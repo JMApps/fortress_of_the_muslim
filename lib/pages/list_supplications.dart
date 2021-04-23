@@ -90,7 +90,8 @@ class _ListSupplicationsState extends State<ListSupplications> {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildSupplicationItem(snapshot.data[index]);
+                  return _buildSupplicationItem(
+                      snapshot.data[index], snapshot.data.length);
                 },
               )
             : Center(
@@ -100,7 +101,7 @@ class _ListSupplicationsState extends State<ListSupplications> {
     );
   }
 
-  Widget _buildSupplicationItem(SupplicationItem item) {
+  Widget _buildSupplicationItem(SupplicationItem item, int chapterLength) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -141,6 +142,30 @@ class _ListSupplicationsState extends State<ListSupplications> {
             },
           ),
         ),
+        Divider(
+          indent: 16,
+          endIndent: 16,
+          color: Colors.grey[500],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text('Дуа ${item.id}/$chapterLength',
+                style: _textStyles.supplicationNumberTextStyle),
+            IconButton(
+                icon: Icon(CupertinoIcons.play),
+                color: Colors.grey[500],
+                onPressed: () {}),
+            IconButton(
+                icon: Icon(CupertinoIcons.doc_on_doc),
+                color: Colors.grey[500],
+                onPressed: () {}),
+            IconButton(
+                icon: Icon(CupertinoIcons.share),
+                color: Colors.grey[500],
+                onPressed: () {}),
+          ],
+        )
       ],
     );
   }

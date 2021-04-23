@@ -41,8 +41,7 @@ class DatabaseQuery {
 
   Future<List<SupplicationItem>> getSupplicationSearchResult(String text) async {
     var dbClient = await con.db;
-    var res = await dbClient.rawQuery("SELECT * FROM Table_of_supplications WHERE _id LIKE '%$text%' OR content_arabic LIKE '%$text%'"
-        "OR content_transcription LIKE '%$text%' OR content_translation LIKE '%$text%'");
+    var res = await dbClient.rawQuery("SELECT * FROM Table_of_supplications WHERE _id LIKE '%$text%' OR content_translation LIKE '%$text%'");
     List<SupplicationItem> searchResult = res.isNotEmpty ? res.map((c) => SupplicationItem.fromMap(c)).toList() : null;
     return searchResult;
   }
