@@ -140,9 +140,10 @@ class _MainChaptersState extends State<MainChapters> {
                 ),
                 Html(
                   onLinkTap: (String url) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(url),
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (BuildContext context) => CupertinoActionSheet(
+                        title: Html(data: url),
                       ),
                     );
                   },
