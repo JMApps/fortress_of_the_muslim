@@ -65,6 +65,9 @@ class _MainPageState extends State<MainPage> {
             initialRoute: '/',
             onGenerateRoute: _appRouter.appGeneratorRoute,
             title: 'Крепость мусульманина',
+            theme: ThemeData(
+              fontFamily: 'Gilroy'
+            ),
             // theme: themes.themeData(
             //     _themeChangeProvider.darkTheme, _selectedIndex),
             home: Scaffold(

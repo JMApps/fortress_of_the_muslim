@@ -1,4 +1,5 @@
 import 'package:fortress_of_the_muslim/model/chapter_item.dart';
+import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 
 import 'database_helper.dart';
 
@@ -29,5 +30,25 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_chapters', where: 'favorite_state == 1');
     List<ChapterItem> favoriteChapters = res.isNotEmpty ? res.map((c) => ChapterItem.fromMap(c)).toList() : null;
     return favoriteChapters;
+  }
+
+  Future<List<SupplicationItem>> getAllSupplications() async {
+    var dbClient = await con.db;
+    var res = await dbClient.query('Table_of_supplications');
+    List<SupplicationItem> listSupplications = res.isNotEmpty ? res.map((c) => SupplicationItem.fromMap(c)).toList() : null;
+    return listSupplications;
+  }
+
+  Future<List<SupplicationItem>> getSupplicationSearchResult(String text) async {
+    var dbClient = await con.db;
+    var res = await dbClient.rawQuery("SELECT * FROM Table_of_supplications WHERE _id LIKE '%$text%' OR content_arabic LIKE '%$text%'"
+        "OR content_transcription LIKE '%$text%' OR content_translation LIKE '%$text%'");
+    List<SupplicationItem> searchResult = res.isNotEmpty ? res.map((c) => SupplicationItem.fromMap(c)).toList() : null;
+    return searchResult;
+  }
+
+  addRemoveFavoriteSupplication(int state, int _id) async {
+    var dbClient = await con.db;
+    await dbClient.rawQuery('UPDATE Table_of_supplications SET favorite_state = $state WHERE _id == $_id');
   }
 }
