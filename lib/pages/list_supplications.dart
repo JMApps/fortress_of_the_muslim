@@ -1,9 +1,11 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:share/share.dart';
 
 class ListSupplications extends StatefulWidget {
   @override
@@ -90,8 +92,7 @@ class _ListSupplicationsState extends State<ListSupplications> {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildSupplicationItem(
-                      snapshot.data[index], snapshot.data.length);
+                  return _buildSupplicationItem(snapshot.data[index]);
                 },
               )
             : Center(
@@ -101,13 +102,13 @@ class _ListSupplicationsState extends State<ListSupplications> {
     );
   }
 
-  Widget _buildSupplicationItem(SupplicationItem item, int chapterLength) {
+  Widget _buildSupplicationItem(SupplicationItem item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         item.contentArabic != null
             ? Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Text(item.contentArabic,
                     style: _textStyles.supplicationArabicTextStyle,
                     textAlign: TextAlign.start,
@@ -116,7 +117,7 @@ class _ListSupplicationsState extends State<ListSupplications> {
             : SizedBox(),
         item.contentTranscription != null
             ? Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Text(
                   item.contentTranscription,
                   style: _textStyles.supplicationTranscriptionTextStyle,
@@ -124,13 +125,13 @@ class _ListSupplicationsState extends State<ListSupplications> {
               )
             : SizedBox(),
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
           child: Html(
             onLinkTap: (String url) {
               showCupertinoModalPopup(
                 context: context,
                 builder: (BuildContext context) => CupertinoActionSheet(
-                  title: Html(data: url),
+                  message: Html(data: url),
                 ),
               );
             },
@@ -150,20 +151,58 @@ class _ListSupplicationsState extends State<ListSupplications> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text('Дуа ${item.id}/$chapterLength',
+            Text('Дуа ${item.id}/280',
                 style: _textStyles.supplicationNumberTextStyle),
-            IconButton(
-                icon: Icon(CupertinoIcons.play),
-                color: Colors.grey[500],
-                onPressed: () {}),
+            // IconButton(
+            //     icon: Icon(CupertinoIcons.play),
+            //     color: Colors.grey[500],
+            //     onPressed: () {}),
             IconButton(
                 icon: Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.grey[500],
-                onPressed: () {}),
+                onPressed: () {
+                  FlutterClipboard.copy('${item.contentArabic}\n\n'
+                          '${item.contentTranscription}\n\n'
+                          '${item.contentForCopyAndShare}')
+                      .then((value) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Скопировано'),
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  });
+                }),
             IconButton(
                 icon: Icon(CupertinoIcons.share),
                 color: Colors.grey[500],
-                onPressed: () {}),
+                onPressed: () {
+                  Share.share('${item.contentArabic}\n\n'
+                      '${item.contentTranscription}\n\n'
+                      '${item.contentForCopyAndShare}');
+                }),
+            IconButton(
+                icon: item.favoriteState == 0
+                    ? Icon(CupertinoIcons.bookmark)
+                    : Icon(CupertinoIcons.bookmark_fill),
+                color: Colors.red[500],
+                onPressed: () {
+                  setState(() {
+                    item.favoriteState == 0
+                        ? _databaseQuery.addRemoveFavoriteSupplication(
+                            1, item.id)
+                        : _databaseQuery.addRemoveFavoriteSupplication(
+                            0, item.id);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: item.favoriteState == 0
+                          ? Text('Добавлено')
+                          : Text('Удалено'),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                })
           ],
         )
       ],

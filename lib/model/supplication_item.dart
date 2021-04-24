@@ -3,6 +3,7 @@ class SupplicationItem {
   String _contentArabic;
   String _contentTranscription;
   String _contentTranslation;
+  String _contentForCopyAndShare;
   int _sampleBy;
   String _nameAudio;
   int _favoriteState;
@@ -12,6 +13,7 @@ class SupplicationItem {
       this._contentArabic,
       this._contentTranscription,
       this._contentTranslation,
+      this._contentForCopyAndShare,
       this._sampleBy,
       this._nameAudio,
       this._favoriteState);
@@ -21,6 +23,7 @@ class SupplicationItem {
     this._contentArabic = obj['content_arabic'];
     this._contentTranscription = obj['content_transcription'];
     this._contentTranslation = obj['content_translation'];
+    this._contentForCopyAndShare = obj['content_for_copy_and_share'];
     this._sampleBy = obj['sample_by'];
     this._nameAudio = obj['name_audio'];
     this._favoriteState = obj['favorite_state'];
@@ -34,6 +37,8 @@ class SupplicationItem {
 
   String get contentTranslation => _contentTranslation;
 
+  String get contentForCopyAndShare => _contentForCopyAndShare;
+
   int get sampleBy => _sampleBy;
 
   String get nameAudio => _nameAudio;
@@ -45,7 +50,8 @@ class SupplicationItem {
     map['_id'] = _id;
     map['content_arabic'] = _contentArabic;
     map['content_transcription'] = _contentTranscription;
-    map['content_russian'] = _contentTranslation;
+    map['content_translation'] = _contentTranslation;
+    map['content_for_copy_and_share'] = _contentForCopyAndShare;
     map['sample_by'] = _sampleBy;
     map['name_audio'] = _nameAudio;
     map['favorite_state'] = _favoriteState;
