@@ -12,4 +12,5 @@ class TextStyles {
   var supplicationTranslationTextStyle = Style(color: Colors.grey[750], fontSize: FontSize(20));
   var smallTextTextStyle = Style(color: Colors.grey[500], fontSize: FontSize(12));
   var supplicationNumberTextStyle = TextStyle(color: Colors.red[500], fontSize: 16);
+  var favoriteSupplicationNumberTextStyle = TextStyle(color: Colors.blue[500], fontSize: 16);
 }

@@ -88,7 +88,7 @@ class _ListSupplicationsState extends State<ListSupplications> {
                   return Divider(
                     indent: 16,
                     endIndent: 16,
-                    color: Colors.grey[500],
+                    color: Colors.grey[700],
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
