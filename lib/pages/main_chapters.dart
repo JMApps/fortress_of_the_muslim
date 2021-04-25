@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
+import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/chapter_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
@@ -143,7 +145,10 @@ class _MainChaptersState extends State<MainChapters> {
                     showCupertinoModalPopup(
                       context: context,
                       builder: (BuildContext context) => CupertinoActionSheet(
-                        title: Html(data: url),
+                        message: Html(
+                          data: url,
+                          style: {"small": Style(color: Colors.grey[500])},
+                        ),
                       ),
                     );
                   },
@@ -159,10 +164,10 @@ class _MainChaptersState extends State<MainChapters> {
         ],
       ),
       onTap: () {
-        // Navigator.of(context, rootNavigator: true).pushNamed(
-        //   '/chapter_content',
-        //   arguments: ChapterArguments(item.id, item.chapterTitle),
-        // );
+        Navigator.of(context, rootNavigator: true).pushNamed(
+          '/content_chapter',
+          arguments: ChapterArguments(item.id, item.chapterTitle),
+        );
       },
     );
   }
