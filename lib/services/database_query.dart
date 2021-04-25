@@ -58,4 +58,11 @@ class DatabaseQuery {
     List<SupplicationItem> favoriteSupplications = res.isNotEmpty ? res.map((c) => SupplicationItem.fromMap(c)).toList() : null;
     return favoriteSupplications;
   }
+
+  Future<List<SupplicationItem>> getContentChapter(int _id) async {
+    var dbClient = await con.db;
+    var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $_id');
+    List<SupplicationItem> chapterSupplications = res.isNotEmpty ? res.map((c) => SupplicationItem.fromMap(c)).toList() : null;
+    return chapterSupplications;
+  }
 }

@@ -13,4 +13,5 @@ class TextStyles {
   var smallTextTextStyle = Style(color: Colors.grey[500], fontSize: FontSize(12));
   var supplicationNumberTextStyle = TextStyle(color: Colors.red[500], fontSize: 16);
   var favoriteSupplicationNumberTextStyle = TextStyle(color: Colors.blue[500], fontSize: 16);
+  var contentChapterNumberTextStyle = TextStyle(color: Colors.blueGrey[500], fontSize: 16);
 }
