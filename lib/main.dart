@@ -71,7 +71,6 @@ class _MainPageState extends State<MainPage> {
             // theme: themes.themeData(
             //     _themeChangeProvider.darkTheme, _selectedIndex),
             home: Scaffold(
-              backgroundColor: _changeColor[_selectedIndex],
               appBar: AppBar(
                 title: Text('Крепость мусульманина'),
                 backgroundColor: _changeColor[_selectedIndex],
@@ -98,7 +97,7 @@ class _MainPageState extends State<MainPage> {
                 child: _changeWidget[_selectedIndex],
               ),
               bottomNavigationBar: FlipBoxBarPlus(
-                navBarHeight: 60,
+                navBarWidth: 60,
                 selectedIndex: _selectedIndex,
                 animationDuration: Duration(milliseconds: 900),
                 items: [

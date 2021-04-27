@@ -19,10 +19,8 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Scrollbar(
-        child: _buildList(),
-      ),
+    return Scrollbar(
+      child: _buildList(),
     );
   }
 
