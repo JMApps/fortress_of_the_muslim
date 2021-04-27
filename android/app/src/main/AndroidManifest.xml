@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jmapps.fortress_of_the_muslim">
    <application
-        android:label="fortress_of_the_muslim"
+        android:label="Крепость мусульманина"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
