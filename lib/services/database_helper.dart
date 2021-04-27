@@ -15,22 +15,38 @@ class DatabaseHelper {
     if (_db != null) {
       return _db;
     }
-    _db = await initDatabase();
+    _db = await initializeDatabase();
     return _db;
   }
 
   DatabaseHelper.internal();
 
-  initDatabase() async {
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
+  Future<Database> initializeDatabase() async {
+    Directory documentDirectory = Platform.isAndroid
+        ? await getExternalStorageDirectory()
+        : await getApplicationSupportDirectory();
     String path = join(documentDirectory.path, 'fortress.db');
 
-    ByteData data = await rootBundle.load(join('assets/databases', 'fortress.db'));
-    List<int> bytes = data.buffer.asInt8List(data.offsetInBytes, data.lengthInBytes);
+    // Проверьте, существует ли база данных
+    var exists = await databaseExists(path);
 
-    await File(path).writeAsBytes(bytes);
+    if (!exists) {
+      print("Создание новой копии из актива");
+      // Должно произойти только первый раз, когда вы запускаете свое приложение
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
+      // Копировать из актива
+      ByteData data = await rootBundle.load(join('assets/databases', 'fortress.db'));
+      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
-    var ourDb = await openDatabase(path);
-    return ourDb;
+      await File(path).writeAsBytes(bytes, flush: true);
+    } else {
+      print('Открытие существующей базы данных');
+    }
+    // Открываем базу данных
+    var bomDataTable = await openDatabase(path, version: 1);
+
+    return bomDataTable;
   }
 }
