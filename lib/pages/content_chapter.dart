@@ -18,6 +18,7 @@ class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
   int _countNumber = 0;
+  bool _isCountShow = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,14 @@ class _ContentChapterState extends State<ContentChapter> {
           title: Text('Глава ${args.chapterId}'),
           centerTitle: true,
           elevation: 0,
+          actions: [
+            Switch(value: _isCountShow, onChanged: (value) {
+              setState(() {
+                _isCountShow = value;
+              });
+            },
+            activeColor: Colors.blueGrey[900])
+          ],
         ),
         body: Column(
           children: [
@@ -50,7 +59,7 @@ class _ContentChapterState extends State<ContentChapter> {
             )
           ],
         ),
-        floatingActionButton: InkWell(
+        floatingActionButton: _isCountShow ? InkWell(
           onLongPress: () {
             setState(() {
               _countNumber = 0;
@@ -66,7 +75,7 @@ class _ContentChapterState extends State<ContentChapter> {
               });
             },
           ),
-        )
+        ) : SizedBox()
         // bottomNavigationBar: Container(
         //   color: Colors.blueGrey[200],
         //   padding: EdgeInsets.all(8),
