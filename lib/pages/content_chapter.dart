@@ -8,6 +8,7 @@ import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:share/share.dart';
+import 'package:vibration/vibration.dart';
 
 class ContentChapter extends StatefulWidget {
   @override
@@ -59,8 +60,6 @@ class _ContentChapterState extends State<ContentChapter> {
             ),
             Expanded(
               child: Scrollbar(
-                isAlwaysShown: true,
-                showTrackOnHover: true,
                 child: _buildList(args.chapterId),
               ),
             )
@@ -81,6 +80,7 @@ class _ContentChapterState extends State<ContentChapter> {
                   onPressed: () {
                     setState(() {
                       _countNumber++;
+                      Vibration.vibrate(duration: 100, amplitude: 50);
                     });
                   },
                 ),
