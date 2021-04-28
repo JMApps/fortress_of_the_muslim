@@ -19,8 +19,6 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
-      isAlwaysShown: true,
-      showTrackOnHover: true,
       child: _buildList(),
     );
   }
