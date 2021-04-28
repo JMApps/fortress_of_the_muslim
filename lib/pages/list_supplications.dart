@@ -37,6 +37,8 @@ class _ListSupplicationsState extends State<ListSupplications> {
           ),
           Expanded(
             child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
               child: _buildList(),
             ),
           ),

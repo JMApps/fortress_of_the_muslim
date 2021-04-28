@@ -36,6 +36,8 @@ class _MainChaptersState extends State<MainChapters> {
           ),
           Expanded(
             child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
               child: _buildList(),
             ),
           ),

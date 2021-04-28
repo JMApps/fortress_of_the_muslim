@@ -17,52 +17,73 @@ class ContentChapter extends StatefulWidget {
 class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
+  int _countNumber = 0;
 
   @override
   Widget build(BuildContext context) {
     final ChapterArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey[500],
-        title: Text('Глава ${args.chapterId}'),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.blueGrey[200],
-            child: Html(
-              data: args.chapterTitle,
-              style: {
-                "#": Style(textAlign: TextAlign.center, fontSize: FontSize(18))
-              },
+        appBar: AppBar(
+          backgroundColor: Colors.blueGrey[500],
+          title: Text('Глава ${args.chapterId}'),
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
+            Container(
+              color: Colors.blueGrey[200],
+              child: Html(
+                data: args.chapterTitle,
+                style: {
+                  "#":
+                      Style(textAlign: TextAlign.center, fontSize: FontSize(18))
+                },
+              ),
             ),
+            Expanded(
+              child: Scrollbar(
+                isAlwaysShown: true,
+                showTrackOnHover: true,
+                child: _buildList(args.chapterId),
+              ),
+            )
+          ],
+        ),
+        floatingActionButton: InkWell(
+          onLongPress: () {
+            setState(() {
+              _countNumber = 0;
+            });
+          },
+          child: FloatingActionButton(
+            elevation: 0,
+            child: Text('$_countNumber', style: _textStyles.contentChapterFloatingButtonTextStyle),
+            backgroundColor: Colors.blueGrey[700],
+            onPressed: () {
+              setState(() {
+                _countNumber++;
+              });
+            },
           ),
-          Expanded(
-            child: Scrollbar(
-              child: _buildList(args.chapterId),
-            ),
-          )
-        ],
-      ),
-      // bottomNavigationBar: Container(
-      //   color: Colors.blueGrey[200],
-      //   padding: EdgeInsets.all(8),
-      //   child: Row(
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     children: [
-      //       IconButton(
-      //           icon: Icon(CupertinoIcons.backward_end), onPressed: () {}),
-      //       IconButton(icon: Icon(CupertinoIcons.play), onPressed: () {}),
-      //       IconButton(
-      //           icon: Icon(CupertinoIcons.forward_end), onPressed: () {}),
-      //       Text('00:35', style: TextStyle(color: Colors.blueGrey[500]))
-      //     ],
-      //   ),
-      // ),
-    );
+        )
+        // bottomNavigationBar: Container(
+        //   color: Colors.blueGrey[200],
+        //   padding: EdgeInsets.all(8),
+        //   child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //     children: [
+        //       IconButton(
+        //           icon: Icon(CupertinoIcons.backward_end), onPressed: () {}),
+        //       IconButton(icon: Icon(CupertinoIcons.play), onPressed: () {}),
+        //       IconButton(
+        //           icon: Icon(CupertinoIcons.forward_end), onPressed: () {}),
+        //       Text('00:35', style: TextStyle(color: Colors.blueGrey[500]))
+        //     ],
+        //   ),
+        // ),
+        );
   }
 
   Widget _buildList(int chapterId) {

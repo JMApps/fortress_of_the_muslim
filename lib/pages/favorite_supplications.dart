@@ -20,6 +20,8 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
+      isAlwaysShown: true,
+      showTrackOnHover: true,
       child: _buildList(),
     );
   }
