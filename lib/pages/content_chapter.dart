@@ -80,7 +80,7 @@ class _ContentChapterState extends State<ContentChapter> {
                   onPressed: () {
                     setState(() {
                       _countNumber++;
-                      Vibration.vibrate(duration: 100, amplitude: 50);
+                      Vibration.vibrate(duration: 50, amplitude: 25);
                     });
                   },
                 ),
