@@ -18,7 +18,7 @@ class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
   int _countNumber = 0;
-  bool _isCountShow = true;
+  bool _isCountShow = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +30,19 @@ class _ContentChapterState extends State<ContentChapter> {
           centerTitle: true,
           elevation: 0,
           actions: [
-            Switch(value: _isCountShow, onChanged: (value) {
-              setState(() {
-                _isCountShow = value;
-              });
-            },
-            activeColor: Colors.blueGrey[900])
+            IconButton(icon: Icon(CupertinoIcons.settings), onPressed: () {}),
+            Transform.scale(
+              scale: 0.7,
+              child: CupertinoSwitch(
+                  value: _isCountShow,
+                  onChanged: (value) {
+                    setState(() {
+                      _isCountShow = value;
+                    });
+                  },
+                  activeColor: Colors.blueGrey[900],
+                  trackColor: Colors.blueGrey[700]),
+            )
           ],
         ),
         body: Column(
@@ -59,23 +66,26 @@ class _ContentChapterState extends State<ContentChapter> {
             )
           ],
         ),
-        floatingActionButton: _isCountShow ? InkWell(
-          onLongPress: () {
-            setState(() {
-              _countNumber = 0;
-            });
-          },
-          child: FloatingActionButton(
-            elevation: 0,
-            child: Text('$_countNumber', style: _textStyles.contentChapterFloatingButtonTextStyle),
-            backgroundColor: Colors.blueGrey[700],
-            onPressed: () {
-              setState(() {
-                _countNumber++;
-              });
-            },
-          ),
-        ) : SizedBox()
+        floatingActionButton: _isCountShow
+            ? InkWell(
+                onLongPress: () {
+                  setState(() {
+                    _countNumber = 0;
+                  });
+                },
+                child: FloatingActionButton(
+                  elevation: 0,
+                  child: Text('$_countNumber',
+                      style: _textStyles.contentChapterFloatingButtonTextStyle),
+                  backgroundColor: Colors.blueGrey[700],
+                  onPressed: () {
+                    setState(() {
+                      _countNumber++;
+                    });
+                  },
+                ),
+              )
+            : SizedBox()
         // bottomNavigationBar: Container(
         //   color: Colors.blueGrey[200],
         //   padding: EdgeInsets.all(8),
