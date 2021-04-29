@@ -25,7 +25,7 @@ class DatabaseHelper {
     Directory documentDirectory = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationSupportDirectory();
-    String path = join(documentDirectory.path, 'fortress.db');
+    String path = join(documentDirectory.path, 'fortress_db.db');
 
     // Проверьте, существует ли база данных
     var exists = await databaseExists(path);
@@ -37,9 +37,8 @@ class DatabaseHelper {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
       // Копировать из актива
-      ByteData data = await rootBundle.load(join('assets/databases', 'fortress.db'));
+      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db.db'));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-
       await File(path).writeAsBytes(bytes, flush: true);
     } else {
       print('Открытие существующей базы данных');
