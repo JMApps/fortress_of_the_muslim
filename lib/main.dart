@@ -1,6 +1,8 @@
 import 'package:flip_box_bar_plus/flip_box_bar_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fortress_of_the_muslim/theme/theme_cubit.dart';
 import 'package:fortress_of_the_muslim/pages/favorite_chapters.dart';
 import 'package:fortress_of_the_muslim/pages/favorite_supplications.dart';
 import 'package:fortress_of_the_muslim/pages/list_supplications.dart';
@@ -8,10 +10,29 @@ import 'package:fortress_of_the_muslim/pages/main_chapters.dart';
 import 'package:fortress_of_the_muslim/router/app_router.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:fortress_of_the_muslim/styles/themes.dart';
-import 'package:fortress_of_the_muslim/theme/dark_theme_provider.dart';
-import 'package:provider/provider.dart';
+
+class SimpleBlocObserver extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object event) {
+    super.onEvent(bloc, event);
+    print(event);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print(error);
+    super.onError(bloc, error, stackTrace);
+  }
+}
 
 void main() {
+  Bloc.observer = SimpleBlocObserver();
   runApp(MainPage());
 }
 
@@ -21,22 +42,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  var _themeChangeProvider = DarkThemeProvider();
   int _selectedIndex = 0;
   var _appRouter = AppRouter();
   var _textStyles = TextStyles();
   var themes = Themes();
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentAppTheme();
-  }
-
-  void getCurrentAppTheme() async {
-    _themeChangeProvider.darkTheme =
-        await _themeChangeProvider.darkThemePreference.getTheme();
-  }
 
   List<Color> _changeColor = [
     Colors.teal[500],
@@ -54,20 +63,16 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) {
-        return _themeChangeProvider;
-      },
-      child: Consumer<DarkThemeProvider>(
-        builder: (BuildContext context, value, Widget child) {
+    return BlocProvider(
+      create: (_) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (BuildContext context, theme) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             onGenerateRoute: _appRouter.appGeneratorRoute,
             title: 'Крепость мусульманина',
-            theme: ThemeData(
-              fontFamily: 'Gilroy'
-            ),
+            theme: theme,
             // theme: themes.themeData(
             //     _themeChangeProvider.darkTheme, _selectedIndex),
             home: Scaffold(
@@ -76,10 +81,10 @@ class _MainPageState extends State<MainPage> {
                 backgroundColor: _changeColor[_selectedIndex],
                 elevation: 0,
                 actions: [
-                  // Checkbox(
-                  //   value: _themeChangeProvider.darkTheme,
-                  //   onChanged: (bool value) {
-                  //     _themeChangeProvider.darkTheme = value;
+                  // IconButton(
+                  //   icon: Icon(Icons.night_shelter),
+                  //   onPressed: () {
+                  //     context.read<ThemeCubit>().toggleTheme();
                   //   },
                   // ),
                 ],
@@ -90,8 +95,8 @@ class _MainPageState extends State<MainPage> {
                       colorFilter: ColorFilter.mode(
                           _changeColor[_selectedIndex].withOpacity(1),
                           BlendMode.color),
-                      image: AssetImage(
-                          'assets/images/${_themeChangeProvider.darkTheme ? 'background_ornament_dark.png' : 'background_ornament.png'}'),
+                      image:
+                          AssetImage('assets/images/background_ornament.png'),
                       fit: BoxFit.cover),
                 ),
                 child: _changeWidget[_selectedIndex],
@@ -106,44 +111,28 @@ class _MainPageState extends State<MainPage> {
                           Icon(CupertinoIcons.square_list, color: Colors.white),
                       text: Text('Главы',
                           style: _textStyles.flipBarItemTextStyle),
-                      frontColor: _themeChangeProvider.darkTheme
-                          ? Colors.teal[900]
-                          : Colors.teal[500],
-                      backColor: _themeChangeProvider.darkTheme
-                          ? Colors.teal[900]
-                          : Colors.teal[500]),
+                      frontColor: Colors.teal[500],
+                      backColor: Colors.teal[500]),
                   FlipBarItem(
                       icon: Icon(CupertinoIcons.bookmark, color: Colors.white),
                       text: Text('Избранное',
                           style: _textStyles.flipBarItemTextStyle),
-                      frontColor: _themeChangeProvider.darkTheme
-                          ? Colors.orange[900]
-                          : Colors.orange[500],
-                      backColor: _themeChangeProvider.darkTheme
-                          ? Colors.orange[900]
-                          : Colors.orange[500]),
+                      frontColor: Colors.orange[500],
+                      backColor: Colors.orange[500]),
                   FlipBarItem(
                       icon: Icon(CupertinoIcons.square_list_fill,
                           color: Colors.white),
                       text:
                           Text('Дуа', style: _textStyles.flipBarItemTextStyle),
-                      frontColor: _themeChangeProvider.darkTheme
-                          ? Colors.red[900]
-                          : Colors.red[500],
-                      backColor: _themeChangeProvider.darkTheme
-                          ? Colors.red[900]
-                          : Colors.red[500]),
+                      frontColor: Colors.red[500],
+                      backColor: Colors.red[500]),
                   FlipBarItem(
                       icon: Icon(CupertinoIcons.bookmark_fill,
                           color: Colors.white),
                       text: Text('Избранное',
                           style: _textStyles.flipBarItemTextStyle),
-                      frontColor: _themeChangeProvider.darkTheme
-                          ? Colors.blue[900]
-                          : Colors.blue[500],
-                      backColor: _themeChangeProvider.darkTheme
-                          ? Colors.blue[900]
-                          : Colors.blue[500])
+                      frontColor: Colors.blue[500],
+                      backColor: Colors.blue[500])
                 ],
                 onIndexChanged: (newIndex) {
                   setState(() {

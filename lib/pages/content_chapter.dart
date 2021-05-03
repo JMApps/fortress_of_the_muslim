@@ -20,6 +20,7 @@ class _ContentChapterState extends State<ContentChapter> {
   var _textStyles = TextStyles();
   int _countNumber = 0;
   bool _isCountShow = false;
+  bool contentTranscriptionIsShow = true;
 
   @override
   Widget build(BuildContext context) {
@@ -85,24 +86,7 @@ class _ContentChapterState extends State<ContentChapter> {
                   },
                 ),
               )
-            : SizedBox()
-        // bottomNavigationBar: Container(
-        //   color: Colors.blueGrey[200],
-        //   padding: EdgeInsets.all(8),
-        //   child: Row(
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       IconButton(
-        //           icon: Icon(CupertinoIcons.backward_end), onPressed: () {}),
-        //       IconButton(icon: Icon(CupertinoIcons.play), onPressed: () {}),
-        //       IconButton(
-        //           icon: Icon(CupertinoIcons.forward_end), onPressed: () {}),
-        //       Text('00:35', style: TextStyle(color: Colors.blueGrey[500]))
-        //     ],
-        //   ),
-        // ),
-        );
+            : SizedBox());
   }
 
   Widget _buildList(int chapterId) {
@@ -144,14 +128,16 @@ class _ContentChapterState extends State<ContentChapter> {
                     textDirection: TextDirection.rtl),
               )
             : SizedBox(),
-        item.contentTranscription != null
-            ? Padding(
-                padding: EdgeInsets.all(16),
-                child: Text(
-                  item.contentTranscription,
-                  style: _textStyles.supplicationTranscriptionTextStyle,
-                ),
-              )
+        contentTranscriptionIsShow
+            ? item.contentTranscription != null
+                ? Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      item.contentTranscription,
+                      style: _textStyles.supplicationTranscriptionTextStyle,
+                    ),
+                  )
+                : SizedBox()
             : SizedBox(),
         Padding(
           padding: EdgeInsets.all(8),
@@ -185,10 +171,14 @@ class _ContentChapterState extends State<ContentChapter> {
           children: [
             Text('Дуа ${item.id}',
                 style: _textStyles.contentChapterNumberTextStyle),
-            // IconButton(
-            //     icon: Icon(CupertinoIcons.play),
-            //     color: Colors.grey[500],
-            //     onPressed: () {}),
+            IconButton(
+                icon: Icon(CupertinoIcons.play),
+                color: Colors.blueGrey[700],
+                onPressed: () {}),
+            Container(
+              width: 50,
+              child: Text('00:00'),
+            ),
             IconButton(
                 icon: Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.grey[500],
@@ -217,7 +207,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 icon: item.favoriteState == 0
                     ? Icon(CupertinoIcons.bookmark)
                     : Icon(CupertinoIcons.bookmark_fill),
-                color: Colors.blueGrey[500],
+                color: Colors.blueGrey[700],
                 onPressed: () {
                   setState(() {
                     item.favoriteState == 0
