@@ -8,7 +8,6 @@ import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:share/share.dart';
-import 'package:vibration/vibration.dart';
 
 class ContentChapter extends StatefulWidget {
   @override
@@ -20,19 +19,52 @@ class _ContentChapterState extends State<ContentChapter> {
   var _textStyles = TextStyles();
   int _countNumber = 0;
   bool _isCountShow = false;
-  bool contentTranscriptionIsShow = true;
+  bool _contentArabicIsShow = true;
+  bool _contentTranscriptionIsShow = true;
+
+  Color pickerColor = Color(0xff443a49);
+  Color currentColor = Color(0xff443a49);
+
+  void changeColor(Color color) {
+    setState(() => pickerColor = color);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final ChapterArguments args = ModalRoute.of(context).settings.arguments;
+    ChapterArguments? args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueGrey[500],
-          title: Text('Глава ${args.chapterId}'),
+          title: Text('Глава ${args!.chapterId}'),
           centerTitle: true,
           elevation: 0,
           actions: [
-            IconButton(icon: Icon(CupertinoIcons.settings), onPressed: () {}),
+            // IconButton(
+            //     icon: Icon(CupertinoIcons.settings),
+            //     onPressed: () {
+            //       showModalBottomSheet(
+            //           context: context,
+            //           builder: (BuildContext context) {
+            //             return Container(
+            //               child: Column(
+            //                 children: [
+            //                   Transform.scale(
+            //                     scale: 0.7,
+            //                     child: CupertinoSwitch(
+            //                         value: _contentArabicIsShow,
+            //                         onChanged: (value) {
+            //                           setState(() {
+            //                             _contentArabicIsShow = value;
+            //                           });
+            //                         },
+            //                         activeColor: Colors.blueGrey[900],
+            //                         trackColor: Colors.blueGrey[700]),
+            //                   )
+            //                 ],
+            //               ),
+            //             );
+            //           });
+            //     }),
             Transform.scale(
               scale: 0.7,
               child: CupertinoSwitch(
@@ -61,7 +93,7 @@ class _ContentChapterState extends State<ContentChapter> {
             ),
             Expanded(
               child: Scrollbar(
-                child: _buildList(args.chapterId),
+                child: _buildList(args.chapterId!),
               ),
             )
           ],
@@ -81,7 +113,6 @@ class _ContentChapterState extends State<ContentChapter> {
                   onPressed: () {
                     setState(() {
                       _countNumber++;
-                      Vibration.vibrate(duration: 50, amplitude: 25);
                     });
                   },
                 ),
@@ -96,7 +127,7 @@ class _ContentChapterState extends State<ContentChapter> {
         return snapshot.hasData
             ? ListView.separated(
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 separatorBuilder: (BuildContext context, int index) {
                   return Divider(
                     indent: 16,
@@ -105,7 +136,7 @@ class _ContentChapterState extends State<ContentChapter> {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildContentChapterItem(snapshot.data[index]);
+                  return _buildContentChapterItem(snapshot.data![index]);
                 },
               )
             : Center(
@@ -119,16 +150,18 @@ class _ContentChapterState extends State<ContentChapter> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        item.contentArabic != null
-            ? Padding(
-                padding: EdgeInsets.all(16),
-                child: Text(item.contentArabic,
-                    style: _textStyles.supplicationArabicTextStyle,
-                    textAlign: TextAlign.start,
-                    textDirection: TextDirection.rtl),
-              )
+        _contentArabicIsShow
+            ? item.contentArabic != null
+                ? Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(item.contentArabic,
+                        style: _textStyles.supplicationArabicTextStyle,
+                        textAlign: TextAlign.start,
+                        textDirection: TextDirection.rtl),
+                  )
+                : SizedBox()
             : SizedBox(),
-        contentTranscriptionIsShow
+        _contentTranscriptionIsShow
             ? item.contentTranscription != null
                 ? Padding(
                     padding: EdgeInsets.all(16),
@@ -142,7 +175,7 @@ class _ContentChapterState extends State<ContentChapter> {
         Padding(
           padding: EdgeInsets.all(8),
           child: Html(
-            onLinkTap: (String url) {
+            onLinkTap: (String? url, RenderContext rendContext, Map<String, String> attributes, element) {
               showCupertinoModalPopup(
                 context: context,
                 builder: (BuildContext context) => CupertinoActionSheet(
@@ -171,14 +204,14 @@ class _ContentChapterState extends State<ContentChapter> {
           children: [
             Text('Дуа ${item.id}',
                 style: _textStyles.contentChapterNumberTextStyle),
-            IconButton(
-                icon: Icon(CupertinoIcons.play),
-                color: Colors.blueGrey[700],
-                onPressed: () {}),
-            Container(
-              width: 50,
-              child: Text('00:00'),
-            ),
+            // IconButton(
+            //     icon: Icon(CupertinoIcons.play),
+            //     color: Colors.blueGrey[700],
+            //     onPressed: () {}),
+            // Container(
+            //   width: 50,
+            //   child: Text('00:00'),
+            // ),
             IconButton(
                 icon: Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.grey[500],
@@ -204,27 +237,27 @@ class _ContentChapterState extends State<ContentChapter> {
                       '${item.contentForCopyAndShare}');
                 }),
             IconButton(
-                icon: item.favoriteState == 0
-                    ? Icon(CupertinoIcons.bookmark)
-                    : Icon(CupertinoIcons.bookmark_fill),
-                color: Colors.blueGrey[700],
-                onPressed: () {
-                  setState(() {
-                    item.favoriteState == 0
-                        ? _databaseQuery.addRemoveFavoriteSupplication(
-                            1, item.id)
-                        : _databaseQuery.addRemoveFavoriteSupplication(
-                            0, item.id);
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: item.favoriteState == 0
-                          ? Text('Добавлено')
-                          : Text('Удалено'),
-                      duration: Duration(milliseconds: 500),
-                    ),
-                  );
-                })
+              icon: item.favoriteState == 0
+                  ? Icon(CupertinoIcons.bookmark)
+                  : Icon(CupertinoIcons.bookmark_fill),
+              color: Colors.blueGrey[700],
+              onPressed: () {
+                setState(() {
+                  item.favoriteState == 0
+                      ? _databaseQuery.addRemoveFavoriteSupplication(1, item.id)
+                      : _databaseQuery.addRemoveFavoriteSupplication(
+                          0, item.id);
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: item.favoriteState == 0
+                        ? Text('Добавлено')
+                        : Text('Удалено'),
+                    duration: Duration(milliseconds: 500),
+                  ),
+                );
+              },
+            ),
           ],
         )
       ],

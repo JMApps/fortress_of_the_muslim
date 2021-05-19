@@ -1,12 +1,12 @@
 class SupplicationItem {
-  int _id;
-  String _contentArabic;
-  String _contentTranscription;
-  String _contentTranslation;
-  String _contentForCopyAndShare;
-  int _sampleBy;
-  String _nameAudio;
-  int _favoriteState;
+  late int _id;
+  late String _contentArabic;
+  late String _contentTranscription;
+  late String _contentTranslation;
+  late String _contentForCopyAndShare;
+  late int _sampleBy;
+  late String _nameAudio;
+  late int _favoriteState;
 
   SupplicationItem(
       this._id,

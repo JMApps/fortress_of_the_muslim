@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Themes {
   ThemeData themeData(bool isDarkTheme, int selectedIndex) {
 
-    List<Color> _changeColor = [
+    List<Color?> _changeColor = [
       isDarkTheme ? Colors.teal[900] : Colors.teal[500],
       isDarkTheme ? Colors.orange[900] : Colors.orange[500],
       isDarkTheme ? Colors.red[900] : Colors.red[500],

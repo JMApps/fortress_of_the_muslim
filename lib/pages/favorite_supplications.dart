@@ -31,7 +31,7 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
         return snapshot.hasData
             ? ListView.separated(
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 separatorBuilder: (BuildContext context, int index) {
                   return Divider(
                     indent: 16,
@@ -40,7 +40,7 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildSupplicationItem(snapshot.data[index]);
+                  return _buildSupplicationItem(snapshot.data![index]);
                 },
               )
             : Center(
@@ -88,7 +88,7 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
         Padding(
           padding: EdgeInsets.all(8),
           child: Html(
-            onLinkTap: (String url) {
+            onLinkTap: (String? url, RenderContext rendContext, Map<String, String> attributes, element) {
               showCupertinoModalPopup(
                 context: context,
                 builder: (BuildContext context) => CupertinoActionSheet(

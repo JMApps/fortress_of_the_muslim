@@ -30,7 +30,7 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
         return snapshot.hasData
             ? ListView.separated(
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 separatorBuilder: (BuildContext context, int index) {
                   return Divider(
                     indent: 16,
@@ -39,7 +39,7 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildChapterItem(snapshot.data[index]);
+                  return _buildChapterItem(snapshot.data![index]);
                 },
               )
             : Center(
@@ -101,7 +101,7 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                       style: _textStyles.mainFavoriteChapterNumberTextStyle),
                 ),
                 Html(
-                  onLinkTap: (String url) {
+                  onLinkTap: (String? url, RenderContext rendContext, Map<String, String> attributes, element) {
                     showCupertinoModalPopup(
                       context: context,
                       builder: (BuildContext context) => CupertinoActionSheet(

@@ -1,7 +1,7 @@
 class ChapterItem {
-  int _id;
-  String _chapterTitle;
-  int _favoriteState;
+  late int _id;
+  late String _chapterTitle;
+  late int _favoriteState;
 
   ChapterItem(this._id, this._chapterTitle, this._favoriteState);
 
