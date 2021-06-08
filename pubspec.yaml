@@ -12,17 +12,17 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.3
-  flip_box_bar_plus: ^0.9.3+2
-  path_provider: ^2.0.1
-  sqflite: ^2.0.0+3
-  flutter_html: ^2.0.0
-  share: ^2.0.1
-  clipboard: ^0.1.3
-  provider: ^5.0.0
-  shared_preferences: ^2.0.5
-  flutter_bloc: ^7.0.0
-  flutter_colorpicker: ^0.4.0
+  cupertino_icons:
+  flip_box_bar_plus:
+  path_provider:
+  sqflite:
+  flutter_html:
+  share:
+  clipboard:
+  provider:
+  shared_preferences:
+  flutter_bloc:
+  flutter_colorpicker:
 
 dev_dependencies:
   flutter_test:

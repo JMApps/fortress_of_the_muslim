@@ -8,6 +8,7 @@ import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ContentChapter extends StatefulWidget {
   @override
@@ -17,21 +18,54 @@ class ContentChapter extends StatefulWidget {
 class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
+  static const ARABIC_SHOW_STATE = "arabic_show_state";
+  static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
+  static const ARABIC_COLOR_NUMBER = "arabic_color_number";
+  static const TRANSCRIPTION_COLOR_NUMBER = "transcription_color_number";
+  static const TRANSLATION_COLOR_NUMBER = "translation_color_number";
+
+  late SharedPreferences sharedPreferences;
+
   int _countNumber = 0;
   bool _isCountShow = false;
-  bool _contentArabicIsShow = true;
-  bool _contentTranscriptionIsShow = true;
+  late bool _contentArabicIsShow;
+  late bool _contentTranscriptionIsShow;
 
-  Color pickerColor = Color(0xff443a49);
-  Color currentColor = Color(0xff443a49);
+  late int _arabicTextColor;
+  late int _transcriptionTextColor;
+  late int _translationTextColor;
 
-  void changeColor(Color color) {
-    setState(() => pickerColor = color);
+  List<Color?> _itemColor = [
+    Colors.white,
+    Colors.black,
+    Colors.grey[500],
+    Colors.teal[500],
+    Colors.orange[500],
+    Colors.brown[500],
+    Colors.red[500],
+    Colors.blue[500],
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      setState(() {
+        _contentArabicIsShow = sp.getBool(ARABIC_SHOW_STATE) ?? true;
+        _contentTranscriptionIsShow =
+            sp.getBool(TRANSCRIPTION_SHOW_STATE) ?? true;
+        _arabicTextColor = sp.getInt(ARABIC_COLOR_NUMBER) ?? 1;
+        _transcriptionTextColor = sp.getInt(TRANSCRIPTION_COLOR_NUMBER) ?? 2;
+        _translationTextColor = sp.getInt(TRANSLATION_COLOR_NUMBER) ?? 1;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    ChapterArguments? args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
+    ChapterArguments? args =
+        ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueGrey[500],
@@ -39,32 +73,135 @@ class _ContentChapterState extends State<ContentChapter> {
           centerTitle: true,
           elevation: 0,
           actions: [
-            // IconButton(
-            //     icon: Icon(CupertinoIcons.settings),
-            //     onPressed: () {
-            //       showModalBottomSheet(
-            //           context: context,
-            //           builder: (BuildContext context) {
-            //             return Container(
-            //               child: Column(
-            //                 children: [
-            //                   Transform.scale(
-            //                     scale: 0.7,
-            //                     child: CupertinoSwitch(
-            //                         value: _contentArabicIsShow,
-            //                         onChanged: (value) {
-            //                           setState(() {
-            //                             _contentArabicIsShow = value;
-            //                           });
-            //                         },
-            //                         activeColor: Colors.blueGrey[900],
-            //                         trackColor: Colors.blueGrey[700]),
-            //                   )
-            //                 ],
-            //               ),
-            //             );
-            //           });
-            //     }),
+            IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        child: StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter stateSetter) {
+                            return Column(
+                              children: [
+                                FractionallySizedBox(
+                                  widthFactor: 0.25,
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      vertical: 12.0,
+                                    ),
+                                    child: Container(
+                                      height: 5.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(2.5)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.language),
+                                  title: Text(
+                                    'Арабский',
+                                    style:
+                                        _textStyles.settingTitleItemTextStyle,
+                                  ),
+                                  trailing: CupertinoSwitch(
+                                    value: _contentArabicIsShow,
+                                    onChanged: (value) {
+                                      stateSetter(() {
+                                        _contentArabicIsShow = value;
+                                        setState(() {
+                                          sharedPreferences.setBool(
+                                              ARABIC_SHOW_STATE,
+                                              _contentArabicIsShow);
+                                        });
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.language),
+                                  title: Text(
+                                    'Транскрипция',
+                                    style:
+                                        _textStyles.settingTitleItemTextStyle,
+                                  ),
+                                  trailing: CupertinoSwitch(
+                                    value: _contentTranscriptionIsShow,
+                                    onChanged: (value) {
+                                      stateSetter(() {
+                                        _contentTranscriptionIsShow = value;
+                                        setState(() {
+                                          sharedPreferences.setBool(
+                                              TRANSCRIPTION_SHOW_STATE,
+                                              _contentTranscriptionIsShow);
+                                        });
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.color_lens),
+                                  title: Text('Цвет арабского текста',
+                                      style: _textStyles
+                                          .settingTitleItemTextStyle),
+                                  trailing: Transform.scale(
+                                    scale: 0.5,
+                                    child: FloatingActionButton(
+                                      onPressed: () {},
+                                      backgroundColor:
+                                          _itemColor[_arabicTextColor],
+                                    ),
+                                  ),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.color_lens),
+                                  title: Text('Цвет текста транскрипции',
+                                      style: _textStyles
+                                          .settingTitleItemTextStyle),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.color_lens),
+                                  title: Text('Цвет текста перевода',
+                                      style: _textStyles
+                                          .settingTitleItemTextStyle),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      );
+                    });
+              },
+              icon: Icon(CupertinoIcons.settings),
+            ),
             Transform.scale(
               scale: 0.7,
               child: CupertinoSwitch(
@@ -155,7 +292,8 @@ class _ContentChapterState extends State<ContentChapter> {
                 ? Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(item.contentArabic,
-                        style: _textStyles.supplicationArabicTextStyle,
+                        style: TextStyle(
+                            color: _itemColor[_arabicTextColor], fontSize: 20),
                         textAlign: TextAlign.start,
                         textDirection: TextDirection.rtl),
                   )
@@ -167,7 +305,9 @@ class _ContentChapterState extends State<ContentChapter> {
                     padding: EdgeInsets.all(16),
                     child: Text(
                       item.contentTranscription,
-                      style: _textStyles.supplicationTranscriptionTextStyle,
+                      style: TextStyle(
+                          color: _itemColor[_transcriptionTextColor],
+                          fontSize: 20),
                     ),
                   )
                 : SizedBox()
@@ -175,7 +315,8 @@ class _ContentChapterState extends State<ContentChapter> {
         Padding(
           padding: EdgeInsets.all(8),
           child: Html(
-            onLinkTap: (String? url, RenderContext rendContext, Map<String, String> attributes, element) {
+            onLinkTap: (String? url, RenderContext rendContext,
+                Map<String, String> attributes, element) {
               showCupertinoModalPopup(
                 context: context,
                 builder: (BuildContext context) => CupertinoActionSheet(
@@ -188,7 +329,9 @@ class _ContentChapterState extends State<ContentChapter> {
             },
             data: item.contentTranslation,
             style: {
-              "#": _textStyles.supplicationTranslationTextStyle,
+              "#": Style(
+                  color: _itemColor[_translationTextColor],
+                  fontSize: FontSize(20)),
               "a": _textStyles.footnoteTextStyle,
               "small": _textStyles.smallTextTextStyle,
             },
