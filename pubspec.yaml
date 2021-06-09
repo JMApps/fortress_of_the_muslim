@@ -22,7 +22,7 @@ dependencies:
   provider:
   shared_preferences:
   flutter_bloc:
-  flutter_colorpicker:
+  o_color_picker:
 
 dev_dependencies:
   flutter_test:

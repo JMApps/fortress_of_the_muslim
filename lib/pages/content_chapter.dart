@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:o_color_picker/o_color_picker.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,44 +21,38 @@ class _ContentChapterState extends State<ContentChapter> {
   var _textStyles = TextStyles();
   static const ARABIC_SHOW_STATE = "arabic_show_state";
   static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
-  static const ARABIC_COLOR_NUMBER = "arabic_color_number";
-  static const TRANSCRIPTION_COLOR_NUMBER = "transcription_color_number";
-  static const TRANSLATION_COLOR_NUMBER = "translation_color_number";
+  static const ARABIC_COLOR = "arabic_color";
+  static const TRANSCRIPTION_COLOR = "transcription_color";
+  static const TRANSLATION_COLOR = "translation_color";
+  static const COUNT_NUMBER_STATE = "count_number_state";
 
   late SharedPreferences sharedPreferences;
 
-  int _countNumber = 0;
+  late int _countNumber;
   bool _isCountShow = false;
   late bool _contentArabicIsShow;
   late bool _contentTranscriptionIsShow;
 
-  late int _arabicTextColor;
-  late int _transcriptionTextColor;
-  late int _translationTextColor;
-
-  List<Color?> _itemColor = [
-    Colors.white,
-    Colors.black,
-    Colors.grey[500],
-    Colors.teal[500],
-    Colors.orange[500],
-    Colors.brown[500],
-    Colors.red[500],
-    Colors.blue[500],
-  ];
+  late Color? arabicColor;
+  late Color? transcriptionColor;
+  late Color? translationColor;
 
   @override
   void initState() {
     super.initState();
     SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
       setState(() {
+        sharedPreferences = sp;
         _contentArabicIsShow = sp.getBool(ARABIC_SHOW_STATE) ?? true;
         _contentTranscriptionIsShow =
             sp.getBool(TRANSCRIPTION_SHOW_STATE) ?? true;
-        _arabicTextColor = sp.getInt(ARABIC_COLOR_NUMBER) ?? 1;
-        _transcriptionTextColor = sp.getInt(TRANSCRIPTION_COLOR_NUMBER) ?? 2;
-        _translationTextColor = sp.getInt(TRANSLATION_COLOR_NUMBER) ?? 1;
+        _countNumber = sp.getInt(COUNT_NUMBER_STATE) ?? 0;
+        arabicColor =
+            Color(sharedPreferences.getInt(ARABIC_COLOR) ?? Colors.black.value);
+        transcriptionColor = Color(
+            sharedPreferences.getInt(TRANSCRIPTION_COLOR) ?? Colors.grey.value);
+        translationColor = Color(
+            sharedPreferences.getInt(TRANSLATION_COLOR) ?? Colors.black.value);
       });
     });
   }
@@ -78,11 +73,12 @@ class _ContentChapterState extends State<ContentChapter> {
                 showModalBottomSheet(
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
+                      return SingleChildScrollView(
                         child: StatefulBuilder(
                           builder:
                               (BuildContext context, StateSetter stateSetter) {
                             return Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 FractionallySizedBox(
                                   widthFactor: 0.25,
@@ -153,16 +149,44 @@ class _ContentChapterState extends State<ContentChapter> {
                                   endIndent: 16,
                                 ),
                                 ListTile(
-                                  leading: Icon(Icons.color_lens),
+                                  leading: Icon(Icons.color_lens,
+                                      color: arabicColor),
                                   title: Text('Цвет арабского текста',
                                       style: _textStyles
                                           .settingTitleItemTextStyle),
                                   trailing: Transform.scale(
                                     scale: 0.5,
                                     child: FloatingActionButton(
-                                      onPressed: () {},
-                                      backgroundColor:
-                                          _itemColor[_arabicTextColor],
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25))),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                OColorPicker(
+                                                  selectedColor: arabicColor,
+                                                  colors: primaryColorsPalette,
+                                                  onColorChange: (color) {
+                                                    setState(() {
+                                                      sharedPreferences.setInt(ARABIC_COLOR, color.value);
+                                                      arabicColor = color;
+                                                    });
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      elevation: 0,
+                                      backgroundColor: arabicColor,
                                     ),
                                   ),
                                 ),
@@ -172,10 +196,50 @@ class _ContentChapterState extends State<ContentChapter> {
                                   endIndent: 16,
                                 ),
                                 ListTile(
-                                  leading: Icon(Icons.color_lens),
+                                  leading: Icon(Icons.color_lens,
+                                      color: transcriptionColor),
                                   title: Text('Цвет текста транскрипции',
                                       style: _textStyles
                                           .settingTitleItemTextStyle),
+                                  trailing: Transform.scale(
+                                    scale: 0.5,
+                                    child: FloatingActionButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25))),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                OColorPicker(
+                                                  selectedColor:
+                                                      transcriptionColor,
+                                                  colors: primaryColorsPalette,
+                                                  onColorChange: (color) {
+                                                    setState(() {
+                                                      sharedPreferences.setInt(
+                                                          TRANSCRIPTION_COLOR,
+                                                          color.value);
+                                                      transcriptionColor =
+                                                          color;
+                                                    });
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      elevation: 0,
+                                      backgroundColor: transcriptionColor,
+                                    ),
+                                  ),
                                 ),
                                 Divider(
                                   height: 1,
@@ -183,16 +247,56 @@ class _ContentChapterState extends State<ContentChapter> {
                                   endIndent: 16,
                                 ),
                                 ListTile(
-                                  leading: Icon(Icons.color_lens),
+                                  leading: Icon(Icons.color_lens,
+                                      color: translationColor),
                                   title: Text('Цвет текста перевода',
                                       style: _textStyles
                                           .settingTitleItemTextStyle),
+                                  trailing: Transform.scale(
+                                    scale: 0.5,
+                                    child: FloatingActionButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25))),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                OColorPicker(
+                                                  selectedColor:
+                                                      translationColor,
+                                                  colors: primaryColorsPalette,
+                                                  onColorChange: (color) {
+                                                    setState(() {
+                                                      sharedPreferences.setInt(
+                                                          TRANSLATION_COLOR,
+                                                          color.value);
+                                                      translationColor = color;
+                                                    });
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      elevation: 0,
+                                      backgroundColor: translationColor,
+                                    ),
+                                  ),
                                 ),
                                 Divider(
                                   height: 1,
                                   indent: 16,
                                   endIndent: 16,
                                 ),
+                                SizedBox(height: 24),
                               ],
                             );
                           },
@@ -240,6 +344,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 onLongPress: () {
                   setState(() {
                     _countNumber = 0;
+                    sharedPreferences.setInt(COUNT_NUMBER_STATE, _countNumber);
                   });
                 },
                 child: FloatingActionButton(
@@ -249,7 +354,11 @@ class _ContentChapterState extends State<ContentChapter> {
                   backgroundColor: Colors.blueGrey[700],
                   onPressed: () {
                     setState(() {
-                      _countNumber++;
+                      if (_countNumber < 100) {
+                        _countNumber++;
+                      }
+                      sharedPreferences.setInt(
+                          COUNT_NUMBER_STATE, _countNumber);
                     });
                   },
                 ),
@@ -292,8 +401,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 ? Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(item.contentArabic,
-                        style: TextStyle(
-                            color: _itemColor[_arabicTextColor], fontSize: 20),
+                        style: TextStyle(color: arabicColor, fontSize: 20),
                         textAlign: TextAlign.start,
                         textDirection: TextDirection.rtl),
                   )
@@ -305,9 +413,7 @@ class _ContentChapterState extends State<ContentChapter> {
                     padding: EdgeInsets.all(16),
                     child: Text(
                       item.contentTranscription,
-                      style: TextStyle(
-                          color: _itemColor[_transcriptionTextColor],
-                          fontSize: 20),
+                      style: TextStyle(color: transcriptionColor, fontSize: 20),
                     ),
                   )
                 : SizedBox()
@@ -329,9 +435,7 @@ class _ContentChapterState extends State<ContentChapter> {
             },
             data: item.contentTranslation,
             style: {
-              "#": Style(
-                  color: _itemColor[_translationTextColor],
-                  fontSize: FontSize(20)),
+              "#": Style(color: translationColor, fontSize: FontSize(20)),
               "a": _textStyles.footnoteTextStyle,
               "small": _textStyles.smallTextTextStyle,
             },

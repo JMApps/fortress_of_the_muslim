@@ -15,5 +15,5 @@ class TextStyles {
   var favoriteSupplicationNumberTextStyle = TextStyle(color: Colors.blue[500], fontSize: 16);
   var contentChapterNumberTextStyle = TextStyle(color: Colors.blueGrey[500], fontSize: 16);
   var contentChapterFloatingButtonTextStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  var settingTitleItemTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
+  var settingTitleItemTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
 }
