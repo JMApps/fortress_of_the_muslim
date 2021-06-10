@@ -25,6 +25,8 @@ class _ContentChapterState extends State<ContentChapter> {
   static const TRANSCRIPTION_COLOR = "transcription_color";
   static const TRANSLATION_COLOR = "translation_color";
   static const COUNT_NUMBER_STATE = "count_number_state";
+  static const ARABIC_FONT_SIZE = "arabic_font_size";
+  static const TRANSC_TRANSL_FONT_SIZE = "transc_transl_font_size";
 
   late SharedPreferences sharedPreferences;
 
@@ -36,6 +38,9 @@ class _ContentChapterState extends State<ContentChapter> {
   late Color? arabicColor;
   late Color? transcriptionColor;
   late Color? translationColor;
+
+  late double _arabicFontSize;
+  late double _transcTranslFontSize;
 
   @override
   void initState() {
@@ -53,6 +58,9 @@ class _ContentChapterState extends State<ContentChapter> {
             sharedPreferences.getInt(TRANSCRIPTION_COLOR) ?? Colors.grey.value);
         translationColor = Color(
             sharedPreferences.getInt(TRANSLATION_COLOR) ?? Colors.black.value);
+        _arabicFontSize = sharedPreferences.getDouble(ARABIC_FONT_SIZE) ?? 18.0;
+        _transcTranslFontSize =
+            sharedPreferences.getDouble(TRANSC_TRANSL_FONT_SIZE) ?? 18.0;
       });
     });
   }
@@ -78,7 +86,6 @@ class _ContentChapterState extends State<ContentChapter> {
                           builder:
                               (BuildContext context, StateSetter stateSetter) {
                             return Column(
-                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 FractionallySizedBox(
                                   widthFactor: 0.25,
@@ -148,6 +155,83 @@ class _ContentChapterState extends State<ContentChapter> {
                                   indent: 16,
                                   endIndent: 16,
                                 ),
+                                SizedBox(height: 16),
+                                Text(
+                                  'Размер арабского текста',
+                                  style: TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.left,
+                                ),
+                                StatefulBuilder(
+                                  builder: (context, setSliderState) {
+                                    return Slider(
+                                      activeColor: Colors.blueGrey[800],
+                                      inactiveColor: Colors.blueGrey[200],
+                                      min: 14.0,
+                                      max: 40.0,
+                                      divisions: 20,
+                                      label: _arabicFontSize.round().toString(),
+                                      value: _arabicFontSize,
+                                      onChanged: (dynamic value) {
+                                        setSliderState(() {
+                                          sharedPreferences.setDouble(
+                                              ARABIC_FONT_SIZE,
+                                              _arabicFontSize);
+                                          _arabicFontSize = value;
+                                        });
+                                        setState(() {
+                                          _arabicFontSize = value;
+                                        });
+                                      },
+                                    );
+                                  },
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
+                                SizedBox(height: 16),
+                                Text(
+                                  'Размер текста перевода',
+                                  style: TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.left,
+                                ),
+                                StatefulBuilder(
+                                  builder: (context, setSliderState) {
+                                    return Slider(
+                                      activeColor: Colors.blueGrey[800],
+                                      inactiveColor: Colors.blueGrey[200],
+                                      min: 14.0,
+                                      max: 40.0,
+                                      divisions: 20,
+                                      label: _transcTranslFontSize
+                                          .round()
+                                          .toString(),
+                                      value: _transcTranslFontSize,
+                                      onChanged: (dynamic value) {
+                                        setSliderState(() {
+                                          sharedPreferences.setDouble(
+                                              TRANSC_TRANSL_FONT_SIZE,
+                                              _transcTranslFontSize);
+                                          _transcTranslFontSize = value;
+                                        });
+                                        setState(() {
+                                          _transcTranslFontSize = value;
+                                        });
+                                      },
+                                    );
+                                  },
+                                ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
                                 ListTile(
                                   leading: Icon(Icons.color_lens,
                                       color: arabicColor),
@@ -174,7 +258,9 @@ class _ContentChapterState extends State<ContentChapter> {
                                                   colors: primaryColorsPalette,
                                                   onColorChange: (color) {
                                                     setState(() {
-                                                      sharedPreferences.setInt(ARABIC_COLOR, color.value);
+                                                      sharedPreferences.setInt(
+                                                          ARABIC_COLOR,
+                                                          color.value);
                                                       arabicColor = color;
                                                     });
                                                     Navigator.of(context).pop();
@@ -296,6 +382,11 @@ class _ContentChapterState extends State<ContentChapter> {
                                   indent: 16,
                                   endIndent: 16,
                                 ),
+                                Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                ),
                                 SizedBox(height: 24),
                               ],
                             );
@@ -401,7 +492,10 @@ class _ContentChapterState extends State<ContentChapter> {
                 ? Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(item.contentArabic,
-                        style: TextStyle(color: arabicColor, fontSize: 20),
+                        style: TextStyle(
+                          color: arabicColor,
+                          fontSize: _arabicFontSize,
+                        ),
                         textAlign: TextAlign.start,
                         textDirection: TextDirection.rtl),
                   )
@@ -413,7 +507,9 @@ class _ContentChapterState extends State<ContentChapter> {
                     padding: EdgeInsets.all(16),
                     child: Text(
                       item.contentTranscription,
-                      style: TextStyle(color: transcriptionColor, fontSize: 20),
+                      style: TextStyle(
+                          color: transcriptionColor,
+                          fontSize: _transcTranslFontSize),
                     ),
                   )
                 : SizedBox()
@@ -435,7 +531,9 @@ class _ContentChapterState extends State<ContentChapter> {
             },
             data: item.contentTranslation,
             style: {
-              "#": Style(color: translationColor, fontSize: FontSize(20)),
+              "#": Style(
+                  color: translationColor,
+                  fontSize: FontSize(_transcTranslFontSize)),
               "a": _textStyles.footnoteTextStyle,
               "small": _textStyles.smallTextTextStyle,
             },
