@@ -7,6 +7,7 @@ class ThemeCubit extends Cubit<ThemeData> {
   static final _lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     brightness: Brightness.light,
+    fontFamily: 'Gilroy',
     appBarTheme: AppBarTheme(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -17,6 +18,7 @@ class ThemeCubit extends Cubit<ThemeData> {
   static final _darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.blueGrey[900],
     brightness: Brightness.dark,
+    fontFamily: 'Gilroy',
     appBarTheme: AppBarTheme(
       elevation: 0,
       backgroundColor: Colors.blueGrey[900],

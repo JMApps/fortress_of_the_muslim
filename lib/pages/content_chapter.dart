@@ -22,10 +22,6 @@ class _ContentChapterState extends State<ContentChapter>
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
 
-  bool isAnimated = false;
-  bool showPlay = true;
-  bool shopPause = false;
-
   static const ARABIC_SHOW_STATE = "arabic_show_state";
   static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
   static const ARABIC_COLOR = "arabic_color";
@@ -78,6 +74,7 @@ class _ContentChapterState extends State<ContentChapter>
     ChapterArguments? args =
         ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return Scaffold(
+        backgroundColor: Colors.grey[100],
         appBar: AppBar(
           backgroundColor: Colors.blueGrey[500],
           title: Text('Глава ${args!.chapterId}'),
@@ -475,17 +472,10 @@ class _ContentChapterState extends State<ContentChapter>
       future: _databaseQuery.getContentChapter(chapterId),
       builder: (context, snapshot) {
         return snapshot.hasData
-            ? ListView.separated(
+            ? ListView.builder(
                 padding: EdgeInsets.zero,
                 physics: BouncingScrollPhysics(),
                 itemCount: snapshot.data!.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider(
-                    indent: 16,
-                    endIndent: 16,
-                    color: Colors.grey[500],
-                  );
-                },
                 itemBuilder: (BuildContext context, int index) {
                   return _buildContentChapterItem(snapshot.data![index]);
                 },
@@ -498,126 +488,143 @@ class _ContentChapterState extends State<ContentChapter>
   }
 
   Widget _buildContentChapterItem(SupplicationItem item) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _contentArabicIsShow
-            ? item.contentArabic != null
-                ? Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(item.contentArabic,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      margin: EdgeInsets.all(8),
+      elevation: 1,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _contentArabicIsShow
+              ? item.contentArabic != null
+                  ? Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(item.contentArabic,
+                          style: TextStyle(
+                              color: arabicColor,
+                              fontSize: _arabicFontSize,
+                              fontFamily: 'Hafs'),
+                          textAlign: TextAlign.start,
+                          textDirection: TextDirection.rtl),
+                    )
+                  : SizedBox()
+              : SizedBox(),
+          _contentTranscriptionIsShow
+              ? item.contentTranscription != null
+                  ? Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        item.contentTranscription,
                         style: TextStyle(
-                          color: arabicColor,
-                          fontSize: _arabicFontSize,
-                        ),
-                        textAlign: TextAlign.start,
-                        textDirection: TextDirection.rtl),
-                  )
-                : SizedBox()
-            : SizedBox(),
-        _contentTranscriptionIsShow
-            ? item.contentTranscription != null
-                ? Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      item.contentTranscription,
-                      style: TextStyle(
-                          color: transcriptionColor,
-                          fontSize: _transcTranslFontSize),
+                            color: transcriptionColor,
+                            fontSize: _transcTranslFontSize,
+                            fontFamily: 'Gilroy'),
+                      ),
+                    )
+                  : SizedBox()
+              : SizedBox(),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Html(
+              onLinkTap: (String? url, RenderContext rendContext,
+                  Map<String, String> attributes, element) {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (BuildContext context) => CupertinoActionSheet(
+                    message: Html(
+                      data: url,
+                      style: {
+                        "small":
+                            Style(color: Colors.grey[500], fontFamily: 'Gilroy')
+                      },
                     ),
-                  )
-                : SizedBox()
-            : SizedBox(),
-        Padding(
-          padding: EdgeInsets.all(8),
-          child: Html(
-            onLinkTap: (String? url, RenderContext rendContext,
-                Map<String, String> attributes, element) {
-              showCupertinoModalPopup(
-                context: context,
-                builder: (BuildContext context) => CupertinoActionSheet(
-                  message: Html(
-                    data: url,
-                    style: {"small": Style(color: Colors.grey[500])},
-                  ),
-                ),
-              );
-            },
-            data: item.contentTranslation,
-            style: {
-              "#": Style(
-                  color: translationColor,
-                  fontSize: FontSize(_transcTranslFontSize)),
-              "a": _textStyles.footnoteTextStyle,
-              "small": _textStyles.smallTextTextStyle,
-            },
-          ),
-        ),
-        Divider(
-          indent: 16,
-          endIndent: 16,
-          color: Colors.grey[500],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text('Дуа ${item.id}',
-                style: _textStyles.contentChapterNumberTextStyle),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.play_circle_outline),
-              color: Colors.blueGrey[500],
-            ),
-            IconButton(
-              icon: Icon(CupertinoIcons.doc_on_doc),
-              color: Colors.grey[500],
-              onPressed: () {
-                FlutterClipboard.copy('${item.contentArabic}\n\n'
-                        '${item.contentTranscription}\n\n'
-                        '${item.contentForCopyAndShare}')
-                    .then((value) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Скопировано'),
-                      duration: Duration(milliseconds: 500),
-                    ),
-                  );
-                });
-              },
-            ),
-            IconButton(
-                icon: Icon(CupertinoIcons.share),
-                color: Colors.grey[500],
-                onPressed: () {
-                  Share.share('${item.contentArabic}\n\n'
-                      '${item.contentTranscription}\n\n'
-                      '${item.contentForCopyAndShare}');
-                }),
-            IconButton(
-              icon: item.favoriteState == 0
-                  ? Icon(CupertinoIcons.bookmark)
-                  : Icon(CupertinoIcons.bookmark_fill),
-              color: Colors.blueGrey[700],
-              onPressed: () {
-                setState(() {
-                  item.favoriteState == 0
-                      ? _databaseQuery.addRemoveFavoriteSupplication(1, item.id)
-                      : _databaseQuery.addRemoveFavoriteSupplication(
-                          0, item.id);
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: item.favoriteState == 0
-                        ? Text('Добавлено')
-                        : Text('Удалено'),
-                    duration: Duration(milliseconds: 500),
                   ),
                 );
               },
+              data: item.contentTranslation,
+              style: {
+                "#": Style(
+                    color: translationColor,
+                    fontSize: FontSize(_transcTranslFontSize),
+                    fontFamily: 'Gilroy'),
+                "a": _textStyles.footnoteTextStyle,
+                "small": _textStyles.smallTextTextStyle,
+              },
             ),
-          ],
-        )
-      ],
+          ),
+          Divider(
+            indent: 16,
+            endIndent: 16,
+            color: Colors.grey[500],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Дуа ${item.id}',
+                  style: _textStyles.contentChapterNumberTextStyle),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.play_circle_outline),
+                  color: Colors.blueGrey[500]),
+              IconButton(
+                icon: Icon(CupertinoIcons.doc_on_doc),
+                color: Colors.grey[500],
+                onPressed: () {
+                  FlutterClipboard.copy('${item.contentArabic}\n\n'
+                          '${item.contentTranscription}\n\n'
+                          '${item.contentForCopyAndShare}')
+                      .then((value) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Скопировано'),
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  });
+                },
+              ),
+              IconButton(
+                  icon: Icon(CupertinoIcons.share),
+                  color: Colors.grey[500],
+                  onPressed: () {
+                    Share.share('${item.contentArabic}\n\n'
+                        '${item.contentTranscription}\n\n'
+                        '${item.contentForCopyAndShare}');
+                  }),
+              IconButton(
+                icon: item.favoriteState == 0
+                    ? Icon(CupertinoIcons.bookmark)
+                    : Icon(CupertinoIcons.bookmark_fill),
+                color: Colors.blueGrey[700],
+                onPressed: () {
+                  setState(() {
+                    item.favoriteState == 0
+                        ? _databaseQuery.addRemoveFavoriteSupplication(
+                            1, item.id)
+                        : _databaseQuery.addRemoveFavoriteSupplication(
+                            0, item.id);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: item.favoriteState == 0
+                          ? Text('Добавлено')
+                          : Text('Удалено'),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          Divider(
+            indent: 16,
+            endIndent: 16,
+            color: Colors.grey[500],
+          ),
+        ],
+      ),
     );
   }
 }
