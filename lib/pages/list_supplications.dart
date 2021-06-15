@@ -32,7 +32,11 @@ class _ListSupplicationsState extends State<ListSupplications> {
         children: [
           Container(
             padding: EdgeInsets.all(8),
-            color: Colors.red[500],
+            decoration: BoxDecoration(
+                color: Colors.red[500],
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15))),
             child: _buildSearch(),
           ),
           Expanded(
@@ -59,7 +63,7 @@ class _ListSupplicationsState extends State<ListSupplications> {
       },
       decoration: BoxDecoration(
         color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(15),
       ),
       prefix: Padding(
         padding: EdgeInsets.all(8),
@@ -128,7 +132,8 @@ class _ListSupplicationsState extends State<ListSupplications> {
         Padding(
           padding: EdgeInsets.all(8),
           child: Html(
-            onLinkTap: (String? url, RenderContext rendContext, Map<String, String> attributes, element) {
+            onLinkTap: (String? url, RenderContext rendContext,
+                Map<String, String> attributes, element) {
               showCupertinoModalPopup(
                 context: context,
                 builder: (BuildContext context) => CupertinoActionSheet(

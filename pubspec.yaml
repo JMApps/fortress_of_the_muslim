@@ -23,6 +23,7 @@ dependencies:
   shared_preferences:
   flutter_bloc:
   o_color_picker:
+  assets_audio_player:
 
 dev_dependencies:
   flutter_test:

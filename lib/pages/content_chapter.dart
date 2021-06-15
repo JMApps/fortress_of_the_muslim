@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:fortress_of_the_muslim/widget/player.dart';
 import 'package:o_color_picker/o_color_picker.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,9 +17,15 @@ class ContentChapter extends StatefulWidget {
   _ContentChapterState createState() => _ContentChapterState();
 }
 
-class _ContentChapterState extends State<ContentChapter> {
+class _ContentChapterState extends State<ContentChapter>
+    with SingleTickerProviderStateMixin {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
+
+  bool isAnimated = false;
+  bool showPlay = true;
+  bool shopPause = false;
+
   static const ARABIC_SHOW_STATE = "arabic_show_state";
   static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
   static const ARABIC_COLOR = "arabic_color";
@@ -29,6 +36,7 @@ class _ContentChapterState extends State<ContentChapter> {
   static const TRANSC_TRANSL_FONT_SIZE = "transc_transl_font_size";
 
   late SharedPreferences sharedPreferences;
+  var _myPlayer = MyPlayer();
 
   late int _countNumber;
   bool _isCountShow = false;
@@ -97,7 +105,7 @@ class _ContentChapterState extends State<ContentChapter> {
                                       height: 5.0,
                                       decoration: BoxDecoration(
                                         color: Colors.grey[300],
-                                        borderRadius: const BorderRadius.all(
+                                        borderRadius: BorderRadius.all(
                                             Radius.circular(2.5)),
                                       ),
                                     ),
@@ -414,7 +422,11 @@ class _ContentChapterState extends State<ContentChapter> {
         body: Column(
           children: [
             Container(
-              color: Colors.blueGrey[200],
+              decoration: BoxDecoration(
+                  color: Colors.blueGrey[200],
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15))),
               child: Html(
                 data: args.chapterTitle,
                 style: {
@@ -427,7 +439,8 @@ class _ContentChapterState extends State<ContentChapter> {
               child: Scrollbar(
                 child: _buildList(args.chapterId!),
               ),
-            )
+            ),
+            _myPlayer,
           ],
         ),
         floatingActionButton: _isCountShow
@@ -463,6 +476,7 @@ class _ContentChapterState extends State<ContentChapter> {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.separated(
+                padding: EdgeInsets.zero,
                 physics: BouncingScrollPhysics(),
                 itemCount: snapshot.data!.length,
                 separatorBuilder: (BuildContext context, int index) {
@@ -549,30 +563,28 @@ class _ContentChapterState extends State<ContentChapter> {
           children: [
             Text('Дуа ${item.id}',
                 style: _textStyles.contentChapterNumberTextStyle),
-            // IconButton(
-            //     icon: Icon(CupertinoIcons.play),
-            //     color: Colors.blueGrey[700],
-            //     onPressed: () {}),
-            // Container(
-            //   width: 50,
-            //   child: Text('00:00'),
-            // ),
             IconButton(
-                icon: Icon(CupertinoIcons.doc_on_doc),
-                color: Colors.grey[500],
-                onPressed: () {
-                  FlutterClipboard.copy('${item.contentArabic}\n\n'
-                          '${item.contentTranscription}\n\n'
-                          '${item.contentForCopyAndShare}')
-                      .then((value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Скопировано'),
-                        duration: Duration(milliseconds: 500),
-                      ),
-                    );
-                  });
-                }),
+              onPressed: () {},
+              icon: Icon(Icons.play_circle_outline),
+              color: Colors.blueGrey[500],
+            ),
+            IconButton(
+              icon: Icon(CupertinoIcons.doc_on_doc),
+              color: Colors.grey[500],
+              onPressed: () {
+                FlutterClipboard.copy('${item.contentArabic}\n\n'
+                        '${item.contentTranscription}\n\n'
+                        '${item.contentForCopyAndShare}')
+                    .then((value) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Скопировано'),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                });
+              },
+            ),
             IconButton(
                 icon: Icon(CupertinoIcons.share),
                 color: Colors.grey[500],
