@@ -23,6 +23,7 @@ dependencies:
   shared_preferences:
   flutter_bloc:
   o_color_picker:
+  scrollable_positioned_list:
 
 dev_dependencies:
   flutter_test:

@@ -18,8 +18,17 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      child: _buildList(),
+    return Scaffold(
+      backgroundColor: Color(0xFFFFFAF2),
+      appBar: AppBar(
+        title: Text('Крепость мусульманина'),
+        backgroundColor: Colors.orange[500],
+        elevation: 0,
+        actions: [],
+      ),
+      body: Scrollbar(
+        child: _buildList(),
+      ),
     );
   }
 
@@ -101,7 +110,8 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                       style: _textStyles.mainFavoriteChapterNumberTextStyle),
                 ),
                 Html(
-                  onLinkTap: (String? url, RenderContext rendContext, Map<String, String> attributes, element) {
+                  onLinkTap: (String? url, RenderContext rendContext,
+                      Map<String, String> attributes, element) {
                     showCupertinoModalPopup(
                       context: context,
                       builder: (BuildContext context) => CupertinoActionSheet(

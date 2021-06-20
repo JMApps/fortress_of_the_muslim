@@ -27,23 +27,32 @@ class _MainChaptersState extends State<MainChapters> {
   Widget build(BuildContext context) {
     FocusScopeNode _currentFocus = FocusScope.of(context);
     return InkWell(
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: Colors.teal[500],
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15))),
-            child: _buildSearch(),
-          ),
-          Expanded(
-            child: Scrollbar(
-              child: _buildList(),
+      child: Scaffold(
+        backgroundColor: Color(0xFFF2FFFE),
+        appBar: AppBar(
+          title: Text('Крепость мусульманина'),
+          backgroundColor: Colors.teal[500],
+          elevation: 0,
+          actions: [],
+        ),
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Colors.teal[500],
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15))),
+              child: _buildSearch(),
             ),
-          ),
-        ],
+            Expanded(
+              child: Scrollbar(
+                child: _buildList(),
+              ),
+            ),
+          ],
+        ),
       ),
       onTap: () {
         if (!_currentFocus.hasPrimaryFocus) {

@@ -12,28 +12,7 @@ import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:fortress_of_the_muslim/styles/themes.dart';
 import 'package:fortress_of_the_muslim/theme/theme_cubit.dart';
 
-class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onEvent(Bloc bloc, Object event) {
-    super.onEvent(bloc, event);
-    print(event);
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
-  }
-
-  @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    print(error);
-    super.onError(bloc, error, stackTrace);
-  }
-}
-
 void main() {
-  Bloc.observer = SimpleBlocObserver();
   runApp(MainPage());
 }
 
@@ -77,19 +56,6 @@ class _MainPageState extends State<MainPage> {
             // theme: themes.themeData(
             //     _themeChangeProvider.darkTheme, _selectedIndex),
             home: Scaffold(
-              appBar: AppBar(
-                title: Text('Крепость мусульманина'),
-                backgroundColor: _changeColor[_selectedIndex],
-                elevation: 0,
-                actions: [
-                  // IconButton(
-                  //   icon: Icon(Icons.night_shelter),
-                  //   onPressed: () {
-                  //     context.read<ThemeCubit>().toggleTheme();
-                  //   },
-                  // ),
-                ],
-              ),
               body: DecoratedBox(
                 decoration: BoxDecoration(
                   image: DecorationImage(
