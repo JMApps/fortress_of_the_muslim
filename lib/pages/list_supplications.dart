@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,10 @@ class _ListSupplicationsState extends State<ListSupplications> {
   final _textController = TextEditingController();
   var _textStyles = TextStyles();
 
-  final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener =
-      ItemPositionsListener.create();
+  final itemScrollController = ItemScrollController();
+  final itemPositionsListener = ItemPositionsListener.create();
+
+  var random = Random();
 
   @override
   void dispose() {
@@ -39,7 +42,18 @@ class _ListSupplicationsState extends State<ListSupplications> {
           title: Text('Крепость мусульманина'),
           backgroundColor: Colors.red[500],
           elevation: 0,
-          actions: [],
+          actions: [
+            IconButton(
+              onPressed: () {
+                int randomNumber = random.nextInt(280);
+                itemScrollController.scrollTo(
+                    index: randomNumber - 1,
+                    duration: Duration(seconds: 1),
+                    curve: Curves.easeInOutCubic);
+              },
+              icon: Icon(CupertinoIcons.arrow_clockwise),
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -102,6 +116,7 @@ class _ListSupplicationsState extends State<ListSupplications> {
         return snapshot.hasData
             ? ScrollablePositionedList.builder(
                 physics: BouncingScrollPhysics(),
+                itemScrollController: itemScrollController,
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return _buildSupplicationItem(snapshot.data![index]);
