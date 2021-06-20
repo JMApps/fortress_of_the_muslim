@@ -7,72 +7,85 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
-import 'package:fortress_of_the_muslim/widget/player.dart';
-import 'package:o_color_picker/o_color_picker.dart';
+import 'package:fortress_of_the_muslim/widget/chapter_settings.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContentChapter extends StatefulWidget {
+  const ContentChapter({Key? key}) : super(key: key);
+
   @override
   _ContentChapterState createState() => _ContentChapterState();
 }
 
-class _ContentChapterState extends State<ContentChapter>
-    with SingleTickerProviderStateMixin {
+class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
 
+  late SharedPreferences _sharedPreferences;
+  late ChapterArguments? args;
+
   static const ARABIC_SHOW_STATE = "arabic_show_state";
   static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
+
   static const ARABIC_COLOR = "arabic_color";
   static const TRANSCRIPTION_COLOR = "transcription_color";
   static const TRANSLATION_COLOR = "translation_color";
-  static const COUNT_NUMBER_STATE = "count_number_state";
+
   static const ARABIC_FONT_SIZE = "arabic_font_size";
   static const TRANSC_TRANSL_FONT_SIZE = "transc_transl_font_size";
 
-  late SharedPreferences sharedPreferences;
-  var _myPlayer = MyPlayer();
+  late bool contentArabicIsShow;
+  late bool contentTranscriptionIsShow;
 
-  late int _countNumber;
-  bool _isCountShow = false;
-  late bool _contentArabicIsShow;
-  late bool _contentTranscriptionIsShow;
-
-  late Color? arabicColor;
-  late Color? transcriptionColor;
-  late Color? translationColor;
+  late Color? _arabicColor;
+  late Color? _transcriptionColor;
+  late Color? _translationColor;
 
   late double _arabicFontSize;
   late double _transcTranslFontSize;
 
+  static const COUNT_NUMBER_STATE = "count_number_state";
+  late int _countNumber;
+  bool _isCountShow = false;
+
+  var chapterSettings = ChapterSettings();
+
   @override
   void initState() {
+    initSharedPreferences();
     super.initState();
+  }
+
+  initSharedPreferences() {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       setState(() {
-        sharedPreferences = sp;
-        _contentArabicIsShow = sp.getBool(ARABIC_SHOW_STATE) ?? true;
-        _contentTranscriptionIsShow =
-            sp.getBool(TRANSCRIPTION_SHOW_STATE) ?? true;
+        _sharedPreferences = sp;
         _countNumber = sp.getInt(COUNT_NUMBER_STATE) ?? 0;
-        arabicColor =
-            Color(sharedPreferences.getInt(ARABIC_COLOR) ?? Colors.black.value);
-        transcriptionColor = Color(
-            sharedPreferences.getInt(TRANSCRIPTION_COLOR) ?? Colors.grey.value);
-        translationColor = Color(
-            sharedPreferences.getInt(TRANSLATION_COLOR) ?? Colors.black.value);
-        _arabicFontSize = sharedPreferences.getDouble(ARABIC_FONT_SIZE) ?? 18.0;
+
+        contentArabicIsShow = sp.getBool(ARABIC_SHOW_STATE) ?? true;
+        contentTranscriptionIsShow =
+            sp.getBool(TRANSCRIPTION_SHOW_STATE) ?? true;
+
+        _arabicColor = Color(
+            _sharedPreferences.getInt(ARABIC_COLOR) ?? Colors.black.value);
+        _transcriptionColor = Color(
+            _sharedPreferences.getInt(TRANSCRIPTION_COLOR) ??
+                Colors.grey.value);
+        _translationColor = Color(
+            _sharedPreferences.getInt(TRANSLATION_COLOR) ?? Colors.black.value);
+
+        _arabicFontSize =
+            _sharedPreferences.getDouble(ARABIC_FONT_SIZE) ?? 18.0;
         _transcTranslFontSize =
-            sharedPreferences.getDouble(TRANSC_TRANSL_FONT_SIZE) ?? 18.0;
+            _sharedPreferences.getDouble(TRANSC_TRANSL_FONT_SIZE) ?? 18.0;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    ChapterArguments? args =
-        ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
+    args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
@@ -81,327 +94,7 @@ class _ContentChapterState extends State<ContentChapter>
           centerTitle: true,
           elevation: 0,
           actions: [
-            IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SingleChildScrollView(
-                        child: StatefulBuilder(
-                          builder:
-                              (BuildContext context, StateSetter stateSetter) {
-                            return Column(
-                              children: [
-                                FractionallySizedBox(
-                                  widthFactor: 0.25,
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      vertical: 12.0,
-                                    ),
-                                    child: Container(
-                                      height: 5.0,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[300],
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(2.5)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.language),
-                                  title: Text(
-                                    'Арабский',
-                                    style:
-                                        _textStyles.settingTitleItemTextStyle,
-                                  ),
-                                  trailing: CupertinoSwitch(
-                                    value: _contentArabicIsShow,
-                                    onChanged: (value) {
-                                      stateSetter(() {
-                                        _contentArabicIsShow = value;
-                                        setState(() {
-                                          sharedPreferences.setBool(
-                                              ARABIC_SHOW_STATE,
-                                              _contentArabicIsShow);
-                                        });
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.language),
-                                  title: Text(
-                                    'Транскрипция',
-                                    style:
-                                        _textStyles.settingTitleItemTextStyle,
-                                  ),
-                                  trailing: CupertinoSwitch(
-                                    value: _contentTranscriptionIsShow,
-                                    onChanged: (value) {
-                                      stateSetter(() {
-                                        _contentTranscriptionIsShow = value;
-                                        setState(() {
-                                          sharedPreferences.setBool(
-                                              TRANSCRIPTION_SHOW_STATE,
-                                              _contentTranscriptionIsShow);
-                                        });
-                                      });
-                                    },
-                                  ),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                SizedBox(height: 16),
-                                Text(
-                                  'Размер арабского текста',
-                                  style: TextStyle(fontSize: 20),
-                                  textAlign: TextAlign.left,
-                                ),
-                                StatefulBuilder(
-                                  builder: (context, setSliderState) {
-                                    return Slider(
-                                      activeColor: Colors.blueGrey[800],
-                                      inactiveColor: Colors.blueGrey[200],
-                                      min: 14.0,
-                                      max: 40.0,
-                                      divisions: 20,
-                                      label: _arabicFontSize.round().toString(),
-                                      value: _arabicFontSize,
-                                      onChanged: (dynamic value) {
-                                        setSliderState(() {
-                                          sharedPreferences.setDouble(
-                                              ARABIC_FONT_SIZE,
-                                              _arabicFontSize);
-                                          _arabicFontSize = value;
-                                        });
-                                        setState(() {
-                                          _arabicFontSize = value;
-                                        });
-                                      },
-                                    );
-                                  },
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                SizedBox(height: 16),
-                                Text(
-                                  'Размер текста перевода',
-                                  style: TextStyle(fontSize: 20),
-                                  textAlign: TextAlign.left,
-                                ),
-                                StatefulBuilder(
-                                  builder: (context, setSliderState) {
-                                    return Slider(
-                                      activeColor: Colors.blueGrey[800],
-                                      inactiveColor: Colors.blueGrey[200],
-                                      min: 14.0,
-                                      max: 40.0,
-                                      divisions: 20,
-                                      label: _transcTranslFontSize
-                                          .round()
-                                          .toString(),
-                                      value: _transcTranslFontSize,
-                                      onChanged: (dynamic value) {
-                                        setSliderState(() {
-                                          sharedPreferences.setDouble(
-                                              TRANSC_TRANSL_FONT_SIZE,
-                                              _transcTranslFontSize);
-                                          _transcTranslFontSize = value;
-                                        });
-                                        setState(() {
-                                          _transcTranslFontSize = value;
-                                        });
-                                      },
-                                    );
-                                  },
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.color_lens,
-                                      color: arabicColor),
-                                  title: Text('Цвет арабского текста',
-                                      style: _textStyles
-                                          .settingTitleItemTextStyle),
-                                  trailing: Transform.scale(
-                                    scale: 0.5,
-                                    child: FloatingActionButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (_) => AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(25))),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                OColorPicker(
-                                                  selectedColor: arabicColor,
-                                                  colors: primaryColorsPalette,
-                                                  onColorChange: (color) {
-                                                    setState(() {
-                                                      sharedPreferences.setInt(
-                                                          ARABIC_COLOR,
-                                                          color.value);
-                                                      arabicColor = color;
-                                                    });
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      elevation: 0,
-                                      backgroundColor: arabicColor,
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.color_lens,
-                                      color: transcriptionColor),
-                                  title: Text('Цвет текста транскрипции',
-                                      style: _textStyles
-                                          .settingTitleItemTextStyle),
-                                  trailing: Transform.scale(
-                                    scale: 0.5,
-                                    child: FloatingActionButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (_) => AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(25))),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                OColorPicker(
-                                                  selectedColor:
-                                                      transcriptionColor,
-                                                  colors: primaryColorsPalette,
-                                                  onColorChange: (color) {
-                                                    setState(() {
-                                                      sharedPreferences.setInt(
-                                                          TRANSCRIPTION_COLOR,
-                                                          color.value);
-                                                      transcriptionColor =
-                                                          color;
-                                                    });
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      elevation: 0,
-                                      backgroundColor: transcriptionColor,
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.color_lens,
-                                      color: translationColor),
-                                  title: Text('Цвет текста перевода',
-                                      style: _textStyles
-                                          .settingTitleItemTextStyle),
-                                  trailing: Transform.scale(
-                                    scale: 0.5,
-                                    child: FloatingActionButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (_) => AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(25))),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                OColorPicker(
-                                                  selectedColor:
-                                                      translationColor,
-                                                  colors: primaryColorsPalette,
-                                                  onColorChange: (color) {
-                                                    setState(() {
-                                                      sharedPreferences.setInt(
-                                                          TRANSLATION_COLOR,
-                                                          color.value);
-                                                      translationColor = color;
-                                                    });
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      elevation: 0,
-                                      backgroundColor: translationColor,
-                                    ),
-                                  ),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                Divider(
-                                  height: 1,
-                                  indent: 16,
-                                  endIndent: 16,
-                                ),
-                                SizedBox(height: 24),
-                              ],
-                            );
-                          },
-                        ),
-                      );
-                    });
-              },
-              icon: Icon(CupertinoIcons.settings),
-            ),
+            chapterSettings,
             Transform.scale(
               scale: 0.7,
               child: CupertinoSwitch(
@@ -425,7 +118,7 @@ class _ContentChapterState extends State<ContentChapter>
                       bottomLeft: Radius.circular(15),
                       bottomRight: Radius.circular(15))),
               child: Html(
-                data: args.chapterTitle,
+                data: args!.chapterTitle,
                 style: {
                   "#":
                       Style(textAlign: TextAlign.center, fontSize: FontSize(18))
@@ -434,10 +127,10 @@ class _ContentChapterState extends State<ContentChapter>
             ),
             Expanded(
               child: Scrollbar(
-                child: _buildList(args.chapterId!),
+                child: _buildList(args!.chapterId!),
               ),
             ),
-            _myPlayer,
+            //_myPlayer,
           ],
         ),
         floatingActionButton: _isCountShow
@@ -445,7 +138,7 @@ class _ContentChapterState extends State<ContentChapter>
                 onLongPress: () {
                   setState(() {
                     _countNumber = 0;
-                    sharedPreferences.setInt(COUNT_NUMBER_STATE, _countNumber);
+                    _sharedPreferences.setInt(COUNT_NUMBER_STATE, _countNumber);
                   });
                 },
                 child: FloatingActionButton(
@@ -458,7 +151,7 @@ class _ContentChapterState extends State<ContentChapter>
                       if (_countNumber < 100) {
                         _countNumber++;
                       }
-                      sharedPreferences.setInt(
+                      _sharedPreferences.setInt(
                           COUNT_NUMBER_STATE, _countNumber);
                     });
                   },
@@ -497,13 +190,13 @@ class _ContentChapterState extends State<ContentChapter>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _contentArabicIsShow
+          contentArabicIsShow
               ? item.contentArabic != null
                   ? Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(item.contentArabic,
                           style: TextStyle(
-                              color: arabicColor,
+                              color: _arabicColor,
                               fontSize: _arabicFontSize,
                               fontFamily: 'Hafs'),
                           textAlign: TextAlign.start,
@@ -511,14 +204,14 @@ class _ContentChapterState extends State<ContentChapter>
                     )
                   : SizedBox()
               : SizedBox(),
-          _contentTranscriptionIsShow
+          contentTranscriptionIsShow
               ? item.contentTranscription != null
                   ? Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(
                         item.contentTranscription,
                         style: TextStyle(
-                            color: transcriptionColor,
+                            color: _transcriptionColor,
                             fontSize: _transcTranslFontSize,
                             fontFamily: 'Gilroy'),
                       ),
@@ -546,7 +239,7 @@ class _ContentChapterState extends State<ContentChapter>
               data: item.contentTranslation,
               style: {
                 "#": Style(
-                    color: translationColor,
+                    color: _translationColor,
                     fontSize: FontSize(_transcTranslFontSize),
                     fontFamily: 'Gilroy'),
                 "a": _textStyles.footnoteTextStyle,
@@ -618,11 +311,7 @@ class _ContentChapterState extends State<ContentChapter>
               ),
             ],
           ),
-          Divider(
-            indent: 16,
-            endIndent: 16,
-            color: Colors.grey[500],
-          ),
+          SizedBox(height: 8)
         ],
       ),
     );

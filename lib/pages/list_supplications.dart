@@ -47,11 +47,11 @@ class _ListSupplicationsState extends State<ListSupplications> {
               onPressed: () {
                 int randomNumber = random.nextInt(280);
                 itemScrollController.scrollTo(
-                    index: randomNumber - 1,
+                    index: randomNumber,
                     duration: Duration(seconds: 1),
                     curve: Curves.easeInOutCubic);
               },
-              icon: Icon(CupertinoIcons.arrow_clockwise),
+              icon: Icon(CupertinoIcons.arrow_3_trianglepath),
             ),
           ],
         ),
