@@ -24,6 +24,7 @@ dependencies:
   flutter_bloc:
   o_color_picker:
   scrollable_positioned_list:
+  percent_indicator:
 
 dev_dependencies:
   flutter_test:

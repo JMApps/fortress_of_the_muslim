@@ -8,6 +8,7 @@ import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:fortress_of_the_muslim/widget/chapter_settings.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -86,96 +87,113 @@ class _ContentChapterState extends State<ContentChapter> {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
-    return Scaffold(
-        backgroundColor: Colors.grey[100],
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey[500],
-          title: Text('Глава ${args!.chapterId}'),
-          centerTitle: true,
-          elevation: 0,
-          actions: [
-            chapterSettings,
-            Transform.scale(
-              scale: 0.7,
-              child: CupertinoSwitch(
-                  value: _isCountShow,
-                  onChanged: (value) {
-                    setState(() {
-                      _isCountShow = value;
-                    });
-                  },
-                  activeColor: Colors.blueGrey[900],
-                  trackColor: Colors.blueGrey[700]),
-            )
-          ],
-        ),
-        body: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.blueGrey[200],
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15))),
-              child: Html(
-                data: args!.chapterTitle,
-                style: {
-                  "#":
-                      Style(textAlign: TextAlign.center, fontSize: FontSize(18))
-                },
-              ),
-            ),
-            Expanded(
-              child: Scrollbar(
-                child: _buildList(args!.chapterId!),
-              ),
-            ),
-            //_myPlayer,
-          ],
-        ),
-        floatingActionButton: _isCountShow
-            ? InkWell(
-                onLongPress: () {
-                  setState(() {
-                    _countNumber = 0;
-                    _sharedPreferences.setInt(COUNT_NUMBER_STATE, _countNumber);
-                  });
-                },
-                child: FloatingActionButton(
-                  elevation: 0,
-                  child: Text('$_countNumber',
-                      style: _textStyles.contentChapterFloatingButtonTextStyle),
-                  backgroundColor: Colors.blueGrey[700],
-                  onPressed: () {
-                    setState(() {
-                      if (_countNumber < 100) {
-                        _countNumber++;
-                      }
-                      _sharedPreferences.setInt(
-                          COUNT_NUMBER_STATE, _countNumber);
-                    });
-                  },
-                ),
-              )
-            : SizedBox());
-  }
-
-  Widget _buildList(int chapterId) {
     return FutureBuilder<List>(
-      future: _databaseQuery.getContentChapter(chapterId),
-      builder: (context, snapshot) {
+      future: _databaseQuery.getContentChapter(args!.chapterId!),
+      builder: (BuildContext context, snapshot) {
         return snapshot.hasData
-            ? ListView.builder(
-                padding: EdgeInsets.zero,
-                physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return _buildContentChapterItem(snapshot.data![index]);
-                },
-              )
+            ? Scaffold(
+                backgroundColor: Colors.grey[100],
+                appBar: AppBar(
+                  backgroundColor: Colors.blueGrey[500],
+                  title: Text('Глава ${args!.chapterId}'),
+                  centerTitle: true,
+                  elevation: 0,
+                  actions: [
+                    chapterSettings,
+                    Transform.scale(
+                      scale: 0.7,
+                      child: CupertinoSwitch(
+                          value: _isCountShow,
+                          onChanged: (value) {
+                            setState(() {
+                              _isCountShow = value;
+                            });
+                          },
+                          activeColor: Colors.blueGrey[900],
+                          trackColor: Colors.blueGrey[700]),
+                    )
+                  ],
+                ),
+                body: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          color: Colors.blueGrey[200],
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15))),
+                      child: Html(
+                        data: args!.chapterTitle,
+                        style: {
+                          "#": Style(
+                              textAlign: TextAlign.center,
+                              fontSize: FontSize(18))
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: Scrollbar(
+                        child: _buildList(snapshot),
+                      ),
+                    ),
+                    //_myPlayer,
+                  ],
+                ),
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerFloat,
+                floatingActionButton: _isCountShow
+                    ? InkWell(
+                        onLongPress: () {
+                          setState(() {
+                            _countNumber = 0;
+                            _sharedPreferences.setInt(
+                                COUNT_NUMBER_STATE, _countNumber);
+                          });
+                        },
+                        child: Transform.scale(
+                          scale: 1.2,
+                          child: FloatingActionButton(
+                            elevation: 0,
+                            child: CircularPercentIndicator(
+                              radius: 55,
+                              lineWidth: 3,
+                              animation: true,
+                              percent: _countNumber / 100,
+                              center: Text('$_countNumber',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 22)),
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor: Colors.blueGrey[900],
+                            ),
+                            backgroundColor: Colors.blueGrey[500],
+                            onPressed: () {
+                              setState(() {
+                                if (_countNumber < 100) {
+                                  _countNumber++;
+                                }
+                                _sharedPreferences.setInt(
+                                    COUNT_NUMBER_STATE, _countNumber);
+                              });
+                            },
+                          ),
+                        ),
+                      )
+                    : SizedBox())
             : Center(
                 child: CircularProgressIndicator(),
               );
+      },
+    );
+  }
+
+  Widget _buildList(snapshot) {
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      physics: BouncingScrollPhysics(),
+      itemCount: snapshot.data!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return _buildContentChapterItem(snapshot.data![index]);
       },
     );
   }
