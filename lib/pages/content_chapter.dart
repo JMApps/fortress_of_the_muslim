@@ -8,6 +8,7 @@ import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:fortress_of_the_muslim/widget/chapter_settings.dart';
+import 'package:fortress_of_the_muslim/widget/player.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,6 +52,7 @@ class _ContentChapterState extends State<ContentChapter> {
   bool _isCountShow = false;
 
   var chapterSettings = ChapterSettings();
+  late MyPlayer _myPlayer;
 
   @override
   void initState() {
@@ -87,6 +89,7 @@ class _ContentChapterState extends State<ContentChapter> {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
+    _myPlayer = MyPlayer(chapterId: args!.chapterId);
     return FutureBuilder<List>(
       future: _databaseQuery.getContentChapter(args!.chapterId!),
       builder: (BuildContext context, snapshot) {
@@ -121,8 +124,7 @@ class _ContentChapterState extends State<ContentChapter> {
                       decoration: BoxDecoration(
                           color: Colors.blueGrey[200],
                           borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15))),
+                              bottomRight: Radius.circular(25))),
                       child: Html(
                         data: args!.chapterTitle,
                         style: {
@@ -137,11 +139,11 @@ class _ContentChapterState extends State<ContentChapter> {
                         child: _buildList(snapshot),
                       ),
                     ),
-                    //_myPlayer,
+                    _myPlayer,
                   ],
                 ),
                 floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerFloat,
+                    FloatingActionButtonLocation.endFloat,
                 floatingActionButton: _isCountShow
                     ? InkWell(
                         onLongPress: () {
@@ -156,8 +158,9 @@ class _ContentChapterState extends State<ContentChapter> {
                           child: FloatingActionButton(
                             elevation: 0,
                             child: CircularPercentIndicator(
+                              animationDuration: 0,
                               radius: 55,
-                              lineWidth: 3,
+                              lineWidth: 2,
                               animation: true,
                               percent: _countNumber / 100,
                               center: Text('$_countNumber',
