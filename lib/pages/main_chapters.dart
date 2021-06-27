@@ -6,6 +6,7 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/chapter_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:fortress_of_the_muslim/widget/chapter_settings.dart';
 
 class MainChapters extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _MainChaptersState extends State<MainChapters> {
   var _databaseQuery = DatabaseQuery();
   final _textController = TextEditingController();
   var _textStyles = TextStyles();
+  var chapterSettings = ChapterSettings();
 
   @override
   void dispose() {
@@ -33,7 +35,9 @@ class _MainChaptersState extends State<MainChapters> {
           title: Text('Крепость мусульманина'),
           backgroundColor: Colors.teal[500],
           elevation: 0,
-          actions: [],
+          actions: [
+            chapterSettings,
+          ],
         ),
         body: Column(
           children: [
