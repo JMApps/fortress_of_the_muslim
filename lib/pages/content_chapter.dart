@@ -1,15 +1,17 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
+import 'package:fortress_of_the_muslim/logic/current_index_cubit.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
-import 'package:fortress_of_the_muslim/widget/chapter_settings.dart';
 import 'package:fortress_of_the_muslim/widget/player.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +25,8 @@ class ContentChapter extends StatefulWidget {
 class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
+
+  final itemScrollController = ItemScrollController();
 
   late SharedPreferences _sharedPreferences;
   late ChapterArguments? args;
@@ -51,8 +55,8 @@ class _ContentChapterState extends State<ContentChapter> {
   late int _countNumber;
   bool _isCountShow = false;
 
-  var chapterSettings = ChapterSettings();
   late MyPlayer _myPlayer;
+  late int itemId;
 
   @override
   void initState() {
@@ -89,119 +93,126 @@ class _ContentChapterState extends State<ContentChapter> {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
-    _myPlayer = MyPlayer(chapterId: args!.chapterId);
-    return FutureBuilder<List>(
-      future: _databaseQuery.getContentChapter(args!.chapterId!),
-      builder: (BuildContext context, snapshot) {
-        return snapshot.hasData
-            ? Scaffold(
-                backgroundColor: Colors.grey[100],
-                appBar: AppBar(
-                  backgroundColor: Colors.blueGrey[500],
-                  title: Text('Глава ${args!.chapterId}'),
-                  centerTitle: true,
-                  elevation: 0,
-                  actions: [
-                    chapterSettings,
-                    Transform.scale(
-                      scale: 0.7,
-                      child: CupertinoSwitch(
-                          value: _isCountShow,
-                          onChanged: (value) {
-                            setState(() {
-                              _isCountShow = value;
-                            });
-                          },
-                          activeColor: Colors.blueGrey[900],
-                          trackColor: Colors.blueGrey[700]),
-                    )
-                  ],
-                ),
-                body: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: Colors.blueGrey[200],
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(25))),
-                      child: Html(
-                        data: args!.chapterTitle,
-                        style: {
-                          "#": Style(
-                              textAlign: TextAlign.center,
-                              fontSize: FontSize(18))
-                        },
+    return BlocProvider(
+      create: (_) => CurrentIndexCubit(),
+      child: BlocBuilder<CurrentIndexCubit, int>(
+        builder: (BuildContext context, count) {
+          return FutureBuilder<List>(
+            future: _databaseQuery.getContentChapter(args!.chapterId!),
+            builder: (BuildContext context, snapshot) {
+              _myPlayer = MyPlayer(chapterId: args!.chapterId);
+              return snapshot.hasData
+                  ? Scaffold(
+                      backgroundColor: Colors.grey[100],
+                      appBar: AppBar(
+                        backgroundColor: Colors.blueGrey[500],
+                        title: Text('Глава ${args!.chapterId}'),
+                        centerTitle: true,
+                        elevation: 0,
+                        actions: [
+                          Transform.scale(
+                            scale: 0.7,
+                            child: CupertinoSwitch(
+                                value: _isCountShow,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isCountShow = value;
+                                  });
+                                },
+                                activeColor: Colors.blueGrey[900],
+                                trackColor: Colors.blueGrey[700]),
+                          )
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: Scrollbar(
-                        child: _buildList(snapshot),
-                      ),
-                    ),
-                    _myPlayer,
-                  ],
-                ),
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.endFloat,
-                floatingActionButton: _isCountShow
-                    ? InkWell(
-                        onLongPress: () {
-                          setState(() {
-                            _countNumber = 0;
-                            _sharedPreferences.setInt(
-                                COUNT_NUMBER_STATE, _countNumber);
-                          });
-                        },
-                        child: Transform.scale(
-                          scale: 1.2,
-                          child: FloatingActionButton(
-                            elevation: 0,
-                            child: CircularPercentIndicator(
-                              animationDuration: 0,
-                              radius: 55,
-                              lineWidth: 2,
-                              animation: true,
-                              percent: _countNumber / 100,
-                              center: Text('$_countNumber',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22)),
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: Colors.blueGrey[900],
+                      body: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: Colors.blueGrey[200],
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(25))),
+                            child: Html(
+                              data: args!.chapterTitle,
+                              style: {
+                                "#": Style(
+                                    textAlign: TextAlign.center,
+                                    fontSize: FontSize(18))
+                              },
                             ),
-                            backgroundColor: Colors.blueGrey[500],
-                            onPressed: () {
-                              setState(() {
-                                if (_countNumber < 100) {
-                                  _countNumber++;
-                                }
-                                _sharedPreferences.setInt(
-                                    COUNT_NUMBER_STATE, _countNumber);
-                              });
-                            },
                           ),
-                        ),
-                      )
-                    : SizedBox())
-            : Center(
-                child: CircularProgressIndicator(),
-              );
-      },
+                          Expanded(
+                            child: Scrollbar(
+                              child: _buildList(snapshot, count),
+                            ),
+                          ),
+                          _myPlayer,
+                        ],
+                      ),
+                      floatingActionButtonLocation:
+                          FloatingActionButtonLocation.endFloat,
+                      floatingActionButton: _isCountShow
+                          ? InkWell(
+                              onLongPress: () {
+                                setState(() {
+                                  _countNumber = 0;
+                                  _sharedPreferences.setInt(
+                                      COUNT_NUMBER_STATE, _countNumber);
+                                });
+                              },
+                              child: Transform.scale(
+                                scale: 1.2,
+                                child: FloatingActionButton(
+                                  elevation: 0,
+                                  child: CircularPercentIndicator(
+                                    animationDuration: 0,
+                                    radius: 55,
+                                    lineWidth: 2,
+                                    animation: true,
+                                    percent: _countNumber / 100,
+                                    center: Text('$_countNumber',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 22)),
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: Colors.blueGrey[900],
+                                  ),
+                                  backgroundColor: Colors.blueGrey[500],
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_countNumber < 100) {
+                                        _countNumber++;
+                                      }
+                                      _sharedPreferences.setInt(
+                                          COUNT_NUMBER_STATE, _countNumber);
+                                    });
+                                  },
+                                ),
+                              ),
+                            )
+                          : SizedBox())
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    );
+            },
+          );
+        },
+      ),
     );
   }
 
-  Widget _buildList(snapshot) {
-    return ListView.builder(
+  Widget _buildList(snapshot, count) {
+    return ScrollablePositionedList.builder(
       padding: EdgeInsets.zero,
       physics: BouncingScrollPhysics(),
+      itemScrollController: itemScrollController,
       itemCount: snapshot.data!.length,
       itemBuilder: (BuildContext context, int index) {
-        return _buildContentChapterItem(snapshot.data![index]);
+        return _buildContentChapterItem(snapshot.data![index], count);
       },
     );
   }
 
-  Widget _buildContentChapterItem(SupplicationItem item) {
+  Widget _buildContentChapterItem(SupplicationItem item, count) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -279,7 +290,9 @@ class _ContentChapterState extends State<ContentChapter> {
               Text('Дуа ${item.id}',
                   style: _textStyles.contentChapterNumberTextStyle),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print('$count');
+                  },
                   icon: Icon(Icons.play_circle_outline),
                   color: Colors.blueGrey[500]),
               IconButton(
@@ -336,5 +349,12 @@ class _ContentChapterState extends State<ContentChapter> {
         ],
       ),
     );
+  }
+
+  toIndex(count) {
+    itemScrollController.scrollTo(
+        index: count,
+        duration: Duration(seconds: 1),
+        curve: Curves.easeInOutCubic);
   }
 }
