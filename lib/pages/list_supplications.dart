@@ -20,16 +20,14 @@ class _ListSupplicationsState extends State<ListSupplications> {
   var _databaseQuery = DatabaseQuery();
   final _textController = TextEditingController();
   var _textStyles = TextStyles();
-
   final itemScrollController = ItemScrollController();
-  final itemPositionsListener = ItemPositionsListener.create();
 
   var random = Random();
 
   @override
   void dispose() {
-    super.dispose();
     _textController.dispose();
+    super.dispose();
   }
 
   @override

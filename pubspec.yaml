@@ -25,7 +25,8 @@ dependencies:
   o_color_picker:
   scrollable_positioned_list:
   percent_indicator:
-  draggable_floating_button:
+  assets_audio_player:
+  rxdart:
 
 dev_dependencies:
   flutter_test:
