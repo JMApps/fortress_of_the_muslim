@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _ContentChapterState extends State<ContentChapter> {
   var _textStyles = TextStyles();
 
   final itemScrollController = ItemScrollController();
+  late AssetsAudioPlayer audioPlayer;
 
   late SharedPreferences _sharedPreferences;
   late ChapterArguments? args;
@@ -53,13 +55,21 @@ class _ContentChapterState extends State<ContentChapter> {
 
   static const COUNT_NUMBER_STATE = "count_number_state";
   late int _countNumber;
+  int _currentIndex = -1;
   bool _isCountShow = false;
 
-  late MyPlayer _myPlayer;
-  late int itemId;
+  var _duration = Duration(seconds: 0);
+  var _current = Duration(seconds: 0);
+
+  @override
+  void dispose() {
+    audioPlayer.stop();
+    super.dispose();
+  }
 
   @override
   void initState() {
+    audioPlayer = AssetsAudioPlayer();
     initSharedPreferences();
     super.initState();
   }
@@ -100,7 +110,6 @@ class _ContentChapterState extends State<ContentChapter> {
           return FutureBuilder<List>(
             future: _databaseQuery.getContentChapter(args!.chapterId!),
             builder: (BuildContext context, snapshot) {
-              _myPlayer = MyPlayer(chapterId: args!.chapterId);
               return snapshot.hasData
                   ? Scaffold(
                       backgroundColor: Colors.grey[100],
@@ -143,10 +152,12 @@ class _ContentChapterState extends State<ContentChapter> {
                           ),
                           Expanded(
                             child: Scrollbar(
-                              child: _buildList(snapshot, count),
+                              child: _buildList(snapshot),
                             ),
                           ),
-                          _myPlayer,
+                          MyPlayer(
+                              chapterId: args!.chapterId,
+                              audioPlayer: audioPlayer),
                         ],
                       ),
                       floatingActionButtonLocation:
@@ -162,30 +173,35 @@ class _ContentChapterState extends State<ContentChapter> {
                               },
                               child: Transform.scale(
                                 scale: 1.2,
-                                child: FloatingActionButton(
-                                  elevation: 0,
-                                  child: CircularPercentIndicator(
-                                    animationDuration: 0,
-                                    radius: 55,
-                                    lineWidth: 2,
-                                    animation: true,
-                                    percent: _countNumber / 100,
-                                    center: Text('$_countNumber',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 22)),
-                                    circularStrokeCap: CircularStrokeCap.round,
-                                    progressColor: Colors.blueGrey[900],
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 16),
+                                  child: FloatingActionButton(
+                                    elevation: 0,
+                                    child: CircularPercentIndicator(
+                                      animationDuration: 0,
+                                      radius: 55,
+                                      lineWidth: 2,
+                                      animation: true,
+                                      percent: _countNumber / 100,
+                                      center: Text('$_countNumber',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22)),
+                                      circularStrokeCap:
+                                          CircularStrokeCap.round,
+                                      progressColor: Colors.blueGrey[900],
+                                    ),
+                                    backgroundColor: Colors.blueGrey[500],
+                                    onPressed: () {
+                                      setState(() {
+                                        if (_countNumber < 100) {
+                                          _countNumber++;
+                                        }
+                                        _sharedPreferences.setInt(
+                                            COUNT_NUMBER_STATE, _countNumber);
+                                      });
+                                    },
                                   ),
-                                  backgroundColor: Colors.blueGrey[500],
-                                  onPressed: () {
-                                    setState(() {
-                                      if (_countNumber < 100) {
-                                        _countNumber++;
-                                      }
-                                      _sharedPreferences.setInt(
-                                          COUNT_NUMBER_STATE, _countNumber);
-                                    });
-                                  },
                                 ),
                               ),
                             )
@@ -200,19 +216,19 @@ class _ContentChapterState extends State<ContentChapter> {
     );
   }
 
-  Widget _buildList(snapshot, count) {
+  Widget _buildList(snapshot) {
     return ScrollablePositionedList.builder(
       padding: EdgeInsets.zero,
       physics: BouncingScrollPhysics(),
       itemScrollController: itemScrollController,
       itemCount: snapshot.data!.length,
       itemBuilder: (BuildContext context, int index) {
-        return _buildContentChapterItem(snapshot.data![index], count);
+        return _buildContentChapterItem(snapshot.data![index], index);
       },
     );
   }
 
-  Widget _buildContentChapterItem(SupplicationItem item, count) {
+  Widget _buildContentChapterItem(SupplicationItem item, int index) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -290,14 +306,8 @@ class _ContentChapterState extends State<ContentChapter> {
               Text('Дуа ${item.id}',
                   style: _textStyles.contentChapterNumberTextStyle),
               IconButton(
-                  onPressed: () {
-                    print('$count');
-                  },
-                  icon: Icon(Icons.play_circle_outline),
-                  color: Colors.blueGrey[500]),
-              IconButton(
                 icon: Icon(CupertinoIcons.doc_on_doc),
-                color: Colors.grey[500],
+                color: Colors.blueGrey[700],
                 onPressed: () {
                   FlutterClipboard.copy('${item.contentArabic}\n\n'
                           '${item.contentTranscription}\n\n'
@@ -314,7 +324,7 @@ class _ContentChapterState extends State<ContentChapter> {
               ),
               IconButton(
                   icon: Icon(CupertinoIcons.share),
-                  color: Colors.grey[500],
+                  color: Colors.blueGrey[700],
                   onPressed: () {
                     Share.share('${item.contentArabic}\n\n'
                         '${item.contentTranscription}\n\n'
@@ -356,5 +366,13 @@ class _ContentChapterState extends State<ContentChapter> {
         index: count,
         duration: Duration(seconds: 1),
         curve: Curves.easeInOutCubic);
+  }
+
+  bool valuesIndex(currentIndex, index) {
+    if (currentIndex == index) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

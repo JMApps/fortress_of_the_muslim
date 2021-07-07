@@ -26,7 +26,6 @@ dependencies:
   scrollable_positioned_list:
   percent_indicator:
   assets_audio_player:
-  rxdart:
 
 dev_dependencies:
   flutter_test:
