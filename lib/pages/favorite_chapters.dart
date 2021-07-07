@@ -21,10 +21,19 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
     return Scaffold(
       backgroundColor: Color(0xFFFFFAF2),
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Крепость мусульманина'),
         backgroundColor: Colors.orange[500],
         elevation: 0,
-        actions: [],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed('/other_content');
+            },
+            icon: Icon(CupertinoIcons.square_list),
+          ),
+        ],
       ),
       body: Scrollbar(
         child: _buildList(),

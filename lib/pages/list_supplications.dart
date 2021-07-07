@@ -37,10 +37,18 @@ class _ListSupplicationsState extends State<ListSupplications> {
       child: Scaffold(
         backgroundColor: Color(0xFFFDF2F7),
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Крепость мусульманина'),
           backgroundColor: Colors.red[500],
           elevation: 0,
           actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true)
+                    .pushNamed('/other_content');
+              },
+              icon: Icon(CupertinoIcons.square_list),
+            ),
             IconButton(
               onPressed: () {
                 int randomNumber = random.nextInt(280);

@@ -2,8 +2,6 @@
 import 'package:flip_box_bar_plus/flip_box_bar_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fortress_of_the_muslim/logic/current_index_cubit.dart';
 import 'package:fortress_of_the_muslim/pages/favorite_chapters.dart';
 import 'package:fortress_of_the_muslim/pages/favorite_supplications.dart';
 import 'package:fortress_of_the_muslim/pages/list_supplications.dart';
@@ -34,59 +32,48 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CurrentIndexCubit(),
-      child: BlocBuilder<CurrentIndexCubit, int>(
-        builder: (BuildContext context, count) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            initialRoute: '/',
-            onGenerateRoute: _appRouter.appGeneratorRoute,
-            title: 'Крепость мусульманина',
-            home: Scaffold(
-              body: _changeWidget[_selectedIndex],
-              bottomNavigationBar: FlipBoxBarPlus(
-                navBarWidth: 60,
-                selectedIndex: _selectedIndex,
-                animationDuration: Duration(milliseconds: 900),
-                items: [
-                  FlipBarItem(
-                      icon:
-                          Icon(CupertinoIcons.square_list, color: Colors.white),
-                      text: Text('Главы',
-                          style: _textStyles.flipBarItemTextStyle),
-                      frontColor: Colors.teal[500],
-                      backColor: Colors.teal[500]),
-                  FlipBarItem(
-                      icon: Icon(CupertinoIcons.bookmark, color: Colors.white),
-                      text: Text('Избранное',
-                          style: _textStyles.flipBarItemTextStyle),
-                      frontColor: Colors.orange[500],
-                      backColor: Colors.orange[500]),
-                  FlipBarItem(
-                      icon: Icon(CupertinoIcons.square_list_fill,
-                          color: Colors.white),
-                      text:
-                          Text('Дуа', style: _textStyles.flipBarItemTextStyle),
-                      frontColor: Colors.red[500],
-                      backColor: Colors.red[500]),
-                  FlipBarItem(
-                      icon: Icon(CupertinoIcons.bookmark_fill,
-                          color: Colors.white),
-                      text: Text('Избранное',
-                          style: _textStyles.flipBarItemTextStyle),
-                      frontColor: Colors.blue[500],
-                      backColor: Colors.blue[500])
-                ],
-                onIndexChanged: (newIndex) {
-                  setState(() {
-                    _selectedIndex = newIndex;
-                  });
-                },
-              ),
-            ),
-          );
-        },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      onGenerateRoute: _appRouter.appGeneratorRoute,
+      title: 'Крепость мусульманина',
+      home: Scaffold(
+        body: _changeWidget[_selectedIndex],
+        bottomNavigationBar: FlipBoxBarPlus(
+          navBarWidth: 60,
+          selectedIndex: _selectedIndex,
+          animationDuration: Duration(milliseconds: 900),
+          items: [
+            FlipBarItem(
+                icon: Icon(CupertinoIcons.square_list, color: Colors.white),
+                text: Text('Главы', style: _textStyles.flipBarItemTextStyle),
+                frontColor: Colors.teal[500],
+                backColor: Colors.teal[500]),
+            FlipBarItem(
+                icon: Icon(CupertinoIcons.bookmark, color: Colors.white),
+                text:
+                    Text('Избранное', style: _textStyles.flipBarItemTextStyle),
+                frontColor: Colors.orange[500],
+                backColor: Colors.orange[500]),
+            FlipBarItem(
+                icon:
+                    Icon(CupertinoIcons.square_list_fill, color: Colors.white),
+                text: Text('Дуа', style: _textStyles.flipBarItemTextStyle),
+                frontColor: Colors.red[500],
+                backColor: Colors.red[500]),
+            FlipBarItem(
+                icon: Icon(CupertinoIcons.bookmark_fill, color: Colors.white),
+                text:
+                    Text('Избранное', style: _textStyles.flipBarItemTextStyle),
+                frontColor: Colors.blue[500],
+                backColor: Colors.blue[500])
+          ],
+          onIndexChanged: (newIndex) {
+            setState(() {
+              _selectedIndex = newIndex;
+            });
+          },
+        ),
       ),
     );
   }

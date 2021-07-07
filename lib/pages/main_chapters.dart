@@ -32,10 +32,18 @@ class _MainChaptersState extends State<MainChapters> {
       child: Scaffold(
         backgroundColor: Color(0xFFF2FFFE),
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Крепость мусульманина'),
           backgroundColor: Colors.teal[500],
           elevation: 0,
           actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true)
+                    .pushNamed('/other_content');
+              },
+              icon: Icon(CupertinoIcons.square_list),
+            ),
             chapterSettings,
           ],
         ),
