@@ -58,20 +58,26 @@ class _ContentChapterState extends State<ContentChapter> {
   int _currentIndex = -1;
   bool _isCountShow = false;
 
-  var _duration = Duration(seconds: 0);
-  var _current = Duration(seconds: 0);
-
-  @override
-  void dispose() {
-    audioPlayer.stop();
-    super.dispose();
-  }
-
   @override
   void initState() {
-    audioPlayer = AssetsAudioPlayer();
     initSharedPreferences();
+    initPlayer();
     super.initState();
+  }
+
+  initPlayer() async {
+    audioPlayer = AssetsAudioPlayer();
+    await audioPlayer.open(
+        Playlist(
+          audios: [
+            Audio('assets/audios/dua_1.mp3'),
+            Audio('assets/audios/dua_2.mp3'),
+            Audio('assets/audios/dua_3.mp3'),
+            Audio('assets/audios/dua_4.mp3'),
+          ],
+        ),
+        autoStart: false,
+        loopMode: LoopMode.none);
   }
 
   initSharedPreferences() {
@@ -98,6 +104,12 @@ class _ContentChapterState extends State<ContentChapter> {
             _sharedPreferences.getDouble(TRANSC_TRANSL_FONT_SIZE) ?? 18.0;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
   }
 
   @override

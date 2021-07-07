@@ -16,10 +16,28 @@ class MyPlayer extends StatefulWidget {
 
 class _MyPlayerState extends State<MyPlayer> {
   var _databaseQuery = DatabaseQuery();
+  bool _repeat = false;
+
+  late List audios;
 
   @override
   void initState() {
+    setupPlayList();
     super.initState();
+  }
+
+  setupPlayList() async {
+    widget.audioPlayer.open(
+        Playlist(
+          audios: [
+            Audio('assets/audios/dua_1.mp3'),
+            Audio('assets/audios/dua_2.mp3'),
+            Audio('assets/audios/dua_3.mp3'),
+            Audio('assets/audios/dua_4.mp3'),
+          ],
+        ),
+        autoStart: false,
+        loopMode: LoopMode.none);
   }
 
   @override
@@ -38,57 +56,79 @@ class _MyPlayerState extends State<MyPlayer> {
         future: _databaseQuery.getContentChapter(widget.chapterId!),
         builder: (context, snapshot) {
           return snapshot.hasData
-              ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      '00:00',
-                      style: TextStyle(
-                          color: Colors.blueGrey[800],
-                          fontSize: 16,
-                          fontFamily: 'Gilroy'),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.skip_previous_outlined),
-                      splashColor: Colors.blueGrey,
-                      color: Colors.blueGrey[800],
-                      iconSize: 30,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.play_circle_outline),
-                      color: Colors.blueGrey[800],
-                      iconSize: 50,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.skip_next_outlined),
-                      splashColor: Colors.blueGrey,
-                      color: Colors.blueGrey[800],
-                      iconSize: 30,
-                    ),
-                    Text(
-                      '00:00',
-                      style: TextStyle(
-                          color: Colors.blueGrey[800],
-                          fontSize: 16,
-                          fontFamily: 'Gilroy'),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.loop),
-                      color: Colors.blueGrey[800],
-                      iconSize: 30,
-                      onPressed: () {},
-                    ),
-                  ],
-                )
+              ? widget.audioPlayer.builderRealtimePlayingInfos(
+                  builder: (context, realtimePLayingInfo) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        '${getTimeString(realtimePLayingInfo.currentPosition.inSeconds)}',
+                        style: TextStyle(
+                            color: Colors.blueGrey[800],
+                            fontSize: 16,
+                            fontFamily: 'Gilroy'),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          widget.audioPlayer.previous();
+                        },
+                        icon: Icon(Icons.skip_previous_outlined),
+                        splashColor: Colors.blueGrey,
+                        color: Colors.blueGrey[800],
+                        iconSize: 30,
+                      ),
+                      IconButton(
+                        icon: Icon(realtimePLayingInfo.isPlaying
+                            ? Icons.pause_circle_outline
+                            : Icons.play_circle_outline),
+                        color: Colors.blueGrey[800],
+                        iconSize: 50,
+                        onPressed: () {
+                          widget.audioPlayer.playOrPause();
+                        },
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          widget.audioPlayer.next();
+                        },
+                        icon: Icon(Icons.skip_next_outlined),
+                        splashColor: Colors.blueGrey,
+                        color: Colors.blueGrey[800],
+                        iconSize: 30,
+                      ),
+                      Text(
+                        '${getTimeString(realtimePLayingInfo.duration.inSeconds)}',
+                        style: TextStyle(
+                            color: Colors.blueGrey[800],
+                            fontSize: 16,
+                            fontFamily: 'Gilroy'),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.loop),
+                        color: _repeat ? Colors.red[800] : Colors.blueGrey[800],
+                        iconSize: 30,
+                        onPressed: () {
+                          setState(() {
+                            _repeat = !_repeat;
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                })
               : Center(
                   child: CircularProgressIndicator(),
                 );
         },
       ),
     );
+  }
+
+  String getTimeString(int seconds) {
+    String minuteString =
+        '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
+    String secondString = '${seconds % 60 < 10 ? 0 : ''}${seconds % 60}';
+    return '$minuteString:$secondString'; // Returns a string with the format mm:ss
   }
 }
