@@ -67,17 +67,6 @@ class _ContentChapterState extends State<ContentChapter> {
 
   initPlayer() async {
     audioPlayer = AssetsAudioPlayer();
-    await audioPlayer.open(
-        Playlist(
-          audios: [
-            Audio('assets/audios/dua_1.mp3'),
-            Audio('assets/audios/dua_2.mp3'),
-            Audio('assets/audios/dua_3.mp3'),
-            Audio('assets/audios/dua_4.mp3'),
-          ],
-        ),
-        autoStart: false,
-        loopMode: LoopMode.none);
   }
 
   initSharedPreferences() {
@@ -168,8 +157,7 @@ class _ContentChapterState extends State<ContentChapter> {
                             ),
                           ),
                           MyPlayer(
-                              chapterId: args!.chapterId,
-                              audioPlayer: audioPlayer),
+                              audioPlayer: audioPlayer, snapshot: snapshot),
                         ],
                       ),
                       floatingActionButtonLocation:
@@ -373,18 +361,18 @@ class _ContentChapterState extends State<ContentChapter> {
     );
   }
 
-  toIndex(count) {
-    itemScrollController.scrollTo(
-        index: count,
-        duration: Duration(seconds: 1),
-        curve: Curves.easeInOutCubic);
-  }
-
   bool valuesIndex(currentIndex, index) {
     if (currentIndex == index) {
       return true;
     } else {
       return false;
     }
+  }
+
+  toIndex(count) {
+    itemScrollController.scrollTo(
+        index: count,
+        duration: Duration(seconds: 1),
+        curve: Curves.easeInOutCubic);
   }
 }
