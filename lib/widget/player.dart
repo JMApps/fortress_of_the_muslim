@@ -6,7 +6,10 @@ class MyPlayer extends StatefulWidget {
   final AssetsAudioPlayer audioPlayer;
   final AsyncSnapshot snapshot;
 
-  MyPlayer({Key? key, required this.audioPlayer, required this.snapshot})
+  MyPlayer(
+      {Key? key,
+      required this.audioPlayer,
+      required this.snapshot})
       : super(key: key);
 
   @override
@@ -43,12 +46,12 @@ class _MyPlayerState extends State<MyPlayer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.blueGrey[100],
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(25))),
-      padding: EdgeInsets.all(8),
-      child: widget.audioPlayer.builderRealtimePlayingInfos(
-        builder: (context, realtimePLayingInfo) {
+        decoration: BoxDecoration(
+            color: Colors.blueGrey[100],
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(25))),
+        padding: EdgeInsets.all(8),
+        child: widget.audioPlayer.builderRealtimePlayingInfos(
+            builder: (context, realtimePLayingInfo) {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +100,7 @@ class _MyPlayerState extends State<MyPlayer> {
               ),
               IconButton(
                 onPressed: () {
-                  widget.audioPlayer.next();
+                  widget.audioPlayer.next(stopIfLast: true);
                 },
                 icon: Icon(Icons.skip_next_outlined),
                 splashColor: Colors.blueGrey,
@@ -128,13 +131,12 @@ class _MyPlayerState extends State<MyPlayer> {
               ),
             ],
           );
-        },
-      ),
-    );
+        }));
   }
 
   String getTimeString(int seconds) {
-    String minuteString = '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
+    String minuteString =
+        '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
     String secondString = '${seconds % 60 < 10 ? 0 : ''}${seconds % 60}';
     return '$minuteString:$secondString';
   }
