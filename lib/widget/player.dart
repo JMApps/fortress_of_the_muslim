@@ -6,10 +6,7 @@ class MyPlayer extends StatefulWidget {
   final AssetsAudioPlayer audioPlayer;
   final AsyncSnapshot snapshot;
 
-  MyPlayer(
-      {Key? key,
-      required this.audioPlayer,
-      required this.snapshot})
+  MyPlayer({Key? key, required this.audioPlayer, required this.snapshot})
       : super(key: key);
 
   @override
@@ -128,6 +125,10 @@ class _MyPlayerState extends State<MyPlayer> {
                       fontSize: 16,
                       fontFamily: 'Gilroy'),
                 ),
+              ),
+              Text(
+                '0',
+                style: TextStyle(color: Colors.red, fontSize: 20),
               ),
             ],
           );
