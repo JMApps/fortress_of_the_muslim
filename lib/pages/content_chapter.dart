@@ -52,7 +52,6 @@ class _ContentChapterState extends State<ContentChapter> {
 
   static const COUNT_NUMBER_STATE = "count_number_state";
   late int _countNumber;
-  int _newCurrentIndex = 0;
   bool _isCountShow = false;
 
   bool _loopTrack = false;
@@ -224,158 +223,180 @@ class _ContentChapterState extends State<ContentChapter> {
       ),
       margin: EdgeInsets.all(8),
       elevation: 1,
-      child: audioPlayer.builderRealtimePlayingInfos(
-        builder: (context, realtimePLayingInfo) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              contentArabicIsShow
-                  ? item.contentArabic != null
-                      ? Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(item.contentArabic,
-                              style: TextStyle(
-                                  color: _arabicColor,
-                                  fontSize: _arabicFontSize,
-                                  fontFamily: 'Hafs'),
-                              textAlign: TextAlign.start,
-                              textDirection: TextDirection.rtl),
-                        )
-                      : SizedBox()
-                  : SizedBox(),
-              contentTranscriptionIsShow
-                  ? item.contentTranscription != null
-                      ? Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            item.contentTranscription,
-                            style: TextStyle(
-                                color: _transcriptionColor,
-                                fontSize: _transcTranslFontSize,
-                                fontFamily: 'Gilroy'),
-                          ),
-                        )
-                      : SizedBox()
-                  : SizedBox(),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Html(
-                  onLinkTap: (String? url, RenderContext rendContext,
-                      Map<String, String> attributes, element) {
-                    showCupertinoModalPopup(
-                      context: context,
-                      builder: (BuildContext context) => CupertinoActionSheet(
-                        message: Html(
-                          data: url,
-                          style: {
-                            "small": Style(
-                                color: Colors.grey[500], fontFamily: 'Gilroy')
-                          },
-                        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          contentArabicIsShow
+              ? item.contentArabic != null
+                  ? Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(item.contentArabic,
+                          style: TextStyle(
+                              color: _arabicColor,
+                              fontSize: _arabicFontSize,
+                              fontFamily: 'Hafs'),
+                          textAlign: TextAlign.start,
+                          textDirection: TextDirection.rtl),
+                    )
+                  : SizedBox()
+              : SizedBox(),
+          contentTranscriptionIsShow
+              ? item.contentTranscription != null
+                  ? Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        item.contentTranscription,
+                        style: TextStyle(
+                            color: _transcriptionColor,
+                            fontSize: _transcTranslFontSize,
+                            fontFamily: 'Gilroy'),
                       ),
-                    );
-                  },
-                  data: item.contentTranslation,
-                  style: {
-                    "#": Style(
-                        color: _translationColor,
-                        fontSize: FontSize(_transcTranslFontSize),
-                        fontFamily: 'Gilroy'),
-                    "a": _textStyles.footnoteTextStyle,
-                    "small": _textStyles.smallTextTextStyle,
-                  },
-                ),
-              ),
-              Divider(
-                indent: 16,
-                endIndent: 16,
-                color: realtimePLayingInfo.isPlaying && valuesIndex(index)
-                    ? Colors.red[500]
-                    : Colors.blueGrey[500],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'Дуа ${item.id}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: realtimePLayingInfo.isPlaying && valuesIndex(index)
-                          ? Colors.red[500]
-                          : Colors.blueGrey[500],
+                    )
+                  : SizedBox()
+              : SizedBox(),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Html(
+              onLinkTap: (String? url, RenderContext rendContext,
+                  Map<String, String> attributes, element) {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (BuildContext context) => CupertinoActionSheet(
+                    message: Html(
+                      data: url,
+                      style: {
+                        "small":
+                            Style(color: Colors.grey[500], fontFamily: 'Gilroy')
+                      },
                     ),
                   ),
-                  item.nameAudio != null
-                      ? IconButton(
-                          onPressed: () {
-                            if (!realtimePLayingInfo.isPlaying) {
-                              audioPlayer.playlistPlayAtIndex(index);
-                            } else {
-                              audioPlayer.playOrPause();
-                            }
-                          },
-                          icon: Icon(
-                            realtimePLayingInfo.isPlaying && valuesIndex(index)
-                                ? Icons.stop_circle_outlined
-                                : Icons.play_circle_outline,
-                            color: Colors.blueGrey[500],
-                          ),
-                        )
-                      : SizedBox(),
-                  IconButton(
-                    icon: Icon(CupertinoIcons.doc_on_doc),
-                    color: Colors.blueGrey[700],
-                    onPressed: () {
-                      FlutterClipboard.copy('${item.contentArabic}\n\n'
-                              '${item.contentTranscription}\n\n'
-                              '${item.contentForCopyAndShare}')
-                          .then((value) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Скопировано'),
-                            duration: Duration(milliseconds: 500),
+                );
+              },
+              data: item.contentTranslation,
+              style: {
+                "#": Style(
+                    color: _translationColor,
+                    fontSize: FontSize(_transcTranslFontSize),
+                    fontFamily: 'Gilroy'),
+                "a": _textStyles.footnoteTextStyle,
+                "small": _textStyles.smallTextTextStyle,
+              },
+            ),
+          ),
+          item.nameAudio != null
+              ? audioPlayer.builderRealtimePlayingInfos(
+                  builder: (context, realtimePlayingInfo) {
+                    return Divider(
+                      indent: 16,
+                      endIndent: 16,
+                      color: realtimePlayingInfo.isPlaying && valuesIndex(index)
+                          ? Colors.red[500]
+                          : Colors.blueGrey[500],
+                    );
+                  },
+                )
+              : Divider(
+                  indent: 16,
+                  endIndent: 16,
+                  color: Colors.blueGrey[500],
+                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              item.nameAudio != null
+                  ? audioPlayer.builderRealtimePlayingInfos(
+                      builder: (context, realtimePlayingInfo) {
+                        return Text(
+                          'Дуа ${item.id}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: realtimePlayingInfo.isPlaying &&
+                                    valuesIndex(index)
+                                ? Colors.red[500]
+                                : Colors.blueGrey[500],
                           ),
                         );
-                      });
-                    },
-                  ),
-                  IconButton(
-                      icon: Icon(CupertinoIcons.share),
-                      color: Colors.blueGrey[700],
-                      onPressed: () {
-                        Share.share('${item.contentArabic}\n\n'
-                            '${item.contentTranscription}\n\n'
-                            '${item.contentForCopyAndShare}');
-                      }),
-                  IconButton(
-                    icon: item.favoriteState == 0
-                        ? Icon(CupertinoIcons.bookmark)
-                        : Icon(CupertinoIcons.bookmark_fill),
-                    color: Colors.blueGrey[700],
-                    onPressed: () {
-                      setState(() {
-                        item.favoriteState == 0
-                            ? _databaseQuery.addRemoveFavoriteSupplication(
-                                1, item.id)
-                            : _databaseQuery.addRemoveFavoriteSupplication(
-                                0, item.id);
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: item.favoriteState == 0
-                              ? Text('Добавлено')
-                              : Text('Удалено'),
-                          duration: Duration(milliseconds: 500),
+                      },
+                    )
+                  : Text(
+                      'Дуа ${item.id}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blueGrey[500],
+                      ),
+                    ),
+              audioPlayer.builderRealtimePlayingInfos(
+                  builder: (context, realtimePLayingInfo) {
+                return item.nameAudio != null
+                    ? IconButton(
+                        onPressed: () {
+                          if (!realtimePLayingInfo.isPlaying) {
+                            audioPlayer.playlistPlayAtIndex(index);
+                          } else {
+                            audioPlayer.playOrPause();
+                          }
+                        },
+                        icon: Icon(
+                          realtimePLayingInfo.isPlaying && valuesIndex(index)
+                              ? Icons.stop_circle_outlined
+                              : Icons.play_circle_outline,
+                          color: Colors.blueGrey[500],
                         ),
-                      );
-                    },
-                  ),
-                ],
+                      )
+                    : SizedBox();
+              }),
+              IconButton(
+                icon: Icon(CupertinoIcons.doc_on_doc),
+                color: Colors.blueGrey[700],
+                onPressed: () {
+                  FlutterClipboard.copy('${item.contentArabic}\n\n'
+                          '${item.contentTranscription}\n\n'
+                          '${item.contentForCopyAndShare}')
+                      .then((value) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Скопировано'),
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  });
+                },
               ),
-              SizedBox(height: 8)
+              IconButton(
+                  icon: Icon(CupertinoIcons.share),
+                  color: Colors.blueGrey[700],
+                  onPressed: () {
+                    Share.share('${item.contentArabic}\n\n'
+                        '${item.contentTranscription}\n\n'
+                        '${item.contentForCopyAndShare}');
+                  }),
+              IconButton(
+                icon: item.favoriteState == 0
+                    ? Icon(CupertinoIcons.bookmark)
+                    : Icon(CupertinoIcons.bookmark_fill),
+                color: Colors.blueGrey[700],
+                onPressed: () {
+                  setState(() {
+                    item.favoriteState == 0
+                        ? _databaseQuery.addRemoveFavoriteSupplication(
+                            1, item.id)
+                        : _databaseQuery.addRemoveFavoriteSupplication(
+                            0, item.id);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: item.favoriteState == 0
+                          ? Text('Добавлено')
+                          : Text('Удалено'),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                },
+              ),
             ],
-          );
-        },
+          ),
+          SizedBox(height: 8)
+        ],
       ),
     );
   }
@@ -394,18 +415,30 @@ class _ContentChapterState extends State<ContentChapter> {
 
   Widget _buildPlayer(snapshot) {
     setupPlayList(snapshot);
-    return Container(
-        decoration: BoxDecoration(
-            color: Colors.blueGrey[100],
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(25))),
-        padding: EdgeInsets.all(8),
-        child: audioPlayer.builderRealtimePlayingInfos(
-            builder: (context, realtimePLayingInfo) {
-          audioPlayer.playlistAudioFinished.listen((event) {
-            if (audioPlayer.readingPlaylist!.currentIndex + 1 <
-                snapshot.data.length) {}
-          });
-          return Row(
+    return audioPlayer.builderRealtimePlayingInfos(
+      builder: (context, realtimePLayingInfo) {
+        audioPlayer.playlistAudioFinished.listen((event) {
+          if (audioPlayer.readingPlaylist!.currentIndex <
+              snapshot.data.length) {
+            if (snapshot.data[audioPlayer.readingPlaylist!.currentIndex]
+                    .nameAudio ==
+                null) {
+              if (audioPlayer.readingPlaylist!.currentIndex + 1 <
+                  snapshot.data.length) {
+                audioPlayer.next();
+                toIndex();
+              }
+            } else {
+              toIndex();
+            }
+          }
+        });
+        return Container(
+          decoration: BoxDecoration(
+              color: Colors.blueGrey[100],
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(25))),
+          padding: EdgeInsets.all(8),
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -426,6 +459,9 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 30,
                 onPressed: () {
                   audioPlayer.previous();
+                  if (audioPlayer.readingPlaylist!.currentIndex > 0) {
+                    toIndex();
+                  }
                 },
               ),
               IconButton(
@@ -436,7 +472,9 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 50,
                 onPressed: () {
                   audioPlayer.playOrPause();
-                  toIndex();
+                  if (snapshot.data.length > 2) {
+                    toIndex();
+                  }
                 },
               ),
               IconButton(
@@ -446,6 +484,9 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 30,
                 onPressed: () {
                   audioPlayer.next(stopIfLast: true);
+                  if (snapshot.data.length > 2) {
+                    toIndex();
+                  }
                 },
               ),
               IconButton(
@@ -469,8 +510,10 @@ class _ContentChapterState extends State<ContentChapter> {
                 ),
               ),
             ],
-          );
-        }));
+          ),
+        );
+      },
+    );
   }
 
   String getTimeString(int seconds) {
@@ -492,6 +535,6 @@ class _ContentChapterState extends State<ContentChapter> {
     itemScrollController.scrollTo(
         index: audioPlayer.readingPlaylist!.currentIndex,
         duration: Duration(milliseconds: 450),
-        curve: Curves.easeInOutCubic);
+        curve: Curves.easeInOutQuart);
   }
 }
