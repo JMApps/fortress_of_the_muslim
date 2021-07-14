@@ -25,7 +25,7 @@ dependencies:
   o_color_picker:
   scrollable_positioned_list:
   percent_indicator:
-  assets_audio_player:
+  assets_audio_player: 3.0.3+3
 
 dev_dependencies:
   flutter_test:
