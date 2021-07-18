@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Fortress.png",
+      "filename" : "launch_splash-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Fortress2.png",
+      "filename" : "launch_splash.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Fortress3.png",
+      "filename" : "launch_splash-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

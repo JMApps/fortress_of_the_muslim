@@ -459,7 +459,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 30,
                 onPressed: () {
                   audioPlayer.previous();
-                  if (audioPlayer.readingPlaylist!.currentIndex > 0) {
+                  if (audioPlayer.readingPlaylist!.currentIndex >= 0) {
                     toIndex();
                   }
                 },

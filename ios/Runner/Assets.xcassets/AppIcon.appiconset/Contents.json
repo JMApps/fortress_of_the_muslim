@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Fortress-20@2x.png",
+      "filename" : "Fortress-20@2x-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -13,13 +13,13 @@
       "size" : "20x20"
     },
     {
-      "filename" : "Fortress-29.png",
+      "filename" : "Fortress-30.png",
       "idiom" : "iphone",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "Fortress-29@2x.png",
+      "filename" : "Fortress-29@2x-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
@@ -31,7 +31,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "Fortress-40@2x.png",
+      "filename" : "Fortress-40@2x-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -61,19 +61,19 @@
       "size" : "20x20"
     },
     {
-      "filename" : "Fortress-20@2x-1.png",
+      "filename" : "Fortress-20@2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "Fortress-30.png",
+      "filename" : "Fortress-29.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "Fortress-29@2x-1.png",
+      "filename" : "Fortress-29@2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
@@ -85,7 +85,7 @@
       "size" : "40x40"
     },
     {
-      "filename" : "Fortress-40@2x-1.png",
+      "filename" : "Fortress-40@2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
