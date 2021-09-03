@@ -10,7 +10,7 @@ import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContentChapter extends StatefulWidget {
