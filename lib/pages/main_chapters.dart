@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/chapter_item.dart';
+import 'package:fortress_of_the_muslim/pages/support_project_page.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:fortress_of_the_muslim/widget/chapter_settings.dart';
@@ -17,7 +20,6 @@ class _MainChaptersState extends State<MainChapters> {
   var _databaseQuery = DatabaseQuery();
   final _textController = TextEditingController();
   var _textStyles = TextStyles();
-  var chapterSettings = ChapterSettings();
 
   @override
   void dispose() {
@@ -36,15 +38,16 @@ class _MainChaptersState extends State<MainChapters> {
           title: Text('Крепость мусульманина'),
           backgroundColor: Colors.teal[500],
           elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed('/other_content');
+            },
+            icon: Icon(CupertinoIcons.square_list),
+          ),
           actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true)
-                    .pushNamed('/other_content');
-              },
-              icon: Icon(CupertinoIcons.square_list),
-            ),
-            chapterSettings,
+            Platform.isAndroid ? SupportProjectPage() : SizedBox(),
+            ChapterSettings(),
           ],
         ),
         body: Column(
@@ -147,9 +150,17 @@ class _MainChaptersState extends State<MainChapters> {
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
+                      backgroundColor:
+                          item.favoriteState == 0 ? Colors.teal : Colors.red,
                       content: item.favoriteState == 0
-                          ? Text('Добавлено')
-                          : Text('Удалено'),
+                          ? Text(
+                              'Добавлено',
+                              style: TextStyle(fontSize: 18),
+                            )
+                          : Text(
+                              'Удалено',
+                              style: TextStyle(fontSize: 18),
+                            ),
                       duration: Duration(milliseconds: 500),
                     ),
                   );
@@ -173,8 +184,24 @@ class _MainChaptersState extends State<MainChapters> {
                       builder: (BuildContext context) => CupertinoActionSheet(
                         message: Html(
                           data: url,
-                          style: {"small": Style(color: Colors.grey[500])},
+                          style: {
+                            "small": Style(
+                              color: Colors.grey[500],
+                              fontSize: FontSize(12),
+                            ),
+                            '#': Style(
+                              fontSize: FontSize(18),
+                            )
+                          },
                         ),
+                        actions: [
+                          CupertinoButton(
+                            child: Text('Закрыть'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                     );
                   },
