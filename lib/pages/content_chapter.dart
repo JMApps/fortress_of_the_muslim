@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +10,9 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +27,7 @@ class ContentChapter extends StatefulWidget {
 class _ContentChapterState extends State<ContentChapter> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
+  var _screenshotController = ScreenshotController();
 
   final itemScrollController = ItemScrollController();
   late AssetsAudioPlayer audioPlayer;
@@ -119,9 +124,11 @@ class _ContentChapterState extends State<ContentChapter> {
                       child: CupertinoSwitch(
                           value: _isCountShow,
                           onChanged: (value) {
-                            setState(() {
-                              _isCountShow = value;
-                            });
+                            setState(
+                              () {
+                                _isCountShow = value;
+                              },
+                            );
                           },
                           activeColor: Colors.blueGrey[900],
                           trackColor: Colors.blueGrey[700]),
@@ -137,11 +144,44 @@ class _ContentChapterState extends State<ContentChapter> {
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(25))),
                       child: Html(
+                        onLinkTap: (String? url, RenderContext rendContext,
+                            Map<String, String> attributes, element) {
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                CupertinoActionSheet(
+                              message: Html(
+                                data: url,
+                                style: {
+                                  'small': Style(
+                                    color: Colors.grey[500],
+                                    fontSize: FontSize(12),
+                                  ),
+                                  '#': Style(
+                                    fontSize: FontSize(18),
+                                  )
+                                },
+                              ),
+                              actions: [
+                                CupertinoButton(
+                                  child: Text('Закрыть'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                         data: args!.chapterTitle,
                         style: {
-                          "#": Style(
-                              textAlign: TextAlign.center,
-                              fontSize: FontSize(18))
+                          '#': Style(
+                            textAlign: TextAlign.center,
+                            fontSize: FontSize(18),
+                          ),
+                          'a': Style(
+                            fontSize: FontSize(12),
+                          )
                         },
                       ),
                     ),
@@ -265,10 +305,23 @@ class _ContentChapterState extends State<ContentChapter> {
                     message: Html(
                       data: url,
                       style: {
-                        "small":
-                            Style(color: Colors.grey[500], fontFamily: 'Gilroy')
+                        "small": Style(
+                          color: Colors.grey[500],
+                          fontSize: FontSize(12),
+                        ),
+                        '#': Style(
+                          fontSize: FontSize(18),
+                        )
                       },
                     ),
+                    actions: [
+                      CupertinoButton(
+                        child: Text('Закрыть'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   ),
                 );
               },
@@ -301,7 +354,7 @@ class _ContentChapterState extends State<ContentChapter> {
                   color: Colors.blueGrey[500],
                 ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               item.nameAudio != null
                   ? audioPlayer.builderRealtimePlayingInfos(
@@ -326,25 +379,26 @@ class _ContentChapterState extends State<ContentChapter> {
                       ),
                     ),
               audioPlayer.builderRealtimePlayingInfos(
-                  builder: (context, realtimePLayingInfo) {
-                return item.nameAudio != null
-                    ? IconButton(
-                        onPressed: () {
-                          if (!realtimePLayingInfo.isPlaying) {
-                            audioPlayer.playlistPlayAtIndex(index);
-                          } else {
-                            audioPlayer.playOrPause();
-                          }
-                        },
-                        icon: Icon(
-                          realtimePLayingInfo.isPlaying && valuesIndex(index)
-                              ? Icons.stop_circle_outlined
-                              : Icons.play_circle_outline,
-                          color: Colors.blueGrey[500],
-                        ),
-                      )
-                    : SizedBox();
-              }),
+                builder: (context, realtimePLayingInfo) {
+                  return item.nameAudio != null
+                      ? IconButton(
+                          onPressed: () {
+                            if (!realtimePLayingInfo.isPlaying) {
+                              audioPlayer.playlistPlayAtIndex(index);
+                            } else {
+                              audioPlayer.playOrPause();
+                            }
+                          },
+                          icon: Icon(
+                            realtimePLayingInfo.isPlaying && valuesIndex(index)
+                                ? Icons.stop_circle_outlined
+                                : Icons.play_circle_outline,
+                            color: Colors.blueGrey[500],
+                          ),
+                        )
+                      : SizedBox();
+                },
+              ),
               IconButton(
                 icon: Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey[700],
@@ -352,42 +406,70 @@ class _ContentChapterState extends State<ContentChapter> {
                   FlutterClipboard.copy('${item.contentArabic}\n\n'
                           '${item.contentTranscription}\n\n'
                           '${item.contentForCopyAndShare}')
-                      .then((value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Скопировано'),
-                        duration: Duration(milliseconds: 500),
-                      ),
-                    );
-                  });
+                      .then(
+                    (value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.blueGrey,
+                          content: Text(
+                            'Скопировано',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          duration: Duration(milliseconds: 500),
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
               IconButton(
-                  icon: Icon(CupertinoIcons.share),
-                  color: Colors.blueGrey[700],
-                  onPressed: () {
-                    Share.share('${item.contentArabic}\n\n'
-                        '${item.contentTranscription}\n\n'
-                        '${item.contentForCopyAndShare}');
-                  }),
+                icon: Icon(CupertinoIcons.share),
+                color: Colors.blueGrey[700],
+                onPressed: () {
+                  Share.share(
+                    '${item.contentArabic}\n\n'
+                    '${item.contentTranscription}\n\n'
+                    '${item.contentForCopyAndShare}',
+                    sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+                  );
+                },
+              ),
+              // IconButton(
+              //   icon: Icon(Icons.image_outlined),
+              //   color: Colors.blueGrey[700],
+              //   onPressed: () {
+              //     _takeScreenshot(item);
+              //   },
+              // ),
               IconButton(
                 icon: item.favoriteState == 0
                     ? Icon(CupertinoIcons.bookmark)
                     : Icon(CupertinoIcons.bookmark_fill),
                 color: Colors.blueGrey[700],
                 onPressed: () {
-                  setState(() {
-                    item.favoriteState == 0
-                        ? _databaseQuery.addRemoveFavoriteSupplication(
-                            1, item.id)
-                        : _databaseQuery.addRemoveFavoriteSupplication(
-                            0, item.id);
-                  });
+                  setState(
+                    () {
+                      item.favoriteState == 0
+                          ? _databaseQuery.addRemoveFavoriteSupplication(
+                              1, item.id)
+                          : _databaseQuery.addRemoveFavoriteSupplication(
+                              0, item.id);
+                    },
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
+                      backgroundColor: item.favoriteState == 0
+                          ? Colors.blueGrey
+                          : Colors.red,
                       content: item.favoriteState == 0
-                          ? Text('Добавлено')
-                          : Text('Удалено'),
+                          ? Text(
+                              'Добавлено',
+                              style: TextStyle(fontSize: 18),
+                            )
+                          : Text(
+                              'Удалено',
+                              style: TextStyle(fontSize: 18),
+                            ),
                       duration: Duration(milliseconds: 500),
                     ),
                   );
@@ -396,6 +478,35 @@ class _ContentChapterState extends State<ContentChapter> {
             ],
           ),
           SizedBox(height: 8)
+        ],
+      ),
+    );
+  }
+
+  _takeScreenshot(SupplicationItem item) async {
+    final unit8List =
+        await _screenshotController.captureFromWidget(_forScreen(item));
+    String tempPath = (Platform.isAndroid
+            ? await getExternalStorageDirectory()
+            : await getApplicationDocumentsDirectory())!
+        .path;
+    File file = File('$tempPath/dua_${item.id}.jpg');
+    await file.writeAsBytes(unit8List);
+    await Share.shareFiles(
+      [file.path],
+      sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+    );
+  }
+
+  Widget _forScreen(SupplicationItem item) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        children: [
+          Text('${item.contentArabic}'),
+          Text('${item.contentTranscription}'),
+          Text('${item.contentTranslation}'),
         ],
       ),
     );
@@ -426,10 +537,10 @@ class _ContentChapterState extends State<ContentChapter> {
               if (audioPlayer.readingPlaylist!.currentIndex + 1 <
                   snapshot.data.length) {
                 audioPlayer.next();
-                toIndex();
+                toIndex(audioPlayer.readingPlaylist!.currentIndex);
               }
             } else {
-              toIndex();
+              toIndex(audioPlayer.readingPlaylist!.currentIndex);
             }
           }
         });
@@ -460,7 +571,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 onPressed: () {
                   audioPlayer.previous();
                   if (audioPlayer.readingPlaylist!.currentIndex >= 0) {
-                    toIndex();
+                    toIndex(audioPlayer.readingPlaylist!.currentIndex);
                   }
                 },
               ),
@@ -472,9 +583,6 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 50,
                 onPressed: () {
                   audioPlayer.playOrPause();
-                  if (snapshot.data.length > 2) {
-                    toIndex();
-                  }
                 },
               ),
               IconButton(
@@ -485,7 +593,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 onPressed: () {
                   audioPlayer.next(stopIfLast: true);
                   if (snapshot.data.length > 2) {
-                    toIndex();
+                    toIndex(audioPlayer.readingPlaylist!.currentIndex);
                   }
                 },
               ),
@@ -498,6 +606,13 @@ class _ContentChapterState extends State<ContentChapter> {
                   audioPlayer.setLoopMode(
                       _loopTrack ? LoopMode.single : LoopMode.none);
                 },
+              ),
+              IconButton(
+                icon: Icon(
+                  CupertinoIcons.arrow_turn_right_down,
+                  color: Colors.blueGrey[800],
+                ),
+                onPressed: () {},
               ),
               Container(
                 width: 50,
@@ -531,9 +646,9 @@ class _ContentChapterState extends State<ContentChapter> {
     }
   }
 
-  toIndex() {
+  toIndex(int index) {
     itemScrollController.scrollTo(
-        index: audioPlayer.readingPlaylist!.currentIndex,
+        index: index,
         duration: Duration(milliseconds: 450),
         curve: Curves.easeInOutQuart);
   }
