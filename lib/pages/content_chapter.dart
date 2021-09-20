@@ -10,6 +10,7 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:html/parser.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:screenshot/screenshot.dart';
@@ -251,12 +252,17 @@ class _ContentChapterState extends State<ContentChapter> {
       itemScrollController: itemScrollController,
       itemCount: snapshot.data!.length,
       itemBuilder: (BuildContext context, int index) {
-        return _buildContentChapterItem(snapshot.data![index], index);
+        return _buildContentChapterItem(
+          snapshot.data![index],
+          index,
+          snapshot.data!.length,
+        );
       },
     );
   }
 
-  Widget _buildContentChapterItem(SupplicationItem item, int index) {
+  Widget _buildContentChapterItem(
+      SupplicationItem item, int index, int supplicationLength) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -403,7 +409,10 @@ class _ContentChapterState extends State<ContentChapter> {
                 icon: Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey[700],
                 onPressed: () {
-                  FlutterClipboard.copy('${item.contentArabic}\n\n'
+                  FlutterClipboard.copy(
+                          '${_parseHtmlString(args!.chapterTitle!)}\n\n'
+                          '${index + 1}/$supplicationLength\n\n'
+                          '${item.contentArabic}\n\n'
                           '${item.contentTranscription}\n\n'
                           '${item.contentForCopyAndShare}')
                       .then(
@@ -427,6 +436,8 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[700],
                 onPressed: () {
                   Share.share(
+                    '${_parseHtmlString(args!.chapterTitle!)}\n\n'
+                    '${index + 1}/$supplicationLength\n\n'
                     '${item.contentArabic}\n\n'
                     '${item.contentTranscription}\n\n'
                     '${item.contentForCopyAndShare}',
@@ -651,5 +662,12 @@ class _ContentChapterState extends State<ContentChapter> {
         index: index,
         duration: Duration(milliseconds: 450),
         curve: Curves.easeInOutQuart);
+  }
+
+  String _parseHtmlString(String htmlString) {
+    final documentText = parse(htmlString);
+    final String parsedString =
+        parse(documentText.body!.text).documentElement!.text;
+    return parsedString;
   }
 }
