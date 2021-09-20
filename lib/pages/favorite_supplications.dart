@@ -26,15 +26,13 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
         title: Text('Крепость мусульманина'),
         backgroundColor: Colors.blue[500],
         elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed('/other_content');
-            },
-            icon: Icon(CupertinoIcons.square_list),
-          ),
-        ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true)
+                .pushNamed('/other_content');
+          },
+          icon: Icon(CupertinoIcons.square_list),
+        ),
       ),
       body: Scrollbar(
         child: _buildList(),
@@ -149,7 +147,11 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
                         .then((value) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Скопировано'),
+                          backgroundColor: Colors.blue,
+                          content: Text(
+                            'Скопировано',
+                            style: TextStyle(fontSize: 18),
+                          ),
                           duration: Duration(milliseconds: 500),
                         ),
                       );
@@ -178,9 +180,11 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: item.favoriteState == 0
-                            ? Text('Добавлено')
-                            : Text('Удалено'),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                          'Удалено',
+                          style: TextStyle(fontSize: 18),
+                        ),
                         duration: Duration(milliseconds: 500),
                       ),
                     );

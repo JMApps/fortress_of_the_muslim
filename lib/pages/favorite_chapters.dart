@@ -25,15 +25,13 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
         title: Text('Крепость мусульманина'),
         backgroundColor: Colors.orange[500],
         elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed('/other_content');
-            },
-            icon: Icon(CupertinoIcons.square_list),
-          ),
-        ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true)
+                .pushNamed('/other_content');
+          },
+          icon: Icon(CupertinoIcons.square_list),
+        ),
       ),
       body: Scrollbar(
         child: _buildList(),
@@ -100,9 +98,11 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: item.favoriteState == 0
-                          ? Text('Добавлено')
-                          : Text('Удалено'),
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        'Удалено',
+                        style: TextStyle(fontSize: 18),
+                      ),
                       duration: Duration(milliseconds: 500),
                     ),
                   );
@@ -126,8 +126,24 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                       builder: (BuildContext context) => CupertinoActionSheet(
                         message: Html(
                           data: url,
-                          style: {"small": Style(color: Colors.grey[500])},
+                          style: {
+                            "small": Style(
+                              color: Colors.grey[500],
+                              fontSize: FontSize(12),
+                            ),
+                            '#': Style(
+                              fontSize: FontSize(18),
+                            )
+                          },
                         ),
+                        actions: [
+                          CupertinoButton(
+                            child: Text('Закрыть'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                     );
                   },

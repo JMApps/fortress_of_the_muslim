@@ -41,14 +41,14 @@ class _ListSupplicationsState extends State<ListSupplications> {
           title: Text('Крепость мусульманина'),
           backgroundColor: Colors.red[500],
           elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed('/other_content');
+            },
+            icon: Icon(CupertinoIcons.square_list),
+          ),
           actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true)
-                    .pushNamed('/other_content');
-              },
-              icon: Icon(CupertinoIcons.square_list),
-            ),
             IconButton(
               onPressed: () {
                 int randomNumber = random.nextInt(280);
@@ -210,7 +210,11 @@ class _ListSupplicationsState extends State<ListSupplications> {
                         .then((value) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Скопировано'),
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            'Скопировано',
+                            style: TextStyle(fontSize: 18),
+                          ),
                           duration: Duration(milliseconds: 500),
                         ),
                       );
@@ -239,9 +243,16 @@ class _ListSupplicationsState extends State<ListSupplications> {
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
+                        backgroundColor: Colors.red,
                         content: item.favoriteState == 0
-                            ? Text('Добавлено')
-                            : Text('Удалено'),
+                            ? Text(
+                                'Добавлено',
+                                style: TextStyle(fontSize: 18),
+                              )
+                            : Text(
+                                'Удалено',
+                                style: TextStyle(fontSize: 18),
+                              ),
                         duration: Duration(milliseconds: 500),
                       ),
                     );
