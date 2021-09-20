@@ -110,8 +110,24 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
                   builder: (BuildContext context) => CupertinoActionSheet(
                     message: Html(
                       data: url,
-                      style: {"small": Style(color: Colors.grey[500])},
+                      style: {
+                        "small": Style(
+                          color: Colors.grey[500],
+                          fontSize: FontSize(12),
+                        ),
+                        '#': Style(
+                          fontSize: FontSize(18),
+                        )
+                      },
                     ),
+                    actions: [
+                      CupertinoButton(
+                        child: Text('Закрыть'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   ),
                 );
               },
