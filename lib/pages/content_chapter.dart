@@ -445,13 +445,13 @@ class _ContentChapterState extends State<ContentChapter> {
                   );
                 },
               ),
-              // IconButton(
-              //   icon: Icon(Icons.image_outlined),
-              //   color: Colors.blueGrey[700],
-              //   onPressed: () {
-              //     _takeScreenshot(item);
-              //   },
-              // ),
+              IconButton(
+                icon: Icon(Icons.image_outlined),
+                color: Colors.blueGrey[700],
+                onPressed: () {
+                  _takeScreenshot(item);
+                },
+              ),
               IconButton(
                 icon: item.favoriteState == 0
                     ? Icon(CupertinoIcons.bookmark)
@@ -510,16 +510,33 @@ class _ContentChapterState extends State<ContentChapter> {
   }
 
   Widget _forScreen(SupplicationItem item) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        children: [
-          Text('${item.contentArabic}'),
-          Text('${item.contentTranscription}'),
-          Text('${item.contentTranslation}'),
-        ],
-      ),
+    return Wrap(
+      children: [
+        Container(
+          child: Column(
+            children: [
+              Text(
+                '${item.contentArabic}',
+                style: TextStyle(color: Colors.black),
+              ),
+              SizedBox(
+                width: 16,
+              ),
+              Text(
+                '${item.contentTranscription}',
+                style: TextStyle(color: Colors.black),
+              ),
+              SizedBox(
+                width: 16,
+              ),
+              Text(
+                '${item.contentTranslation}',
+                style: TextStyle(color: Colors.black),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
