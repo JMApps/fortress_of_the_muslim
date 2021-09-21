@@ -44,21 +44,35 @@ class _OtherBookContentState extends State<OtherBookContent> {
                   message: Html(
                     data: url,
                     style: {
-                      "small":
-                          Style(color: Colors.red[500], fontFamily: 'Gilroy')
+                      "small": Style(
+                        color: Colors.grey,
+                        fontSize: FontSize(12),
+                      ),
+                      '#': Style(
+                        fontSize: FontSize(18),
+                      )
                     },
                   ),
+                  actions: [
+                    CupertinoButton(
+                      child: Text('Закрыть'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
                 ),
               );
             },
             data: content,
             style: {
               "#": Style(
+                  textAlign: TextAlign.justify,
                   color: Colors.grey[800],
                   fontSize: FontSize(20),
                   fontFamily: 'Gilroy'),
-              "a": _textStyles.footnoteTextStyle,
               "small": _textStyles.smallTextTextStyle,
+              "a": _textStyles.footnoteTextStyle,
             },
           ),
         ),
