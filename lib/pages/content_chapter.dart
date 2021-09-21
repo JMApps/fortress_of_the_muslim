@@ -348,7 +348,8 @@ class _ContentChapterState extends State<ContentChapter> {
                     return Divider(
                       indent: 16,
                       endIndent: 16,
-                      color: realtimePlayingInfo.isPlaying && valuesIndex(index)
+                      color: realtimePlayingInfo.isPlaying &&
+                              _assignPlayValue(index)
                           ? Colors.red[500]
                           : Colors.blueGrey[500],
                     );
@@ -370,7 +371,7 @@ class _ContentChapterState extends State<ContentChapter> {
                           style: TextStyle(
                             fontSize: 16,
                             color: realtimePlayingInfo.isPlaying &&
-                                    valuesIndex(index)
+                                    _assignPlayValue(index)
                                 ? Colors.red[500]
                                 : Colors.blueGrey[500],
                           ),
@@ -389,14 +390,20 @@ class _ContentChapterState extends State<ContentChapter> {
                   return item.nameAudio != null
                       ? IconButton(
                           onPressed: () {
-                            if (!realtimePLayingInfo.isPlaying) {
-                              audioPlayer.playlistPlayAtIndex(index);
+                            if (audioPlayer.readingPlaylist!.currentIndex ==
+                                index) {
+                              if (realtimePLayingInfo.isPlaying) {
+                                audioPlayer.stop();
+                              } else {
+                                audioPlayer.playlistPlayAtIndex(index);
+                              }
                             } else {
-                              audioPlayer.playOrPause();
+                              audioPlayer.playlistPlayAtIndex(index);
                             }
                           },
                           icon: Icon(
-                            realtimePLayingInfo.isPlaying && valuesIndex(index)
+                            realtimePLayingInfo.isPlaying &&
+                                    _assignPlayValue(index)
                                 ? Icons.stop_circle_outlined
                                 : Icons.play_circle_outline,
                             color: Colors.blueGrey[500],
@@ -666,12 +673,8 @@ class _ContentChapterState extends State<ContentChapter> {
     return '$minuteString:$secondString';
   }
 
-  bool valuesIndex(index) {
-    if (audioPlayer.readingPlaylist!.currentIndex == index) {
-      return true;
-    } else {
-      return false;
-    }
+  bool _assignPlayValue(index) {
+    return audioPlayer.readingPlaylist!.currentIndex == index ? true : false;
   }
 
   toIndex(int index) {
