@@ -4,6 +4,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
@@ -31,7 +32,7 @@ class _ContentChapterState extends State<ContentChapter> {
   var _screenshotController = ScreenshotController();
 
   final itemScrollController = ItemScrollController();
-  late AssetsAudioPlayer audioPlayer;
+  final assetsAudioPlayer = AssetsAudioPlayer();
 
   late SharedPreferences _sharedPreferences;
   late ChapterArguments? args;
@@ -65,12 +66,7 @@ class _ContentChapterState extends State<ContentChapter> {
   @override
   void initState() {
     initSharedPreferences();
-    initPlayer();
     super.initState();
-  }
-
-  initPlayer() async {
-    audioPlayer = AssetsAudioPlayer();
   }
 
   initSharedPreferences() {
@@ -101,7 +97,7 @@ class _ContentChapterState extends State<ContentChapter> {
 
   @override
   void dispose() {
-    audioPlayer.dispose();
+    assetsAudioPlayer.dispose();
     super.dispose();
   }
 
@@ -141,9 +137,12 @@ class _ContentChapterState extends State<ContentChapter> {
                     Container(
                       padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                          color: Colors.blueGrey[200],
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(25))),
+                        color: Colors.blueGrey[200],
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(25),
+                          bottomLeft: Radius.circular(25),
+                        ),
+                      ),
                       child: Html(
                         onLinkTap: (String? url, RenderContext rendContext,
                             Map<String, String> attributes, element) {
@@ -343,7 +342,7 @@ class _ContentChapterState extends State<ContentChapter> {
             ),
           ),
           item.nameAudio != null
-              ? audioPlayer.builderRealtimePlayingInfos(
+              ? assetsAudioPlayer.builderRealtimePlayingInfos(
                   builder: (context, realtimePlayingInfo) {
                     return Divider(
                       indent: 16,
@@ -364,7 +363,7 @@ class _ContentChapterState extends State<ContentChapter> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               item.nameAudio != null
-                  ? audioPlayer.builderRealtimePlayingInfos(
+                  ? assetsAudioPlayer.builderRealtimePlayingInfos(
                       builder: (context, realtimePlayingInfo) {
                         return Text(
                           'Дуа ${item.id}',
@@ -385,20 +384,21 @@ class _ContentChapterState extends State<ContentChapter> {
                         color: Colors.blueGrey[500],
                       ),
                     ),
-              audioPlayer.builderRealtimePlayingInfos(
+              assetsAudioPlayer.builderRealtimePlayingInfos(
                 builder: (context, realtimePLayingInfo) {
                   return item.nameAudio != null
                       ? IconButton(
                           onPressed: () {
-                            if (audioPlayer.readingPlaylist!.currentIndex ==
+                            if (assetsAudioPlayer
+                                    .readingPlaylist!.currentIndex ==
                                 index) {
                               if (realtimePLayingInfo.isPlaying) {
-                                audioPlayer.stop();
+                                assetsAudioPlayer.stop();
                               } else {
-                                audioPlayer.playlistPlayAtIndex(index);
+                                assetsAudioPlayer.playlistPlayAtIndex(index);
                               }
                             } else {
-                              audioPlayer.playlistPlayAtIndex(index);
+                              assetsAudioPlayer.playlistPlayAtIndex(index);
                             }
                           },
                           icon: Icon(
@@ -495,7 +495,7 @@ class _ContentChapterState extends State<ContentChapter> {
               ),
             ],
           ),
-          SizedBox(height: 8)
+          SizedBox(height: 8),
         ],
       ),
     );
@@ -517,41 +517,52 @@ class _ContentChapterState extends State<ContentChapter> {
   }
 
   Widget _forScreen(SupplicationItem item) {
-    return Wrap(
+    return ListView(
+      controller: ScrollController(),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       children: [
         Container(
-          child: Column(
-            children: [
-              Text(
-                '${item.contentArabic}',
-                style: TextStyle(color: Colors.black),
+          padding: EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child: Screenshot(
+              controller: _screenshotController,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    '${item.contentArabic}',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    '${item.contentTranscription}',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    '${item.contentForCopyAndShare}',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 16,
-              ),
-              Text(
-                '${item.contentTranscription}',
-                style: TextStyle(color: Colors.black),
-              ),
-              SizedBox(
-                width: 16,
-              ),
-              Text(
-                '${item.contentTranslation}',
-                style: TextStyle(color: Colors.black),
-              ),
-            ],
+            ),
           ),
         ),
       ],
     );
   }
 
-  setupPlayList(snapshot) async {
+  setupPlayList(AsyncSnapshot snapshot) async {
     var myList = List<Audio>.generate(snapshot.data.length,
         (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
 
-    audioPlayer.open(
+    assetsAudioPlayer.open(
         Playlist(
           audios: myList,
         ),
@@ -561,28 +572,16 @@ class _ContentChapterState extends State<ContentChapter> {
 
   Widget _buildPlayer(snapshot) {
     setupPlayList(snapshot);
-    return audioPlayer.builderRealtimePlayingInfos(
+    return assetsAudioPlayer.builderRealtimePlayingInfos(
       builder: (context, realtimePLayingInfo) {
-        audioPlayer.playlistAudioFinished.listen((event) {
-          if (audioPlayer.readingPlaylist!.currentIndex <
-              snapshot.data.length) {
-            if (snapshot.data[audioPlayer.readingPlaylist!.currentIndex]
-                    .nameAudio ==
-                null) {
-              if (audioPlayer.readingPlaylist!.currentIndex + 1 <
-                  snapshot.data.length) {
-                audioPlayer.next();
-                toIndex(audioPlayer.readingPlaylist!.currentIndex);
-              }
-            } else {
-              toIndex(audioPlayer.readingPlaylist!.currentIndex);
-            }
-          }
-        });
         return Container(
           decoration: BoxDecoration(
-              color: Colors.blueGrey[100],
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(25))),
+            color: Colors.blueGrey[100],
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+          ),
           padding: EdgeInsets.all(8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -604,9 +603,9 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[800],
                 iconSize: 30,
                 onPressed: () {
-                  audioPlayer.previous();
-                  if (audioPlayer.readingPlaylist!.currentIndex >= 0) {
-                    toIndex(audioPlayer.readingPlaylist!.currentIndex);
+                  assetsAudioPlayer.previous();
+                  if (assetsAudioPlayer.readingPlaylist!.currentIndex >= 0) {
+                    toIndex(assetsAudioPlayer.readingPlaylist!.currentIndex);
                   }
                 },
               ),
@@ -617,7 +616,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[800],
                 iconSize: 50,
                 onPressed: () {
-                  audioPlayer.playOrPause();
+                  assetsAudioPlayer.playOrPause();
                 },
               ),
               IconButton(
@@ -626,10 +625,8 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[800],
                 iconSize: 30,
                 onPressed: () {
-                  audioPlayer.next(stopIfLast: true);
-                  if (snapshot.data.length > 2) {
-                    toIndex(audioPlayer.readingPlaylist!.currentIndex);
-                  }
+                  assetsAudioPlayer.next(stopIfLast: true);
+                  toIndex(assetsAudioPlayer.readingPlaylist!.currentIndex);
                 },
               ),
               IconButton(
@@ -638,16 +635,9 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 30,
                 onPressed: () {
                   _loopTrack = !_loopTrack;
-                  audioPlayer.setLoopMode(
+                  assetsAudioPlayer.setLoopMode(
                       _loopTrack ? LoopMode.single : LoopMode.none);
                 },
-              ),
-              IconButton(
-                icon: Icon(
-                  CupertinoIcons.arrow_turn_right_down,
-                  color: Colors.blueGrey[800],
-                ),
-                onPressed: () {},
               ),
               Container(
                 width: 50,
@@ -674,7 +664,9 @@ class _ContentChapterState extends State<ContentChapter> {
   }
 
   bool _assignPlayValue(index) {
-    return audioPlayer.readingPlaylist!.currentIndex == index ? true : false;
+    return assetsAudioPlayer.readingPlaylist!.currentIndex == index
+        ? true
+        : false;
   }
 
   toIndex(int index) {
