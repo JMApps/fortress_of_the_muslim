@@ -625,8 +625,12 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[800],
                 iconSize: 30,
                 onPressed: () {
-                  assetsAudioPlayer.next(stopIfLast: true);
-                  toIndex(assetsAudioPlayer.readingPlaylist!.currentIndex);
+                  if (assetsAudioPlayer.readingPlaylist!.currentIndex <
+                      snapshot!.data.length) {
+                    assetsAudioPlayer.playlistPlayAtIndex(
+                        assetsAudioPlayer.readingPlaylist!.currentIndex + 1);
+                    toIndex(assetsAudioPlayer.readingPlaylist!.currentIndex);
+                  }
                 },
               ),
               IconButton(
