@@ -31,7 +31,8 @@ class _ContentChapterState extends State<ContentChapter> {
   var _textStyles = TextStyles();
   var _screenshotController = ScreenshotController();
 
-  final itemScrollController = ItemScrollController();
+  final _itemScrollController = ItemScrollController();
+
   final assetsAudioPlayer = AssetsAudioPlayer();
 
   late SharedPreferences _sharedPreferences;
@@ -62,6 +63,8 @@ class _ContentChapterState extends State<ContentChapter> {
   bool _isCountShow = false;
 
   bool _loopTrack = false;
+
+  int _itemIndex = 0;
 
   @override
   void initState() {
@@ -186,9 +189,7 @@ class _ContentChapterState extends State<ContentChapter> {
                       ),
                     ),
                     Expanded(
-                      child: Scrollbar(
-                        child: _buildList(snapshot),
-                      ),
+                      child: _buildList(snapshot),
                     ),
                     _buildPlayer(snapshot)
                   ],
@@ -247,8 +248,8 @@ class _ContentChapterState extends State<ContentChapter> {
   Widget _buildList(snapshot) {
     return ScrollablePositionedList.builder(
       padding: EdgeInsets.zero,
-      physics: BouncingScrollPhysics(),
-      itemScrollController: itemScrollController,
+      physics: ScrollPhysics(),
+      itemScrollController: _itemScrollController,
       itemCount: snapshot.data!.length,
       itemBuilder: (BuildContext context, int index) {
         return _buildContentChapterItem(
@@ -389,9 +390,8 @@ class _ContentChapterState extends State<ContentChapter> {
                   return item.nameAudio != null
                       ? IconButton(
                           onPressed: () {
-                            if (assetsAudioPlayer
-                                    .readingPlaylist!.currentIndex ==
-                                index) {
+                            _itemIndex = index;
+                            if (_itemIndex == index) {
                               if (realtimePLayingInfo.isPlaying) {
                                 assetsAudioPlayer.stop();
                               } else {
@@ -456,7 +456,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 icon: Icon(Icons.image_outlined),
                 color: Colors.blueGrey[700],
                 onPressed: () {
-                  _takeScreenshot(item);
+                  _takeScreenshot(item, supplicationLength);
                 },
               ),
               IconButton(
@@ -501,9 +501,9 @@ class _ContentChapterState extends State<ContentChapter> {
     );
   }
 
-  _takeScreenshot(SupplicationItem item) async {
-    final unit8List =
-        await _screenshotController.captureFromWidget(_forScreen(item));
+  _takeScreenshot(SupplicationItem item, int supplicationLength) async {
+    final unit8List = await _screenshotController
+        .captureFromWidget(_forScreen(item, supplicationLength));
     String tempPath = (Platform.isAndroid
             ? await getExternalStorageDirectory()
             : await getApplicationDocumentsDirectory())!
@@ -516,45 +516,69 @@ class _ContentChapterState extends State<ContentChapter> {
     );
   }
 
-  Widget _forScreen(SupplicationItem item) {
-    return ListView(
-      controller: ScrollController(),
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: [
-        Container(
-          padding: EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Screenshot(
-              controller: _screenshotController,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    '${item.contentArabic}',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    '${item.contentTranscription}',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    '${item.contentForCopyAndShare}',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
+  Widget _forScreen(SupplicationItem item, int supplicationLength) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
+      elevation: 1,
+      margin: EdgeInsets.all(8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.blueGrey[50],
+          borderRadius: BorderRadius.circular(25),
+        ),
+        padding: EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                '${_parseHtmlString(args!.chapterTitle!)}',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Gilroy',
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
+              SizedBox(height: 16),
+              Text(
+                '${item.id}/$supplicationLength',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Gilroy',
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                '${item.contentArabic}',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontFamily: 'Hafs',
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                '${item.contentTranscription}',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Gilroy',
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                '${item.contentForCopyAndShare}',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Gilroy',
+                ),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 
@@ -604,8 +628,9 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 30,
                 onPressed: () {
                   assetsAudioPlayer.previous();
-                  if (assetsAudioPlayer.readingPlaylist!.currentIndex >= 0) {
-                    toIndex(assetsAudioPlayer.readingPlaylist!.currentIndex);
+                  if (_itemIndex > 0) {
+                    _itemIndex--;
+                    toIndex(_itemIndex);
                   }
                 },
               ),
@@ -626,10 +651,10 @@ class _ContentChapterState extends State<ContentChapter> {
                 iconSize: 30,
                 onPressed: () {
                   if (assetsAudioPlayer.readingPlaylist!.currentIndex <
-                      snapshot!.data.length) {
-                    assetsAudioPlayer.playlistPlayAtIndex(
-                        assetsAudioPlayer.readingPlaylist!.currentIndex + 1);
-                    toIndex(assetsAudioPlayer.readingPlaylist!.currentIndex);
+                      snapshot!.data.length - 1) {
+                    _itemIndex++;
+                    assetsAudioPlayer.playlistPlayAtIndex(_itemIndex);
+                    toIndex(_itemIndex);
                   }
                 },
               ),
@@ -668,13 +693,11 @@ class _ContentChapterState extends State<ContentChapter> {
   }
 
   bool _assignPlayValue(index) {
-    return assetsAudioPlayer.readingPlaylist!.currentIndex == index
-        ? true
-        : false;
+    return _itemIndex == index ? true : false;
   }
 
   toIndex(int index) {
-    itemScrollController.scrollTo(
+    _itemScrollController.scrollTo(
         index: index,
         duration: Duration(milliseconds: 450),
         curve: Curves.easeInOutQuart);
