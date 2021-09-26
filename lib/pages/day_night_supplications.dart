@@ -1,32 +1,25 @@
-import 'dart:io';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/style.dart';
-import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
-import 'package:fortress_of_the_muslim/model/supplication_item.dart';
+import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:html/parser.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ContentChapter extends StatefulWidget {
-  const ContentChapter({Key? key}) : super(key: key);
+class DayNightSupplications extends StatefulWidget {
+  const DayNightSupplications({Key? key}) : super(key: key);
 
   @override
-  _ContentChapterState createState() => _ContentChapterState();
+  _DayNightSupplicationsState createState() => _DayNightSupplicationsState();
 }
 
-class _ContentChapterState extends State<ContentChapter> {
+class _DayNightSupplicationsState extends State<DayNightSupplications> {
   var _databaseQuery = DatabaseQuery();
   var _textStyles = TextStyles();
   var _screenshotController = ScreenshotController();
@@ -36,17 +29,6 @@ class _ContentChapterState extends State<ContentChapter> {
   final assetsAudioPlayer = AssetsAudioPlayer();
 
   late SharedPreferences _sharedPreferences;
-  late ChapterArguments? args;
-
-  static const ARABIC_SHOW_STATE = "arabic_show_state";
-  static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
-
-  static const ARABIC_COLOR = "arabic_color";
-  static const TRANSCRIPTION_COLOR = "transcription_color";
-  static const TRANSLATION_COLOR = "translation_color";
-
-  static const ARABIC_FONT_SIZE = "arabic_font_size";
-  static const TRANSC_TRANSL_FONT_SIZE = "transc_transl_font_size";
 
   late bool contentArabicIsShow;
   late bool contentTranscriptionIsShow;
@@ -58,7 +40,18 @@ class _ContentChapterState extends State<ContentChapter> {
   late double _arabicFontSize;
   late double _transcTranslFontSize;
 
+  static const ARABIC_SHOW_STATE = "arabic_show_state";
+  static const TRANSCRIPTION_SHOW_STATE = "transcription_show_state";
+
+  static const ARABIC_COLOR = "arabic_color";
+  static const TRANSCRIPTION_COLOR = "transcription_color";
+  static const TRANSLATION_COLOR = "translation_color";
+
+  static const ARABIC_FONT_SIZE = "arabic_font_size";
+  static const TRANSC_TRANSL_FONT_SIZE = "transc_transl_font_size";
+
   static const COUNT_NUMBER_STATE = "count_number_state";
+
   late int _countNumber;
   bool _isCountShow = false;
 
@@ -66,9 +59,13 @@ class _ContentChapterState extends State<ContentChapter> {
 
   int _itemIndex = 0;
 
+  var _time = DateTime.now();
+  late bool _dayNight;
+
   @override
   void initState() {
     initSharedPreferences();
+    _time.hour < 12 ? _dayNight = true : _dayNight = false;
     super.initState();
   }
 
@@ -106,33 +103,27 @@ class _ContentChapterState extends State<ContentChapter> {
 
   @override
   Widget build(BuildContext context) {
-    args = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return FutureBuilder<List>(
-      future: _databaseQuery.getContentChapter(args!.chapterId!),
-      builder: (BuildContext context, snapshot) {
+      future: _databaseQuery.getDayNightSupplications(_dayNight),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot.hasData
             ? Scaffold(
-                backgroundColor: Colors.grey[100],
                 appBar: AppBar(
-                  backgroundColor: Colors.blueGrey[500],
-                  title: Text('Глава ${args!.chapterId}'),
                   centerTitle: true,
-                  elevation: 0,
+                  title: Text('Глава 27'),
+                  backgroundColor: Colors.blueGrey,
                   actions: [
-                    Transform.scale(
-                      scale: 0.7,
-                      child: CupertinoSwitch(
-                          value: _isCountShow,
-                          onChanged: (value) {
-                            setState(
-                              () {
-                                _isCountShow = value;
-                              },
-                            );
-                          },
-                          activeColor: Colors.blueGrey[900],
-                          trackColor: Colors.blueGrey[700]),
-                    )
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _dayNight = !_dayNight;
+                          });
+                        },
+                        icon: Icon(_dayNight
+                            ? CupertinoIcons.sunrise
+                            : CupertinoIcons.sunset),
+                        iconSize: 30,
+                        color: _dayNight ? Colors.yellow : Colors.orange),
                   ],
                 ),
                 body: Column(
@@ -147,120 +138,43 @@ class _ContentChapterState extends State<ContentChapter> {
                         ),
                       ),
                       child: Html(
-                        onLinkTap: (String? url, RenderContext rendContext,
-                            Map<String, String> attributes, element) {
-                          showCupertinoModalPopup(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                CupertinoActionSheet(
-                              message: Html(
-                                data: url,
-                                style: {
-                                  'small': Style(
-                                    color: Colors.grey[500],
-                                    fontSize: FontSize(12),
-                                  ),
-                                  '#': Style(
-                                    fontSize: FontSize(18),
-                                  )
-                                },
-                              ),
-                              actions: [
-                                CupertinoButton(
-                                  child: Text('Закрыть'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        data: args!.chapterTitle,
+                        data:
+                            'Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}',
                         style: {
                           '#': Style(
-                            textAlign: TextAlign.center,
                             fontSize: FontSize(18),
-                          ),
-                          'a': Style(
-                            fontSize: FontSize(12),
+                            textAlign: TextAlign.center,
                           )
                         },
                       ),
                     ),
                     Expanded(
-                      child: _buildList(snapshot),
+                      child: Scrollbar(child: _buildList(snapshot)),
                     ),
                     _buildPlayer(snapshot)
                   ],
                 ),
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.endFloat,
-                floatingActionButton: _isCountShow
-                    ? InkWell(
-                        onLongPress: () {
-                          setState(() {
-                            _countNumber = 0;
-                            _sharedPreferences.setInt(
-                                COUNT_NUMBER_STATE, _countNumber);
-                          });
-                        },
-                        child: Transform.scale(
-                          scale: 1.2,
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 16),
-                            child: FloatingActionButton(
-                              elevation: 0,
-                              child: CircularPercentIndicator(
-                                animationDuration: 0,
-                                radius: 55,
-                                lineWidth: 2,
-                                animation: true,
-                                percent: _countNumber / 100,
-                                center: Text('$_countNumber',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 22)),
-                                circularStrokeCap: CircularStrokeCap.round,
-                                progressColor: Colors.blueGrey[900],
-                              ),
-                              backgroundColor: Colors.blueGrey[500],
-                              onPressed: () {
-                                setState(() {
-                                  if (_countNumber < 100) {
-                                    _countNumber++;
-                                  }
-                                  _sharedPreferences.setInt(
-                                      COUNT_NUMBER_STATE, _countNumber);
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      )
-                    : SizedBox(),
               )
-            : Center(
-                child: CircularProgressIndicator(),
-              );
+            : CircularProgressIndicator();
       },
     );
   }
 
-  Widget _buildList(snapshot) {
+  Widget _buildList(AsyncSnapshot snapshot) {
     return ScrollablePositionedList.builder(
       padding: EdgeInsets.zero,
       physics: ScrollPhysics(),
       itemScrollController: _itemScrollController,
-      itemCount: snapshot.data!.length,
+      itemCount: snapshot.data.length,
       itemBuilder: (BuildContext context, int index) {
         return _buildContentChapterItem(
-            snapshot.data![index], index, snapshot.data!.length);
+            snapshot.data![index], index, snapshot.data.length);
       },
     );
   }
 
   Widget _buildContentChapterItem(
-      SupplicationItem item, int index, int supplicationLength) {
+      SupplicationDayNightItem item, int index, int supplicationLength) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -274,7 +188,7 @@ class _ContentChapterState extends State<ContentChapter> {
               ? item.contentArabic != null
                   ? Padding(
                       padding: EdgeInsets.all(16),
-                      child: Text(item.contentArabic,
+                      child: Text(item.contentArabic!,
                           style: TextStyle(
                               color: _arabicColor,
                               fontSize: _arabicFontSize,
@@ -289,7 +203,7 @@ class _ContentChapterState extends State<ContentChapter> {
                   ? Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(
-                        item.contentTranscription,
+                        item.contentTranscription!,
                         style: TextStyle(
                             color: _transcriptionColor,
                             fontSize: _transcTranslFontSize,
@@ -415,7 +329,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[700],
                 onPressed: () {
                   FlutterClipboard.copy(
-                          '${_parseHtmlString(args!.chapterTitle!)}\n\n'
+                          '${_parseHtmlString('Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}')}\n\n'
                           '${index + 1}/$supplicationLength\n\n'
                           '${item.contentArabic}\n\n'
                           '${item.contentTranscription}\n\n'
@@ -441,7 +355,7 @@ class _ContentChapterState extends State<ContentChapter> {
                 color: Colors.blueGrey[700],
                 onPressed: () {
                   Share.share(
-                    '${_parseHtmlString(args!.chapterTitle!)}\n\n'
+                    '${_parseHtmlString('Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}')}\n\n'
                     '${index + 1}/$supplicationLength\n\n'
                     '${item.contentArabic}\n\n'
                     '${item.contentTranscription}\n\n'
@@ -453,9 +367,7 @@ class _ContentChapterState extends State<ContentChapter> {
               IconButton(
                 icon: Icon(Icons.image_outlined),
                 color: Colors.blueGrey[700],
-                onPressed: () {
-                  _takeScreenshot(item, index, supplicationLength);
-                },
+                onPressed: () {},
               ),
               IconButton(
                 icon: item.favoriteState == 0
@@ -467,9 +379,9 @@ class _ContentChapterState extends State<ContentChapter> {
                     () {
                       item.favoriteState == 0
                           ? _databaseQuery.addRemoveFavoriteSupplication(
-                              1, item.id)
+                              1, item.id!)
                           : _databaseQuery.addRemoveFavoriteSupplication(
-                              0, item.id);
+                              0, item.id!);
                     },
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -496,116 +408,6 @@ class _ContentChapterState extends State<ContentChapter> {
           SizedBox(height: 8),
         ],
       ),
-    );
-  }
-
-  _takeScreenshot(
-      SupplicationItem item, int index, int chapterItemLength) async {
-    final unit8List = await _screenshotController
-        .captureFromWidget(_itemForScreen(item, index, chapterItemLength));
-    String tempPath = (Platform.isAndroid
-            ? await getExternalStorageDirectory()
-            : await getApplicationDocumentsDirectory())!
-        .path;
-    File file = File('$tempPath/dua_${item.id}.jpg');
-    await file.writeAsBytes(unit8List);
-    await Share.shareFiles(
-      [file.path],
-      sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
-    );
-  }
-
-  Widget _itemForScreen(
-      SupplicationItem item, int index, int supplicationLength) {
-    return ListView(
-      controller: ScrollController(),
-      shrinkWrap: true,
-      children: [
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-          elevation: 1,
-          margin: EdgeInsets.all(8),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.yellow[50],
-              borderRadius: BorderRadius.circular(25),
-            ),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  '${_parseHtmlString(args!.chapterTitle!)}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Gilroy',
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 16),
-                Text(
-                  item.contentArabic != null
-                      ? '${index + 1}/$supplicationLength'
-                      : '',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Gilroy',
-                  ),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  '${item.contentArabic}',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: 'Hafs',
-                    color: Colors.red[700],
-                  ),
-                  textDirection: TextDirection.rtl,
-                ),
-                SizedBox(height: 16),
-                Text(
-                  '${item.contentForCopyAndShare}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Gilroy',
-                  ),
-                ),
-                SizedBox(height: 8),
-                Divider(indent: 16, endIndent: 16, color: Colors.black),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/asgp.png',
-                      width: 70,
-                      height: 40,
-                    ),
-                    SizedBox(width: 16),
-                    Image.asset(
-                      'assets/images/splash_launch.png',
-                      width: 40,
-                      height: 40,
-                    ),
-                    SizedBox(width: 16),
-                    Text(
-                      'Крепость верующего\nКрепость мусульманина',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Gilroy',
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 
