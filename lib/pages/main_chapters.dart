@@ -120,7 +120,7 @@ class _MainChaptersState extends State<MainChapters> {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildChapterItem(snapshot.data![index]);
+                  return _buildChapterItem(snapshot.data![index], index);
                 },
               )
             : Center(
@@ -130,7 +130,7 @@ class _MainChaptersState extends State<MainChapters> {
     );
   }
 
-  Widget _buildChapterItem(ChapterItem item) {
+  Widget _buildChapterItem(ChapterItem item, int index) {
     return InkWell(
       child: Row(
         children: [
@@ -218,7 +218,7 @@ class _MainChaptersState extends State<MainChapters> {
       ),
       onTap: () {
         Navigator.of(context, rootNavigator: true).pushNamed(
-          '/content_chapter',
+          item.id == 27 ? '/day_night_supplications' : '/content_chapter',
           arguments: ChapterArguments(item.id, item.chapterTitle),
         );
       },

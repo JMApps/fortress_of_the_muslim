@@ -1,5 +1,6 @@
 import 'package:fortress_of_the_muslim/model/about_item.dart';
 import 'package:fortress_of_the_muslim/model/chapter_item.dart';
+import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/model/supplication_item.dart';
 
 import 'database_helper.dart';
@@ -79,5 +80,12 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_about_us', where: '_id == $_id');
     List<AboutItem>? aboutBook = res.isNotEmpty ? res.map((c) => AboutItem.fromMap(c)).toList() : null;
     return aboutBook!;
+  }
+
+  Future<List<SupplicationDayNightItem>> getDayNightSupplications(bool dayNight) async {
+    var dbClient = await con.db;
+    var res = await dbClient.query(dayNight ? 'Table_of_supplications_day' : 'Table_of_supplication_night');
+    List<SupplicationDayNightItem>? dayNightSupplications = res.isNotEmpty ? res.map((c) => SupplicationDayNightItem.fromMap(c)).toList() : null;
+    return dayNightSupplications!;
   }
 }
