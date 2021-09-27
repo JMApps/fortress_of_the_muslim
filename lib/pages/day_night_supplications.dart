@@ -52,12 +52,12 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
 
   static const COUNT_NUMBER_STATE = "count_number_state";
 
-  late int _countNumber;
-  bool _isCountShow = false;
+  int _countNumber = 0;
 
   bool _loopTrack = false;
 
   int _itemIndex = 0;
+  int _clickCountIndex = -1;
 
   var _time = DateTime.now();
   late bool _dayNight;
@@ -73,7 +73,6 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       setState(() {
         _sharedPreferences = sp;
-        _countNumber = sp.getInt(COUNT_NUMBER_STATE) ?? 0;
 
         contentArabicIsShow = sp.getBool(ARABIC_SHOW_STATE) ?? true;
         contentTranscriptionIsShow =
@@ -108,6 +107,7 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot.hasData
             ? Scaffold(
+                backgroundColor: Colors.grey[100],
                 appBar: AppBar(
                   centerTitle: true,
                   title: Text('Глава 27'),
@@ -182,26 +182,29 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
       margin: EdgeInsets.all(8),
       elevation: 1,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           contentArabicIsShow
               ? item.contentArabic != null
                   ? Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text(item.contentArabic!,
-                          style: TextStyle(
-                              color: _arabicColor,
-                              fontSize: _arabicFontSize,
-                              fontFamily: 'Hafs'),
-                          textAlign: TextAlign.start,
-                          textDirection: TextDirection.rtl),
+                      padding: EdgeInsets.only(left: 16, top: 16, right: 16),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(item.contentArabic!,
+                            style: TextStyle(
+                                color: _arabicColor,
+                                fontSize: _arabicFontSize,
+                                fontFamily: 'Hafs'),
+                            textAlign: TextAlign.start,
+                            textDirection: TextDirection.rtl),
+                      ),
                     )
                   : SizedBox()
               : SizedBox(),
           contentTranscriptionIsShow
               ? item.contentTranscription != null
                   ? Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.only(left: 16, top: 16, right: 16),
                       child: Text(
                         item.contentTranscription!,
                         style: TextStyle(
@@ -369,40 +372,32 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                 color: Colors.blueGrey[700],
                 onPressed: () {},
               ),
-              IconButton(
-                icon: item.favoriteState == 0
-                    ? Icon(CupertinoIcons.bookmark)
-                    : Icon(CupertinoIcons.bookmark_fill),
-                color: Colors.blueGrey[700],
-                onPressed: () {
-                  setState(
-                    () {
-                      item.favoriteState == 0
-                          ? _databaseQuery.addRemoveFavoriteSupplication(
-                              1, item.id!)
-                          : _databaseQuery.addRemoveFavoriteSupplication(
-                              0, item.id!);
-                    },
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: item.favoriteState == 0
-                          ? Colors.blueGrey
-                          : Colors.red,
-                      content: item.favoriteState == 0
-                          ? Text(
-                              'Добавлено',
-                              style: TextStyle(fontSize: 18),
-                            )
-                          : Text(
-                              'Удалено',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                      duration: Duration(milliseconds: 500),
-                    ),
-                  );
-                },
-              ),
+              item.buttonState == 1
+                  ? FloatingActionButton(
+                      onPressed: () {
+                        _clickCountIndex = index;
+                        if (item.buttonCount! > 0 && _assignCountValue(index)) {
+                          setState(() {
+                            _countNumber--;
+                            print('$_countNumber');
+                          });
+                        }
+                      },
+                      elevation: 0,
+                      mini: true,
+                      backgroundColor: Colors.teal,
+                      splashColor: Colors.teal[800],
+                      child: Center(
+                        child: Text(
+                          '$_countNumber',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
           SizedBox(height: 8),
@@ -522,6 +517,10 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
 
   bool _assignPlayValue(index) {
     return _itemIndex == index ? true : false;
+  }
+
+  bool _assignCountValue(int index) {
+    return _clickCountIndex == index ? true : false;
   }
 
   toIndex(int index) {

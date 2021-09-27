@@ -189,7 +189,9 @@ class _ContentChapterState extends State<ContentChapter> {
                       ),
                     ),
                     Expanded(
-                      child: _buildList(snapshot),
+                      child: Scrollbar(
+                        child: _buildList(snapshot),
+                      ),
                     ),
                     _buildPlayer(snapshot)
                   ],
@@ -273,7 +275,7 @@ class _ContentChapterState extends State<ContentChapter> {
           contentArabicIsShow
               ? item.contentArabic != null
                   ? Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.only(left: 16, top: 16, right: 16),
                       child: Text(item.contentArabic,
                           style: TextStyle(
                               color: _arabicColor,
@@ -287,7 +289,7 @@ class _ContentChapterState extends State<ContentChapter> {
           contentTranscriptionIsShow
               ? item.contentTranscription != null
                   ? Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.only(left: 16, top: 16, right: 16),
                       child: Text(
                         item.contentTranscription,
                         style: TextStyle(
