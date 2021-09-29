@@ -51,14 +51,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
   static const ARABIC_FONT_SIZE = "arabic_font_size";
   static const TRANSC_TRANSL_FONT_SIZE = "transc_transl_font_size";
 
-  static const COUNT_NUMBER_STATE = "count_number_state";
-
-  int _countNumber = 0;
-
   bool _loopTrack = false;
-
   int _itemIndex = 0;
-  int _clickCountIndex = -1;
 
   var _time = DateTime.now();
   late bool _dayNight;
@@ -118,6 +112,9 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                         onPressed: () {
                           setState(() {
                             _dayNight = !_dayNight;
+                            _itemIndex = 0;
+                            toIndex(_itemIndex);
+                            _buildPlayer(snapshot);
                           });
                         },
                         icon: Icon(_dayNight
@@ -307,7 +304,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                       ? IconButton(
                           onPressed: () {
                             _itemIndex = index;
-                            if (_itemIndex == index) {
+                            if (assetsAudioPlayer.readingPlaylist!.currentIndex ==
+                                index) {
                               if (realtimePLayingInfo.isPlaying) {
                                 assetsAudioPlayer.stop();
                               } else {
@@ -495,10 +493,6 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
 
   bool _assignPlayValue(index) {
     return _itemIndex == index ? true : false;
-  }
-
-  bool _assignCountValue(int index) {
-    return _clickCountIndex == index ? true : false;
   }
 
   toIndex(int index) {

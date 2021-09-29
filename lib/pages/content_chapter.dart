@@ -391,7 +391,9 @@ class _ContentChapterState extends State<ContentChapter> {
                       ? IconButton(
                           onPressed: () {
                             _itemIndex = index;
-                            if (_itemIndex == index) {
+                            if (assetsAudioPlayer
+                                    .readingPlaylist!.currentIndex ==
+                                index) {
                               if (realtimePLayingInfo.isPlaying) {
                                 assetsAudioPlayer.stop();
                               } else {
