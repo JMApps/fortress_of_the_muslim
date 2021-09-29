@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
+import 'package:fortress_of_the_muslim/pages/count_button.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:html/parser.dart';
@@ -373,30 +374,7 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                 onPressed: () {},
               ),
               item.buttonState == 1
-                  ? FloatingActionButton(
-                      onPressed: () {
-                        _clickCountIndex = index;
-                        if (item.buttonCount! > 0 && _assignCountValue(index)) {
-                          setState(() {
-                            _countNumber--;
-                            print('$_countNumber');
-                          });
-                        }
-                      },
-                      elevation: 0,
-                      mini: true,
-                      backgroundColor: Colors.teal,
-                      splashColor: Colors.teal[800],
-                      child: Center(
-                        child: Text(
-                          '$_countNumber',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    )
+                  ? CountButton(buttonCount: item.buttonCount!)
                   : SizedBox(),
             ],
           ),

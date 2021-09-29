@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jmapps.fortress_of_the_muslim">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
    <application
         android:label="Крепость мусульманина"
         android:icon="@mipmap/ic_launcher"
