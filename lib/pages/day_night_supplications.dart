@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +10,7 @@ import 'package:fortress_of_the_muslim/pages/count_button.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:html/parser.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
@@ -304,7 +307,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                       ? IconButton(
                           onPressed: () {
                             _itemIndex = index;
-                            if (assetsAudioPlayer.readingPlaylist!.currentIndex ==
+                            if (assetsAudioPlayer
+                                    .readingPlaylist!.currentIndex ==
                                 index) {
                               if (realtimePLayingInfo.isPlaying) {
                                 assetsAudioPlayer.stop();
@@ -369,7 +373,9 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
               IconButton(
                 icon: Icon(Icons.image_outlined),
                 color: Colors.blueGrey[700],
-                onPressed: () {},
+                onPressed: () {
+                  _takeScreenshot(item, index, supplicationLength);
+                },
               ),
               item.buttonState == 1
                   ? CountButton(buttonCount: item.buttonCount!)
@@ -379,6 +385,116 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
           SizedBox(height: 8),
         ],
       ),
+    );
+  }
+
+  _takeScreenshot(
+      SupplicationDayNightItem item, int index, int supplicationLength) async {
+    final unit8List = await _screenshotController
+        .captureFromWidget(_itemForScreen(item, index, supplicationLength));
+    String tempPath = (Platform.isAndroid
+            ? await getExternalStorageDirectory()
+            : await getApplicationDocumentsDirectory())!
+        .path;
+    File file = File('$tempPath/dua_${item.id}.jpg');
+    await file.writeAsBytes(unit8List);
+    await Share.shareFiles(
+      [file.path],
+      sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+    );
+  }
+
+  Widget _itemForScreen(
+      SupplicationDayNightItem item, int index, int supplicationLength) {
+    return ListView(
+      controller: ScrollController(),
+      shrinkWrap: true,
+      children: [
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          elevation: 1,
+          margin: EdgeInsets.all(8),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.yellow[50],
+              borderRadius: BorderRadius.circular(25),
+            ),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Слова поминания Аллаха, которые желательно произносить ${_dayNight ? 'утром' : 'вечером'}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Gilroy',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  item.contentArabic != null
+                      ? '${index + 1}/$supplicationLength'
+                      : '',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Gilroy',
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  '${item.contentArabic}',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Hafs',
+                    color: Colors.red[700],
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  '${item.contentForCopyAndShare}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Gilroy',
+                  ),
+                ),
+                SizedBox(height: 8),
+                Divider(indent: 16, endIndent: 16, color: Colors.black),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/images/asgp.png',
+                      width: 70,
+                      height: 40,
+                    ),
+                    SizedBox(width: 16),
+                    Image.asset(
+                      'assets/images/splash_launch.png',
+                      width: 40,
+                      height: 40,
+                    ),
+                    SizedBox(width: 16),
+                    Text(
+                      'Крепость верующего\nКрепость мусульманина',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Gilroy',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
