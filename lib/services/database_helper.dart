@@ -25,7 +25,7 @@ class DatabaseHelper {
     Directory? documentDirectory = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationSupportDirectory();
-    String path = join(documentDirectory!.path, 'fortress_db.db');
+    String path = join(documentDirectory!.path, 'fortress_db_2.db');
 
     // Проверяем, существует ли база данных
     var exists = await databaseExists(path);
@@ -39,7 +39,7 @@ class DatabaseHelper {
         Exception('Invalid database');
       }
       // Копировать из актива
-      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db.db'));
+      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db_2.db'));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(path).writeAsBytes(bytes, flush: true);
     } else {
