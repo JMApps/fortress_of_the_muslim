@@ -36,7 +36,10 @@ class _MainPageState extends State<MainPage> {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       onGenerateRoute: _appRouter.appGeneratorRoute,
-      theme: ThemeData(fontFamily: 'Gilroy'),
+      theme: ThemeData(
+        fontFamily: 'Gilroy',
+        primarySwatch: Colors.teal,
+      ),
       title: 'Крепость мусульманина',
       home: Scaffold(
         body: _changeWidget[_selectedIndex],

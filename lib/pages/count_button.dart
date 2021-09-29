@@ -32,7 +32,7 @@ class _CountButtonState extends State<CountButton> {
           if (_countNumber > 0) {
             setState(() {
               _countNumber--;
-              HapticFeedback.selectionClick();
+              HapticFeedback.vibrate();
             });
           }
         },

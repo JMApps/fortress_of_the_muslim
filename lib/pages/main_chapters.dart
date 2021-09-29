@@ -46,7 +46,7 @@ class _MainChaptersState extends State<MainChapters> {
             icon: Icon(CupertinoIcons.square_list),
           ),
           actions: [
-            Platform.isAndroid ? SupportProjectPage() : SizedBox(),
+            //Platform.isAndroid ? SupportProjectPage() : SizedBox(),
             ChapterSettings(),
           ],
         ),
