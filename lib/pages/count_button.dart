@@ -32,14 +32,18 @@ class _CountButtonState extends State<CountButton> {
           if (_countNumber > 0) {
             setState(() {
               _countNumber--;
-              HapticFeedback.vibrate();
+              if (_countNumber == 0) {
+                HapticFeedback.vibrate();
+              } else {
+                HapticFeedback.lightImpact();
+              }
             });
           }
         },
         elevation: 3,
         mini: true,
-        backgroundColor: Colors.teal,
-        splashColor: Colors.teal[800],
+        backgroundColor: Colors.blueGrey,
+        splashColor: Colors.blueGrey[800],
         child: Center(
           child: Text(
             '$_countNumber',
