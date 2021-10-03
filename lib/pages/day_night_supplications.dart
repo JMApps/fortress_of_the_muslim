@@ -337,8 +337,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                   FlutterClipboard.copy(
                           '${_parseHtmlString('Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}')}\n\n'
                           '${index + 1}/$supplicationLength\n\n'
-                          '${item.contentArabic}\n\n'
-                          '${item.contentTranscription}\n\n'
+                          '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
+                          '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
                           '${item.contentForCopyAndShare}')
                       .then(
                     (value) {
@@ -363,8 +363,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                   Share.share(
                     '${_parseHtmlString('Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}')}\n\n'
                     '${index + 1}/$supplicationLength\n\n'
-                    '${item.contentArabic}\n\n'
-                    '${item.contentTranscription}\n\n'
+                    '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
+                    '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
                     '${item.contentForCopyAndShare}',
                     sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
                   );
@@ -437,25 +437,25 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  item.contentArabic != null
-                      ? '${index + 1}/$supplicationLength'
-                      : '',
+                  '${index + 1}/$supplicationLength',
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'Gilroy',
                   ),
                 ),
                 SizedBox(height: 16),
-                Text(
-                  '${item.contentArabic}',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: 'Hafs',
-                    color: Colors.red[700],
-                  ),
-                  textDirection: TextDirection.rtl,
-                ),
-                SizedBox(height: 16),
+                item.contentArabic != null
+                    ? Text(
+                        '${item.contentArabic}',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontFamily: 'Hafs',
+                          color: Colors.red[700],
+                        ),
+                        textDirection: TextDirection.rtl,
+                      )
+                    : SizedBox(),
+                item.contentArabic != null ? SizedBox(height: 16) : SizedBox(),
                 Text(
                   '${item.contentForCopyAndShare}',
                   style: TextStyle(

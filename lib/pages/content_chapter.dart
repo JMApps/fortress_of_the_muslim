@@ -421,8 +421,8 @@ class _ContentChapterState extends State<ContentChapter> {
                   FlutterClipboard.copy(
                           '${_parseHtmlString(args!.chapterTitle!)}\n\n'
                           '${index + 1}/$supplicationLength\n\n'
-                          '${item.contentArabic}\n\n'
-                          '${item.contentTranscription}\n\n'
+                          '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
+                          '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
                           '${item.contentForCopyAndShare}')
                       .then(
                     (value) {
@@ -447,8 +447,8 @@ class _ContentChapterState extends State<ContentChapter> {
                   Share.share(
                     '${_parseHtmlString(args!.chapterTitle!)}\n\n'
                     '${index + 1}/$supplicationLength\n\n'
-                    '${item.contentArabic}\n\n'
-                    '${item.contentTranscription}\n\n'
+                    '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
+                    '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
                     '${item.contentForCopyAndShare}',
                     sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
                   );
@@ -552,25 +552,25 @@ class _ContentChapterState extends State<ContentChapter> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  item.contentArabic != null
-                      ? '${index + 1}/$supplicationLength'
-                      : '',
+                  '${index + 1}/$supplicationLength',
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'Gilroy',
                   ),
                 ),
                 SizedBox(height: 16),
-                Text(
-                  '${item.contentArabic}',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: 'Hafs',
-                    color: Colors.red[700],
-                  ),
-                  textDirection: TextDirection.rtl,
-                ),
-                SizedBox(height: 16),
+                item.contentArabic != null
+                    ? Text(
+                        '${item.contentArabic}',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontFamily: 'Hafs',
+                          color: Colors.red[700],
+                        ),
+                        textDirection: TextDirection.rtl,
+                      )
+                    : SizedBox(),
+                item.contentArabic != null ? SizedBox(height: 16) : SizedBox(),
                 Text(
                   '${item.contentForCopyAndShare}',
                   style: TextStyle(
