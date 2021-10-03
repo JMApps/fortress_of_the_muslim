@@ -1,6 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/main.dart';
+import 'package:fortress_of_the_muslim/pages/about_us.dart';
 import 'package:fortress_of_the_muslim/pages/content_chapter.dart';
 import 'package:fortress_of_the_muslim/pages/day_night_supplications.dart';
 import 'package:fortress_of_the_muslim/pages/other_book_content.dart';
@@ -24,6 +25,9 @@ class AppRouter {
       case '/day_night_supplications':
         return MaterialPageRoute(
             builder: (_) => DayNightSupplications(), settings: routeSettings);
+      case '/about_us':
+        return MaterialPageRoute(
+            builder: (_) => AboutUs(), settings: routeSettings);
       default:
         throw Exception('Invalid route');
     }

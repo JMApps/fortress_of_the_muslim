@@ -132,7 +132,14 @@ class _ContentChapterState extends State<ContentChapter> {
                           },
                           activeColor: Colors.blueGrey[900],
                           trackColor: Colors.blueGrey[700]),
-                    )
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamed('/about_us');
+                      },
+                      icon: Icon(Icons.info_outline),
+                    ),
                   ],
                 ),
                 body: Column(
@@ -421,8 +428,8 @@ class _ContentChapterState extends State<ContentChapter> {
                   FlutterClipboard.copy(
                           '${_parseHtmlString(args!.chapterTitle!)}\n\n'
                           '${index + 1}/$supplicationLength\n\n'
-                          '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
-                          '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
+                          '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+                          '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                           '${item.contentForCopyAndShare}')
                       .then(
                     (value) {
@@ -447,8 +454,8 @@ class _ContentChapterState extends State<ContentChapter> {
                   Share.share(
                     '${_parseHtmlString(args!.chapterTitle!)}\n\n'
                     '${index + 1}/$supplicationLength\n\n'
-                    '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
-                    '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
+                    '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+                    '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                     '${item.contentForCopyAndShare}',
                     sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
                   );

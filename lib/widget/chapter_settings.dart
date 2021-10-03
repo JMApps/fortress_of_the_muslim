@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/pages/content_chapter.dart';
 import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:o_color_picker/o_color_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';

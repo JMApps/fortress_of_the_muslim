@@ -337,8 +337,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                   FlutterClipboard.copy(
                           '${_parseHtmlString('Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}')}\n\n'
                           '${index + 1}/$supplicationLength\n\n'
-                          '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
-                          '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
+                          '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+                          '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                           '${item.contentForCopyAndShare}')
                       .then(
                     (value) {
@@ -363,8 +363,8 @@ class _DayNightSupplicationsState extends State<DayNightSupplications> {
                   Share.share(
                     '${_parseHtmlString('Слова поминания Аллаха, которые желательно произносить ${_dayNight ? '<b>утром</b>' : '<b>вечером</b>'}')}\n\n'
                     '${index + 1}/$supplicationLength\n\n'
-                    '${item.contentArabic != null ? item.contentArabic : ''}\n\n'
-                    '${item.contentTranscription != null ? item.contentTranscription : ''}\n\n'
+                    '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+                    '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                     '${item.contentForCopyAndShare}',
                     sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
                   );
