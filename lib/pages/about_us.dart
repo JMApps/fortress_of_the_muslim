@@ -28,7 +28,7 @@ class AboutUs extends StatelessWidget {
                       'Instagram: www.instagram.com/dev_muslim\n\n'
                       'UmmaLife: www.umma.life/jmapps\n\n'
                       'По всем вопросам, предложениям и скритикой можете писать нам на почту:\n\n'
-                      'JMAppsMuslim@gmail.com или в telegram: www.t.me/dev_muslim\n\n',
+                      'jmappsmuslim@gmail.com или в telegram: www.t.me/dev_muslim\n\n',
                   style: TextStyle(fontSize: 20),
                   linkStyle: TextStyle(color: Colors.teal),
                   onOpen: (link) async {
