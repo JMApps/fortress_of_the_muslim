@@ -91,7 +91,7 @@ packages:
       name: csslib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.17.0"
+    version: "0.17.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -145,7 +145,7 @@ packages:
       name: flutter_html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   flutter_layout_grid:
     dependency: transitive
     description:
@@ -197,7 +197,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.3"
+    version: "0.13.4"
   http_parser:
     dependency: transitive
     description:
@@ -274,7 +274,7 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.1+1"
   path_parsing:
     dependency: transitive
     description:
@@ -317,20 +317,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.11.1"
   percent_indicator:
     dependency: "direct main"
     description:
       name: percent_indicator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.4.0"
   petitparser:
     dependency: transitive
     description:
@@ -393,7 +386,7 @@ packages:
       name: scrollable_positioned_list
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0-nullsafety.0"
+    version: "0.2.2"
   share_plus:
     dependency: "direct main"
     description:
@@ -608,7 +601,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.5"
   vector_math:
     dependency: transitive
     description:
@@ -692,7 +685,7 @@ packages:
       name: webview_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.2.0"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
