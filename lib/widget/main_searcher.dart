@@ -21,6 +21,7 @@ class MainSearcher extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: Icon(
           CupertinoIcons.search,
+          color: Colors.grey,
         ),
       ),
       placeholder: 'Поиск',

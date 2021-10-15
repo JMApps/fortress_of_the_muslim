@@ -18,10 +18,15 @@ class MainChapters extends StatelessWidget {
       ],
       child: GestureDetector(
         child: Scaffold(
-          backgroundColor: Color(0xFFF2FFFE),
+          backgroundColor: Color(0xFFE0F2F1),
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('Крепость мусульманина'),
+            title: const Text(
+              'Крепость мусульманина',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
             backgroundColor: Colors.teal,
             elevation: 0,
             leading: IconButton(
