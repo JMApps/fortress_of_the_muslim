@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
+import 'package:fortress_of_the_muslim/widget/app_settings.dart';
 import 'package:fortress_of_the_muslim/widget/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/widget/content_title.dart';
 import 'package:fortress_of_the_muslim/widget/main_player.dart';
@@ -27,11 +28,18 @@ class ContentChapter extends StatelessWidget {
         backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(
-            icon: Icon(
+            onPressed: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AppSettings();
+                },
+              );
+            },
+            icon: const Icon(
               CupertinoIcons.settings,
               color: Colors.white,
             ),
-            onPressed: () {},
           ),
           Switch(
             value: false,
