@@ -14,18 +14,18 @@ class MainSearcher extends StatelessWidget {
         context.read<MainChapterState>().updateTextFiledData(newString);
       },
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Colors.teal[50],
         borderRadius: BorderRadius.circular(15),
       ),
       prefix: Padding(
-        padding: EdgeInsets.all(8),
-        child: Icon(
+        padding: const EdgeInsets.all(8),
+        child: const Icon(
           CupertinoIcons.search,
           color: Colors.grey,
         ),
       ),
       placeholder: 'Поиск',
-      placeholderStyle: TextStyle(color: Colors.grey[500]),
+      placeholderStyle: const TextStyle(color: Colors.grey),
       style: TextStyle(fontFamily: 'Gilroy', color: Colors.grey[800]),
       clearButtonMode: OverlayVisibilityMode.editing,
     );
