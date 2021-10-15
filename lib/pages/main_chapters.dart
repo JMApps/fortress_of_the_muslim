@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
 import 'package:fortress_of_the_muslim/widget/main_chapter_list.dart';
 import 'package:fortress_of_the_muslim/widget/main_searcher.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainChapters extends StatelessWidget {
   const MainChapters({Key? key}) : super(key: key);
@@ -38,9 +41,31 @@ class MainChapters extends StatelessWidget {
             ),
             actions: [
               IconButton(
+                icon: const Icon(
+                  Icons.apps,
+                  color: Colors.white,
+                ),
+                onPressed: () async {
+                  if (await canLaunch(
+                    Platform.isIOS
+                        ? 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953'
+                        : 'https://play.google.com/store/apps/dev?id=8649252597553656018',
+                  )) {
+                    await launch(
+                      Platform.isIOS
+                          ? 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953'
+                          : 'https://play.google.com/store/apps/dev?id=8649252597553656018',
+                    );
+                  } else {
+                    throw 'Could not launch';
+                  }
+                },
+              ),
+              IconButton(
                 icon: const Icon(Icons.info_outline),
                 onPressed: () {
-                  // About us page
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed('/about_us');
                 },
               ),
             ],

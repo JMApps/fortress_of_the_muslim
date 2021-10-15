@@ -36,7 +36,8 @@ class FavoriteChapters extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.info_outline),
               onPressed: () {
-                // About us page
+                Navigator.of(context, rootNavigator: true)
+                    .pushNamed('/about_us');
               },
             ),
           ],

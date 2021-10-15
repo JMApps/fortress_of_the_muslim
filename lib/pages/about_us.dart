@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:fortress_of_the_muslim/widget/about_us_app_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutUs extends StatelessWidget {
@@ -10,16 +13,20 @@ class AboutUs extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        elevation: 1,
-        title: Text('О нас'),
+        title: const Text('О нас'),
+        backgroundColor: Colors.red,
       ),
-      body: SingleChildScrollView(
-        child: Scrollbar(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Linkify(
+      body: Scrollbar(
+        thickness: 5,
+        isAlwaysShown: true,
+        showTrackOnHover: true,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                child: Linkify(
                   text:
                       'JMApps - серия бесплатных и безрекламных андроид и iOS приложений для мусульман.\n\n'
                       'Вы можете следить за обновлением старых и изданием новых приложений в наших соцсетях:\n\n'
@@ -29,8 +36,8 @@ class AboutUs extends StatelessWidget {
                       'UmmaLife: www.umma.life/jmapps\n\n'
                       'По всем вопросам, предложениям и скритикой можете писать нам на почту:\n\n'
                       'jmappsmuslim@gmail.com или в telegram: www.t.me/dev_muslim\n\n',
-                  style: TextStyle(fontSize: 20),
-                  linkStyle: TextStyle(color: Colors.teal),
+                  style: const TextStyle(fontSize: 20),
+                  linkStyle: TextStyle(color: Colors.red),
                   onOpen: (link) async {
                     if (await canLaunch(link.url)) {
                       await launch(link.url);
@@ -39,8 +46,20 @@ class AboutUs extends StatelessWidget {
                     }
                   },
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Делитесь нашими ${Platform.isIOS ? 'android-приложениями' : 'iOS-приложениями'} с родными и близкими, которые используют эту платформу.',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(height: 16),
+              Divider(indent: 16, endIndent: 16),
+              Scrollbar(
+                child: AboutUsAppList(),
+              ),
+            ],
           ),
         ),
       ),
