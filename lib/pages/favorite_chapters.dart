@@ -1,169 +1,52 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/style.dart';
-import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
-import 'package:fortress_of_the_muslim/model/chapter_item.dart';
-import 'package:fortress_of_the_muslim/services/database_query.dart';
-import 'package:fortress_of_the_muslim/styles/text_styles.dart';
+import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
+import 'package:fortress_of_the_muslim/widget/favorite_chapter_list.dart';
+import 'package:provider/provider.dart';
 
-class FavoriteChapters extends StatefulWidget {
-  @override
-  _FavoriteChaptersState createState() => _FavoriteChaptersState();
-}
-
-class _FavoriteChaptersState extends State<FavoriteChapters> {
-  var _databaseQuery = DatabaseQuery();
-  var _textStyles = TextStyles();
+class FavoriteChapters extends StatelessWidget {
+  const FavoriteChapters({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFFFAF2),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Крепость мусульманина'),
-        backgroundColor: Colors.orange[500],
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true)
-                .pushNamed('/other_content');
-          },
-          icon: Icon(CupertinoIcons.square_list),
-        ),
-      ),
-      body: Scrollbar(
-        child: _buildList(),
-      ),
-    );
-  }
-
-  Widget _buildList() {
-    return FutureBuilder<List>(
-      future: _databaseQuery.getFavoriteChapters(),
-      builder: (context, snapshot) {
-        return snapshot.hasData
-            ? ListView.separated(
-                physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data!.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider(
-                    indent: 16,
-                    endIndent: 16,
-                    color: Colors.grey[500],
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return _buildChapterItem(snapshot.data![index]);
-                },
-              )
-            : Center(
-                child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    Text(
-                      'Избранных глав нет',
-                      style: TextStyle(fontSize: 20, color: Colors.grey[500]),
-                    ),
-                    Icon(
-                      Icons.bookmark,
-                      color: Colors.orange[500],
-                      size: 30,
-                    ),
-                  ],
-                ),
-              );
-      },
-    );
-  }
-
-  Widget _buildChapterItem(ChapterItem item) {
-    return InkWell(
-      child: Row(
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
-            child: IconButton(
-                icon: item.favoriteState == 0
-                    ? Icon(CupertinoIcons.bookmark)
-                    : Icon(CupertinoIcons.bookmark_solid),
-                color: Colors.orange[500],
-                onPressed: () {
-                  setState(() {
-                    item.favoriteState == 0
-                        ? _databaseQuery.addRemoveFavoriteChapter(1, item.id)
-                        : _databaseQuery.addRemoveFavoriteChapter(0, item.id);
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                        'Удалено',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      duration: Duration(milliseconds: 500),
-                    ),
-                  );
-                }),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8, top: 8, right: 0, bottom: 0),
-                  child: Text('Глава ${item.id.toString()}',
-                      style: _textStyles.mainFavoriteChapterNumberTextStyle),
-                ),
-                Html(
-                  onLinkTap: (String? url, RenderContext rendContext,
-                      Map<String, String> attributes, element) {
-                    showCupertinoModalPopup(
-                      context: context,
-                      builder: (BuildContext context) => CupertinoActionSheet(
-                        message: Html(
-                          data: url,
-                          style: {
-                            "small": Style(
-                              color: Colors.grey[500],
-                              fontSize: FontSize(12),
-                            ),
-                            '#': Style(
-                              fontSize: FontSize(18),
-                            )
-                          },
-                        ),
-                        actions: [
-                          CupertinoButton(
-                            child: Text('Закрыть'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  data: item.chapterTitle,
-                  style: {
-                    "#": _textStyles.mainChapterTitleTextStyle,
-                    "a": _textStyles.footnoteTextStyle
-                  },
-                ),
-              ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MainChapterState>(create: (_) => MainChapterState()),
+      ],
+      child: Scaffold(
+        backgroundColor: Color(0xFFFFF3E0),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Избранные главы',
+            style: TextStyle(
+              color: Colors.white,
             ),
           ),
-        ],
+          backgroundColor: Colors.orange,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(CupertinoIcons.square_list),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed('/other_content');
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () {
+                // About us page
+              },
+            ),
+          ],
+        ),
+        body: Scrollbar(
+          isAlwaysShown: true,
+          showTrackOnHover: true,
+          child: FavoriteChapterList(),
+        ),
       ),
-      onTap: () {
-        Navigator.of(context, rootNavigator: true).pushNamed(
-          '/content_chapter',
-          arguments: ChapterArguments(item.id, item.chapterTitle),
-        );
-      },
     );
   }
 }
