@@ -5,7 +5,7 @@ import 'package:fortress_of_the_muslim/pages/content_chapter.dart';
 import 'package:fortress_of_the_muslim/pages/day_night_supplications.dart';
 import 'package:fortress_of_the_muslim/pages/main_page.dart';
 import 'package:fortress_of_the_muslim/pages/other_book_content.dart';
-import 'package:fortress_of_the_muslim/pages/other_content_list.dart';
+import 'package:fortress_of_the_muslim/widget/other_content_list.dart';
 
 class AppRouter {
   Route appGeneratorRoute(RouteSettings routeSettings) {
