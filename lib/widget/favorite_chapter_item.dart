@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
-import 'package:fortress_of_the_muslim/model/chapter_item.dart';
+import 'package:fortress_of_the_muslim/model/chapter_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ class FavoriteChapterItem extends StatelessWidget {
   FavoriteChapterItem({Key? key, required this.item, required this.index})
       : super(key: key);
 
-  final ChapterItem item;
+  final ChapterModelItem item;
   final int index;
 
   @override
@@ -22,7 +22,9 @@ class FavoriteChapterItem extends StatelessWidget {
             : CupertinoIcons.bookmark_solid),
         color: Colors.orange,
         onPressed: () {
-          context.read<MainChapterState>().updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
+          context
+              .read<MainChapterState>()
+              .updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
           _showSnackBar(context);
         },
       ),
@@ -89,7 +91,7 @@ class FavoriteChapterItem extends StatelessWidget {
   _showSnackBar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: item.favoriteState == 0 ? Colors.teal : Colors.red,
+        backgroundColor: item.favoriteState == 0 ? Colors.teal : Colors.teal,
         content: item.favoriteState == 0
             ? const Text(
                 'Добавлено',

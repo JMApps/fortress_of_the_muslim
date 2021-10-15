@@ -42,6 +42,7 @@ class FavoriteChapters extends StatelessWidget {
           ],
         ),
         body: Scrollbar(
+          thickness: 5,
           isAlwaysShown: true,
           showTrackOnHover: true,
           child: FavoriteChapterList(),
