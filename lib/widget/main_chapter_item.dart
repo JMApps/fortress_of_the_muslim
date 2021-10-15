@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
-import 'package:fortress_of_the_muslim/model/chapter_item.dart';
+import 'package:fortress_of_the_muslim/model/chapter_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
 import 'package:provider/provider.dart';
 
@@ -10,21 +10,17 @@ class MainChapterItem extends StatelessWidget {
   MainChapterItem({Key? key, required this.item, required this.index})
       : super(key: key);
 
-  final ChapterItem item;
+  final ChapterModelItem item;
   final int index;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: IconButton(
-        icon: Icon(item.favoriteState == 0
-            ? CupertinoIcons.bookmark
-            : CupertinoIcons.bookmark_solid),
+        icon: Icon(item.favoriteState == 0 ? CupertinoIcons.bookmark : CupertinoIcons.bookmark_solid),
         color: Colors.teal,
         onPressed: () {
-          context
-              .read<MainChapterState>()
-              .updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
+          context.read<MainChapterState>().updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
           _showSnackBar(context);
         },
       ),
@@ -52,7 +48,7 @@ class MainChapterItem extends StatelessWidget {
                   ),
                   'small': Style(
                     color: Colors.grey,
-                    fontSize: FontSize(12),
+                    fontSize: FontSize(10),
                   ),
                 },
               ),
@@ -76,6 +72,10 @@ class MainChapterItem extends StatelessWidget {
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
             fontSize: FontSize(19),
+          ),
+          'a': Style(
+            fontSize: const FontSize(16),
+            color: Colors.blue,
           ),
         },
       ),
