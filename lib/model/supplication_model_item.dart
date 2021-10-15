@@ -1,4 +1,4 @@
-class SupplicationItem {
+class SupplicationModelItem {
   late int _id;
   late String _contentArabic;
   late String _contentTranscription;
@@ -8,7 +8,7 @@ class SupplicationItem {
   late String _nameAudio;
   late int _favoriteState;
 
-  SupplicationItem(
+  SupplicationModelItem(
       this._id,
       this._contentArabic,
       this._contentTranscription,
@@ -18,7 +18,7 @@ class SupplicationItem {
       this._nameAudio,
       this._favoriteState);
 
-  SupplicationItem.fromMap(dynamic obj) {
+  SupplicationModelItem.fromMap(dynamic obj) {
     this._id = obj['_id'];
     this._contentArabic = obj['content_arabic'];
     this._contentTranscription = obj['content_transcription'];
@@ -44,17 +44,4 @@ class SupplicationItem {
   String get nameAudio => _nameAudio;
 
   int get favoriteState => _favoriteState;
-
-  Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
-    map['_id'] = _id;
-    map['content_arabic'] = _contentArabic;
-    map['content_transcription'] = _contentTranscription;
-    map['content_translation'] = _contentTranslation;
-    map['content_for_copy_and_share'] = _contentForCopyAndShare;
-    map['sample_by'] = _sampleBy;
-    map['name_audio'] = _nameAudio;
-    map['favorite_state'] = _favoriteState;
-    return map;
-  }
 }
