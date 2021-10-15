@@ -33,7 +33,7 @@ class MainChapterItem extends StatelessWidget {
         style: TextStyle(
           color: Colors.teal,
           fontSize: 18,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w700,
         ),
       ),
       subtitle: Html(
@@ -47,6 +47,7 @@ class MainChapterItem extends StatelessWidget {
                 style: {
                   '#': Style(
                     padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
                     fontSize: FontSize(18),
                   ),
                   'small': Style(
@@ -73,7 +74,8 @@ class MainChapterItem extends StatelessWidget {
         style: {
           '#': Style(
             padding: EdgeInsets.zero,
-            fontSize: FontSize(18),
+            margin: EdgeInsets.zero,
+            fontSize: FontSize(19),
           ),
         },
       ),
