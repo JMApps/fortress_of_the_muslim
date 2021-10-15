@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/main_supplication_state.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
@@ -13,23 +16,38 @@ class SupplicationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future: context.watch<MainSupplicationState>().getTextFieldText.isNotEmpty ||
-          context.watch<MainSupplicationState>().getUpdateList
-          ? _databaseQuery.getSupplicationSearchResult(context.watch<MainSupplicationState>().getTextFieldText)
-          : _databaseQuery.getAllSupplications(),
+      future:
+          context.watch<MainSupplicationState>().getTextFieldText.isNotEmpty ||
+                  context.watch<MainSupplicationState>().getUpdateList
+              ? _databaseQuery.getSupplicationSearchResult(
+                  context.watch<MainSupplicationState>().getTextFieldText)
+              : _databaseQuery.getAllSupplications(),
       builder: (context, snapshot) {
-        return snapshot.hasData
-            ? ScrollablePositionedList.builder(
-          physics: BouncingScrollPhysics(),
-          itemScrollController: context.read<MainSupplicationState>().getItemScrollController,
-          itemCount: snapshot.data!.length,
-          itemBuilder: (BuildContext context, int index) {
-            return SupplicationItem(item: snapshot.data![index], index: index);
-          },
-        )
-            : Center(
-          child: CircularProgressIndicator(),
-        );
+        return snapshot.hasError
+            ? const Center(
+                child: Text(
+                  'По вашему запросу ничего не найдено',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            : snapshot.hasData
+                ? ScrollablePositionedList.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemScrollController: context.watch<MainSupplicationState>().getItemScrollController,
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SupplicationItem(
+                          item: snapshot.data![index], index: index);
+                    },
+                  )
+                : Center(
+                    child: Platform.isAndroid
+                        ? CircularProgressIndicator()
+                        : CupertinoActivityIndicator(),
+                  );
       },
     );
   }

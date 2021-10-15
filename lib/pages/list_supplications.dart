@@ -16,7 +16,8 @@ class ListSupplications extends StatelessWidget {
     FocusScopeNode _currentFocus = FocusScope.of(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainSupplicationState>(create: (_) => MainSupplicationState()),
+        ChangeNotifierProvider<MainSupplicationState>(
+            create: (_) => MainSupplicationState()),
       ],
       child: InkWell(
         child: Scaffold(
@@ -37,15 +38,20 @@ class ListSupplications extends StatelessWidget {
               icon: Icon(CupertinoIcons.square_list),
             ),
             actions: [
+              Consumer<MainSupplicationState>(
+                builder: (context, mainSupplicationState, _) => IconButton(
+                  onPressed: () {
+                    int randomNumber = random.nextInt(280);
+                    mainSupplicationState.scrollTo(randomNumber);
+                  },
+                  icon: const Icon(CupertinoIcons.arrow_3_trianglepath),
+                ),
+              ),
               IconButton(
+                icon: const Icon(Icons.info_outline),
                 onPressed: () {
-                  int randomNumber = random.nextInt(280);
-                  context.read<MainSupplicationState>().getItemScrollController.scrollTo(
-                          index: randomNumber,
-                          duration: Duration(seconds: 1),
-                          curve: Curves.easeInOutCubic);
+                  // About us page
                 },
-                icon: const Icon(CupertinoIcons.arrow_3_trianglepath),
               ),
             ],
           ),
@@ -64,6 +70,9 @@ class ListSupplications extends StatelessWidget {
               ),
               Expanded(
                 child: Scrollbar(
+                  thickness: 5,
+                  isAlwaysShown: true,
+                  showTrackOnHover: true,
                   child: SupplicationList(),
                 ),
               ),

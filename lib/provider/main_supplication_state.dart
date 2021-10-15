@@ -17,6 +17,13 @@ class MainSupplicationState with ChangeNotifier {
 
   bool get getUpdateList => _updateList;
 
+  scrollTo(int randomNumber) {
+    _itemScrollController.scrollTo(
+        index: randomNumber,
+        duration: Duration(seconds: 1),
+        curve: Curves.easeInOutCubic);
+  }
+
   updateTextFiledData(String newString) {
     _textFiledText = newString;
     notifyListeners();

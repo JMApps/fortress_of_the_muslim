@@ -165,7 +165,7 @@ class SupplicationItem extends StatelessWidget {
   _showMessage(BuildContext context, bool isBookmark) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Colors.red,
+        backgroundColor: isBookmark ? item.favoriteState == 0 ? Colors.blue : Colors.red : Colors.red,
         content: isBookmark
             ? item.favoriteState == 0
                 ? const Text(
