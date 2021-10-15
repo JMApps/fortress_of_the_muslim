@@ -1,4 +1,4 @@
-import 'package:fortress_of_the_muslim/model/about_item.dart';
+import 'package:fortress_of_the_muslim/model/other_model_item.dart';
 import 'package:fortress_of_the_muslim/model/chapter_model_item.dart';
 import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
@@ -67,18 +67,18 @@ class DatabaseQuery {
     return chapterSupplications!;
   }
 
-  Future<List<AboutItem>> getAboutUs() async {
+  Future<List<OtherModelItem>> getAboutUs() async {
     var dbClient = await con.db;
     var res = await dbClient.query('Table_of_about_us');
-    List<AboutItem>? aboutBook = res.isNotEmpty ? res.map((c) => AboutItem.fromMap(c)).toList() : null;
+    List<OtherModelItem>? aboutBook = res.isNotEmpty ? res.map((c) => OtherModelItem.fromMap(c)).toList() : null;
     return aboutBook!;
   }
 
 
-  Future<List<AboutItem>> getAboutUsContent(int _id) async {
+  Future<List<OtherModelItem>> getAboutUsContent(int _id) async {
     var dbClient = await con.db;
     var res = await dbClient.query('Table_of_about_us', where: '_id == $_id');
-    List<AboutItem>? aboutBook = res.isNotEmpty ? res.map((c) => AboutItem.fromMap(c)).toList() : null;
+    List<OtherModelItem>? aboutBook = res.isNotEmpty ? res.map((c) => OtherModelItem.fromMap(c)).toList() : null;
     return aboutBook!;
   }
 

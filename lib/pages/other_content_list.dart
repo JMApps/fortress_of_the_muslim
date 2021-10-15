@@ -1,17 +1,14 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/model/about_item.dart';
-import 'package:fortress_of_the_muslim/model/other_book_content_arguments.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
+import 'package:fortress_of_the_muslim/widget/other_content_item.dart';
 
-class OtherContent extends StatefulWidget {
-  const OtherContent({Key? key}) : super(key: key);
+class OtherContent extends StatelessWidget {
+  OtherContent({Key? key}) : super(key: key);
 
-  @override
-  _OtherContentState createState() => _OtherContentState();
-}
-
-class _OtherContentState extends State<OtherContent> {
-  var _databaseQuery = DatabaseQuery();
+  final _databaseQuery = DatabaseQuery();
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +20,18 @@ class _OtherContentState extends State<OtherContent> {
                 backgroundColor: Color(0xFFEFEBE9),
                 appBar: AppBar(
                   centerTitle: true,
-                  title: Text('Содержимое'),
-                  backgroundColor: Colors.brown[500],
+                  title: const Text('Содержимое'),
+                  backgroundColor: Colors.brown,
                   elevation: 0,
-                  actions: [],
                 ),
                 body: Scrollbar(
+                  thickness: 5,
+                  isAlwaysShown: true,
+                  showTrackOnHover: true,
                   child: ListView.separated(
                     physics: BouncingScrollPhysics(),
                     itemCount: snapshot.data!.length,
+                    padding: EdgeInsets.zero,
                     separatorBuilder: (BuildContext context, int index) {
                       return Divider(
                         indent: 16,
@@ -40,29 +40,16 @@ class _OtherContentState extends State<OtherContent> {
                       );
                     },
                     itemBuilder: (BuildContext context, int index) {
-                      return _buildItem(snapshot.data![index]);
+                      return OtherContentItem(item: snapshot.data![index]);
                     },
                   ),
                 ),
               )
             : Center(
-                child: CircularProgressIndicator(),
+                child: Platform.isAndroid
+                    ? CircularProgressIndicator()
+                    : CupertinoActivityIndicator(),
               );
-      },
-    );
-  }
-
-  Widget _buildItem(AboutItem item) {
-    return ListTile(
-      title: Text(
-        '${item.title}',
-        style: TextStyle(fontSize: 20, fontFamily: 'Gilroy'),
-      ),
-      onTap: () {
-        Navigator.of(context, rootNavigator: true).pushNamed(
-          '/other_book_content',
-          arguments: OtherBookContentArguments(item.id, item.title, item.content),
-        );
       },
     );
   }
