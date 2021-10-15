@@ -97,7 +97,7 @@ class ChapterContentItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
-                fontSize: const FontSize(16),
+                fontSize: const FontSize(14),
                 color: Colors.blue,
               ),
               'small': Style(
@@ -106,6 +106,7 @@ class ChapterContentItem extends StatelessWidget {
               ),
             },
           ),
+          SizedBox(height: 8),
           Divider(
             indent: 16,
             endIndent: 16,
