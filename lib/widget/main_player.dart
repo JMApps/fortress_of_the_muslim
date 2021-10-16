@@ -12,6 +12,7 @@ class _MainPlayerState extends State<MainPlayer> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(25),

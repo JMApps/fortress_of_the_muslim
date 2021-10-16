@@ -12,7 +12,7 @@ import 'package:fortress_of_the_muslim/widget/main_player.dart';
 import 'package:provider/provider.dart';
 
 class ContentChapter extends StatelessWidget {
-  const ContentChapter({Key? key}) : super(key: key);
+  ContentChapter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class ContentChapter extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: MainPlayer(),
+        bottomNavigationBar: Offstage(offstage: false, child: MainPlayer()),
       ),
     );
   }
