@@ -150,12 +150,12 @@ class ChapterContentItem extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(CupertinoIcons.play_circle),
-                color: Colors.grey,
+                color: Colors.blueGrey,
                 onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
-                color: Colors.grey,
+                color: Colors.blueGrey,
                 onPressed: () {
                   FlutterClipboard.copy(
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
@@ -167,7 +167,7 @@ class ChapterContentItem extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(CupertinoIcons.share),
-                color: Colors.grey,
+                color: Colors.blueGrey,
                 onPressed: () {
                   Share.share(
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
@@ -179,7 +179,7 @@ class ChapterContentItem extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(CupertinoIcons.photo),
-                color: Colors.grey,
+                color: Colors.blueGrey,
                 onPressed: () {},
               ),
               IconButton(
