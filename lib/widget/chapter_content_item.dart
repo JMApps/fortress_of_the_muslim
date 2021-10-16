@@ -5,6 +5,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
+import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -14,11 +15,13 @@ class ChapterContentItem extends StatelessWidget {
     required this.item,
     required this.index,
     required this.length,
+    required this.chapterTitle,
   }) : super(key: key);
 
   final SupplicationModelItem item;
   final int index;
   final int length;
+  final String chapterTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +183,9 @@ class ChapterContentItem extends StatelessWidget {
               IconButton(
                 icon: const Icon(CupertinoIcons.photo),
                 color: Colors.blueGrey,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<TakeScreenshotState>().takeScreenshot(item, index, length, chapterTitle);
+                },
               ),
               IconButton(
                 icon: Icon(

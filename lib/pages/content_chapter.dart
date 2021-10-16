@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
 import 'package:fortress_of_the_muslim/provider/floating_counter_state.dart';
+import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:fortress_of_the_muslim/widget/app_settings.dart';
 import 'package:fortress_of_the_muslim/widget/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/widget/content_title.dart';
@@ -22,6 +23,8 @@ class ContentChapter extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<FavoriteSupplicationState>(
             create: (_) => FavoriteSupplicationState()),
+        ChangeNotifierProvider<TakeScreenshotState>(
+            create: (_) => TakeScreenshotState()),
       ],
       child: Scaffold(
         backgroundColor: Colors.blueGrey[50],
@@ -76,7 +79,10 @@ class ContentChapter extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   child: ContentTitle(contentTitle: arguments.chapterTitle),
                 ),
-                ChapterContentList(chapterId: arguments.chapterId),
+                ChapterContentList(
+                  chapterId: arguments.chapterId,
+                  chapterTitle: arguments.chapterTitle,
+                ),
               ],
             ),
           ),

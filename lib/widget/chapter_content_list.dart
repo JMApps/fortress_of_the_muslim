@@ -8,9 +8,12 @@ import 'package:fortress_of_the_muslim/widget/chapter_content_item.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContentList extends StatelessWidget {
-  ChapterContentList({Key? key, required this.chapterId}) : super(key: key);
+  ChapterContentList(
+      {Key? key, required this.chapterId, required this.chapterTitle})
+      : super(key: key);
 
   final int chapterId;
+  final String chapterTitle;
   final _databaseQuery = DatabaseQuery();
 
   @override
@@ -31,9 +34,11 @@ class ChapterContentList extends StatelessWidget {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ChapterContentItem(
-                          item: snapshot.data![index],
-                          index: index,
-                          length: snapshot.data!.length);
+                        item: snapshot.data![index],
+                        index: index,
+                        length: snapshot.data!.length,
+                        chapterTitle: chapterTitle,
+                      );
                     },
                   )
                 : Center(
