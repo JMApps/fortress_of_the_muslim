@@ -6,11 +6,11 @@ class AppSettingsState with ChangeNotifier {
 
   int get getTextSize => _textSize;
 
-  Color _arabicTextColor = Colors.red;
+  Color _arabicTextColor = Colors.blueGrey[800]!;
 
   Color get getArabicTextColor => _arabicTextColor;
 
-  Color _transcriptionTextColor = Colors.green;
+  Color _transcriptionTextColor = Colors.teal[800]!;
 
   Color get getTranscriptionTextColor => _transcriptionTextColor;
 

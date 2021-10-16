@@ -12,7 +12,7 @@ class ContentTitle extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.blueGrey,
+        color: Colors.blueGrey[700],
         borderRadius: const BorderRadius.all(
           Radius.circular(25),
         ),
@@ -54,11 +54,12 @@ class ContentTitle extends StatelessWidget {
         data: contentTitle,
         style: {
           '#': Style(
-              fontSize: const FontSize(18),
-              padding: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
-              color: Colors.white,
-              margin: EdgeInsets.zero,
-              textAlign: TextAlign.center),
+            fontSize: const FontSize(18),
+            padding: EdgeInsets.zero,
+            color: Colors.white,
+            margin: EdgeInsets.zero,
+            textAlign: TextAlign.center,
+          ),
           'a': Style(
             fontSize: const FontSize(13),
             color: Colors.blue,
