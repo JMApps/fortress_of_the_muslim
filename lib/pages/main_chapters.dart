@@ -16,8 +16,7 @@ class MainChapters extends StatelessWidget {
     FocusScopeNode _currentFocus = FocusScope.of(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainChapterState>(
-            create: (_) => MainChapterState()),
+        ChangeNotifierProvider<MainChapterState>(create: (_) => MainChapterState()),
       ],
       child: GestureDetector(
         child: Scaffold(
