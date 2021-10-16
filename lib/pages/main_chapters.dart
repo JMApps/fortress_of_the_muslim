@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
 import 'package:fortress_of_the_muslim/widget/main_chapter_list.dart';
 import 'package:fortress_of_the_muslim/widget/main_searcher.dart';
@@ -14,6 +15,7 @@ class MainChapters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FocusScopeNode _currentFocus = FocusScope.of(context);
+    context.read<DayNightChapterState>().initDayNightState();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<MainChapterState>(create: (_) => MainChapterState()),
