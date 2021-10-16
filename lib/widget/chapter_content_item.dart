@@ -33,7 +33,7 @@ class ChapterContentItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      item.contentArabic,
+                      item.contentArabic!,
                       style: TextStyle(
                           fontSize: 21, // Change with shared preferences
                           fontFamily: 'Hafs'),
@@ -48,7 +48,7 @@ class ChapterContentItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      item.contentTranscription,
+                      item.contentTranscription!,
                       style: TextStyle(
                         fontSize: 18, // Change with shared preferences
                       ), //

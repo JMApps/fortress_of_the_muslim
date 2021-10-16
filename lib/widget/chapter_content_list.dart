@@ -16,7 +16,7 @@ class ChapterContentList extends StatelessWidget {
     return FutureBuilder<List>(
       future: _databaseQuery.getContentChapter(chapterId),
       builder: (context, snapshot) {
-        return snapshot.hasData
+        return snapshot.hasError ? Center(child: Text('${snapshot.error}'),) : snapshot.hasData
             ? ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

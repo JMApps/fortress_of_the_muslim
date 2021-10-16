@@ -35,7 +35,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      item.contentArabic,
+                      item.contentArabic!,
                       style: TextStyle(
                           fontSize: 21, // Change with shared preferences
                           fontFamily: 'Hafs'),
@@ -50,7 +50,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      item.contentTranscription,
+                      item.contentTranscription!,
                       style: TextStyle(
                         fontSize: 18, // Change with shared preferences
                       ), //
@@ -152,7 +152,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 color: Colors.blue,
                 onPressed: () {
                   context.read<FavoriteSupplicationState>().updateBookmarkState(
-                      item.favoriteState == 0 ? 1 : 0, item.id);
+                      item.favoriteState == 0 ? 1 : 0, item.id!);
                   _showMessage(context, true);
                 },
               ),
