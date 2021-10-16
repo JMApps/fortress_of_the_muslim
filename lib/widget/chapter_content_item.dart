@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
+import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ChapterContentItem extends StatelessWidget {
@@ -27,34 +30,54 @@ class ChapterContentItem extends StatelessWidget {
       elevation: 1,
       child: Column(
         children: [
-          item.contentArabic != null
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      item.contentArabic!,
-                      style: TextStyle(
-                          fontSize: 21, // Change with shared preferences
-                          fontFamily: 'Hafs'),
-                      textDirection: TextDirection.rtl,
-                    ),
-                  ),
-                )
+          context.watch<AppSettingsState>().getIsArabicTextShow
+              ? item.contentArabic != null
+                  ? Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16, top: 16, right: 16),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          item.contentArabic!,
+                          style: TextStyle(
+                            fontSize: context
+                                    .watch<AppSettingsState>()
+                                    .getTextSize
+                                    .toDouble() +
+                                3,
+                            fontFamily: 'Hafs',
+                            color: context
+                                .watch<AppSettingsState>()
+                                .getArabicTextColor,
+                          ),
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                    )
+                  : SizedBox()
               : SizedBox(),
-          item.contentTranscription != null
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      item.contentTranscription!,
-                      style: TextStyle(
-                        fontSize: 18, // Change with shared preferences
-                      ), //
-                    ),
-                  ),
-                )
+          context.watch<AppSettingsState>().getIsTranscriptionTextShow
+              ? item.contentTranscription != null
+                  ? Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16, top: 8, right: 16),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          item.contentTranscription!,
+                          style: TextStyle(
+                            fontSize: context
+                                .watch<AppSettingsState>()
+                                .getTextSize
+                                .toDouble(),
+                            color: context
+                                .watch<AppSettingsState>()
+                                .getTranscriptionTextColor,
+                          ), //
+                        ),
+                      ),
+                    )
+                  : SizedBox()
               : SizedBox(),
           Html(
             onLinkTap: (String? url, RenderContext rendContext,
@@ -66,7 +89,10 @@ class ChapterContentItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(18),
+                        fontSize: FontSize(context
+                            .watch<AppSettingsState>()
+                            .getTextSize
+                            .toDouble()),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
@@ -93,7 +119,10 @@ class ChapterContentItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: const FontSize(18),
+                  fontSize: FontSize(
+                      context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  color:
+                      context.watch<AppSettingsState>().getTranslationTextColor,
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
@@ -161,6 +190,8 @@ class ChapterContentItem extends StatelessWidget {
                 ),
                 color: Colors.blueGrey,
                 onPressed: () {
+                  context.read<FavoriteSupplicationState>().updateBookmarkState(
+                      item.favoriteState == 0 ? 1 : 0, item.id!);
                   _showMessage(context, true);
                 },
               ),
@@ -178,7 +209,11 @@ class ChapterContentItem extends StatelessWidget {
         elevation: 0,
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(8),
-        backgroundColor: isBookmark ? item.favoriteState == 0 ? Colors.blue : Colors.red : Colors.blueGrey,
+        backgroundColor: isBookmark
+            ? item.favoriteState == 0
+                ? Colors.blue
+                : Colors.blueGrey
+            : Colors.blueGrey,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(25),
