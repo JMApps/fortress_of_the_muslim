@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/pages/about_us.dart';
 import 'package:fortress_of_the_muslim/pages/content_chapter.dart';
-import 'package:fortress_of_the_muslim/pages/day_night_supplications.dart';
+import 'package:fortress_of_the_muslim/pages/day_night_content_chapter.dart';
 import 'package:fortress_of_the_muslim/pages/main_page.dart';
 import 'package:fortress_of_the_muslim/pages/other_book_content.dart';
 import 'package:fortress_of_the_muslim/widget/other_content_list.dart';
@@ -23,7 +23,7 @@ class AppRouter {
             builder: (_) => OtherBookContent(), settings: routeSettings);
       case '/day_night_supplications':
         return MaterialPageRoute(
-            builder: (_) => DayNightSupplications(), settings: routeSettings);
+            builder: (_) => DayNightContentChapter(), settings: routeSettings);
       case '/about_us':
         return MaterialPageRoute(
             builder: (_) => AboutUs(), settings: routeSettings);
