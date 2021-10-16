@@ -12,10 +12,12 @@ class FavoriteSupplicationItem extends StatelessWidget {
     Key? key,
     required this.item,
     required this.index,
+    required this.length,
   }) : super(key: key);
 
   final SupplicationModelItem item;
   final int index;
+  final int length;
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +117,8 @@ class FavoriteSupplicationItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                'Дуа ${item.id}/280',
-                style: const TextStyle(fontSize: 18, color: Colors.blue),
+                'Дуа ${index + 1}/$length',
+                style: const TextStyle(fontSize: 16, color: Colors.blue),
               ),
               IconButton(
                   icon: const Icon(CupertinoIcons.doc_on_doc),

@@ -23,7 +23,7 @@ class FavoriteSupplicationList extends StatelessWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return FavoriteSupplicationItem(
-                      item: snapshot.data![index], index: index);
+                      item: snapshot.data![index], index: index, length: snapshot.data!.length);
                 },
               )
             : Center(

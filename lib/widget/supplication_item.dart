@@ -116,7 +116,7 @@ class SupplicationItem extends StatelessWidget {
             children: [
               Text(
                 'Дуа ${item.id}/280',
-                style: const TextStyle(fontSize: 18, color: Colors.red),
+                style: const TextStyle(fontSize: 16, color: Colors.red),
               ),
               IconButton(
                   icon: const Icon(CupertinoIcons.doc_on_doc),
