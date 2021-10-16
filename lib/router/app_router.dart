@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/pages/about_us.dart';
 import 'package:fortress_of_the_muslim/pages/content_chapter.dart';

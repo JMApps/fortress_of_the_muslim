@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flip_box_bar_plus/flip_box_bar_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ import 'package:fortress_of_the_muslim/styles/text_styles.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({Key key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   final _textStyles = TextStyles();
 
