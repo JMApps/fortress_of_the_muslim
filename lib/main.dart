@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
+import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
 import 'package:fortress_of_the_muslim/provider/floating_counter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
@@ -26,6 +27,7 @@ class Main extends StatelessWidget {
         ChangeNotifierProvider<AppSettingsState>(create: (_) => AppSettingsState()),
         ChangeNotifierProvider<TakeScreenshotState>(create: (_) => TakeScreenshotState()),
         ChangeNotifierProvider<DayNightChapterState>(create: (_) => DayNightChapterState()),
+        ChangeNotifierProvider<FavoriteSupplicationState>(create: (_) => FavoriteSupplicationState()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

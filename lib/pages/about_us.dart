@@ -17,9 +17,6 @@ class AboutUs extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
       body: Scrollbar(
-        thickness: 5,
-        isAlwaysShown: true,
-        showTrackOnHover: true,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,

@@ -14,7 +14,7 @@ class ContentTitle extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.blueGrey[700],
         borderRadius: const BorderRadius.all(
-          Radius.circular(25),
+          Radius.circular(15),
         ),
       ),
       child: Html(
