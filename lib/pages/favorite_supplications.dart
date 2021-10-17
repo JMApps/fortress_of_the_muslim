@@ -41,9 +41,6 @@ class FavoriteSupplications extends StatelessWidget {
           ],
         ),
         body: Scrollbar(
-          thickness: 5,
-          isAlwaysShown: true,
-          showTrackOnHover: true,
           child: FavoriteSupplicationList(),
         ),
       ),

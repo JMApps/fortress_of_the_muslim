@@ -71,9 +71,6 @@ class ListSupplications extends StatelessWidget {
               ),
               Expanded(
                 child: Scrollbar(
-                  thickness: 5,
-                  isAlwaysShown: true,
-                  showTrackOnHover: true,
                   child: SupplicationList(),
                 ),
               ),

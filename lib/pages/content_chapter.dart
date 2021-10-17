@@ -65,22 +65,18 @@ class ContentChapter extends StatelessWidget {
                 ? FloatingCounterButton()
                 : SizedBox(),
         body: Scrollbar(
-          thickness: 3,
-          isAlwaysShown: true,
-          showTrackOnHover: true,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ContentTitle(contentTitle: arguments.chapterTitle),
-                ),
-                ChapterContentList(
-                  chapterId: arguments.chapterId,
-                  chapterTitle: arguments.chapterTitle,
-                ),
-              ],
-            ),
+          child: ListView(
+            physics: BouncingScrollPhysics(),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: ContentTitle(contentTitle: arguments.chapterTitle),
+              ),
+              ChapterContentList(
+                chapterId: arguments.chapterId,
+                chapterTitle: arguments.chapterTitle,
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: Offstage(offstage: false, child: MainPlayer()),

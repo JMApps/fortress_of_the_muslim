@@ -53,22 +53,18 @@ class DayNightContentChapter extends StatelessWidget {
         ],
       ),
       body: Scrollbar(
-        thickness: 3,
-        isAlwaysShown: true,
-        showTrackOnHover: true,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: ContentTitle(
-                  contentTitle:
-                      'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
-                ),
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ContentTitle(
+                contentTitle:
+                'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
               ),
-              DayNightChapterContentList(),
-            ],
-          ),
+            ),
+            DayNightChapterContentList(),
+          ],
         ),
       ),
       bottomNavigationBar: Offstage(offstage: false, child: MainPlayer()),
