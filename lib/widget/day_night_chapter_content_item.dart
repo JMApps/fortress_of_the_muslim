@@ -1,9 +1,11 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -14,11 +16,13 @@ class DayNightChapterContentItem extends StatelessWidget {
     required this.item,
     required this.index,
     required this.length,
+    required this.player,
   }) : super(key: key);
 
   final SupplicationDayNightItem item;
   final int index;
   final int length;
+  final AssetsAudioPlayer player;
 
   @override
   Widget build(BuildContext context) {
@@ -139,20 +143,54 @@ class DayNightChapterContentItem extends StatelessWidget {
           Divider(
             indent: 16,
             endIndent: 16,
-            color: Colors.grey,
+            color: context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Дуа ${index + 1}/$length',
-                style: const TextStyle(fontSize: 15, color: Colors.blueGrey),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: context.watch<MainPlayerState>().getCurrentIndex == index
+                      ? Colors.red
+                      : Colors.blueGrey,
+                ),
               ),
-              IconButton(
-                icon: const Icon(CupertinoIcons.play_circle),
-                color: Colors.blueGrey,
-                onPressed: () {},
-              ),
+              item.nameAudio != null
+                  ? player.builderRealtimePlayingInfos(
+                  builder: (context, realTimePlayingInfo) {
+                    return IconButton(
+                      icon: Icon(realTimePlayingInfo.isPlaying &&
+                          context
+                              .watch<MainPlayerState>()
+                              .getCurrentIndex ==
+                              index
+                          ? CupertinoIcons.stop_circle
+                          : CupertinoIcons.play_circle),
+                      color: Colors.blueGrey,
+                      onPressed: () {
+                        context
+                            .read<MainPlayerState>()
+                            .setCurrentIndex(index);
+                        if (player.readingPlaylist!.currentIndex == index) {
+                          if (realTimePlayingInfo.isPlaying) {
+                            player.stop();
+                          } else {
+                            context
+                                .read<MainPlayerState>()
+                                .playOnlyTrack(player);
+                          }
+                        } else {
+                          context
+                              .read<MainPlayerState>()
+                              .playOnlyTrack(player);
+                        }
+                      },
+                    );
+                  })
+                  : SizedBox(),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey,
