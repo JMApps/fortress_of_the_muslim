@@ -146,37 +146,54 @@ class ChapterContentItem extends StatelessWidget {
           Divider(
             indent: 16,
             endIndent: 16,
-            color: Colors.grey,
+            color: context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Дуа ${index + 1}/$length',
-                style: const TextStyle(fontSize: 15, color: Colors.blueGrey),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: context.watch<MainPlayerState>().getCurrentIndex == index
+                      ? Colors.red
+                      : Colors.blueGrey,
+                ),
               ),
-              item.nameAudio != null ? player.builderRealtimePlayingInfos(
-                builder: (context, realTimePlayingInfo) {
-                  return IconButton(
-                    icon: Icon(realTimePlayingInfo.isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index
-                        ? CupertinoIcons.stop_circle
-                        : CupertinoIcons.play_circle),
-                    color: Colors.blueGrey,
-                    onPressed: () {
-                      context.read<MainPlayerState>().setCurrentIndex(index);
-                      if (player.readingPlaylist!.currentIndex == index) {
-                        if (realTimePlayingInfo.isPlaying) {
-                          player.stop();
-                        } else {
-                          context.read<MainPlayerState>().playOnlyTrack(player);
-                        }
-                      } else {
-                        context.read<MainPlayerState>().playOnlyTrack(player);
-                      }
-                    },
-                  );
-                },
-              ) : SizedBox(),
+              item.nameAudio != null
+                  ? player.builderRealtimePlayingInfos(
+                      builder: (context, realTimePlayingInfo) {
+                      return IconButton(
+                        icon: Icon(realTimePlayingInfo.isPlaying &&
+                                context
+                                        .watch<MainPlayerState>()
+                                        .getCurrentIndex ==
+                                    index
+                            ? CupertinoIcons.stop_circle
+                            : CupertinoIcons.play_circle),
+                        color: Colors.blueGrey,
+                        onPressed: () {
+                          context
+                              .read<MainPlayerState>()
+                              .setCurrentIndex(index);
+                          if (player.readingPlaylist!.currentIndex == index) {
+                            if (realTimePlayingInfo.isPlaying) {
+                              player.stop();
+                            } else {
+                              context
+                                  .read<MainPlayerState>()
+                                  .playOnlyTrack(player);
+                            }
+                          } else {
+                            context
+                                .read<MainPlayerState>()
+                                .playOnlyTrack(player);
+                          }
+                        },
+                      );
+                    })
+                  : SizedBox(),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey,
@@ -205,7 +222,9 @@ class ChapterContentItem extends StatelessWidget {
                 icon: const Icon(CupertinoIcons.photo_on_rectangle),
                 color: Colors.blueGrey,
                 onPressed: () {
-                  context.read<TakeScreenshotState>().takeScreenshot(item, index, length, chapterTitle);
+                  context
+                      .read<TakeScreenshotState>()
+                      .takeScreenshot(item, index, length, chapterTitle);
                 },
               ),
               IconButton(
@@ -220,7 +239,7 @@ class ChapterContentItem extends StatelessWidget {
                       item.favoriteState == 0 ? 1 : 0, item.id!);
                   _showMessage(context, true);
                 },
-              ),
+              )
             ],
           ),
           SizedBox(height: 8),
