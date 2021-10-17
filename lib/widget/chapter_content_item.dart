@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -16,12 +18,14 @@ class ChapterContentItem extends StatelessWidget {
     required this.index,
     required this.length,
     required this.chapterTitle,
+    required this.player,
   }) : super(key: key);
 
   final SupplicationModelItem item;
   final int index;
   final int length;
   final String chapterTitle;
+  final AssetsAudioPlayer player;
 
   @override
   Widget build(BuildContext context) {
@@ -151,11 +155,28 @@ class ChapterContentItem extends StatelessWidget {
                 'Дуа ${index + 1}/$length',
                 style: const TextStyle(fontSize: 15, color: Colors.blueGrey),
               ),
-              IconButton(
-                icon: const Icon(CupertinoIcons.play_circle),
-                color: Colors.blueGrey,
-                onPressed: () {},
-              ),
+              item.nameAudio != null ? player.builderRealtimePlayingInfos(
+                builder: (context, realTimePlayingInfo) {
+                  return IconButton(
+                    icon: Icon(realTimePlayingInfo.isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index
+                        ? CupertinoIcons.stop_circle
+                        : CupertinoIcons.play_circle),
+                    color: Colors.blueGrey,
+                    onPressed: () {
+                      context.read<MainPlayerState>().setCurrentIndex(index);
+                      if (player.readingPlaylist!.currentIndex == index) {
+                        if (realTimePlayingInfo.isPlaying) {
+                          player.stop();
+                        } else {
+                          context.read<MainPlayerState>().playOnlyTrack(player);
+                        }
+                      } else {
+                        context.read<MainPlayerState>().playOnlyTrack(player);
+                      }
+                    },
+                  );
+                },
+              ) : SizedBox(),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey,
@@ -181,7 +202,7 @@ class ChapterContentItem extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: const Icon(CupertinoIcons.photo),
+                icon: const Icon(CupertinoIcons.photo_on_rectangle),
                 color: Colors.blueGrey,
                 onPressed: () {
                   context.read<TakeScreenshotState>().takeScreenshot(item, index, length, chapterTitle);

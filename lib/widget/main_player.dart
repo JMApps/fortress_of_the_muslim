@@ -1,8 +1,15 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
+import 'package:provider/provider.dart';
 
 class MainPlayer extends StatefulWidget {
-  const MainPlayer({Key? key}) : super(key: key);
+  const MainPlayer({Key? key, required this.player, required this.snapshot})
+      : super(key: key);
+
+  final AssetsAudioPlayer player;
+  final AsyncSnapshot snapshot;
 
   @override
   _MainPlayerState createState() => _MainPlayerState();
@@ -10,35 +17,129 @@ class MainPlayer extends StatefulWidget {
 
 class _MainPlayerState extends State<MainPlayer> {
   @override
+  void initState() {
+    setupPlayList(widget.snapshot);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.player.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
-        ),
-        color: Colors.blueGrey,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text('--:--', style: TextStyle(color: Colors.white),),
-              IconButton(icon: Icon(CupertinoIcons.backward_end, color: Colors.white,), onPressed: () {},),
-              IconButton(icon: Icon(CupertinoIcons.play), iconSize: 30, color: Colors.white, onPressed: () {},),
-              IconButton(icon: Icon(CupertinoIcons.forward_end, color: Colors.white,), onPressed: () {},),
-              IconButton(icon: Icon(CupertinoIcons.arrow_2_circlepath, color: Colors.white,), onPressed: () {},),
-              IconButton(icon: Icon(CupertinoIcons.arrow_turn_right_down, color: Colors.white,), onPressed: () {},),
-              Text('01:33', style: TextStyle(color: Colors.white),),
-            ],
+    return widget.player.builderRealtimePlayingInfos(
+        builder: (context, realTimePlayingInfo) {
+      widget.player.playlistAudioFinished.listen((event) {
+        context
+            .read<MainPlayerState>()
+            .setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
+        context
+            .read<MainPlayerState>()
+            .toIndex(widget.player.readingPlaylist!.currentIndex);
+      });
+      return Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
           ),
-          SizedBox(height: 12),
-        ],
-      ),
-    );
+          color: Colors.blueGrey,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  _getTimeString(realTimePlayingInfo.currentPosition.inSeconds),
+                  style: TextStyle(color: Colors.white),
+                ),
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.backward_end,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    widget.player.previous();
+                    context
+                        .read<MainPlayerState>()
+                        .toIndex(widget.player.readingPlaylist!.currentIndex);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(realTimePlayingInfo.isPlaying
+                      ? CupertinoIcons.pause
+                      : CupertinoIcons.play),
+                  iconSize: 30,
+                  color: Colors.white,
+                  onPressed: () {
+                    widget.player.playOrPause();
+                    context
+                        .read<MainPlayerState>()
+                        .toIndex(widget.player.readingPlaylist!.currentIndex);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.forward_end,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    widget.player.next(stopIfLast: true);
+                    context
+                        .read<MainPlayerState>()
+                        .toIndex(widget.player.readingPlaylist!.currentIndex);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.arrow_2_circlepath,
+                    color: context.watch<MainPlayerState>().getLoopTrackState
+                        ? Colors.blueGrey[900]
+                        : Colors.white,
+                  ),
+                  onPressed: () {
+                    context.read<MainPlayerState>().updateLoopTrackState();
+                    widget.player.setLoopMode(
+                        context.read<MainPlayerState>().getLoopTrackState
+                            ? LoopMode.single
+                            : LoopMode.none);
+                  },
+                ),
+                Text(
+                  _getTimeString(realTimePlayingInfo.duration.inSeconds),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+            SizedBox(height: 12),
+          ],
+        ),
+      );
+    });
+  }
+
+  String _getTimeString(int seconds) {
+    String minuteString =
+        '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
+    String secondString = '${seconds % 60 < 10 ? 0 : ''}${seconds % 60}';
+    return '$minuteString:$secondString';
+  }
+
+  setupPlayList(AsyncSnapshot snapshot) async {
+    var myList = List<Audio>.generate(snapshot.data!.length,
+        (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
+
+    widget.player.open(
+        Playlist(
+          audios: myList,
+        ),
+        autoStart: false,
+        loopMode: LoopMode.none);
   }
 }
