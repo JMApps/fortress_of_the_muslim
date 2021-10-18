@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class DayNightButtonCount extends StatefulWidget {
+  const DayNightButtonCount({Key? key, required this.buttonCount})
+      : super(key: key);
+
+  final int buttonCount;
+
+  @override
+  _DayNightButtonCountState createState() => _DayNightButtonCountState();
+}
+
+class _DayNightButtonCountState extends State<DayNightButtonCount> {
+  late int _countNumber;
+
+  @override
+  void initState() {
+    _countNumber = widget.buttonCount;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: InkWell(
+        onTap: () {
+          _countNumber = widget.buttonCount;
+        },
+        child: Material(
+          color: Colors.blueGrey,
+          elevation: 3,
+          child: InkWell(
+            splashColor: Colors.blueGrey[900], // Splash color
+            onTap: () {
+              if (_countNumber > 0) {
+                setState(() {
+                  _countNumber--;
+                });
+                HapticFeedback.lightImpact();
+              }
+            },
+            child: SizedBox(
+              width: 35,
+              height: 35,
+              child: Center(
+                child: Text(
+                  '$_countNumber',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
