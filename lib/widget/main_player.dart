@@ -18,7 +18,16 @@ class MainPlayer extends StatefulWidget {
 class _MainPlayerState extends State<MainPlayer> {
   @override
   void initState() {
-    setupPlayList(widget.snapshot);
+    widget.player.playlistAudioFinished.listen((event) {
+      context.read<MainPlayerState>().setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
+      context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
+    });
+    widget.player.playlistFinished.listen((playlistFinished) {
+      if (playlistFinished) {
+        context.read<MainPlayerState>().toIndex(0);
+        context.read<MainPlayerState>().setCurrentIndex(-1);
+      }
+    });
     super.initState();
   }
 
@@ -32,16 +41,7 @@ class _MainPlayerState extends State<MainPlayer> {
   Widget build(BuildContext context) {
     return widget.player.builderRealtimePlayingInfos(
         builder: (context, realTimePlayingInfo) {
-      widget.player.playlistAudioFinished.listen((event) {
-        context
-            .read<MainPlayerState>()
-            .setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
-        context
-            .read<MainPlayerState>()
-            .toIndex(widget.player.readingPlaylist!.currentIndex);
-      });
       return Container(
-        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(25),
@@ -79,9 +79,7 @@ class _MainPlayerState extends State<MainPlayer> {
                   color: Colors.white,
                   onPressed: () {
                     widget.player.playOrPause();
-                    context
-                        .read<MainPlayerState>()
-                        .toIndex(widget.player.readingPlaylist!.currentIndex);
+                    context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
                   },
                 ),
                 IconButton(
@@ -129,17 +127,5 @@ class _MainPlayerState extends State<MainPlayer> {
         '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
     String secondString = '${seconds % 60 < 10 ? 0 : ''}${seconds % 60}';
     return '$minuteString:$secondString';
-  }
-
-  setupPlayList(AsyncSnapshot snapshot) async {
-    var myList = List<Audio>.generate(snapshot.data!.length,
-        (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
-
-    widget.player.open(
-        Playlist(
-          audios: myList,
-        ),
-        autoStart: false,
-        loopMode: LoopMode.none);
   }
 }

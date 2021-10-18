@@ -30,6 +30,18 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
     super.dispose();
   }
 
+  setupPlayList(AsyncSnapshot snapshot) async {
+    var myList = List<Audio>.generate(snapshot.data!.length,
+            (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
+
+    _player.open(
+        Playlist(
+          audios: myList,
+        ),
+        autoStart: false,
+        loopMode: LoopMode.none);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -41,6 +53,7 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
         future: _databaseQuery.getDayNightSupplications(
             context.watch<DayNightChapterState>().getDayNight),
         builder: (context, snapshot) {
+          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -76,16 +89,14 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                           Consumer<DayNightChapterState>(
                             builder: (context, dayNightState, _) => IconButton(
                                 onPressed: () {
-                                  context.read<MainPlayerState>().toIndex(0);
                                   dayNightState.updateDayNightState();
+                                  setupPlayList(snapshot);
+                                  context.read<MainPlayerState>().toIndex(0);
+                                  context.read<MainPlayerState>().setCurrentIndex(-1);
                                 },
-                                icon: Icon(dayNightState.getDayNight
-                                    ? CupertinoIcons.sunrise
-                                    : CupertinoIcons.sunset),
+                                icon: Icon(dayNightState.getDayNight ? CupertinoIcons.sunrise : CupertinoIcons.sunset),
                                 iconSize: 30,
-                                color: dayNightState.getDayNight
-                                    ? Colors.yellow
-                                    : Colors.orange),
+                                color: dayNightState.getDayNight ? Colors.yellow : Colors.orange),
                           ),
                         ],
                       ),

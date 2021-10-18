@@ -34,6 +34,18 @@ class _ContentChapterState extends State<ContentChapter> {
     super.dispose();
   }
 
+  setupPlayList(AsyncSnapshot snapshot) async {
+    var myList = List<Audio>.generate(snapshot.data!.length,
+        (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
+
+    _player.open(
+        Playlist(
+          audios: myList,
+        ),
+        autoStart: false,
+        loopMode: LoopMode.none);
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments =
@@ -48,6 +60,7 @@ class _ContentChapterState extends State<ContentChapter> {
             ? _databaseQuery.getContentChapter(arguments!.chapterId!)
             : _databaseQuery.getContentChapter(arguments!.chapterId!),
         builder: (context, snapshot) {
+          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -115,7 +128,6 @@ class _ContentChapterState extends State<ContentChapter> {
                                 physics: ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  setupPlayList(snapshot);
                                   return ChapterContentItem(
                                     item: snapshot.data![index],
                                     index: index,
@@ -140,17 +152,5 @@ class _ContentChapterState extends State<ContentChapter> {
         },
       ),
     );
-  }
-
-  setupPlayList(AsyncSnapshot snapshot) async {
-    var myList = List<Audio>.generate(snapshot.data!.length,
-        (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
-
-    _player.open(
-        Playlist(
-          audios: myList,
-        ),
-        autoStart: false,
-        loopMode: LoopMode.none);
   }
 }
