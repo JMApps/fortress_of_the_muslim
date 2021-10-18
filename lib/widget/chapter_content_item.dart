@@ -10,6 +10,7 @@ import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:html/parser.dart';
 
 class ChapterContentItem extends StatelessWidget {
   const ChapterContentItem({
@@ -47,11 +48,7 @@ class ChapterContentItem extends StatelessWidget {
                         child: Text(
                           item.contentArabic!,
                           style: TextStyle(
-                            fontSize: context
-                                    .watch<AppSettingsState>()
-                                    .getTextSize
-                                    .toDouble() +
-                                3,
+                            fontSize: context.watch<AppSettingsState>().getTextSize.toDouble() + 3,
                             fontFamily: 'Hafs',
                             color: context
                                 .watch<AppSettingsState>()
@@ -96,10 +93,7 @@ class ChapterContentItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(context
-                            .watch<AppSettingsState>()
-                            .getTextSize
-                            .toDouble()),
+                        fontSize: FontSize(18),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
@@ -126,10 +120,8 @@ class ChapterContentItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(
-                      context.watch<AppSettingsState>().getTextSize.toDouble()),
-                  color:
-                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  color: context.watch<AppSettingsState>().getTranslationTextColor,
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
@@ -146,7 +138,9 @@ class ChapterContentItem extends StatelessWidget {
           Divider(
             indent: 16,
             endIndent: 16,
-            color: context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
+            color: context.watch<MainPlayerState>().getCurrentIndex == index
+                ? Colors.red
+                : Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -156,9 +150,10 @@ class ChapterContentItem extends StatelessWidget {
                 'Дуа ${index + 1}/$length',
                 style: TextStyle(
                   fontSize: 15,
-                  color: context.watch<MainPlayerState>().getCurrentIndex == index
-                      ? Colors.red
-                      : Colors.blueGrey,
+                  color:
+                      context.watch<MainPlayerState>().getCurrentIndex == index
+                          ? Colors.red
+                          : Colors.blueGrey,
                 ),
               ),
               item.nameAudio != null
@@ -199,6 +194,8 @@ class ChapterContentItem extends StatelessWidget {
                 color: Colors.blueGrey,
                 onPressed: () {
                   FlutterClipboard.copy(
+                    '${_parseHtmlString(chapterTitle)}\n\n'
+                    'Дуа ${index + 1}/$length\n\n'
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
                     '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                     '${item.contentForCopyAndShare}',
@@ -211,6 +208,8 @@ class ChapterContentItem extends StatelessWidget {
                 color: Colors.blueGrey,
                 onPressed: () {
                   Share.share(
+                    '${_parseHtmlString(chapterTitle)}\n\n'
+                    'Дуа ${index + 1}/$length\n\n'
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
                     '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                     '${item.contentForCopyAndShare}',
@@ -281,5 +280,11 @@ class ChapterContentItem extends StatelessWidget {
         duration: Duration(milliseconds: 500),
       ),
     );
+  }
+
+  String _parseHtmlString(String htmlString) {
+    final documentText = parse(htmlString);
+    final String parsedString = parse(documentText.body!.text).documentElement!.text;
+    return parsedString;
   }
 }
