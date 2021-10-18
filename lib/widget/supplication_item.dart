@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
+import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_supplication_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -35,8 +36,16 @@ class SupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentArabic!,
                       style: TextStyle(
-                          fontSize: 21, // Change with shared preferences
-                          fontFamily: 'Hafs'),
+                        fontSize: context
+                                .watch<AppSettingsState>()
+                                .getTextSize
+                                .toDouble() +
+                            3,
+                        fontFamily: 'Hafs',
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getArabicTextColor,
+                      ),
                       textDirection: TextDirection.rtl,
                     ),
                   ),
@@ -50,7 +59,13 @@ class SupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentTranscription!,
                       style: TextStyle(
-                        fontSize: 18, // Change with shared preferences
+                        fontSize: context
+                            .watch<AppSettingsState>()
+                            .getTextSize
+                            .toDouble(),
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getTranscriptionTextColor,
                       ), //
                     ),
                   ),
@@ -93,7 +108,10 @@ class SupplicationItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: const FontSize(18),
+                  fontSize: FontSize(
+                      context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  color:
+                      context.watch<AppSettingsState>().getTranslationTextColor,
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
@@ -165,7 +183,11 @@ class SupplicationItem extends StatelessWidget {
   _showMessage(BuildContext context, bool isBookmark) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: isBookmark ? item.favoriteState == 0 ? Colors.blue : Colors.red : Colors.red,
+        backgroundColor: isBookmark
+            ? item.favoriteState == 0
+                ? Colors.blue
+                : Colors.red
+            : Colors.red,
         content: isBookmark
             ? item.favoriteState == 0
                 ? const Text(
