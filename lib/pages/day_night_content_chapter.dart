@@ -51,6 +51,7 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
       child: FutureBuilder<List>(
         future: _databaseQuery.getDayNightSupplications(context.watch<DayNightChapterState>().getDayNight),
         builder: (context, snapshot) {
+          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -114,7 +115,6 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  setupPlayList(snapshot);
                                   return DayNightChapterContentItem(
                                     item: snapshot.data![index],
                                     index: index,

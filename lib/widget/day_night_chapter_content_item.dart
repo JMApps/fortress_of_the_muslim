@@ -142,28 +142,27 @@ class DayNightChapterContentItem extends StatelessWidget {
               ),
               item.nameAudio != null
                   ? player.builderRealtimePlayingInfos(
-                builder: (context, realTimePlayingInfo) {
-                  return IconButton(
-                    icon: Icon(realTimePlayingInfo.isPlaying &&
-                        context.watch<MainPlayerState>().getCurrentIndex == index
-                        ? CupertinoIcons.stop_circle
-                        : CupertinoIcons.play_circle),
-                    color: Colors.blueGrey,
-                    onPressed: () {
-                      context.read<MainPlayerState>().setCurrentIndex(index);
-                      if (player.readingPlaylist!.currentIndex == index) {
-                        if (realTimePlayingInfo.isPlaying) {
-                          player.stop();
+                  builder: (context, realTimePlayingInfo) {
+                    return IconButton(
+                      icon: Icon(realTimePlayingInfo.isPlaying &&
+                          context.watch<MainPlayerState>().getCurrentIndex == index
+                          ? CupertinoIcons.stop_circle
+                          : CupertinoIcons.play_circle),
+                      color: Colors.blueGrey,
+                      onPressed: () {
+                        context.read<MainPlayerState>().setCurrentIndex(index);
+                        if (player.readingPlaylist!.currentIndex == index) {
+                          if (realTimePlayingInfo.isPlaying) {
+                            player.stop();
+                          } else {
+                            context.read<MainPlayerState>().playOnlyTrack(player);
+                          }
                         } else {
                           context.read<MainPlayerState>().playOnlyTrack(player);
                         }
-                      } else {
-                        context.read<MainPlayerState>().playOnlyTrack(player);
-                      }
-                    },
-                  );
-                },
-              )
+                      },
+                    );
+                  })
                   : const SizedBox(),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
