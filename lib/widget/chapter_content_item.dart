@@ -168,7 +168,7 @@ class ChapterContentItem extends StatelessWidget {
                         },
                       );
                     })
-                  : SizedBox(),
+                  : const SizedBox(),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey,

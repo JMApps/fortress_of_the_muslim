@@ -51,14 +51,14 @@ class _ContentChapterState extends State<ContentChapter> {
     final arguments = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainPlayerState>(
-            create: (_) => MainPlayerState()),
+        ChangeNotifierProvider<MainPlayerState>(create: (_) => MainPlayerState()),
       ],
       child: FutureBuilder<List>(
         future: context.watch<FavoriteSupplicationState>().getUpdateList
             ? _databaseQuery.getContentChapter(arguments!.chapterId!)
             : _databaseQuery.getContentChapter(arguments!.chapterId!),
         builder: (context, snapshot) {
+          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -112,13 +112,10 @@ class _ContentChapterState extends State<ContentChapter> {
                           Expanded(
                             child: Scrollbar(
                               child: ScrollablePositionedList.builder(
-                                itemScrollController: context
-                                    .read<MainPlayerState>()
-                                    .getItemScrollController,
+                                itemScrollController: context.read<MainPlayerState>().getItemScrollController,
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  setupPlayList(snapshot);
                                   return ChapterContentItem(
                                     item: snapshot.data![index],
                                     index: index,
@@ -136,8 +133,8 @@ class _ContentChapterState extends State<ContentChapter> {
                     )
                   : Center(
                       child: Platform.isAndroid
-                          ? CircularProgressIndicator()
-                          : CupertinoActivityIndicator(),
+                          ? const CircularProgressIndicator()
+                          : const CupertinoActivityIndicator(),
                     );
         },
       ),
