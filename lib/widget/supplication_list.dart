@@ -25,7 +25,7 @@ class SupplicationList extends StatelessWidget {
       builder: (context, snapshot) {
         return snapshot.hasError
             ? const Center(
-                child: Text(
+                child: const Text(
                   'По вашему запросу ничего не найдено',
                   style: TextStyle(
                     fontSize: 18,
@@ -34,9 +34,9 @@ class SupplicationList extends StatelessWidget {
               )
             : snapshot.hasData
                 ? ScrollablePositionedList.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemScrollController: context.watch<MainSupplicationState>().getItemScrollController,
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return SupplicationItem(
@@ -45,8 +45,8 @@ class SupplicationList extends StatelessWidget {
                   )
                 : Center(
                     child: Platform.isAndroid
-                        ? CircularProgressIndicator()
-                        : CupertinoActivityIndicator(),
+                        ? const CircularProgressIndicator()
+                        : const CupertinoActivityIndicator(),
                   );
       },
     );

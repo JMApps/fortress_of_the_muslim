@@ -32,7 +32,7 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
 
   setupPlayList(AsyncSnapshot snapshot) async {
     var myList = List<Audio>.generate(snapshot.data!.length,
-            (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
+        (i) => Audio('assets/audios/${snapshot.data[i].nameAudio}.mp3'));
 
     _player.open(
         Playlist(
@@ -46,14 +46,11 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainPlayerState>(
-            create: (_) => MainPlayerState()),
+        ChangeNotifierProvider<MainPlayerState>(create: (_) => MainPlayerState()),
       ],
       child: FutureBuilder<List>(
-        future: _databaseQuery.getDayNightSupplications(
-            context.watch<DayNightChapterState>().getDayNight),
+        future: _databaseQuery.getDayNightSupplications(context.watch<DayNightChapterState>().getDayNight),
         builder: (context, snapshot) {
-          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -64,7 +61,7 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                       appBar: AppBar(
                         centerTitle: true,
                         elevation: 0,
-                        title: Text(
+                        title: const Text(
                           'Глава 27',
                           style: TextStyle(
                             color: Colors.white,
@@ -74,10 +71,8 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                         actions: [
                           IconButton(
                             onPressed: () {
-                              showCupertinoModalPopup(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AppSettings();
+                              showCupertinoModalPopup(context: context, builder: (BuildContext context) {
+                                  return const AppSettings();
                                 },
                               );
                             },
@@ -94,31 +89,32 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                                   context.read<MainPlayerState>().toIndex(0);
                                   context.read<MainPlayerState>().setCurrentIndex(-1);
                                 },
-                                icon: Icon(dayNightState.getDayNight ? CupertinoIcons.sunrise : CupertinoIcons.sunset),
+                                icon: Icon(dayNightState.getDayNight
+                                    ? CupertinoIcons.sunrise
+                                    : CupertinoIcons.sunset),
                                 iconSize: 30,
-                                color: dayNightState.getDayNight ? Colors.yellow : Colors.orange),
+                                color: dayNightState.getDayNight
+                                    ? Colors.yellow
+                                    : Colors.orange),
                           ),
                         ],
                       ),
                       body: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 8, top: 8, right: 8),
+                            padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                             child: ContentTitle(
-                              contentTitle:
-                                  'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
+                              contentTitle: 'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
                             ),
                           ),
                           Expanded(
                             child: Scrollbar(
                               child: ScrollablePositionedList.builder(
-                                itemScrollController: context
-                                    .read<MainPlayerState>()
-                                    .getItemScrollController,
-                                physics: ClampingScrollPhysics(),
+                                itemScrollController: context.read<MainPlayerState>().getItemScrollController,
+                                physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
+                                  setupPlayList(snapshot);
                                   return DayNightChapterContentItem(
                                     item: snapshot.data![index],
                                     index: index,
@@ -131,13 +127,12 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                           ),
                         ],
                       ),
-                      bottomNavigationBar:
-                          MainPlayer(player: _player, snapshot: snapshot),
+                      bottomNavigationBar: MainPlayer(player: _player, snapshot: snapshot),
                     )
                   : Center(
                       child: Platform.isAndroid
-                          ? CircularProgressIndicator()
-                          : CupertinoActivityIndicator(),
+                          ? const CircularProgressIndicator()
+                          : const CupertinoActivityIndicator(),
                     );
         },
       ),

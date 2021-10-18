@@ -3,5 +3,6 @@ class OtherBookContentArguments {
   String? otherContentTitle;
   String? otherContent;
 
-  OtherBookContentArguments(this.otherContentId, this.otherContentTitle, this.otherContent);
+  OtherBookContentArguments(
+      this.otherContentId, this.otherContentTitle, this.otherContent);
 }

@@ -48,11 +48,11 @@ class OtherContent extends StatelessWidget {
           data: content,
           style: {
             '#': Style(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 margin: EdgeInsets.zero,
                 textAlign: TextAlign.justify,
                 color: Colors.grey[800],
-                fontSize: FontSize(20),
+                fontSize: const FontSize(20),
                 fontFamily: 'Gilroy'),
             'a': Style(
               fontSize: const FontSize(16),

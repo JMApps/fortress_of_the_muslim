@@ -16,8 +16,7 @@ class ListSupplications extends StatelessWidget {
     FocusScopeNode _currentFocus = FocusScope.of(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainSupplicationState>(
-            create: (_) => MainSupplicationState()),
+        ChangeNotifierProvider<MainSupplicationState>(create: (_) => MainSupplicationState()),
       ],
       child: InkWell(
         child: Scaffold(

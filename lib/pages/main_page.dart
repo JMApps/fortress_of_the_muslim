@@ -13,8 +13,8 @@ class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
 
   final List<Widget> _changeWidget = [
-    MainChapters(),
-    FavoriteChapters(),
+    const MainChapters(),
+    const FavoriteChapters(),
     ListSupplications(),
     FavoriteSupplications(),
   ];
@@ -30,23 +30,23 @@ class MainPage extends StatelessWidget {
         animationDuration: Duration(milliseconds: 900),
         items: [
           FlipBarItem(
-              icon: Icon(CupertinoIcons.square_list, color: Colors.white),
-              text: Text('Главы', style: TextStyle(fontSize: 16, color: Colors.white)),
+              icon: const Icon(CupertinoIcons.square_list, color: Colors.white),
+              text: const Text('Главы', style: TextStyle(fontSize: 16, color: Colors.white)),
               frontColor: Colors.teal,
               backColor: Colors.teal),
           FlipBarItem(
-              icon: Icon(CupertinoIcons.bookmark, color: Colors.white),
-              text: Text('Избранное', style: TextStyle(fontSize: 16, color: Colors.white)),
+              icon: const Icon(CupertinoIcons.bookmark, color: Colors.white),
+              text: const Text('Избранное', style: TextStyle(fontSize: 16, color: Colors.white)),
               frontColor: Colors.orange,
               backColor: Colors.orange),
           FlipBarItem(
-              icon: Icon(CupertinoIcons.square_list_fill, color: Colors.white),
-              text: Text('Дуа', style: TextStyle(fontSize: 16, color: Colors.white)),
+              icon: const Icon(CupertinoIcons.square_list_fill, color: Colors.white),
+              text: const Text('Дуа', style: TextStyle(fontSize: 16, color: Colors.white)),
               frontColor: Colors.red,
               backColor: Colors.red),
           FlipBarItem(
-              icon: Icon(CupertinoIcons.bookmark_fill, color: Colors.white),
-              text: Text('Избранное', style: TextStyle(fontSize: 16, color: Colors.white)),
+              icon: const Icon(CupertinoIcons.bookmark_fill, color: Colors.white),
+              text: const Text('Избранное', style: TextStyle(fontSize: 16, color: Colors.white)),
               frontColor: Colors.blue,
               backColor: Colors.blue)
         ],

@@ -10,7 +10,7 @@ class ContentTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.blueGrey[700],
         borderRadius: const BorderRadius.all(
@@ -27,13 +27,13 @@ class ContentTitle extends StatelessWidget {
                 data: url,
                 style: {
                   '#': Style(
-                    fontSize: FontSize(18),
+                    fontSize: const FontSize(18),
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.zero,
                   ),
                   'small': Style(
                     color: Colors.grey,
-                    fontSize: FontSize(10),
+                    fontSize: const FontSize(10),
                   ),
                 },
               ),
@@ -41,7 +41,7 @@ class ContentTitle extends StatelessWidget {
                 CupertinoButton(
                   child: const Text(
                     'Закрыть',
-                    style: TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();

@@ -19,7 +19,8 @@ class OtherContentItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context, rootNavigator: true).pushNamed(
           '/other_book_content',
-          arguments: OtherBookContentArguments(item.id, item.title, item.content),
+          arguments:
+              OtherBookContentArguments(item.id, item.title, item.content),
         );
       },
     );

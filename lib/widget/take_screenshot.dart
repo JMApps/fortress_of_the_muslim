@@ -43,14 +43,14 @@ class TakeScreenShot extends StatelessWidget {
                     children: [
                       Text(
                         _parseHtmlString(chapterTitle),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.w700,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       item.contentArabic != null
                           ? Align(
                               alignment: Alignment.centerRight,
@@ -64,19 +64,19 @@ class TakeScreenShot extends StatelessWidget {
                                 textDirection: TextDirection.rtl,
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       item.contentArabic != null
-                          ? SizedBox(height: 16)
-                          : SizedBox(),
+                          ? const SizedBox(height: 16)
+                          : const SizedBox(),
                       Text(
                         item.contentForCopyAndShare!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontFamily: 'Gilroy',
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
@@ -87,7 +87,7 @@ class TakeScreenShot extends StatelessWidget {
                           SizedBox(width: 8),
                           Text(
                             '${index + 1}/$supplicationLength',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontFamily: 'Gilroy',
                             ),
@@ -103,14 +103,14 @@ class TakeScreenShot extends StatelessWidget {
                             width: 70,
                             height: 40,
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Image.asset(
                             'assets/images/splash_launch.png',
                             width: 40,
                             height: 40,
                           ),
-                          SizedBox(width: 16),
-                          Text(
+                          const SizedBox(width: 16),
+                          const Text(
                             'Крепость верующего\nКрепость мусульманина',
                             style: TextStyle(
                               fontSize: 18,

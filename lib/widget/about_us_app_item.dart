@@ -20,20 +20,20 @@ class AboutUsAppItem extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
       ),
       subtitle: Text(
         subTitle,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
       ),
       trailing: IconButton(
-        icon: Icon(
+        icon: const Icon(
           CupertinoIcons.share,
           color: Colors.red,
         ),

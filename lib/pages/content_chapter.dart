@@ -48,8 +48,7 @@ class _ContentChapterState extends State<ContentChapter> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
+    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<MainPlayerState>(
@@ -60,7 +59,6 @@ class _ContentChapterState extends State<ContentChapter> {
             ? _databaseQuery.getContentChapter(arguments!.chapterId!)
             : _databaseQuery.getContentChapter(arguments!.chapterId!),
         builder: (context, snapshot) {
-          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -73,7 +71,7 @@ class _ContentChapterState extends State<ContentChapter> {
                         elevation: 0,
                         title: Text(
                           'Глава ${arguments.chapterId}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
@@ -84,7 +82,7 @@ class _ContentChapterState extends State<ContentChapter> {
                               showCupertinoModalPopup(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AppSettings();
+                                  return const AppSettings();
                                 },
                               );
                             },
@@ -95,29 +93,21 @@ class _ContentChapterState extends State<ContentChapter> {
                           ),
                           Switch(
                             activeColor: Colors.orange[700],
-                            value: context
-                                .watch<FloatingCounterState>()
-                                .getIsCountButtonShow,
+                            value: context.watch<FloatingCounterState>().getIsCountButtonShow,
                             onChanged: (value) {
-                              context
-                                  .read<FloatingCounterState>()
-                                  .updateButtonCountShow(value);
+                              context.read<FloatingCounterState>().updateButtonCountShow(value);
                             },
                           ),
                         ],
                       ),
-                      floatingActionButton: context
-                              .watch<FloatingCounterState>()
-                              .getIsCountButtonShow
+                      floatingActionButton: context.watch<FloatingCounterState>().getIsCountButtonShow
                           ? FloatingCounterButton()
-                          : SizedBox(),
+                          : const SizedBox(),
                       body: Column(
                         children: [
                           Container(
-                            padding: const EdgeInsets.only(
-                                left: 8, top: 8, right: 8),
-                            child: ContentTitle(
-                                contentTitle: arguments.chapterTitle!),
+                            padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+                            child: ContentTitle(contentTitle: arguments.chapterTitle!),
                           ),
                           Expanded(
                             child: Scrollbar(
@@ -125,9 +115,10 @@ class _ContentChapterState extends State<ContentChapter> {
                                 itemScrollController: context
                                     .read<MainPlayerState>()
                                     .getItemScrollController,
-                                physics: ClampingScrollPhysics(),
+                                physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
+                                  setupPlayList(snapshot);
                                   return ChapterContentItem(
                                     item: snapshot.data![index],
                                     index: index,
@@ -141,8 +132,7 @@ class _ContentChapterState extends State<ContentChapter> {
                           ),
                         ],
                       ),
-                      bottomNavigationBar:
-                          MainPlayer(player: _player, snapshot: snapshot),
+                      bottomNavigationBar: MainPlayer(player: _player, snapshot: snapshot),
                     )
                   : Center(
                       child: Platform.isAndroid

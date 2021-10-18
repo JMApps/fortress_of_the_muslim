@@ -1,5 +1,5 @@
-import 'package:fortress_of_the_muslim/model/other_model_item.dart';
 import 'package:fortress_of_the_muslim/model/chapter_model_item.dart';
+import 'package:fortress_of_the_muslim/model/other_model_item.dart';
 import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
 

@@ -38,15 +38,9 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentArabic!,
                       style: TextStyle(
-                        fontSize: context
-                                .watch<AppSettingsState>()
-                                .getTextSize
-                                .toDouble() +
-                            3,
+                        fontSize: context.watch<AppSettingsState>().getTextSize.toDouble() + 3,
                         fontFamily: 'Hafs',
-                        color: context
-                            .watch<AppSettingsState>()
-                            .getArabicTextColor,
+                        color: context.watch<AppSettingsState>().getArabicTextColor,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -61,13 +55,8 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentTranscription!,
                       style: TextStyle(
-                        fontSize: context
-                            .watch<AppSettingsState>()
-                            .getTextSize
-                            .toDouble(),
-                        color: context
-                            .watch<AppSettingsState>()
-                            .getTranscriptionTextColor,
+                        fontSize: context.watch<AppSettingsState>().getTextSize.toDouble(),
+                        color: context.watch<AppSettingsState>().getTranscriptionTextColor,
                       ), //
                     ),
                   ),
@@ -83,13 +72,13 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(18),
+                        fontSize: const FontSize(18),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
                       'small': Style(
                         color: Colors.grey,
-                        fontSize: FontSize(10),
+                        fontSize: const FontSize(10),
                       ),
                     },
                   ),
@@ -110,10 +99,8 @@ class FavoriteSupplicationItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(
-                      context.watch<AppSettingsState>().getTextSize.toDouble()),
-                  color:
-                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  color: context.watch<AppSettingsState>().getTranslationTextColor,
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
@@ -126,7 +113,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
               ),
             },
           ),
-          Divider(
+          const Divider(
             indent: 16,
             endIndent: 16,
             color: Colors.grey,
@@ -134,8 +121,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                'Дуа ${index + 1}/$length',
+              Text('Дуа ${index + 1}/$length',
                 style: const TextStyle(fontSize: 16, color: Colors.blue),
               ),
               IconButton(
@@ -200,7 +186,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 'Скопировано',
                 style: TextStyle(fontSize: 18),
               ),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }

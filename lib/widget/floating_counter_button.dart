@@ -20,7 +20,7 @@ class FloatingCounterButton extends StatelessWidget {
           percent: context.watch<FloatingCounterState>().getCount / 100,
           center: Text(
             context.watch<FloatingCounterState>().getCount.toString(),
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           circularStrokeCap: CircularStrokeCap.round,
           progressColor: Colors.blueGrey[900],

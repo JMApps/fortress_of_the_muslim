@@ -40,7 +40,7 @@ class TakeDayNightScreenShot extends StatelessWidget {
                     children: [
                       Text(
                         'Слова поминания Аллаха, которые желательно произносить утром и вечером',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.w700,
@@ -61,30 +61,30 @@ class TakeDayNightScreenShot extends StatelessWidget {
                                 textDirection: TextDirection.rtl,
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       item.contentArabic != null
-                          ? SizedBox(height: 16)
-                          : SizedBox(),
+                          ? const SizedBox(height: 16)
+                          : const SizedBox(),
                       Text(
                         item.contentForCopyAndShare!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontFamily: 'Gilroy',
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         children: [
                           Expanded(
-                              child: Divider(
+                              child: const Divider(
                                   indent: 16,
                                   endIndent: 16,
                                   color: Colors.black)),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             '${index + 1}/$supplicationLength',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontFamily: 'Gilroy',
                             ),
@@ -100,16 +100,16 @@ class TakeDayNightScreenShot extends StatelessWidget {
                             width: 70,
                             height: 40,
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Image.asset(
                             'assets/images/splash_launch.png',
                             width: 40,
                             height: 40,
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Text(
                             'Крепость верующего\nКрепость мусульманина',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontFamily: 'Gilroy',
                             ),

@@ -11,9 +11,9 @@ class AboutUsAppList extends StatelessWidget {
     return Platform.isIOS
         ? ListView(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(vertical: 8),
-            children: [
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            children: const [
               AboutUsAppItem(
                   title: 'Крепость мусульманина',
                   subTitle: 'Из слов поминания встречающихся в Коране и Сунне',
@@ -86,9 +86,9 @@ class AboutUsAppList extends StatelessWidget {
           )
         : ListView(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(vertical: 8),
-            children: [
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            children: const [
               AboutUsAppItem(
                   title: 'Крепость верующего',
                   subTitle: 'Из слов поминания встречающихся в Коране и Сунне',

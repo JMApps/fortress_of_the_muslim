@@ -23,7 +23,9 @@ class FavoriteSupplicationList extends StatelessWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return FavoriteSupplicationItem(
-                      item: snapshot.data![index], index: index, length: snapshot.data!.length);
+                      item: snapshot.data![index],
+                      index: index,
+                      length: snapshot.data!.length);
                 },
               )
             : Center(
@@ -38,7 +40,7 @@ class FavoriteSupplicationList extends StatelessWidget {
                         size: 150,
                         color: Colors.blue[100],
                       ),
-                      Text(
+                      const Text(
                         'Избранных дуа нет',
                         style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),

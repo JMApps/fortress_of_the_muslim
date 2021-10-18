@@ -22,15 +22,13 @@ class FavoriteChapterItem extends StatelessWidget {
             : CupertinoIcons.bookmark_solid),
         color: Colors.orange,
         onPressed: () {
-          context
-              .read<MainChapterState>()
-              .updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
+          context.read<MainChapterState>().updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
           _showSnackBar(context);
         },
       ),
       title: Text(
         'Глава ${item.id}',
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.orange,
           fontSize: 18,
           fontWeight: FontWeight.w700,
@@ -75,7 +73,7 @@ class FavoriteChapterItem extends StatelessWidget {
           '#': Style(
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
-            fontSize: FontSize(19),
+            fontSize: const FontSize(19),
           ),
         },
       ),

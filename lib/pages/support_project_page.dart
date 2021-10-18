@@ -8,7 +8,7 @@ class SupportProjectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(
+      icon: const Icon(
         CupertinoIcons.money_dollar_circle,
         color: Colors.white,
       ),
@@ -16,7 +16,7 @@ class SupportProjectPage extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(
+            title: const Text(
               'Поддержать проект!',
               style: TextStyle(color: Colors.teal),
             ),
@@ -25,7 +25,7 @@ class SupportProjectPage extends StatelessWidget {
               children: [
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: Icon(
+                  leading: const Icon(
                     CupertinoIcons.bitcoin_circle,
                     color: Colors.teal,
                   ),
@@ -34,14 +34,14 @@ class SupportProjectPage extends StatelessWidget {
                     style: _itemTitleTextStyle,
                   ),
                   subtitle: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: SelectableText(
                       '13B9fMAxXFCSkLnkHFNrA2D2xAZtyMaWxy',
                       style: _itemSubtitleTextStyle,
                     ),
                   ),
                   trailing: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.doc_on_doc,
                       color: Colors.red,
                     ),
@@ -54,7 +54,7 @@ class SupportProjectPage extends StatelessWidget {
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: Icon(
+                  leading: const Icon(
                     CupertinoIcons.money_dollar_circle,
                     color: Colors.teal,
                   ),
@@ -63,14 +63,14 @@ class SupportProjectPage extends StatelessWidget {
                     style: _itemTitleTextStyle,
                   ),
                   subtitle: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: SelectableText(
                       '87zyaJCihgg2r8mSbXKE1uj4iqPp8hqQkWMdr2SbBVmGchjVNACEDDtEV1tB79cK1q2bC8h8Sy3BMVQLfWCSfyBjLjqkJB7',
                       style: _itemSubtitleTextStyle,
                     ),
                   ),
                   trailing: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.doc_on_doc,
                       color: Colors.red,
                     ),
@@ -89,9 +89,8 @@ class SupportProjectPage extends StatelessWidget {
     );
   }
 
-  final _itemTitleTextStyle = TextStyle(fontSize: 20, fontFamily: 'Gilroy');
-  final _itemSubtitleTextStyle =
-      TextStyle(fontSize: 18, fontFamily: 'Gilroy', color: Colors.grey[600]);
+  final _itemTitleTextStyle = const TextStyle(fontSize: 20, fontFamily: 'Gilroy');
+  final _itemSubtitleTextStyle = TextStyle(fontSize: 18, fontFamily: 'Gilroy', color: Colors.grey[600]);
 
   _snackMessage(BuildContext context, String clipMessage) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -99,7 +98,7 @@ class SupportProjectPage extends StatelessWidget {
         backgroundColor: Colors.red,
         content: Text(
           clipMessage,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
           ),

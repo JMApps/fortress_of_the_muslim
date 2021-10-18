@@ -17,7 +17,9 @@ class MainChapterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: IconButton(
-        icon: Icon(item.favoriteState == 0 ? CupertinoIcons.bookmark : CupertinoIcons.bookmark_solid),
+        icon: Icon(item.favoriteState == 0
+            ? CupertinoIcons.bookmark
+            : CupertinoIcons.bookmark_solid),
         color: Colors.teal,
         onPressed: () {
           context.read<MainChapterState>().updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
@@ -44,11 +46,11 @@ class MainChapterItem extends StatelessWidget {
                   '#': Style(
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.zero,
-                    fontSize: FontSize(18),
+                    fontSize: const FontSize(18),
                   ),
                   'small': Style(
                     color: Colors.grey,
-                    fontSize: FontSize(10),
+                    fontSize: const FontSize(10),
                   ),
                 },
               ),
@@ -71,7 +73,7 @@ class MainChapterItem extends StatelessWidget {
           '#': Style(
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
-            fontSize: FontSize(19),
+            fontSize: const FontSize(19),
           ),
           'a': Style(
             fontSize: const FontSize(16),

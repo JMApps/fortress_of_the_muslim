@@ -10,7 +10,7 @@ class OtherBookContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as OtherBookContentArguments?;
     return Scaffold(
-      backgroundColor: Color(0xFFE8F5E9),
+      backgroundColor: const Color(0xFFE8F5E9),
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('${args!.otherContentTitle}'),

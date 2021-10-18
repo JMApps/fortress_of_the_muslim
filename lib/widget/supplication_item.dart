@@ -36,15 +36,9 @@ class SupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentArabic!,
                       style: TextStyle(
-                        fontSize: context
-                                .watch<AppSettingsState>()
-                                .getTextSize
-                                .toDouble() +
-                            3,
+                        fontSize: context.watch<AppSettingsState>().getTextSize.toDouble() + 3,
                         fontFamily: 'Hafs',
-                        color: context
-                            .watch<AppSettingsState>()
-                            .getArabicTextColor,
+                        color: context.watch<AppSettingsState>().getArabicTextColor,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -59,18 +53,13 @@ class SupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentTranscription!,
                       style: TextStyle(
-                        fontSize: context
-                            .watch<AppSettingsState>()
-                            .getTextSize
-                            .toDouble(),
-                        color: context
-                            .watch<AppSettingsState>()
-                            .getTranscriptionTextColor,
+                        fontSize: context.watch<AppSettingsState>().getTextSize.toDouble(),
+                        color: context.watch<AppSettingsState>().getTranscriptionTextColor,
                       ), //
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           Html(
             onLinkTap: (String? url, RenderContext rendContext,
                 Map<String, String> attributes, element) {
@@ -81,13 +70,13 @@ class SupplicationItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(18),
+                        fontSize: const FontSize(18),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
                       'small': Style(
                         color: Colors.grey,
-                        fontSize: FontSize(10),
+                        fontSize: const FontSize(10),
                       ),
                     },
                   ),
@@ -108,10 +97,8 @@ class SupplicationItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(
-                      context.watch<AppSettingsState>().getTextSize.toDouble()),
-                  color:
-                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  color: context.watch<AppSettingsState>().getTranslationTextColor,
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
@@ -124,7 +111,7 @@ class SupplicationItem extends StatelessWidget {
               ),
             },
           ),
-          Divider(
+          const Divider(
             indent: 16,
             endIndent: 16,
             color: Colors.grey,
@@ -174,7 +161,7 @@ class SupplicationItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
@@ -183,13 +170,11 @@ class SupplicationItem extends StatelessWidget {
   _showMessage(BuildContext context, bool isBookmark) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: isBookmark
-            ? item.favoriteState == 0
+        backgroundColor: isBookmark ? item.favoriteState == 0
                 ? Colors.blue
                 : Colors.red
             : Colors.red,
-        content: isBookmark
-            ? item.favoriteState == 0
+        content: isBookmark ? item.favoriteState == 0
                 ? const Text(
                     'Добавлено',
                     style: TextStyle(fontSize: 18),
@@ -202,7 +187,7 @@ class SupplicationItem extends StatelessWidget {
                 'Скопировано',
                 style: TextStyle(fontSize: 18),
               ),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }

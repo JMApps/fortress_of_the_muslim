@@ -34,7 +34,7 @@ class AboutUs extends StatelessWidget {
                       'По всем вопросам, предложениям и скритикой можете писать нам на почту:\n\n'
                       'jmappsmuslim@gmail.com или в telegram: www.t.me/dev_muslim\n\n',
                   style: const TextStyle(fontSize: 20),
-                  linkStyle: TextStyle(color: Colors.red),
+                  linkStyle: const TextStyle(color: Colors.red),
                   onOpen: (link) async {
                     if (await canLaunch(link.url)) {
                       await launch(link.url);
@@ -48,13 +48,14 @@ class AboutUs extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   'Делитесь нашими ${Platform.isIOS ? 'android-приложениями' : 'iOS-приложениями'} с родными и близкими, которые используют эту платформу.',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 16),
-              Divider(indent: 16, endIndent: 16),
+              const SizedBox(height: 16),
+              const Divider(indent: 16, endIndent: 16),
               Scrollbar(
-                child: AboutUsAppList(),
+                child: const AboutUsAppList(),
               ),
             ],
           ),

@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
+import 'package:fortress_of_the_muslim/widget/day_night_button_count.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -36,53 +38,40 @@ class DayNightChapterContentItem extends StatelessWidget {
         children: [
           context.watch<AppSettingsState>().getIsArabicTextShow
               ? item.contentArabic != null
-                  ? Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16, top: 16, right: 16),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          item.contentArabic!,
-                          style: TextStyle(
-                            fontSize: context
-                                    .watch<AppSettingsState>()
-                                    .getTextSize
-                                    .toDouble() +
-                                3,
-                            fontFamily: 'Hafs',
-                            color: context
-                                .watch<AppSettingsState>()
-                                .getArabicTextColor,
-                          ),
-                          textDirection: TextDirection.rtl,
-                        ),
-                      ),
-                    )
-                  : SizedBox()
-              : SizedBox(),
+              ? Padding(
+            padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                item.contentArabic!,
+                style: TextStyle(
+                  fontSize: context.watch<AppSettingsState>().getTextSize.toDouble() + 3,
+                  fontFamily: 'Hafs',
+                  color: context.watch<AppSettingsState>().getArabicTextColor,
+                ),
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          )
+              : const SizedBox()
+              : const SizedBox(),
           context.watch<AppSettingsState>().getIsTranscriptionTextShow
               ? item.contentTranscription != null
-                  ? Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16, top: 8, right: 16),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          item.contentTranscription!,
-                          style: TextStyle(
-                            fontSize: context
-                                .watch<AppSettingsState>()
-                                .getTextSize
-                                .toDouble(),
-                            color: context
-                                .watch<AppSettingsState>()
-                                .getTranscriptionTextColor,
-                          ), //
-                        ),
-                      ),
-                    )
-                  : SizedBox()
-              : SizedBox(),
+              ? Padding(
+            padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                item.contentTranscription!,
+                style: TextStyle(
+                  fontSize: context.watch<AppSettingsState>().getTextSize.toDouble(),
+                  color: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                ), //
+              ),
+            ),
+          )
+              : const SizedBox()
+              : const SizedBox(),
           Html(
             onLinkTap: (String? url, RenderContext rendContext,
                 Map<String, String> attributes, element) {
@@ -93,16 +82,13 @@ class DayNightChapterContentItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(context
-                            .watch<AppSettingsState>()
-                            .getTextSize
-                            .toDouble()),
+                        fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
                       'small': Style(
                         color: Colors.grey,
-                        fontSize: FontSize(10),
+                        fontSize: const FontSize(10),
                       ),
                     },
                   ),
@@ -110,7 +96,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                     CupertinoButton(
                       child: const Text(
                         'Закрыть',
-                        style: TextStyle(color: Colors.red),
+                        style: const TextStyle(color: Colors.red),
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -123,10 +109,8 @@ class DayNightChapterContentItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(
-                      context.watch<AppSettingsState>().getTextSize.toDouble()),
-                  color:
-                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  color: context.watch<AppSettingsState>().getTranslationTextColor,
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
@@ -139,7 +123,7 @@ class DayNightChapterContentItem extends StatelessWidget {
               ),
             },
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Divider(
             indent: 16,
             endIndent: 16,
@@ -153,52 +137,44 @@ class DayNightChapterContentItem extends StatelessWidget {
                 'Дуа ${index + 1}/$length',
                 style: TextStyle(
                   fontSize: 15,
-                  color: context.watch<MainPlayerState>().getCurrentIndex == index
-                      ? Colors.red
-                      : Colors.blueGrey,
+                  color: context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.blueGrey,
                 ),
               ),
               item.nameAudio != null
                   ? player.builderRealtimePlayingInfos(
-                  builder: (context, realTimePlayingInfo) {
-                    return IconButton(
-                      icon: Icon(realTimePlayingInfo.isPlaying &&
-                          context
-                              .watch<MainPlayerState>()
-                              .getCurrentIndex ==
-                              index
-                          ? CupertinoIcons.stop_circle
-                          : CupertinoIcons.play_circle),
-                      color: Colors.blueGrey,
-                      onPressed: () {
-                        context
-                            .read<MainPlayerState>()
-                            .setCurrentIndex(index);
-                        if (player.readingPlaylist!.currentIndex == index) {
-                          if (realTimePlayingInfo.isPlaying) {
-                            player.stop();
-                          } else {
-                            context
-                                .read<MainPlayerState>()
-                                .playOnlyTrack(player);
-                          }
+                builder: (context, realTimePlayingInfo) {
+                  return IconButton(
+                    icon: Icon(realTimePlayingInfo.isPlaying &&
+                        context.watch<MainPlayerState>().getCurrentIndex == index
+                        ? CupertinoIcons.stop_circle
+                        : CupertinoIcons.play_circle),
+                    color: Colors.blueGrey,
+                    onPressed: () {
+                      context.read<MainPlayerState>().setCurrentIndex(index);
+                      if (player.readingPlaylist!.currentIndex == index) {
+                        if (realTimePlayingInfo.isPlaying) {
+                          player.stop();
                         } else {
-                          context
-                              .read<MainPlayerState>()
-                              .playOnlyTrack(player);
+                          context.read<MainPlayerState>().playOnlyTrack(player);
                         }
-                      },
-                    );
-                  })
-                  : SizedBox(),
+                      } else {
+                        context.read<MainPlayerState>().playOnlyTrack(player);
+                      }
+                    },
+                  );
+                },
+              )
+                  : const SizedBox(),
               IconButton(
                 icon: const Icon(CupertinoIcons.doc_on_doc),
                 color: Colors.blueGrey,
                 onPressed: () {
                   FlutterClipboard.copy(
-                    '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
-                    '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
-                    '${item.contentForCopyAndShare}',
+                    'Слова поминания Аллаха, которые желательно произносить ${context.read<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}\n\n'
+                        'Дуа ${index + 1}/$length\n\n'
+                        '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+                        '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
+                        '${item.contentForCopyAndShare}',
                   );
                   _showMessage(context, false);
                 },
@@ -208,9 +184,11 @@ class DayNightChapterContentItem extends StatelessWidget {
                 color: Colors.blueGrey,
                 onPressed: () {
                   Share.share(
-                    '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
-                    '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
-                    '${item.contentForCopyAndShare}',
+                    'Слова поминания Аллаха, которые желательно произносить ${context.read<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}\n\n'
+                        'Дуа ${index + 1}/$length\n\n'
+                        '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+                        '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
+                        '${item.contentForCopyAndShare}',
                     sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
                   );
                 },
@@ -222,9 +200,10 @@ class DayNightChapterContentItem extends StatelessWidget {
                   context.read<TakeScreenshotState>().takeDayNightScreenshot(item, index, length);
                 },
               ),
+              item.buttonState == 1 ? DayNightButtonCount(buttonCount: item.buttonCount!) : const SizedBox(),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
@@ -235,18 +214,18 @@ class DayNightChapterContentItem extends StatelessWidget {
       SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         backgroundColor: Colors.blueGrey,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(25),
           ),
         ),
         content: const Text(
           'Скопировано',
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }

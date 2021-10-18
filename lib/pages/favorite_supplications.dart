@@ -28,7 +28,7 @@ class FavoriteSupplications extends StatelessWidget {
               Navigator.of(context, rootNavigator: true)
                   .pushNamed('/other_content');
             },
-            icon: Icon(CupertinoIcons.square_list),
+            icon: const Icon(CupertinoIcons.square_list),
           ),
           actions: [
             IconButton(

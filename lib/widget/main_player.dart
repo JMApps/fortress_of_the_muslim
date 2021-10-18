@@ -42,8 +42,8 @@ class _MainPlayerState extends State<MainPlayer> {
     return widget.player.builderRealtimePlayingInfos(
         builder: (context, realTimePlayingInfo) {
       return Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
           ),
@@ -57,7 +57,7 @@ class _MainPlayerState extends State<MainPlayer> {
               children: [
                 Text(
                   _getTimeString(realTimePlayingInfo.currentPosition.inSeconds),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 IconButton(
                   icon: Icon(
@@ -66,15 +66,11 @@ class _MainPlayerState extends State<MainPlayer> {
                   ),
                   onPressed: () {
                     widget.player.previous();
-                    context
-                        .read<MainPlayerState>()
-                        .toIndex(widget.player.readingPlaylist!.currentIndex);
+                    context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
                   },
                 ),
                 IconButton(
-                  icon: Icon(realTimePlayingInfo.isPlaying
-                      ? CupertinoIcons.pause
-                      : CupertinoIcons.play),
+                  icon: Icon(realTimePlayingInfo.isPlaying ? CupertinoIcons.pause : CupertinoIcons.play),
                   iconSize: 30,
                   color: Colors.white,
                   onPressed: () {
@@ -83,39 +79,34 @@ class _MainPlayerState extends State<MainPlayer> {
                   },
                 ),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.forward_end,
                     color: Colors.white,
                   ),
                   onPressed: () {
                     widget.player.next(stopIfLast: true);
-                    context
-                        .read<MainPlayerState>()
-                        .toIndex(widget.player.readingPlaylist!.currentIndex);
+                    context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
                   },
                 ),
                 IconButton(
                   icon: Icon(
                     CupertinoIcons.arrow_2_circlepath,
-                    color: context.watch<MainPlayerState>().getLoopTrackState
-                        ? Colors.blueGrey[900]
-                        : Colors.white,
+                    color: context.watch<MainPlayerState>().getLoopTrackState ? Colors.blueGrey[900] : Colors.white,
                   ),
                   onPressed: () {
                     context.read<MainPlayerState>().updateLoopTrackState();
-                    widget.player.setLoopMode(
-                        context.read<MainPlayerState>().getLoopTrackState
+                    widget.player.setLoopMode(context.read<MainPlayerState>().getLoopTrackState
                             ? LoopMode.single
                             : LoopMode.none);
                   },
                 ),
                 Text(
                   _getTimeString(realTimePlayingInfo.duration.inSeconds),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
           ],
         ),
       );
@@ -123,8 +114,7 @@ class _MainPlayerState extends State<MainPlayer> {
   }
 
   String _getTimeString(int seconds) {
-    String minuteString =
-        '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
+    String minuteString = '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
     String secondString = '${seconds % 60 < 10 ? 0 : ''}${seconds % 60}';
     return '$minuteString:$secondString';
   }

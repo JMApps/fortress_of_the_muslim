@@ -17,12 +17,13 @@ class MainChapterList extends StatelessWidget {
     return FutureBuilder<List>(
       future: context.watch<MainChapterState>().getTextFieldText.isNotEmpty ||
               context.watch<MainChapterState>().getUpdateList
-          ? _databaseQuery.getChapterSearchResult(context.watch<MainChapterState>().getTextFieldText)
+          ? _databaseQuery.getChapterSearchResult(
+              context.watch<MainChapterState>().getTextFieldText)
           : _databaseQuery.getAllChapters(),
       builder: (context, snapshot) {
         return snapshot.hasError
             ? const Center(
-                child: Text(
+                child: const Text(
                   'По вашему запросу ничего не найдено',
                   style: TextStyle(
                     fontSize: 18,
@@ -33,12 +34,13 @@ class MainChapterList extends StatelessWidget {
                 ? ListView.separated(
                     physics: BouncingScrollPhysics(),
                     itemCount: snapshot.data!.length,
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     itemBuilder: (BuildContext context, int index) {
-                      return MainChapterItem(item: snapshot.data![index], index: index);
+                      return MainChapterItem(
+                          item: snapshot.data![index], index: index);
                     },
                     separatorBuilder: (BuildContext context, int index) {
-                      return Divider(
+                      return const Divider(
                         indent: 16,
                         endIndent: 16,
                         color: Colors.grey,
@@ -47,8 +49,8 @@ class MainChapterList extends StatelessWidget {
                   )
                 : Center(
                     child: Platform.isAndroid
-                        ? CircularProgressIndicator()
-                        : CupertinoActivityIndicator(),
+                        ? const CircularProgressIndicator()
+                        : const CupertinoActivityIndicator(),
                   );
       },
     );

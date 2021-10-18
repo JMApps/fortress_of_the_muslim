@@ -14,7 +14,7 @@ class FavoriteChapters extends StatelessWidget {
         ChangeNotifierProvider<MainChapterState>(create: (_) => MainChapterState()),
       ],
       child: Scaffold(
-        backgroundColor: Color(0xFFFFF3E0),
+        backgroundColor: const Color(0xFFFFF3E0),
         appBar: AppBar(
           centerTitle: true,
           title: const Text(

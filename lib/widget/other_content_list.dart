@@ -29,7 +29,7 @@ class OtherContent extends StatelessWidget {
                   isAlwaysShown: true,
                   showTrackOnHover: true,
                   child: ListView.separated(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: snapshot.data!.length,
                     padding: EdgeInsets.zero,
                     separatorBuilder: (BuildContext context, int index) {
@@ -47,8 +47,8 @@ class OtherContent extends StatelessWidget {
               )
             : Center(
                 child: Platform.isAndroid
-                    ? CircularProgressIndicator()
-                    : CupertinoActivityIndicator(),
+                    ? const CircularProgressIndicator()
+                    : const CupertinoActivityIndicator(),
               );
       },
     );
