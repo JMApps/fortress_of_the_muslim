@@ -24,8 +24,10 @@ class _DayNightButtonCountState extends State<DayNightButtonCount> {
   Widget build(BuildContext context) {
     return ClipOval(
       child: InkWell(
-        onTap: () {
-          _countNumber = widget.buttonCount;
+        onLongPress: () {
+          setState(() {
+            _countNumber = widget.buttonCount;
+          });
         },
         child: Material(
           color: Colors.blueGrey,
@@ -36,8 +38,12 @@ class _DayNightButtonCountState extends State<DayNightButtonCount> {
               if (_countNumber > 0) {
                 setState(() {
                   _countNumber--;
+                  if (_countNumber == 0) {
+                    HapticFeedback.vibrate();
+                 } else {
+                   HapticFeedback.lightImpact();
+                 }
                 });
-                HapticFeedback.lightImpact();
               }
             },
             child: SizedBox(
