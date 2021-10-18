@@ -45,18 +45,25 @@ class AppSettings extends StatelessWidget {
                             activeColor: Colors.blue,
                             min: 14,
                             max: 40,
-                            value: context.watch<AppSettingsState>().getTextSize.toDouble(),
+                            value:
+                                context.watch<AppSettingsState>().getTextSize,
                             onChanged: (value) {
-                              context.read<AppSettingsState>().updateTextSizeValue(value.toInt());
+                              context
+                                  .read<AppSettingsState>()
+                                  .updateTextSizeValue(value);
                             },
-                            onChangeEnd: (value) {},
+                            onChangeEnd: (value) {
+                              context
+                                  .read<AppSettingsState>()
+                                  .saveTextSizeValue(value);
+                            },
                           ),
                         ),
                         const SizedBox(width: 16),
                         Flexible(
                           flex: 1,
                           child: Text(
-                            '${context.watch<AppSettingsState>().getTextSize}',
+                            '${context.watch<AppSettingsState>().getTextSize.toInt()}',
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.blue,
@@ -71,7 +78,9 @@ class AppSettings extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.palette_outlined,
-                        color: context.watch<AppSettingsState>().getArabicTextColor,
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getArabicTextColor,
                       ),
                       title: const Text(
                         'Цвет арабского текста',
@@ -82,7 +91,9 @@ class AppSettings extends StatelessWidget {
                         height: 25,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
-                          color: context.watch<AppSettingsState>().getArabicTextColor,
+                          color: context
+                              .watch<AppSettingsState>()
+                              .getArabicTextColor,
                         ),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(25),
@@ -96,10 +107,17 @@ class AppSettings extends StatelessWidget {
                                   ),
                                 ),
                                 content: OColorPicker(
-                                  selectedColor: context.watch<AppSettingsState>().getArabicTextColor,
+                                  selectedColor: context
+                                      .watch<AppSettingsState>()
+                                      .getArabicTextColor,
                                   colors: primaryColorsPalette,
                                   onColorChange: (color) {
-                                    context.read<AppSettingsState>().updateArabicTextColor(color);
+                                    context
+                                        .read<AppSettingsState>()
+                                        .updateArabicTextColor(color);
+                                    context
+                                        .read<AppSettingsState>()
+                                        .saveArabicTextColor(color);
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -113,7 +131,9 @@ class AppSettings extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.palette_outlined,
-                        color: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getTranscriptionTextColor,
                       ),
                       title: const Text(
                         'Цвет текста транскрипции',
@@ -123,8 +143,11 @@ class AppSettings extends StatelessWidget {
                         width: 25,
                         height: 25,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: context.watch<AppSettingsState>().getTranscriptionTextColor,),
+                          borderRadius: BorderRadius.circular(25),
+                          color: context
+                              .watch<AppSettingsState>()
+                              .getTranscriptionTextColor,
+                        ),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(25),
                           onTap: () {
@@ -137,10 +160,17 @@ class AppSettings extends StatelessWidget {
                                   ),
                                 ),
                                 content: OColorPicker(
-                                  selectedColor: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                                  selectedColor: context
+                                      .watch<AppSettingsState>()
+                                      .getTranscriptionTextColor,
                                   colors: primaryColorsPalette,
                                   onColorChange: (color) {
-                                    context.read<AppSettingsState>().updateTranscriptionTextColor(color);
+                                    context
+                                        .read<AppSettingsState>()
+                                        .updateTranscriptionTextColor(color);
+                                    context
+                                        .read<AppSettingsState>()
+                                        .saveTranscriptionTextColor(color);
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -154,7 +184,9 @@ class AppSettings extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.palette_outlined,
-                        color: context.watch<AppSettingsState>().getTranslationTextColor,
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getTranslationTextColor,
                       ),
                       title: const Text(
                         'Цвет текста перевода',
@@ -165,7 +197,9 @@ class AppSettings extends StatelessWidget {
                         height: 25,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            color: context.watch<AppSettingsState>().getTranslationTextColor),
+                            color: context
+                                .watch<AppSettingsState>()
+                                .getTranslationTextColor),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(25),
                           onTap: () {
@@ -178,10 +212,17 @@ class AppSettings extends StatelessWidget {
                                   ),
                                 ),
                                 content: OColorPicker(
-                                  selectedColor: context.watch<AppSettingsState>().getTranslationTextColor,
+                                  selectedColor: context
+                                      .watch<AppSettingsState>()
+                                      .getTranslationTextColor,
                                   colors: primaryColorsPalette,
                                   onColorChange: (color) {
-                                    context.read<AppSettingsState>().updateTranslationTextColor(color);
+                                    context
+                                        .read<AppSettingsState>()
+                                        .updateTranslationTextColor(color);
+                                    context
+                                        .read<AppSettingsState>()
+                                        .saveTranslationTextColor(color);
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -196,23 +237,44 @@ class AppSettings extends StatelessWidget {
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       leading: Switch(
                         activeColor: Colors.blueGrey,
-                        value: context.watch<AppSettingsState>().getIsArabicTextShow,
+                        value: context
+                            .watch<AppSettingsState>()
+                            .getIsArabicTextShow,
                         onChanged: (value) {
-                          context.read<AppSettingsState>().updateArabicTextShowState(value);
+                          context
+                              .read<AppSettingsState>()
+                              .updateArabicTextShowState(value);
+                          context
+                              .read<AppSettingsState>()
+                              .saveArabicTextShowState(value);
                         },
                       ),
-                      title: Text(context.watch<AppSettingsState>().getIsArabicTextShow ? 'Скрыть арабский текст' : 'Показать арабский текст'),
+                      title: Text(
+                          context.watch<AppSettingsState>().getIsArabicTextShow
+                              ? 'Скрыть арабский текст'
+                              : 'Показать арабский текст'),
                     ),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       leading: Switch(
                         activeColor: Colors.blueGrey,
-                        value: context.watch<AppSettingsState>().getIsTranscriptionTextShow,
+                        value: context
+                            .watch<AppSettingsState>()
+                            .getIsTranscriptionTextShow,
                         onChanged: (value) {
-                          context.read<AppSettingsState>().updateTranscriptionTextShowState(value);
+                          context
+                              .read<AppSettingsState>()
+                              .updateTranscriptionTextShowState(value);
+                          context
+                              .read<AppSettingsState>()
+                              .saveTranscriptionTextShowState(value);
                         },
                       ),
-                      title: Text(context.watch<AppSettingsState>().getIsTranscriptionTextShow ? 'Скрыть текст транскрипции' : 'Показать текст транскрипции'),
+                      title: Text(context
+                              .watch<AppSettingsState>()
+                              .getIsTranscriptionTextShow
+                          ? 'Скрыть текст транскрипции'
+                          : 'Показать текст транскрипции'),
                     )
                   ],
                 ),
