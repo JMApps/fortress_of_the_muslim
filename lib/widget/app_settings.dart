@@ -33,7 +33,7 @@ class AppSettings extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
-                        'Размер текста',
+                        'Размер арабского текста',
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
@@ -45,12 +45,12 @@ class AppSettings extends StatelessWidget {
                             activeColor: Colors.blue,
                             min: 14,
                             max: 40,
-                            value: context.watch<AppSettingsState>().getTextSize,
+                            value: context.watch<AppSettingsState>().getArabicTextSize,
                             onChanged: (value) {
-                              context.read<AppSettingsState>().updateTextSizeValue(value);
+                              context.read<AppSettingsState>().updateArabicTextSizeValue(value);
                             },
                             onChangeEnd: (value) {
-                              context.read<AppSettingsState>().saveTextSizeValue(value);
+                              context.read<AppSettingsState>().saveArabicTextSizeValue(value);
                             },
                           ),
                         ),
@@ -58,7 +58,7 @@ class AppSettings extends StatelessWidget {
                         Flexible(
                           flex: 1,
                           child: Text(
-                            '${context.watch<AppSettingsState>().getTextSize.toInt()}',
+                            '${context.watch<AppSettingsState>().getArabicTextSize.toInt()}',
                             style: const TextStyle(
                               fontSize: 18,
                               color: Colors.blue,
@@ -68,6 +68,69 @@ class AppSettings extends StatelessWidget {
                         const SizedBox(width: 8),
                       ],
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        'Размер текста перевода',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 10,
+                          child: CupertinoSlider(
+                            activeColor: Colors.blue,
+                            min: 14,
+                            max: 40,
+                            value: context.watch<AppSettingsState>().getTranslationTextSize,
+                            onChanged: (value) {
+                              context.read<AppSettingsState>().updateTranslationTextSizeValue(value);
+                            },
+                            onChangeEnd: (value) {
+                              context.read<AppSettingsState>().saveTranslationTextSizeValue(value);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Flexible(
+                          flex: 1,
+                          child: Text(
+                            '${context.watch<AppSettingsState>().getTranslationTextSize.toInt()}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                    const Divider(indent: 16, endIndent: 16),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Расположение текста',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Center(
+                      child: ToggleButtons(
+                        selectedColor: Colors.blueGrey[800],
+                        children: <Widget>[
+                          Icon(Icons.format_align_left),
+                          Icon(Icons.format_align_center),
+                          Icon(Icons.format_align_right),
+                          Icon(Icons.format_align_justify),
+                        ],
+                        isSelected: context.watch<AppSettingsState>().getIsSelected,
+                        onPressed: (index) {
+                          context.read<AppSettingsState>().updateToggleTextLayout(index);
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     const Divider(indent: 16, endIndent: 16),
                     ListTile(
                       contentPadding: EdgeInsets.zero,

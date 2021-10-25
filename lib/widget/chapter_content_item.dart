@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ChapterContentItem extends StatelessWidget {
-  const ChapterContentItem({
+  ChapterContentItem({
     Key? key,
     required this.item,
     required this.index,
@@ -27,6 +27,13 @@ class ChapterContentItem extends StatelessWidget {
   final int length;
   final String chapterTitle;
   final AssetsAudioPlayer player;
+
+  final List<TextAlign> _getTextAlign = [
+    TextAlign.left,
+    TextAlign.center,
+    TextAlign.right,
+    TextAlign.justify,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +55,7 @@ class ChapterContentItem extends StatelessWidget {
                         child: Text(
                           item.contentArabic!,
                           style: TextStyle(
-                            fontSize: context.watch<AppSettingsState>().getTextSize.toDouble() + 3,
+                            fontSize: context.watch<AppSettingsState>().getArabicTextSize.toDouble() + 3,
                             fontFamily: 'Hafs',
                             color: context.watch<AppSettingsState>().getArabicTextColor,
                           ),
@@ -67,9 +74,10 @@ class ChapterContentItem extends StatelessWidget {
                         child: Text(
                           item.contentTranscription!,
                           style: TextStyle(
-                            fontSize: context.watch<AppSettingsState>().getTextSize.toDouble(),
+                            fontSize: context.watch<AppSettingsState>().getTranslationTextSize.toDouble(),
                             color: context.watch<AppSettingsState>().getTranscriptionTextColor,
                           ), //
+                          textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
                         ),
                       ),
                     )
@@ -112,8 +120,9 @@ class ChapterContentItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  fontSize: FontSize(context.watch<AppSettingsState>().getTranslationTextSize.toDouble()),
                   color: context.watch<AppSettingsState>().getTranslationTextColor,
+                  textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(

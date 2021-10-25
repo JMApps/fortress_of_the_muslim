@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DayNightChapterContentItem extends StatelessWidget {
-  const DayNightChapterContentItem({
+  DayNightChapterContentItem({
     Key? key,
     required this.item,
     required this.index,
@@ -25,6 +25,13 @@ class DayNightChapterContentItem extends StatelessWidget {
   final int index;
   final int length;
   final AssetsAudioPlayer player;
+
+  final List<TextAlign> _getTextAlign = [
+    TextAlign.left,
+    TextAlign.center,
+    TextAlign.right,
+    TextAlign.justify,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +52,7 @@ class DayNightChapterContentItem extends StatelessWidget {
               child: Text(
                 item.contentArabic!,
                 style: TextStyle(
-                  fontSize: context.watch<AppSettingsState>().getTextSize.toDouble() + 3,
+                  fontSize: context.watch<AppSettingsState>().getArabicTextSize.toDouble() + 3,
                   fontFamily: 'Hafs',
                   color: context.watch<AppSettingsState>().getArabicTextColor,
                 ),
@@ -64,9 +71,10 @@ class DayNightChapterContentItem extends StatelessWidget {
               child: Text(
                 item.contentTranscription!,
                 style: TextStyle(
-                  fontSize: context.watch<AppSettingsState>().getTextSize.toDouble(),
+                  fontSize: context.watch<AppSettingsState>().getTranslationTextSize.toDouble(),
                   color: context.watch<AppSettingsState>().getTranscriptionTextColor,
                 ), //
+                textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
               ),
             ),
           )
@@ -82,7 +90,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                        fontSize: FontSize(20),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
@@ -109,8 +117,9 @@ class DayNightChapterContentItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(context.watch<AppSettingsState>().getTextSize.toDouble()),
+                  fontSize: FontSize(context.watch<AppSettingsState>().getTranslationTextSize.toDouble()),
                   color: context.watch<AppSettingsState>().getTranslationTextColor,
+                  textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(

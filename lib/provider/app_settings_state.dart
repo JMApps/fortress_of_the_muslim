@@ -4,9 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSettingsState with ChangeNotifier {
 
-  double _textSize = 20;
+  double _arabicTextSize = 20;
 
-  double get getTextSize => _textSize;
+  double _translationTextSize = 20;
+
+  double get getArabicTextSize => _arabicTextSize;
+
+  double get getTranslationTextSize => _translationTextSize;
 
   Color _arabicTextColor = Colors.blueGrey[800]!;
 
@@ -28,14 +32,33 @@ class AppSettingsState with ChangeNotifier {
 
   bool get getIsTranscriptionTextShow => _isTranscriptionTextShow;
 
-  updateTextSizeValue(double textSize) {
-    _textSize = textSize;
+  final List<bool> _isSelected = [true, false, false, false];
+
+  int _toggleButtonIndex = 0;
+
+  int get getToggleButtonIndex => _toggleButtonIndex;
+
+  List<bool> get getIsSelected => _isSelected;
+
+
+  updateArabicTextSizeValue(double textSize) {
+    _arabicTextSize = textSize;
     notifyListeners();
   }
 
-  saveTextSizeValue(double lastSizeValue) async {
+  updateTranslationTextSizeValue(double textSize) {
+    _translationTextSize = textSize;
+    notifyListeners();
+  }
+
+  saveArabicTextSizeValue(double lastSizeValue) async {
     final preferences = await SharedPreferences.getInstance();
-    preferences.setDouble(keyTextSizeValue, lastSizeValue);
+    preferences.setDouble(keyArabicTextSizeValue, lastSizeValue);
+  }
+
+  saveTranslationTextSizeValue(double lastSizeValue) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setDouble(keyTranslationTextSizeValue, lastSizeValue);
   }
 
   updateArabicTextColor(Color newColor) {
@@ -89,13 +112,32 @@ class AppSettingsState with ChangeNotifier {
     preferences.setBool(keyTranscriptionTextShow, state);
   }
 
+  updateToggleTextLayout(int index) {
+    _toggleButtonIndex = index;
+    for (int i = 0; i < _isSelected.length; i++) {
+      _isSelected[i] = i == _toggleButtonIndex;
+    }
+    saveToggleButtonIndex(index);
+    notifyListeners();
+  }
+
+  saveToggleButtonIndex(int index) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setInt(keyToggleButtonIndex, index);
+  }
+
   initPreferences() async {
     final preferences = await SharedPreferences.getInstance();
-    _textSize = preferences.getDouble(keyTextSizeValue) ?? 20;
+    _arabicTextSize = preferences.getDouble(keyArabicTextSizeValue) ?? 20;
+    _translationTextSize = preferences.getDouble(keyTranslationTextSizeValue) ?? 20;
     _arabicTextColor = Color(preferences.getInt(keyArabicTextColorValue) ?? Colors.blueGrey[800]!.value);
     _transcriptionTextColor = Color(preferences.getInt(keyTranscriptionTextColorValue) ?? Colors.teal[800]!.value);
     _translationTextColor = Color(preferences.getInt(keyTranslationTextColorValue) ?? Colors.black.value);
     _isArabicTextShow = preferences.getBool(keyArabicTextShow) ?? true;
     _isTranscriptionTextShow = preferences.getBool(keyTranscriptionTextShow) ?? true;
+    _toggleButtonIndex = preferences.getInt(keyToggleButtonIndex) ?? 0;
+    for (int i = 0; i < _isSelected.length; i++) {
+      _isSelected[i] = i == _toggleButtonIndex;
+    }
   }
 }
