@@ -28,6 +28,7 @@ dependencies:
   percent_indicator: ^3.4.0
   flutter_linkify: ^5.0.2
   url_launcher: ^6.0.12
+  draggable_fab: ^0.1.4
 
 dev_dependencies:
   flutter_test:
