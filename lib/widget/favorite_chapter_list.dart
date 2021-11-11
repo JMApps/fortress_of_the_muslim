@@ -19,9 +19,9 @@ class FavoriteChapterList extends StatelessWidget {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.separated(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: snapshot.data!.length,
-                padding: EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 itemBuilder: (BuildContext context, int index) {
                   return FavoriteChapterItem(
                       item: snapshot.data![index], index: index);

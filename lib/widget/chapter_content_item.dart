@@ -107,7 +107,7 @@ class ChapterContentItem extends StatelessWidget {
                     CupertinoButton(
                       child: const Text(
                         'Закрыть',
-                        style: const TextStyle(color: Colors.red),
+                        style: TextStyle(color: Colors.red),
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -202,7 +202,7 @@ class ChapterContentItem extends StatelessWidget {
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
                     '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                     '${item.contentForCopyAndShare}',
-                    sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+                    sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
                   );
                 },
               ),
@@ -236,15 +236,15 @@ class ChapterContentItem extends StatelessWidget {
       SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         backgroundColor: isBookmark
             ? item.favoriteState == 0
                 ? Colors.blue
                 : Colors.blueGrey
             : Colors.blueGrey,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            const Radius.circular(25),
+            Radius.circular(25),
           ),
         ),
         content: isBookmark
@@ -261,7 +261,7 @@ class ChapterContentItem extends StatelessWidget {
                 'Скопировано',
                 style: TextStyle(fontSize: 18),
               ),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }

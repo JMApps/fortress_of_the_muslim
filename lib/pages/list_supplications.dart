@@ -20,7 +20,7 @@ class ListSupplications extends StatelessWidget {
       ],
       child: InkWell(
         child: Scaffold(
-          backgroundColor: Color(0xFFFFEBEE),
+          backgroundColor: const Color(0xFFFFEBEE),
           appBar: AppBar(
             centerTitle: true,
             title: const Text(
@@ -34,7 +34,7 @@ class ListSupplications extends StatelessWidget {
                 Navigator.of(context, rootNavigator: true)
                     .pushNamed('/other_content');
               },
-              icon: Icon(CupertinoIcons.square_list),
+              icon: const Icon(CupertinoIcons.square_list),
             ),
             actions: [
               Consumer<MainSupplicationState>(
@@ -46,13 +46,13 @@ class ListSupplications extends StatelessWidget {
                   icon: const Icon(CupertinoIcons.arrow_3_trianglepath),
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed('/about_us');
-                },
-              ),
+              // IconButton(
+              //   icon: const Icon(Icons.info_outline),
+              //   onPressed: () {
+              //     Navigator.of(context, rootNavigator: true)
+              //         .pushNamed('/about_us');
+              //   },
+              // ),
             ],
           ),
           body: Column(

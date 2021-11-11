@@ -5,7 +5,7 @@ import 'package:fortress_of_the_muslim/widget/favorite_supplication_list.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteSupplications extends StatelessWidget {
-  FavoriteSupplications({Key? key}) : super(key: key);
+  const FavoriteSupplications({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class FavoriteSupplications extends StatelessWidget {
         ChangeNotifierProvider<FavoriteSupplicationState>(create: (_) => FavoriteSupplicationState()),
       ],
       child: Scaffold(
-        backgroundColor: Color(0xFFE3F2FD),
+        backgroundColor: const Color(0xFFE3F2FD),
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
@@ -30,15 +30,15 @@ class FavoriteSupplications extends StatelessWidget {
             },
             icon: const Icon(CupertinoIcons.square_list),
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true)
-                    .pushNamed('/about_us');
-              },
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.info_outline),
+          //     onPressed: () {
+          //       Navigator.of(context, rootNavigator: true)
+          //           .pushNamed('/about_us');
+          //     },
+          //   ),
+          // ],
         ),
         body: Scrollbar(
           child: FavoriteSupplicationList(),

@@ -17,7 +17,7 @@ class OtherContent extends StatelessWidget {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? Scaffold(
-                backgroundColor: Color(0xFFEFEBE9),
+                backgroundColor: const Color(0xFFEFEBE9),
                 appBar: AppBar(
                   centerTitle: true,
                   title: const Text('Содержимое'),

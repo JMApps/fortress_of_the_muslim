@@ -38,16 +38,16 @@ class TakeDayNightScreenShot extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'Слова поминания Аллаха, которые желательно произносить утром и вечером',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.w700,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       item.contentArabic != null
                           ? Align(
                               alignment: Alignment.centerRight,
@@ -76,8 +76,8 @@ class TakeDayNightScreenShot extends StatelessWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Expanded(
-                              child: const Divider(
+                          const Expanded(
+                              child: Divider(
                                   indent: 16,
                                   endIndent: 16,
                                   color: Colors.black)),
@@ -91,7 +91,7 @@ class TakeDayNightScreenShot extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -107,9 +107,9 @@ class TakeDayNightScreenShot extends StatelessWidget {
                             height: 40,
                           ),
                           const SizedBox(width: 16),
-                          Text(
+                          const Text(
                             'Крепость верующего\nКрепость мусульманина',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontFamily: 'Gilroy',
                             ),

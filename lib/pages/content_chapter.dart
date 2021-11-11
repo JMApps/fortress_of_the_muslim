@@ -100,7 +100,7 @@ class _ContentChapterState extends State<ContentChapter> {
                         ],
                       ),
                       floatingActionButton: context.watch<FloatingCounterState>().getIsCountButtonShow
-                          ? FloatingCounterButton()
+                          ? const FloatingCounterButton()
                           : const SizedBox(),
                       body: Column(
                         children: [

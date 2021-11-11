@@ -53,7 +53,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           item.contentTranscription != null
               ? Padding(
                   padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
@@ -69,7 +69,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           Html(
             onLinkTap: (String? url, RenderContext rendContext,
                 Map<String, String> attributes, element) {
@@ -152,7 +152,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
                     '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                     '${item.contentForCopyAndShare}',
-                    sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+                    sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
                   );
                 },
               ),
@@ -171,7 +171,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );

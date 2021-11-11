@@ -46,11 +46,11 @@ class FavoriteChapterItem extends StatelessWidget {
                   '#': Style(
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.zero,
-                    fontSize: FontSize(18),
+                    fontSize: const FontSize(18),
                   ),
                   'small': Style(
                     color: Colors.grey,
-                    fontSize: FontSize(12),
+                    fontSize: const FontSize(12),
                   ),
                 },
               ),
@@ -68,7 +68,7 @@ class FavoriteChapterItem extends StatelessWidget {
             ),
           );
         },
-        data: '${item.chapterTitle}',
+        data: item.chapterTitle,
         style: {
           '#': Style(
             padding: EdgeInsets.zero,

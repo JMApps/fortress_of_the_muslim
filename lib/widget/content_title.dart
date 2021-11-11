@@ -41,7 +41,7 @@ class ContentTitle extends StatelessWidget {
                 CupertinoButton(
                   child: const Text(
                     'Закрыть',
-                    style: const TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.red),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();

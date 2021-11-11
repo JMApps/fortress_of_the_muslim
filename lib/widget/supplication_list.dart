@@ -25,7 +25,7 @@ class SupplicationList extends StatelessWidget {
       builder: (context, snapshot) {
         return snapshot.hasError
             ? const Center(
-                child: const Text(
+                child: Text(
                   'По вашему запросу ничего не найдено',
                   style: TextStyle(
                     fontSize: 18,

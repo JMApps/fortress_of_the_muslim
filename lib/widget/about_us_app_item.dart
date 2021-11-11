@@ -40,7 +40,7 @@ class AboutUsAppItem extends StatelessWidget {
         onPressed: () {
           Share.share(
             appLink,
-            sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+            sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
           );
         },
       ),

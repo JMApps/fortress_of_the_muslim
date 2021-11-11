@@ -28,7 +28,7 @@ class MainChapterItem extends StatelessWidget {
       ),
       title: Text(
         'Глава ${item.id}',
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.teal,
           fontSize: 18,
           fontWeight: FontWeight.w700,
@@ -68,7 +68,7 @@ class MainChapterItem extends StatelessWidget {
             ),
           );
         },
-        data: '${item.chapterTitle}',
+        data: item.chapterTitle,
         style: {
           '#': Style(
             padding: EdgeInsets.zero,

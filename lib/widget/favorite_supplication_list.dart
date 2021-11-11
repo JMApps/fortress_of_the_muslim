@@ -19,7 +19,7 @@ class FavoriteSupplicationList extends StatelessWidget {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return FavoriteSupplicationItem(

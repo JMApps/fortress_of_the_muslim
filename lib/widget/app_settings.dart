@@ -18,7 +18,7 @@ class AppSettings extends StatelessWidget {
             ),
           ),
           margin: const EdgeInsets.all(16),
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             child: Material(
               borderRadius: const BorderRadius.all(
@@ -30,11 +30,11 @@ class AppSettings extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
                         'Размер арабского текста',
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                     Row(
@@ -68,11 +68,11 @@ class AppSettings extends StatelessWidget {
                         const SizedBox(width: 8),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
                         'Размер текста перевода',
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                     Row(
@@ -118,7 +118,7 @@ class AppSettings extends StatelessWidget {
                     Center(
                       child: ToggleButtons(
                         selectedColor: Colors.blueGrey[800],
-                        children: <Widget>[
+                        children: const [
                           Icon(Icons.format_align_left),
                           Icon(Icons.format_align_center),
                           Icon(Icons.format_align_right),
@@ -260,7 +260,7 @@ class AppSettings extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Divider(indent: 16, endIndent: 16),
+                    const Divider(indent: 16, endIndent: 16),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       leading: Switch(

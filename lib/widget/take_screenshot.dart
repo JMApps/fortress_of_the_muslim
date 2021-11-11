@@ -79,12 +79,12 @@ class TakeScreenShot extends StatelessWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                               child: Divider(
                                   indent: 16,
                                   endIndent: 16,
                                   color: Colors.black)),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             '${index + 1}/$supplicationLength',
                             style: const TextStyle(
@@ -94,7 +94,7 @@ class TakeScreenShot extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [

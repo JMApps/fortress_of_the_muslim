@@ -32,15 +32,15 @@ class FavoriteChapters extends StatelessWidget {
                   .pushNamed('/other_content');
             },
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true)
-                    .pushNamed('/about_us');
-              },
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.info_outline),
+          //     onPressed: () {
+          //       Navigator.of(context, rootNavigator: true)
+          //           .pushNamed('/about_us');
+          //     },
+          //   ),
+          // ],
         ),
         body: Scrollbar(
           child: FavoriteChapterList(),

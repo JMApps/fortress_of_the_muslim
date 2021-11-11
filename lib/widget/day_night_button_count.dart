@@ -52,7 +52,7 @@ class _DayNightButtonCountState extends State<DayNightButtonCount> {
               child: Center(
                 child: Text(
                   '$_countNumber',
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

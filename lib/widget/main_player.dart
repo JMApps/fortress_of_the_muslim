@@ -60,7 +60,7 @@ class _MainPlayerState extends State<MainPlayer> {
                   style: const TextStyle(color: Colors.white),
                 ),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.backward_end,
                     color: Colors.white,
                   ),

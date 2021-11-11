@@ -17,9 +17,9 @@ class MainSearcher extends StatelessWidget {
         color: Colors.teal[50],
         borderRadius: BorderRadius.circular(15),
       ),
-      prefix: Padding(
-        padding: const EdgeInsets.all(8),
-        child: const Icon(
+      prefix: const Padding(
+        padding: EdgeInsets.all(8),
+        child: Icon(
           CupertinoIcons.search,
           color: Colors.grey,
         ),

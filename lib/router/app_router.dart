@@ -14,19 +14,19 @@ class AppRouter {
             builder: (_) => MainPage(), settings: routeSettings);
       case '/content_chapter':
         return MaterialPageRoute(
-            builder: (_) => ContentChapter(), settings: routeSettings);
+            builder: (_) => const ContentChapter(), settings: routeSettings);
       case '/other_content':
         return MaterialPageRoute(
             builder: (_) => OtherContent(), settings: routeSettings);
       case '/other_book_content':
         return MaterialPageRoute(
-            builder: (_) => OtherBookContent(), settings: routeSettings);
+            builder: (_) => const OtherBookContent(), settings: routeSettings);
       case '/day_night_supplications':
         return MaterialPageRoute(
-            builder: (_) => DayNightContentChapter(), settings: routeSettings);
+            builder: (_) => const DayNightContentChapter(), settings: routeSettings);
       case '/about_us':
         return MaterialPageRoute(
-            builder: (_) => AboutUs(), settings: routeSettings);
+            builder: (_) => const AboutUs(), settings: routeSettings);
       default:
         throw Exception('Invalid route');
     }

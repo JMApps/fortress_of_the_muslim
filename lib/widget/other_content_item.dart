@@ -11,7 +11,7 @@ class OtherContentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        '${item.title}',
+        item.title,
         style: const TextStyle(
           fontSize: 20,
         ),

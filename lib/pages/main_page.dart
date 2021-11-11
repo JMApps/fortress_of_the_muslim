@@ -27,7 +27,7 @@ class MainPage extends StatelessWidget {
       bottomNavigationBar: FlipBoxBarPlus(
         navBarWidth: 60,
         selectedIndex: context.watch<MainState>().getSelectedItem,
-        animationDuration: Duration(milliseconds: 900),
+        animationDuration: const Duration(milliseconds: 900),
         items: [
           FlipBarItem(
               icon: const Icon(CupertinoIcons.square_list, color: Colors.white),

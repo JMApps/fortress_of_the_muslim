@@ -90,7 +90,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                     data: url,
                     style: {
                       '#': Style(
-                        fontSize: FontSize(20),
+                        fontSize: const FontSize(20),
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.zero,
                       ),
@@ -104,7 +104,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                     CupertinoButton(
                       child: const Text(
                         'Закрыть',
-                        style: const TextStyle(color: Colors.red),
+                        style: TextStyle(color: Colors.red),
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -197,7 +197,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                         '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
                         '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
                         '${item.contentForCopyAndShare}',
-                    sharePositionOrigin: Rect.fromLTWH(0, 0, 10, 10),
+                    sharePositionOrigin: const Rect.fromLTWH(0, 0, 10, 10),
                   );
                 },
               ),
@@ -219,21 +219,21 @@ class DayNightChapterContentItem extends StatelessWidget {
 
   _showMessage(BuildContext context, bool isBookmark) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.all(8),
+        margin: EdgeInsets.all(8),
         backgroundColor: Colors.blueGrey,
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(25),
           ),
         ),
-        content: const Text(
+        content: Text(
           'Скопировано',
-          style: const TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 18),
         ),
-        duration: const Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 500),
       ),
     );
   }

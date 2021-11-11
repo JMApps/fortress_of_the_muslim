@@ -22,7 +22,7 @@ class MainChapters extends StatelessWidget {
       ],
       child: GestureDetector(
         child: Scaffold(
-          backgroundColor: Color(0xFFE0F2F1),
+          backgroundColor: const Color(0xFFE0F2F1),
           appBar: AppBar(
             centerTitle: true,
             title: const Text(
@@ -62,22 +62,22 @@ class MainChapters extends StatelessWidget {
                   }
                 },
               ),
-              IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed('/about_us');
-                },
-              ),
+              // IconButton(
+              //   icon: const Icon(Icons.info_outline),
+              //   onPressed: () {
+              //     Navigator.of(context, rootNavigator: true)
+              //         .pushNamed('/about_us');
+              //   },
+              // ),
             ],
           ),
           body: Column(
             children: [
               Container(
                 padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.teal,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15),
                   ),
