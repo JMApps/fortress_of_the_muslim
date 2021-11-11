@@ -10,6 +10,7 @@ class DatabaseHelper {
 
   factory DatabaseHelper() => _instance;
   static Database? _db;
+  final _databaseVersion = 1;
 
   Future<Database> get db async {
     if (_db != null) {
@@ -25,23 +26,32 @@ class DatabaseHelper {
     Directory? documentDirectory = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationSupportDirectory();
-    String path = join(documentDirectory!.path, 'fortress_db_2.db');
 
-    var exists = await databaseExists(path);
+    String _path = join(documentDirectory!.path, 'fortress_db_3.db');
 
-    if (!exists) {
+    String _toDelete_1 = '${documentDirectory.path}/fortress_db_2.db';
+
+    var _del_1 = await databaseExists(_toDelete_1);
+
+    if (_del_1) {
+      await deleteDatabase(_toDelete_1);
+    }
+
+    var _exists = await databaseExists(_path);
+
+    if (!_exists) {
       try {
-        await Directory(dirname(path)).create(recursive: true);
+        await Directory(dirname(_path)).create(recursive: true);
       } catch (_) {
         Exception('Invalid database');
       }
-      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db_2.db'));
-      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-      await File(path).writeAsBytes(bytes, flush: true);
-    }
-    var bomDataTable = await openDatabase(path, version: 1, onUpgrade: _onUpgrade);
-    return bomDataTable;
-  }
 
-  _onUpgrade(Database db, int oldVersion, int newVersion) async {}
+      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db_3.db'));
+      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      await File(_path).writeAsBytes(bytes, flush: true);
+    }
+
+    var _onOpen = await openDatabase(_path, version: _databaseVersion);
+    return _onOpen;
+  }
 }
