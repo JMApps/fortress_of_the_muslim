@@ -1,6 +1,4 @@
-# fortress_of_the_muslim
-
-Крепость мусульманина
+# Крепость мусульманина
 
 ## Version for Android/iOS in stores
 
