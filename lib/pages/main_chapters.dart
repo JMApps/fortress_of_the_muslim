@@ -47,19 +47,11 @@ class MainChapters extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onPressed: () async {
-                  if (await canLaunch(
+                  await launch(
                     Platform.isIOS
                         ? 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953'
                         : 'https://play.google.com/store/apps/dev?id=8649252597553656018',
-                  )) {
-                    await launch(
-                      Platform.isIOS
-                          ? 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953'
-                          : 'https://play.google.com/store/apps/dev?id=8649252597553656018',
-                    );
-                  } else {
-                    throw 'Could not launch';
-                  }
+                  );
                 },
               ),
               // IconButton(
