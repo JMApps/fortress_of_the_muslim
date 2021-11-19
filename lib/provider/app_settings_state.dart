@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
 class AppSettingsState with ChangeNotifier {
 
@@ -31,6 +32,10 @@ class AppSettingsState with ChangeNotifier {
   bool _isTranscriptionTextShow = true;
 
   bool get getIsTranscriptionTextShow => _isTranscriptionTextShow;
+
+  bool _isScreenWakeLock = false;
+
+  bool get getScreenWakelock => _isScreenWakeLock;
 
   final List<bool> _isSelected = [true, false, false, false];
 
@@ -81,7 +86,6 @@ class AppSettingsState with ChangeNotifier {
     preferences.setInt(keyTranscriptionTextColorValue, lastTranscriptionTextColor.value);
   }
 
-
   updateTranslationTextColor(Color newColor) {
     _translationTextColor = newColor;
     notifyListeners();
@@ -112,6 +116,16 @@ class AppSettingsState with ChangeNotifier {
     preferences.setBool(keyTranscriptionTextShow, state);
   }
 
+  updateScreenWakeLock(bool state) {
+    _isScreenWakeLock = state;
+    notifyListeners();
+  }
+
+  saveScreenWakeLock(bool state) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setBool(keyScreenWakeLock, state);
+  }
+
   updateToggleTextLayout(int index) {
     _toggleButtonIndex = index;
     for (int i = 0; i < _isSelected.length; i++) {
@@ -135,9 +149,11 @@ class AppSettingsState with ChangeNotifier {
     _translationTextColor = Color(preferences.getInt(keyTranslationTextColorValue) ?? Colors.black.value);
     _isArabicTextShow = preferences.getBool(keyArabicTextShow) ?? true;
     _isTranscriptionTextShow = preferences.getBool(keyTranscriptionTextShow) ?? true;
+    _isScreenWakeLock = preferences.getBool(keyScreenWakeLock) ?? false;
     _toggleButtonIndex = preferences.getInt(keyToggleButtonIndex) ?? 0;
     for (int i = 0; i < _isSelected.length; i++) {
       _isSelected[i] = i == _toggleButtonIndex;
     }
+    _isScreenWakeLock ? Wakelock.enable() : Wakelock.disable();
   }
 }

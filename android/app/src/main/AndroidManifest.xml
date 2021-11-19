@@ -2,6 +2,7 @@
     package="jmapps.fortress_of_the_muslim">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:icon="@mipmap/ic_launcher"
