@@ -58,6 +58,7 @@ class _ContentChapterState extends State<ContentChapter> {
             ? _databaseQuery.getContentChapter(arguments!.chapterId!)
             : _databaseQuery.getContentChapter(arguments!.chapterId!),
         builder: (context, snapshot) {
+          setupPlayList(snapshot);
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -115,7 +116,6 @@ class _ContentChapterState extends State<ContentChapter> {
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  setupPlayList(snapshot);
                                   return ChapterContentItem(
                                     item: snapshot.data![index],
                                     index: index,

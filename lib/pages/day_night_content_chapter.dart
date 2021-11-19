@@ -46,7 +46,8 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainPlayerState>(create: (_) => MainPlayerState()),
+        ChangeNotifierProvider<MainPlayerState>(
+            create: (_) => MainPlayerState()),
       ],
       child: FutureBuilder<List>(
         future: _databaseQuery.getDayNightSupplications(context.watch<DayNightChapterState>().getDayNight),
@@ -72,7 +73,9 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                         actions: [
                           IconButton(
                             onPressed: () {
-                              showCupertinoModalPopup(context: context, builder: (BuildContext context) {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext context) {
                                   return const AppSettings();
                                 },
                               );
@@ -88,7 +91,9 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                                   dayNightState.updateDayNightState();
                                   setupPlayList(snapshot);
                                   context.read<MainPlayerState>().toIndex(0);
-                                  context.read<MainPlayerState>().setCurrentIndex(-1);
+                                  context
+                                      .read<MainPlayerState>()
+                                      .setCurrentIndex(-1);
                                 },
                                 icon: Icon(dayNightState.getDayNight
                                     ? CupertinoIcons.sunrise
@@ -103,9 +108,11 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                       body: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+                            padding: const EdgeInsets.only(
+                                left: 8, top: 8, right: 8),
                             child: ContentTitle(
-                              contentTitle: 'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
+                              contentTitle:
+                                  'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
                             ),
                           ),
                           Expanded(
@@ -127,7 +134,8 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                           ),
                         ],
                       ),
-                      bottomNavigationBar: MainPlayer(player: _player, snapshot: snapshot),
+                      bottomNavigationBar:
+                          MainPlayer(player: _player, snapshot: snapshot),
                     )
                   : Center(
                       child: Platform.isAndroid
