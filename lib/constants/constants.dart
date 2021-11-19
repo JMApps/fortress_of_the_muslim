@@ -5,4 +5,5 @@ const keyTranscriptionTextColorValue = 'key_transcription_text_color_value';
 const keyTranslationTextColorValue = 'key_translation_text_color_value';
 const keyArabicTextShow = 'key_arabic_text_show';
 const keyTranscriptionTextShow = 'key_transcription_text_show';
+const keyScreenWakeLock = 'key_screen_wake_lock';
 const keyToggleButtonIndex = 'key_toggle_button_index';
