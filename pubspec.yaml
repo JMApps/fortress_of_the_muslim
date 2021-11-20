@@ -24,10 +24,10 @@ dependencies:
   screenshot: ^1.2.3
   o_color_picker: ^1.0.2
   assets_audio_player: ^3.0.3+6
-  shared_preferences: ^2.0.8
+  shared_preferences: ^2.0.9
   percent_indicator: ^3.4.0
   flutter_linkify: ^5.0.2
-  url_launcher: ^6.0.13
+  url_launcher: ^6.0.14
   draggable_fab: ^0.1.4
   wakelock: ^0.5.6
 
