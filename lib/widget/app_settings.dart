@@ -347,8 +347,8 @@ class AppSettings extends StatelessWidget {
                       },
                       activeColor: Colors.blueGrey,
                       title: Text(context.watch<AppSettingsState>().getScreenWakelock
-                      ? 'Отключать дисплей'
-                      : 'Не отключать дисплей')
+                      ? 'Дисплей не выключится'
+                      : 'Дисплей выключится')
                     ),
                   ],
                 ),
