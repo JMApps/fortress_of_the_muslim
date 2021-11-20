@@ -118,6 +118,7 @@ class AppSettingsState with ChangeNotifier {
 
   updateScreenWakeLock(bool state) {
     _isScreenWakeLock = state;
+    _isScreenWakeLock ? Wakelock.enable() : Wakelock.disable();
     notifyListeners();
   }
 
