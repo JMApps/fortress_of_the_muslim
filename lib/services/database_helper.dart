@@ -27,14 +27,14 @@ class DatabaseHelper {
         ? await getExternalStorageDirectory()
         : await getApplicationSupportDirectory();
 
-    String _path = join(documentDirectory!.path, 'fortress_db_3.db');
+    String _path = join(documentDirectory!.path, 'fortress_db_4.db');
 
-    String _toDelete_1 = '${documentDirectory.path}/fortress_db_2.db';
+    String _toDeleteDB = '${documentDirectory.path}/fortress_db_3.db';
 
-    var _del_1 = await databaseExists(_toDelete_1);
+    var _delDB = await databaseExists(_toDeleteDB);
 
-    if (_del_1) {
-      await deleteDatabase(_toDelete_1);
+    if (_delDB) {
+      await deleteDatabase(_toDeleteDB);
     }
 
     var _exists = await databaseExists(_path);
@@ -46,7 +46,7 @@ class DatabaseHelper {
         Exception('Invalid database');
       }
 
-      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db_3.db'));
+      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_db_4.db'));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(_path).writeAsBytes(bytes, flush: true);
     }
