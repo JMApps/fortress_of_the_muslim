@@ -18,8 +18,6 @@ class Main extends StatelessWidget {
 
   final _appRouter = AppRouter();
 
-  // Test ok
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
