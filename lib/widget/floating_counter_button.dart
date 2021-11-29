@@ -1,5 +1,6 @@
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fortress_of_the_muslim/provider/floating_counter_state.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class FloatingCounterButton extends StatelessWidget {
           ),
           onPressed: () {
             context.read<FloatingCounterState>().updateCountValue();
+            HapticFeedback.lightImpact();
           },
         ),
       ),

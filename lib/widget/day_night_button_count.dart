@@ -39,7 +39,7 @@ class _DayNightButtonCountState extends State<DayNightButtonCount> {
                 setState(() {
                   _countNumber--;
                   if (_countNumber == 0) {
-                    HapticFeedback.vibrate();
+                    HapticFeedback.heavyImpact();
                  } else {
                    HapticFeedback.lightImpact();
                  }
@@ -47,8 +47,8 @@ class _DayNightButtonCountState extends State<DayNightButtonCount> {
               }
             },
             child: SizedBox(
-              width: 35,
-              height: 35,
+              width: 50,
+              height: 50,
               child: Center(
                 child: Text(
                   '$_countNumber',
