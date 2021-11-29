@@ -48,10 +48,12 @@ class _ContentChapterState extends State<ContentChapter> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ChapterArguments?;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainPlayerState>(create: (_) => MainPlayerState()),
+        ChangeNotifierProvider<MainPlayerState>(
+            create: (_) => MainPlayerState()),
       ],
       child: FutureBuilder<List>(
         future: context.watch<FavoriteSupplicationState>().getUpdateList
@@ -93,26 +95,36 @@ class _ContentChapterState extends State<ContentChapter> {
                           ),
                           Switch(
                             activeColor: Colors.orange[700],
-                            value: context.watch<FloatingCounterState>().getIsCountButtonShow,
+                            value: context
+                                .watch<FloatingCounterState>()
+                                .getIsCountButtonShow,
                             onChanged: (value) {
-                              context.read<FloatingCounterState>().updateButtonCountShow(value);
+                              context
+                                  .read<FloatingCounterState>()
+                                  .updateButtonCountShow(value);
                             },
                           ),
                         ],
                       ),
-                      floatingActionButton: context.watch<FloatingCounterState>().getIsCountButtonShow
+                      floatingActionButton: context
+                              .watch<FloatingCounterState>()
+                              .getIsCountButtonShow
                           ? const FloatingCounterButton()
                           : const SizedBox(),
                       body: Column(
                         children: [
                           Container(
-                            padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
-                            child: ContentTitle(contentTitle: arguments.chapterTitle!),
+                            padding: const EdgeInsets.only(
+                                left: 8, top: 8, right: 8),
+                            child: ContentTitle(
+                                contentTitle: arguments.chapterTitle!),
                           ),
                           Expanded(
                             child: Scrollbar(
                               child: ScrollablePositionedList.builder(
-                                itemScrollController: context.read<MainPlayerState>().getItemScrollController,
+                                itemScrollController: context
+                                    .read<MainPlayerState>()
+                                    .getItemScrollController,
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
@@ -129,7 +141,8 @@ class _ContentChapterState extends State<ContentChapter> {
                           ),
                         ],
                       ),
-                      bottomNavigationBar: MainPlayer(player: _player, snapshot: snapshot),
+                      bottomNavigationBar:
+                          MainPlayer(player: _player, snapshot: snapshot),
                     )
                   : Center(
                       child: Platform.isAndroid

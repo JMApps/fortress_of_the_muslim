@@ -50,7 +50,8 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
             create: (_) => MainPlayerState()),
       ],
       child: FutureBuilder<List>(
-        future: _databaseQuery.getDayNightSupplications(context.watch<DayNightChapterState>().getDayNight),
+        future: _databaseQuery.getDayNightSupplications(
+            context.watch<DayNightChapterState>().getDayNight),
         builder: (context, snapshot) {
           setupPlayList(snapshot);
           return snapshot.hasError
@@ -118,7 +119,9 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                           Expanded(
                             child: Scrollbar(
                               child: ScrollablePositionedList.builder(
-                                itemScrollController: context.read<MainPlayerState>().getItemScrollController,
+                                itemScrollController: context
+                                    .read<MainPlayerState>()
+                                    .getItemScrollController,
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
