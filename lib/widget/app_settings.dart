@@ -28,7 +28,6 @@ class AppSettings extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
@@ -163,20 +162,20 @@ class AppSettings extends StatelessWidget {
                         width: 25,
                         height: 25,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(7.5),
                           color: context
                               .watch<AppSettingsState>()
                               .getArabicTextColor,
                         ),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(7.5),
                           onTap: () {
                             showDialog(
                               context: context,
                               builder: (_) => AlertDialog(
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
+                                    Radius.circular(7.5),
                                   ),
                                 ),
                                 content: OColorPicker(
@@ -216,20 +215,20 @@ class AppSettings extends StatelessWidget {
                         width: 25,
                         height: 25,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(7.5),
                           color: context
                               .watch<AppSettingsState>()
                               .getTranscriptionTextColor,
                         ),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(7.5),
                           onTap: () {
                             showDialog(
                               context: context,
                               builder: (_) => AlertDialog(
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
+                                    Radius.circular(7.5),
                                   ),
                                 ),
                                 content: OColorPicker(
@@ -269,19 +268,19 @@ class AppSettings extends StatelessWidget {
                         width: 25,
                         height: 25,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(7.5),
                             color: context
                                 .watch<AppSettingsState>()
                                 .getTranslationTextColor),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(7.5),
                           onTap: () {
                             showDialog(
                               context: context,
                               builder: (_) => AlertDialog(
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
+                                    Radius.circular(7.5),
                                   ),
                                 ),
                                 content: OColorPicker(
@@ -327,10 +326,16 @@ class AppSettings extends StatelessWidget {
                     SwitchListTile(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       activeColor: Colors.blueGrey,
-                      value: context.watch<AppSettingsState>().getIsTranscriptionTextShow,
+                      value: context
+                          .watch<AppSettingsState>()
+                          .getIsTranscriptionTextShow,
                       onChanged: (value) {
-                        context.read<AppSettingsState>().updateTranscriptionTextShowState(value);
-                        context.read<AppSettingsState>().saveTranscriptionTextShowState(value);
+                        context
+                            .read<AppSettingsState>()
+                            .updateTranscriptionTextShowState(value);
+                        context
+                            .read<AppSettingsState>()
+                            .saveTranscriptionTextShowState(value);
                       },
                       title: Text(context
                               .watch<AppSettingsState>()
@@ -339,16 +344,40 @@ class AppSettings extends StatelessWidget {
                           : 'Скрыть текст транскрипции'),
                     ),
                     SwitchListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                      value: context.watch<AppSettingsState>().getScreenWakelock,
-                      onChanged: (value) {
-                        context.read<AppSettingsState>().updateScreenWakeLock(value);
-                        context.read<AppSettingsState>().saveScreenWakeLock(value);
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 8),
+                        value:
+                            context.watch<AppSettingsState>().getScreenWakelock,
+                        onChanged: (value) {
+                          context
+                              .read<AppSettingsState>()
+                              .updateScreenWakeLock(value);
+                          context
+                              .read<AppSettingsState>()
+                              .saveScreenWakeLock(value);
+                        },
+                        activeColor: Colors.blueGrey,
+                        title: Text(
+                            context.watch<AppSettingsState>().getScreenWakelock
+                                ? 'Дисплей не выключится'
+                                : 'Дисплей выключится')),
+                    const Divider(indent: 16, endIndent: 16),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      child: Text(
+                        'Закрыть',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Colors.blueGrey,
+                      onPressed: () {
+                        Navigator.of(context).pop();
                       },
-                      activeColor: Colors.blueGrey,
-                      title: Text(context.watch<AppSettingsState>().getScreenWakelock
-                      ? 'Дисплей не выключится'
-                      : 'Дисплей выключится')
                     ),
                   ],
                 ),
