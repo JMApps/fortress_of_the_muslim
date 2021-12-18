@@ -48,7 +48,7 @@ class DayNightChapterContentItem extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: context.watch<MainPlayerState>().getCurrentIndex == index ? const Color(0xFFFFFDE7) : const Color(0xFFFFFFFF),
+          color: realtimePlayingInfo.isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index ? const Color(0xFFFFFDE7) : const Color(0xFFFFFFFF),
         ),
         child: Column(
           children: [
@@ -145,7 +145,7 @@ class DayNightChapterContentItem extends StatelessWidget {
             Divider(
               indent: 16,
               endIndent: 16,
-              color: context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
+              color: realtimePlayingInfo.isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
