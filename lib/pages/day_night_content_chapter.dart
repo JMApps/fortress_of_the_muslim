@@ -53,7 +53,9 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
         future: _databaseQuery.getDayNightSupplications(
             context.watch<DayNightChapterState>().getDayNight),
         builder: (context, snapshot) {
-          setupPlayList(snapshot);
+          if (snapshot.hasData) {
+            setupPlayList(snapshot);
+          }
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -106,36 +108,38 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                           ),
                         ],
                       ),
-                      body: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 8, top: 8, right: 8),
-                            child: ContentTitle(
-                              contentTitle:
-                                  'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
-                            ),
-                          ),
-                          Expanded(
-                            child: Scrollbar(
-                              child: ScrollablePositionedList.builder(
-                                itemScrollController: context
-                                    .read<MainPlayerState>()
-                                    .getItemScrollController,
-                                physics: const ClampingScrollPhysics(),
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return DayNightChapterContentItem(
-                                    item: snapshot.data![index],
-                                    index: index,
-                                    length: snapshot.data!.length,
-                                    player: _player,
-                                  );
-                                },
+                      body: _player.builderRealtimePlayingInfos(
+                        builder: (context, realtimePlayingInfo) {
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8, top: 8, right: 8),
+                                child: ContentTitle(
+                                  contentTitle: 'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
+                              Expanded(
+                                child: Scrollbar(
+                                  child: ScrollablePositionedList.builder(
+                                    itemScrollController: context.read<MainPlayerState>().getItemScrollController,
+                                    physics: const ClampingScrollPhysics(),
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return DayNightChapterContentItem(
+                                        item: snapshot.data![index],
+                                        index: index,
+                                        length: snapshot.data!.length,
+                                        player: _player,
+                                        realtimePlayingInfo: realtimePlayingInfo,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }
                       ),
                       bottomNavigationBar:
                           MainPlayer(player: _player, snapshot: snapshot),

@@ -60,7 +60,9 @@ class _ContentChapterState extends State<ContentChapter> {
             ? _databaseQuery.getContentChapter(arguments!.chapterId!)
             : _databaseQuery.getContentChapter(arguments!.chapterId!),
         builder: (context, snapshot) {
-          setupPlayList(snapshot);
+          if (snapshot.hasData) {
+            setupPlayList(snapshot);
+          }
           return snapshot.hasError
               ? Center(
                   child: Text('${snapshot.error}'),
@@ -95,13 +97,9 @@ class _ContentChapterState extends State<ContentChapter> {
                           ),
                           Switch(
                             activeColor: Colors.orange[700],
-                            value: context
-                                .watch<FloatingCounterState>()
-                                .getIsCountButtonShow,
+                            value: context.watch<FloatingCounterState>().getIsCountButtonShow,
                             onChanged: (value) {
-                              context
-                                  .read<FloatingCounterState>()
-                                  .updateButtonCountShow(value);
+                              context.read<FloatingCounterState>().updateButtonCountShow(value);
                             },
                           ),
                         ],
@@ -111,35 +109,36 @@ class _ContentChapterState extends State<ContentChapter> {
                               .getIsCountButtonShow
                           ? const FloatingCounterButton()
                           : const SizedBox(),
-                      body: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 8, top: 8, right: 8),
-                            child: ContentTitle(
-                                contentTitle: arguments.chapterTitle!),
-                          ),
-                          Expanded(
-                            child: Scrollbar(
-                              child: ScrollablePositionedList.builder(
-                                itemScrollController: context
-                                    .read<MainPlayerState>()
-                                    .getItemScrollController,
-                                physics: const ClampingScrollPhysics(),
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ChapterContentItem(
-                                    item: snapshot.data![index],
-                                    index: index,
-                                    length: snapshot.data!.length,
-                                    chapterTitle: arguments.chapterTitle!,
-                                    player: _player,
-                                  );
-                                },
+                      body: _player.builderRealtimePlayingInfos(
+                        builder: (context, realtimePlayingInfo) {
+                          return Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+                                child: ContentTitle(contentTitle: arguments.chapterTitle!),
                               ),
-                            ),
-                          ),
-                        ],
+                              Expanded(
+                                child: Scrollbar(
+                                  child: ScrollablePositionedList.builder(
+                                    itemScrollController: context.read<MainPlayerState>().getItemScrollController,
+                                    physics: const ClampingScrollPhysics(),
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return ChapterContentItem(
+                                        item: snapshot.data![index],
+                                        index: index,
+                                        length: snapshot.data!.length,
+                                        chapterTitle: arguments.chapterTitle!,
+                                        player: _player,
+                                        realtimePlayingInfo: realtimePlayingInfo,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                       bottomNavigationBar:
                           MainPlayer(player: _player, snapshot: snapshot),
