@@ -25,7 +25,6 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       body: _changeWidget[context.watch<MainState>().getSelectedItem],
       bottomNavigationBar: FlipBoxBarPlus(
-        navBarWidth: 60,
         selectedIndex: context.watch<MainState>().getSelectedItem,
         animationDuration: const Duration(milliseconds: 900),
         items: [
