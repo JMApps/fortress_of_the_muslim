@@ -15,6 +15,10 @@ class MainPlayerState with ChangeNotifier {
 
   bool get getLoopTrackState => _loopTrackState;
 
+  bool _playing = false;
+
+  bool get getPlayingState => _playing;
+
   playOnlyTrack(AssetsAudioPlayer player) {
     player.playlistPlayAtIndex(_currentTrackIndex);
     notifyListeners();

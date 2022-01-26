@@ -41,7 +41,7 @@ class _MainPlayerState extends State<MainPlayer> {
   Widget build(BuildContext context) {
     return widget.player.builderRealtimePlayingInfos(
         builder: (context, realTimePlayingInfo) {
-      return Container(
+          return Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25),
