@@ -7,14 +7,14 @@ packages:
       name: assets_audio_player
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.3+6"
+    version: "3.0.3+9"
   assets_audio_player_web:
     dependency: transitive
     description:
       name: assets_audio_player_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.3+6"
+    version: "3.0.3+9"
   async:
     dependency: transitive
     description:
@@ -407,7 +407,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.2"
+    version: "0.27.3"
   screenshot:
     dependency: "direct main"
     description:
