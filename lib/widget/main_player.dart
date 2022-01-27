@@ -74,6 +74,7 @@ class _MainPlayerState extends State<MainPlayer> {
                   iconSize: 30,
                   color: Colors.white,
                   onPressed: () {
+                    context.read<MainPlayerState>().playingState(realTimePlayingInfo.isPlaying);
                     widget.player.playOrPause();
                     context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
                   },

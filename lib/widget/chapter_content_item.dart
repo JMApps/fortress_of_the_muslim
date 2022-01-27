@@ -48,7 +48,7 @@ class ChapterContentItem extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: && context.watch<MainPlayerState>().getCurrentIndex == index ? const Color(0xFFFFFDE7) : const Color(0xFFFFFFFF),
+          color: !context.watch<MainPlayerState>().getPlayingState && context.watch<MainPlayerState>().getCurrentIndex == index ? const Color(0xFFFFFDE7) : const Color(0xFFFFFFFF),
         ),
         child: Column(
           children: [
@@ -145,7 +145,7 @@ class ChapterContentItem extends StatelessWidget {
             Divider(
               indent: 16,
               endIndent: 16,
-              color: && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
+              color: !context.watch<MainPlayerState>().getPlayingState && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -155,28 +155,31 @@ class ChapterContentItem extends StatelessWidget {
                   'Дуа ${index + 1}/$length',
                   style: TextStyle(
                     fontSize: 15,
-                    color: && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.blueGrey,
+                    color: !context.watch<MainPlayerState>().getPlayingState && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.blueGrey,
                   ),
                 ),
                 item.nameAudio != null
-                    ? IconButton(
-                        icon: Icon(&& context.watch<MainPlayerState>().getCurrentIndex == index
-                            ? CupertinoIcons.stop_circle
-                            : CupertinoIcons.play_circle),
-                        color: Colors.blueGrey,
-                        onPressed: () {
-                          context.read<MainPlayerState>().setCurrentIndex(index);
-                          if (player.readingPlaylist!.currentIndex == index) {
-                            if () {
-                              player.stop();
-                            } else {
-                              context.read<MainPlayerState>().playOnlyTrack(player);
-                            }
-                          } else {
-                            context.read<MainPlayerState>().playOnlyTrack(player);
-                          }
-                        },
-                      )
+                    ? player.builderIsPlaying(builder: (context, isPlaying) {
+                  return IconButton(
+                    icon: Icon(isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index
+                        ? CupertinoIcons.stop_circle
+                        : CupertinoIcons.play_circle),
+                    color: Colors.blueGrey,
+                    onPressed: () {
+                      context.read<MainPlayerState>().setCurrentIndex(index);
+                      if (player.readingPlaylist!.currentIndex == index) {
+                      context.read<MainPlayerState>().playingState(isPlaying);
+                        if (isPlaying) {
+                          player.stop();
+                        } else {
+                          context.read<MainPlayerState>().playOnlyTrack(player);
+                        }
+                      } else {
+                        context.read<MainPlayerState>().playOnlyTrack(player);
+                      }
+                    },
+                  );
+                })
                     : const SizedBox(),
                 IconButton(
                   icon: const Icon(CupertinoIcons.doc_on_doc),
