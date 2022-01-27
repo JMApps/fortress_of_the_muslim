@@ -24,6 +24,11 @@ class MainPlayerState with ChangeNotifier {
     notifyListeners();
   }
 
+  playingState(bool state) {
+    _playing = state;
+    notifyListeners();
+  }
+
   setCurrentIndex(int index) {
     _currentTrackIndex = index;
     notifyListeners();
