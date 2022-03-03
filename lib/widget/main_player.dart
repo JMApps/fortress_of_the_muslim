@@ -2,6 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:provider/provider.dart';
 
 class MainPlayer extends StatefulWidget {
@@ -42,12 +43,14 @@ class _MainPlayerState extends State<MainPlayer> {
     return widget.player.builderRealtimePlayingInfos(
         builder: (context, realTimePlayingInfo) {
           return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
           ),
-          color: Colors.blueGrey,
+          color: context.watch<MainState>().getNightThemeState
+              ? Colors.blueGrey[900]
+              : Colors.blueGrey[400],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

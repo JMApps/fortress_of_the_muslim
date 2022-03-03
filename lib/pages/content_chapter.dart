@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
 import 'package:fortress_of_the_muslim/provider/floating_counter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/widget/app_settings.dart';
 import 'package:fortress_of_the_muslim/widget/chapter_content_item.dart';
@@ -68,17 +69,25 @@ class _ContentChapterState extends State<ContentChapter> {
                 )
               : snapshot.hasData
                   ? Scaffold(
-                      backgroundColor: Colors.blueGrey[50],
+                      backgroundColor:
+                          context.watch<MainState>().getNightThemeState
+                              ? Colors.blueGrey[800]
+                              : Colors.blueGrey[50],
                       appBar: AppBar(
                         centerTitle: true,
                         elevation: 0,
                         title: Text(
                           'Глава ${arguments.chapterId}',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: context.watch<MainState>().getNightThemeState
+                                ? Colors.blueGrey[50]
+                                : Colors.white,
                           ),
                         ),
-                        backgroundColor: Colors.blueGrey,
+                        backgroundColor:
+                            context.watch<MainState>().getNightThemeState
+                                ? Colors.blueGrey[900]
+                                : Colors.blueGrey[400],
                         actions: [
                           IconButton(
                             onPressed: () {
@@ -89,9 +98,12 @@ class _ContentChapterState extends State<ContentChapter> {
                                 },
                               );
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               CupertinoIcons.settings,
-                              color: Colors.white,
+                              color:
+                                  context.watch<MainState>().getNightThemeState
+                                      ? Colors.blueGrey[50]
+                                      : Colors.white,
                             ),
                           ),
                           Switch(

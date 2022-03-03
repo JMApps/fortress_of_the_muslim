@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:html/parser.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,9 @@ class ChapterContentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: context.watch<MainState>().getNightThemeState
+          ? Colors.blueGrey[900]
+          : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -48,22 +52,36 @@ class ChapterContentItem extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: !context.watch<MainPlayerState>().getPlayingState && context.watch<MainPlayerState>().getCurrentIndex == index ? const Color(0xFFFFFDE7) : const Color(0xFFFFFFFF),
+          color: !context.watch<MainPlayerState>().getPlayingState &&
+                  context.watch<MainPlayerState>().getCurrentIndex == index
+              ? context.watch<MainState>().getNightThemeState
+                  ? const Color(0xFF131D21)
+                  : const Color(0xFFFFFDE7)
+              : context.watch<MainState>().getNightThemeState
+                  ? Colors.blueGrey[900]
+                  : Colors.white,
         ),
         child: Column(
           children: [
             context.watch<AppSettingsState>().getIsArabicTextShow
                 ? item.contentArabic != null
                     ? Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                        padding:
+                            const EdgeInsets.only(left: 16, top: 16, right: 16),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(
                             item.contentArabic!,
                             style: TextStyle(
-                              fontSize: context.watch<AppSettingsState>().getArabicTextSize.toDouble() + 3,
+                              fontSize: context
+                                      .watch<AppSettingsState>()
+                                      .getArabicTextSize
+                                      .toDouble() +
+                                  3,
                               fontFamily: 'Hafs',
-                              color: context.watch<AppSettingsState>().getArabicTextColor,
+                              color: context
+                                  .watch<AppSettingsState>()
+                                  .getArabicTextColor,
                             ),
                             textDirection: TextDirection.rtl,
                           ),
@@ -74,16 +92,24 @@ class ChapterContentItem extends StatelessWidget {
             context.watch<AppSettingsState>().getIsTranscriptionTextShow
                 ? item.contentTranscription != null
                     ? Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                        padding:
+                            const EdgeInsets.only(left: 16, top: 8, right: 16),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             item.contentTranscription!,
                             style: TextStyle(
-                              fontSize: context.watch<AppSettingsState>().getTranslationTextSize.toDouble(),
-                              color: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                              fontSize: context
+                                  .watch<AppSettingsState>()
+                                  .getTranslationTextSize
+                                  .toDouble(),
+                              color: context
+                                  .watch<AppSettingsState>()
+                                  .getTranscriptionTextColor,
                             ), //
-                            textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                            textAlign: _getTextAlign[context
+                                .watch<AppSettingsState>()
+                                .getToggleButtonIndex],
                           ),
                         ),
                       )
@@ -126,9 +152,15 @@ class ChapterContentItem extends StatelessWidget {
               data: item.contentTranslation,
               style: {
                 '#': Style(
-                    fontSize: FontSize(context.watch<AppSettingsState>().getTranslationTextSize.toDouble()),
-                    color: context.watch<AppSettingsState>().getTranslationTextColor,
-                    textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                    fontSize: FontSize(context
+                        .watch<AppSettingsState>()
+                        .getTranslationTextSize
+                        .toDouble()),
+                    color: context
+                        .watch<AppSettingsState>()
+                        .getTranslationTextColor,
+                    textAlign: _getTextAlign[
+                        context.watch<AppSettingsState>().getToggleButtonIndex],
                     padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                     margin: EdgeInsets.zero),
                 'a': Style(
@@ -145,7 +177,10 @@ class ChapterContentItem extends StatelessWidget {
             Divider(
               indent: 16,
               endIndent: 16,
-              color: !context.watch<MainPlayerState>().getPlayingState && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
+              color: !context.watch<MainPlayerState>().getPlayingState &&
+                      context.watch<MainPlayerState>().getCurrentIndex == index
+                  ? Colors.red
+                  : Colors.grey,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -155,34 +190,59 @@ class ChapterContentItem extends StatelessWidget {
                   'Дуа ${index + 1}/$length',
                   style: TextStyle(
                     fontSize: 15,
-                    color: !context.watch<MainPlayerState>().getPlayingState && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.blueGrey,
+                    color: !context.watch<MainPlayerState>().getPlayingState &&
+                            context.watch<MainPlayerState>().getCurrentIndex ==
+                                index
+                        ? Colors.red
+                        : context.watch<MainState>().getNightThemeState
+                            ? Colors.blueGrey[100]
+                            : Colors.blueGrey[400],
                   ),
                 ),
                 item.nameAudio != null
                     ? player.builderIsPlaying(builder: (context, isPlaying) {
-                  return IconButton(
-                    icon: Icon(isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index
-                        ? CupertinoIcons.stop_circle
-                        : CupertinoIcons.play_circle),
-                    color: Colors.blueGrey,
-                    onPressed: () {
-                      context.read<MainPlayerState>().setCurrentIndex(index);
-                      if (player.readingPlaylist!.currentIndex == index) {
-                      context.read<MainPlayerState>().playingState(isPlaying);
-                        if (isPlaying) {
-                          player.stop();
-                        } else {
-                          context.read<MainPlayerState>().playOnlyTrack(player);
-                        }
-                      } else {
-                        context.read<MainPlayerState>().playOnlyTrack(player);
-                      }
-                    },
-                  );
-                })
+                        return IconButton(
+                          icon: Icon(isPlaying &&
+                                  context
+                                          .watch<MainPlayerState>()
+                                          .getCurrentIndex ==
+                                      index
+                              ? CupertinoIcons.stop_circle
+                              : CupertinoIcons.play_circle),
+                          color: context.watch<MainState>().getNightThemeState
+                              ? Colors.blueGrey[100]
+                              : Colors.blueGrey[400],
+                          onPressed: () {
+                            context
+                                .read<MainPlayerState>()
+                                .setCurrentIndex(index);
+                            if (player.readingPlaylist!.currentIndex == index) {
+                              context
+                                  .read<MainPlayerState>()
+                                  .playingState(isPlaying);
+                              if (isPlaying) {
+                                player.stop();
+                              } else {
+                                context
+                                    .read<MainPlayerState>()
+                                    .playOnlyTrack(player);
+                              }
+                            } else {
+                              context
+                                  .read<MainPlayerState>()
+                                  .playOnlyTrack(player);
+                            }
+                          },
+                        );
+                      })
                     : const SizedBox(),
                 IconButton(
-                  icon: const Icon(CupertinoIcons.doc_on_doc),
+                  icon: Icon(
+                    CupertinoIcons.doc_on_doc,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
+                  ),
                   color: Colors.blueGrey,
                   onPressed: () {
                     FlutterClipboard.copy(
@@ -196,8 +256,12 @@ class ChapterContentItem extends StatelessWidget {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(CupertinoIcons.share),
-                  color: Colors.blueGrey,
+                  icon: Icon(
+                    CupertinoIcons.share,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
+                  ),
                   onPressed: () {
                     Share.share(
                       '${_parseHtmlString(chapterTitle)}\n\n'
@@ -210,8 +274,12 @@ class ChapterContentItem extends StatelessWidget {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(CupertinoIcons.photo_on_rectangle),
-                  color: Colors.blueGrey,
+                  icon: Icon(
+                    CupertinoIcons.photo_on_rectangle,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
+                  ),
                   onPressed: () {
                     context
                         .read<TakeScreenshotState>()
@@ -223,11 +291,15 @@ class ChapterContentItem extends StatelessWidget {
                     item.favoriteState == 0
                         ? CupertinoIcons.bookmark
                         : CupertinoIcons.bookmark_fill,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
                   ),
-                  color: Colors.blueGrey,
                   onPressed: () {
-                    context.read<FavoriteSupplicationState>().updateBookmarkState(
-                        item.favoriteState == 0 ? 1 : 0, item.id!);
+                    context
+                        .read<FavoriteSupplicationState>()
+                        .updateBookmarkState(
+                            item.favoriteState == 0 ? 1 : 0, item.id!);
                     _showMessage(context, true);
                   },
                 )
@@ -260,15 +332,24 @@ class ChapterContentItem extends StatelessWidget {
             ? item.favoriteState == 0
                 ? const Text(
                     'Добавлено',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   )
                 : const Text(
                     'Удалено',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   )
             : const Text(
                 'Скопировано',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
         duration: const Duration(milliseconds: 500),
       ),

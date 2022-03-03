@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
+import 'package:provider/provider.dart';
 
 class ContentTitle extends StatelessWidget {
   const ContentTitle({Key? key, required this.contentTitle}) : super(key: key);
@@ -12,7 +14,9 @@ class ContentTitle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.blueGrey[700],
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.blueGrey[900]
+            : Colors.blueGrey[700],
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
