@@ -106,7 +106,9 @@ class FavoriteChapterItem extends StatelessWidget {
   _showSnackBar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: item.favoriteState == 0 ? Colors.teal : Colors.teal,
+        backgroundColor: context.read<MainState>().getNightThemeState
+            ? Colors.blueGrey[800]
+            : Colors.teal[400],
         content: item.favoriteState == 0
             ? const Text(
                 'Добавлено',

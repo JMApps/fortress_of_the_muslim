@@ -20,8 +20,12 @@ class _MainPlayerState extends State<MainPlayer> {
   @override
   void initState() {
     widget.player.playlistAudioFinished.listen((event) {
-      context.read<MainPlayerState>().setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
-      context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
+      context
+          .read<MainPlayerState>()
+          .setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
+      context
+          .read<MainPlayerState>()
+          .toIndex(widget.player.readingPlaylist!.currentIndex);
     });
     widget.player.playlistFinished.listen((playlistFinished) {
       if (playlistFinished) {
@@ -42,7 +46,7 @@ class _MainPlayerState extends State<MainPlayer> {
   Widget build(BuildContext context) {
     return widget.player.builderRealtimePlayingInfos(
         builder: (context, realTimePlayingInfo) {
-          return Container(
+      return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25),
@@ -69,17 +73,25 @@ class _MainPlayerState extends State<MainPlayer> {
                   ),
                   onPressed: () {
                     widget.player.previous();
-                    context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
+                    context
+                        .read<MainPlayerState>()
+                        .toIndex(widget.player.readingPlaylist!.currentIndex);
                   },
                 ),
                 IconButton(
-                  icon: Icon(realTimePlayingInfo.isPlaying ? CupertinoIcons.pause : CupertinoIcons.play),
+                  icon: Icon(realTimePlayingInfo.isPlaying
+                      ? CupertinoIcons.pause
+                      : CupertinoIcons.play),
                   iconSize: 30,
                   color: Colors.white,
                   onPressed: () {
-                    context.read<MainPlayerState>().playingState(realTimePlayingInfo.isPlaying);
+                    context
+                        .read<MainPlayerState>()
+                        .playingState(realTimePlayingInfo.isPlaying);
                     widget.player.playOrPause();
-                    context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
+                    context
+                        .read<MainPlayerState>()
+                        .toIndex(widget.player.readingPlaylist!.currentIndex);
                   },
                 ),
                 IconButton(
@@ -89,17 +101,24 @@ class _MainPlayerState extends State<MainPlayer> {
                   ),
                   onPressed: () {
                     widget.player.next(stopIfLast: true);
-                    context.read<MainPlayerState>().toIndex(widget.player.readingPlaylist!.currentIndex);
+                    context
+                        .read<MainPlayerState>()
+                        .toIndex(widget.player.readingPlaylist!.currentIndex);
                   },
                 ),
                 IconButton(
                   icon: Icon(
                     CupertinoIcons.arrow_2_circlepath,
-                    color: context.watch<MainPlayerState>().getLoopTrackState ? Colors.blueGrey[900] : Colors.white,
+                    color: context.watch<MainPlayerState>().getLoopTrackState
+                        ? context.read<MainState>().getNightThemeState
+                            ? Colors.blue[400]
+                            : Colors.blueGrey[900]
+                        : Colors.white,
                   ),
                   onPressed: () {
                     context.read<MainPlayerState>().updateLoopTrackState();
-                    widget.player.setLoopMode(context.read<MainPlayerState>().getLoopTrackState
+                    widget.player.setLoopMode(
+                        context.read<MainPlayerState>().getLoopTrackState
                             ? LoopMode.single
                             : LoopMode.none);
                   },
@@ -118,7 +137,8 @@ class _MainPlayerState extends State<MainPlayer> {
   }
 
   String _getTimeString(int seconds) {
-    String minuteString = '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
+    String minuteString =
+        '${(seconds / 60).floor() < 10 ? 0 : ''}${(seconds / 60).floor()}';
     String secondString = '${seconds % 60 < 10 ? 0 : ''}${seconds % 60}';
     return '$minuteString:$secondString';
   }

@@ -53,9 +53,13 @@ class SupplicationItem extends StatelessWidget {
                                 .toDouble() +
                             3,
                         fontFamily: 'Hafs',
-                        color: context
-                            .watch<AppSettingsState>()
-                            .getArabicTextColor,
+                        color: context.read<MainState>().getNightThemeColorState
+                            ? context
+                                .watch<AppSettingsState>()
+                                .getArabicTextColor
+                            : context.watch<MainState>().getNightThemeState
+                                ? Colors.blueGrey[100]
+                                : Colors.blueGrey[900],
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -74,9 +78,13 @@ class SupplicationItem extends StatelessWidget {
                             .watch<AppSettingsState>()
                             .getTranslationTextSize
                             .toDouble(),
-                        color: context
-                            .watch<AppSettingsState>()
-                            .getTranscriptionTextColor,
+                        color: context.read<MainState>().getNightThemeColorState
+                            ? context
+                                .watch<AppSettingsState>()
+                                .getTranscriptionTextColor
+                            : context.watch<MainState>().getNightThemeState
+                                ? Colors.green[200]
+                                : Colors.green[400],
                       ), //
                       textAlign: _getTextAlign[context
                           .watch<AppSettingsState>()
@@ -130,8 +138,13 @@ class SupplicationItem extends StatelessWidget {
                       .watch<AppSettingsState>()
                       .getTranslationTextSize
                       .toDouble()),
-                  color:
-                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  color: context.read<MainState>().getNightThemeColorState
+                      ? context
+                          .watch<AppSettingsState>()
+                          .getTranslationTextColor
+                      : context.watch<MainState>().getNightThemeState
+                          ? Colors.white
+                          : Colors.black,
                   textAlign: _getTextAlign[
                       context.watch<AppSettingsState>().getToggleButtonIndex],
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
@@ -225,9 +238,13 @@ class SupplicationItem extends StatelessWidget {
       SnackBar(
         backgroundColor: isBookmark
             ? item.favoriteState == 0
-                ? Colors.blue
-                : Colors.red
-            : Colors.red,
+                ? context.read<MainState>().getNightThemeState
+                    ? Colors.blue[900]
+                    : Colors.blue[400]
+                : context.read<MainState>().getNightThemeState
+                    ? Colors.red[900]
+                    : Colors.red[400]
+            : Colors.red[400],
         content: isBookmark
             ? item.favoriteState == 0
                 ? const Text(

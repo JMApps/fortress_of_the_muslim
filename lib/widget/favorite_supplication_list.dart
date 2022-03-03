@@ -49,7 +49,7 @@ class FavoriteSupplicationList extends StatelessWidget {
                           fontSize: 18,
                           color: context.watch<MainState>().getNightThemeState
                               ? Colors.blue[50]
-                              : Colors.blue[400],
+                              : Colors.grey,
                         ),
                       ),
                     ],

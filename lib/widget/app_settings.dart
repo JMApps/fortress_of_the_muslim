@@ -128,7 +128,7 @@ class AppSettings extends StatelessWidget {
                         fontSize: 18,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Center(
                       child: ToggleButtons(
                         selectedColor: Colors.blueGrey[800],
@@ -147,7 +147,7 @@ class AppSettings extends StatelessWidget {
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     const Divider(indent: 16, endIndent: 16),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
@@ -374,9 +374,22 @@ class AppSettings extends StatelessWidget {
                       },
                       activeColor: Colors.blueGrey,
                       title: Text(
-                          context.watch<AppSettingsState>().getScreenWakelock
+                          context.watch<MainState>().getNightThemeState
                               ? 'Выкл ночной режим'
                               : 'Вкл ночной режим'),
+                    ),
+                    SwitchListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      value: context.watch<MainState>().getNightThemeColorState,
+                      onChanged: (value) {
+                        context.read<MainState>().changeColorState();
+                        context.read<MainState>().saveColorState();
+                      },
+                      activeColor: Colors.blueGrey,
+                      title: Text(
+                          context.watch<MainState>().getNightThemeColorState
+                              ? 'Цвета темы'
+                              : 'Выбранные цвета дуа'),
                     ),
                     const Divider(indent: 16, endIndent: 16),
                     MaterialButton(

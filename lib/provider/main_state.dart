@@ -11,6 +11,10 @@ class MainState with ChangeNotifier {
 
   bool get getNightThemeState => _nightThemeState;
 
+  bool _nightThemeColorState = false;
+
+  bool get getNightThemeColorState => _nightThemeColorState;
+
   selectedItem(int selectedItem) {
     _selectedItem = selectedItem;
     notifyListeners();
@@ -21,13 +25,24 @@ class MainState with ChangeNotifier {
     notifyListeners();
   }
 
+  changeColorState() {
+    _nightThemeColorState = !_nightThemeColorState;
+    notifyListeners();
+  }
+
   saveThemeState() async {
     final preferences = await SharedPreferences.getInstance();
     preferences.setBool(keyToggleNightTheme, _nightThemeState);
   }
 
+  saveColorState() async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setBool(keyToggleColorState, _nightThemeColorState);
+  }
+
   initTheme() async {
     final preferences = await SharedPreferences.getInstance();
     _nightThemeState = preferences.getBool(keyToggleNightTheme) ?? false;
+    _nightThemeColorState = preferences.getBool(keyToggleColorState) ?? false;
   }
 }

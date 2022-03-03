@@ -80,8 +80,16 @@ class ChapterContentItem extends StatelessWidget {
                                   3,
                               fontFamily: 'Hafs',
                               color: context
-                                  .watch<AppSettingsState>()
-                                  .getArabicTextColor,
+                                      .read<MainState>()
+                                      .getNightThemeColorState
+                                  ? context
+                                      .watch<AppSettingsState>()
+                                      .getArabicTextColor
+                                  : context
+                                          .watch<MainState>()
+                                          .getNightThemeState
+                                      ? Colors.blueGrey[100]
+                                      : Colors.blueGrey[900],
                             ),
                             textDirection: TextDirection.rtl,
                           ),
@@ -104,8 +112,16 @@ class ChapterContentItem extends StatelessWidget {
                                   .getTranslationTextSize
                                   .toDouble(),
                               color: context
-                                  .watch<AppSettingsState>()
-                                  .getTranscriptionTextColor,
+                                      .read<MainState>()
+                                      .getNightThemeColorState
+                                  ? context
+                                      .watch<AppSettingsState>()
+                                      .getTranscriptionTextColor
+                                  : context
+                                          .watch<MainState>()
+                                          .getNightThemeState
+                                      ? Colors.green[200]
+                                      : Colors.green[400],
                             ), //
                             textAlign: _getTextAlign[context
                                 .watch<AppSettingsState>()
@@ -156,9 +172,13 @@ class ChapterContentItem extends StatelessWidget {
                         .watch<AppSettingsState>()
                         .getTranslationTextSize
                         .toDouble()),
-                    color: context
-                        .watch<AppSettingsState>()
-                        .getTranslationTextColor,
+                    color: context.read<MainState>().getNightThemeColorState
+                        ? context
+                            .watch<AppSettingsState>()
+                            .getTranslationTextColor
+                        : context.watch<MainState>().getNightThemeState
+                            ? Colors.white
+                            : Colors.black,
                     textAlign: _getTextAlign[
                         context.watch<AppSettingsState>().getToggleButtonIndex],
                     padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
@@ -320,9 +340,13 @@ class ChapterContentItem extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         backgroundColor: isBookmark
             ? item.favoriteState == 0
-                ? Colors.blue
-                : Colors.blueGrey
-            : Colors.blueGrey,
+                ? context.read<MainState>().getNightThemeState
+                    ? Colors.blue[900]
+                    : Colors.blue[400]
+                : context.read<MainState>().getNightThemeState
+                    ? Colors.blueGrey[800]
+                    : Colors.blueGrey[400]
+            : Colors.blueGrey[400],
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(25),
