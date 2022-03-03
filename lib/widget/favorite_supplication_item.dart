@@ -5,6 +5,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -30,6 +31,9 @@ class FavoriteSupplicationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: context.watch<MainState>().getNightThemeState
+          ? Colors.blueGrey[900]
+          : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -45,9 +49,15 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentArabic!,
                       style: TextStyle(
-                        fontSize: context.watch<AppSettingsState>().getArabicTextSize.toDouble() + 3,
+                        fontSize: context
+                                .watch<AppSettingsState>()
+                                .getArabicTextSize
+                                .toDouble() +
+                            3,
                         fontFamily: 'Hafs',
-                        color: context.watch<AppSettingsState>().getArabicTextColor,
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getArabicTextColor,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -62,10 +72,17 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentTranscription!,
                       style: TextStyle(
-                        fontSize: context.watch<AppSettingsState>().getTranslationTextSize.toDouble(),
-                        color: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                        fontSize: context
+                            .watch<AppSettingsState>()
+                            .getTranslationTextSize
+                            .toDouble(),
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getTranscriptionTextColor,
                       ), //
-                      textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                      textAlign: _getTextAlign[context
+                          .watch<AppSettingsState>()
+                          .getToggleButtonIndex],
                     ),
                   ),
                 )
@@ -92,9 +109,13 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   ),
                   actions: [
                     CupertinoButton(
-                      child: const Text(
+                      child: Text(
                         'Закрыть',
-                        style: TextStyle(color: Colors.red),
+                        style: TextStyle(
+                          color: context.watch<MainState>().getNightThemeState
+                              ? Colors.blue[900]
+                              : Colors.blue[400],
+                        ),
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -107,14 +128,21 @@ class FavoriteSupplicationItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(context.watch<AppSettingsState>().getTranslationTextSize.toDouble()),
-                  color: context.watch<AppSettingsState>().getTranslationTextColor,
-                  textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                  fontSize: FontSize(context
+                      .watch<AppSettingsState>()
+                      .getTranslationTextSize
+                      .toDouble()),
+                  color:
+                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  textAlign: _getTextAlign[
+                      context.watch<AppSettingsState>().getToggleButtonIndex],
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
                 fontSize: const FontSize(16),
-                color: Colors.blue,
+                color: context.watch<MainState>().getNightThemeState
+                    ? Colors.blue[900]
+                    : Colors.blue[400],
               ),
               'small': Style(
                 fontSize: const FontSize(10),
@@ -130,12 +158,20 @@ class FavoriteSupplicationItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Дуа ${index + 1}/$length',
-                style: const TextStyle(fontSize: 16, color: Colors.blue),
+              Text(
+                'Дуа ${index + 1}/$length',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: context.watch<MainState>().getNightThemeState
+                      ? Colors.blue[900]
+                      : Colors.blue[400],
+                ),
               ),
               IconButton(
                   icon: const Icon(CupertinoIcons.doc_on_doc),
-                  color: Colors.grey,
+                  color: context.watch<MainState>().getNightThemeState
+                      ? Colors.blue[50]
+                      : Colors.grey,
                   onPressed: () {
                     FlutterClipboard.copy(
                       '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
@@ -146,7 +182,9 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   }),
               IconButton(
                 icon: const Icon(CupertinoIcons.share),
-                color: Colors.grey,
+                color: context.watch<MainState>().getNightThemeState
+                    ? Colors.blue[50]
+                    : Colors.grey,
                 onPressed: () {
                   Share.share(
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
@@ -162,7 +200,9 @@ class FavoriteSupplicationItem extends StatelessWidget {
                       ? CupertinoIcons.bookmark
                       : CupertinoIcons.bookmark_fill,
                 ),
-                color: Colors.blue,
+                color: context.watch<MainState>().getNightThemeState
+                    ? Colors.blue[900]
+                    : Colors.blue[400],
                 onPressed: () {
                   context.read<FavoriteSupplicationState>().updateBookmarkState(
                       item.favoriteState == 0 ? 1 : 0, item.id!);
@@ -185,15 +225,24 @@ class FavoriteSupplicationItem extends StatelessWidget {
             ? item.favoriteState == 0
                 ? const Text(
                     'Добавлено',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   )
                 : const Text(
                     'Удалено',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   )
             : const Text(
                 'Скопировано',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
         duration: const Duration(milliseconds: 500),
       ),

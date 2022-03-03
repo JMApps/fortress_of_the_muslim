@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/widget/favorite_supplication_item.dart';
 import 'package:provider/provider.dart';
@@ -38,11 +39,18 @@ class FavoriteSupplicationList extends StatelessWidget {
                       Icon(
                         Icons.bookmark,
                         size: 150,
-                        color: Colors.blue[100],
+                        color: context.watch<MainState>().getNightThemeState
+                            ? Colors.blue[900]
+                            : Colors.blue[100],
                       ),
-                      const Text(
+                      Text(
                         'Избранных дуа нет',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: context.watch<MainState>().getNightThemeState
+                              ? Colors.blue[50]
+                              : Colors.blue[400],
+                        ),
                       ),
                     ],
                   ),

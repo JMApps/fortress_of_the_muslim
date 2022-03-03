@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/favorite_supplication_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/widget/favorite_supplication_list.dart';
 import 'package:provider/provider.dart';
 
@@ -11,17 +12,26 @@ class FavoriteSupplications extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<FavoriteSupplicationState>(create: (_) => FavoriteSupplicationState()),
+        ChangeNotifierProvider<FavoriteSupplicationState>(
+            create: (_) => FavoriteSupplicationState()),
       ],
       child: Scaffold(
-        backgroundColor: const Color(0xFFE3F2FD),
+        backgroundColor: context.watch<MainState>().getNightThemeState
+            ? Colors.blueGrey[900]
+            : Colors.blue[50],
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
+          title: Text(
             'Избранные дуа',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: context.watch<MainState>().getNightThemeState
+                  ? Colors.blue[50]
+                  : Colors.white,
+            ),
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: context.watch<MainState>().getNightThemeState
+              ? Colors.blue[900]
+              : Colors.blue[400],
           elevation: 0,
           leading: IconButton(
             onPressed: () {
