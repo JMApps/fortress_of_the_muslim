@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/widget/other_content_item.dart';
+import 'package:provider/provider.dart';
 
 class OtherContent extends StatelessWidget {
   OtherContent({Key? key}) : super(key: key);
@@ -17,11 +19,15 @@ class OtherContent extends StatelessWidget {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? Scaffold(
-                backgroundColor: const Color(0xFFEFEBE9),
+                backgroundColor: context.watch<MainState>().getNightThemeState
+                    ? Colors.blueGrey[900]
+                    : Colors.brown[50],
                 appBar: AppBar(
                   centerTitle: true,
                   title: const Text('Содержимое'),
-                  backgroundColor: Colors.brown,
+                  backgroundColor: context.watch<MainState>().getNightThemeState
+                      ? Colors.brown[900]
+                      : Colors.brown[400],
                   elevation: 0,
                 ),
                 body: Scrollbar(

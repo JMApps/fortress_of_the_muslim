@@ -51,7 +51,6 @@ class OtherContent extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 margin: EdgeInsets.zero,
                 textAlign: TextAlign.justify,
-                color: Colors.grey[800],
                 fontSize: const FontSize(20),
                 fontFamily: 'Gilroy'),
             'a': Style(
