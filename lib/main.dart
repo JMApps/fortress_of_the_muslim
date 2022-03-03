@@ -38,6 +38,7 @@ class Main extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 initialRoute: '/',
                 onGenerateRoute: _appRouter.appGeneratorRoute,
+                themeMode: ThemeMode.system,
                 theme: mainState.getNightThemeState ? AppTheme().darkTheme : AppTheme().lightTheme,
                 title: 'Крепость мусульманина');
           },
