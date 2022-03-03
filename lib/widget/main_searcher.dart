@@ -26,14 +26,14 @@ class MainSearcher extends StatelessWidget {
           CupertinoIcons.search,
           color: context.watch<MainState>().getNightThemeState
               ? Colors.blueGrey[50]
-              : Colors.grey[800],
+              : Colors.grey,
         ),
       ),
       placeholder: 'Поиск',
       placeholderStyle: TextStyle(
         color: context.watch<MainState>().getNightThemeState
             ? Colors.blueGrey[50]
-            : Colors.grey[800],
+            : Colors.grey,
       ),
       style: TextStyle(
         fontFamily: 'Gilroy',
