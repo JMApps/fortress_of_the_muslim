@@ -114,7 +114,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                         style: TextStyle(
                           color: context.watch<MainState>().getNightThemeState
                               ? Colors.blue[900]
-                              : Colors.blue[400],
+                              : Colors.red[400],
                         ),
                       ),
                       onPressed: () {
