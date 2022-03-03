@@ -25,7 +25,9 @@ class AppSettings extends StatelessWidget {
               borderRadius: const BorderRadius.all(
                 Radius.circular(25),
               ),
-              color: Colors.white,
+              color: context.watch<MainState>().getNightThemeState
+                  ? Colors.blueGrey[900]
+                  : Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(

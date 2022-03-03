@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/model/supplication_day_night_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:fortress_of_the_muslim/widget/day_night_button_count.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,9 @@ class DayNightChapterContentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: context.watch<MainState>().getNightThemeState
+          ? Colors.blueGrey[900]
+          : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -48,22 +52,36 @@ class DayNightChapterContentItem extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: realtimePlayingInfo.isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index ? const Color(0xFFFFFDE7) : const Color(0xFFFFFFFF),
+          color: !context.watch<MainPlayerState>().getPlayingState &&
+                  context.watch<MainPlayerState>().getCurrentIndex == index
+              ? context.watch<MainState>().getNightThemeState
+                  ? const Color(0xFF131D21)
+                  : const Color(0xFFFFFDE7)
+              : context.watch<MainState>().getNightThemeState
+                  ? Colors.blueGrey[900]
+                  : Colors.white,
         ),
         child: Column(
           children: [
             context.watch<AppSettingsState>().getIsArabicTextShow
                 ? item.contentArabic != null
                     ? Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                        padding:
+                            const EdgeInsets.only(left: 16, top: 16, right: 16),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(
                             item.contentArabic!,
                             style: TextStyle(
-                              fontSize: context.watch<AppSettingsState>().getArabicTextSize.toDouble() + 3,
+                              fontSize: context
+                                      .watch<AppSettingsState>()
+                                      .getArabicTextSize
+                                      .toDouble() +
+                                  3,
                               fontFamily: 'Hafs',
-                              color: context.watch<AppSettingsState>().getArabicTextColor,
+                              color: context
+                                  .watch<AppSettingsState>()
+                                  .getArabicTextColor,
                             ),
                             textDirection: TextDirection.rtl,
                           ),
@@ -74,16 +92,24 @@ class DayNightChapterContentItem extends StatelessWidget {
             context.watch<AppSettingsState>().getIsTranscriptionTextShow
                 ? item.contentTranscription != null
                     ? Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                        padding:
+                            const EdgeInsets.only(left: 16, top: 8, right: 16),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             item.contentTranscription!,
                             style: TextStyle(
-                              fontSize: context.watch<AppSettingsState>().getTranslationTextSize.toDouble(),
-                              color: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                              fontSize: context
+                                  .watch<AppSettingsState>()
+                                  .getTranslationTextSize
+                                  .toDouble(),
+                              color: context
+                                  .watch<AppSettingsState>()
+                                  .getTranscriptionTextColor,
                             ), //
-                            textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                            textAlign: _getTextAlign[context
+                                .watch<AppSettingsState>()
+                                .getToggleButtonIndex],
                           ),
                         ),
                       )
@@ -126,9 +152,15 @@ class DayNightChapterContentItem extends StatelessWidget {
               data: item.contentTranslation,
               style: {
                 '#': Style(
-                    fontSize: FontSize(context.watch<AppSettingsState>().getTranslationTextSize.toDouble()),
-                    color: context.watch<AppSettingsState>().getTranslationTextColor,
-                    textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                    fontSize: FontSize(context
+                        .watch<AppSettingsState>()
+                        .getTranslationTextSize
+                        .toDouble()),
+                    color: context
+                        .watch<AppSettingsState>()
+                        .getTranslationTextColor,
+                    textAlign: _getTextAlign[
+                        context.watch<AppSettingsState>().getToggleButtonIndex],
                     padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                     margin: EdgeInsets.zero),
                 'a': Style(
@@ -145,7 +177,10 @@ class DayNightChapterContentItem extends StatelessWidget {
             Divider(
               indent: 16,
               endIndent: 16,
-              color: realtimePlayingInfo.isPlaying && context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.grey,
+              color: realtimePlayingInfo.isPlaying &&
+                      context.watch<MainPlayerState>().getCurrentIndex == index
+                  ? Colors.red
+                  : Colors.grey,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -155,33 +190,53 @@ class DayNightChapterContentItem extends StatelessWidget {
                   'Дуа ${index + 1}/$length',
                   style: TextStyle(
                     fontSize: 15,
-                    color: context.watch<MainPlayerState>().getCurrentIndex == index ? Colors.red : Colors.blueGrey,
+                    color: context.watch<MainPlayerState>().getCurrentIndex ==
+                            index
+                        ? Colors.red
+                        : context.watch<MainState>().getNightThemeState
+                            ? Colors.blueGrey[100]
+                            : Colors.blueGrey[400],
                   ),
                 ),
                 item.nameAudio != null
                     ? IconButton(
                         icon: Icon(realtimePlayingInfo.isPlaying &&
-                                context.watch<MainPlayerState>().getCurrentIndex == index
+                                context
+                                        .watch<MainPlayerState>()
+                                        .getCurrentIndex ==
+                                    index
                             ? CupertinoIcons.stop_circle
                             : CupertinoIcons.play_circle),
-                        color: Colors.blueGrey,
+                        color: context.watch<MainState>().getNightThemeState
+                            ? Colors.blueGrey[100]
+                            : Colors.blueGrey[400],
                         onPressed: () {
-                          context.read<MainPlayerState>().setCurrentIndex(index);
+                          context
+                              .read<MainPlayerState>()
+                              .setCurrentIndex(index);
                           if (player.readingPlaylist!.currentIndex == index) {
                             if (realtimePlayingInfo.isPlaying) {
                               player.stop();
                             } else {
-                              context.read<MainPlayerState>().playOnlyTrack(player);
+                              context
+                                  .read<MainPlayerState>()
+                                  .playOnlyTrack(player);
                             }
                           } else {
-                            context.read<MainPlayerState>().playOnlyTrack(player);
+                            context
+                                .read<MainPlayerState>()
+                                .playOnlyTrack(player);
                           }
                         },
                       )
                     : const SizedBox(),
                 IconButton(
-                  icon: const Icon(CupertinoIcons.doc_on_doc),
-                  color: Colors.blueGrey,
+                  icon: Icon(
+                    CupertinoIcons.doc_on_doc,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
+                  ),
                   onPressed: () {
                     FlutterClipboard.copy(
                       'Слова поминания Аллаха, которые желательно произносить ${context.read<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}\n\n'
@@ -194,8 +249,12 @@ class DayNightChapterContentItem extends StatelessWidget {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(CupertinoIcons.share),
-                  color: Colors.blueGrey,
+                  icon: Icon(
+                    CupertinoIcons.share,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
+                  ),
                   onPressed: () {
                     Share.share(
                       'Слова поминания Аллаха, которые желательно произносить ${context.read<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}\n\n'
@@ -208,8 +267,12 @@ class DayNightChapterContentItem extends StatelessWidget {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(CupertinoIcons.photo),
-                  color: Colors.blueGrey,
+                  icon: Icon(
+                    CupertinoIcons.photo,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[100]
+                        : Colors.blueGrey[400],
+                  ),
                   onPressed: () {
                     context
                         .read<TakeScreenshotState>()
@@ -242,7 +305,10 @@ class DayNightChapterContentItem extends StatelessWidget {
         ),
         content: Text(
           'Скопировано',
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+          ),
         ),
         duration: Duration(milliseconds: 500),
       ),

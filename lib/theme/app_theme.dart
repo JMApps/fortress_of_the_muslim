@@ -4,7 +4,7 @@ class AppTheme {
   ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Gilroy',
-  );
+   );
 
   ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,

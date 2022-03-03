@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_player_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/widget/app_settings.dart';
 import 'package:fortress_of_the_muslim/widget/content_title.dart';
@@ -62,17 +63,24 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                 )
               : snapshot.hasData
                   ? Scaffold(
-                      backgroundColor: Colors.blueGrey[50],
+                      backgroundColor:
+                          context.watch<MainState>().getNightThemeState
+                              ? Colors.blueGrey[800]
+                              : Colors.blueGrey[50],
                       appBar: AppBar(
                         centerTitle: true,
                         elevation: 0,
-                        title: const Text(
+                        title: Text(
                           'Глава 27',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: context.watch<MainState>().getNightThemeState
+                                ? Colors.blueGrey[50]
+                                : Colors.white,
                           ),
                         ),
-                        backgroundColor: Colors.blueGrey,
+                        backgroundColor: context.watch<MainState>().getNightThemeState
+                            ? Colors.blueGrey[900]
+                            : Colors.blueGrey[400],
                         actions: [
                           IconButton(
                             onPressed: () {
@@ -83,9 +91,11 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                                 },
                               );
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               CupertinoIcons.settings,
-                              color: Colors.white,
+                              color: context.watch<MainState>().getNightThemeState
+                                  ? Colors.blueGrey[50]
+                                  : Colors.white,
                             ),
                           ),
                           Consumer<DayNightChapterState>(
@@ -109,38 +119,41 @@ class _DayNightContentChapterState extends State<DayNightContentChapter> {
                         ],
                       ),
                       body: _player.builderRealtimePlayingInfos(
-                        builder: (context, realtimePlayingInfo) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8, top: 8, right: 8),
-                                child: ContentTitle(
-                                  contentTitle: 'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
+                          builder: (context, realtimePlayingInfo) {
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8, top: 8, right: 8),
+                              child: ContentTitle(
+                                contentTitle:
+                                    'Слова поминания Аллаха, которые желательно произносить ${context.watch<DayNightChapterState>().getDayNight ? 'утром' : 'вечером'}',
+                              ),
+                            ),
+                            Expanded(
+                              child: Scrollbar(
+                                child: ScrollablePositionedList.builder(
+                                  itemScrollController: context
+                                      .read<MainPlayerState>()
+                                      .getItemScrollController,
+                                  physics: const ClampingScrollPhysics(),
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return DayNightChapterContentItem(
+                                      item: snapshot.data![index],
+                                      index: index,
+                                      length: snapshot.data!.length,
+                                      player: _player,
+                                      realtimePlayingInfo: realtimePlayingInfo,
+                                    );
+                                  },
                                 ),
                               ),
-                              Expanded(
-                                child: Scrollbar(
-                                  child: ScrollablePositionedList.builder(
-                                    itemScrollController: context.read<MainPlayerState>().getItemScrollController,
-                                    physics: const ClampingScrollPhysics(),
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return DayNightChapterContentItem(
-                                        item: snapshot.data![index],
-                                        index: index,
-                                        length: snapshot.data!.length,
-                                        player: _player,
-                                        realtimePlayingInfo: realtimePlayingInfo,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        }
-                      ),
+                            ),
+                          ],
+                        );
+                      }),
                       bottomNavigationBar:
                           MainPlayer(player: _player, snapshot: snapshot),
                     )
