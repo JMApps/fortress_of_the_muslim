@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_supplication_state.dart';
 import 'package:provider/provider.dart';
 
@@ -14,19 +15,32 @@ class SupplicationSearcher extends StatelessWidget {
         context.read<MainSupplicationState>().updateTextFiledData(newString);
       },
       decoration: BoxDecoration(
-        color: Colors.red[50],
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.red[600]
+            : Colors.red[50],
         borderRadius: BorderRadius.circular(15),
       ),
-      prefix: const Padding(
+      prefix: Padding(
         padding: EdgeInsets.all(8),
         child: Icon(
           CupertinoIcons.search,
-          color: Colors.grey,
+          color: context.watch<MainState>().getNightThemeState
+              ? Colors.red[50]
+              : Colors.grey,
         ),
       ),
       placeholder: 'Поиск',
-      placeholderStyle: const TextStyle(color: Colors.grey),
-      style: TextStyle(fontFamily: 'Gilroy', color: Colors.grey[800]),
+      placeholderStyle: TextStyle(
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.red[50]
+            : Colors.grey,
+      ),
+      style: TextStyle(
+        fontFamily: 'Gilroy',
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.red[50]
+            : Colors.grey[800],
+      ),
       clearButtonMode: OverlayVisibilityMode.editing,
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/supplication_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_supplication_state.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -28,11 +29,14 @@ class SupplicationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: context.watch<MainState>().getNightThemeState
+          ? Colors.blueGrey[900]
+          : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       margin: const EdgeInsets.all(8),
-      elevation: 1,
+      elevation: 3,
       child: Column(
         children: [
           item.contentArabic != null
@@ -43,9 +47,15 @@ class SupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentArabic!,
                       style: TextStyle(
-                        fontSize: context.watch<AppSettingsState>().getArabicTextSize.toDouble() + 3,
+                        fontSize: context
+                                .watch<AppSettingsState>()
+                                .getArabicTextSize
+                                .toDouble() +
+                            3,
                         fontFamily: 'Hafs',
-                        color: context.watch<AppSettingsState>().getArabicTextColor,
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getArabicTextColor,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -60,10 +70,17 @@ class SupplicationItem extends StatelessWidget {
                     child: Text(
                       item.contentTranscription!,
                       style: TextStyle(
-                        fontSize: context.watch<AppSettingsState>().getTranslationTextSize.toDouble(),
-                        color: context.watch<AppSettingsState>().getTranscriptionTextColor,
+                        fontSize: context
+                            .watch<AppSettingsState>()
+                            .getTranslationTextSize
+                            .toDouble(),
+                        color: context
+                            .watch<AppSettingsState>()
+                            .getTranscriptionTextColor,
                       ), //
-                      textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                      textAlign: _getTextAlign[context
+                          .watch<AppSettingsState>()
+                          .getToggleButtonIndex],
                     ),
                   ),
                 )
@@ -90,9 +107,13 @@ class SupplicationItem extends StatelessWidget {
                   ),
                   actions: [
                     CupertinoButton(
-                      child: const Text(
+                      child: Text(
                         'Закрыть',
-                        style: TextStyle(color: Colors.red),
+                        style: TextStyle(
+                          color: context.watch<MainState>().getNightThemeState
+                              ? Colors.red[900]
+                              : Colors.red[400],
+                        ),
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -105,14 +126,21 @@ class SupplicationItem extends StatelessWidget {
             data: item.contentTranslation,
             style: {
               '#': Style(
-                  fontSize: FontSize(context.watch<AppSettingsState>().getTranslationTextSize.toDouble()),
-                  color: context.watch<AppSettingsState>().getTranslationTextColor,
-                  textAlign: _getTextAlign[context.watch<AppSettingsState>().getToggleButtonIndex],
+                  fontSize: FontSize(context
+                      .watch<AppSettingsState>()
+                      .getTranslationTextSize
+                      .toDouble()),
+                  color:
+                      context.watch<AppSettingsState>().getTranslationTextColor,
+                  textAlign: _getTextAlign[
+                      context.watch<AppSettingsState>().getToggleButtonIndex],
                   padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                   margin: EdgeInsets.zero),
               'a': Style(
                 fontSize: const FontSize(16),
-                color: Colors.blue,
+                color: context.watch<MainState>().getNightThemeState
+                    ? Colors.red[900]
+                    : Colors.red[400],
               ),
               'small': Style(
                 fontSize: const FontSize(10),
@@ -130,10 +158,20 @@ class SupplicationItem extends StatelessWidget {
             children: [
               Text(
                 'Дуа ${item.id}/280',
-                style: const TextStyle(fontSize: 16, color: Colors.red),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: context.watch<MainState>().getNightThemeState
+                      ? Colors.red[900]
+                      : Colors.red[400],
+                ),
               ),
               IconButton(
-                  icon: const Icon(CupertinoIcons.doc_on_doc),
+                  icon: Icon(
+                    CupertinoIcons.doc_on_doc,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.red[50]
+                        : Colors.grey,
+                  ),
                   color: Colors.grey,
                   onPressed: () {
                     FlutterClipboard.copy(
@@ -144,8 +182,12 @@ class SupplicationItem extends StatelessWidget {
                     _showMessage(context, false);
                   }),
               IconButton(
-                icon: const Icon(CupertinoIcons.share),
-                color: Colors.grey,
+                icon: Icon(
+                  CupertinoIcons.share,
+                  color: context.watch<MainState>().getNightThemeState
+                      ? Colors.red[50]
+                      : Colors.grey,
+                ),
                 onPressed: () {
                   Share.share(
                     '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
@@ -161,7 +203,9 @@ class SupplicationItem extends StatelessWidget {
                       ? CupertinoIcons.bookmark
                       : CupertinoIcons.bookmark_fill,
                 ),
-                color: Colors.red,
+                color: context.watch<MainState>().getNightThemeState
+                    ? Colors.red[900]
+                    : Colors.red[400],
                 onPressed: () {
                   context.read<MainSupplicationState>().updateBookmarkState(
                       item.favoriteState == 0 ? 1 : 0, item.id!);
@@ -179,22 +223,33 @@ class SupplicationItem extends StatelessWidget {
   _showMessage(BuildContext context, bool isBookmark) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: isBookmark ? item.favoriteState == 0
+        backgroundColor: isBookmark
+            ? item.favoriteState == 0
                 ? Colors.blue
                 : Colors.red
             : Colors.red,
-        content: isBookmark ? item.favoriteState == 0
+        content: isBookmark
+            ? item.favoriteState == 0
                 ? const Text(
                     'Добавлено',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   )
                 : const Text(
                     'Удалено',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   )
             : const Text(
                 'Скопировано',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
         duration: const Duration(milliseconds: 500),
       ),
