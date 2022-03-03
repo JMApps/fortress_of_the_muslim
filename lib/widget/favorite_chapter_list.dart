@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/services/database_query.dart';
 import 'package:fortress_of_the_muslim/widget/favorite_chapter_item.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +28,12 @@ class FavoriteChapterList extends StatelessWidget {
                       item: snapshot.data![index], index: index);
                 },
                 separatorBuilder: (BuildContext context, int index) {
-                  return const Divider(
+                  return Divider(
                     indent: 16,
                     endIndent: 16,
-                    color: Colors.grey,
+                    color: context.watch<MainState>().getNightThemeState
+                        ? Colors.blueGrey[50]
+                        : Colors.grey,
                   );
                 },
               )
@@ -44,11 +47,15 @@ class FavoriteChapterList extends StatelessWidget {
                       Icon(
                         Icons.bookmark,
                         size: 150,
-                        color: Colors.orange[100],
+                        color: context.watch<MainState>().getNightThemeState
+                            ? Colors.orange[900]
+                            : Colors.orange[100],
                       ),
-                      const Text(
+                      Text(
                         'Избранных глав нет',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(fontSize: 18, color: context.watch<MainState>().getNightThemeState
+                            ? Colors.orange[50]
+                            : Colors.grey,),
                       ),
                     ],
                   ),

@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/model/chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/model/chapter_model_item.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteChapterItem extends StatelessWidget {
@@ -20,16 +21,22 @@ class FavoriteChapterItem extends StatelessWidget {
         icon: Icon(item.favoriteState == 0
             ? CupertinoIcons.bookmark
             : CupertinoIcons.bookmark_solid),
-        color: Colors.orange,
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.orange[900]
+            : Colors.orange[400],
         onPressed: () {
-          context.read<MainChapterState>().updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
+          context
+              .read<MainChapterState>()
+              .updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id);
           _showSnackBar(context);
         },
       ),
       title: Text(
         'Глава ${item.id}',
-        style: const TextStyle(
-          color: Colors.orange,
+        style: TextStyle(
+          color: context.watch<MainState>().getNightThemeState
+              ? Colors.orange[900]
+              : Colors.orange[400],
           fontSize: 18,
           fontWeight: FontWeight.w700,
         ),
@@ -56,9 +63,13 @@ class FavoriteChapterItem extends StatelessWidget {
               ),
               actions: [
                 CupertinoButton(
-                  child: const Text(
+                  child: Text(
                     'Закрыть',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(
+                      color: context.watch<MainState>().getNightThemeState
+                          ? Colors.orange[900]
+                          : Colors.red[400],
+                    ),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -74,6 +85,12 @@ class FavoriteChapterItem extends StatelessWidget {
             padding: EdgeInsets.zero,
             margin: EdgeInsets.zero,
             fontSize: const FontSize(19),
+          ),
+          'a': Style(
+            fontSize: const FontSize(16),
+            color: context.watch<MainState>().getNightThemeState
+                ? Colors.orange[900]
+                : Colors.orange[400],
           ),
         },
       ),
@@ -93,11 +110,17 @@ class FavoriteChapterItem extends StatelessWidget {
         content: item.favoriteState == 0
             ? const Text(
                 'Добавлено',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               )
             : const Text(
                 'Удалено',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
         duration: const Duration(milliseconds: 500),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/widget/favorite_chapter_list.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,9 @@ class FavoriteChapters extends StatelessWidget {
         ChangeNotifierProvider<MainChapterState>(create: (_) => MainChapterState()),
       ],
       child: Scaffold(
-        backgroundColor: const Color(0xFFFFF3E0),
+        backgroundColor: context.watch<MainState>().getNightThemeState
+            ? Colors.blueGrey[900]
+            : Colors.orange[50],
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
@@ -23,9 +26,14 @@ class FavoriteChapters extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          backgroundColor: Colors.orange,
+          backgroundColor: context.watch<MainState>().getNightThemeState
+              ? Colors.orange[900]
+              : Colors.orange[400],
           elevation: 0,
           leading: IconButton(
+            color: context.watch<MainState>().getNightThemeState
+                ? Colors.orange[50]
+                : Colors.white,
             icon: const Icon(CupertinoIcons.square_list),
             onPressed: () {
               Navigator.of(context, rootNavigator: true)
