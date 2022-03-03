@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
@@ -7,6 +6,7 @@ import 'package:fortress_of_the_muslim/provider/floating_counter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/provider/take_screenshot_state.dart';
 import 'package:fortress_of_the_muslim/router/app_router.dart';
+import 'package:fortress_of_the_muslim/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -29,15 +29,20 @@ class Main extends StatelessWidget {
         ChangeNotifierProvider<DayNightChapterState>(create: (_) => DayNightChapterState()),
         ChangeNotifierProvider<FavoriteSupplicationState>(create: (_) => FavoriteSupplicationState()),
       ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          onGenerateRoute: _appRouter.appGeneratorRoute,
-          theme: ThemeData(
-            fontFamily: 'Gilroy',
-            primarySwatch: Colors.teal,
-          ),
-          title: 'Крепость мусульманина'),
+      child: ChangeNotifierProvider(
+        create: (_) => MainState(),
+        child: Consumer<MainState>(
+          builder: (BuildContext context, MainState mainState, child) {
+            context.read<MainState>().initTheme();
+            return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                initialRoute: '/',
+                onGenerateRoute: _appRouter.appGeneratorRoute,
+                theme: mainState.getNightThemeState ? AppTheme().darkTheme : AppTheme().lightTheme,
+                title: 'Крепость мусульманина');
+          },
+        ),
+      ),
     );
   }
 }

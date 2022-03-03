@@ -29,25 +29,50 @@ class MainPage extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 900),
         items: [
           FlipBarItem(
-              icon: const Icon(CupertinoIcons.square_list, color: Colors.white),
-              text: const Text('Главы', style: TextStyle(fontSize: 16, color: Colors.white)),
-              frontColor: Colors.teal,
-              backColor: Colors.teal),
+            icon: const Icon(CupertinoIcons.square_list, color: Colors.white),
+            text: Text('Главы',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+            frontColor: context.watch<MainState>().getNightThemeState
+                ? Colors.blueGrey[900]!
+                : Colors.teal[400]!,
+            backColor: context.watch<MainState>().getNightThemeState
+                ? Colors.blueGrey[900]!
+                : Colors.teal[400]!,
+          ),
           FlipBarItem(
-              icon: const Icon(CupertinoIcons.bookmark, color: Colors.white),
-              text: const Text('Избранное', style: TextStyle(fontSize: 16, color: Colors.white)),
-              frontColor: Colors.orange,
-              backColor: Colors.orange),
+            icon: const Icon(CupertinoIcons.bookmark, color: Colors.white),
+            text: Text('Избранное',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+            frontColor: context.watch<MainState>().getNightThemeState
+                ? Colors.orange[900]!
+                : Colors.orange[400]!,
+            backColor: context.watch<MainState>().getNightThemeState
+                ? Colors.orange[900]!
+                : Colors.orange[400]!,
+          ),
           FlipBarItem(
-              icon: const Icon(CupertinoIcons.square_list_fill, color: Colors.white),
-              text: const Text('Дуа', style: TextStyle(fontSize: 16, color: Colors.white)),
-              frontColor: Colors.red,
-              backColor: Colors.red),
+            icon: const Icon(CupertinoIcons.square_list_fill,
+                color: Colors.white),
+            text: Text('Дуа',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+            frontColor: context.watch<MainState>().getNightThemeState
+                ? Colors.red[900]!
+                : Colors.red[400]!,
+            backColor: context.watch<MainState>().getNightThemeState
+                ? Colors.red[900]!
+                : Colors.red[400]!,
+          ),
           FlipBarItem(
-              icon: const Icon(CupertinoIcons.bookmark_fill, color: Colors.white),
-              text: const Text('Избранное', style: TextStyle(fontSize: 16, color: Colors.white)),
-              frontColor: Colors.blue,
-              backColor: Colors.blue)
+            icon: const Icon(CupertinoIcons.bookmark_fill, color: Colors.white),
+            text: Text('Избранное',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+            frontColor: context.watch<MainState>().getNightThemeState
+                ? Colors.blue[900]!
+                : Colors.blue[400]!,
+            backColor: context.watch<MainState>().getNightThemeState
+                ? Colors.blue[900]!
+                : Colors.blue[400]!,
+          )
         ],
         onIndexChanged: (newIndex) {
           context.read<MainState>().selectedItem(newIndex);

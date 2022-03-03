@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/day_night_chapter_state.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:fortress_of_the_muslim/widget/main_chapter_list.dart';
 import 'package:fortress_of_the_muslim/widget/main_searcher.dart';
 import 'package:provider/provider.dart';
@@ -18,20 +19,27 @@ class MainChapters extends StatelessWidget {
     context.read<DayNightChapterState>().initDayNightState();
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainChapterState>(create: (_) => MainChapterState()),
+        ChangeNotifierProvider<MainChapterState>(
+            create: (_) => MainChapterState()),
       ],
       child: GestureDetector(
         child: Scaffold(
-          backgroundColor: const Color(0xFFE0F2F1),
+          backgroundColor: context.watch<MainState>().getNightThemeState
+              ? Colors.blueGrey[800]
+              : Colors.teal[50],
           appBar: AppBar(
             centerTitle: true,
-            title: const Text(
+            title: Text(
               'Крепость мусульманина',
               style: TextStyle(
-                color: Colors.white,
+                color: context.watch<MainState>().getNightThemeState
+                    ? Colors.blueGrey[50]
+                    : Colors.teal[50],
               ),
             ),
-            backgroundColor: Colors.teal,
+            backgroundColor: context.watch<MainState>().getNightThemeState
+                ? Colors.blueGrey[900]
+                : Colors.teal[400],
             elevation: 0,
             leading: IconButton(
               icon: const Icon(CupertinoIcons.square_list),
@@ -39,12 +47,17 @@ class MainChapters extends StatelessWidget {
                 Navigator.of(context, rootNavigator: true)
                     .pushNamed('/other_content');
               },
+              color: context.watch<MainState>().getNightThemeState
+                  ? Colors.blueGrey[50]
+                  : Colors.teal[50],
             ),
             actions: [
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.apps,
-                  color: Colors.white,
+                  color: context.watch<MainState>().getNightThemeState
+                      ? Colors.blueGrey[50]
+                      : Colors.teal[50],
                 ),
                 onPressed: () async {
                   await launch(
@@ -66,9 +79,11 @@ class MainChapters extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(
-                  color: Colors.teal,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: context.watch<MainState>().getNightThemeState
+                      ? Colors.blueGrey[900]
+                      : Colors.teal[400],
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15),

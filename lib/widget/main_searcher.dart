@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/main_chapter_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:provider/provider.dart';
 
 class MainSearcher extends StatelessWidget {
@@ -14,19 +15,32 @@ class MainSearcher extends StatelessWidget {
         context.read<MainChapterState>().updateTextFiledData(newString);
       },
       decoration: BoxDecoration(
-        color: Colors.teal[50],
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.blueGrey[800]
+            : Colors.teal[50],
         borderRadius: BorderRadius.circular(15),
       ),
-      prefix: const Padding(
+      prefix: Padding(
         padding: EdgeInsets.all(8),
         child: Icon(
           CupertinoIcons.search,
-          color: Colors.grey,
+          color: context.watch<MainState>().getNightThemeState
+              ? Colors.blueGrey[50]
+              : Colors.grey[800],
         ),
       ),
       placeholder: 'Поиск',
-      placeholderStyle: const TextStyle(color: Colors.grey),
-      style: TextStyle(fontFamily: 'Gilroy', color: Colors.grey[800]),
+      placeholderStyle: TextStyle(
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.blueGrey[50]
+            : Colors.grey[800],
+      ),
+      style: TextStyle(
+        fontFamily: 'Gilroy',
+        color: context.watch<MainState>().getNightThemeState
+            ? Colors.blueGrey[50]
+            : Colors.grey[800],
+      ),
       clearButtonMode: OverlayVisibilityMode.editing,
     );
   }

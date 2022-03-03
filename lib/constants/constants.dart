@@ -7,3 +7,4 @@ const keyArabicTextShow = 'key_arabic_text_show';
 const keyTranscriptionTextShow = 'key_transcription_text_show';
 const keyScreenWakeLock = 'key_screen_wake_lock';
 const keyToggleButtonIndex = 'key_toggle_button_index';
+const keyToggleNightTheme = 'key_toggle_night_theme';

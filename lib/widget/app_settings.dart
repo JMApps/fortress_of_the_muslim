@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/provider/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/provider/main_state.dart';
 import 'package:o_color_picker/o_color_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -344,23 +345,37 @@ class AppSettings extends StatelessWidget {
                           : 'Скрыть текст транскрипции'),
                     ),
                     SwitchListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 8),
-                        value:
-                            context.watch<AppSettingsState>().getScreenWakelock,
-                        onChanged: (value) {
-                          context
-                              .read<AppSettingsState>()
-                              .updateScreenWakeLock(value);
-                          context
-                              .read<AppSettingsState>()
-                              .saveScreenWakeLock(value);
-                        },
-                        activeColor: Colors.blueGrey,
-                        title: Text(
-                            context.watch<AppSettingsState>().getScreenWakelock
-                                ? 'Дисплей не выключится'
-                                : 'Дисплей выключится')),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      value:
+                          context.watch<AppSettingsState>().getScreenWakelock,
+                      onChanged: (value) {
+                        context
+                            .read<AppSettingsState>()
+                            .updateScreenWakeLock(value);
+                        context
+                            .read<AppSettingsState>()
+                            .saveScreenWakeLock(value);
+                      },
+                      activeColor: Colors.blueGrey,
+                      title: Text(
+                          context.watch<AppSettingsState>().getScreenWakelock
+                              ? 'Дисплей не выключится'
+                              : 'Дисплей выключится'),
+                    ),
+                    const Divider(indent: 16, endIndent: 16),
+                    SwitchListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      value: context.watch<MainState>().getNightThemeState,
+                      onChanged: (value) {
+                        context.read<MainState>().changeTheme();
+                        context.read<MainState>().saveThemeState();
+                      },
+                      activeColor: Colors.blueGrey,
+                      title: Text(
+                          context.watch<AppSettingsState>().getScreenWakelock
+                              ? 'Выкл ночной режим'
+                              : 'Вкл ночной режим'),
+                    ),
                     const Divider(indent: 16, endIndent: 16),
                     MaterialButton(
                       shape: RoundedRectangleBorder(
