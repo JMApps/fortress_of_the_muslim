@@ -44,5 +44,6 @@ class MainState with ChangeNotifier {
     final preferences = await SharedPreferences.getInstance();
     _nightThemeState = preferences.getBool(keyToggleNightTheme) ?? false;
     _nightThemeColorState = preferences.getBool(keyToggleColorState) ?? false;
+    notifyListeners();
   }
 }

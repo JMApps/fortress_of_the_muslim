@@ -33,13 +33,12 @@ class Main extends StatelessWidget {
         create: (_) => MainState(),
         child: Consumer<MainState>(
           builder: (BuildContext context, MainState mainState, child) {
-            context.read<MainState>().initTheme();
+            mainState.initTheme();
             return MaterialApp(
+                theme: mainState.getNightThemeState ? AppTheme().darkTheme : AppTheme().lightTheme,
                 debugShowCheckedModeBanner: false,
                 initialRoute: '/',
                 onGenerateRoute: _appRouter.appGeneratorRoute,
-                themeMode: ThemeMode.system,
-                theme: mainState.getNightThemeState ? AppTheme().darkTheme : AppTheme().lightTheme,
                 title: 'Крепость мусульманина');
           },
         ),
