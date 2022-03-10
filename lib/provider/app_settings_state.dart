@@ -45,6 +45,9 @@ class AppSettingsState with ChangeNotifier {
 
   List<bool> get getIsSelected => _isSelected;
 
+  bool _nightThemeColorState = false;
+
+  bool get getNightThemeColorState => _nightThemeColorState;
 
   updateArabicTextSizeValue(double textSize) {
     _arabicTextSize = textSize;
@@ -141,6 +144,16 @@ class AppSettingsState with ChangeNotifier {
     preferences.setInt(keyToggleButtonIndex, index);
   }
 
+  changeColorState() {
+    _nightThemeColorState = !_nightThemeColorState;
+    notifyListeners();
+  }
+
+  saveColorState() async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setBool(keyToggleColorState, _nightThemeColorState);
+  }
+
   initPreferences() async {
     final preferences = await SharedPreferences.getInstance();
     _arabicTextSize = preferences.getDouble(keyArabicTextSizeValue) ?? 20;
@@ -152,6 +165,7 @@ class AppSettingsState with ChangeNotifier {
     _isTranscriptionTextShow = preferences.getBool(keyTranscriptionTextShow) ?? true;
     _isScreenWakeLock = preferences.getBool(keyScreenWakeLock) ?? false;
     _toggleButtonIndex = preferences.getInt(keyToggleButtonIndex) ?? 0;
+    _nightThemeColorState = preferences.getBool(keyToggleColorState) ?? false;
     for (int i = 0; i < _isSelected.length; i++) {
       _isSelected[i] = i == _toggleButtonIndex;
     }

@@ -382,14 +382,14 @@ class AppSettings extends StatelessWidget {
                         ),
                         SwitchListTile(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                          value: context.watch<MainState>().getNightThemeColorState,
+                          value: context.watch<AppSettingsState>().getNightThemeColorState,
                           onChanged: (value) {
-                            context.read<MainState>().changeColorState();
-                            context.read<MainState>().saveColorState();
+                            context.read<AppSettingsState>().changeColorState();
+                            context.read<AppSettingsState>().saveColorState();
                           },
                           activeColor: Colors.blueGrey,
                           title: Text(
-                              context.watch<MainState>().getNightThemeColorState
+                              context.watch<AppSettingsState>().getNightThemeColorState
                                   ? 'Цвета темы'
                                   : 'Выбранные цвета дуа'),
                         ),

@@ -53,7 +53,7 @@ class SupplicationItem extends StatelessWidget {
                                 .toDouble() +
                             3,
                         fontFamily: 'Hafs',
-                        color: context.read<MainState>().getNightThemeColorState
+                        color: context.read<AppSettingsState>().getNightThemeColorState
                             ? context
                                 .watch<AppSettingsState>()
                                 .getArabicTextColor
@@ -78,7 +78,7 @@ class SupplicationItem extends StatelessWidget {
                             .watch<AppSettingsState>()
                             .getTranslationTextSize
                             .toDouble(),
-                        color: context.read<MainState>().getNightThemeColorState
+                        color: context.read<AppSettingsState>().getNightThemeColorState
                             ? context
                                 .watch<AppSettingsState>()
                                 .getTranscriptionTextColor
@@ -138,7 +138,7 @@ class SupplicationItem extends StatelessWidget {
                       .watch<AppSettingsState>()
                       .getTranslationTextSize
                       .toDouble()),
-                  color: context.read<MainState>().getNightThemeColorState
+                  color: context.read<AppSettingsState>().getNightThemeColorState
                       ? context
                           .watch<AppSettingsState>()
                           .getTranslationTextColor

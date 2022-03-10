@@ -39,7 +39,8 @@ class Main extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 initialRoute: '/',
                 onGenerateRoute: _appRouter.appGeneratorRoute,
-                title: 'Крепость мусульманина');
+                title: 'Крепость мусульманина',
+            );
           },
         ),
       ),

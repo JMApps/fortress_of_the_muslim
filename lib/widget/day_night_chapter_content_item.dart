@@ -80,7 +80,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                                   3,
                               fontFamily: 'Hafs',
                               color: context
-                                      .read<MainState>()
+                                      .read<AppSettingsState>()
                                       .getNightThemeColorState
                                   ? context
                                       .watch<AppSettingsState>()
@@ -112,7 +112,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                                   .getTranslationTextSize
                                   .toDouble(),
                               color: context
-                                      .read<MainState>()
+                                      .read<AppSettingsState>()
                                       .getNightThemeColorState
                                   ? context
                                       .watch<AppSettingsState>()
@@ -172,7 +172,7 @@ class DayNightChapterContentItem extends StatelessWidget {
                         .watch<AppSettingsState>()
                         .getTranslationTextSize
                         .toDouble()),
-                    color: context.read<MainState>().getNightThemeColorState
+                    color: context.read<AppSettingsState>().getNightThemeColorState
                         ? context
                             .watch<AppSettingsState>()
                             .getTranslationTextColor

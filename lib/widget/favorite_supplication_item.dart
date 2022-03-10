@@ -76,7 +76,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                             .watch<AppSettingsState>()
                             .getTranslationTextSize
                             .toDouble(),
-                        color: context.read<MainState>().getNightThemeColorState
+                        color: context.read<AppSettingsState>().getNightThemeColorState
                             ? context
                                 .watch<AppSettingsState>()
                                 .getTranscriptionTextColor
@@ -136,7 +136,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                       .watch<AppSettingsState>()
                       .getTranslationTextSize
                       .toDouble()),
-                  color: context.read<MainState>().getNightThemeColorState
+                  color: context.read<AppSettingsState>().getNightThemeColorState
                       ? context
                           .watch<AppSettingsState>()
                           .getTranslationTextColor
