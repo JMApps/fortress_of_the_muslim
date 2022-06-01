@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/presentation/pages/app_settings.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/chapters.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/favorite_chapters.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/favorite_supplications.dart';
@@ -27,10 +28,11 @@ class AppRoute {
           builder: (_) => const FavoriteSupplications(),
           settings: routeSettings,
         );
-      // case 'app_settings':
-      //   return MaterialPageRoute(
-      //     builder: (_) => AppSettings(), settings: routeSettings,
-      //   );
+      case 'app_settings':
+        return MaterialPageRoute(
+          builder: (_) => const AppSettings(),
+          settings: routeSettings,
+        );
       // case 'app_about':
       //   return MaterialPageRoute(
       //     builder: (_) => AppAbout(), settings: routeSettings,
