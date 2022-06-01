@@ -61,7 +61,7 @@ class MainItems extends StatelessWidget {
               MainItem(
                 icon: CupertinoIcons.doc_append,
                 title: 'Содержимое',
-                route: 'app_about',
+                route: 'book_content',
                 color: Color(0xFFFFFFFF),
               ),
               MainItem(

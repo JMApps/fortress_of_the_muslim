@@ -1,3 +1,4 @@
+import 'package:fortress_of_the_muslim/data/local/database/model/book_content_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_chapter_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_chapter_item_model.dart';
@@ -51,12 +52,19 @@ class DatabaseQuery {
 
   addRemoveFavoriteChapter(int state, int chapterId) async {
     var dbClient = await con.db;
-    var res = await dbClient.rawQuery('UPDATE Table_of_chapters SET favorite_state = $state WHERE _id == $chapterId');
+    await dbClient.rawQuery('UPDATE Table_of_chapters SET favorite_state = $state WHERE _id == $chapterId');
   }
 
   addRemoveFavoriteSupplication(int state, int supplicationId) async {
     var dbClient = await con.db;
     await dbClient.rawQuery('UPDATE Table_of_supplications SET favorite_state = $state WHERE _id == $supplicationId');
+  }
+
+  Future<List<BookContentItemModel>> getBookContent() async {
+    var dbClient = await con.db;
+    var res = await dbClient.query('Table_of_about_us');
+    List<BookContentItemModel>? bookContent = res.isNotEmpty ? res.map((c) => BookContentItemModel.fromMap(c)).toList() : null;
+    return bookContent!;
   }
 
   // Future<List<SupplicationModelItem>> getSupplicationSearchResult(String text) async {
@@ -72,13 +80,6 @@ class DatabaseQuery {
   //   var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $_id');
   //   List<SupplicationModelItem>? chapterSupplications = res.isNotEmpty ? res.map((c) => SupplicationModelItem.fromMap(c)).toList() : null;
   //   return chapterSupplications!;
-  // }
-  //
-  // Future<List<OtherModelItem>> getAboutUs() async {
-  //   var dbClient = await con.db;
-  //   var res = await dbClient.query('Table_of_about_us');
-  //   List<OtherModelItem>? aboutBook = res.isNotEmpty ? res.map((c) => OtherModelItem.fromMap(c)).toList() : null;
-  //   return aboutBook!;
   // }
   //
   //

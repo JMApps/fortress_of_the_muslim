@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/app_settings.dart';
+import 'package:fortress_of_the_muslim/presentation/pages/book_contents.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/chapters.dart';
+import 'package:fortress_of_the_muslim/presentation/pages/content_book_content.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/favorite_chapters.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/favorite_supplications.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/supplications.dart';
@@ -33,15 +35,17 @@ class AppRoute {
           builder: (_) => const AppSettings(),
           settings: routeSettings,
         );
-      // case 'app_about':
-      //   return MaterialPageRoute(
-      //     builder: (_) => AppAbout(), settings: routeSettings,
-      //   );
-      // case 'app_ios_account':
-      //   return MaterialPageRoute(
-      //     builder: (_) => AppIosAccount(), settings: routeSettings,
-      //   );
+      case 'book_content':
+        return MaterialPageRoute(
+          builder: (_) => const BookContents(),
+          settings: routeSettings,
+        );
+      case 'content_book_content':
+        return MaterialPageRoute(
+          builder: (_) => const ContentBookContent(),
+          settings: routeSettings,
+        );
     }
-    return throw (Exception('Invalid ${routeSettings.name}'));
+    return throw (Exception('Invalid route = ${routeSettings.name}'));
   }
 }
