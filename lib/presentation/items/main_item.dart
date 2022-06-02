@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainItem extends StatelessWidget {
-  const MainItem({
+  MainItem({
     Key? key,
     required this.icon,
     required this.title,
@@ -14,6 +17,11 @@ class MainItem extends StatelessWidget {
   final String route;
   final Color? color;
 
+  final Uri _urlIOS = Uri.parse(
+      'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953');
+  final Uri _urlAndroid = Uri.parse(
+      'https://play.google.com/store/apps/dev?id=8649252597553656018');
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,8 +33,14 @@ class MainItem extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: () {
-          Navigator.pushNamed(context, route);
+        onTap: () async {
+          if (route == 'app_ios_account') {
+            await launchUrl(
+              Platform.isIOS ? _urlIOS : _urlAndroid,
+            );
+          } else {
+            Navigator.pushNamed(context, route);
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),

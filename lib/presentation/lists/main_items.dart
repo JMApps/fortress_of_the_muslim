@@ -51,24 +51,24 @@ class MainItems extends StatelessWidget {
               vertical: 4,
             ),
             primary: false,
-            children: const [
+            children: [
               MainItem(
                 icon: CupertinoIcons.settings,
                 title: 'Настройки',
                 route: 'app_settings',
-                color: Color(0xFFFFFFFF),
+                color: const Color(0xFFFFFFFF),
               ),
               MainItem(
                 icon: CupertinoIcons.doc_append,
                 title: 'Содержимое',
                 route: 'book_content',
-                color: Color(0xFFFFFFFF),
+                color: const Color(0xFFFFFFFF),
               ),
               MainItem(
                 icon: CupertinoIcons.square_grid_2x2,
                 title: 'Приложения',
                 route: 'app_ios_account',
-                color: Color(0xFFFFFFFF),
+                color: const Color(0xFFFFFFFF),
               ),
             ],
           ),
