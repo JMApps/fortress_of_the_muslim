@@ -10,7 +10,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   @override
   initState() {
     super.initState();
@@ -18,12 +17,23 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PreferredSize(
+    return Scaffold(
+      appBar: const PreferredSize(
         preferredSize: Size(double.maxFinite, 50),
         child: MainAppBar(),
       ),
-      body: MainItems(),
+      body: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Colors.teal.withOpacity(0.05), BlendMode.dstATop),
+            fit: BoxFit.cover,
+            image: const AssetImage('assets/icons/row_texture.jpeg'),
+          ),
+        ),
+        child: const MainItems(),
+      ),
     );
   }
 }

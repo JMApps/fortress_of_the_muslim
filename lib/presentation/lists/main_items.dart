@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_item.dart';
+import 'package:fortress_of_the_muslim/presentation/items/main_row.dart';
 
 class MainItems extends StatelessWidget {
   const MainItems({Key? key}) : super(key: key);
@@ -18,31 +19,45 @@ class MainItems extends StatelessWidget {
             mainAxisSpacing: 1,
             crossAxisCount: 2,
             children: [
-              MainItem(
+              MainRow(
                 icon: CupertinoIcons.square_list,
                 title: 'Главы',
                 route: 'main_chapters',
-                color: Colors.teal[100],
+                color: const Color(0xa63f968c),
               ),
-              MainItem(
+              MainRow(
                 icon: CupertinoIcons.bookmark,
                 title: 'Избранное',
                 route: 'favorite_chapters',
-                color: Colors.amber[100],
+                color: const Color(0xa6d19834),
               ),
-              MainItem(
+              MainRow(
                 icon: CupertinoIcons.book,
                 title: 'Все дуа',
                 route: 'main_supplications',
-                color: Colors.red[100],
+                color: const Color(0xa6bf615b),
               ),
-              MainItem(
+              MainRow(
                 icon: CupertinoIcons.bookmark,
                 title: 'Избранные дуа',
                 route: 'favorite_supplications',
-                color: Colors.blue[100],
+                color: const Color(0x99454c5b),
               ),
             ],
+          ),
+          Visibility(
+            visible: false,
+            maintainAnimation: false,
+            maintainSize: false,
+            child: Card(
+              margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Container(
+                height: 50,
+              ),
+            ),
           ),
           ListView(
             shrinkWrap: true,

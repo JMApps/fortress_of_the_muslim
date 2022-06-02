@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MainItem extends StatelessWidget {
-  MainItem({
+class MainRow extends StatelessWidget {
+  MainRow({
     Key? key,
     required this.icon,
     required this.title,
@@ -44,6 +44,15 @@ class MainItem extends StatelessWidget {
         },
         child: Container(
           padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            image: DecorationImage(
+              colorFilter:
+                  ColorFilter.mode(color!.withOpacity(0.05), BlendMode.dstATop),
+              fit: BoxFit.fill,
+              image: const AssetImage('assets/icons/row_texture.jpeg'),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
