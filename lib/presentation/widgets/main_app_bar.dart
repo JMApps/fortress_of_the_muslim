@@ -9,7 +9,7 @@ class MainAppBar extends StatelessWidget {
       centerTitle: true,
       title: const Text('Крепость мусульманина'),
       elevation: 0,
-      backgroundColor: Colors.teal,
+      backgroundColor: const Color(0xff3f968c),
       actions: const [
       ],
     );

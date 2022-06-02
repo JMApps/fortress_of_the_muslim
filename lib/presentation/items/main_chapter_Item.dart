@@ -28,12 +28,12 @@ class MainChapterItem extends StatelessWidget {
                     ? const Icon(CupertinoIcons.bookmark)
                     : const Icon(CupertinoIcons.bookmark_fill),
                 splashRadius: 22,
-                splashColor: Colors.teal[100],
-                color: Colors.teal,
+                splashColor: const Color(0xff81b9b0),
+                color: const Color(0xff3f968c),
                 onPressed: () {
                   context.read<MainState>().showSnackBarMessage(
                       context,
-                      Colors.teal,
+                      const Color(0xff3f968c),
                       item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
                   context.read<BookmarkButtonState>().addRemoveChapterBookmark(
                       item.favoriteState == 0 ? 1 : 0, item.id);
@@ -51,7 +51,7 @@ class MainChapterItem extends StatelessWidget {
                       'Глава ${item.id}',
                       style: const TextStyle(
                         fontSize: 17,
-                        color: Colors.teal,
+                        color: Color(0xff3f968c),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -77,7 +77,7 @@ class MainChapterItem extends StatelessWidget {
                       context.read<MainState>().showFootNoteDialog(
                             context,
                             url,
-                            Colors.teal,
+                            const Color(0xff3f968c),
                           );
                     },
                   ),

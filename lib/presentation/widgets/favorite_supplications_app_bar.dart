@@ -9,7 +9,7 @@ class FavoriteSupplicationsAppBar extends StatelessWidget {
       centerTitle: true,
       title: const Text('Избранные дуа'),
       elevation: 0,
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color(0xff454c5b),
       actions: const [],
     );
   }

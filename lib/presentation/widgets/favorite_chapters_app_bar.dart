@@ -9,7 +9,7 @@ class FavoriteChaptersAppBar extends StatelessWidget {
       centerTitle: true,
       title: const Text('Избранное'),
       elevation: 0,
-      backgroundColor: Colors.amber[700],
+      backgroundColor: const Color(0xffd19834),
       actions: const [],
     );
   }

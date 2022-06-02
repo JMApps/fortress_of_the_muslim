@@ -81,7 +81,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 ),
                 'a': Style(
                   fontSize: const FontSize(14),
-                  color: Colors.blue,
+                  color: const Color(0xff454c5b),
                 ),
               },
               onLinkTap: (String? url, RenderContext rendContext,
@@ -89,7 +89,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 context.read<MainState>().showFootNoteDialog(
                       context,
                       url,
-                      Colors.blue,
+                  const Color(0xff454c5b),
                     );
               },
             ),

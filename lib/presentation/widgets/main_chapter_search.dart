@@ -13,7 +13,7 @@ class MainChapterSearch extends StatelessWidget {
       height: 55,
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
-        color: Colors.teal,
+        color: Color(0xff3f968c),
       ),
       child: CupertinoTextField(
         autocorrect: true,

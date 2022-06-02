@@ -37,7 +37,7 @@ class _ChaptersState extends State<Chapters> {
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return [
                     SliverAppBar(
-                      backgroundColor: Colors.teal,
+                      backgroundColor: const Color(0xff3f968c),
                       elevation: 0,
                       floating: true,
                       snap: true,

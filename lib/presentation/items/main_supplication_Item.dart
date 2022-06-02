@@ -82,7 +82,7 @@ class MainSupplicationItem extends StatelessWidget {
                 ),
                 'a': Style(
                   fontSize: const FontSize(14),
-                  color: Colors.red,
+                  color: const Color(0xffbf615b),
                 ),
               },
               onLinkTap: (String? url, RenderContext rendContext,
@@ -90,7 +90,7 @@ class MainSupplicationItem extends StatelessWidget {
                 context.read<MainState>().showFootNoteDialog(
                       context,
                       url,
-                      Colors.red,
+                      const Color(0xffbf615b),
                     );
               },
             ),

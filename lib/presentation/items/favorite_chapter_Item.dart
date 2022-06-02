@@ -29,10 +29,12 @@ class FavoriteChapterItem extends StatelessWidget {
                     : const Icon(CupertinoIcons.bookmark_fill),
                 splashRadius: 22,
                 splashColor: Colors.amber[100],
-                color: Colors.amber[700],
+                color: const Color(0xffd19834),
                 onPressed: () {
                   context.read<MainState>().showSnackBarMessage(
-                      context, Colors.amber[700]!, item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
+                      context,
+                      const Color(0xffd19834),
+                      item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
                   context.read<BookmarkButtonState>().addRemoveChapterBookmark(
                       item.favoriteState == 0 ? 1 : 0, item.id);
                 },
@@ -47,9 +49,9 @@ class FavoriteChapterItem extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
                       'Глава ${item.id}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17,
-                        color: Colors.amber[700],
+                        color: Color(0xffd19834),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -67,16 +69,16 @@ class FavoriteChapterItem extends StatelessWidget {
                       ),
                       'a': Style(
                         fontSize: const FontSize(14),
-                        color: Colors.amber[700],
+                        color: const Color(0xffd19834),
                       ),
                     },
                     onLinkTap: (String? url, RenderContext rendContext,
                         Map<String, String> attributes, element) {
                       context.read<MainState>().showFootNoteDialog(
-                        context,
-                        url,
-                        Colors.amber[700]!,
-                      );
+                            context,
+                            url,
+                            const Color(0xffd19834),
+                          );
                     },
                   ),
                 ),

@@ -13,7 +13,7 @@ class MainSupplicationSearch extends StatelessWidget {
       height: 55,
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
-        color: Colors.red,
+        color: Color(0xffbf615b),
       ),
       child: CupertinoTextField(
         autocorrect: true,

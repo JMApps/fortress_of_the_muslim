@@ -29,48 +29,46 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
           preferredSize: Size(double.maxFinite, 50),
           child: FavoriteSupplicationsAppBar(),
         ),
-        body: Builder(
-          builder: (context) {
-            return FutureBuilder<List>(
-              future: context.watch<BookmarkButtonState>().getUpdateList
-                  ? _databaseQuery.getFavoriteSupplications()
-                  : _databaseQuery.getFavoriteSupplications(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                return snapshot.hasData
-                    ? CupertinoScrollbar(
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return FavoriteSupplicationItem(
-                              item: snapshot.data![index],
-                            );
-                          },
-                        ),
-                      )
-                    : Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.bookmark,
-                              size: 150,
-                              color: Colors.grey[300],
+        body: Builder(builder: (context) {
+          return FutureBuilder<List>(
+            future: context.watch<BookmarkButtonState>().getUpdateList
+                ? _databaseQuery.getFavoriteSupplications()
+                : _databaseQuery.getFavoriteSupplications(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              return snapshot.hasData
+                  ? CupertinoScrollbar(
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return FavoriteSupplicationItem(
+                            item: snapshot.data![index],
+                          );
+                        },
+                      ),
+                    )
+                  : Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.bookmark,
+                            size: 150,
+                            color: Colors.grey[300],
+                          ),
+                          const Text(
+                            'Избранных дуа нет',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey,
                             ),
-                            const Text(
-                              'Избранных дуа нет',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-              },
-            );
-          }
-        ),
+                          ),
+                        ],
+                      ),
+                    );
+            },
+          );
+        }),
       ),
     );
   }
