@@ -24,12 +24,11 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
-                Colors.teal.withOpacity(0.05), BlendMode.dstATop),
+                Colors.teal.withOpacity(0.1), BlendMode.dstIn),
             fit: BoxFit.cover,
-            image: const AssetImage('assets/icons/row_texture.jpeg'),
+            image: const AssetImage('assets/icons/row_texture.png'),
           ),
         ),
         child: const MainItems(),

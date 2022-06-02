@@ -48,9 +48,9 @@ class MainRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
               colorFilter:
-                  ColorFilter.mode(color!.withOpacity(0.05), BlendMode.dstATop),
+                  ColorFilter.mode(color!.withOpacity(1), BlendMode.color),
               fit: BoxFit.fill,
-              image: const AssetImage('assets/icons/row_texture.jpeg'),
+              image: const AssetImage('assets/icons/row_texture.png'),
             ),
           ),
           child: Column(
