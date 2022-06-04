@@ -76,9 +76,7 @@ class ContentChapterShareCopyPopup extends StatelessWidget {
                     ),
                     onPressed: () {
                       FlutterClipboard.copy(_contentForCopyAndShare());
-                      context
-                          .read<MainState>()
-                          .showSnackBarMessage(context, color, 'Скопировано');
+                      context.read<MainState>().showSnackBarMessage(context, color, 'Скопировано');
                       Navigator.of(context).pop();
                     },
                   ),
