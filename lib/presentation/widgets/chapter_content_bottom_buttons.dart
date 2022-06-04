@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/share_copy_popup.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_share_copy_popup.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContentBottomButtons extends StatelessWidget {
-  const ChapterContentBottomButtons({Key? key, required this.item})
-      : super(key: key);
+  const ChapterContentBottomButtons({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
 
   final ChapterContentItemModel item;
 
@@ -62,8 +64,8 @@ class ChapterContentBottomButtons extends StatelessWidget {
             showCupertinoModalPopup(
               context: context,
               builder: (BuildContext context) {
-                return ShareCopyPopup(
-                  contentForShareAndCopy: item.contentForCopyAndShare,
+                return ContentChapterShareCopyPopup(
+                  item: item,
                   color: const Color(0xFF455A64),
                 );
               },

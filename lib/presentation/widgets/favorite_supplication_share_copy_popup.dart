@@ -1,15 +1,18 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
-class ShareCopyPopup extends StatelessWidget {
-  const ShareCopyPopup({
+class FavoriteSupplicationsShareCopyPopup extends StatelessWidget {
+  const FavoriteSupplicationsShareCopyPopup({
     Key? key,
-    required this.contentForShareAndCopy,
+    required this.item,
     required this.color,
   }) : super(key: key);
 
-  final String contentForShareAndCopy;
+  final FavoriteSupplicationItemModel item;
   final Color color;
 
   @override
@@ -48,6 +51,7 @@ class ShareCopyPopup extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      Share.share(_contentForCopyAndShare());
                       Navigator.of(context).pop();
                     },
                   ),
@@ -71,8 +75,10 @@ class ShareCopyPopup extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      context.read<MainState>().showSnackBarMessage(
-                          context, color, 'Скопировано');
+                      FlutterClipboard.copy(_contentForCopyAndShare());
+                      context
+                          .read<MainState>()
+                          .showSnackBarMessage(context, color, 'Скопировано');
                       Navigator.of(context).pop();
                     },
                   ),
@@ -83,5 +89,11 @@ class ShareCopyPopup extends StatelessWidget {
         )
       ],
     );
+  }
+
+  String _contentForCopyAndShare() {
+    return '${item.contentArabic != null ? '${item.contentArabic}\n\n' : ''}'
+        '${item.contentTranscription != null ? '${item.contentTranscription}\n\n' : ''}'
+        '${item.contentForCopyAndShare}';
   }
 }

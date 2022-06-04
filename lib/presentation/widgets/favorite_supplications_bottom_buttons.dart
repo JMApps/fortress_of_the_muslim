@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/share_copy_popup.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/favorite_supplication_share_copy_popup.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteSupplicationsBottomButtons extends StatelessWidget {
@@ -62,8 +62,8 @@ class FavoriteSupplicationsBottomButtons extends StatelessWidget {
             showCupertinoModalPopup(
               context: context,
               builder: (BuildContext context) {
-                return ShareCopyPopup(
-                  contentForShareAndCopy: item.contentForCopyAndShare,
+                return FavoriteSupplicationsShareCopyPopup(
+                  item: item,
                   color: const Color(0xff454c5b),
                 );
               },
