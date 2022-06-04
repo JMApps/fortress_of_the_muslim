@@ -1,4 +1,5 @@
 import 'package:fortress_of_the_muslim/data/local/database/model/book_content_item_model.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_chapter_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_chapter_item_model.dart';
@@ -20,6 +21,13 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_chapters', where: 'favorite_state == 1');
     List<FavoriteChapterItemModel>? favoriteChapters = res.isNotEmpty ? res.map((c) => FavoriteChapterItemModel.fromMap(c)).toList() : null;
     return favoriteChapters!;
+  }
+
+  Future<List<ChapterContentItemModel>> getContentChapter(int id) async {
+    var dbClient = await con.db;
+    var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $id');
+    List<ChapterContentItemModel>? chapterSupplications = res.isNotEmpty ? res.map((c) => ChapterContentItemModel.fromMap(c)).toList() : null;
+    return chapterSupplications!;
   }
 
   Future<List<MainSupplicationItemModel>> getAllSupplications() async {
@@ -75,13 +83,6 @@ class DatabaseQuery {
   // }
   //
 
-  // Future<List<SupplicationModelItem>> getContentChapter(int _id) async {
-  //   var dbClient = await con.db;
-  //   var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $_id');
-  //   List<SupplicationModelItem>? chapterSupplications = res.isNotEmpty ? res.map((c) => SupplicationModelItem.fromMap(c)).toList() : null;
-  //   return chapterSupplications!;
-  // }
-  //
   //
   // Future<List<OtherModelItem>> getAboutUsContent(int _id) async {
   //   var dbClient = await con.db;

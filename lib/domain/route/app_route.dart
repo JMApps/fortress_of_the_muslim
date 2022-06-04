@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/app_settings.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/book_contents.dart';
+import 'package:fortress_of_the_muslim/presentation/pages/chapter_content.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/chapters.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/content_book_content.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/favorite_chapters.dart';
@@ -18,6 +19,11 @@ class AppRoute {
       case 'favorite_chapters':
         return MaterialPageRoute(
           builder: (_) => const FavoriteChapters(),
+          settings: routeSettings,
+        );
+      case 'chapter_content':
+        return MaterialPageRoute(
+          builder: (_) => const ChapterContent(),
           settings: routeSettings,
         );
       case 'main_supplications':
