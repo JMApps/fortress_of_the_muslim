@@ -27,60 +27,62 @@ class _ChapterContentState extends State<ChapterContent> {
           create: (_) => BookmarkButtonState(),
         ),
       ],
-      child: Builder(builder: (context) {
-        return Scaffold(
-          body: NestedScrollView(
-            floatHeaderSlivers: true,
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  backgroundColor: const Color(0xFF455A64),
-                  elevation: 0,
-                  floating: true,
-                  snap: true,
-                  centerTitle: true,
-                  forceElevated: innerBoxIsScrolled,
-                  expandedHeight: 75,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: Text('Глава ${arguments!.chapterId}'),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: NestedScrollView(
+              floatHeaderSlivers: true,
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return [
+                  SliverAppBar(
+                    centerTitle: true,
+                    backgroundColor: const Color(0xFF455A64),
+                    elevation: 0,
+                    floating: true,
+                    snap: true,
+                    forceElevated: innerBoxIsScrolled,
+                    expandedHeight: 75,
+                    flexibleSpace: FlexibleSpaceBar(
+                      title: Text('Глава ${arguments!.chapterId}'),
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: ChapterContentSubTitle(
-                    chapterSubTitle: arguments.chapterSubTitle,
+                  SliverToBoxAdapter(
+                    child: ChapterContentSubTitle(
+                      chapterSubTitle: arguments.chapterSubTitle,
+                    ),
                   ),
+                ];
+              },
+              body: MediaQuery.removePadding(
+                removeTop: true,
+                context: context,
+                child: FutureBuilder<List>(
+                  future: context.watch<BookmarkButtonState>().getUpdateList
+                      ? _databaseQuery.getContentChapter(arguments!.chapterId)
+                      : _databaseQuery.getContentChapter(arguments!.chapterId),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return snapshot.hasData
+                        ? CupertinoScrollbar(
+                            child: ListView.builder(
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ChapterContentItem(
+                                  item: snapshot.data![index],
+                                );
+                              },
+                            ),
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                  },
                 ),
-              ];
-            },
-            body: MediaQuery.removePadding(
-              removeTop: true,
-              context: context,
-              child: FutureBuilder<List>(
-                future: context.watch<BookmarkButtonState>().getUpdateList
-                    ? _databaseQuery.getContentChapter(arguments!.chapterId)
-                    : _databaseQuery.getContentChapter(arguments!.chapterId),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  return snapshot.hasData
-                      ? CupertinoScrollbar(
-                          child: ListView.builder(
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ChapterContentItem(
-                                item: snapshot.data![index],
-                              );
-                            },
-                          ),
-                        )
-                      : const Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        );
-                },
               ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

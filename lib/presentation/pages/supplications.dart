@@ -37,6 +37,7 @@ class _SupplicationsState extends State<Supplications> {
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return [
                     SliverAppBar(
+                      centerTitle: true,
                       backgroundColor: const Color(0xffbf615b),
                       elevation: 0,
                       floating: true,
