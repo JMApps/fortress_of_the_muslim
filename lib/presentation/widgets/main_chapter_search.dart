@@ -32,7 +32,11 @@ class MainChapterSearch extends StatelessWidget {
           ),
         ),
         placeholder: 'Поиск по главам...',
+        style: const TextStyle(
+          fontFamily: 'Gilroy',
+        ),
         placeholderStyle: const TextStyle(
+          fontFamily: 'Gilroy',
           color: Colors.grey,
         ),
         clearButtonMode: OverlayVisibilityMode.editing,

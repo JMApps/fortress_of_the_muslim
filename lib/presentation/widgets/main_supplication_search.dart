@@ -32,8 +32,12 @@ class MainSupplicationSearch extends StatelessWidget {
           ),
         ),
         placeholder: 'Поиск по дуа...',
+        style: const TextStyle(
+          fontFamily: 'Gilroy',
+        ),
         placeholderStyle: const TextStyle(
           color: Colors.grey,
+          fontFamily: 'Gilroy',
         ),
         clearButtonMode: OverlayVisibilityMode.editing,
       ),
