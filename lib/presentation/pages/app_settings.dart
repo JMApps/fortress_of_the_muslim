@@ -17,6 +17,7 @@ class _AppSettingsState extends State<AppSettings> {
         child: SettingsAppBar(),
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           SwitchListTile.adaptive(
             activeColor: const Color(0xff3f968c),

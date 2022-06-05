@@ -74,27 +74,4 @@ class DatabaseQuery {
     List<BookContentItemModel>? bookContent = res.isNotEmpty ? res.map((c) => BookContentItemModel.fromMap(c)).toList() : null;
     return bookContent!;
   }
-
-  // Future<List<SupplicationModelItem>> getSupplicationSearchResult(String text) async {
-  //   var dbClient = await con.db;
-  //   var res = await dbClient.rawQuery("SELECT * FROM Table_of_supplications WHERE _id LIKE '%$text%' OR content_translation LIKE '%$text%'");
-  //   List<SupplicationModelItem>? searchResult = res.isNotEmpty ? res.map((c) => SupplicationModelItem.fromMap(c)).toList() : null;
-  //   return searchResult!;
-  // }
-  //
-
-  //
-  // Future<List<OtherModelItem>> getAboutUsContent(int _id) async {
-  //   var dbClient = await con.db;
-  //   var res = await dbClient.query('Table_of_about_us', where: '_id == $_id');
-  //   List<OtherModelItem>? aboutBook = res.isNotEmpty ? res.map((c) => OtherModelItem.fromMap(c)).toList() : null;
-  //   return aboutBook!;
-  // }
-  //
-  // Future<List<SupplicationDayNightItem>> getDayNightSupplications(bool dayNight) async {
-  //   var dbClient = await con.db;
-  //   var res = await dbClient.query(dayNight ? 'Table_of_supplications_day' : 'Table_of_supplication_night');
-  //   List<SupplicationDayNightItem>? dayNightSupplications = res.isNotEmpty ? res.map((c) => SupplicationDayNightItem.fromMap(c)).toList() : null;
-  //   return dayNightSupplications!;
-  // }
 }

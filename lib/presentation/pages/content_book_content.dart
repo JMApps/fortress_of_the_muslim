@@ -27,6 +27,7 @@ class ContentBookContent extends StatelessWidget {
       ),
       body: CupertinoScrollbar(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: SelectableHtml(

@@ -74,6 +74,7 @@ class _SupplicationsState extends State<Supplications> {
                           : snapshot.hasData
                               ? CupertinoScrollbar(
                                   child: ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
                                     itemCount: snapshot.data!.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {

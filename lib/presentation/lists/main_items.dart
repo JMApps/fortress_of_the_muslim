@@ -12,6 +12,7 @@ class MainItems extends StatelessWidget {
       child: ListView(
         children: [
           GridView.count(
+            physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.all(32),
             primary: false,

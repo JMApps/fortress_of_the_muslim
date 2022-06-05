@@ -73,6 +73,7 @@ class _ChaptersState extends State<Chapters> {
                           : snapshot.hasData
                               ? CupertinoScrollbar(
                                   child: ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
                                     itemCount: snapshot.data!.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
