@@ -20,7 +20,7 @@ class ChapterContentBottomButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
-          'Дуа ${item.id}',
+          'Дуа № ${item.id}',
           style: const TextStyle(
             color: Color(0xFF455A64),
             fontSize: 16,

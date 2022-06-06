@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_item.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_row.dart';
 
@@ -14,7 +15,12 @@ class MainItems extends StatelessWidget {
           GridView.count(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.only(
+              left: 32,
+              top: 16,
+              right: 32,
+              bottom: 16,
+            ),
             primary: false,
             crossAxisSpacing: 1,
             mainAxisSpacing: 1,
@@ -47,16 +53,45 @@ class MainItems extends StatelessWidget {
             ],
           ),
           Visibility(
-            visible: false,
+            visible: true,
             maintainAnimation: false,
             maintainSize: false,
             child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 0),
+              color: Colors.grey[300],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Container(
-                height: 50,
+              child: MaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Expanded(
+                        child: Text(
+                          'Вы читали 25 главу',
+                          style: TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      SizedBox(width: 16),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xFF455A64),
+                      ),
+                    ],
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    'chapter_content',
+                    arguments: ChapterContentArguments(25),
+                  );
+                },
               ),
             ),
           ),
@@ -64,7 +99,7 @@ class MainItems extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(
               horizontal: 32,
-              vertical: 4,
+              vertical: 16,
             ),
             primary: false,
             children: [
