@@ -90,11 +90,7 @@ class FavoriteChapterItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pushNamed(
             'chapter_content',
-            arguments: ChapterContentArguments(
-              item.id,
-              item.chapterSubTitle,
-              item.favoriteState,
-            ),
+            arguments: ChapterContentArguments(item.id),
           );
         },
       ),
