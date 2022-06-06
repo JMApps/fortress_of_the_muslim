@@ -61,7 +61,6 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                               'Избранных глав нет',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.grey,
                               ),
                             ),
                           ],

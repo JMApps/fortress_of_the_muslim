@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_chapter_search_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class MainChapterSearch extends StatelessWidget {
@@ -12,32 +13,33 @@ class MainChapterSearch extends StatelessWidget {
       width: double.maxFinite,
       height: 55,
       padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(
-        color: Color(0xff3f968c),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.mainColor,
       ),
       child: CupertinoTextField(
         autocorrect: true,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.mainChapterSearchBackground,
         ),
         onChanged: (value) {
           context.read<MainChapterSearchState>().getCurrentKeyWord(value);
         },
-        prefix: const Padding(
-          padding: EdgeInsets.all(8),
+        prefix: Padding(
+          padding: const EdgeInsets.all(8),
           child: Icon(
             CupertinoIcons.search,
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.mainTitleColor,
           ),
         ),
         placeholder: 'Поиск по главам...',
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: 'Gilroy',
+          color: Theme.of(context).colorScheme.mainChapterSearchPlaceholder,
         ),
-        placeholderStyle: const TextStyle(
+        placeholderStyle: TextStyle(
           fontFamily: 'Gilroy',
-          color: Colors.grey,
+          color: Colors.grey.shade400,
         ),
         clearButtonMode: OverlayVisibilityMode.editing,
       ),

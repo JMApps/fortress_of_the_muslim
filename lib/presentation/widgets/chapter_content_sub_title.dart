@@ -12,7 +12,6 @@ class ChapterContentSubTitle extends StatelessWidget {
   }) : super(key: key);
 
   final DatabaseQuery databaseQuery;
-
   final int chapterId;
 
   @override
@@ -20,44 +19,48 @@ class ChapterContentSubTitle extends StatelessWidget {
     return FutureBuilder<List>(
       future: databaseQuery.getOneChapter(chapterId),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Container(
-          margin: const EdgeInsets.only(
-            left: 8,
-            top: 8,
-            right: 8,
-          ),
-          padding: const EdgeInsets.all(8),
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: const Color(0xFF455A64),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Html(
-            data: snapshot.data![0].chapterSubTitle,
-            style: {
-              '#': Style(
-                fontSize: const FontSize(17),
-                textAlign: TextAlign.center,
-                color: Colors.white,
-              ),
-              'small': Style(
-                fontSize: const FontSize(8),
-              ),
-              'a': Style(
-                fontSize: const FontSize(14),
-                color: Colors.blue,
-              ),
-            },
-            onLinkTap: (String? url, RenderContext rendContext,
-                Map<String, String> attributes, element) {
-              context.read<MainState>().showFootNoteDialog(
-                    context,
-                    url,
-                    const Color(0xff3f968c),
-                  );
-            },
-          ),
-        );
+        return snapshot.hasData
+            ? Container(
+                margin: const EdgeInsets.only(
+                  left: 8,
+                  top: 8,
+                  right: 8,
+                ),
+                padding: const EdgeInsets.all(8),
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF455A64),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Html(
+                  data: snapshot.data![0].chapterSubTitle,
+                  style: {
+                    '#': Style(
+                      fontSize: const FontSize(17),
+                      textAlign: TextAlign.center,
+                      color: Colors.white,
+                    ),
+                    'small': Style(
+                      fontSize: const FontSize(8),
+                    ),
+                    'a': Style(
+                      fontSize: const FontSize(14),
+                      color: Colors.blue,
+                    ),
+                  },
+                  onLinkTap: (String? url, RenderContext rendContext,
+                      Map<String, String> attributes, element) {
+                    context.read<MainState>().showFootNoteDialog(
+                          context,
+                          url,
+                          const Color(0xff3f968c),
+                        );
+                  },
+                ),
+              )
+            : const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
       },
     );
   }

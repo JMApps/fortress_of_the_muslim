@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/book_content_arguments.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class ContentBookContent extends StatelessWidget {
@@ -19,7 +20,9 @@ class ContentBookContent extends StatelessWidget {
         preferredSize: const Size(double.maxFinite, 50),
         child: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.green,
+          elevation: 0,
+          backgroundColor:
+              Theme.of(context).colorScheme.mainContentContentBookColor,
           title: Text(
             arguments!.title,
           ),

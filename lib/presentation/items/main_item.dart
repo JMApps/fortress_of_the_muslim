@@ -9,13 +9,11 @@ class MainItem extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.route,
-    required this.color,
   }) : super(key: key);
 
   final IconData icon;
   final String title;
   final String route;
-  final Color? color;
 
   final Uri _urlIOS = Uri.parse(
       'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953');
@@ -26,7 +24,6 @@ class MainItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      color: color,
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -50,14 +47,12 @@ class MainItem extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: Colors.black87,
               ),
               const SizedBox(height: 8),
               Text(
                 title,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),

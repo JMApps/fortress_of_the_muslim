@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_supplication_search_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/main_supplication_search.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ class _SupplicationsState extends State<Supplications> {
                   return [
                     SliverAppBar(
                       centerTitle: true,
-                      backgroundColor: const Color(0xffbf615b),
+                      backgroundColor: Theme.of(context).colorScheme.supplicationColor,
                       elevation: 0,
                       floating: true,
                       snap: true,

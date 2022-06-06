@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/book_content_arguments.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/book_content_item_model.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 
 class BookContentItem extends StatelessWidget {
   const BookContentItem({
@@ -13,8 +13,9 @@ class BookContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Material(
-      color: item.id.isOdd ? Colors.white : Colors.grey[200],
+      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
       child: InkWell(
         child: Padding(
           padding: const EdgeInsets.all(8),
@@ -35,7 +36,6 @@ class BookContentItem extends StatelessWidget {
               item.title,
               style: const TextStyle(
                 fontSize: 18,
-                color: Colors.black,
               ),
             ),
           ),

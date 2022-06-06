@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 
 class BookContentAppBar extends StatelessWidget {
   const BookContentAppBar({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class BookContentAppBar extends StatelessWidget {
       centerTitle: true,
       title: const Text('Содержимое'),
       elevation: 0,
-      backgroundColor: Colors.brown,
+      backgroundColor: Theme.of(context).colorScheme.mainContentBookColor,
       actions: const [
       ],
     );

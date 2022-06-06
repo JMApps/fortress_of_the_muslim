@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/domain/state/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/settings_app_bar.dart';
+import 'package:provider/provider.dart';
 
 class AppSettings extends StatefulWidget {
   const AppSettings({Key? key}) : super(key: key);
@@ -11,6 +14,7 @@ class AppSettings extends StatefulWidget {
 class _AppSettingsState extends State<AppSettings> {
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size(double.maxFinite, 50),
@@ -20,11 +24,12 @@ class _AppSettingsState extends State<AppSettings> {
         physics: const BouncingScrollPhysics(),
         children: [
           SwitchListTile.adaptive(
-            activeColor: const Color(0xff3f968c),
+            activeColor: myColor.mainSettingsColor,
             title: const Text(
               'Список глав',
               style: TextStyle(
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
             subtitle: const Text(
@@ -38,11 +43,12 @@ class _AppSettingsState extends State<AppSettings> {
           ),
           const Divider(indent: 16, endIndent: 16),
           SwitchListTile.adaptive(
-            activeColor: const Color(0xff3f968c),
+            activeColor: myColor.mainSettingsColor,
             title: const Text(
               'Последняя глава',
               style: TextStyle(
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
             subtitle: const Text(
@@ -56,11 +62,12 @@ class _AppSettingsState extends State<AppSettings> {
           ),
           const Divider(indent: 16, endIndent: 16),
           SwitchListTile.adaptive(
-            activeColor: const Color(0xff3f968c),
+            activeColor: myColor.mainSettingsColor,
             title: const Text(
               'Уведомления',
               style: TextStyle(
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
             subtitle: const Text(
@@ -74,11 +81,12 @@ class _AppSettingsState extends State<AppSettings> {
           ),
           const Divider(indent: 16, endIndent: 16),
           SwitchListTile.adaptive(
-            activeColor: const Color(0xff3f968c),
+            activeColor: myColor.mainSettingsColor,
             title: const Text(
               'Экран',
               style: TextStyle(
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
             subtitle: const Text(
@@ -89,6 +97,26 @@ class _AppSettingsState extends State<AppSettings> {
             ),
             onChanged: (value) {},
             value: false,
+          ),
+          SwitchListTile.adaptive(
+            activeColor: myColor.mainSettingsColor,
+            title: const Text(
+              'Тема',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: const Text(
+              'Текущая тема (адаптивная)',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            value: context.watch<AppSettingsState>().isDarkMode,
+            onChanged: (value) {
+              context.read<AppSettingsState>().toggleTheme(value);
+            },
           ),
         ],
       ),

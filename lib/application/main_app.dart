@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/domain/route/app_route.dart';
+import 'package:fortress_of_the_muslim/domain/state/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/main.dart';
 import 'package:provider/provider.dart';
 
@@ -11,18 +13,26 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<AppSettingsState>(
+          create: (_) => AppSettingsState(),
+        ),
         ChangeNotifierProvider<MainState>(
           create: (_) => MainState(),
-        )
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Крепость мусульманина',
-        theme: ThemeData(
-          fontFamily: 'Gilroy',
         ),
-        onGenerateRoute: AppRoute().onGeneratorRoute,
-        home: const MainPage(),
+      ],
+      child: Builder(
+        builder: (context) {
+          context.read<AppSettingsState>().useLatThemeState();
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Крепость мусульманина',
+            themeMode: context.watch<AppSettingsState>().themeMode,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            onGenerateRoute: AppRoute().onGeneratorRoute,
+            home: const MainPage(),
+          );
+        }
       ),
     );
   }

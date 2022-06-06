@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_item.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_row.dart';
 
@@ -30,25 +31,29 @@ class MainItems extends StatelessWidget {
                 icon: CupertinoIcons.square_list,
                 title: 'Главы',
                 route: 'main_chapters',
-                color: const Color(0xa63f968c),
+                backgroundColor: Theme.of(context).colorScheme.mainColor,
+                itemsColor: Theme.of(context).colorScheme.mainChapterRowColor,
               ),
               MainRow(
                 icon: CupertinoIcons.bookmark,
                 title: 'Избранное',
                 route: 'favorite_chapters',
-                color: const Color(0xa6d19834),
+                backgroundColor: Theme.of(context).colorScheme.favoriteChapterColor,
+                itemsColor: Theme.of(context).colorScheme.favoriteChapterRowColor,
               ),
               MainRow(
                 icon: CupertinoIcons.book,
                 title: 'Все дуа',
                 route: 'main_supplications',
-                color: const Color(0xa6bf615b),
+                backgroundColor: Theme.of(context).colorScheme.supplicationColor,
+                itemsColor: Theme.of(context).colorScheme.supplicationRowColor,
               ),
               MainRow(
                 icon: CupertinoIcons.bookmark,
                 title: 'Избранные дуа',
                 route: 'favorite_supplications',
-                color: const Color(0x99454c5b),
+                backgroundColor: Theme.of(context).colorScheme.favoriteSupplicationColor,
+                itemsColor: Theme.of(context).colorScheme.favoriteSupplicationRowColor,
               ),
             ],
           ),
@@ -58,9 +63,12 @@ class MainItems extends StatelessWidget {
             maintainSize: false,
             child: Card(
               margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 0),
-              color: Colors.grey[300],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
+                side: const BorderSide(
+                  width: 0.5,
+                  color: Color(0xffbf615b),
+                )
               ),
               child: MaterialButton(
                 shape: RoundedRectangleBorder(
@@ -81,7 +89,6 @@ class MainItems extends StatelessWidget {
                       SizedBox(width: 16),
                       Icon(
                         Icons.arrow_forward_ios,
-                        color: Color(0xFF455A64),
                       ),
                     ],
                   ),
@@ -107,19 +114,16 @@ class MainItems extends StatelessWidget {
                 icon: CupertinoIcons.settings,
                 title: 'Настройки',
                 route: 'app_settings',
-                color: const Color(0xFFFFFFFF),
               ),
               MainItem(
                 icon: CupertinoIcons.doc_append,
                 title: 'Содержимое',
                 route: 'book_content',
-                color: const Color(0xFFFFFFFF),
               ),
               MainItem(
                 icon: CupertinoIcons.square_grid_2x2,
                 title: 'Приложения',
                 route: 'app_ios_account',
-                color: const Color(0xFFFFFFFF),
               ),
             ],
           ),

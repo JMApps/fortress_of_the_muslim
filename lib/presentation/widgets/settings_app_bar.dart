@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 
 class SettingsAppBar extends StatelessWidget {
   const SettingsAppBar({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class SettingsAppBar extends StatelessWidget {
       centerTitle: true,
       title: const Text('Настройки'),
       elevation: 0,
-      backgroundColor: Colors.teal,
+      backgroundColor: Theme.of(context).colorScheme.mainSettingsColor,
       actions: const [],
     );
   }

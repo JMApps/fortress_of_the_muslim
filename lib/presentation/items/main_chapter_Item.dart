@@ -5,6 +5,7 @@ import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content
 import 'package:fortress_of_the_muslim/data/local/database/model/main_chapter_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class MainChapterItem extends StatelessWidget {
@@ -17,8 +18,9 @@ class MainChapterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Material(
-      color: item.id.isOdd ? Colors.white : Colors.grey[200],
+      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
       child: InkWell(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -30,11 +32,11 @@ class MainChapterItem extends StatelessWidget {
                     : const Icon(CupertinoIcons.bookmark_fill),
                 splashRadius: 22,
                 splashColor: const Color(0xff81b9b0),
-                color: const Color(0xff3f968c),
+                color: myColor.mainTitleColor,
                 onPressed: () {
                   context.read<MainState>().showSnackBarMessage(
                       context,
-                      const Color(0xff3f968c),
+                      myColor.mainColor,
                       item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
                   context.read<BookmarkButtonState>().addRemoveChapterBookmark(
                       item.favoriteState == 0 ? 1 : 0, item.id);
@@ -50,10 +52,9 @@ class MainChapterItem extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
                       'Глава ${item.id}',
-                      style: const TextStyle(
-                        fontSize: 17,
-                        color: Color(0xff3f968c),
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: myColor.mainTitleColor,
                       ),
                     ),
                   ),
@@ -78,7 +79,7 @@ class MainChapterItem extends StatelessWidget {
                       context.read<MainState>().showFootNoteDialog(
                             context,
                             url,
-                            const Color(0xff3f968c),
+                            myColor.mainChapterRowColor,
                           );
                     },
                   ),

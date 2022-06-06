@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/main_items.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/main_app_bar.dart';
 
@@ -24,12 +25,7 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.teal.withOpacity(0.1), BlendMode.dstIn),
-            fit: BoxFit.cover,
-            image: const AssetImage('assets/icons/row_texture.png'),
-          ),
+          color: Theme.of(context).colorScheme.secondIs0dd,
         ),
         child: const MainItems(),
       ),

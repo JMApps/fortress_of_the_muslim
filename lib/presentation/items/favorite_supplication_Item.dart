@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/favorite_supplications_bottom_buttons.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +16,11 @@ class FavoriteSupplicationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Card(
       elevation: 3,
       margin: const EdgeInsets.all(8),
-      color: item.id.isOdd ? Colors.white : Colors.grey[200],
+      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -81,7 +83,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 ),
                 'a': Style(
                   fontSize: const FontSize(14),
-                  color: const Color(0xff454c5b),
+                  color: Colors.blue,
                 ),
               },
               onLinkTap: (String? url, RenderContext rendContext,
@@ -89,7 +91,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 context.read<MainState>().showFootNoteDialog(
                       context,
                       url,
-                  const Color(0xff454c5b),
+                      myColor.favoriteSupplicationRowColor,
                     );
               },
             ),
