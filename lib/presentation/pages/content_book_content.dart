@@ -19,10 +19,6 @@ class ContentBookContent extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size(double.maxFinite, 50),
         child: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor:
-              Theme.of(context).colorScheme.mainContentContentBookColor,
           title: Text(
             arguments!.title,
           ),
@@ -52,7 +48,7 @@ class ContentBookContent extends StatelessWidget {
                 context.read<MainState>().showFootNoteDialog(
                       context,
                       url,
-                      Colors.green,
+                      Theme.of(context).colorScheme.mainContentContentBookItemColor,
                     );
               },
             ),

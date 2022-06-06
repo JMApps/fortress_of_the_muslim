@@ -15,13 +15,14 @@ class SupplicationsBottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
           'Дуа ${item.id}',
-          style: const TextStyle(
-            color: Color(0xffbf615b),
+          style: TextStyle(
+            color: myColor.mainSupplicationTitleColor,
             fontSize: 16,
           ),
         ),
@@ -41,14 +42,14 @@ class SupplicationsBottomButtons extends StatelessWidget {
           splashRadius: 22,
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),
-          color: const Color(0xffbf615b),
+          color: myColor.mainSupplicationTitleColor,
           icon: item.favoriteState == 0
               ? const Icon(Icons.bookmark_border)
               : const Icon(Icons.bookmark),
           onPressed: () {
             context.read<MainState>().showSnackBarMessage(
                 context,
-                Theme.of(context).colorScheme.supplicationColor,
+                myColor.mainSupplicationTitleColor,
                 item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
             context.read<BookmarkButtonState>().addRemoveSupplicationBookmark(
                 item.favoriteState == 0 ? 1 : 0, item.id);
@@ -65,7 +66,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               builder: (BuildContext context) {
                 return MainSupplicationShareCopyPopup(
                   item: item,
-                  color: const Color(0xffbf615b),
+                  color: myColor.mainSupplicationTitleColor,
                 );
               },
             );

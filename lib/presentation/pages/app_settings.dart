@@ -22,6 +22,7 @@ class _AppSettingsState extends State<AppSettings> {
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(8),
         children: [
           SwitchListTile.adaptive(
             activeColor: myColor.mainSettingsColor,

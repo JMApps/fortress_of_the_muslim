@@ -21,7 +21,7 @@ class MainSupplicationItem extends StatelessWidget {
     return Card(
       elevation: 3,
       margin: const EdgeInsets.all(8),
-      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
+      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -90,7 +90,7 @@ class MainSupplicationItem extends StatelessWidget {
               onLinkTap: (String? url, RenderContext rendContext,
                   Map<String, String> attributes, element) {
                 context.read<MainState>().showFootNoteDialog(
-                    context, url, myColor.supplicationColor);
+                    context, url, myColor.mainSupplicationTitleColor);
               },
             ),
             const SizedBox(height: 8),

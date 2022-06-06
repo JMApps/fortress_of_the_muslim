@@ -15,19 +15,19 @@ class BookContentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
     return Material(
-      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
+      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
       child: InkWell(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: ListTile(
             contentPadding: EdgeInsets.zero,
             title: Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 'Глава ${item.id}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
-                  color: Colors.brown,
+                  color: Theme.of(context).colorScheme.mainContentBookItemColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

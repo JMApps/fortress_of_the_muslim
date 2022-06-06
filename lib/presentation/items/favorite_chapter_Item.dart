@@ -20,7 +20,7 @@ class FavoriteChapterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
     return Material(
-      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
+      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
       child: InkWell(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -32,11 +32,11 @@ class FavoriteChapterItem extends StatelessWidget {
                     : const Icon(CupertinoIcons.bookmark_fill),
                 splashRadius: 22,
                 splashColor: Colors.amber[100],
-                color: const Color(0xffd19834),
+                color: myColor.favoriteChapterTitleColor,
                 onPressed: () {
                   context.read<MainState>().showSnackBarMessage(
                       context,
-                      myColor.favoriteChapterColor,
+                      myColor.favoriteChapterTitleColor,
                       item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
                   context.read<BookmarkButtonState>().addRemoveChapterBookmark(
                       item.favoriteState == 0 ? 1 : 0, item.id);
@@ -52,9 +52,9 @@ class FavoriteChapterItem extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
                       'Глава ${item.id}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 17,
-                        color: Color(0xffd19834),
+                        color: myColor.favoriteChapterTitleColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -80,7 +80,7 @@ class FavoriteChapterItem extends StatelessWidget {
                       context.read<MainState>().showFootNoteDialog(
                             context,
                             url,
-                            const Color(0xffd19834),
+                            myColor.favoriteChapterTitleColor,
                           );
                     },
                   ),

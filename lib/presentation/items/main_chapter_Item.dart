@@ -20,7 +20,7 @@ class MainChapterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
     return Material(
-      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
+      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
       child: InkWell(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -32,11 +32,11 @@ class MainChapterItem extends StatelessWidget {
                     : const Icon(CupertinoIcons.bookmark_fill),
                 splashRadius: 22,
                 splashColor: const Color(0xff81b9b0),
-                color: myColor.mainTitleColor,
+                color: myColor.mainChapterTitleColor,
                 onPressed: () {
                   context.read<MainState>().showSnackBarMessage(
                       context,
-                      myColor.mainColor,
+                      myColor.mainChapterTitleColor,
                       item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
                   context.read<BookmarkButtonState>().addRemoveChapterBookmark(
                       item.favoriteState == 0 ? 1 : 0, item.id);
@@ -54,7 +54,7 @@ class MainChapterItem extends StatelessWidget {
                       'Глава ${item.id}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: myColor.mainTitleColor,
+                        color: myColor.mainChapterTitleColor,
                       ),
                     ),
                   ),
@@ -79,7 +79,7 @@ class MainChapterItem extends StatelessWidget {
                       context.read<MainState>().showFootNoteDialog(
                             context,
                             url,
-                            myColor.mainChapterRowColor,
+                            myColor.mainChapterTitleColor,
                           );
                     },
                   ),

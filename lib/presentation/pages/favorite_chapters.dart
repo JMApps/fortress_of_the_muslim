@@ -51,16 +51,17 @@ class _FavoriteChaptersState extends State<FavoriteChapters> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Icon(
                               Icons.bookmark,
                               size: 150,
-                              color: Colors.grey[300],
+                              color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               'Избранных глав нет',
                               style: TextStyle(
                                 fontSize: 18,
+                                color: Colors.grey,
                               ),
                             ),
                           ],

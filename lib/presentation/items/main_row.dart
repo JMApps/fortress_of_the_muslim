@@ -28,11 +28,10 @@ class MainRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      color: backgroundColor,
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
+          borderRadius: BorderRadius.circular(15),
+          side: BorderSide(color: backgroundColor!, width: 3)),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () async {
@@ -48,12 +47,6 @@ class MainRow extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-              colorFilter:
-                  ColorFilter.mode(backgroundColor!.withOpacity(0.2), BlendMode.dstATop),
-              fit: BoxFit.fill,
-              image: const AssetImage('assets/icons/row_texture.png'),
-            ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

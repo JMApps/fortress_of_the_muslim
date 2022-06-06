@@ -22,7 +22,7 @@ class FavoriteSupplicationsBottomButtons extends StatelessWidget {
         Text(
           'Дуа ${item.id}',
           style: TextStyle(
-            color: myColor.favoriteSupplicationRowColor,
+            color: myColor.favoriteSupplicationTitleColor,
             fontSize: 16,
           ),
         ),
@@ -42,14 +42,14 @@ class FavoriteSupplicationsBottomButtons extends StatelessWidget {
           splashRadius: 22,
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),
-          color: myColor.favoriteSupplicationRowColor,
+          color:  myColor.favoriteSupplicationTitleColor,
           icon: item.favoriteState == 0
               ? const Icon(Icons.bookmark_border)
               : const Icon(Icons.bookmark),
           onPressed: () {
             context.read<MainState>().showSnackBarMessage(
                 context,
-                myColor.favoriteSupplicationColor,
+                myColor.favoriteSupplicationTitleColor,
                 item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
             context.read<BookmarkButtonState>().addRemoveSupplicationBookmark(
                 item.favoriteState == 0 ? 1 : 0, item.id);
@@ -66,7 +66,7 @@ class FavoriteSupplicationsBottomButtons extends StatelessWidget {
               builder: (BuildContext context) {
                 return FavoriteSupplicationsShareCopyPopup(
                   item: item,
-                  color: myColor.favoriteSupplicationColor,
+                  color:  myColor.favoriteSupplicationTitleColor,
                 );
               },
             );

@@ -38,15 +38,28 @@ class _SupplicationsState extends State<Supplications> {
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return [
                     SliverAppBar(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.sliverAppBarColor,
                       centerTitle: true,
-                      backgroundColor: Theme.of(context).colorScheme.supplicationColor,
                       elevation: 0,
                       floating: true,
                       snap: true,
+                      iconTheme: IconThemeData(
+                        color:
+                            Theme.of(context).colorScheme.sliverAppBarTextColor,
+                      ),
                       forceElevated: innerBoxIsScrolled,
                       expandedHeight: 75,
-                      flexibleSpace: const FlexibleSpaceBar(
-                        title: Text('Все дуа'),
+                      flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
+                        title: Text(
+                          'Все дуа',
+                          style: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .sliverAppBarTextColor,
+                          ),
+                        ),
                       ),
                     ),
                     const SliverToBoxAdapter(
@@ -60,8 +73,12 @@ class _SupplicationsState extends State<Supplications> {
                   child: FutureBuilder<List>(
                     future: _databaseQuery.getSupplicationSearchResult(
                         context.watch<BookmarkButtonState>().getUpdateList
-                            ? context.watch<MainSupplicationSearchState>().getKeyWord
-                            : context.watch<MainSupplicationSearchState>().getKeyWord),
+                            ? context
+                                .watch<MainSupplicationSearchState>()
+                                .getKeyWord
+                            : context
+                                .watch<MainSupplicationSearchState>()
+                                .getKeyWord),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       return snapshot.hasError
                           ? const Center(

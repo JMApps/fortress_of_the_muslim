@@ -31,29 +31,29 @@ class MainItems extends StatelessWidget {
                 icon: CupertinoIcons.square_list,
                 title: 'Главы',
                 route: 'main_chapters',
-                backgroundColor: Theme.of(context).colorScheme.mainColor,
-                itemsColor: Theme.of(context).colorScheme.mainChapterRowColor,
+                backgroundColor: Theme.of(context).colorScheme.mainChapterRowColor,
+                itemsColor: Theme.of(context).colorScheme.mainChapterItemColor,
               ),
               MainRow(
                 icon: CupertinoIcons.bookmark,
                 title: 'Избранное',
                 route: 'favorite_chapters',
-                backgroundColor: Theme.of(context).colorScheme.favoriteChapterColor,
-                itemsColor: Theme.of(context).colorScheme.favoriteChapterRowColor,
+                backgroundColor: Theme.of(context).colorScheme.favoriteChapterRowColor,
+                itemsColor: Theme.of(context).colorScheme.favoriteChapterItemColor,
               ),
               MainRow(
                 icon: CupertinoIcons.book,
                 title: 'Все дуа',
                 route: 'main_supplications',
-                backgroundColor: Theme.of(context).colorScheme.supplicationColor,
-                itemsColor: Theme.of(context).colorScheme.supplicationRowColor,
+                backgroundColor: Theme.of(context).colorScheme.supplicationRowColor,
+                itemsColor: Theme.of(context).colorScheme.supplicationItemColor,
               ),
               MainRow(
                 icon: CupertinoIcons.bookmark,
                 title: 'Избранные дуа',
                 route: 'favorite_supplications',
-                backgroundColor: Theme.of(context).colorScheme.favoriteSupplicationColor,
-                itemsColor: Theme.of(context).colorScheme.favoriteSupplicationRowColor,
+                backgroundColor: Theme.of(context).colorScheme.favoriteSupplicationRowColor,
+                itemsColor: Theme.of(context).colorScheme.favoriteSupplicationItemColor,
               ),
             ],
           ),
@@ -66,7 +66,7 @@ class MainItems extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
                 side: const BorderSide(
-                  width: 0.5,
+                  width: 1,
                   color: Color(0xffbf615b),
                 )
               ),
@@ -81,7 +81,7 @@ class MainItems extends StatelessWidget {
                     children: const [
                       Expanded(
                         child: Text(
-                          'Вы читали 25 главу',
+                          'Продолжить с 25-й главы',
                           style: TextStyle(fontSize: 16),
                           textAlign: TextAlign.center,
                         ),

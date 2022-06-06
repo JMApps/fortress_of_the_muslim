@@ -20,7 +20,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
     return Card(
       elevation: 3,
       margin: const EdgeInsets.all(8),
-      color: item.id.isOdd ? myColor.secondIs0dd : myColor.firstIs0dd,
+      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -91,7 +91,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                 context.read<MainState>().showFootNoteDialog(
                       context,
                       url,
-                      myColor.favoriteSupplicationRowColor,
+                      myColor.favoriteSupplicationItemColor,
                     );
               },
             ),
