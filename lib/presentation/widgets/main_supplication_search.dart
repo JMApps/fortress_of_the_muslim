@@ -15,7 +15,7 @@ class MainSupplicationSearch extends StatelessWidget {
       height: 55,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.sliverAppBarColor,
+        color: Theme.of(context).colorScheme.supplicationRowColor,
       ),
       child: CupertinoTextField(
         autocorrect: true,

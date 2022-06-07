@@ -39,26 +39,17 @@ class _SupplicationsState extends State<Supplications> {
                   return [
                     SliverAppBar(
                       backgroundColor:
-                          Theme.of(context).colorScheme.sliverAppBarColor,
+                          Theme.of(context).colorScheme.supplicationRowColor,
                       centerTitle: true,
                       elevation: 0,
                       floating: true,
                       snap: true,
-                      iconTheme: IconThemeData(
-                        color:
-                            Theme.of(context).colorScheme.sliverAppBarTextColor,
-                      ),
                       forceElevated: innerBoxIsScrolled,
                       expandedHeight: 75,
-                      flexibleSpace: FlexibleSpaceBar(
+                      flexibleSpace: const FlexibleSpaceBar(
                         centerTitle: true,
                         title: Text(
                           'Все дуа',
-                          style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .sliverAppBarTextColor,
-                          ),
                         ),
                       ),
                     ),

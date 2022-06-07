@@ -38,25 +38,18 @@ class _ChaptersState extends State<Chapters> {
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return [
                     SliverAppBar(
-                      backgroundColor: Theme.of(context).colorScheme.sliverAppBarColor,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.mainChapterRowColor,
                       centerTitle: true,
                       elevation: 0,
                       floating: true,
                       snap: true,
-                      iconTheme: IconThemeData(
-                        color: Theme.of(context).colorScheme.sliverAppBarTextColor,
-                      ),
                       forceElevated: innerBoxIsScrolled,
                       expandedHeight: 75,
-                      flexibleSpace: FlexibleSpaceBar(
+                      flexibleSpace: const FlexibleSpaceBar(
                         centerTitle: true,
                         title: Text(
                           'Главы',
-                          style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .sliverAppBarTextColor,
-                          ),
                         ),
                       ),
                     ),

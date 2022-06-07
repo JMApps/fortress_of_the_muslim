@@ -30,8 +30,8 @@ class MainRow extends StatelessWidget {
       elevation: 3,
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-          side: BorderSide(color: backgroundColor!, width: 3)),
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () async {
@@ -47,6 +47,7 @@ class MainRow extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
+            color: backgroundColor,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

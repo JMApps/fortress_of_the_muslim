@@ -19,7 +19,10 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(double.maxFinite, 50),
+        preferredSize: Size(
+          double.maxFinite,
+          50,
+        ),
         child: MainAppBar(),
       ),
       body: MainItems(),

@@ -6,16 +6,11 @@ class AppTheme {
     fontFamily: 'Gilroy',
     colorScheme: const ColorScheme.light(),
     cardColor: const Color(0xFFFFFFFF),
-    appBarTheme: AppBarTheme(
-      iconTheme: const IconThemeData(
-        color: Color(0xDD000000),
-      ),
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Colors.grey.shade400,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         fontSize: 20,
-        color: Colors.black87,
         fontFamily: 'Gilroy',
       ),
     ),
@@ -26,16 +21,11 @@ class AppTheme {
     fontFamily: 'Gilroy',
     colorScheme: const ColorScheme.dark(),
     cardColor: const Color(0xFF263238),
-    appBarTheme: AppBarTheme(
-      iconTheme: const IconThemeData(
-        color: Color(0xFFEEEEEE),
-      ),
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Colors.blueGrey.shade900,
       titleTextStyle: TextStyle(
         fontSize: 20,
-        color: Colors.grey[200],
         fontFamily: 'Gilroy',
       ),
     ),
@@ -44,32 +34,32 @@ class AppTheme {
 
 extension ColorSchemeS on ColorScheme {
   Color get mainChapterRowColor => brightness == Brightness.light
-      ? const Color(0x99009688)
-      : const Color(0x99009688);
+      ? const Color(0xFF3F968C)
+      : const Color(0xBF00695C);
 
   Color get mainChapterItemColor => brightness == Brightness.light
       ? const Color(0xFF00342C)
       : const Color(0xFFB2DFDB);
 
   Color get favoriteChapterRowColor => brightness == Brightness.light
-      ? const Color(0x99FFC107)
-      : const Color(0xFFFF6F00);
+      ? const Color(0xFFD19834)
+      : const Color(0xBFFF6F00);
 
   Color get favoriteChapterItemColor => brightness == Brightness.light
       ? const Color(0xFF853B00)
       : const Color(0xFFFFECB3);
 
   Color get supplicationRowColor => brightness == Brightness.light
-      ? const Color(0x99F44336)
-      : const Color(0xFFB71C1C);
+      ? const Color(0xFFBF615B)
+      : const Color(0xBFB71C1C);
 
   Color get supplicationItemColor => brightness == Brightness.light
       ? const Color(0xFF671111)
       : const Color(0xFFFFCDD2);
 
   Color get favoriteSupplicationRowColor => brightness == Brightness.light
-      ? const Color(0x992196F3)
-      : const Color(0xFF0D47A1);
+      ? const Color(0xFF2196F3)
+      : const Color(0xBF01579B);
 
   Color get favoriteSupplicationItemColor => brightness == Brightness.light
       ? const Color(0xFF092F69)
@@ -77,11 +67,11 @@ extension ColorSchemeS on ColorScheme {
 
   Color get mainContentBookItemColor => brightness == Brightness.light
       ? const Color(0xFF795548)
-      : const Color(0xFFA1887F);
+      : const Color(0xFF604237);
 
   Color get mainContentContentBookItemColor => brightness == Brightness.light
       ? const Color(0xFF4CAF50)
-      : const Color(0xFF1B5E20);
+      : const Color(0xBF1B5E20);
 
   Color get mainSettingsColor => brightness == Brightness.light
       ? const Color(0xFF009688)
@@ -109,7 +99,7 @@ extension ColorSchemeS on ColorScheme {
 
   Color get favoriteChapterTitleColor => brightness == Brightness.light
       ? const Color(0xFFFF8F00)
-      : const Color(0xFFFFCA28);
+      : const Color(0xFFFF6F00);
 
   Color get mainSupplicationTitleColor => brightness == Brightness.light
       ? const Color(0xFFEF5350)

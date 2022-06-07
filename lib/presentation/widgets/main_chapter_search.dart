@@ -15,7 +15,7 @@ class MainChapterSearch extends StatelessWidget {
       height: 55,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: myColor.sliverAppBarColor,
+        color: myColor.mainChapterRowColor,
       ),
       child: CupertinoTextField(
         autocorrect: true,
