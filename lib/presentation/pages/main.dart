@@ -26,10 +26,7 @@ class _MainPageState extends State<MainPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
-                Theme.of(context)
-                    .colorScheme
-                    .mainChapterRowColor
-                    .withOpacity(0.05),
+                Theme.of(context).colorScheme.mainChapterRowColor.withOpacity(0.05),
                 BlendMode.dstATop),
             fit: BoxFit.cover,
             image: const AssetImage('assets/icons/app_icon.png'),
