@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/main_items.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/main_app_bar.dart';
 
@@ -10,22 +11,32 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  @override
-  initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PreferredSize(
+    return Scaffold(
+      appBar: const PreferredSize(
         preferredSize: Size(
           double.maxFinite,
           50,
         ),
         child: MainAppBar(),
       ),
-      body: MainItems(),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Theme.of(context)
+                    .colorScheme
+                    .mainChapterRowColor
+                    .withOpacity(0.05),
+                BlendMode.dstATop),
+            fit: BoxFit.cover,
+            image: const AssetImage('assets/icons/app_icon.png'),
+          ),
+        ),
+        child: const MainItems(),
+      ),
     );
   }
 }
