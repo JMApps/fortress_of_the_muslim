@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          context.read<AppSettingsState>().useLatThemeState();
+          context.read<AppSettingsState>().loadLastPreferencesState();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Крепость мусульманина',
