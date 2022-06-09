@@ -24,9 +24,11 @@ class _ChaptersState extends State<Chapters> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<MainChapterSearchState>(
-            create: (_) => MainChapterSearchState()),
+          create: (_) => MainChapterSearchState(),
+        ),
         ChangeNotifierProvider<BookmarkButtonState>(
-            create: (_) => BookmarkButtonState()),
+          create: (_) => BookmarkButtonState(),
+        ),
       ],
       child: Builder(
         builder: (context) {

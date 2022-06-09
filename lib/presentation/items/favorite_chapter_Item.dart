@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_chapter_item_model.dart';
+import 'package:fortress_of_the_muslim/domain/state/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
@@ -90,6 +91,7 @@ class FavoriteChapterItem extends StatelessWidget {
           ),
         ),
         onTap: () {
+          context.read<AppSettingsState>().changeLastChapterNumber(item.id);
           Navigator.of(context).pushNamed(
             'chapter_content',
             arguments: ChapterContentArguments(item.id),

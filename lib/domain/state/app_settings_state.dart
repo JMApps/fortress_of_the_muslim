@@ -11,6 +11,10 @@ class AppSettingsState with ChangeNotifier {
 
   bool get getIsLastChapter => isLastChapter;
 
+  int lastChapterNumber = 1;
+
+  int get getLastChapterNumber => lastChapterNumber;
+
   bool isNotification = true;
 
   bool get getIsNotification => isNotification;
@@ -37,6 +41,13 @@ class AppSettingsState with ChangeNotifier {
     notifyListeners();
   }
 
+  changeLastChapterNumber(int number) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setInt('key_last_chapter_number', number);
+    lastChapterNumber = number;
+    notifyListeners();
+  }
+
   changeShowNotification(bool state) {
     isNotification = state;
     saveBoolValue('key_is_show_notification', state);
@@ -60,6 +71,7 @@ class AppSettingsState with ChangeNotifier {
     final preferences = await SharedPreferences.getInstance();
     isRunChapters = preferences.getBool('key_is_run_chapters') ?? false;
     isLastChapter = preferences.getBool('key_is_show_last_chapter') ?? true;
+    lastChapterNumber = preferences.getInt('key_last_chapter_number') ?? 1;
     isNotification = preferences.getBool('key_is_show_notification') ?? true;
     isWakeLock = preferences.getBool('key_is_wake_lock') ?? true;
     isWakeLock ? Wakelock.enable() : Wakelock.disable();
