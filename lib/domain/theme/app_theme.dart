@@ -41,6 +41,14 @@ extension ColorSchemeS on ColorScheme {
       ? const Color(0xFF00342C)
       : const Color(0xFFB2DFDB);
 
+  Color get chapterContentColor => brightness == Brightness.light
+      ? const Color(0xFF455A64)
+      : const Color(0xFF263238);
+
+  Color get chapterContentItemColor => brightness == Brightness.light
+      ? const Color(0xFF455A64)
+      : const Color(0xFF78909C);
+
   Color get favoriteChapterRowColor => brightness == Brightness.light
       ? const Color(0xFFD19834)
       : const Color(0xBFFF6F00);

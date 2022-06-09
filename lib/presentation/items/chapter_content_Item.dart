@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_bottom_buttons.dart';
 import 'package:provider/provider.dart';
 
@@ -12,11 +13,14 @@ class ChapterContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Card(
       elevation: 3,
       margin: const EdgeInsets.all(8),
-      color: item.id.isOdd ? Colors.white : Colors.grey[200],
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -34,8 +38,10 @@ class ChapterContentItem extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: Text(
                           '${item.contentArabic}',
-                          style:
-                              const TextStyle(fontSize: 20, fontFamily: 'Hafs'),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Hafs',
+                          ),
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.start,
                         ),

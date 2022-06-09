@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_share_copy_popup.dart';
 import 'package:provider/provider.dart';
 
@@ -16,13 +17,14 @@ class ChapterContentBottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColor = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
           'Дуа № ${item.id}',
-          style: const TextStyle(
-            color: Color(0xFF455A64),
+          style: TextStyle(
+            color: myColor.chapterContentItemColor,
             fontSize: 16,
           ),
         ),
@@ -42,14 +44,14 @@ class ChapterContentBottomButtons extends StatelessWidget {
           splashRadius: 22,
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),
-          color: const Color(0xFF455A64),
+          color: myColor.chapterContentItemColor,
           icon: item.favoriteState == 0
               ? const Icon(Icons.bookmark_border)
               : const Icon(Icons.bookmark),
           onPressed: () {
             context.read<MainState>().showSnackBarMessage(
                 context,
-                const Color(0xFF455A64),
+                myColor.chapterContentItemColor,
                 item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
             context.read<BookmarkButtonState>().addRemoveSupplicationBookmark(
                 item.favoriteState == 0 ? 1 : 0, item.id);
@@ -66,7 +68,7 @@ class ChapterContentBottomButtons extends StatelessWidget {
               builder: (BuildContext context) {
                 return ContentChapterShareCopyPopup(
                   item: item,
-                  color: const Color(0xFF455A64),
+                  color: myColor.chapterContentItemColor,
                 );
               },
             );
