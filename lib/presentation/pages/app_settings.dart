@@ -41,9 +41,9 @@ class _AppSettingsState extends State<AppSettings> {
                     fontSize: 16,
                   ),
                 ),
-                value: appSettings.isChapterMain,
+                value: appSettings.isRunChapters,
                 onChanged: (value) {
-                  appSettings.ifChaptersFirst(value);
+                  appSettings.changeRunWithChapters(value);
                 },
               ),
               const Divider(indent: 16, endIndent: 16),
@@ -62,8 +62,10 @@ class _AppSettingsState extends State<AppSettings> {
                     fontSize: 16,
                   ),
                 ),
-                onChanged: (value) {},
-                value: true,
+                value: appSettings.isLastChapter,
+                onChanged: (value) {
+                  appSettings.changeShowLastChapter(value);
+                },
               ),
               const Divider(indent: 16, endIndent: 16),
               SwitchListTile.adaptive(
@@ -81,8 +83,10 @@ class _AppSettingsState extends State<AppSettings> {
                     fontSize: 16,
                   ),
                 ),
-                onChanged: (value) {},
-                value: true,
+                value: appSettings.isNotification,
+                onChanged: (value) {
+                  appSettings.changeShowNotification(value);
+                },
               ),
               const Divider(indent: 16, endIndent: 16),
               SwitchListTile.adaptive(
@@ -100,8 +104,10 @@ class _AppSettingsState extends State<AppSettings> {
                     fontSize: 16,
                   ),
                 ),
-                onChanged: (value) {},
-                value: false,
+                value: appSettings.getIsWakeLock,
+                onChanged: (value) {
+                  appSettings.changeWakeLock(value);
+                },
               ),
               SwitchListTile.adaptive(
                 activeColor: myColor.mainSettingsColor,
@@ -113,14 +119,14 @@ class _AppSettingsState extends State<AppSettings> {
                   ),
                 ),
                 subtitle: const Text(
-                  'Текущая тема (адаптивная)',
+                  'Используйте светлую и ночную темы',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
-                value: context.watch<AppSettingsState>().isDarkMode,
+                value: appSettings.isDarkTheme,
                 onChanged: (value) {
-                  context.read<AppSettingsState>().toggleTheme(value);
+                  appSettings.changeTheme(value);
                 },
               ),
             ],
