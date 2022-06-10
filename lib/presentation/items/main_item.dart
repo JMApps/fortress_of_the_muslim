@@ -40,6 +40,17 @@ class MainItem extends StatelessWidget {
           }
         },
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.2),
+                BlendMode.dstATop,
+              ),
+              fit: BoxFit.cover,
+              image: const AssetImage('assets/icons/row_texture.jpeg'),
+            ),
+          ),
           padding: const EdgeInsets.all(8),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -50,10 +50,13 @@ class MainRow extends StatelessWidget {
             color: backgroundColor,
             image: DecorationImage(
               colorFilter: ColorFilter.mode(
-                  backgroundColor!.withOpacity(1),
+                  backgroundColor!.withOpacity(
+                      Theme.of(context).brightness == Brightness.dark
+                          ? 1
+                          : 0.5),
                   Theme.of(context).brightness == Brightness.dark
                       ? BlendMode.multiply
-                      : BlendMode.color),
+                      : BlendMode.modulate),
               fit: BoxFit.fill,
               image: const AssetImage('assets/icons/row_texture.jpeg'),
             ),
