@@ -11,7 +11,7 @@ class AppSettingsState with ChangeNotifier {
 
   bool get getIsLastChapter => isLastChapter;
 
-  int lastChapterNumber = 1;
+  int lastChapterNumber = 27;
 
   int get getLastChapterNumber => lastChapterNumber;
 
@@ -71,7 +71,7 @@ class AppSettingsState with ChangeNotifier {
     final preferences = await SharedPreferences.getInstance();
     isRunChapters = preferences.getBool('key_is_run_chapters') ?? false;
     isLastChapter = preferences.getBool('key_is_show_last_chapter') ?? true;
-    lastChapterNumber = preferences.getInt('key_last_chapter_number') ?? 1;
+    lastChapterNumber = preferences.getInt('key_last_chapter_number') ?? 27;
     isNotification = preferences.getBool('key_is_show_notification') ?? true;
     isWakeLock = preferences.getBool('key_is_wake_lock') ?? true;
     isWakeLock ? Wakelock.enable() : Wakelock.disable();

@@ -48,6 +48,15 @@ class MainRow extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: backgroundColor,
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  backgroundColor!.withOpacity(1),
+                  Theme.of(context).brightness == Brightness.dark
+                      ? BlendMode.multiply
+                      : BlendMode.color),
+              fit: BoxFit.fill,
+              image: const AssetImage('assets/icons/row_texture.jpeg'),
+            ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

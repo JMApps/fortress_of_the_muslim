@@ -33,10 +33,10 @@ class _MainPageState extends State<MainPage> {
                 Theme.of(context)
                     .colorScheme
                     .mainChapterRowColor
-                    .withOpacity(0.05),
+                    .withOpacity(0.15),
                 BlendMode.dstATop),
             fit: BoxFit.cover,
-            image: const AssetImage('assets/icons/app_icon.png'),
+            image: const AssetImage('assets/icons/row_texture.jpeg'),
           ),
         ),
         child: const MainItems(),
