@@ -124,4 +124,8 @@ extension ColorSchemeS on ColorScheme {
   Color get secondIs0dd => brightness == Brightness.light
       ? const Color(0xFFEEEEEE)
       : const Color(0xFF263238);
+
+  Color get playerChoiceChipColor => brightness == Brightness.light
+      ? const Color(0xFFE0E0E0)
+      : const Color(0xFF9E9E9E);
 }
