@@ -47,7 +47,7 @@ class _AppPlayerState extends State<AppPlayer> {
               ),
               IconButton(
                 icon: const Icon(
-                  CupertinoIcons.chevron_left,
+                  CupertinoIcons.backward_end,
                   color: Colors.white,
                 ),
                 splashRadius: 25,
@@ -64,7 +64,7 @@ class _AppPlayerState extends State<AppPlayer> {
               ),
               IconButton(
                 icon: const Icon(
-                  CupertinoIcons.chevron_forward,
+                  CupertinoIcons.forward_end,
                   color: Colors.white,
                 ),
                 splashRadius: 25,
@@ -72,7 +72,7 @@ class _AppPlayerState extends State<AppPlayer> {
               ),
               IconButton(
                 icon: const Icon(
-                  CupertinoIcons.repeat,
+                  CupertinoIcons.refresh_bold,
                   color: Colors.white,
                 ),
                 splashRadius: 25,

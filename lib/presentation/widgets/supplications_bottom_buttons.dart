@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_supplication_item_model.dart';
+import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
@@ -8,8 +9,7 @@ import 'package:fortress_of_the_muslim/presentation/widgets/main_supplication_sh
 import 'package:provider/provider.dart';
 
 class SupplicationsBottomButtons extends StatelessWidget {
-  const SupplicationsBottomButtons({Key? key, required this.item})
-      : super(key: key);
+  const SupplicationsBottomButtons({Key? key, required this.item}) : super(key: key);
 
   final MainSupplicationItemModel item;
 
@@ -34,8 +34,15 @@ class SupplicationsBottomButtons extends StatelessWidget {
             splashRadius: 20,
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
-            icon: const Icon(Icons.play_circle_outline),
-            onPressed: () {},
+            icon: Icon(
+              context.watch<AppPlayerState>().currentPlayItem == item.id &&
+                      context.watch<AppPlayerState>().playingState
+                  ? Icons.stop_circle_outlined
+                  : Icons.play_circle_outline,
+            ),
+            onPressed: () {
+              context.read<AppPlayerState>().playOneAudio(item.id);
+            },
           ),
         ),
         IconButton(
