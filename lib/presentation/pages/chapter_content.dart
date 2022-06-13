@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
-import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/chapter_content_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/app_player.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContent extends StatefulWidget {
@@ -20,7 +18,6 @@ class ChapterContent extends StatefulWidget {
 
 class _ChapterContentState extends State<ChapterContent> {
   final _databaseQuery = DatabaseQuery();
-  final _player = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +28,6 @@ class _ChapterContentState extends State<ChapterContent> {
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
           create: (_) => BookmarkButtonState(),
-        ),
-        ChangeNotifierProvider<AppPlayerState>(
-          create: (_) => AppPlayerState(),
         ),
       ],
       child: Builder(
