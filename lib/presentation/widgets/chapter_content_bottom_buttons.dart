@@ -8,10 +8,8 @@ import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_shar
 import 'package:provider/provider.dart';
 
 class ChapterContentBottomButtons extends StatelessWidget {
-  const ChapterContentBottomButtons({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
+  const ChapterContentBottomButtons({Key? key, required this.item})
+      : super(key: key);
 
   final ChapterContentItemModel item;
 
@@ -37,7 +35,7 @@ class ChapterContentBottomButtons extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             icon: const Icon(Icons.play_circle_outline),
-            onPressed: () {},
+            onPressed: () async {},
           ),
         ),
         IconButton(

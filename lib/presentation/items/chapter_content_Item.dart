@@ -7,7 +7,10 @@ import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_bott
 import 'package:provider/provider.dart';
 
 class ChapterContentItem extends StatelessWidget {
-  const ChapterContentItem({Key? key, required this.item}) : super(key: key);
+  const ChapterContentItem({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
 
   final ChapterContentItemModel item;
 
