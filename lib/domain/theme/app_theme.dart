@@ -34,7 +34,7 @@ class AppTheme {
 
 extension ColorSchemeS on ColorScheme {
   Color get mainChapterRowColor => brightness == Brightness.light
-      ? const Color(0xFF3F968C)
+      ? const Color(0xFF009688)
       : const Color(0xBF00695C);
 
   Color get mainChapterItemColor => brightness == Brightness.light
@@ -102,7 +102,7 @@ extension ColorSchemeS on ColorScheme {
       : const Color(0xFFF5F5F5);
 
   Color get mainChapterTitleColor => brightness == Brightness.light
-      ? const Color(0xFF26A69A)
+      ? const Color(0xFF009688)
       : const Color(0xFF26A69A);
 
   Color get contentChapterTitleColor => brightness == Brightness.light

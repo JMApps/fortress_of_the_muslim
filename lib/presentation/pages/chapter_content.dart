@@ -21,8 +21,7 @@ class _ChapterContentState extends State<ChapterContent> {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
+    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
@@ -54,7 +53,6 @@ class _ChapterContentState extends State<ChapterContent> {
                   ),
                   SliverToBoxAdapter(
                     child: FutureBuilder<List>(
-                      future: _databaseQuery.getOneChapter(arguments.chapterId),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         return ChapterContentSubTitle(
                           databaseQuery: _databaseQuery,
