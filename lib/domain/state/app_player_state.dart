@@ -4,6 +4,8 @@ import 'package:just_audio/just_audio.dart';
 class AppPlayerState with ChangeNotifier {
   final _player = AudioPlayer();
 
+  AudioPlayer get getAudioPlayer => _player;
+
   bool isPlaybackSpeed = false;
 
   bool get getIsPlaybackSpeed => isPlaybackSpeed;
@@ -15,6 +17,10 @@ class AppPlayerState with ChangeNotifier {
   bool playingState = false;
 
   bool get getPlayingState => playingState;
+
+  bool repeatState = false;
+
+  bool get getRepeatState => repeatState;
 
   playOneAudio(int itemId) async {
     if (currentPlayItem != itemId) {
@@ -42,13 +48,27 @@ class AppPlayerState with ChangeNotifier {
     );
   }
 
-  changePlaybackSpeedState(bool state) {
-    isPlaybackSpeed = state;
-    if (isPlaybackSpeed) {
-      _player.setSpeed(0.5);
-    } else {
-      _player.setSpeed(1);
+  changePlaybackSpeedState(bool state, int itemId) {
+    if (currentPlayItem == itemId) {
+      isPlaybackSpeed = state;
+      if (isPlaybackSpeed) {
+        _player.setSpeed(0.5);
+      } else {
+        _player.setSpeed(1);
+      }
+      notifyListeners();
     }
-    notifyListeners();
+  }
+
+  changeRepeatState(bool state, int itemId) {
+    if (currentPlayItem == itemId) {
+      repeatState = state;
+      if (repeatState) {
+        _player.setLoopMode(LoopMode.one);
+      } else {
+        _player.setLoopMode(LoopMode.off);
+      }
+      notifyListeners();
+    }
   }
 }

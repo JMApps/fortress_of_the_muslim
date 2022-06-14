@@ -105,6 +105,10 @@ extension ColorSchemeS on ColorScheme {
       ? const Color(0xFF26A69A)
       : const Color(0xFF26A69A);
 
+  Color get contentChapterTitleColor => brightness == Brightness.light
+      ? const Color(0xFF607D8B)
+      : const Color(0xFF607D8B);
+
   Color get favoriteChapterTitleColor => brightness == Brightness.light
       ? const Color(0xFFFF8F00)
       : const Color(0xFFFF6F00);
