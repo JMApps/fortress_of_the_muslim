@@ -1,4 +1,5 @@
 import 'package:fortress_of_the_muslim/data/local/database/model/book_content_item_model.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_day_night_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_chapter_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
@@ -35,6 +36,13 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $id');
     List<ChapterContentItemModel>? chapterSupplications = res.isNotEmpty ? res.map((c) => ChapterContentItemModel.fromMap(c)).toList() : null;
     return chapterSupplications!;
+  }
+
+  Future<List<ChapterContentDayNightItemModel>> getDayNightContentChapter(bool dayNight) async {
+    var dbClient = await con.db;
+    var res = await dbClient.query(dayNight ? 'Table_of_supplications_day' : 'Table_of_supplications_night');
+    List<ChapterContentDayNightItemModel>? dayNightContents = res.isNotEmpty ? res.map((c) => ChapterContentDayNightItemModel.fromMap(c)).toList() : null;
+    return dayNightContents!;
   }
 
   Future<List<MainSupplicationItemModel>> getAllSupplications() async {

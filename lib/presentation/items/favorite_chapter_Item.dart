@@ -93,7 +93,7 @@ class FavoriteChapterItem extends StatelessWidget {
         onTap: () {
           context.read<AppSettingsState>().changeLastChapterNumber(item.id);
           Navigator.of(context).pushNamed(
-            'chapter_content',
+            item.id != 27 ? 'chapter_content' : 'chapter_content_day_night',
             arguments: ChapterContentArguments(item.id),
           );
         },
