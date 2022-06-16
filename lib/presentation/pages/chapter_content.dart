@@ -6,6 +6,7 @@ import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/chapter_content_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContent extends StatefulWidget {
@@ -21,7 +22,8 @@ class _ChapterContentState extends State<ChapterContent> {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
@@ -50,6 +52,24 @@ class _ChapterContentState extends State<ChapterContent> {
                         'Глава ${arguments!.chapterId}',
                       ),
                     ),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(CupertinoIcons.settings),
+                        splashRadius: 20,
+                        onPressed: () {
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                margin: const EdgeInsets.all(16),
+                                child: const ContentChapterSettings(
+                                    isDayNight: false),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
                   SliverToBoxAdapter(
                     child: FutureBuilder<List>(
