@@ -15,6 +15,34 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int _toggleTextAlignIndex = 0;
 
+  int _textArabicSize = 16;
+
+  int get getTextArabicSize => _textArabicSize;
+
+  int _textTextTranslateSize = 16;
+
+  int get getTextTranslateSize => _textTextTranslateSize;
+
+  Color? _arabicTextColor = Colors.red[900];
+
+  Color? get getArabicTextColor => _arabicTextColor;
+
+  Color? _transcriptionTextColor = Colors.green[900];
+
+  Color? get getTranscriptionTextColor => _transcriptionTextColor;
+
+  Color? _translateTextColor = Colors.black;
+
+  Color? get getTranslateTextColor => _translateTextColor;
+
+  bool _isDefaultColors = false;
+
+  bool get getIsDefaultColors => _isDefaultColors;
+
+  bool _isTranscriptionShow = true;
+
+  bool get getIsTranscriptionShow => _isTranscriptionShow;
+
   bool _isDay = true;
 
   bool get getIsDay => _isDay;
@@ -38,6 +66,41 @@ class ChapterContentSettingsState with ChangeNotifier {
     for (int i = 0; i < _isTextAlignSelected.length; i++) {
       _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
     }
+    notifyListeners();
+  }
+
+  changeTextArabicSize(double size) {
+    _textArabicSize = size.toInt();
+    notifyListeners();
+  }
+
+  changeTextTranslateSize(double size) {
+    _textTextTranslateSize = size.toInt();
+    notifyListeners();
+  }
+
+  changeTextArabicColor(Color color) {
+    _arabicTextColor = color;
+    notifyListeners();
+  }
+
+  changeTextTranscriptionColor(Color color) {
+    _transcriptionTextColor = color;
+    notifyListeners();
+  }
+
+  changeTextTranslateColor(Color color) {
+    _translateTextColor = color;
+    notifyListeners();
+  }
+
+  changeDefaultColorsState(bool state) {
+    _isDefaultColors = state;
+    notifyListeners();
+  }
+
+  changeTranscriptionShow(bool state) {
+    _isTranscriptionShow = state;
     notifyListeners();
   }
 }

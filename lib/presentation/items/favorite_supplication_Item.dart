@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
+import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/favorite_supplications_bottom_buttons.dart';
@@ -49,7 +50,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   : const SizedBox(),
             ),
             Visibility(
-              visible: true,
+              visible: context.watch<ChapterContentSettingsState>().getIsTranscriptionShow,
               maintainAnimation: false,
               maintainSize: false,
               child: item.contentTranscription != null
