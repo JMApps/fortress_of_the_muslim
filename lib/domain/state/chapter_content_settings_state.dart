@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChapterContentSettingsState with ChangeNotifier {
   DateTime now = DateTime.now();
@@ -66,6 +68,7 @@ class ChapterContentSettingsState with ChangeNotifier {
     for (int i = 0; i < _isTextAlignSelected.length; i++) {
       _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
     }
+    saveInt(Constants.keyTextAlignIndex, _toggleTextAlignIndex);
     notifyListeners();
   }
 
@@ -81,26 +84,57 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   changeTextArabicColor(Color color) {
     _arabicTextColor = color;
+    saveInt(Constants.keyTextArabicColor, _arabicTextColor!.value);
     notifyListeners();
   }
 
   changeTextTranscriptionColor(Color color) {
     _transcriptionTextColor = color;
+    saveInt(Constants.keyTextTranscriptionColor, _transcriptionTextColor!.value);
     notifyListeners();
   }
 
   changeTextTranslateColor(Color color) {
     _translateTextColor = color;
+    saveInt(Constants.keyTextTranslateColor, _translateTextColor!.value);
     notifyListeners();
   }
 
   changeDefaultColorsState(bool state) {
     _isDefaultColors = state;
+    saveBool(Constants.keyColorsWithDayNight, state);
     notifyListeners();
   }
 
   changeTranscriptionShow(bool state) {
     _isTranscriptionShow = state;
+    saveBool(Constants.keyTextTranscriptionIsShow, state);
+    notifyListeners();
+  }
+
+  saveInt(String key, int value) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setInt(key, value);
+  }
+
+  saveBool(String key, bool state) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setBool(key, state);
+  }
+
+  initSettings() async {
+    final preferences = await SharedPreferences.getInstance();
+    _toggleTextAlignIndex = preferences.getInt(Constants.keyTextAlignIndex) ?? 0;
+    for (int i = 0; i < _isTextAlignSelected.length; i++) {
+      _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
+    }
+    _textArabicSize = preferences.getInt(Constants.keyTextArabicSize) ?? 16;
+    _textTextTranslateSize = preferences.getInt(Constants.keyTextTranslateSize) ?? 16;
+    _arabicTextColor = preferences.getInt(Constants.keyTextArabicColor) as Color?;
+    _transcriptionTextColor = preferences.getInt(Constants.keyTextTranscriptionColor) as Color?;
+    _translateTextColor = preferences.getInt(Constants.keyTextTranslateColor) as Color?;
+    _isDefaultColors = preferences.getBool(Constants.keyColorsWithDayNight) ?? false;
+    _isTranscriptionShow = preferences.getBool(Constants.keyTextTranscriptionIsShow) ?? true;
     notifyListeners();
   }
 }
