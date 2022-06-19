@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
+import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/chapter_content_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
@@ -32,6 +33,7 @@ class _ChapterContentState extends State<ChapterContent> {
       ],
       child: Builder(
         builder: (context) {
+          context.read<ChapterContentSettingsState>().initSettings();
           return Scaffold(
             body: NestedScrollView(
               floatHeaderSlivers: true,

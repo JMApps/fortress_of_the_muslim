@@ -25,17 +25,17 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int get getTextTranslateSize => _textTextTranslateSize;
 
-  Color? _arabicTextColor = Colors.red[900];
+  int _arabicTextColor = Colors.red[900]!.value;
 
-  Color? get getArabicTextColor => _arabicTextColor;
+  int get getArabicTextColor => _arabicTextColor;
 
-  Color? _transcriptionTextColor = Colors.green[900];
+  int _transcriptionTextColor = Colors.teal[900]!.value;
 
-  Color? get getTranscriptionTextColor => _transcriptionTextColor;
+  int get getTranscriptionTextColor => _transcriptionTextColor;
 
-  Color? _translateTextColor = Colors.black;
+  int _translateTextColor = Colors.black.value;
 
-  Color? get getTranslateTextColor => _translateTextColor;
+  int get getTranslateTextColor => _translateTextColor;
 
   bool _isDefaultColors = false;
 
@@ -83,20 +83,20 @@ class ChapterContentSettingsState with ChangeNotifier {
   }
 
   changeTextArabicColor(Color color) {
-    _arabicTextColor = color;
-    saveInt(Constants.keyTextArabicColor, _arabicTextColor!.value);
+    _arabicTextColor = color.value;
+    saveInt(Constants.keyTextArabicColor, color.value);
     notifyListeners();
   }
 
   changeTextTranscriptionColor(Color color) {
-    _transcriptionTextColor = color;
-    saveInt(Constants.keyTextTranscriptionColor, _transcriptionTextColor!.value);
+    _transcriptionTextColor = color.value;
+    saveInt(Constants.keyTextTranscriptionColor, color.value);
     notifyListeners();
   }
 
   changeTextTranslateColor(Color color) {
-    _translateTextColor = color;
-    saveInt(Constants.keyTextTranslateColor, _translateTextColor!.value);
+    _translateTextColor = color.value;
+    saveInt(Constants.keyTextTranslateColor, color.value);
     notifyListeners();
   }
 
@@ -130,9 +130,9 @@ class ChapterContentSettingsState with ChangeNotifier {
     }
     _textArabicSize = preferences.getInt(Constants.keyTextArabicSize) ?? 16;
     _textTextTranslateSize = preferences.getInt(Constants.keyTextTranslateSize) ?? 16;
-    _arabicTextColor = preferences.getInt(Constants.keyTextArabicColor) as Color?;
-    _transcriptionTextColor = preferences.getInt(Constants.keyTextTranscriptionColor) as Color?;
-    _translateTextColor = preferences.getInt(Constants.keyTextTranslateColor) as Color?;
+    _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ?? Colors.red[900]!.value);
+    _transcriptionTextColor = (preferences.getInt(Constants.keyTextTranscriptionColor) ?? Colors.teal[900]!.value);
+    _translateTextColor = (preferences.getInt(Constants.keyTextTranslateColor) ?? Colors.black.value);
     _isDefaultColors = preferences.getBool(Constants.keyColorsWithDayNight) ?? false;
     _isTranscriptionShow = preferences.getBool(Constants.keyTextTranscriptionIsShow) ?? true;
     notifyListeners();

@@ -21,6 +21,7 @@ class _ChapterContentDayNightState extends State<ChapterContentDayNight> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ChapterContentSettingsState>().initSettings();
     final myColor = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
