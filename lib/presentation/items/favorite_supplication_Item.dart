@@ -18,91 +18,102 @@ class FavoriteSupplicationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    return Card(
-      elevation: 3,
-      margin: const EdgeInsets.all(8),
-      color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Visibility(
-              visible: true,
-              maintainAnimation: false,
-              maintainSize: false,
-              child: item.contentArabic != null
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          '${item.contentArabic}',
-                          style:
-                              const TextStyle(fontSize: 20, fontFamily: 'Hafs'),
-                          textDirection: TextDirection.rtl,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                    )
-                  : const SizedBox(),
-            ),
-            Visibility(
-              visible: context.watch<ChapterContentSettingsState>().getIsTranscriptionShow,
-              maintainAnimation: false,
-              maintainSize: false,
-              child: item.contentTranscription != null
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 16,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '${item.contentTranscription}',
-                          style: const TextStyle(
-                            fontSize: 16,
+    return Consumer<ChapterContentSettingsState>(
+      builder: (context, chapterContentSettings, _) {
+        return Card(
+          elevation: 3,
+          margin: const EdgeInsets.all(8),
+          color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Visibility(
+                  visible: true,
+                  maintainAnimation: false,
+                  maintainSize: false,
+                  child: item.contentArabic != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
                           ),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                    )
-                  : const SizedBox(),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              '${item.contentArabic}',
+                              style: TextStyle(
+                                fontSize: chapterContentSettings.getTextArabicSize + 5,
+                                fontFamily: 'Hafs',
+                                color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getArabicTextColor) : myColor.textArabicColor,
+                              ),
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                ),
+                Visibility(
+                  visible: chapterContentSettings.getIsTranscriptionShow,
+                  maintainAnimation: false,
+                  maintainSize: false,
+                  child: item.contentTranscription != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 16,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '${item.contentTranscription}',
+                              style: TextStyle(
+                                fontSize: chapterContentSettings.getTextTranslateSize.toDouble(),
+                                color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranscriptionTextColor) : myColor.textTranscriptionColor,
+                              ),
+                              textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                ),
+                Html(
+                  data: item.contentTranslation,
+                  style: {
+                    '#': Style(
+                      fontSize: FontSize(chapterContentSettings.getTextTranslateSize.toDouble()),
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero,
+                      color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranslateTextColor) : myColor.textTranslateColor,
+                      textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                    ),
+                    'small': Style(
+                      fontSize: const FontSize(8),
+                    ),
+                    'a': Style(
+                      fontSize: const FontSize(14),
+                      color: Colors.blue,
+                    ),
+                  },
+                  onLinkTap: (String? url, RenderContext rendContext,
+                      Map<String, String> attributes, element) {
+                    context.read<MainState>().showFootNoteDialog(
+                          context,
+                          url,
+                          myColor.favoriteSupplicationItemColor,
+                        );
+                  },
+                ),
+                const SizedBox(height: 8),
+                const Divider(color: Colors.black),
+                const SizedBox(height: 8),
+                FavoriteSupplicationsBottomButtons(item: item),
+              ],
             ),
-            Html(
-              data: item.contentTranslation,
-              style: {
-                '#': Style(
-                  fontSize: const FontSize(17),
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.zero,
-                ),
-                'small': Style(
-                  fontSize: const FontSize(8),
-                ),
-                'a': Style(
-                  fontSize: const FontSize(14),
-                  color: Colors.blue,
-                ),
-              },
-              onLinkTap: (String? url, RenderContext rendContext,
-                  Map<String, String> attributes, element) {
-                context.read<MainState>().showFootNoteDialog(
-                      context,
-                      url,
-                      myColor.favoriteSupplicationItemColor,
-                    );
-              },
-            ),
-            const SizedBox(height: 8),
-            const Divider(color: Colors.black),
-            const SizedBox(height: 8),
-            FavoriteSupplicationsBottomButtons(item: item),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

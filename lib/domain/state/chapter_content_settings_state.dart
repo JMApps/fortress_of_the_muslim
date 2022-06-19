@@ -7,7 +7,7 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   final List<bool> _isDayNightSelected = [true, false];
 
-  final List<bool> _isTextAlignSelected = [true, false, false, false];
+  final List<bool> _isTextAlignSelected = [false, false, false, true];
 
   List<bool> get getIsDayNightSelected => _isDayNightSelected;
 
@@ -15,7 +15,9 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int _toggleDayNightIndex = 0;
 
-  int _toggleTextAlignIndex = 0;
+  int _toggleTextAlignIndex = 3;
+
+  int get getToggleTextAlignIndex => _toggleTextAlignIndex;
 
   int _textArabicSize = 16;
 
@@ -49,10 +51,14 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   bool get getIsDay => _isDay;
 
-  changeDayNight(bool state) {
-    _isDay = state;
-    notifyListeners();
-  }
+  final List<TextAlign> _myTextAlign = [
+    TextAlign.start,
+    TextAlign.center,
+    TextAlign.end,
+    TextAlign.justify,
+  ];
+
+  List get getMyTextAlign => _myTextAlign;
 
   updateToggleDayNight(int index) {
     _toggleDayNightIndex = index;
@@ -124,7 +130,7 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   initSettings() async {
     final preferences = await SharedPreferences.getInstance();
-    _toggleTextAlignIndex = preferences.getInt(Constants.keyTextAlignIndex) ?? 0;
+    _toggleTextAlignIndex = preferences.getInt(Constants.keyTextAlignIndex) ?? 3;
     for (int i = 0; i < _isTextAlignSelected.length; i++) {
       _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
     }
