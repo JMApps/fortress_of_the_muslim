@@ -61,7 +61,7 @@ class DatabaseQuery {
 
   Future<List<MainChapterItemModel>> getChapterSearchResult(String keyword) async {
     var dbClient = await con.db;
-    var res = await dbClient.rawQuery("SELECT * FROM Table_of_chapters WHERE _id LIKE '%$keyword%' OR chapter_title LIKE '%$keyword%'");
+    var res = await dbClient.rawQuery("SELECT * FROM Table_of_chapters WHERE chapter_number LIKE '%$keyword%' OR chapter_title LIKE '%$keyword%'");
     List<MainChapterItemModel>? searchResult = res.isNotEmpty ? res.map((c) => MainChapterItemModel.fromMap(c)).toList() : null;
     return searchResult!;
   }

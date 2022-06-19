@@ -52,7 +52,7 @@ class MainChapterItem extends StatelessWidget {
                   title: Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
-                      'Глава ${item.id}',
+                      item.chapterNumber,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: myColor.mainChapterTitleColor,
@@ -60,7 +60,7 @@ class MainChapterItem extends StatelessWidget {
                     ),
                   ),
                   subtitle: Html(
-                    data: item.chapterSubTitle,
+                    data: item.chapterTitle,
                     style: {
                       '#': Style(
                         fontSize: const FontSize(17),

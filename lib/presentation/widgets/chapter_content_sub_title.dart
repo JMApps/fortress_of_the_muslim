@@ -34,7 +34,7 @@ class ChapterContentSubTitle extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Html(
-                  data: snapshot.data![0].chapterSubTitle,
+                  data: snapshot.data![0].chapterTitle,
                   style: {
                     '#': Style(
                       fontSize: const FontSize(17),
