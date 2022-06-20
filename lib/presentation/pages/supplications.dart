@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/data/search_supplication_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_supplication_search_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/main_supplication_search.dart';
 import 'package:provider/provider.dart';
 
 class Supplications extends StatefulWidget {
@@ -55,6 +55,17 @@ class _SupplicationsState extends State<Supplications> {
                       ),
                       actions: [
                         IconButton(
+                          icon: const Icon(
+                            CupertinoIcons.search,
+                          ),
+                          onPressed: () {
+                            showSearch(
+                              context: context,
+                              delegate: SearchSupplicationDelegate(),
+                            );
+                          },
+                        ),
+                        IconButton(
                           icon: const Icon(CupertinoIcons.settings),
                           splashRadius: 20,
                           onPressed: () {
@@ -63,16 +74,17 @@ class _SupplicationsState extends State<Supplications> {
                               builder: (BuildContext context) {
                                 return Container(
                                     margin: const EdgeInsets.all(16),
-                                    child: const ContentChapterSettings(isDayNight: false));
+                                    child: const ContentChapterSettings(
+                                        isDayNight: false));
                               },
                             );
                           },
                         ),
                       ],
                     ),
-                    const SliverToBoxAdapter(
-                      child: MainSupplicationSearch(),
-                    ),
+                    // const SliverToBoxAdapter(
+                    //   child: MainSupplicationSearch(),
+                    // ),
                   ];
                 },
                 body: MediaQuery.removePadding(

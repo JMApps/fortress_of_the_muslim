@@ -16,7 +16,7 @@ class ContentChapterSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
     return Consumer<ChapterContentSettingsState>(
-      builder: (context, chapterContentSettingsState, _) {
+      builder: (context, chapterContentSettingsState, child) {
         return Material(
           borderRadius: BorderRadius.circular(15),
           child: Container(

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/data/search_chapter_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_chapter_search_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_chapter_Item.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/main_chapter_search.dart';
 import 'package:provider/provider.dart';
 
 class Chapters extends StatefulWidget {
@@ -54,10 +54,23 @@ class _ChaptersState extends State<Chapters> {
                           'Главы',
                         ),
                       ),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            CupertinoIcons.search,
+                          ),
+                          onPressed: () {
+                            showSearch(
+                              context: context,
+                              delegate: SearchChapterDelegate(),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                    const SliverToBoxAdapter(
-                      child: MainChapterSearch(),
-                    ),
+                    // const SliverToBoxAdapter(
+                    //   child: MainChapterSearch(),
+                    // ),
                   ];
                 },
                 body: MediaQuery.removePadding(
