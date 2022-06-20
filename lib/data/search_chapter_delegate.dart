@@ -73,10 +73,11 @@ class SearchChapterDelegate extends SearchDelegate {
                     },
                   ),
                 );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
         }
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
-        );
       },
     );
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/data/search_chapter_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
-import 'package:fortress_of_the_muslim/domain/state/main_chapter_search_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_chapter_Item.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +22,6 @@ class _ChaptersState extends State<Chapters> {
     final currentFocus = FocusScope.of(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainChapterSearchState>(
-          create: (_) => MainChapterSearchState(),
-        ),
         ChangeNotifierProvider<BookmarkButtonState>(
           create: (_) => BookmarkButtonState(),
         ),
@@ -77,11 +73,7 @@ class _ChaptersState extends State<Chapters> {
                   removeTop: true,
                   context: context,
                   child: FutureBuilder<List>(
-                    future: _databaseQuery.getChapterSearchResult(context
-                            .watch<BookmarkButtonState>()
-                            .getUpdateList
-                        ? context.watch<MainChapterSearchState>().getKeyWord
-                        : context.watch<MainChapterSearchState>().getKeyWord),
+                    future: _databaseQuery.getAllChapters(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       return snapshot.hasError
                           ? const Center(
@@ -90,7 +82,9 @@ class _ChaptersState extends State<Chapters> {
                                 style: TextStyle(fontSize: 16),
                               ),
                             )
-                          : (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data != null)
+                          : (snapshot.connectionState == ConnectionState.done &&
+                                  snapshot.hasData &&
+                                  snapshot.data != null)
                               ? CupertinoScrollbar(
                                   child: ListView.builder(
                                     physics: const BouncingScrollPhysics(),

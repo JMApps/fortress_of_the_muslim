@@ -71,8 +71,8 @@ class SearchSupplicationDelegate extends SearchDelegate {
                 );
         } else {
           return const Center(
-          child: CircularProgressIndicator.adaptive(),
-        );
+            child: CircularProgressIndicator.adaptive(),
+          );
         }
       },
     );

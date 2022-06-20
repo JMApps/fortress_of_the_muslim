@@ -9,4 +9,11 @@ class FavoriteChapterItemModel {
         chapterNumber = object['chapter_number'],
         chapterTitle = object['chapter_title'],
         favoriteState = object['favorite_state'];
+
+  @override
+  int get hashCode => id;
+
+  @override
+  bool operator ==(Object other) =>
+      other is FavoriteChapterItemModel && other.id == id;
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/data/search_supplication_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
-import 'package:fortress_of_the_muslim/domain/state/main_supplication_search_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
@@ -24,8 +23,6 @@ class _SupplicationsState extends State<Supplications> {
     final currentFocus = FocusScope.of(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MainSupplicationSearchState>(
-            create: (_) => MainSupplicationSearchState()),
         ChangeNotifierProvider<BookmarkButtonState>(
             create: (_) => BookmarkButtonState()),
       ],
@@ -91,14 +88,7 @@ class _SupplicationsState extends State<Supplications> {
                   removeTop: true,
                   context: context,
                   child: FutureBuilder<List>(
-                    future: _databaseQuery.getSupplicationSearchResult(
-                        context.watch<BookmarkButtonState>().getUpdateList
-                            ? context
-                                .watch<MainSupplicationSearchState>()
-                                .getKeyWord
-                            : context
-                                .watch<MainSupplicationSearchState>()
-                                .getKeyWord),
+                    future: _databaseQuery.getAllSupplications(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       return snapshot.hasError
                           ? const Center(
@@ -109,7 +99,9 @@ class _SupplicationsState extends State<Supplications> {
                                 ),
                               ),
                             )
-                          : (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data != null)
+                          : (snapshot.connectionState == ConnectionState.done &&
+                                  snapshot.hasData &&
+                                  snapshot.data != null)
                               ? CupertinoScrollbar(
                                   child: ListView.builder(
                                     physics: const BouncingScrollPhysics(),
