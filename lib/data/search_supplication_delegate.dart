@@ -63,6 +63,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
                     itemBuilder: (BuildContext context, int index) {
                       return MainSupplicationItem(
                         item: recentSupplications[index],
+                        isSearch: false,
                       );
                     },
                   ),

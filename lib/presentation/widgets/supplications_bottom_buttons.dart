@@ -9,10 +9,14 @@ import 'package:fortress_of_the_muslim/presentation/widgets/main_supplication_sh
 import 'package:provider/provider.dart';
 
 class SupplicationsBottomButtons extends StatelessWidget {
-  const SupplicationsBottomButtons({Key? key, required this.item})
-      : super(key: key);
+  const SupplicationsBottomButtons({
+    Key? key,
+    required this.item,
+    required this.isSearch,
+  }) : super(key: key);
 
   final MainSupplicationItemModel item;
+  final bool isSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: item.nameAudio != null ? true : false,
+              visible: isSearch ? item.nameAudio != null ? true : false : false,
               maintainAnimation: false,
               maintainSize: false,
               child: Transform.scale(
@@ -56,7 +60,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: item.nameAudio != null ? true : false,
+              visible: isSearch ? item.nameAudio != null ? true : false : false,
               maintainAnimation: false,
               maintainSize: false,
               child: IconButton(
@@ -74,7 +78,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: item.nameAudio != null ? true : false,
+              visible: isSearch ? item.nameAudio != null ? true : false : false,
               maintainAnimation: false,
               maintainSize: false,
               child: IconButton(
@@ -91,24 +95,29 @@ class SupplicationsBottomButtons extends StatelessWidget {
                 },
               ),
             ),
-            IconButton(
-              splashRadius: 22,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              color: myColor.mainSupplicationTitleColor,
-              icon: item.favoriteState == 0
-                  ? const Icon(Icons.bookmark_border)
-                  : const Icon(Icons.bookmark),
-              onPressed: () {
-                context.read<MainState>().showSnackBarMessage(
-                    context,
-                    myColor.mainSupplicationTitleColor,
-                    item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
-                context
-                    .read<BookmarkButtonState>()
-                    .addRemoveSupplicationBookmark(
-                        item.favoriteState == 0 ? 1 : 0, item.id);
-              },
+            Visibility(
+              visible: isSearch,
+              maintainSize: false,
+              maintainAnimation: false,
+              child: IconButton(
+                splashRadius: 22,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                color: myColor.mainSupplicationTitleColor,
+                icon: item.favoriteState == 0
+                    ? const Icon(Icons.bookmark_border)
+                    : const Icon(Icons.bookmark),
+                onPressed: () {
+                  context.read<MainState>().showSnackBarMessage(
+                      context,
+                      myColor.mainSupplicationTitleColor,
+                      item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
+                  context
+                      .read<BookmarkButtonState>()
+                      .addRemoveSupplicationBookmark(
+                          item.favoriteState == 0 ? 1 : 0, item.id);
+                },
+              ),
             ),
             IconButton(
               splashRadius: 20,

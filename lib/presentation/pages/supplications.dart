@@ -118,6 +118,7 @@ class _SupplicationsState extends State<Supplications> {
                                         (BuildContext context, int index) {
                                       return MainSupplicationItem(
                                         item: snapshot.data![index],
+                                        isSearch: true,
                                       );
                                     },
                                   ),

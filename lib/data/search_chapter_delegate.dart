@@ -67,6 +67,7 @@ class SearchChapterDelegate extends SearchDelegate {
                   itemBuilder: (BuildContext context, int index) {
                     return MainChapterItem(
                       item: recentChapters[index],
+                      isSearch: false,
                     );
                   },
                 ),

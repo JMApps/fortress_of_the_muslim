@@ -13,9 +13,11 @@ class MainChapterItem extends StatelessWidget {
   const MainChapterItem({
     Key? key,
     required this.item,
+    required this.isSearch,
   }) : super(key: key);
 
   final MainChapterItemModel item;
+  final bool isSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +29,26 @@ class MainChapterItem extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Row(
             children: [
-              IconButton(
-                icon: item.favoriteState == 0
-                    ? const Icon(CupertinoIcons.bookmark)
-                    : const Icon(CupertinoIcons.bookmark_fill),
-                splashRadius: 22,
-                splashColor: const Color(0xff81b9b0),
-                color: myColor.mainChapterTitleColor,
-                onPressed: () {
-                  context.read<MainState>().showSnackBarMessage(
-                      context,
-                      myColor.mainChapterTitleColor,
-                      item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
-                  context.read<BookmarkButtonState>().addRemoveChapterBookmark(
-                      item.favoriteState == 0 ? 1 : 0, item.id);
-                },
+              Visibility(
+                visible: isSearch,
+                maintainSize: false,
+                maintainAnimation: false,
+                child: IconButton(
+                  icon: item.favoriteState == 0
+                      ? const Icon(CupertinoIcons.bookmark)
+                      : const Icon(CupertinoIcons.bookmark_fill),
+                  splashRadius: 22,
+                  splashColor: const Color(0xff81b9b0),
+                  color: myColor.mainChapterTitleColor,
+                  onPressed: () {
+                    context.read<MainState>().showSnackBarMessage(
+                        context,
+                        myColor.mainChapterTitleColor,
+                        item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
+                    context.read<BookmarkButtonState>().addRemoveChapterBookmark(
+                        item.favoriteState == 0 ? 1 : 0, item.id);
+                  },
+                ),
               ),
               const SizedBox(
                 width: 8,
