@@ -109,7 +109,7 @@ class _SupplicationsState extends State<Supplications> {
                                 ),
                               ),
                             )
-                          : snapshot.hasData
+                          : (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data != null)
                               ? CupertinoScrollbar(
                                   child: ListView.builder(
                                     physics: const BouncingScrollPhysics(),

@@ -37,15 +37,16 @@ class SearchSupplicationDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     return FutureBuilder<List>(
-        future: _databaseQuery.getAllSupplications(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          List<MainSupplicationItemModel> supplications = snapshot.data;
+      future: _databaseQuery.getAllSupplications(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          List<MainSupplicationItemModel> supplications = snapshot.data!;
           List<MainSupplicationItemModel> recentSupplications = query.isEmpty
               ? supplications
               : supplications
                   .where((element) => element.contentTranslation
                       .toLowerCase()
-                      .contains(query.toLowerCase()))
+                      .contains(query.toString()))
                   .toList();
           return recentSupplications.isEmpty
               ? const Center(
@@ -68,6 +69,12 @@ class SearchSupplicationDelegate extends SearchDelegate {
                     },
                   ),
                 );
-        });
+        } else {
+          return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
+        }
+      },
+    );
   }
 }

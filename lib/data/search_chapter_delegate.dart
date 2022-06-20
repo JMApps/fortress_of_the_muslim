@@ -39,39 +39,44 @@ class SearchChapterDelegate extends SearchDelegate {
     return FutureBuilder<List>(
       future: _databaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        List<MainChapterItemModel> chapters = snapshot.data;
-        List<MainChapterItemModel> recentChapters = query.isEmpty
-            ? chapters
-            : chapters
-                .where((element) =>
-                    element.chapterTitle
-                        .toLowerCase()
-                        .contains(query.toLowerCase()) ||
-                    element.chapterNumber
-                        .toLowerCase()
-                        .contains(query.toLowerCase()))
-                .toList();
-        return recentChapters.isEmpty
-            ? const Center(
-                child: Text(
-                  'По вашему запросу ничего не найдено',
-                  style: TextStyle(
-                    fontSize: 18,
+        if (snapshot.hasData) {
+          List<MainChapterItemModel> chapters = snapshot.data!;
+          List<MainChapterItemModel> recentChapters = query.isEmpty
+              ? chapters
+              : chapters
+                  .where((element) =>
+                      element.chapterTitle
+                          .toLowerCase()
+                          .contains(query.toLowerCase()) ||
+                      element.chapterNumber
+                          .toLowerCase()
+                          .contains(query.toLowerCase()))
+                  .toList();
+          return recentChapters.isEmpty
+              ? const Center(
+                  child: Text(
+                    'По вашему запросу ничего не найдено',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-              )
-            : CupertinoScrollbar(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: recentChapters.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MainChapterItem(
-                      item: recentChapters[index],
-                      isSearch: false,
-                    );
-                  },
-                ),
-              );
+                )
+              : CupertinoScrollbar(
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: recentChapters.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return MainChapterItem(
+                        item: recentChapters[index],
+                        isSearch: false,
+                      );
+                    },
+                  ),
+                );
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
       },
     );
   }

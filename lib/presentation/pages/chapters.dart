@@ -90,7 +90,7 @@ class _ChaptersState extends State<Chapters> {
                                 style: TextStyle(fontSize: 16),
                               ),
                             )
-                          : snapshot.hasData
+                          : (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data != null)
                               ? CupertinoScrollbar(
                                   child: ListView.builder(
                                     physics: const BouncingScrollPhysics(),
