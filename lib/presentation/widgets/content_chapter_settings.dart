@@ -259,7 +259,7 @@ class ContentChapterSettings extends StatelessWidget {
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.invert_colors_off),
+                  leading: const Icon(Icons.invert_colors),
                   title: const Text(
                     'Выбранные цвета для светлой и ночной темы',
                     style: TextStyle(fontSize: 18),
@@ -277,7 +277,7 @@ class ContentChapterSettings extends StatelessWidget {
                 const SizedBox(height: 8),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(CupertinoIcons.eye),
+                  leading: const Icon(Icons.remove_red_eye),
                   title: const Text(
                     'Отображать транскрипцию',
                     style: TextStyle(fontSize: 18),
