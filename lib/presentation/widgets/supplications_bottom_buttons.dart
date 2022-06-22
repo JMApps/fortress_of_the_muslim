@@ -90,9 +90,10 @@ class SupplicationsBottomButtons extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.repeat),
-                onPressed: () {
+                onPressed: appPlayer.currentPlayItem == item.id
+                    ? () {
                   appPlayer.changeRepeatState(!appPlayer.repeatState, item.id);
-                },
+                } : null,
               ),
             ),
             Visibility(
