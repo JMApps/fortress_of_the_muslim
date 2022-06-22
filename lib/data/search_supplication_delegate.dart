@@ -5,7 +5,7 @@ import 'package:fortress_of_the_muslim/data/local/database/service/database_quer
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
 
-class SearchSupplicationDelegate extends SearchDelegate<String> {
+class SearchSupplicationDelegate extends SearchDelegate {
   final _databaseQuery = DatabaseQuery();
 
   SearchSupplicationDelegate({
@@ -42,7 +42,7 @@ class SearchSupplicationDelegate extends SearchDelegate<String> {
         color: Theme.of(context).colorScheme.supplicationRowColor,
       ),
       onPressed: () {
-        close(context, '');
+        close(context, null);
       },
     );
   }

@@ -47,9 +47,14 @@ class MainSupplicationItem extends StatelessWidget {
                             child: Text(
                               '${item.contentArabic}',
                               style: TextStyle(
-                                fontSize: chapterContentSettings.getTextArabicSize + 5,
+                                fontSize:
+                                    chapterContentSettings.getTextArabicSize +
+                                        5,
                                 fontFamily: 'Hafs',
-                                color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getArabicTextColor) : myColor.textArabicColor,
+                                color: chapterContentSettings.getIsDefaultColors
+                                    ? Color(chapterContentSettings
+                                        .getArabicTextColor)
+                                    : myColor.textArabicColor,
                               ),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.start,
@@ -70,10 +75,16 @@ class MainSupplicationItem extends StatelessWidget {
                           child: Text(
                             '${item.contentTranscription}',
                             style: TextStyle(
-                              fontSize: chapterContentSettings.getTextTranslateSize.toDouble(),
-                              color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranscriptionTextColor) : myColor.textTranscriptionColor,
+                              fontSize: chapterContentSettings
+                                  .getTextTranslateSize
+                                  .toDouble(),
+                              color: chapterContentSettings.getIsDefaultColors
+                                  ? Color(chapterContentSettings
+                                      .getTranscriptionTextColor)
+                                  : myColor.textTranscriptionColor,
                             ),
-                            textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                            textAlign: chapterContentSettings.getMyTextAlign[
+                                chapterContentSettings.getToggleTextAlignIndex],
                           ),
                         )
                       : const SizedBox(),
@@ -82,11 +93,16 @@ class MainSupplicationItem extends StatelessWidget {
                   data: item.contentTranslation,
                   style: {
                     '#': Style(
-                      fontSize: FontSize(chapterContentSettings.getTextTranslateSize.toDouble()),
+                      fontSize: FontSize(chapterContentSettings
+                          .getTextTranslateSize
+                          .toDouble()),
                       padding: EdgeInsets.zero,
                       margin: EdgeInsets.zero,
-                      color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranslateTextColor) : myColor.textTranslateColor,
-                      textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                      color: chapterContentSettings.getIsDefaultColors
+                          ? Color(chapterContentSettings.getTranslateTextColor)
+                          : myColor.textTranslateColor,
+                      textAlign: chapterContentSettings.getMyTextAlign[
+                          chapterContentSettings.getToggleTextAlignIndex],
                     ),
                     'small': Style(
                       fontSize: const FontSize(8),
