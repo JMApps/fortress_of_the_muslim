@@ -2,29 +2,47 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_chapter_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_chapter_Item.dart';
 
-class SearchChapterDelegate extends SearchDelegate {
+class SearchChapterDelegate extends SearchDelegate<String> {
   final _databaseQuery = DatabaseQuery();
+
+  SearchChapterDelegate({
+    String hintText = 'Поиск глав...',
+  }) : super(
+          searchFieldLabel: hintText,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+        );
 
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: const Icon(CupertinoIcons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
+      query.isNotEmpty
+          ? IconButton(
+              icon: AnimatedIcon(
+                icon: AnimatedIcons.menu_close,
+                color: Theme.of(context).colorScheme.mainChapterRowColor,
+                progress: transitionAnimation,
+              ),
+              onPressed: () {
+                query = '';
+              },
+            )
+          : const SizedBox(),
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.arrow_back_ios),
+      icon: Icon(
+        Icons.arrow_back_ios,
+        color: Theme.of(context).colorScheme.mainChapterRowColor,
+      ),
       onPressed: () {
-        close(context, null);
+        close(context, '');
       },
     );
   }
