@@ -5,7 +5,7 @@ import 'package:fortress_of_the_muslim/data/local/database/service/database_quer
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_chapter_Item.dart';
 
-class SearchChapterDelegate extends SearchDelegate<String> {
+class SearchChapterDelegate extends SearchDelegate {
   final _databaseQuery = DatabaseQuery();
 
   SearchChapterDelegate({
@@ -13,7 +13,7 @@ class SearchChapterDelegate extends SearchDelegate<String> {
   }) : super(
           searchFieldLabel: hintText,
           keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
+          textInputAction: TextInputAction.search,
         );
 
   @override
@@ -42,14 +42,49 @@ class SearchChapterDelegate extends SearchDelegate<String> {
         color: Theme.of(context).colorScheme.mainChapterRowColor,
       ),
       onPressed: () {
-        close(context, '');
+        close(context, null);
       },
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return const SizedBox();
+    return FutureBuilder<List>(
+      future: _databaseQuery.getAllChapters(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          List<MainChapterItemModel> chapters = snapshot.data!;
+          List<MainChapterItemModel> recentChapters = query.isEmpty
+              ? chapters
+              : chapters.where((element) => element.chapterTitle.toLowerCase().contains(query.toLowerCase()) || element.chapterNumber.toLowerCase().contains(query.toLowerCase())).toList();
+          return recentChapters.isEmpty
+              ? const Center(
+            child: Text(
+              'По вашему запросу ничего не найдено',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          )
+              : CupertinoScrollbar(
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: recentChapters.length,
+              itemBuilder: (BuildContext context, int index) {
+                return MainChapterItem(
+                  item: recentChapters[index],
+                  isSearch: false,
+                );
+              },
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -61,15 +96,7 @@ class SearchChapterDelegate extends SearchDelegate<String> {
           List<MainChapterItemModel> chapters = snapshot.data!;
           List<MainChapterItemModel> recentChapters = query.isEmpty
               ? chapters
-              : chapters
-                  .where((element) =>
-                      element.chapterTitle
-                          .toLowerCase()
-                          .contains(query.toLowerCase()) ||
-                      element.chapterNumber
-                          .toLowerCase()
-                          .contains(query.toLowerCase()))
-                  .toList();
+              : chapters.where((element) => element.chapterTitle.toLowerCase().contains(query.toLowerCase()) || element.chapterNumber.toLowerCase().contains(query.toLowerCase())).toList();
           return recentChapters.isEmpty
               ? const Center(
                   child: Text(

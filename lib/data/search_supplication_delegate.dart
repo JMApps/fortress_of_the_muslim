@@ -49,7 +49,42 @@ class SearchSupplicationDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const SizedBox();
+    return FutureBuilder<List>(
+      future: _databaseQuery.getAllSupplications(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          List<MainSupplicationItemModel> supplications = snapshot.data!;
+          List<MainSupplicationItemModel> recentSupplications = query.isEmpty
+              ? supplications
+              : supplications.where((element) => element.contentTranslation.toLowerCase().contains(query.toString())).toList();
+          return recentSupplications.isEmpty
+              ? const Center(
+            child: Text(
+              'По вашему запросу ничего не найдено',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          )
+              : CupertinoScrollbar(
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: recentSupplications.length,
+              itemBuilder: (BuildContext context, int index) {
+                return MainSupplicationItem(
+                  item: recentSupplications[index],
+                  isSearch: false,
+                );
+              },
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -61,11 +96,7 @@ class SearchSupplicationDelegate extends SearchDelegate<String> {
           List<MainSupplicationItemModel> supplications = snapshot.data!;
           List<MainSupplicationItemModel> recentSupplications = query.isEmpty
               ? supplications
-              : supplications
-                  .where((element) => element.contentTranslation
-                      .toLowerCase()
-                      .contains(query.toString()))
-                  .toList();
+              : supplications.where((element) => element.contentTranslation.toLowerCase().contains(query.toString())).toList();
           return recentSupplications.isEmpty
               ? const Center(
                   child: Text(
