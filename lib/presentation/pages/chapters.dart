@@ -19,7 +19,6 @@ class _ChaptersState extends State<Chapters> {
 
   @override
   Widget build(BuildContext context) {
-    final currentFocus = FocusScope.of(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
@@ -28,89 +27,82 @@ class _ChaptersState extends State<Chapters> {
       ],
       child: Builder(
         builder: (context) {
-          return GestureDetector(
-            child: Scaffold(
-              body: NestedScrollView(
-                floatHeaderSlivers: true,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return [
-                    SliverAppBar(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.mainChapterRowColor,
+          return Scaffold(
+            body: NestedScrollView(
+              floatHeaderSlivers: true,
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return [
+                  SliverAppBar(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.mainChapterRowColor,
+                    centerTitle: true,
+                    elevation: 0,
+                    floating: true,
+                    snap: true,
+                    forceElevated: innerBoxIsScrolled,
+                    expandedHeight: 75,
+                    flexibleSpace: const FlexibleSpaceBar(
                       centerTitle: true,
-                      elevation: 0,
-                      floating: true,
-                      snap: true,
-                      forceElevated: innerBoxIsScrolled,
-                      expandedHeight: 75,
-                      flexibleSpace: const FlexibleSpaceBar(
-                        centerTitle: true,
-                        title: Text(
-                          'Главы',
-                        ),
+                      title: Text(
+                        'Главы',
                       ),
-                      actions: [
-                        IconButton(
-                          icon: const Icon(
-                            CupertinoIcons.search,
-                          ),
-                          onPressed: () {
-                            showSearch(
-                              context: context,
-                              delegate: SearchChapterDelegate(),
-                            );
-                          },
-                        ),
-                      ],
                     ),
-                    // const SliverToBoxAdapter(
-                    //   child: MainChapterSearch(),
-                    // ),
-                  ];
-                },
-                body: MediaQuery.removePadding(
-                  removeTop: true,
-                  context: context,
-                  child: FutureBuilder<List>(
-                    future: _databaseQuery.getAllChapters(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      return snapshot.hasError
-                          ? const Center(
-                              child: Text(
-                                'По вашему запросу ничего не найдено',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            )
-                          : (snapshot.connectionState == ConnectionState.done &&
-                                  snapshot.hasData &&
-                                  snapshot.data != null)
-                              ? CupertinoScrollbar(
-                                  child: ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return MainChapterItem(
-                                        item: snapshot.data![index],
-                                        isSearch: true,
-                                      );
-                                    },
-                                  ),
-                                )
-                              : const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                );
-                    },
+                    actions: [
+                      IconButton(
+                        icon: const Icon(
+                          CupertinoIcons.search,
+                        ),
+                        onPressed: () {
+                          showSearch(
+                            context: context,
+                            delegate: SearchChapterDelegate(),
+                          );
+                        },
+                      ),
+                    ],
                   ),
+                  // const SliverToBoxAdapter(
+                  //   child: MainChapterSearch(),
+                  // ),
+                ];
+              },
+              body: MediaQuery.removePadding(
+                removeTop: true,
+                context: context,
+                child: FutureBuilder<List>(
+                  future: _databaseQuery.getAllChapters(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return snapshot.hasError
+                        ? const Center(
+                            child: Text(
+                              'По вашему запросу ничего не найдено',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          )
+                        : (snapshot.connectionState == ConnectionState.done &&
+                                snapshot.hasData &&
+                                snapshot.data != null)
+                            ? CupertinoScrollbar(
+                                child: ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return MainChapterItem(
+                                      item: snapshot.data![index],
+                                      isSearch: true,
+                                    );
+                                  },
+                                ),
+                              )
+                            : const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                  },
                 ),
               ),
             ),
-            onTap: () {
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
-            },
           );
         },
       ),
