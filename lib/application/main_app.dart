@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/domain/route/app_route.dart';
-import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
@@ -20,9 +19,6 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<MainState>(
           create: (_) => MainState(),
-        ),
-        ChangeNotifierProvider<AppPlayerState>(
-          create: (_) => AppPlayerState(),
         ),
         ChangeNotifierProvider<ChapterContentSettingsState>(
           create: (_) => ChapterContentSettingsState(),

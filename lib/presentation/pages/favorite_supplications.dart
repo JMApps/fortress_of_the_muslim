@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/presentation/items/favorite_supplication_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/favorite_supplications_app_bar.dart';
@@ -22,6 +23,9 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
           create: (_) => BookmarkButtonState(),
+        ),
+        ChangeNotifierProvider<AppPlayerState>(
+          create: (_) => AppPlayerState(),
         ),
       ],
       child: Scaffold(

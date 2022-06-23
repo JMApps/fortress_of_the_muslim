@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/data/search_supplication_delegate.dart';
+import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
@@ -23,7 +24,11 @@ class _SupplicationsState extends State<Supplications> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
-            create: (_) => BookmarkButtonState()),
+          create: (_) => BookmarkButtonState(),
+        ),
+        ChangeNotifierProvider<AppPlayerState>(
+          create: (_) => AppPlayerState(),
+        ),
       ],
       child: Builder(
         builder: (context) {
