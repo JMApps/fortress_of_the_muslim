@@ -8,12 +8,14 @@ import 'package:fortress_of_the_muslim/presentation/items/main_chapter_Item.dart
 class SearchChapterDelegate extends SearchDelegate {
   final _databaseQuery = DatabaseQuery();
 
+  List<MainChapterItemModel> chapters = [];
+  List<MainChapterItemModel> recentChapters = [];
+
   SearchChapterDelegate({
     String hintText = 'Поиск глав...',
   }) : super(
           searchFieldLabel: hintText,
           keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.search,
         );
 
   @override
@@ -53,8 +55,8 @@ class SearchChapterDelegate extends SearchDelegate {
       future: _databaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          List<MainChapterItemModel> chapters = snapshot.data!;
-          List<MainChapterItemModel> recentChapters = query.isEmpty
+          chapters = snapshot.data;
+          recentChapters = query.isEmpty
               ? chapters
               : chapters
                   .where((element) =>
@@ -66,12 +68,13 @@ class SearchChapterDelegate extends SearchDelegate {
                           .contains(query.toLowerCase()))
                   .toList();
           return recentChapters.isEmpty
-              ? const Center(
+              ? Center(
                   child: Text(
-                    'По вашему запросу ничего не найдено',
-                    style: TextStyle(
+                    'По запросу $query ничего не найдено',
+                    style: const TextStyle(
                       fontSize: 18,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 )
               : CupertinoScrollbar(
@@ -100,8 +103,8 @@ class SearchChapterDelegate extends SearchDelegate {
       future: _databaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          List<MainChapterItemModel> chapters = snapshot.data!;
-          List<MainChapterItemModel> recentChapters = query.isEmpty
+          chapters = snapshot.data;
+          recentChapters = query.isEmpty
               ? chapters
               : chapters
                   .where((element) =>
@@ -113,11 +116,15 @@ class SearchChapterDelegate extends SearchDelegate {
                           .contains(query.toLowerCase()))
                   .toList();
           return recentChapters.isEmpty
-              ? const Center(
-                  child: Text(
-                    'По вашему запросу ничего не найдено',
-                    style: TextStyle(
-                      fontSize: 18,
+              ? Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Center(
+                    child: Text(
+                      'По запросу $query ничего не найдено',
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 )

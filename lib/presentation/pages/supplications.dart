@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/data/search_supplication_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
@@ -16,6 +17,8 @@ class Supplications extends StatefulWidget {
 }
 
 class _SupplicationsState extends State<Supplications> {
+  final _databaseQuery = DatabaseQuery();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,67 +30,77 @@ class _SupplicationsState extends State<Supplications> {
           create: (_) => AppPlayerState(),
         ),
       ],
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            body: NestedScrollView(
-              floatHeaderSlivers: true,
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.supplicationRowColor,
-                    centerTitle: true,
-                    elevation: 0,
-                    floating: true,
-                    snap: true,
-                    forceElevated: innerBoxIsScrolled,
-                    expandedHeight: 75,
-                    flexibleSpace: const FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(
-                        'Все дуа',
+      child: FutureBuilder(
+        future: _databaseQuery.getAllSupplications(),
+        builder: (context, snapshot) {
+          return snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData
+              ? Scaffold(
+                  body: NestedScrollView(
+                    floatHeaderSlivers: true,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return [
+                        SliverAppBar(
+                          backgroundColor: Theme.of(context)
+                              .colorScheme
+                              .supplicationRowColor,
+                          centerTitle: true,
+                          elevation: 0,
+                          floating: true,
+                          snap: true,
+                          forceElevated: innerBoxIsScrolled,
+                          expandedHeight: 75,
+                          flexibleSpace: const FlexibleSpaceBar(
+                            centerTitle: true,
+                            title: Text(
+                              'Все дуа',
+                            ),
+                          ),
+                          actions: [
+                            IconButton(
+                              icon: const Icon(
+                                CupertinoIcons.search,
+                              ),
+                              onPressed: () {
+                                showSearch(
+                                  context: context,
+                                  delegate: SearchSupplicationDelegate(
+                                      snapshot: snapshot),
+                                );
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(CupertinoIcons.settings),
+                              splashRadius: 20,
+                              onPressed: () {
+                                showCupertinoModalPopup(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                        margin: const EdgeInsets.all(16),
+                                        child: const ContentChapterSettings(
+                                            isDayNight: false));
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ];
+                    },
+                    body: MediaQuery.removePadding(
+                      removeTop: true,
+                      context: context,
+                      child: MainSupplicationsList(
+                        snapshot: snapshot,
                       ),
                     ),
-                    actions: [
-                      IconButton(
-                        icon: const Icon(
-                          CupertinoIcons.search,
-                        ),
-                        onPressed: () {
-                          showSearch(
-                            context: context,
-                            delegate: SearchSupplicationDelegate(),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(CupertinoIcons.settings),
-                        splashRadius: 20,
-                        onPressed: () {
-                          showCupertinoModalPopup(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                  margin: const EdgeInsets.all(16),
-                                  child: const ContentChapterSettings(
-                                      isDayNight: false));
-                            },
-                          );
-                        },
-                      ),
-                    ],
                   ),
-                ];
-              },
-              body: MediaQuery.removePadding(
-                removeTop: true,
-                context: context,
-                child: MainSupplicationsList(),
-              ),
-            ),
-          );
+                )
+              : const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
         },
       ),
     );
