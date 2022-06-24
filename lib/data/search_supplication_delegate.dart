@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_supplication_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
-import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
 import 'package:fortress_of_the_muslim/presentation/items/search_supplication_Item.dart';
 
 class SearchSupplicationDelegate extends SearchDelegate {
@@ -123,7 +122,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
                     physics: const BouncingScrollPhysics(),
                     itemCount: recentSupplications.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return MainSupplicationItem(
+                      return SearchSupplicationItem(
                         item: recentSupplications[index],
                       );
                     },
