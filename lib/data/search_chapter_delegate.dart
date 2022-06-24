@@ -56,28 +56,35 @@ class SearchChapterDelegate extends SearchDelegate {
           List<MainChapterItemModel> chapters = snapshot.data!;
           List<MainChapterItemModel> recentChapters = query.isEmpty
               ? chapters
-              : chapters.where((element) => element.chapterTitle.toLowerCase().contains(query.toLowerCase()) || element.chapterNumber.toLowerCase().contains(query.toLowerCase())).toList();
+              : chapters
+                  .where((element) =>
+                      element.chapterTitle
+                          .toLowerCase()
+                          .contains(query.toLowerCase()) ||
+                      element.chapterNumber
+                          .toLowerCase()
+                          .contains(query.toLowerCase()))
+                  .toList();
           return recentChapters.isEmpty
               ? const Center(
-            child: Text(
-              'По вашему запросу ничего не найдено',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          )
+                  child: Text(
+                    'По вашему запросу ничего не найдено',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                )
               : CupertinoScrollbar(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: recentChapters.length,
-              itemBuilder: (BuildContext context, int index) {
-                return MainChapterItem(
-                  item: recentChapters[index],
-                  isSearch: false,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: recentChapters.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return MainChapterItem(
+                        item: recentChapters[index],
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
-          );
         } else {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
@@ -96,7 +103,15 @@ class SearchChapterDelegate extends SearchDelegate {
           List<MainChapterItemModel> chapters = snapshot.data!;
           List<MainChapterItemModel> recentChapters = query.isEmpty
               ? chapters
-              : chapters.where((element) => element.chapterTitle.toLowerCase().contains(query.toLowerCase()) || element.chapterNumber.toLowerCase().contains(query.toLowerCase())).toList();
+              : chapters
+                  .where((element) =>
+                      element.chapterTitle
+                          .toLowerCase()
+                          .contains(query.toLowerCase()) ||
+                      element.chapterNumber
+                          .toLowerCase()
+                          .contains(query.toLowerCase()))
+                  .toList();
           return recentChapters.isEmpty
               ? const Center(
                   child: Text(
@@ -113,7 +128,6 @@ class SearchChapterDelegate extends SearchDelegate {
                     itemBuilder: (BuildContext context, int index) {
                       return MainChapterItem(
                         item: recentChapters[index],
-                        isSearch: false,
                       );
                     },
                   ),

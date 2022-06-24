@@ -4,6 +4,7 @@ import 'package:fortress_of_the_muslim/data/local/database/model/main_supplicati
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
+import 'package:fortress_of_the_muslim/presentation/items/search_supplication_Item.dart';
 
 class SearchSupplicationDelegate extends SearchDelegate {
   final _databaseQuery = DatabaseQuery();
@@ -13,7 +14,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
   }) : super(
           searchFieldLabel: hintText,
           keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
+          textInputAction: TextInputAction.search,
         );
 
   @override
@@ -56,28 +57,33 @@ class SearchSupplicationDelegate extends SearchDelegate {
           List<MainSupplicationItemModel> supplications = snapshot.data!;
           List<MainSupplicationItemModel> recentSupplications = query.isEmpty
               ? supplications
-              : supplications.where((element) => element.contentTranslation.toLowerCase().contains(query.toString())).toList();
+              : supplications
+                  .where((element) =>
+                      element.contentTranslation
+                          .toLowerCase()
+                          .contains(query.toLowerCase()) ||
+                      element.id.toString().contains(query))
+                  .toList();
           return recentSupplications.isEmpty
               ? const Center(
-            child: Text(
-              'По вашему запросу ничего не найдено',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          )
+                  child: Text(
+                    'По вашему запросу ничего не найдено',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                )
               : CupertinoScrollbar(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: recentSupplications.length,
-              itemBuilder: (BuildContext context, int index) {
-                return MainSupplicationItem(
-                  item: recentSupplications[index],
-                  isSearch: false,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: recentSupplications.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SearchSupplicationItem(
+                        item: recentSupplications[index],
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
-          );
         } else {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
@@ -96,7 +102,13 @@ class SearchSupplicationDelegate extends SearchDelegate {
           List<MainSupplicationItemModel> supplications = snapshot.data!;
           List<MainSupplicationItemModel> recentSupplications = query.isEmpty
               ? supplications
-              : supplications.where((element) => element.contentTranslation.toLowerCase().contains(query.toString())).toList();
+              : supplications
+                  .where((element) =>
+                      element.contentTranslation
+                          .toLowerCase()
+                          .contains(query.toLowerCase()) ||
+                      element.id.toString().contains(query))
+                  .toList();
           return recentSupplications.isEmpty
               ? const Center(
                   child: Text(
@@ -113,7 +125,6 @@ class SearchSupplicationDelegate extends SearchDelegate {
                     itemBuilder: (BuildContext context, int index) {
                       return MainSupplicationItem(
                         item: recentSupplications[index],
-                        isSearch: false,
                       );
                     },
                   ),

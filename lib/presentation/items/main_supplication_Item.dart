@@ -12,11 +12,9 @@ class MainSupplicationItem extends StatelessWidget {
   const MainSupplicationItem({
     Key? key,
     required this.item,
-    required this.isSearch,
   }) : super(key: key);
 
   final MainSupplicationItemModel item;
-  final bool isSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +119,7 @@ class MainSupplicationItem extends StatelessWidget {
                 const SizedBox(height: 8),
                 const Divider(color: Colors.black),
                 const SizedBox(height: 8),
-                SupplicationsBottomButtons(item: item, isSearch: isSearch),
+                SupplicationsBottomButtons(item: item),
               ],
             ),
           ),

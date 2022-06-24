@@ -91,7 +91,6 @@ class _ChaptersState extends State<Chapters> {
                                       (BuildContext context, int index) {
                                     return MainChapterItem(
                                       item: snapshot.data![index],
-                                      isSearch: true,
                                     );
                                   },
                                 ),

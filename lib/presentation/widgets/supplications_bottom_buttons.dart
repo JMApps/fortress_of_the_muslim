@@ -12,11 +12,9 @@ class SupplicationsBottomButtons extends StatelessWidget {
   const SupplicationsBottomButtons({
     Key? key,
     required this.item,
-    required this.isSearch,
   }) : super(key: key);
 
   final MainSupplicationItemModel item;
-  final bool isSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: isSearch ? item.nameAudio != null ? true : false : false,
+              visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
               maintainSize: false,
               child: Transform.scale(
@@ -60,7 +58,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: isSearch ? item.nameAudio != null ? true : false : false,
+              visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
               maintainSize: false,
               child: IconButton(
@@ -78,7 +76,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: isSearch ? item.nameAudio != null ? true : false : false,
+              visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
               maintainSize: false,
               child: IconButton(
@@ -92,12 +90,14 @@ class SupplicationsBottomButtons extends StatelessWidget {
                 icon: const Icon(Icons.repeat),
                 onPressed: appPlayer.currentPlayItem == item.id
                     ? () {
-                  appPlayer.changeRepeatState(!appPlayer.repeatState, item.id);
-                } : null,
+                        appPlayer.changeRepeatState(
+                            !appPlayer.repeatState, item.id);
+                      }
+                    : null,
               ),
             ),
             Visibility(
-              visible: isSearch,
+              visible: true,
               maintainSize: false,
               maintainAnimation: false,
               child: IconButton(
