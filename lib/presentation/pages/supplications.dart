@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/data/search_supplication_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
-import 'package:fortress_of_the_muslim/presentation/items/main_supplication_Item.dart';
+import 'package:fortress_of_the_muslim/presentation/lists/main_supplications_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +16,6 @@ class Supplications extends StatefulWidget {
 }
 
 class _SupplicationsState extends State<Supplications> {
-  final _databaseQuery = DatabaseQuery();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -82,46 +79,12 @@ class _SupplicationsState extends State<Supplications> {
                       ),
                     ],
                   ),
-                  // const SliverToBoxAdapter(
-                  //   child: MainSupplicationSearch(),
-                  // ),
                 ];
               },
               body: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
-                child: FutureBuilder<List>(
-                  future: _databaseQuery.getAllSupplications(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    return snapshot.hasError
-                        ? const Center(
-                            child: Text(
-                              'По вашему запросу ничего не найдено',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          )
-                        : (snapshot.connectionState == ConnectionState.done &&
-                                snapshot.hasData &&
-                                snapshot.data != null)
-                            ? CupertinoScrollbar(
-                                child: ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: snapshot.data!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return MainSupplicationItem(
-                                      item: snapshot.data![index],
-                                    );
-                                  },
-                                ),
-                              )
-                            : const Center(
-                                child: CircularProgressIndicator.adaptive(),
-                              );
-                  },
-                ),
+                child: MainSupplicationsList(),
               ),
             ),
           );
