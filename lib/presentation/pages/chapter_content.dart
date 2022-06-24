@@ -6,7 +6,7 @@ import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
-import 'package:fortress_of_the_muslim/presentation/items/chapter_content_Item.dart';
+import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,8 @@ class _ChapterContentState extends State<ChapterContent> {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
@@ -92,27 +93,8 @@ class _ChapterContentState extends State<ChapterContent> {
                 removeTop: true,
                 removeBottom: true,
                 context: context,
-                child: FutureBuilder<List>(
-                  future: context.watch<BookmarkButtonState>().getUpdateList
-                      ? _databaseQuery.getContentChapter(arguments!.chapterId)
-                      : _databaseQuery.getContentChapter(arguments!.chapterId),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    return snapshot.hasData
-                        ? CupertinoScrollbar(
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return ChapterContentItem(
-                                  item: snapshot.data![index],
-                                );
-                              },
-                            ),
-                          )
-                        : const Center(
-                            child: CircularProgressIndicator.adaptive(),
-                          );
-                  },
+                child: ChapterContentList(
+                  chapterId: arguments!.chapterId,
                 ),
               ),
             ),

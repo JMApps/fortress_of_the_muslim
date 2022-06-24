@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/search_chapter_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
-import 'package:fortress_of_the_muslim/presentation/lists/main_chapters_list.dart';
+import 'package:fortress_of_the_muslim/presentation/lists/main_chapter_list.dart';
 import 'package:provider/provider.dart';
 
 class Chapters extends StatefulWidget {
@@ -14,7 +14,6 @@ class Chapters extends StatefulWidget {
 }
 
 class _ChaptersState extends State<Chapters> {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -65,7 +64,7 @@ class _ChaptersState extends State<Chapters> {
               body: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
-                child: MainChaptersList()
+                child: MainChapterList(),
               ),
             ),
           );
