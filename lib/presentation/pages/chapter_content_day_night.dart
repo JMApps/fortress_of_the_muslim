@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
-import 'package:fortress_of_the_muslim/presentation/items/chapter_content_day_night_item.dart';
+import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_day_night_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +17,8 @@ class ChapterContentDayNight extends StatefulWidget {
 }
 
 class _ChapterContentDayNightState extends State<ChapterContentDayNight> {
-  final _databaseQuery = DatabaseQuery();
-
   @override
   Widget build(BuildContext context) {
-    context.read<ChapterContentSettingsState>().initSettings();
     final myColor = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
@@ -62,8 +58,11 @@ class _ChapterContentDayNightState extends State<ChapterContentDayNight> {
                             context: context,
                             builder: (BuildContext context) {
                               return Container(
-                                  margin: const EdgeInsets.all(16),
-                                  child: const ContentChapterSettings(isDayNight: true));
+                                margin: const EdgeInsets.all(16),
+                                child: const ContentChapterSettings(
+                                  isDayNight: true,
+                                ),
+                              );
                             },
                           );
                         },
@@ -98,35 +97,7 @@ class _ChapterContentDayNightState extends State<ChapterContentDayNight> {
                 removeTop: true,
                 removeBottom: true,
                 context: context,
-                child: FutureBuilder<List>(
-                  future: context.watch<BookmarkButtonState>().getUpdateList
-                      ? _databaseQuery.getDayNightContentChapter(
-                          context.watch<ChapterContentSettingsState>().getIsDay)
-                      : _databaseQuery.getDayNightContentChapter(
-                          context.watch<ChapterContentSettingsState>().getIsDay),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    return snapshot.hasError
-                        ? Center(
-                            child: Text('${snapshot.error}'),
-                          )
-                        : snapshot.hasData
-                            ? CupertinoScrollbar(
-                                child: ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: snapshot.data!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return ChapterContentDayNightItem(
-                                      item: snapshot.data![index],
-                                    );
-                                  },
-                                ),
-                              )
-                            : const Center(
-                                child: CircularProgressIndicator.adaptive(),
-                              );
-                  },
-                ),
+                child: ChapterContentDayNightList(),
               ),
             ),
           );
