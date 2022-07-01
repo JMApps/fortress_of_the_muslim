@@ -69,7 +69,8 @@ class _ChapterContentState extends State<ChapterContent> {
                               return Container(
                                 margin: const EdgeInsets.all(16),
                                 child: const ContentChapterSettings(
-                                    isDayNight: false),
+                                  isDayNight: false,
+                                ),
                               );
                             },
                           );
@@ -78,13 +79,9 @@ class _ChapterContentState extends State<ChapterContent> {
                     ],
                   ),
                   SliverToBoxAdapter(
-                    child: FutureBuilder<List>(
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        return ChapterContentSubTitle(
-                          databaseQuery: _databaseQuery,
-                          chapterId: arguments.chapterId,
-                        );
-                      },
+                    child: ChapterContentSubTitle(
+                      databaseQuery: _databaseQuery,
+                      chapterId: arguments.chapterId,
                     ),
                   ),
                 ];

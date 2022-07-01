@@ -113,7 +113,10 @@ class MainSupplicationItem extends StatelessWidget {
                   onLinkTap: (String? url, RenderContext rendContext,
                       Map<String, String> attributes, element) {
                     context.read<MainState>().showFootNoteDialog(
-                        context, url, myColor.mainSupplicationTitleColor);
+                          context,
+                          url,
+                          myColor.mainSupplicationTitleColor,
+                        );
                   },
                 ),
                 const SizedBox(height: 8),

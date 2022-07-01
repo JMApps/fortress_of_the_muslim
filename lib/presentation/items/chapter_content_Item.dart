@@ -20,7 +20,7 @@ class ChapterContentItem extends StatelessWidget {
     final myColor = Theme.of(context).colorScheme;
     return Consumer<ChapterContentSettingsState>(
       builder: (context, chapterContentSettings, _) {
-        return  Card(
+        return Card(
           elevation: 3,
           margin: const EdgeInsets.all(8),
           color: item.id.isOdd ? myColor.firstIs0dd : myColor.secondIs0dd,
@@ -37,23 +37,28 @@ class ChapterContentItem extends StatelessWidget {
                   maintainSize: false,
                   child: item.contentArabic != null
                       ? Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 8,
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        '${item.contentArabic}',
-                        style: TextStyle(
-                          fontSize: chapterContentSettings.getTextArabicSize + 5,
-                          fontFamily: 'Hafs',
-                          color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getArabicTextColor) : myColor.textArabicColor,
-                        ),
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  )
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              '${item.contentArabic}',
+                              style: TextStyle(
+                                fontSize:
+                                    chapterContentSettings.getTextArabicSize +
+                                        5,
+                                fontFamily: 'Hafs',
+                                color: chapterContentSettings.getIsDefaultColors
+                                    ? Color(chapterContentSettings
+                                        .getArabicTextColor)
+                                    : myColor.textArabicColor,
+                              ),
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        )
                       : const SizedBox(),
                 ),
                 Visibility(
@@ -62,32 +67,44 @@ class ChapterContentItem extends StatelessWidget {
                   maintainSize: false,
                   child: item.contentTranscription != null
                       ? Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 16,
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '${item.contentTranscription}',
-                        style: TextStyle(
-                          fontSize: chapterContentSettings.getTextTranslateSize.toDouble(),
-                          color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranscriptionTextColor) : myColor.textTranscriptionColor,
-                        ),
-                        textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
-                      ),
-                    ),
-                  )
+                          padding: const EdgeInsets.only(
+                            bottom: 16,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '${item.contentTranscription}',
+                              style: TextStyle(
+                                fontSize: chapterContentSettings
+                                    .getTextTranslateSize
+                                    .toDouble(),
+                                color: chapterContentSettings.getIsDefaultColors
+                                    ? Color(chapterContentSettings
+                                        .getTranscriptionTextColor)
+                                    : myColor.textTranscriptionColor,
+                              ),
+                              textAlign: chapterContentSettings.getMyTextAlign[
+                                  chapterContentSettings
+                                      .getToggleTextAlignIndex],
+                            ),
+                          ),
+                        )
                       : const SizedBox(),
                 ),
                 Html(
                   data: item.contentTranslation,
                   style: {
                     '#': Style(
-                      fontSize: FontSize(chapterContentSettings.getTextTranslateSize.toDouble()),
+                      fontSize: FontSize(chapterContentSettings
+                          .getTextTranslateSize
+                          .toDouble()),
                       padding: EdgeInsets.zero,
                       margin: EdgeInsets.zero,
-                      color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranslateTextColor) : myColor.textTranslateColor,
-                      textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                      color: chapterContentSettings.getIsDefaultColors
+                          ? Color(chapterContentSettings.getTranslateTextColor)
+                          : myColor.textTranslateColor,
+                      textAlign: chapterContentSettings.getMyTextAlign[
+                          chapterContentSettings.getToggleTextAlignIndex],
                     ),
                     'small': Style(
                       fontSize: const FontSize(8),
@@ -100,10 +117,10 @@ class ChapterContentItem extends StatelessWidget {
                   onLinkTap: (String? url, RenderContext rendContext,
                       Map<String, String> attributes, element) {
                     context.read<MainState>().showFootNoteDialog(
-                      context,
-                      url,
-                      const Color(0xFF455A64),
-                    );
+                          context,
+                          url,
+                          myColor.contentChapterTitleColor,
+                        );
                   },
                 ),
                 const SizedBox(height: 8),
