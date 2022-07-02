@@ -6,19 +6,18 @@ import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContentSubTitle extends StatelessWidget {
-  const ChapterContentSubTitle({
+  ChapterContentSubTitle({
     Key? key,
-    required this.databaseQuery,
     required this.chapterId,
   }) : super(key: key);
 
-  final DatabaseQuery databaseQuery;
+  final _databaseQuery = DatabaseQuery();
   final int chapterId;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future: databaseQuery.getOneChapter(chapterId),
+      future: _databaseQuery.getOneChapter(chapterId),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot.hasData
             ? Container(

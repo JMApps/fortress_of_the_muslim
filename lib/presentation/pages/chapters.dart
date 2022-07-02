@@ -22,53 +22,48 @@ class _ChaptersState extends State<Chapters> {
           create: (_) => BookmarkButtonState(),
         ),
       ],
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            body: NestedScrollView(
-              floatHeaderSlivers: true,
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.mainChapterRowColor,
-                    centerTitle: true,
-                    elevation: 0,
-                    floating: true,
-                    snap: true,
-                    forceElevated: innerBoxIsScrolled,
-                    expandedHeight: 75,
-                    flexibleSpace: const FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(
-                        'Главы',
-                      ),
-                    ),
-                    actions: [
-                      IconButton(
-                        icon: const Icon(
-                          CupertinoIcons.search,
-                        ),
-                        onPressed: () {
-                          showSearch(
-                            context: context,
-                            delegate: SearchChapterDelegate(),
-                          );
-                        },
-                      ),
-                    ],
+      child: Scaffold(
+        body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                backgroundColor:
+                    Theme.of(context).colorScheme.mainChapterRowColor,
+                centerTitle: true,
+                elevation: 0,
+                floating: true,
+                snap: true,
+                forceElevated: innerBoxIsScrolled,
+                expandedHeight: 75,
+                flexibleSpace: const FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(
+                    'Главы',
                   ),
-                ];
-              },
-              body: MediaQuery.removePadding(
-                removeTop: true,
-                context: context,
-                child: MainChapterList(),
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      CupertinoIcons.search,
+                    ),
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: SearchChapterDelegate(),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-          );
-        },
+            ];
+          },
+          body: MediaQuery.removePadding(
+            removeTop: true,
+            context: context,
+            child: MainChapterList(),
+          ),
+        ),
       ),
     );
   }

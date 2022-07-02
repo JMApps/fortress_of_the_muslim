@@ -29,79 +29,74 @@ class _ChapterContentDayNightState extends State<ChapterContentDayNight> {
           create: (_) => AppPlayerState(),
         ),
       ],
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            body: NestedScrollView(
-              floatHeaderSlivers: true,
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    centerTitle: true,
-                    backgroundColor: myColor.chapterContentColor,
-                    elevation: 0,
-                    floating: true,
-                    snap: false,
-                    forceElevated: innerBoxIsScrolled,
-                    expandedHeight: 75,
-                    flexibleSpace: const FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text('Глава 27'),
-                    ),
-                    actions: [
-                      IconButton(
-                        icon: const Icon(CupertinoIcons.settings),
-                        splashRadius: 20,
-                        onPressed: () {
-                          showCupertinoModalPopup(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                margin: const EdgeInsets.all(16),
-                                child: const ContentChapterSettings(
-                                  isDayNight: true,
-                                ),
-                              );
-                            },
+      child: Scaffold(
+        body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                centerTitle: true,
+                backgroundColor: myColor.chapterContentColor,
+                elevation: 0,
+                floating: true,
+                snap: false,
+                forceElevated: innerBoxIsScrolled,
+                expandedHeight: 75,
+                flexibleSpace: const FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text('Глава 27'),
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(CupertinoIcons.settings),
+                    splashRadius: 20,
+                    onPressed: () {
+                      showCupertinoModalPopup(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            margin: const EdgeInsets.all(16),
+                            child: const ContentChapterSettings(
+                              isDayNight: true,
+                            ),
                           );
                         },
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 8, top: 8, right: 8),
-                      padding: const EdgeInsets.all(8),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: myColor.chapterContentColor,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Html(
-                        data:
-                            'Слова поминания Аллаха, которые желательно произносить ${context.watch<ChapterContentSettingsState>().getIsDay ? '<b>утром</b>' : '<b>вечером</b>'}',
-                        style: {
-                          '#': Style(
-                            fontSize: const FontSize(17),
-                            textAlign: TextAlign.center,
-                            color: Colors.white,
-                          ),
-                        },
-                      ),
-                    ),
-                  ),
-                ];
-              },
-              body: MediaQuery.removePadding(
-                removeTop: true,
-                removeBottom: true,
-                context: context,
-                child: ChapterContentDayNightList(),
+                ],
               ),
-            ),
-          );
-        },
+              SliverToBoxAdapter(
+                child: Container(
+                  margin: const EdgeInsets.only(left: 8, top: 8, right: 8),
+                  padding: const EdgeInsets.all(8),
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    color: myColor.chapterContentColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Html(
+                    data:
+                        'Слова поминания Аллаха, которые желательно произносить ${context.watch<ChapterContentSettingsState>().getIsDay ? '<b>утром</b>' : '<b>вечером</b>'}',
+                    style: {
+                      '#': Style(
+                        fontSize: const FontSize(17),
+                        textAlign: TextAlign.center,
+                        color: Colors.white,
+                      ),
+                    },
+                  ),
+                ),
+              ),
+            ];
+          },
+          body: MediaQuery.removePadding(
+            removeTop: true,
+            removeBottom: true,
+            context: context,
+            child: ChapterContentDayNightList(),
+          ),
+        ),
       ),
     );
   }

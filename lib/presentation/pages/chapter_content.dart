@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
-import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
@@ -19,13 +17,11 @@ class ChapterContent extends StatefulWidget {
 }
 
 class _ChapterContentState extends State<ChapterContent> {
-  final _databaseQuery = DatabaseQuery();
 
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
+    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
@@ -35,68 +31,61 @@ class _ChapterContentState extends State<ChapterContent> {
           create: (_) => AppPlayerState(),
         ),
       ],
-      child: Builder(
-        builder: (context) {
-          context.read<ChapterContentSettingsState>().initSettings();
-          return Scaffold(
-            body: NestedScrollView(
-              floatHeaderSlivers: true,
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    centerTitle: true,
-                    backgroundColor: myColor.chapterContentColor,
-                    elevation: 0,
-                    floating: true,
-                    snap: false,
-                    forceElevated: innerBoxIsScrolled,
-                    expandedHeight: 75,
-                    flexibleSpace: FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(
-                        'Глава ${arguments!.chapterId}',
-                      ),
-                    ),
-                    actions: [
-                      IconButton(
-                        icon: const Icon(CupertinoIcons.settings),
-                        splashRadius: 20,
-                        onPressed: () {
-                          showCupertinoModalPopup(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                margin: const EdgeInsets.all(16),
-                                child: const ContentChapterSettings(
-                                  isDayNight: false,
-                                ),
-                              );
-                            },
+      child: Scaffold(
+        body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                centerTitle: true,
+                backgroundColor: myColor.chapterContentColor,
+                elevation: 0,
+                floating: true,
+                snap: false,
+                forceElevated: innerBoxIsScrolled,
+                expandedHeight: 75,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(
+                    'Глава ${arguments!.chapterId}',
+                  ),
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(CupertinoIcons.settings),
+                    splashRadius: 20,
+                    onPressed: () {
+                      showCupertinoModalPopup(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            margin: const EdgeInsets.all(16),
+                            child: const ContentChapterSettings(
+                              isDayNight: false,
+                            ),
                           );
                         },
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                  SliverToBoxAdapter(
-                    child: ChapterContentSubTitle(
-                      databaseQuery: _databaseQuery,
-                      chapterId: arguments.chapterId,
-                    ),
-                  ),
-                ];
-              },
-              body: MediaQuery.removePadding(
-                removeTop: true,
-                removeBottom: true,
-                context: context,
-                child: ChapterContentList(
-                  chapterId: arguments!.chapterId,
+                ],
+              ),
+              SliverToBoxAdapter(
+                child: ChapterContentSubTitle(
+                  chapterId: arguments.chapterId,
                 ),
               ),
+            ];
+          },
+          body: MediaQuery.removePadding(
+            removeTop: true,
+            removeBottom: true,
+            context: context,
+            child: ChapterContentList(
+              chapterId: arguments!.chapterId,
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -13,8 +13,7 @@ class ContentBookContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as BookContentArguments?;
+    final arguments = ModalRoute.of(context)!.settings.arguments as BookContentArguments?;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.maxFinite, 50),
