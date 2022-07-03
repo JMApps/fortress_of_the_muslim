@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/app_settings.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/book_contents.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/chapter_content.dart';
@@ -10,54 +11,55 @@ import 'package:fortress_of_the_muslim/presentation/pages/favorite_supplications
 import 'package:fortress_of_the_muslim/presentation/pages/supplications.dart';
 
 class AppRoute {
-  Route onGeneratorRoute(RouteSettings routeSettings) {
-    switch (routeSettings.name) {
+  Route onGeneratorRoute(settings) {
+    final ChapterContentArguments? arguments = settings.arguments;
+    switch (settings.name) {
       case 'main_chapters':
         return MaterialPageRoute(
           builder: (_) => const Chapters(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'favorite_chapters':
         return MaterialPageRoute(
           builder: (_) => const FavoriteChapters(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'chapter_content':
         return MaterialPageRoute(
-          builder: (_) => const ChapterContent(),
-          settings: routeSettings,
+          builder: (_) => ChapterContent(chapterId: arguments!.chapterId),
+          settings: settings,
         );
       case 'chapter_content_day_night':
         return MaterialPageRoute(
           builder: (_) => const ChapterContentDayNight(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'main_supplications':
         return MaterialPageRoute(
           builder: (_) => const Supplications(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'favorite_supplications':
         return MaterialPageRoute(
           builder: (_) => const FavoriteSupplications(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'app_settings':
         return MaterialPageRoute(
           builder: (_) => const AppSettings(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'book_content':
         return MaterialPageRoute(
           builder: (_) => const BookContents(),
-          settings: routeSettings,
+          settings: settings,
         );
       case 'content_book_content':
         return MaterialPageRoute(
           builder: (_) => const ContentBookContent(),
-          settings: routeSettings,
+          settings: settings,
         );
     }
-    return throw (Exception('Invalid route = ${routeSettings.name}'));
+    return throw (Exception('Invalid route = ${settings.name}'));
   }
 }

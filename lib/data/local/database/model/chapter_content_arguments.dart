@@ -1,5 +1,5 @@
 class ChapterContentArguments {
-  int chapterId;
+  final int chapterId;
 
-  ChapterContentArguments(this.chapterId);
+  const ChapterContentArguments(this.chapterId);
 }

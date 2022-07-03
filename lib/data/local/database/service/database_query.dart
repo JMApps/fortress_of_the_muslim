@@ -34,8 +34,8 @@ class DatabaseQuery {
   Future<List<ChapterContentItemModel>> getContentChapter(int id) async {
     var dbClient = await con.db;
     var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $id');
-    List<ChapterContentItemModel>? chapterSupplications = res.isNotEmpty ? res.map((c) => ChapterContentItemModel.fromMap(c)).toList() : null;
-    return chapterSupplications!;
+    List<ChapterContentItemModel>? chapterContent = res.isNotEmpty ? res.map((c) => ChapterContentItemModel.fromMap(c)).toList() : null;
+    return chapterContent!;
   }
 
   Future<List<ChapterContentDayNightItemModel>> getDayNightContentChapter(bool dayNight) async {

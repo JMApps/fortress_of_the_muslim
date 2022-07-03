@@ -21,8 +21,7 @@ class ChapterContentList extends StatelessWidget {
           ? _databaseQuery.getContentChapter(chapterId)
           : _databaseQuery.getContentChapter(chapterId),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return snapshot.connectionState == ConnectionState.done &&
-                snapshot.hasData
+        return snapshot.hasData
             ? CupertinoScrollbar(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),

@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
     final preferences = await SharedPreferences.getInstance();
     bool isRunChapters = preferences.getBool('key_is_run_chapters') ?? false;
     if (isRunChapters) {
-      Future.delayed(const Duration(milliseconds: 250)).then(
+      Future.delayed(const Duration(milliseconds: 50)).then(
         (value) => {
           Navigator.of(context).pushNamed('main_chapters'),
         },

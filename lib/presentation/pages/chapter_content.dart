@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
@@ -10,7 +9,12 @@ import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_sett
 import 'package:provider/provider.dart';
 
 class ChapterContent extends StatefulWidget {
-  const ChapterContent({Key? key}) : super(key: key);
+  const ChapterContent({
+    Key? key,
+    required this.chapterId,
+  }) : super(key: key);
+
+  final int chapterId;
 
   @override
   State<ChapterContent> createState() => _ChapterContentState();
@@ -21,7 +25,6 @@ class _ChapterContentState extends State<ChapterContent> {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    final arguments = ModalRoute.of(context)!.settings.arguments as ChapterContentArguments?;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BookmarkButtonState>(
@@ -47,7 +50,7 @@ class _ChapterContentState extends State<ChapterContent> {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text(
-                    'Глава ${arguments!.chapterId}',
+                    'Глава ${widget.chapterId}',
                   ),
                 ),
                 actions: [
@@ -72,7 +75,7 @@ class _ChapterContentState extends State<ChapterContent> {
               ),
               SliverToBoxAdapter(
                 child: ChapterContentSubTitle(
-                  chapterId: arguments.chapterId,
+                  chapterId: widget.chapterId,
                 ),
               ),
             ];
@@ -82,7 +85,7 @@ class _ChapterContentState extends State<ChapterContent> {
             removeBottom: true,
             context: context,
             child: ChapterContentList(
-              chapterId: arguments!.chapterId,
+              chapterId: widget.chapterId,
             ),
           ),
         ),
