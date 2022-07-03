@@ -1,4 +1,5 @@
 class Constants {
+  static const String keyFavoritesBox = 'key_favorites_box';
   static const String keyTextAlignIndex = 'key_text_align_index';
   static const String keyTextArabicSize = 'key_text_arabic_size';
   static const String keyTextTranslateSize = 'key_text_translate_size';

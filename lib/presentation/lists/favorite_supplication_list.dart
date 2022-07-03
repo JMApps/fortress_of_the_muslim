@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
-import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/presentation/items/favorite_supplication_Item.dart';
-import 'package:provider/provider.dart';
 
 class FavoriteSupplicationList extends StatelessWidget {
   FavoriteSupplicationList({Key? key}) : super(key: key);
@@ -13,9 +11,7 @@ class FavoriteSupplicationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future: context.watch<BookmarkButtonState>().getUpdateList
-          ? _databaseQuery.getFavoriteSupplications()
-          : _databaseQuery.getFavoriteSupplications(),
+      future: _databaseQuery.getFavoriteSupplications(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot.connectionState == ConnectionState.done &&
                 snapshot.hasData
