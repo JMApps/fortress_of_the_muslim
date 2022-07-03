@@ -26,6 +26,7 @@ class MainApp extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         context.read<AppSettingsState>().loadLastPreferencesState();
+        context.read<ChapterContentSettingsState>().initSettings();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Крепость мусульманина',
