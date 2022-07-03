@@ -1,6 +1,6 @@
 class BookContentArguments {
-  String title;
-  String content;
+  final String title;
+  final String content;
 
-  BookContentArguments(this.title, this.content);
+  const BookContentArguments(this.title, this.content);
 }

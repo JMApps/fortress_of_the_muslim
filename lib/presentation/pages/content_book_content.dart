@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:fortress_of_the_muslim/data/local/database/model/book_content_arguments.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -9,11 +8,15 @@ import 'package:provider/provider.dart';
 class ContentBookContent extends StatelessWidget {
   const ContentBookContent({
     Key? key,
+    required this.title,
+    required this.content,
   }) : super(key: key);
+
+  final String title;
+  final String content;
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as BookContentArguments?;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.maxFinite, 50),
@@ -21,7 +24,7 @@ class ContentBookContent extends StatelessWidget {
           backgroundColor:
               Theme.of(context).colorScheme.mainContentContentBookItemColor,
           title: Text(
-            arguments!.title,
+            title,
           ),
         ),
       ),
@@ -31,7 +34,7 @@ class ContentBookContent extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: SelectableHtml(
-              data: arguments.content,
+              data: content,
               style: {
                 '#': Style(
                   fontSize: const FontSize(20),

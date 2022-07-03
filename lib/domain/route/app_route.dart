@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/book_content_arguments.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/app_settings.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/book_contents.dart';
@@ -12,7 +13,6 @@ import 'package:fortress_of_the_muslim/presentation/pages/supplications.dart';
 
 class AppRoute {
   Route onGeneratorRoute(settings) {
-    final ChapterContentArguments? arguments = settings.arguments;
     switch (settings.name) {
       case 'main_chapters':
         return MaterialPageRoute(
@@ -25,8 +25,9 @@ class AppRoute {
           settings: settings,
         );
       case 'chapter_content':
+        final ChapterContentArguments chapterContentArguments = settings.arguments;
         return MaterialPageRoute(
-          builder: (_) => ChapterContent(chapterId: arguments!.chapterId),
+          builder: (_) => ChapterContent(chapterId: chapterContentArguments.chapterId),
           settings: settings,
         );
       case 'chapter_content_day_night':
@@ -55,8 +56,12 @@ class AppRoute {
           settings: settings,
         );
       case 'content_book_content':
+        final BookContentArguments bookContentArguments = settings.arguments;
         return MaterialPageRoute(
-          builder: (_) => const ContentBookContent(),
+          builder: (_) => ContentBookContent(
+            title: bookContentArguments.title,
+            content: bookContentArguments.content,
+          ),
           settings: settings,
         );
     }
