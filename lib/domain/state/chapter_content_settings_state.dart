@@ -39,7 +39,7 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int get getTranslateTextColor => _translateTextColor;
 
-  bool _isDefaultColors = false;
+  bool _isDefaultColors = true;
 
   bool get getIsDefaultColors => _isDefaultColors;
 
@@ -136,10 +136,10 @@ class ChapterContentSettingsState with ChangeNotifier {
     }
     _textArabicSize = preferences.getInt(Constants.keyTextArabicSize) ?? 16;
     _textTextTranslateSize = preferences.getInt(Constants.keyTextTranslateSize) ?? 16;
-    _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ?? Colors.red[900]!.value);
-    _transcriptionTextColor = (preferences.getInt(Constants.keyTextTranscriptionColor) ?? Colors.teal[900]!.value);
-    _translateTextColor = (preferences.getInt(Constants.keyTextTranslateColor) ?? Colors.black.value);
-    _isDefaultColors = preferences.getBool(Constants.keyColorsWithDayNight) ?? false;
+    _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ?? Colors.purple[400]!.value);
+    _transcriptionTextColor = (preferences.getInt(Constants.keyTextTranscriptionColor) ?? Colors.teal[400]!.value);
+    _translateTextColor = (preferences.getInt(Constants.keyTextTranslateColor) ?? Colors.black54.value);
+    _isDefaultColors = preferences.getBool(Constants.keyColorsWithDayNight) ?? true;
     _isTranscriptionShow = preferences.getBool(Constants.keyTextTranscriptionIsShow) ?? true;
     notifyListeners();
   }
