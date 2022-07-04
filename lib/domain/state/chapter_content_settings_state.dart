@@ -27,15 +27,15 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int get getTextTranslateSize => _textTextTranslateSize;
 
-  int _arabicTextColor = Colors.red[900]!.value;
+  int _arabicTextColor = Colors.purple[400]!.value;
 
   int get getArabicTextColor => _arabicTextColor;
 
-  int _transcriptionTextColor = Colors.teal[900]!.value;
+  int _transcriptionTextColor = Colors.teal[400]!.value;
 
   int get getTranscriptionTextColor => _transcriptionTextColor;
 
-  int _translateTextColor = Colors.black.value;
+  int _translateTextColor = Colors.black54.value;
 
   int get getTranslateTextColor => _translateTextColor;
 

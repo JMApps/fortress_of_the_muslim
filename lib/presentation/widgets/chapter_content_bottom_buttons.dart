@@ -85,9 +85,12 @@ class ChapterContentBottomButtons extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.repeat),
-                onPressed: () {
-                  appPlayer.changeRepeatState(!appPlayer.repeatState, item.id);
-                },
+                onPressed: appPlayer.currentPlayItem == item.id
+                    ? () {
+                        appPlayer.changeRepeatState(
+                            !appPlayer.repeatState, item.id);
+                      }
+                    : null,
               ),
             ),
             IconButton(
