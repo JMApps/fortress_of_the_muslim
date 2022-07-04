@@ -32,11 +32,11 @@ class MainItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         onTap: () async {
           if (route == 'app_ios_account') {
-            if (Platform.isIOS) {
-              await launchUrl(_urlIOS);
-            } else if (Platform.isAndroid) {
-              await launchUrl(_urlAndroid);
-            }
+            await launchUrl(
+              Platform.isIOS
+                  ? _urlIOS
+                  : _urlAndroid,
+            );
           } else {
             Navigator.pushNamed(context, route);
           }
