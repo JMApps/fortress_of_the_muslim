@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/constants.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
+import 'package:fortress_of_the_muslim/data/local/database/model/chapter_favorite_model.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
-import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_share_copy_popup.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContentBottomButtons extends StatelessWidget {
@@ -17,6 +19,8 @@ class ChapterContentBottomButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
+    var box = Hive.box(Constants.keyFavoritesBox);
+    final ChapterFavoriteModel chapterFavorite = box.get('key_t');
     return Consumer<AppPlayerState>(
       builder: (context, appPlayer, _) {
         return Row(
@@ -98,18 +102,19 @@ class ChapterContentBottomButtons extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               color: myColor.chapterContentItemColor,
-              icon: item.favoriteState == 0
-                  ? const Icon(Icons.bookmark_border)
-                  : const Icon(Icons.bookmark),
+              icon: chapterFavorite.isFavorite && chapterFavorite.chapterId == item.id
+                  ? const Icon(Icons.bookmark)
+                  : const Icon(Icons.bookmark_border),
               onPressed: () {
                 context.read<MainState>().showSnackBarMessage(
                     context,
                     myColor.chapterContentItemColor,
-                    item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
-                context
-                    .read<BookmarkButtonState>()
-                    .addRemoveSupplicationBookmark(
-                        item.favoriteState == 0 ? 1 : 0, item.id);
+                    chapterFavorite.isFavorite ? 'Добавлено' : 'Удалено');
+                // context
+                //     .read<BookmarkButtonState>()
+                //     .addRemoveSupplicationBookmark(
+                //         item.favoriteState == 0 ? 1 : 0, item.id);
+                box.put('key_t', ChapterFavoriteModel(isFavorite: !chapterFavorite.isFavorite, chapterId: item.id));
               },
             ),
             IconButton(
