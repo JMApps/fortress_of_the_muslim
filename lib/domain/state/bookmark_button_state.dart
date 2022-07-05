@@ -6,6 +6,10 @@ class BookmarkButtonState with ChangeNotifier {
 
   DatabaseQuery get getDatabaseQuery => _databaseQuery;
 
+  final bool _updateList = false;
+
+  bool get getUpdateList => _updateList;
+
   addRemoveChapterBookmark(int state, int chapterId) {
     _databaseQuery.addRemoveFavoriteChapter(state, chapterId);
     notifyListeners();
