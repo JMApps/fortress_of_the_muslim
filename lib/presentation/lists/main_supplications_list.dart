@@ -12,7 +12,7 @@ class MainSupplicationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return snapshot.connectionState == ConnectionState.done && snapshot.hasData
+    return snapshot.hasData
         ? CupertinoScrollbar(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),

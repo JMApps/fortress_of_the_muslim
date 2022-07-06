@@ -33,8 +33,7 @@ class _SupplicationsState extends State<Supplications> {
       child: FutureBuilder(
         future: _databaseQuery.getAllSupplications(),
         builder: (context, snapshot) {
-          return snapshot.connectionState == ConnectionState.done &&
-                  snapshot.hasData
+          return snapshot.hasData
               ? Scaffold(
                   body: NestedScrollView(
                     floatHeaderSlivers: true,
