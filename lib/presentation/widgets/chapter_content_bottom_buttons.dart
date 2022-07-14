@@ -9,9 +9,15 @@ import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_shar
 import 'package:provider/provider.dart';
 
 class ChapterContentBottomButtons extends StatelessWidget {
-  const ChapterContentBottomButtons({Key? key, required this.item})
-      : super(key: key);
+  const ChapterContentBottomButtons({
+    Key? key,
+    required this.index,
+    required this.supplicationsLength,
+    required this.item,
+  }) : super(key: key);
 
+  final int index;
+  final int supplicationsLength;
   final ChapterContentItemModel item;
 
   @override
@@ -22,38 +28,6 @@ class ChapterContentBottomButtons extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              'Дуа № ${item.id}',
-              style: TextStyle(
-                color: myColor.chapterContentItemColor,
-                fontSize: 16,
-              ),
-            ),
-            Visibility(
-              visible: item.nameAudio != null ? true : false,
-              maintainAnimation: false,
-              maintainSize: false,
-              child: Transform.scale(
-                scale: 0.85,
-                child: ChoiceChip(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  backgroundColor: myColor.playerChoiceChipColor,
-                  selectedColor: myColor.contentChapterTitleColor,
-                  label: const Text(
-                    '0,5x',
-                  ),
-                  selected: appPlayer.isPlaybackSpeed &&
-                      appPlayer.currentPlayItem == item.id,
-                  onSelected: (value) {
-                    appPlayer.changePlaybackSpeedState(value, item.id);
-                  },
-                ),
-              ),
-            ),
             Visibility(
               visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
@@ -93,6 +67,32 @@ class ChapterContentBottomButtons extends StatelessWidget {
                     : null,
               ),
             ),
+            Visibility(
+              visible: item.nameAudio != null ? true : false,
+              maintainAnimation: false,
+              maintainSize: false,
+              child: Transform.scale(
+                scale: 0.85,
+                child: ChoiceChip(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  backgroundColor: myColor.playerChoiceChipColor,
+                  selectedColor: myColor.contentChapterTitleColor,
+                  label: Text(
+                    '0,5x',
+                    style: TextStyle(color: myColor.chapterContentColor),
+                  ),
+                  selected: appPlayer.isPlaybackSpeed &&
+                      appPlayer.currentPlayItem == item.id,
+                  onSelected: (value) {
+                    appPlayer.changePlaybackSpeedState(value, item.id);
+                  },
+                ),
+              ),
+            ),
             IconButton(
               splashRadius: 22,
               padding: EdgeInsets.zero,
@@ -128,6 +128,13 @@ class ChapterContentBottomButtons extends StatelessWidget {
                   },
                 );
               },
+            ),
+            Text(
+              '$index/$supplicationsLength',
+              style: TextStyle(
+                color: myColor.chapterContentItemColor,
+                fontSize: 16,
+              ),
             ),
           ],
         );

@@ -39,6 +39,8 @@ class ChapterContentList extends StatelessWidget {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ChapterContentItem(
+                      index: index + 1,
+                      supplicationsLength: snapshot.data!.length,
                       item: snapshot.data![index],
                     );
                   },

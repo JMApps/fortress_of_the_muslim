@@ -10,9 +10,13 @@ import 'package:provider/provider.dart';
 class ChapterContentItem extends StatelessWidget {
   const ChapterContentItem({
     Key? key,
+    required this.index,
+    required this.supplicationsLength,
     required this.item,
   }) : super(key: key);
 
+  final int index;
+  final int supplicationsLength;
   final ChapterContentItemModel item;
 
   @override
@@ -126,7 +130,11 @@ class ChapterContentItem extends StatelessWidget {
                 const SizedBox(height: 8),
                 const Divider(color: Colors.black),
                 const SizedBox(height: 8),
-                ChapterContentBottomButtons(item: item),
+                ChapterContentBottomButtons(
+                  index: index,
+                  supplicationsLength: supplicationsLength,
+                  item: item,
+                ),
               ],
             ),
           ),

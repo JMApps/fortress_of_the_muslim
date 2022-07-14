@@ -33,32 +33,6 @@ class SupplicationsBottomButtons extends StatelessWidget {
               visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
               maintainSize: false,
-              child: Transform.scale(
-                scale: 0.85,
-                child: ChoiceChip(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  backgroundColor: myColor.playerChoiceChipColor,
-                  selectedColor: myColor.mainSupplicationTitleColor,
-                  label: Text(
-                    '0,5x',
-                    style: TextStyle(color: myColor.chapterContentColor),
-                  ),
-                  selected: appPlayer.isPlaybackSpeed &&
-                      appPlayer.currentPlayItem == item.id,
-                  onSelected: (value) {
-                    appPlayer.changePlaybackSpeedState(value, item.id);
-                  },
-                ),
-              ),
-            ),
-            Visibility(
-              visible: item.nameAudio != null ? true : false,
-              maintainAnimation: false,
-              maintainSize: false,
               child: IconButton(
                 splashRadius: 20,
                 padding: EdgeInsets.zero,
@@ -92,6 +66,32 @@ class SupplicationsBottomButtons extends StatelessWidget {
                             !appPlayer.repeatState, item.id);
                       }
                     : null,
+              ),
+            ),
+            Visibility(
+              visible: item.nameAudio != null ? true : false,
+              maintainAnimation: false,
+              maintainSize: false,
+              child: Transform.scale(
+                scale: 0.85,
+                child: ChoiceChip(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  backgroundColor: myColor.playerChoiceChipColor,
+                  selectedColor: myColor.mainSupplicationTitleColor,
+                  label: Text(
+                    '0,5x',
+                    style: TextStyle(color: myColor.chapterContentColor),
+                  ),
+                  selected: appPlayer.isPlaybackSpeed &&
+                      appPlayer.currentPlayItem == item.id,
+                  onSelected: (value) {
+                    appPlayer.changePlaybackSpeedState(value, item.id);
+                  },
+                ),
               ),
             ),
             IconButton(
