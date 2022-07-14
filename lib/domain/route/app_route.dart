@@ -4,7 +4,6 @@ import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content
 import 'package:fortress_of_the_muslim/presentation/pages/app_settings.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/book_contents.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/chapter_content.dart';
-import 'package:fortress_of_the_muslim/presentation/pages/chapter_content_day_night.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/chapters.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/content_book_content.dart';
 import 'package:fortress_of_the_muslim/presentation/pages/favorite_chapters.dart';
@@ -28,11 +27,6 @@ class AppRoute {
         final ChapterContentArguments chapterContentArguments = settings.arguments;
         return MaterialPageRoute(
           builder: (_) => ChapterContent(chapterId: chapterContentArguments.chapterId),
-          settings: settings,
-        );
-      case 'chapter_content_day_night':
-        return MaterialPageRoute(
-          builder: (_) => const ChapterContentDayNight(),
           settings: settings,
         );
       case 'main_supplications':

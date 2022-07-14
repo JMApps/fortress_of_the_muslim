@@ -102,9 +102,7 @@ class MainItems extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed(
-                    context.read<AppSettingsState>().getLastChapterNumber != 27
-                        ? 'chapter_content'
-                        : 'chapter_content_day_night',
+                    'chapter_content',
                     arguments: ChapterContentArguments(
                         context.read<AppSettingsState>().getLastChapterNumber),
                   );

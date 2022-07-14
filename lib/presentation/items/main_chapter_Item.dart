@@ -91,8 +91,7 @@ class MainChapterItem extends StatelessWidget {
         ),
         onTap: () {
           context.read<AppSettingsState>().changeLastChapterNumber(item.id);
-          Navigator.of(context).pushNamed(
-            item.id != 27 ? 'chapter_content' : 'chapter_content_day_night',
+          Navigator.of(context).pushNamed('chapter_content',
             arguments: ChapterContentArguments(item.id),
           );
         },

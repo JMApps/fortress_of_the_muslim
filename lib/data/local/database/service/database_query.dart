@@ -1,5 +1,4 @@
 import 'package:fortress_of_the_muslim/data/local/database/model/book_content_item_model.dart';
-import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_day_night_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_chapter_item_model.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/favorite_supplication_item_model.dart';
@@ -38,11 +37,11 @@ class DatabaseQuery {
     return chapterContent!;
   }
 
-  Future<List<ChapterContentDayNightItemModel>> getDayNightContentChapter(bool dayNight) async {
+  Future<List<ChapterContentItemModel>> getDayNightContentChapter(bool isDayNight) async {
     var dbClient = await con.db;
-    var res = await dbClient.query(dayNight ? 'Table_of_supplications_day' : 'Table_of_supplications_night');
-    List<ChapterContentDayNightItemModel>? dayNightContents = res.isNotEmpty ? res.map((c) => ChapterContentDayNightItemModel.fromMap(c)).toList() : null;
-    return dayNightContents!;
+    var res = await dbClient.rawQuery('SELECT * FROM Table_of_supplications WHERE ${isDayNight ? 'day_night == 0 OR day_night == 1' : 'day_night == 0 OR day_night == 2'}');
+    List<ChapterContentItemModel>? chapterContent = res.isNotEmpty ? res.map((c) => ChapterContentItemModel.fromMap(c)).toList() : null;
+    return chapterContent!;
   }
 
   Future<List<MainSupplicationItemModel>> getAllSupplications() async {
@@ -57,20 +56,6 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_supplications', where: 'favorite_state == 1');
     List<FavoriteSupplicationItemModel>? favoriteSupplications = res.isNotEmpty ? res.map((c) => FavoriteSupplicationItemModel.fromMap(c)).toList() : null;
     return favoriteSupplications!;
-  }
-
-  Future<List<MainChapterItemModel>> getChapterSearchResult(String keyword) async {
-    var dbClient = await con.db;
-    var res = await dbClient.rawQuery("SELECT * FROM Table_of_chapters WHERE chapter_number LIKE '%$keyword%' OR chapter_title LIKE '%$keyword%'");
-    List<MainChapterItemModel>? searchResult = res.isNotEmpty ? res.map((c) => MainChapterItemModel.fromMap(c)).toList() : null;
-    return searchResult!;
-  }
-
-  Future<List<MainSupplicationItemModel>> getSupplicationSearchResult(String keyword) async {
-    var dbClient = await con.db;
-    var res = await dbClient.rawQuery("SELECT * FROM Table_of_supplications WHERE _id LIKE '%$keyword%' OR content_translation LIKE '%$keyword%'");
-    List<MainSupplicationItemModel>? searchResult = res.isNotEmpty ? res.map((c) => MainSupplicationItemModel.fromMap(c)).toList() : null;
-    return searchResult!;
   }
 
   addRemoveFavoriteChapter(int state, int chapterId) async {
