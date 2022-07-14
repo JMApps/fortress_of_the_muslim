@@ -20,8 +20,8 @@ class _FavoriteSupplicationsState extends State<FavoriteSupplications> {
           create: (_) => AppPlayerState(),
         ),
       ],
-      child: Scaffold(
-        appBar: const PreferredSize(
+      child: const Scaffold(
+        appBar: PreferredSize(
           preferredSize: Size(double.maxFinite, 50),
           child: FavoriteSupplicationsAppBar(),
         ),

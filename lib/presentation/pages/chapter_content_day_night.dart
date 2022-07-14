@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
-import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_day_night_list.dart';
@@ -22,9 +21,6 @@ class _ChapterContentDayNightState extends State<ChapterContentDayNight> {
     final myColor = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<BookmarkButtonState>(
-          create: (_) => BookmarkButtonState(),
-        ),
         ChangeNotifierProvider<AppPlayerState>(
           create: (_) => AppPlayerState(),
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
-import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
@@ -27,9 +26,6 @@ class _ChapterContentState extends State<ChapterContent> {
     final myColor = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<BookmarkButtonState>(
-          create: (_) => BookmarkButtonState(),
-        ),
         ChangeNotifierProvider<AppPlayerState>(
           create: (_) => AppPlayerState(),
         ),
