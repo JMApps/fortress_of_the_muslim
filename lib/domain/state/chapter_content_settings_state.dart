@@ -3,7 +3,6 @@ import 'package:fortress_of_the_muslim/data/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChapterContentSettingsState with ChangeNotifier {
-  DateTime now = DateTime.now();
 
   final List<bool> _isDayNightSelected = [true, false];
 
@@ -47,7 +46,7 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   bool get getIsTranscriptionShow => _isTranscriptionShow;
 
-  bool _isDay = true;
+  bool _isDay = DateTime.now().hour < 12 ? true : false;
 
   bool get getIsDay => _isDay;
 

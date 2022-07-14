@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
+import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/floating_counter_button.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContent extends StatefulWidget {
@@ -20,7 +22,6 @@ class ChapterContent extends StatefulWidget {
 }
 
 class _ChapterContentState extends State<ChapterContent> {
-
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
@@ -50,6 +51,18 @@ class _ChapterContentState extends State<ChapterContent> {
                   ),
                 ),
                 actions: [
+                  Transform.scale(
+                    scale: 0.8,
+                    child: Switch.adaptive(
+                      activeColor: myColor.contentChapterTitleColor,
+                      value: context.watch<MainState>().getCountShowState,
+                      onChanged: (value) {
+                        context
+                            .read<MainState>()
+                            .changeShowHideCountButtonState(value);
+                      },
+                    ),
+                  ),
                   IconButton(
                     icon: const Icon(CupertinoIcons.settings),
                     splashRadius: 20,
@@ -84,6 +97,12 @@ class _ChapterContentState extends State<ChapterContent> {
               chapterId: widget.chapterId,
             ),
           ),
+        ),
+        floatingActionButton: Visibility(
+          maintainSize: false,
+          maintainAnimation: false,
+          visible: context.watch<MainState>().getCountShowState,
+          child: const FloatingCounterButton(),
         ),
       ),
     );
