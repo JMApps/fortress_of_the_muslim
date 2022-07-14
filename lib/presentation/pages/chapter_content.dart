@@ -59,8 +59,8 @@ class _ChapterContentState extends State<ChapterContent> {
                         builder: (BuildContext context) {
                           return Container(
                             margin: const EdgeInsets.all(16),
-                            child: const ContentChapterSettings(
-                              isDayNight: false,
+                            child: ContentChapterSettings(
+                              isDayNight: widget.chapterId != 27 ? false : true,
                             ),
                           );
                         },
