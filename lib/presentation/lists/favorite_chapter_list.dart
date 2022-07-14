@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/presentation/items/favorite_chapter_Item.dart';
+import 'package:provider/provider.dart';
 
 class FavoriteChapterList extends StatelessWidget {
-  FavoriteChapterList({Key? key}) : super(key: key);
-
-  final _databaseQuery = DatabaseQuery();
+  const FavoriteChapterList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future: _databaseQuery.getFavoriteChapters(),
+      future: context
+          .watch<BookmarkButtonState>()
+          .getDatabaseQuery
+          .getFavoriteChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return snapshot.connectionState == ConnectionState.done &&
-                snapshot.hasData
+        return snapshot.hasData
             ? CupertinoScrollbar(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),

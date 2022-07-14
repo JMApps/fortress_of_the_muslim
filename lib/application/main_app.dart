@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/domain/route/app_route.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
@@ -22,6 +23,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ChapterContentSettingsState>(
           create: (_) => ChapterContentSettingsState(),
+        ),
+        ChangeNotifierProvider<BookmarkButtonState>(
+          create: (_) => BookmarkButtonState(),
         ),
       ],
       child: Builder(builder: (context) {

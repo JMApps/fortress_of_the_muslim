@@ -3,6 +3,8 @@ import 'package:fortress_of_the_muslim/data/local/database/service/database_quer
 
 class BookmarkButtonState with ChangeNotifier {
   final DatabaseQuery _databaseQuery = DatabaseQuery();
+
+  DatabaseQuery get getDatabaseQuery => _databaseQuery;
   
   final bool _updateList = false;
 

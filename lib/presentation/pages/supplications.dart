@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
 import 'package:fortress_of_the_muslim/data/search_supplication_delegate.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
@@ -17,21 +16,16 @@ class Supplications extends StatefulWidget {
 }
 
 class _SupplicationsState extends State<Supplications> {
-  final _databaseQuery = DatabaseQuery();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<BookmarkButtonState>(
-          create: (_) => BookmarkButtonState(),
-        ),
         ChangeNotifierProvider<AppPlayerState>(
           create: (_) => AppPlayerState(),
         ),
       ],
       child: FutureBuilder(
-        future: _databaseQuery.getAllSupplications(),
+        future: context.watch<BookmarkButtonState>().getDatabaseQuery.getAllSupplications(),
         builder: (context, snapshot) {
           return snapshot.hasData
               ? Scaffold(

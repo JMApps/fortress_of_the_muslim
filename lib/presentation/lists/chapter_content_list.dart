@@ -1,21 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/presentation/items/chapter_content_Item.dart';
+import 'package:provider/provider.dart';
 
 class ChapterContentList extends StatelessWidget {
-  ChapterContentList({
+  const ChapterContentList({
     Key? key,
     required this.chapterId,
   }) : super(key: key);
 
-  final _databaseQuery = DatabaseQuery();
   final int chapterId;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future: _databaseQuery.getContentChapter(chapterId),
+      future: context
+          .watch<BookmarkButtonState>()
+          .getDatabaseQuery
+          .getContentChapter(chapterId),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return snapshot.hasData
             ? CupertinoScrollbar(
