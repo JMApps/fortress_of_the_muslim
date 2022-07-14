@@ -67,27 +67,27 @@ class _AppSettingsState extends State<AppSettings> {
                   appSettings.changeShowLastChapter(value);
                 },
               ),
-              const Divider(indent: 16, endIndent: 16),
-              SwitchListTile.adaptive(
-                activeColor: myColor.mainSettingsColor,
-                title: const Text(
-                  'Уведомления',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: const Text(
-                  'Ежедневные уведомления утром и вечером',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                value: appSettings.isNotification,
-                onChanged: (value) {
-                  appSettings.changeShowNotification(value);
-                },
-              ),
+              // const Divider(indent: 16, endIndent: 16),
+              // SwitchListTile.adaptive(
+              //   activeColor: myColor.mainSettingsColor,
+              //   title: const Text(
+              //     'Уведомления',
+              //     style: TextStyle(
+              //       fontSize: 18,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              //   subtitle: const Text(
+              //     'Ежедневные уведомления утром и вечером',
+              //     style: TextStyle(
+              //       fontSize: 16,
+              //     ),
+              //   ),
+              //   value: appSettings.isNotification,
+              //   onChanged: (value) {
+              //     appSettings.changeShowNotification(value);
+              //   },
+              // ),
               const Divider(indent: 16, endIndent: 16),
               SwitchListTile.adaptive(
                 activeColor: myColor.mainSettingsColor,
@@ -109,6 +109,7 @@ class _AppSettingsState extends State<AppSettings> {
                   appSettings.changeWakeLock(value);
                 },
               ),
+              const Divider(indent: 16, endIndent: 16),
               SwitchListTile.adaptive(
                 activeColor: myColor.mainSettingsColor,
                 title: const Text(
