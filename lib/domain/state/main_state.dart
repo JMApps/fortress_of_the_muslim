@@ -3,6 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class MainState with ChangeNotifier {
+  int _supplicationCount = 0;
+
+  int get getSupplicationCount => _supplicationCount;
+
+  bool _countShowState = false;
+
+  bool get getCountShowState => _countShowState;
+
+  updateCountValue() {
+    if (_supplicationCount < 100) {
+      _supplicationCount++;
+    }
+    notifyListeners();
+  }
+
+  resetCount() {
+    _supplicationCount = 0;
+    notifyListeners();
+  }
+
+  changeShowHideCountButtonState(bool value) {
+    _countShowState = value;
+    notifyListeners();
+  }
+
   showSnackBarMessage(BuildContext context, Color color, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
