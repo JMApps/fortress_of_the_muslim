@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_chapter_item_model.dart';
-import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_chapter_Item.dart';
+import 'package:provider/provider.dart';
 
 class SearchChapterDelegate extends SearchDelegate {
-  final _databaseQuery = DatabaseQuery();
 
   List<MainChapterItemModel> chapters = [];
   List<MainChapterItemModel> recentChapters = [];
@@ -52,7 +52,7 @@ class SearchChapterDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder<List>(
-      future: _databaseQuery.getAllChapters(),
+      future: context.watch<BookmarkButtonState>().getDatabaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           chapters = snapshot.data;
@@ -100,7 +100,7 @@ class SearchChapterDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     return FutureBuilder<List>(
-      future: _databaseQuery.getAllChapters(),
+      future: context.watch<BookmarkButtonState>().getDatabaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           chapters = snapshot.data;

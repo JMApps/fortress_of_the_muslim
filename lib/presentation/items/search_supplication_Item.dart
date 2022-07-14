@@ -135,7 +135,7 @@ class SearchSupplicationItem extends StatelessWidget {
                         context
                             .read<BookmarkButtonState>()
                             .addRemoveSupplicationBookmark(
-                                item.favoriteState == 0 ? 1 : 0, item.id);
+                            item.favoriteState == 0 ? 1 : 0, item.id);
                       },
                     ),
                     IconButton(
