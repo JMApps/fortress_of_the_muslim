@@ -15,7 +15,8 @@ class ContentChapterSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    var chapterContentSettingsState = context.read<ChapterContentSettingsState>();
+    var chapterContentSettingsState =
+        context.read<ChapterContentSettingsState>();
     return Material(
       borderRadius: BorderRadius.circular(15),
       child: Container(
@@ -91,18 +92,19 @@ class ContentChapterSettings extends StatelessWidget {
               ),
               subtitle: Slider.adaptive(
                 min: 14,
-                max: 100,
+                max: 50,
                 value: chapterContentSettingsState.getTextArabicSize,
                 onChanged: (value) {
-                  chapterContentSettingsState.changeTextArabicSize(value);
+                  chapterContentSettingsState
+                      .changeTextArabicSize(value);
                 },
                 onChangeEnd: (value) {
-                  chapterContentSettingsState.saveInt(
-                      Constants.keyTextArabicSize, value.toInt());
+                  chapterContentSettingsState.saveDouble(
+                      Constants.keyTextArabicSize, value);
                 },
               ),
               trailing: Text(
-                chapterContentSettingsState.getTextArabicSize.round().toString(),
+                '${chapterContentSettingsState.getTextArabicSize.toInt()}',
                 style: const TextStyle(fontSize: 18),
               ),
             ),
@@ -117,19 +119,19 @@ class ContentChapterSettings extends StatelessWidget {
               ),
               subtitle: Slider.adaptive(
                 min: 14,
-                max: 100,
-                value:
-                    chapterContentSettingsState.getTextTranslateSize,
+                max: 50,
+                value: chapterContentSettingsState.getTextTranslateSize,
                 onChanged: (value) {
-                  chapterContentSettingsState.changeTextTranslateSize(value);
+                  chapterContentSettingsState
+                      .changeTextTranslateSize(value);
                 },
                 onChangeEnd: (value) {
-                  chapterContentSettingsState.saveInt(
-                      Constants.keyTextTranslateSize, value.toInt());
+                  chapterContentSettingsState.saveDouble(
+                      Constants.keyTextTranslateSize, value);
                 },
               ),
               trailing: Text(
-                chapterContentSettingsState.getTextTranslateSize.round().toString(),
+                '${chapterContentSettingsState.getTextTranslateSize.toInt()}',
                 style: const TextStyle(fontSize: 18),
               ),
             ),

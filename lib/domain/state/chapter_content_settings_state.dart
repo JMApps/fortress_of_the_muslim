@@ -3,7 +3,6 @@ import 'package:fortress_of_the_muslim/data/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChapterContentSettingsState with ChangeNotifier {
-
   final List<bool> _isDayNightSelected = [true, false];
 
   final List<bool> _isTextAlignSelected = [false, false, false, true];
@@ -122,6 +121,11 @@ class ChapterContentSettingsState with ChangeNotifier {
     preferences.setInt(key, value);
   }
 
+  saveDouble(String key, double value) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setDouble(key, value);
+  }
+
   saveBool(String key, bool state) async {
     final preferences = await SharedPreferences.getInstance();
     preferences.setBool(key, state);
@@ -129,17 +133,26 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   initSettings() async {
     final preferences = await SharedPreferences.getInstance();
-    _toggleTextAlignIndex = preferences.getInt(Constants.keyTextAlignIndex) ?? 3;
+    _toggleTextAlignIndex =
+        preferences.getInt(Constants.keyTextAlignIndex) ?? 3;
     for (int i = 0; i < _isTextAlignSelected.length; i++) {
       _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
     }
     _textArabicSize = preferences.getDouble(Constants.keyTextArabicSize) ?? 16;
-    _textTranslateSize = preferences.getDouble(Constants.keyTextTranslateSize) ?? 16;
-    _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ?? Colors.purple[400]!.value);
-    _transcriptionTextColor = (preferences.getInt(Constants.keyTextTranscriptionColor) ?? Colors.teal[400]!.value);
-    _translateTextColor = (preferences.getInt(Constants.keyTextTranslateColor) ?? Colors.black54.value);
-    _isDefaultColors = preferences.getBool(Constants.keyColorsWithDayNight) ?? true;
-    _isTranscriptionShow = preferences.getBool(Constants.keyTextTranscriptionIsShow) ?? true;
+    _textTranslateSize =
+        preferences.getDouble(Constants.keyTextTranslateSize) ?? 16;
+    _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ??
+        Colors.purple[400]!.value);
+    _transcriptionTextColor =
+        (preferences.getInt(Constants.keyTextTranscriptionColor) ??
+            Colors.teal[400]!.value);
+    _translateTextColor =
+        (preferences.getInt(Constants.keyTextTranslateColor) ??
+            Colors.black54.value);
+    _isDefaultColors =
+        preferences.getBool(Constants.keyColorsWithDayNight) ?? true;
+    _isTranscriptionShow =
+        preferences.getBool(Constants.keyTextTranscriptionIsShow) ?? true;
     notifyListeners();
   }
 }

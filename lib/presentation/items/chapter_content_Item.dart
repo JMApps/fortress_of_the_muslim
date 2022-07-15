@@ -78,8 +78,7 @@ class ChapterContentItem extends StatelessWidget {
                           '${item.contentTranscription}',
                           style: TextStyle(
                             fontSize: chapterContentSettings
-                                .getTextTranslateSize
-                                .toDouble(),
+                                .getTextTranslateSize,
                             color: chapterContentSettings.getIsDefaultColors
                                 ? Color(chapterContentSettings
                                     .getTranscriptionTextColor)
@@ -96,8 +95,8 @@ class ChapterContentItem extends StatelessWidget {
               data: item.contentTranslation,
               style: {
                 '#': Style(
-                  fontSize: FontSize(
-                      chapterContentSettings.getTextTranslateSize.toDouble()),
+                  fontSize:
+                      FontSize(chapterContentSettings.getTextTranslateSize),
                   padding: EdgeInsets.zero,
                   margin: EdgeInsets.zero,
                   color: chapterContentSettings.getIsDefaultColors
