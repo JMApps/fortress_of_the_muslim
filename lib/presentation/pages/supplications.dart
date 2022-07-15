@@ -25,7 +25,10 @@ class _SupplicationsState extends State<Supplications> {
         ),
       ],
       child: FutureBuilder(
-        future: context.watch<BookmarkButtonState>().getDatabaseQuery.getAllSupplications(),
+        future: context
+            .watch<BookmarkButtonState>()
+            .getDatabaseQuery
+            .getAllSupplications(),
         builder: (context, snapshot) {
           return snapshot.hasData
               ? Scaffold(
@@ -71,9 +74,10 @@ class _SupplicationsState extends State<Supplications> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return Container(
-                                        margin: const EdgeInsets.all(16),
-                                        child: const ContentChapterSettings(
-                                            isDayNight: false));
+                                      margin: const EdgeInsets.all(16),
+                                      child: const ContentChapterSettings(
+                                          isDayNight: false),
+                                    );
                                   },
                                 );
                               },
