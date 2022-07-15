@@ -24,18 +24,10 @@ class BookContentItem extends StatelessWidget {
             title: Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
-                'Глава ${item.id}',
-                style: TextStyle(
+                item.title,
+                style: const TextStyle(
                   fontSize: 18,
-                  color: Theme.of(context).colorScheme.mainContentBookItemColor,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-            ),
-            subtitle: Text(
-              item.title,
-              style: const TextStyle(
-                fontSize: 18,
               ),
             ),
           ),
