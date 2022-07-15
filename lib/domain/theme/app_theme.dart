@@ -144,4 +144,12 @@ extension ColorSchemeS on ColorScheme {
   Color get textTranslateColor => brightness == Brightness.light
       ? const Color(0xFF212121)
       : const Color(0xFFE0E0E0);
+
+  Color get activeCountSwitchColor => brightness == Brightness.light
+      ? const Color(0xFF9C27B0)
+      : const Color(0xFF7B1FA2);
+
+  Color get passiveCountSwitchColor => brightness == Brightness.light
+      ? const Color(0xFF78909C)
+      : const Color(0xFF546E7A);
 }

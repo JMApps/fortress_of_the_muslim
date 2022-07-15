@@ -54,7 +54,8 @@ class _ChapterContentState extends State<ChapterContent> {
                   Transform.scale(
                     scale: 0.8,
                     child: Switch.adaptive(
-                      activeColor: myColor.contentChapterTitleColor,
+                      activeColor: myColor.activeCountSwitchColor,
+                      inactiveTrackColor: myColor.passiveCountSwitchColor,
                       value: context.watch<MainState>().getCountShowState,
                       onChanged: (value) {
                         context

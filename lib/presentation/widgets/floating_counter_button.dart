@@ -27,7 +27,7 @@ class FloatingCounterButton extends StatelessWidget {
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             circularStrokeCap: CircularStrokeCap.round,
-            progressColor: Colors.blueGrey[900],
+            progressColor: Colors.purple[700],
           ),
           onPressed: () {
             context.read<MainState>().updateCountValue();

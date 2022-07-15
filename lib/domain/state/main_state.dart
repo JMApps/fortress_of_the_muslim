@@ -14,6 +14,8 @@ class MainState with ChangeNotifier {
   updateCountValue() {
     if (_supplicationCount < 100) {
       _supplicationCount++;
+    } else {
+      _supplicationCount = 1;
     }
     notifyListeners();
   }
