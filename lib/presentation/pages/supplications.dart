@@ -61,8 +61,7 @@ class _SupplicationsState extends State<Supplications> {
                               onPressed: () {
                                 showSearch(
                                   context: context,
-                                  delegate: SearchSupplicationDelegate(
-                                      snapshot: snapshot),
+                                  delegate: SearchSupplicationDelegate(),
                                 );
                               },
                             ),
