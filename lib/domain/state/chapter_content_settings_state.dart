@@ -17,13 +17,13 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int get getToggleTextAlignIndex => _toggleTextAlignIndex;
 
-  double _textArabicSize = 16;
+  int _textArabicSize = 16;
 
-  double get getTextArabicSize => _textArabicSize;
+  int get getTextArabicSize => _textArabicSize;
 
-  double _textTranslateSize = 16;
+  int _textTranslateSize = 16;
 
-  double get getTextTranslateSize => _textTranslateSize;
+  int get getTextTranslateSize => _textTranslateSize;
 
   int _arabicTextColor = Colors.purple[400]!.value;
 
@@ -76,13 +76,13 @@ class ChapterContentSettingsState with ChangeNotifier {
     notifyListeners();
   }
 
-  changeTextArabicSize(double size) {
-    _textArabicSize = size;
+  changeTextArabicSize(double arabicTextSize) {
+    _textArabicSize = arabicTextSize.toInt();
     notifyListeners();
   }
 
-  changeTextTranslateSize(double size) {
-    _textTranslateSize = size;
+  changeTextTranslateSize(double translateTextSize) {
+    _textTranslateSize = translateTextSize.toInt();
     notifyListeners();
   }
 
@@ -138,9 +138,9 @@ class ChapterContentSettingsState with ChangeNotifier {
     for (int i = 0; i < _isTextAlignSelected.length; i++) {
       _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
     }
-    _textArabicSize = preferences.getDouble(Constants.keyTextArabicSize) ?? 16;
+    _textArabicSize = preferences.getInt(Constants.keyTextArabicSize) ?? 16;
     _textTranslateSize =
-        preferences.getDouble(Constants.keyTextTranslateSize) ?? 16;
+        preferences.getInt(Constants.keyTextTranslateSize) ?? 16;
     _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ??
         Colors.purple[400]!.value);
     _transcriptionTextColor =

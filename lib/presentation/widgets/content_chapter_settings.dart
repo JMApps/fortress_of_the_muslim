@@ -93,14 +93,14 @@ class ContentChapterSettings extends StatelessWidget {
               subtitle: Slider.adaptive(
                 min: 14,
                 max: 50,
-                value: chapterContentSettingsState.getTextArabicSize,
-                onChanged: (value) {
+                value: chapterContentSettingsState.getTextArabicSize.toDouble(),
+                onChanged: (currentArabicTextSize) {
                   chapterContentSettingsState
-                      .changeTextArabicSize(value);
+                      .changeTextArabicSize(currentArabicTextSize);
                 },
-                onChangeEnd: (value) {
+                onChangeEnd: (lastArabicTextSize) {
                   chapterContentSettingsState.saveDouble(
-                      Constants.keyTextArabicSize, value);
+                      Constants.keyTextArabicSize, lastArabicTextSize);
                 },
               ),
               trailing: Text(
@@ -120,14 +120,14 @@ class ContentChapterSettings extends StatelessWidget {
               subtitle: Slider.adaptive(
                 min: 14,
                 max: 50,
-                value: chapterContentSettingsState.getTextTranslateSize,
-                onChanged: (value) {
+                value: chapterContentSettingsState.getTextTranslateSize.toDouble(),
+                onChanged: (currentTranslationTextSize) {
                   chapterContentSettingsState
-                      .changeTextTranslateSize(value);
+                      .changeTextTranslateSize(currentTranslationTextSize);
                 },
-                onChangeEnd: (value) {
+                onChangeEnd: (lastTranslationTextSize) {
                   chapterContentSettingsState.saveDouble(
-                      Constants.keyTextTranslateSize, value);
+                      Constants.keyTextTranslateSize, lastTranslationTextSize);
                 },
               ),
               trailing: Text(
