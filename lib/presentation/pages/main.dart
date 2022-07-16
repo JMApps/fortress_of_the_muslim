@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/constants.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/main_items.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/main_app_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -19,8 +20,9 @@ class _MainPageState extends State<MainPage> {
   }
 
   isRunChapters() async {
-    final preferences = await SharedPreferences.getInstance();
-    bool isRunChapters = preferences.getBool('key_is_run_chapters') ?? false;
+    var mainSettingsBox = Hive.box(Constants.keyMainSettingBox);
+    bool isRunChapters =
+        mainSettingsBox.get(Constants.keyIsRunChapters) ?? false;
     if (isRunChapters) {
       Future.delayed(const Duration(milliseconds: 50)).then(
         (value) => {

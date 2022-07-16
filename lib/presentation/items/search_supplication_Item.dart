@@ -131,8 +131,7 @@ class SearchSupplicationItem extends StatelessWidget {
                     //         context,
                     //         myColor.mainSupplicationTitleColor,
                     //         item.favoriteState == 0 ? 'Добавлено' : 'Удалено');
-                    //     context
-                    //         .read<BookmarkButtonState>()
+                    //     context.read<BookmarkButtonState>()
                     //         .addRemoveSupplicationBookmark(
                     //         item.favoriteState == 0 ? 1 : 0, item.id);
                     //   },

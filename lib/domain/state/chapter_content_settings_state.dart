@@ -1,53 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class ChapterContentSettingsState with ChangeNotifier {
-  final List<bool> _isDayNightSelected = [true, false];
 
-  final List<bool> _isTextAlignSelected = [false, false, false, true];
+  var contentSettingsBox = Hive.box(Constants.keyMainSettingBox);
 
-  List<bool> get getIsDayNightSelected => _isDayNightSelected;
+  final List<bool> isDayNightSelected = [true, false];
 
-  List<bool> get getIsTextAlignSelected => _isTextAlignSelected;
+  final List<bool> isTextAlignSelected = [false, false, false, true];
 
-  int _toggleDayNightIndex = 0;
+  List<bool> get getIsDayNightSelected => isDayNightSelected;
 
-  int _toggleTextAlignIndex = 3;
+  List<bool> get getIsTextAlignSelected => isTextAlignSelected;
 
-  int get getToggleTextAlignIndex => _toggleTextAlignIndex;
+  int toggleDayNightIndex = 0;
 
-  int _textArabicSize = 16;
+  int toggleTextAlignIndex = 3;
 
-  int get getTextArabicSize => _textArabicSize;
+  int get getToggleTextAlignIndex => toggleTextAlignIndex;
 
-  int _textTranslateSize = 16;
+  double textArabicSize = 16;
 
-  int get getTextTranslateSize => _textTranslateSize;
+  double get getTextArabicSize => textArabicSize;
 
-  int _arabicTextColor = Colors.purple[400]!.value;
+  double textTranslateSize = 16;
 
-  int get getArabicTextColor => _arabicTextColor;
+  double get getTextTranslateSize => textTranslateSize;
 
-  int _transcriptionTextColor = Colors.teal[400]!.value;
+  int arabicTextColor = Colors.purple[400]!.value;
 
-  int get getTranscriptionTextColor => _transcriptionTextColor;
+  int get getArabicTextColor => arabicTextColor;
 
-  int _translateTextColor = Colors.black54.value;
+  int transcriptionTextColor = Colors.teal[400]!.value;
 
-  int get getTranslateTextColor => _translateTextColor;
+  int get getTranscriptionTextColor => transcriptionTextColor;
 
-  bool _isDefaultColors = true;
+  int translateTextColor = Colors.black54.value;
 
-  bool get getIsDefaultColors => _isDefaultColors;
+  int get getTranslateTextColor => translateTextColor;
 
-  bool _isTranscriptionShow = true;
+  bool isDefaultColors = true;
 
-  bool get getIsTranscriptionShow => _isTranscriptionShow;
+  bool get getIsDefaultColors => isDefaultColors;
 
-  bool _isDay = DateTime.now().hour < 12 ? true : false;
+  bool isTranscriptionShow = true;
 
-  bool get getIsDay => _isDay;
+  bool get getIsTranscriptionShow => isTranscriptionShow;
+
+  bool isDay = DateTime.now().hour < 12 ? true : false;
+
+  bool get getIsDay => isDay;
 
   final List<TextAlign> _myTextAlign = [
     TextAlign.start,
@@ -59,100 +62,78 @@ class ChapterContentSettingsState with ChangeNotifier {
   List get getMyTextAlign => _myTextAlign;
 
   updateToggleDayNight(int index) {
-    _toggleDayNightIndex = index;
-    _toggleDayNightIndex == 0 ? _isDay = true : _isDay = false;
-    for (int i = 0; i < _isDayNightSelected.length; i++) {
-      _isDayNightSelected[i] = i == _toggleDayNightIndex;
+    toggleDayNightIndex = index;
+    toggleDayNightIndex == 0 ? isDay = true : isDay = false;
+    for (int i = 0; i < isDayNightSelected.length; i++) {
+      isDayNightSelected[i] = i == toggleDayNightIndex;
     }
     notifyListeners();
   }
 
   updateToggleTextAlign(int index) {
-    _toggleTextAlignIndex = index;
-    for (int i = 0; i < _isTextAlignSelected.length; i++) {
-      _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
+    toggleTextAlignIndex = index;
+    for (int i = 0; i < isTextAlignSelected.length; i++) {
+      isTextAlignSelected[i] = i == toggleTextAlignIndex;
     }
-    saveInt(Constants.keyTextAlignIndex, _toggleTextAlignIndex);
+    contentSettingsBox.put(Constants.keyTextAlignIndex, toggleTextAlignIndex);
     notifyListeners();
   }
 
   changeTextArabicSize(double arabicTextSize) {
-    _textArabicSize = arabicTextSize.toInt();
+    textArabicSize = arabicTextSize;
     notifyListeners();
   }
 
   changeTextTranslateSize(double translateTextSize) {
-    _textTranslateSize = translateTextSize.toInt();
+    textTranslateSize = translateTextSize;
     notifyListeners();
   }
 
   changeTextArabicColor(Color color) {
-    _arabicTextColor = color.value;
-    saveInt(Constants.keyTextArabicColor, color.value);
+    arabicTextColor = color.value;
+    contentSettingsBox.put(Constants.keyTextArabicColor, color.value);
     notifyListeners();
   }
 
   changeTextTranscriptionColor(Color color) {
-    _transcriptionTextColor = color.value;
-    saveInt(Constants.keyTextTranscriptionColor, color.value);
+    transcriptionTextColor = color.value;
+    contentSettingsBox.put(Constants.keyTextTranscriptionColor, color.value);
     notifyListeners();
   }
 
   changeTextTranslateColor(Color color) {
-    _translateTextColor = color.value;
-    saveInt(Constants.keyTextTranslateColor, color.value);
+    translateTextColor = color.value;
+    contentSettingsBox.put(Constants.keyTextTranslateColor, color.value);
     notifyListeners();
   }
 
   changeDefaultColorsState(bool state) {
-    _isDefaultColors = state;
-    saveBool(Constants.keyColorsWithDayNight, state);
+    isDefaultColors = state;
+    contentSettingsBox.put(Constants.keyColorsWithDayNight, state);
     notifyListeners();
   }
 
   changeTranscriptionShow(bool state) {
-    _isTranscriptionShow = state;
-    saveBool(Constants.keyTextTranscriptionIsShow, state);
+    isTranscriptionShow = state;
+    contentSettingsBox.put(Constants.keyTextTranscriptionIsShow, state);
     notifyListeners();
-  }
-
-  saveInt(String key, int value) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setInt(key, value);
   }
 
   saveDouble(String key, double value) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setDouble(key, value);
+    await contentSettingsBox.put(key, value);
   }
 
-  saveBool(String key, bool state) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setBool(key, state);
-  }
-
-  initSettings() async {
-    final preferences = await SharedPreferences.getInstance();
-    _toggleTextAlignIndex =
-        preferences.getInt(Constants.keyTextAlignIndex) ?? 3;
-    for (int i = 0; i < _isTextAlignSelected.length; i++) {
-      _isTextAlignSelected[i] = i == _toggleTextAlignIndex;
+  initContentSettings() {
+    toggleTextAlignIndex = contentSettingsBox.get(Constants.keyTextAlignIndex) ?? 3;
+    for (int i = 0; i < isTextAlignSelected.length; i++) {
+      isTextAlignSelected[i] = i == toggleTextAlignIndex;
     }
-    _textArabicSize = preferences.getInt(Constants.keyTextArabicSize) ?? 16;
-    _textTranslateSize =
-        preferences.getInt(Constants.keyTextTranslateSize) ?? 16;
-    _arabicTextColor = (preferences.getInt(Constants.keyTextArabicColor) ??
-        Colors.purple[400]!.value);
-    _transcriptionTextColor =
-        (preferences.getInt(Constants.keyTextTranscriptionColor) ??
-            Colors.teal[400]!.value);
-    _translateTextColor =
-        (preferences.getInt(Constants.keyTextTranslateColor) ??
-            Colors.black54.value);
-    _isDefaultColors =
-        preferences.getBool(Constants.keyColorsWithDayNight) ?? true;
-    _isTranscriptionShow =
-        preferences.getBool(Constants.keyTextTranscriptionIsShow) ?? true;
-    notifyListeners();
+    textArabicSize = contentSettingsBox.get(Constants.keyTextArabicSize) ?? 16;
+    textTranslateSize = contentSettingsBox.get(Constants.keyTextTranslateSize) ?? 16;
+    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor) ?? Colors.purple[400]!.value);
+    transcriptionTextColor = (contentSettingsBox.get(Constants.keyTextTranscriptionColor) ?? Colors.teal[400]!.value);
+    translateTextColor = (contentSettingsBox.get(Constants.keyTextTranslateColor) ?? Colors.black54.value);
+    isDefaultColors = contentSettingsBox.get(Constants.keyColorsWithDayNight) ?? true;
+    isTranscriptionShow = contentSettingsBox.get(Constants.keyTextTranscriptionIsShow) ?? true;
   }
 }

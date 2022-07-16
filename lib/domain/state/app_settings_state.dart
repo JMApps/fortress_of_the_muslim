@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fortress_of_the_muslim/data/constants.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wakelock/wakelock.dart';
 
 class AppSettingsState with ChangeNotifier {
+  var mainSettingsBox = Hive.box(Constants.keyMainSettingBox);
+
   bool isRunChapters = false;
 
   bool get getIsRunChapters => isRunChapters;
@@ -31,57 +34,49 @@ class AppSettingsState with ChangeNotifier {
 
   changeRunWithChapters(bool state) {
     isRunChapters = state;
-    saveBoolValue('key_is_run_chapters', state);
+    mainSettingsBox.put(Constants.keyIsRunChapters, state);
     notifyListeners();
   }
 
   changeShowLastChapter(bool state) {
     isLastChapter = state;
-    saveBoolValue('key_is_show_last_chapter', state);
+    mainSettingsBox.put(Constants.keyIsShowLastChapter, state);
     notifyListeners();
   }
 
-  changeLastChapterNumber(int number) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setInt('key_last_chapter_number', number);
+  changeLastChapterNumber(int number) {
     lastChapterNumber = number;
+    mainSettingsBox.put(Constants.keyLastChapterNumber, number);
     notifyListeners();
   }
 
   changeShowNotification(bool state) {
     isNotification = state;
-    saveBoolValue('key_is_show_notification', state);
+    mainSettingsBox.put(Constants.keyIsShowNotification, state);
     notifyListeners();
   }
 
-  changeWakeLock(bool state) async {
+  changeWakeLock(bool state) {
     isWakeLock = state;
-    saveBoolValue('key_is_wake_lock', state);
+    mainSettingsBox.put(Constants.keyIsWakeLock, state);
     notifyListeners();
   }
 
-  changeTheme(bool state) async {
+  changeTheme(bool state) {
     isDarkTheme = state;
     isDarkTheme ? ThemeMode.dark : ThemeMode.light;
-    saveBoolValue('key_theme_mode', state);
+    mainSettingsBox.put(Constants.keyThemeMode, state);
     notifyListeners();
   }
 
-  loadLastPreferencesState() async {
-    final preferences = await SharedPreferences.getInstance();
-    isRunChapters = preferences.getBool('key_is_run_chapters') ?? false;
-    isLastChapter = preferences.getBool('key_is_show_last_chapter') ?? true;
-    lastChapterNumber = preferences.getInt('key_last_chapter_number') ?? 27;
-    isNotification = preferences.getBool('key_is_show_notification') ?? true;
-    isWakeLock = preferences.getBool('key_is_wake_lock') ?? true;
+  initMainSettings() {
+    isRunChapters = mainSettingsBox.get(Constants.keyIsRunChapters) ?? false;
+    isLastChapter = mainSettingsBox.get(Constants.keyIsShowLastChapter) ?? true;
+    lastChapterNumber = mainSettingsBox.get(Constants.keyLastChapterNumber) ?? 27;
+    isNotification = mainSettingsBox.get(Constants.keyIsShowNotification) ?? true;
+    isWakeLock = mainSettingsBox.get(Constants.keyIsWakeLock) ?? true;
     isWakeLock ? Wakelock.enable() : Wakelock.disable();
-    isDarkTheme = preferences.getBool('key_theme_mode') ?? false;
+    isDarkTheme = mainSettingsBox.get(Constants.keyThemeMode) ?? false;
     themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
-  }
-
-  saveBoolValue(String key, bool value) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setBool(key, value);
   }
 }

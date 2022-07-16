@@ -15,8 +15,6 @@ class ContentChapterSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myColor = Theme.of(context).colorScheme;
-    var chapterContentSettingsState =
-        context.read<ChapterContentSettingsState>();
     return Material(
       borderRadius: BorderRadius.circular(15),
       child: Container(
@@ -35,7 +33,7 @@ class ContentChapterSettings extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Отображать ${chapterContentSettingsState.getIsDay ? 'утренние' : 'вечерние'} азкары',
+                    'Отображать ${context.watch<ChapterContentSettingsState>().getIsDay ? 'утренние' : 'вечерние'} азкары',
                     style: const TextStyle(fontSize: 18),
                     textAlign: TextAlign.start,
                   ),
@@ -43,9 +41,11 @@ class ContentChapterSettings extends StatelessWidget {
                   Center(
                     child: ToggleButtons(
                       borderRadius: BorderRadius.circular(15),
-                      isSelected:
-                          chapterContentSettingsState.getIsDayNightSelected,
-                      onPressed: (index) => chapterContentSettingsState
+                      isSelected: context
+                          .watch<ChapterContentSettingsState>()
+                          .getIsDayNightSelected,
+                      onPressed: (index) => context
+                          .read<ChapterContentSettingsState>()
                           .updateToggleDayNight(index),
                       children: const [
                         Icon(CupertinoIcons.sunrise),
@@ -68,9 +68,12 @@ class ContentChapterSettings extends StatelessWidget {
             Center(
               child: ToggleButtons(
                 borderRadius: BorderRadius.circular(15),
-                isSelected: chapterContentSettingsState.getIsTextAlignSelected,
-                onPressed: (index) =>
-                    chapterContentSettingsState.updateToggleTextAlign(index),
+                isSelected: context
+                    .watch<ChapterContentSettingsState>()
+                    .getIsTextAlignSelected,
+                onPressed: (index) => context
+                    .read<ChapterContentSettingsState>()
+                    .updateToggleTextAlign(index),
                 children: const [
                   Icon(CupertinoIcons.text_alignleft),
                   Icon(CupertinoIcons.text_aligncenter),
@@ -93,18 +96,21 @@ class ContentChapterSettings extends StatelessWidget {
               subtitle: Slider.adaptive(
                 min: 14,
                 max: 50,
-                value: chapterContentSettingsState.getTextArabicSize.toDouble(),
+                value: context
+                    .watch<ChapterContentSettingsState>()
+                    .getTextArabicSize,
                 onChanged: (currentArabicTextSize) {
-                  chapterContentSettingsState
+                  context
+                      .read<ChapterContentSettingsState>()
                       .changeTextArabicSize(currentArabicTextSize);
                 },
                 onChangeEnd: (lastArabicTextSize) {
-                  chapterContentSettingsState.saveDouble(
+                  context.read<ChapterContentSettingsState>().saveDouble(
                       Constants.keyTextArabicSize, lastArabicTextSize);
                 },
               ),
               trailing: Text(
-                '${chapterContentSettingsState.getTextArabicSize.toInt()}',
+                '${context.watch<ChapterContentSettingsState>().getTextArabicSize.toInt()}',
                 style: const TextStyle(fontSize: 18),
               ),
             ),
@@ -120,18 +126,21 @@ class ContentChapterSettings extends StatelessWidget {
               subtitle: Slider.adaptive(
                 min: 14,
                 max: 50,
-                value: chapterContentSettingsState.getTextTranslateSize.toDouble(),
+                value: context
+                    .watch<ChapterContentSettingsState>()
+                    .getTextTranslateSize,
                 onChanged: (currentTranslationTextSize) {
-                  chapterContentSettingsState
+                  context
+                      .read<ChapterContentSettingsState>()
                       .changeTextTranslateSize(currentTranslationTextSize);
                 },
                 onChangeEnd: (lastTranslationTextSize) {
-                  chapterContentSettingsState.saveDouble(
+                  context.read<ChapterContentSettingsState>().saveDouble(
                       Constants.keyTextTranslateSize, lastTranslationTextSize);
                 },
               ),
               trailing: Text(
-                '${chapterContentSettingsState.getTextTranslateSize.toInt()}',
+                '${context.watch<ChapterContentSettingsState>().getTextTranslateSize.toInt()}',
                 style: const TextStyle(fontSize: 18),
               ),
             ),
@@ -142,7 +151,9 @@ class ContentChapterSettings extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: Icon(
                 Icons.palette_outlined,
-                color: Color(chapterContentSettingsState.getArabicTextColor),
+                color: Color(context
+                    .watch<ChapterContentSettingsState>()
+                    .getArabicTextColor),
               ),
               title: const Text(
                 'Цвет арабского текста',
@@ -153,7 +164,9 @@ class ContentChapterSettings extends StatelessWidget {
                 child: Icon(
                   Icons.palette,
                   size: 35,
-                  color: Color(chapterContentSettingsState.getArabicTextColor),
+                  color: Color(context
+                      .watch<ChapterContentSettingsState>()
+                      .getArabicTextColor),
                 ),
                 onTap: () {
                   showDialog(
@@ -165,11 +178,13 @@ class ContentChapterSettings extends StatelessWidget {
                         ),
                       ),
                       content: OColorPicker(
-                        selectedColor: Color(
-                            chapterContentSettingsState.getArabicTextColor),
+                        selectedColor: Color(context
+                            .watch<ChapterContentSettingsState>()
+                            .getArabicTextColor),
                         colors: primaryColorsPalette,
                         onColorChange: (color) {
-                          chapterContentSettingsState
+                          context
+                              .read<ChapterContentSettingsState>()
                               .changeTextArabicColor(color);
                           Navigator.of(context).pop();
                         },
@@ -183,8 +198,9 @@ class ContentChapterSettings extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(Icons.palette_outlined,
-                  color: Color(
-                      chapterContentSettingsState.getTranscriptionTextColor)),
+                  color: Color(context
+                      .watch<ChapterContentSettingsState>()
+                      .getTranscriptionTextColor)),
               title: const Text(
                 'Цвет текста транскрипции',
                 style: TextStyle(fontSize: 18),
@@ -194,8 +210,9 @@ class ContentChapterSettings extends StatelessWidget {
                 child: Icon(
                   Icons.palette,
                   size: 35,
-                  color: Color(
-                      chapterContentSettingsState.getTranscriptionTextColor),
+                  color: Color(context
+                      .watch<ChapterContentSettingsState>()
+                      .getTranscriptionTextColor),
                 ),
                 onTap: () {
                   showDialog(
@@ -207,11 +224,13 @@ class ContentChapterSettings extends StatelessWidget {
                         ),
                       ),
                       content: OColorPicker(
-                        selectedColor: Color(chapterContentSettingsState
+                        selectedColor: Color(context
+                            .watch<ChapterContentSettingsState>()
                             .getTranscriptionTextColor),
                         colors: primaryColorsPalette,
                         onColorChange: (color) {
-                          chapterContentSettingsState
+                          context
+                              .read<ChapterContentSettingsState>()
                               .changeTextTranscriptionColor(color);
                           Navigator.of(context).pop();
                         },
@@ -226,7 +245,9 @@ class ContentChapterSettings extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: Icon(
                 Icons.palette_outlined,
-                color: Color(chapterContentSettingsState.getTranslateTextColor),
+                color: Color(context
+                    .watch<ChapterContentSettingsState>()
+                    .getTranslateTextColor),
               ),
               title: const Text(
                 'Цвет текста перевода',
@@ -237,8 +258,9 @@ class ContentChapterSettings extends StatelessWidget {
                 child: Icon(
                   Icons.palette,
                   size: 35,
-                  color:
-                      Color(chapterContentSettingsState.getTranslateTextColor),
+                  color: Color(context
+                      .watch<ChapterContentSettingsState>()
+                      .getTranslateTextColor),
                 ),
                 onTap: () {
                   showDialog(
@@ -250,11 +272,13 @@ class ContentChapterSettings extends StatelessWidget {
                         ),
                       ),
                       content: OColorPicker(
-                        selectedColor: Color(
-                            chapterContentSettingsState.getTranslateTextColor),
+                        selectedColor: Color(context
+                            .watch<ChapterContentSettingsState>()
+                            .getTranslateTextColor),
                         colors: primaryColorsPalette,
                         onColorChange: (color) {
-                          chapterContentSettingsState
+                          context
+                              .read<ChapterContentSettingsState>()
                               .changeTextTranslateColor(color);
                           Navigator.of(context).pop();
                         },
@@ -272,9 +296,13 @@ class ContentChapterSettings extends StatelessWidget {
                 style: TextStyle(fontSize: 18),
               ),
               trailing: Switch.adaptive(
-                value: chapterContentSettingsState.getIsDefaultColors,
+                value: context
+                    .watch<ChapterContentSettingsState>()
+                    .getIsDefaultColors,
                 onChanged: (value) {
-                  chapterContentSettingsState.changeDefaultColorsState(value);
+                  context
+                      .read<ChapterContentSettingsState>()
+                      .changeDefaultColorsState(value);
                 },
               ),
             ),
@@ -289,9 +317,13 @@ class ContentChapterSettings extends StatelessWidget {
                 style: TextStyle(fontSize: 18),
               ),
               trailing: Switch.adaptive(
-                value: chapterContentSettingsState.getIsTranscriptionShow,
+                value: context
+                    .watch<ChapterContentSettingsState>()
+                    .getIsTranscriptionShow,
                 onChanged: (value) {
-                  chapterContentSettingsState.changeTranscriptionShow(value);
+                  context
+                      .read<ChapterContentSettingsState>()
+                      .changeTranscriptionShow(value);
                 },
               ),
             ),

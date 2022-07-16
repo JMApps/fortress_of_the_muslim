@@ -18,19 +18,19 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider<AppSettingsState>(
           create: (_) => AppSettingsState(),
         ),
-        ChangeNotifierProvider<MainState>(
-          create: (_) => MainState(),
-        ),
         ChangeNotifierProvider<ChapterContentSettingsState>(
           create: (_) => ChapterContentSettingsState(),
+        ),
+        ChangeNotifierProvider<MainState>(
+          create: (_) => MainState(),
         ),
         ChangeNotifierProvider<BookmarkButtonState>(
           create: (_) => BookmarkButtonState(),
         ),
       ],
       child: Builder(builder: (context) {
-        context.read<AppSettingsState>().loadLastPreferencesState();
-        context.read<ChapterContentSettingsState>().initSettings();
+        context.read<AppSettingsState>().initMainSettings();
+        context.read<ChapterContentSettingsState>().initContentSettings();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Крепость мусульманина',
