@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_supplication_item_model.dart';
-import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/search_supplication_Item.dart';
-import 'package:provider/provider.dart';
 
 class SearchSupplicationDelegate extends SearchDelegate {
-
   List<MainSupplicationItemModel> supplications = [];
   List<MainSupplicationItemModel> recentSupplications = [];
+  final AsyncSnapshot snapshot;
 
   SearchSupplicationDelegate({
+    required this.snapshot,
     String hintText = 'Поиск дуа...',
   }) : super(
           searchFieldLabel: hintText,
@@ -51,95 +50,79 @@ class SearchSupplicationDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder<List>(
-      future: context
-          .watch<BookmarkButtonState>()
-          .getDatabaseQuery
-          .getAllSupplications(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          supplications = snapshot.data;
-          recentSupplications = query.isEmpty
-              ? supplications
-              : supplications
-                  .where((element) => element.contentTranslation
-                      .toLowerCase()
-                      .contains(query.toLowerCase()))
-                  .toList();
-          return recentSupplications.isEmpty
-              ? Center(
-                  child: Text(
-                    'По запросу $query ничего не найдено',
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              : CupertinoScrollbar(
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: recentSupplications.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return SearchSupplicationItem(
-                        item: recentSupplications[index],
-                      );
-                    },
-                  ),
-                );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
-      },
-    );
+    if (snapshot.hasData) {
+      supplications = snapshot.data;
+      recentSupplications = query.isEmpty
+          ? supplications
+          : supplications
+              .where((element) => element.contentTranslation
+                  .toLowerCase()
+                  .contains(query.toLowerCase()))
+              .toList();
+      return recentSupplications.isEmpty
+          ? Center(
+              child: Text(
+                'По запросу $query ничего не найдено',
+                style: const TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          : CupertinoScrollbar(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: recentSupplications.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SearchSupplicationItem(
+                    item: recentSupplications[index],
+                  );
+                },
+              ),
+            );
+    } else {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder<List>(
-      future: context
-          .watch<BookmarkButtonState>()
-          .getDatabaseQuery
-          .getAllSupplications(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          supplications = snapshot.data;
-          recentSupplications = query.isEmpty
-              ? supplications
-              : supplications
-                  .where((element) => element.contentTranslation
-                      .toLowerCase()
-                      .contains(query.toLowerCase()))
-                  .toList();
-          return recentSupplications.isEmpty
-              ? Center(
-                  child: Text(
-                    'По запросу $query ничего не найдено',
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              : CupertinoScrollbar(
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: recentSupplications.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return SearchSupplicationItem(
-                        item: recentSupplications[index],
-                      );
-                    },
-                  ),
-                );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
-      },
-    );
+    if (snapshot.hasData) {
+      supplications = snapshot.data;
+      recentSupplications = query.isEmpty
+          ? supplications
+          : supplications
+              .where((element) => element.contentTranslation
+                  .toLowerCase()
+                  .contains(query.toLowerCase()))
+              .toList();
+      return recentSupplications.isEmpty
+          ? Center(
+              child: Text(
+                'По запросу $query ничего не найдено',
+                style: const TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          : CupertinoScrollbar(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: recentSupplications.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SearchSupplicationItem(
+                    item: recentSupplications[index],
+                  );
+                },
+              ),
+            );
+    } else {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
   }
 }
