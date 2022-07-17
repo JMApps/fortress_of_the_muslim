@@ -2,6 +2,7 @@ import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
+import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class FloatingCounterButton extends StatelessWidget {
       child: DraggableFab(
         child: FloatingActionButton(
           mini: false,
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Theme.of(context).colorScheme.chapterContentColor,
           splashColor: Colors.blueGrey[700],
           child: CircularPercentIndicator(
             animationDuration: 0,
@@ -27,7 +28,7 @@ class FloatingCounterButton extends StatelessWidget {
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             circularStrokeCap: CircularStrokeCap.round,
-            progressColor: Colors.purple[700],
+            progressColor: Colors.purple[400],
           ),
           onPressed: () {
             context.read<MainState>().updateCountValue();

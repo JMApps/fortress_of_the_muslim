@@ -53,9 +53,9 @@ class _ChapterContentState extends State<ChapterContent> {
                 actions: [
                   Transform.scale(
                     scale: 0.8,
-                    child: Switch.adaptive(
+                    child: CupertinoSwitch(
                       activeColor: myColor.activeCountSwitchColor,
-                      inactiveTrackColor: myColor.passiveCountSwitchColor,
+                      trackColor: myColor.passiveCountSwitchColor,
                       value: context.watch<MainState>().getCountShowState,
                       onChanged: (value) {
                         context
@@ -99,6 +99,7 @@ class _ChapterContentState extends State<ChapterContent> {
             ),
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Visibility(
           maintainSize: false,
           maintainAnimation: false,
