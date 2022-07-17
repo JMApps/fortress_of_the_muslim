@@ -17,6 +17,7 @@ class ContentChapterShareCopyPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Wrap(
       children: [
         Center(
@@ -51,7 +52,11 @@ class ContentChapterShareCopyPopup extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Share.share(_contentForCopyAndShare());
+                      Share.share(
+                        _contentForCopyAndShare(),
+                        sharePositionOrigin:
+                            Rect.fromLTWH(0, 0, size.width, size.height / 2),
+                      );
                       Navigator.of(context).pop();
                     },
                   ),
@@ -76,7 +81,9 @@ class ContentChapterShareCopyPopup extends StatelessWidget {
                     ),
                     onPressed: () {
                       FlutterClipboard.copy(_contentForCopyAndShare());
-                      context.read<MainState>().showSnackBarMessage(context, color, 'Скопировано');
+                      context
+                          .read<MainState>()
+                          .showSnackBarMessage(context, color, 'Скопировано');
                       Navigator.of(context).pop();
                     },
                   ),

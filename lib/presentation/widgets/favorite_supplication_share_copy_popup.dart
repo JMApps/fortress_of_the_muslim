@@ -17,6 +17,7 @@ class FavoriteSupplicationsShareCopyPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Wrap(
       children: [
         Center(
@@ -51,7 +52,11 @@ class FavoriteSupplicationsShareCopyPopup extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Share.share(_contentForCopyAndShare());
+                      Share.share(
+                        _contentForCopyAndShare(),
+                        sharePositionOrigin:
+                            Rect.fromLTWH(0, 0, size.width, size.height / 2),
+                      );
                       Navigator.of(context).pop();
                     },
                   ),
