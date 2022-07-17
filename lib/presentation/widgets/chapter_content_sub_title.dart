@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/data/local/database/service/database_query.dart';
+import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,9 @@ class ChapterContentSubTitle extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Html(
-                  data: snapshot.data![0].chapterTitle,
+                  data: chapterId != 27
+                      ? snapshot.data![0].chapterTitle
+                      : 'Слова поминания Аллаха, которые желательно произносить ${context.watch<ChapterContentSettingsState>().isDay ? '<b>утром</b>' : '<b>вечером</b>'}',
                   style: {
                     '#': Style(
                       fontSize: const FontSize(17),
