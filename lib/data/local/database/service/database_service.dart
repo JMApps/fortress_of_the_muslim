@@ -27,9 +27,9 @@ class DatabaseService {
         ? await getExternalStorageDirectory()
         : await getApplicationSupportDirectory();
 
-    String path = join(documentDirectory!.path, 'fortress_db_5.db');
+    String path = join(documentDirectory!.path, 'fortress_db_6.db');
 
-    String toDeleteDB = '${documentDirectory.path}/fortress_db_4.db';
+    String toDeleteDB = '${documentDirectory.path}/fortress_db_5.db';
 
     var delDB = await databaseExists(toDeleteDB);
 
@@ -47,13 +47,13 @@ class DatabaseService {
       }
 
       ByteData data =
-          await rootBundle.load(join('assets/databases', 'fortress_db_5.db'));
+          await rootBundle.load(join('assets/databases', 'fortress_db_6.db'));
       List<int> bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(path).writeAsBytes(bytes, flush: true);
     }
 
-    var _onOpen = await openDatabase(path, version: _databaseVersion);
-    return _onOpen;
+    var onOpen = await openDatabase(path, version: _databaseVersion);
+    return onOpen;
   }
 }
