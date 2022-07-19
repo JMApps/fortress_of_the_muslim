@@ -28,9 +28,9 @@ class AppSettingsState with ChangeNotifier {
 
   ThemeMode themeMode = ThemeMode.system;
 
-  bool isDarkTheme = false;
+  ThemeMode get getThemeMode => themeMode;
 
-  ThemeMode get isDarkMode => themeMode = ThemeMode.dark;
+  bool isDarkTheme = false;
 
   changeRunWithChapters(bool state) {
     isRunChapters = state;
@@ -64,7 +64,7 @@ class AppSettingsState with ChangeNotifier {
 
   changeTheme(bool state) {
     isDarkTheme = state;
-    isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+    isDarkTheme ? ThemeMode.dark : ThemeMode.system;
     mainSettingsBox.put(Constants.keyThemeMode, state);
     notifyListeners();
   }
@@ -77,6 +77,6 @@ class AppSettingsState with ChangeNotifier {
     isWakeLock = mainSettingsBox.get(Constants.keyIsWakeLock) ?? true;
     isWakeLock ? Wakelock.enable() : Wakelock.disable();
     isDarkTheme = mainSettingsBox.get(Constants.keyThemeMode) ?? false;
-    themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+    themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.system;
   }
 }

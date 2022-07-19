@@ -34,7 +34,7 @@ class MainApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Крепость мусульманина',
-          themeMode: context.watch<AppSettingsState>().themeMode,
+          themeMode: context.watch<AppSettingsState>().getThemeMode,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           onGenerateRoute: AppRoute().onGeneratorRoute,

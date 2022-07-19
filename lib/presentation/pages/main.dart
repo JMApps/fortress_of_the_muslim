@@ -45,9 +45,9 @@ class _MainPageState extends State<MainPage> {
             colorFilter: ColorFilter.mode(
               Theme.of(context)
                   .colorScheme
-                  .mainChapterRowColor
-                  .withOpacity(0.15),
-              BlendMode.dstATop,
+                  .mainBackgroundColor
+                  .withOpacity(0.9),
+              BlendMode.srcATop,
             ),
             fit: BoxFit.cover,
             image: const AssetImage('assets/icons/row_texture.jpeg'),
