@@ -42,7 +42,7 @@ class ChapterContentBottomButtons extends StatelessWidget {
                       : Icons.play_circle_outline,
                 ),
                 onPressed: () {
-                  context.read<AppPlayerState>().playOneAudio(item.id);
+                  context.read<AppPlayerState>().playOneAudio(item.nameAudio!, item.id);
                 },
               ),
             ),

@@ -22,9 +22,9 @@ class AppPlayerState with ChangeNotifier {
 
   bool get getRepeatState => repeatState;
 
-  playOneAudio(int itemId) async {
+  playOneAudio(String nameAudio, int itemId) async {
     if (currentPlayItem != itemId) {
-      await _player.setAsset('assets/audios/dua_$itemId.mp3');
+      await _player.setAsset('assets/audios/$nameAudio.mp3');
       currentPlayItem = itemId;
       _player.play();
       playingState = _player.playing;
