@@ -3,10 +3,12 @@ import 'package:fortress_of_the_muslim/data/constants.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class ChapterContentSettingsState with ChangeNotifier {
-
   var contentSettingsBox = Hive.box(Constants.keyMainSettingBox);
 
-  final List<bool> isDayNightSelected = [true, false];
+  final List<bool> isDayNightSelected = [
+    DateTime.now().hour < 12 ? true : false,
+    DateTime.now().hour > 12 ? true : false
+  ];
 
   final List<bool> isTextAlignSelected = [false, false, false, true];
 
@@ -124,16 +126,25 @@ class ChapterContentSettingsState with ChangeNotifier {
   }
 
   initContentSettings() {
-    toggleTextAlignIndex = contentSettingsBox.get(Constants.keyTextAlignIndex) ?? 3;
+    toggleTextAlignIndex =
+        contentSettingsBox.get(Constants.keyTextAlignIndex) ?? 3;
     for (int i = 0; i < isTextAlignSelected.length; i++) {
       isTextAlignSelected[i] = i == toggleTextAlignIndex;
     }
     textArabicSize = contentSettingsBox.get(Constants.keyTextArabicSize) ?? 16;
-    textTranslateSize = contentSettingsBox.get(Constants.keyTextTranslateSize) ?? 16;
-    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor) ?? Colors.purple[400]!.value);
-    transcriptionTextColor = (contentSettingsBox.get(Constants.keyTextTranscriptionColor) ?? Colors.teal[400]!.value);
-    translateTextColor = (contentSettingsBox.get(Constants.keyTextTranslateColor) ?? Colors.black54.value);
-    isDefaultColors = contentSettingsBox.get(Constants.keyColorsWithDayNight) ?? true;
-    isTranscriptionShow = contentSettingsBox.get(Constants.keyTextTranscriptionIsShow) ?? true;
+    textTranslateSize =
+        contentSettingsBox.get(Constants.keyTextTranslateSize) ?? 16;
+    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor) ??
+        Colors.purple[400]!.value);
+    transcriptionTextColor =
+        (contentSettingsBox.get(Constants.keyTextTranscriptionColor) ??
+            Colors.teal[400]!.value);
+    translateTextColor =
+        (contentSettingsBox.get(Constants.keyTextTranslateColor) ??
+            Colors.black54.value);
+    isDefaultColors =
+        contentSettingsBox.get(Constants.keyColorsWithDayNight) ?? true;
+    isTranscriptionShow =
+        contentSettingsBox.get(Constants.keyTextTranscriptionIsShow) ?? true;
   }
 }
