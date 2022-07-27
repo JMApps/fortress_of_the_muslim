@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
+import 'package:fortress_of_the_muslim/data/play_spped_enum.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
@@ -75,12 +76,10 @@ class ChapterContentBottomButtons extends StatelessWidget {
               maintainSize: false,
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
-                onTap: appPlayer.playingState &&
-                        appPlayer.currentPlayItem == item.id
-                    ? () {
-                        appPlayer.changePlaybackSpeedState(item.id);
-                      }
-                    : null,
+                onTap: () {
+                  appPlayer.changePlaybackSpeedState(
+                      item.id, PlaySpeed.values.last);
+                },
                 child: Container(
                   width: 45,
                   height: 30,

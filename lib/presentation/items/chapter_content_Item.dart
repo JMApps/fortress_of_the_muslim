@@ -55,8 +55,7 @@ class ChapterContentItem extends StatelessWidget {
                                   5,
                               fontFamily: 'Hafs',
                               color: chapterContentSettings.getIsDefaultColors
-                                  ? Color(
-                                      chapterContentSettings.getArabicTextColor)
+                                  ? Color(chapterContentSettings.getArabicTextColor)
                                   : myColor.textArabicColor,
                             ),
                             textDirection: TextDirection.rtl,

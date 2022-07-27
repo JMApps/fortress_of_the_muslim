@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_supplication_item_model.dart';
+import 'package:fortress_of_the_muslim/data/play_spped_enum.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
@@ -89,7 +90,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
                   selected: appPlayer.isPlaybackSpeed &&
                       appPlayer.currentPlayItem == item.id,
                   onSelected: (value) {
-                    appPlayer.changePlaybackSpeedState(item.id);
+                    appPlayer.changePlaybackSpeedState(item.id, PlaySpeed.normal);
                   },
                 ),
               ),

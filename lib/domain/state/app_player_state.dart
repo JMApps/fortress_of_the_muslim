@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fortress_of_the_muslim/data/play_spped_enum.dart';
 import 'package:just_audio/just_audio.dart';
 
 class AppPlayerState with ChangeNotifier {
@@ -21,6 +22,18 @@ class AppPlayerState with ChangeNotifier {
   bool repeatState = false;
 
   bool get getRepeatState => repeatState;
+
+  final _speedNames = [
+    '0.5x',
+    '0.75x',
+    '1x',
+    '1.5x',
+    '1.75x',
+  ];
+
+  String _speedName = '1x';
+
+  String get getSpeedName => _speedName;
 
   playOneAudio(String nameAudio, int itemId) async {
     if (currentPlayItem != itemId) {
@@ -48,16 +61,37 @@ class AppPlayerState with ChangeNotifier {
     );
   }
 
-  changePlaybackSpeedState(bool state, int itemId) {
+  changePlaybackSpeedState(int itemId, PlaySpeed speedValue) {
     if (currentPlayItem == itemId) {
-      isPlaybackSpeed = state;
-      if (isPlaybackSpeed) {
-        _player.setSpeed(0.5);
-      } else {
-        _player.setSpeed(1);
+      switch (speedValue) {
+        case PlaySpeed.fast:
+          _speedName = _speedNames[0];
+          _player.setSpeed(0.5);
+          break;
+        case PlaySpeed.veryFast:
+          _speedName = _speedNames[1];
+          _player.setSpeed(0.75);
+          break;
+        case PlaySpeed.normal:
+          _speedName = _speedNames[2];
+          _player.setSpeed(1);
+          break;
+        case PlaySpeed.slow:
+          _speedName = _speedNames[3];
+          _player.setSpeed(1.5);
+          break;
+        case PlaySpeed.verySlow:
+          _speedName = _speedNames[4];
+          _player.setSpeed(1.75);
+          break;
       }
       notifyListeners();
     }
+  }
+
+  nextEnum(PlaySpeed value) {
+    final nextIndex = (value.index + 1) % PlaySpeed.values.length;
+    return PlaySpeed.values[nextIndex];
   }
 
   changeRepeatState(bool state, int itemId) {
