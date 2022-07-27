@@ -70,13 +70,13 @@ class AppSettingsState with ChangeNotifier {
   }
 
   initMainSettings() {
-    isRunChapters = mainSettingsBox.get(Constants.keyIsRunChapters) ?? false;
-    isLastChapter = mainSettingsBox.get(Constants.keyIsShowLastChapter) ?? true;
-    lastChapterNumber = mainSettingsBox.get(Constants.keyLastChapterNumber) ?? 27;
-    isNotification = mainSettingsBox.get(Constants.keyIsShowNotification) ?? true;
-    isWakeLock = mainSettingsBox.get(Constants.keyIsWakeLock) ?? true;
+    isRunChapters = mainSettingsBox.get(Constants.keyIsRunChapters, defaultValue: false);
+    isLastChapter = mainSettingsBox.get(Constants.keyIsShowLastChapter, defaultValue: true);
+    lastChapterNumber = mainSettingsBox.get(Constants.keyLastChapterNumber, defaultValue: 27);
+    isNotification = mainSettingsBox.get(Constants.keyIsShowNotification, defaultValue: true);
+    isWakeLock = mainSettingsBox.get(Constants.keyIsWakeLock, defaultValue: true);
     isWakeLock ? Wakelock.enable() : Wakelock.disable();
-    isDarkTheme = mainSettingsBox.get(Constants.keyThemeMode) ?? false;
+    isDarkTheme = mainSettingsBox.get(Constants.keyThemeMode, defaultValue: false);
     themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.system;
   }
 }

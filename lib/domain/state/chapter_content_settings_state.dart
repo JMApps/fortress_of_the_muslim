@@ -127,24 +127,25 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   initContentSettings() {
     toggleTextAlignIndex =
-        contentSettingsBox.get(Constants.keyTextAlignIndex) ?? 3;
+        contentSettingsBox.get(Constants.keyTextAlignIndex, defaultValue: 3);
     for (int i = 0; i < isTextAlignSelected.length; i++) {
       isTextAlignSelected[i] = i == toggleTextAlignIndex;
     }
-    textArabicSize = contentSettingsBox.get(Constants.keyTextArabicSize) ?? 16;
-    textTranslateSize =
-        contentSettingsBox.get(Constants.keyTextTranslateSize) ?? 16;
-    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor) ??
-        Colors.purple[400]!.value);
-    transcriptionTextColor =
-        (contentSettingsBox.get(Constants.keyTextTranscriptionColor) ??
-            Colors.teal[400]!.value);
-    translateTextColor =
-        (contentSettingsBox.get(Constants.keyTextTranslateColor) ??
-            Colors.black54.value);
-    isDefaultColors =
-        contentSettingsBox.get(Constants.keyColorsWithDayNight) ?? true;
-    isTranscriptionShow =
-        contentSettingsBox.get(Constants.keyTextTranscriptionIsShow) ?? true;
+    textArabicSize =
+        contentSettingsBox.get(Constants.keyTextArabicSize, defaultValue: 16.0);
+    textTranslateSize = contentSettingsBox.get(Constants.keyTextTranslateSize,
+        defaultValue: 16.0);
+    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor,
+        defaultValue: Colors.purple[400]!.value));
+    transcriptionTextColor = (contentSettingsBox.get(
+        Constants.keyTextTranscriptionColor,
+        defaultValue: Colors.teal[400]!.value));
+    translateTextColor = (contentSettingsBox.get(
+        Constants.keyTextTranslateColor,
+        defaultValue: Colors.black54.value));
+    isDefaultColors = contentSettingsBox.get(Constants.keyColorsWithDayNight,
+        defaultValue: false);
+    isTranscriptionShow = contentSettingsBox
+        .get(Constants.keyTextTranscriptionIsShow, defaultValue: true);
   }
 }
