@@ -5,7 +5,6 @@ import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/chapter_content_list.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/chapter_content_sub_title.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/floating_counter_button.dart';
 import 'package:provider/provider.dart';
 
@@ -68,17 +67,7 @@ class _ChapterContentState extends State<ChapterContent> {
                     icon: const Icon(CupertinoIcons.settings),
                     splashRadius: 20,
                     onPressed: () {
-                      showCupertinoModalPopup(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            margin: const EdgeInsets.all(16),
-                            child: ContentChapterSettings(
-                              isDayNight: widget.chapterId != 27 ? false : true,
-                            ),
-                          );
-                        },
-                      );
+                      Navigator.of(context).pushNamed('content_settings');
                     },
                   ),
                 ],
