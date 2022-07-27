@@ -5,7 +5,6 @@ import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/lists/main_supplications_list.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/content_chapter_settings.dart';
 import 'package:provider/provider.dart';
 
 class Supplications extends StatelessWidget {
@@ -65,16 +64,7 @@ class Supplications extends StatelessWidget {
                     icon: const Icon(CupertinoIcons.settings),
                     splashRadius: 20,
                     onPressed: () {
-                      showCupertinoModalPopup(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            margin: const EdgeInsets.all(16),
-                            // ignore: prefer_const_constructors
-                            child: ContentChapterSettings(isDayNight: false),
-                          );
-                        },
-                      );
+                      Navigator.of(context).pushNamed('content_settings');
                     },
                   ),
                 ],
