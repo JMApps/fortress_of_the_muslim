@@ -42,7 +42,7 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int get getTranslateTextColor => translateTextColor;
 
-  bool isDefaultColors = true;
+  bool isDefaultColors = false;
 
   bool get getIsDefaultColors => isDefaultColors;
 

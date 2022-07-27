@@ -80,7 +80,7 @@ class FavoriteSupplicationsBottomButtons extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  backgroundColor: myColor.playerChoiceChipColor,
+                  backgroundColor: myColor.playSpeedButtonColor,
                   selectedColor: myColor.favoriteSupplicationTitleColor,
                   label: Text(
                     '0,5x',
@@ -89,7 +89,7 @@ class FavoriteSupplicationsBottomButtons extends StatelessWidget {
                   selected: appPlayer.isPlaybackSpeed &&
                       appPlayer.currentPlayItem == item.id,
                   onSelected: (value) {
-                    appPlayer.changePlaybackSpeedState(value, item.id);
+                    appPlayer.changePlaybackSpeedState(item.id);
                   },
                 ),
               ),

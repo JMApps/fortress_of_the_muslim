@@ -42,7 +42,9 @@ class ChapterContentBottomButtons extends StatelessWidget {
                       : Icons.play_circle_outline,
                 ),
                 onPressed: () {
-                  context.read<AppPlayerState>().playOneAudio(item.nameAudio!, item.id);
+                  context
+                      .read<AppPlayerState>()
+                      .playOneAudio(item.nameAudio!, item.id);
                 },
               ),
             ),
@@ -71,25 +73,28 @@ class ChapterContentBottomButtons extends StatelessWidget {
               visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
               maintainSize: false,
-              child: Transform.scale(
-                scale: 0.85,
-                child: ChoiceChip(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: appPlayer.playingState &&
+                        appPlayer.currentPlayItem == item.id
+                    ? () {
+                        appPlayer.changePlaybackSpeedState(item.id);
+                      }
+                    : null,
+                child: Container(
+                  width: 45,
+                  height: 30,
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
+                    color: myColor.playSpeedButtonColor,
                   ),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  backgroundColor: myColor.playerChoiceChipColor,
-                  selectedColor: myColor.contentChapterTitleColor,
-                  label: Text(
-                    '0,5x',
-                    style: TextStyle(color: myColor.chapterContentColor),
+                  child: Center(
+                    child: Text(
+                      appPlayer.getSpeedName,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
-                  selected: appPlayer.isPlaybackSpeed &&
-                      appPlayer.currentPlayItem == item.id,
-                  onSelected: (value) {
-                    appPlayer.changePlaybackSpeedState(value, item.id);
-                  },
                 ),
               ),
             ),

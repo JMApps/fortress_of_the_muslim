@@ -134,16 +134,16 @@ extension ColorSchemeS on ColorScheme {
       ? const Color(0xFFEEEEEE)
       : const Color(0xFF263238);
 
-  Color get playerChoiceChipColor => brightness == Brightness.light
-      ? const Color(0xFFE0E0E0)
-      : const Color(0xFF9E9E9E);
+  Color get playSpeedButtonColor => brightness == Brightness.light
+      ? const Color(0xFF607D8B)
+      : const Color(0xFF455A64);
 
   Color get textArabicColor => brightness == Brightness.light
-      ? const Color(0xFFB71C1C)
-      : const Color(0xFFEF9A9A);
+      ? const Color(0xFF9C27B0)
+      : const Color(0xFFCE93D8);
 
   Color get textTranscriptionColor => brightness == Brightness.light
-      ? const Color(0xFF004D40)
+      ? const Color(0xFF00695C)
       : const Color(0xFF80CBC4);
 
   Color get textTranslateColor => brightness == Brightness.light
