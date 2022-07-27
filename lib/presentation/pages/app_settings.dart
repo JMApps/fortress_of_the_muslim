@@ -150,6 +150,7 @@ class _AppSettingsState extends State<AppSettings> {
                   appSettings.changeTheme(value);
                 },
               ),
+              const Divider(indent: 16, endIndent: 16),
             ],
           ),
         );
