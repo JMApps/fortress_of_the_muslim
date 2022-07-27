@@ -32,6 +32,8 @@ class AppSettingsState with ChangeNotifier {
 
   bool isDarkTheme = false;
 
+  bool isAdaptiveTheme = true;
+
   changeRunWithChapters(bool state) {
     isRunChapters = state;
     mainSettingsBox.put(Constants.keyIsRunChapters, state);
@@ -63,9 +65,17 @@ class AppSettingsState with ChangeNotifier {
   }
 
   changeTheme(bool state) {
-    isDarkTheme = state;
-    isDarkTheme ? ThemeMode.dark : ThemeMode.system;
-    mainSettingsBox.put(Constants.keyThemeMode, state);
+    if (!isAdaptiveTheme) {
+      state ? ThemeMode.dark : ThemeMode.light;
+      mainSettingsBox.put(Constants.keyThemeMode, state);
+      notifyListeners();
+    }
+  }
+
+  changeAdaptiveTheme(bool state) {
+    isAdaptiveTheme = state;
+    ThemeMode.system;
+    mainSettingsBox.put(Constants.keyThemeAdaptiveMode, state);
     notifyListeners();
   }
 
@@ -77,6 +87,10 @@ class AppSettingsState with ChangeNotifier {
     isWakeLock = mainSettingsBox.get(Constants.keyIsWakeLock, defaultValue: true);
     isWakeLock ? Wakelock.enable() : Wakelock.disable();
     isDarkTheme = mainSettingsBox.get(Constants.keyThemeMode, defaultValue: false);
-    themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.system;
+    if (!isAdaptiveTheme) {
+      themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+    } else {
+      themeMode = ThemeMode.system;
+    }
   }
 }

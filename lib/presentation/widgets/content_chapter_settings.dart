@@ -2,19 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/constants.dart';
 import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
-import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:o_color_picker/o_color_picker.dart';
 import 'package:provider/provider.dart';
 
 class ContentChapterSettings extends StatelessWidget {
-  const ContentChapterSettings({Key? key, required this.isDayNight})
-      : super(key: key);
-
-  final bool isDayNight;
+  const ContentChapterSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final myColor = Theme.of(context).colorScheme;
     return Material(
       borderRadius: BorderRadius.circular(15),
       child: Container(
@@ -25,39 +20,34 @@ class ContentChapterSettings extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           children: [
-            Visibility(
-              maintainAnimation: false,
-              maintainSize: false,
-              visible: isDayNight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Отображать ${context.watch<ChapterContentSettingsState>().getIsDay ? 'утренние' : 'вечерние'} азкары',
-                    style: const TextStyle(fontSize: 18),
-                    textAlign: TextAlign.start,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Отображать ${context.watch<ChapterContentSettingsState>().getIsDay ? 'утренние' : 'вечерние'} азкары',
+                  style: const TextStyle(fontSize: 18),
+                  textAlign: TextAlign.start,
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: ToggleButtons(
+                    borderRadius: BorderRadius.circular(15),
+                    isSelected: context
+                        .watch<ChapterContentSettingsState>()
+                        .getIsDayNightSelected,
+                    onPressed: (index) => context
+                        .read<ChapterContentSettingsState>()
+                        .updateToggleDayNight(index),
+                    children: const [
+                      Icon(CupertinoIcons.sunrise),
+                      Icon(CupertinoIcons.sunset_fill),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  Center(
-                    child: ToggleButtons(
-                      borderRadius: BorderRadius.circular(15),
-                      isSelected: context
-                          .watch<ChapterContentSettingsState>()
-                          .getIsDayNightSelected,
-                      onPressed: (index) => context
-                          .read<ChapterContentSettingsState>()
-                          .updateToggleDayNight(index),
-                      children: const [
-                        Icon(CupertinoIcons.sunrise),
-                        Icon(CupertinoIcons.sunset_fill),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Divider(),
-                  const SizedBox(height: 8),
-                ],
-              ),
+                ),
+                const SizedBox(height: 8),
+                const Divider(),
+                const SizedBox(height: 8),
+              ],
             ),
             const Text(
               'Расположение текста',
@@ -330,22 +320,6 @@ class ContentChapterSettings extends StatelessWidget {
             const SizedBox(height: 8),
             const Divider(),
             const SizedBox(height: 8),
-            MaterialButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              color: myColor.contentChapterTitleColor,
-              child: const Text(
-                'Закрыть',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
           ],
         ),
       ),

@@ -113,6 +113,26 @@ class _AppSettingsState extends State<AppSettings> {
               SwitchListTile.adaptive(
                 activeColor: myColor.mainSettingsColor,
                 title: const Text(
+                  'Адаптивная тема',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: const Text(
+                  'Будет использована адаптивная тема',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                value: appSettings.isAdaptiveTheme,
+                onChanged: (value) {
+                  appSettings.changeAdaptiveTheme(value);
+                },
+              ),
+              SwitchListTile.adaptive(
+                activeColor: myColor.mainSettingsColor,
+                title: const Text(
                   'Тема',
                   style: TextStyle(
                     fontSize: 18,
@@ -126,7 +146,7 @@ class _AppSettingsState extends State<AppSettings> {
                   ),
                 ),
                 value: appSettings.isDarkTheme,
-                onChanged: (value) {
+                onChanged: appSettings.isAdaptiveTheme ? null : (value) {
                   appSettings.changeTheme(value);
                 },
               ),

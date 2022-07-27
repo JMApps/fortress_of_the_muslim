@@ -8,6 +8,7 @@ class Constants {
   static const String keyIsShowNotification = 'key_is_show_notification';
   static const String keyIsWakeLock = 'key_is_wake_lock';
   static const String keyThemeMode = 'key_theme_mode';
+  static const String keyThemeAdaptiveMode = 'key_theme_adaptive_mode';
 
   static const String keyFavoritesBox = 'key_favorites_box';
   static const String keyTextAlignIndex = 'key_text_align_index';
