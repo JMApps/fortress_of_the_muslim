@@ -46,7 +46,7 @@ class MainItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
               colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.5),
+                Colors.white.withOpacity(0.25),
                 BlendMode.dstATop,
               ),
               fit: BoxFit.cover,
