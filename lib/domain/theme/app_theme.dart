@@ -33,7 +33,6 @@ class AppTheme {
 }
 
 extension ColorSchemeS on ColorScheme {
-
   Color get mainBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFEEEEEE)
       : const Color(0xFF192226);
@@ -134,7 +133,7 @@ extension ColorSchemeS on ColorScheme {
       ? const Color(0xFFEEEEEE)
       : const Color(0xFF263238);
 
-  Color get playSpeedButtonColor => brightness == Brightness.light
+  Color get playSpeedChapterContentButtonColor => brightness == Brightness.light
       ? const Color(0xFF607D8B)
       : const Color(0xFF455A64);
 

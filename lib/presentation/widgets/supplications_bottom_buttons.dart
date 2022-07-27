@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/main_supplication_item_model.dart';
-import 'package:fortress_of_the_muslim/data/play_spped_enum.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
@@ -56,7 +55,7 @@ class SupplicationsBottomButtons extends StatelessWidget {
                 splashRadius: 20,
                 color: appPlayer.repeatState &&
                         appPlayer.currentPlayItem == item.id
-                    ? myColor.mainSupplicationTitleColor
+                    ? myColor.activeCountSwitchColor
                     : Colors.grey,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
@@ -73,25 +72,28 @@ class SupplicationsBottomButtons extends StatelessWidget {
               visible: item.nameAudio != null ? true : false,
               maintainAnimation: false,
               maintainSize: false,
-              child: Transform.scale(
-                scale: 0.85,
-                child: ChoiceChip(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {
+                  appPlayer.changePlaybackSpeedState(item.id);
+                },
+                child: Container(
+                  width: 45,
+                  height: 30,
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
+                    color: appPlayer.isPlaybackSpeed &&
+                        appPlayer.currentPlayItem == item.id
+                        ? myColor.activeCountSwitchColor
+                        : myColor.mainSupplicationTitleColor,
                   ),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  backgroundColor: myColor.playSpeedButtonColor,
-                  selectedColor: myColor.mainSupplicationTitleColor,
-                  label: Text(
-                    '0,5x',
-                    style: TextStyle(color: myColor.chapterContentColor),
+                  child: const Center(
+                    child: Text(
+                      '0.5x',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  selected: appPlayer.isPlaybackSpeed &&
-                      appPlayer.currentPlayItem == item.id,
-                  onSelected: (value) {
-                    appPlayer.changePlaybackSpeedState(item.id, PlaySpeed.normal);
-                  },
                 ),
               ),
             ),

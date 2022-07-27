@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_item_model.dart';
-import 'package:fortress_of_the_muslim/data/play_spped_enum.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/bookmark_button_state.dart';
 import 'package:fortress_of_the_muslim/domain/state/main_state.dart';
@@ -57,7 +56,7 @@ class ChapterContentBottomButtons extends StatelessWidget {
                 splashRadius: 20,
                 color: appPlayer.repeatState &&
                         appPlayer.currentPlayItem == item.id
-                    ? myColor.contentChapterTitleColor
+                    ? myColor.activeCountSwitchColor
                     : Colors.grey,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
@@ -77,8 +76,7 @@ class ChapterContentBottomButtons extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
                 onTap: () {
-                  appPlayer.changePlaybackSpeedState(
-                      item.id, PlaySpeed.values.last);
+                  appPlayer.changePlaybackSpeedState(item.id);
                 },
                 child: Container(
                   width: 45,
@@ -86,12 +84,15 @@ class ChapterContentBottomButtons extends StatelessWidget {
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: myColor.playSpeedButtonColor,
+                    color: appPlayer.isPlaybackSpeed &&
+                            appPlayer.currentPlayItem == item.id
+                        ? myColor.activeCountSwitchColor
+                        : myColor.playSpeedChapterContentButtonColor,
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
-                      appPlayer.getSpeedName,
-                      style: const TextStyle(color: Colors.white),
+                      '0.5x',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
