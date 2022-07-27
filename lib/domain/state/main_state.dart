@@ -7,7 +7,7 @@ class MainState with ChangeNotifier {
 
   int get getSupplicationCount => _supplicationCount;
 
-  bool _countShowState = false;
+  bool _countShowState = true;
 
   bool get getCountShowState => _countShowState;
 

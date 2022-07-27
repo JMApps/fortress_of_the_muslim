@@ -58,7 +58,7 @@ class MainRow extends StatelessWidget {
                       ? BlendMode.multiply
                       : BlendMode.srcATop),
               fit: BoxFit.fill,
-              image: const AssetImage('assets/icons/row_texture.jpeg'),
+              image: const AssetImage('assets/icons/row_texture.jpg'),
             ),
           ),
           child: Column(

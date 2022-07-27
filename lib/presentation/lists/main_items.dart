@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/data/local/database/model/chapter_content_arguments.dart';
 import 'package:fortress_of_the_muslim/domain/state/app_settings_state.dart';
+import 'package:fortress_of_the_muslim/domain/state/chapter_content_settings_state.dart';
 import 'package:fortress_of_the_muslim/domain/theme/app_theme.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_item.dart';
 import 'package:fortress_of_the_muslim/presentation/items/main_row.dart';
+import 'package:fortress_of_the_muslim/presentation/items/pray_item.dart';
 import 'package:provider/provider.dart';
 
 class MainItems extends StatelessWidget {
@@ -14,15 +16,15 @@ class MainItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoScrollbar(
       child: ListView(
+        padding: EdgeInsets.zero,
         children: [
           GridView.count(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.only(
               left: 32,
-              top: 16,
+              top: 32,
               right: 32,
-              bottom: 16,
             ),
             primary: false,
             crossAxisSpacing: 1,
@@ -62,6 +64,34 @@ class MainItems extends StatelessWidget {
                     Theme.of(context).colorScheme.favoriteSupplicationRowColor,
                 itemsColor:
                     Theme.of(context).colorScheme.favoriteSupplicationItemColor,
+              ),
+            ],
+          ),
+          ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(16),
+            primary: false,
+            children: [
+              const PrayItem(
+                chapterNumber: 25,
+                image: 'pray',
+                title: 'После молитвы',
+              ),
+              context.watch<ChapterContentSettingsState>().isDay
+                  ? const PrayItem(
+                      chapterNumber: 27,
+                      image: 'day',
+                      title: 'Утренние',
+                    )
+                  : const PrayItem(
+                      chapterNumber: 27,
+                      image: 'evening',
+                      title: 'Вечерние',
+                    ),
+              const PrayItem(
+                chapterNumber: 28,
+                image: 'night',
+                title: 'Перед сном',
               ),
             ],
           ),

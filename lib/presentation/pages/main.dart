@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
               BlendMode.srcATop,
             ),
             fit: BoxFit.cover,
-            image: const AssetImage('assets/icons/row_texture.jpeg'),
+            image: const AssetImage('assets/icons/row_texture.jpg'),
           ),
         ),
         child: const MainItems(),
