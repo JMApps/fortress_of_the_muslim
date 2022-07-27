@@ -23,18 +23,6 @@ class AppPlayerState with ChangeNotifier {
 
   bool get getRepeatState => repeatState;
 
-  final _speedNames = [
-    '0.5x',
-    '0.75x',
-    '1x',
-    '1.5x',
-    '1.75x',
-  ];
-
-  String _speedName = '1x';
-
-  String get getSpeedName => _speedName;
-
   playOneAudio(String nameAudio, int itemId) async {
     if (currentPlayItem != itemId) {
       await _player.setAsset('assets/audios/$nameAudio.mp3');
@@ -61,32 +49,16 @@ class AppPlayerState with ChangeNotifier {
     );
   }
 
-  changePlaybackSpeedState(int itemId, PlaySpeed speedValue) {
+  changePlaybackSpeedState(int itemId) {
     if (currentPlayItem == itemId) {
-      switch (speedValue) {
-        case PlaySpeed.fast:
-          _speedName = _speedNames[0];
-          _player.setSpeed(0.5);
-          break;
-        case PlaySpeed.veryFast:
-          _speedName = _speedNames[1];
-          _player.setSpeed(0.75);
-          break;
-        case PlaySpeed.normal:
-          _speedName = _speedNames[2];
-          _player.setSpeed(1);
-          break;
-        case PlaySpeed.slow:
-          _speedName = _speedNames[3];
-          _player.setSpeed(1.5);
-          break;
-        case PlaySpeed.verySlow:
-          _speedName = _speedNames[4];
-          _player.setSpeed(1.75);
-          break;
+      isPlaybackSpeed = !isPlaybackSpeed;
+      if (isPlaybackSpeed) {
+        _player.setSpeed(0.5);
+      } else {
+        _player.setSpeed(1);
       }
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   nextEnum(PlaySpeed value) {
