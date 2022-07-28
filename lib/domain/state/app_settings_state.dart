@@ -87,6 +87,7 @@ class AppSettingsState with ChangeNotifier {
     isWakeLock = mainSettingsBox.get(Constants.keyIsWakeLock, defaultValue: true);
     isWakeLock ? Wakelock.enable() : Wakelock.disable();
     isDarkTheme = mainSettingsBox.get(Constants.keyThemeMode, defaultValue: false);
+    isAdaptiveTheme = mainSettingsBox.get(Constants.keyThemeAdaptiveMode, defaultValue: true);
     if (!isAdaptiveTheme) {
       themeMode = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
     } else {
