@@ -133,7 +133,7 @@ class _AppSettingsState extends State<AppSettings> {
               SwitchListTile.adaptive(
                 activeColor: myColor.mainSettingsColor,
                 title: const Text(
-                  'Тема',
+                  'Пользовательская тема',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

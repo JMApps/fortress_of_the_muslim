@@ -163,6 +163,11 @@ class MainItems extends StatelessWidget {
                 title: 'Приложения',
                 route: 'app_ios_account',
               ),
+              MainItem(
+                icon: CupertinoIcons.share,
+                title: 'Поделиться',
+                route: 'share_link',
+              ),
             ],
           ),
         ],
