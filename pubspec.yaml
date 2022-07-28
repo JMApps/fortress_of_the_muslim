@@ -19,7 +19,7 @@ dependencies:
   wakelock: ^0.6.2
   share_plus: ^4.0.10
   clipboard: ^0.1.3
-  just_audio: ^0.9.27
+  just_audio: ^0.9.28
   o_color_picker: ^1.0.2
   draggable_fab: ^0.1.4
   percent_indicator: ^4.2.2
@@ -43,7 +43,19 @@ flutter:
   fonts:
     - family: Gilroy
       fonts:
-        - asset: assets/fonts/gilroy_medium.ttf
+        - asset: assets/fonts/gilroy_light.ttf
     - family: Hafs
       fonts:
         - asset: assets/fonts/hafs.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/amiri_reqular.ttf
+    - family: Quran
+      fonts:
+        - asset: assets/fonts/quran_font.ttf
+    - family: Calibri
+      fonts:
+        - asset: assets/fonts/calibri_reqular.ttf
+    - family: Times
+      fonts:
+        - asset: assets/fonts/times_new_roman.ttf
