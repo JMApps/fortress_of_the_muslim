@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainItem extends StatelessWidget {
@@ -22,6 +23,7 @@ class MainItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Card(
       elevation: 3,
       margin: const EdgeInsets.all(8),
@@ -33,9 +35,14 @@ class MainItem extends StatelessWidget {
         onTap: () async {
           if (route == 'app_ios_account') {
             await launchUrl(
-              Platform.isIOS
-                  ? _urlIOS
-                  : _urlAndroid,
+              Platform.isIOS ? _urlIOS : _urlAndroid,
+            );
+          } else if (route == 'share_link') {
+            Share.share(
+              'Версия андроид: https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim\n\n'
+              'Версия iOS: https://apps.apple.com/ru/app/крепость-верующего/id1564920951',
+              sharePositionOrigin:
+                  Rect.fromLTWH(0, 0, size.width, size.height / 2),
             );
           } else {
             Navigator.pushNamed(context, route);
