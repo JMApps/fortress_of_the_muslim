@@ -47,7 +47,7 @@ class MainSupplicationItem extends StatelessWidget {
                                 fontSize:
                                     chapterContentSettings.getTextArabicSize +
                                         5,
-                                fontFamily: 'Hafs',
+                                fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
                                 color: chapterContentSettings.getIsDefaultColors
                                     ? Color(chapterContentSettings
                                         .getArabicTextColor)
@@ -79,9 +79,9 @@ class MainSupplicationItem extends StatelessWidget {
                                   ? Color(chapterContentSettings
                                       .getTranscriptionTextColor)
                                   : myColor.textTranscriptionColor,
+                              fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                             ),
-                            textAlign: chapterContentSettings.getMyTextAlign[
-                                chapterContentSettings.getToggleTextAlignIndex],
+                            textAlign: chapterContentSettings.getMyTextAlign,
                           ),
                         )
                       : const SizedBox(),
@@ -98,8 +98,8 @@ class MainSupplicationItem extends StatelessWidget {
                       color: chapterContentSettings.getIsDefaultColors
                           ? Color(chapterContentSettings.getTranslateTextColor)
                           : myColor.textTranslateColor,
-                      textAlign: chapterContentSettings.getMyTextAlign[
-                          chapterContentSettings.getToggleTextAlignIndex],
+                      fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
+                      textAlign: chapterContentSettings.getMyTextAlign,
                     ),
                     'small': Style(
                       fontSize: const FontSize(8),

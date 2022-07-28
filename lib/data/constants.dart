@@ -12,6 +12,8 @@ class Constants {
 
   static const String keyFavoritesBox = 'key_favorites_box';
   static const String keyTextAlignIndex = 'key_text_align_index';
+  static const String keyTextArabicFontIndex = 'key_text_arabic_font_index';
+  static const String keyTextTranslationFontIndex = 'key_text_translation_font_index';
   static const String keyTextArabicSize = 'key_text_arabic_size';
   static const String keyTextTranslateSize = 'key_text_translate_size';
   static const String keyTextArabicColor = 'key_text_arabic_color';

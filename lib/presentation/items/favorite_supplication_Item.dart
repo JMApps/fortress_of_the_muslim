@@ -45,7 +45,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                               '${item.contentArabic}',
                               style: TextStyle(
                                 fontSize: chapterContentSettings.getTextArabicSize + 5,
-                                fontFamily: 'Hafs',
+                                fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
                                 color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getArabicTextColor) : myColor.textArabicColor,
                               ),
                               textDirection: TextDirection.rtl,
@@ -71,8 +71,9 @@ class FavoriteSupplicationItem extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: chapterContentSettings.getTextTranslateSize.toDouble(),
                                 color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranscriptionTextColor) : myColor.textTranscriptionColor,
+                                fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                               ),
-                              textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                              textAlign: chapterContentSettings.getMyTextAlign,
                             ),
                           ),
                         )
@@ -86,7 +87,8 @@ class FavoriteSupplicationItem extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       margin: EdgeInsets.zero,
                       color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranslateTextColor) : myColor.textTranslateColor,
-                      textAlign: chapterContentSettings.getMyTextAlign[chapterContentSettings.getToggleTextAlignIndex],
+                      fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
+                      textAlign: chapterContentSettings.getMyTextAlign,
                     ),
                     'small': Style(
                       fontSize: const FontSize(8),
