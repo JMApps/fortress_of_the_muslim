@@ -10,15 +10,27 @@ class ChapterContentSettingsState with ChangeNotifier {
     DateTime.now().hour > 12 ? true : false
   ];
 
-  final List<bool> isTextAlignSelected = [false, false, false, true];
-
   List<bool> get getIsDayNightSelected => isDayNightSelected;
 
+  final List<bool> isTextAlignSelected = [false, false, false, true];
+
   List<bool> get getIsTextAlignSelected => isTextAlignSelected;
+
+  final List<bool> isTextArabicFontSelected = [true, false, false];
+
+  List<bool> get getIsTextArabicFontSelected => isTextArabicFontSelected;
+
+  final List<bool> isTextTranslationFontSelected = [true, false, false];
+
+  List<bool> get getIsTextTranslationFontSelected => isTextTranslationFontSelected;
 
   int toggleDayNightIndex = 0;
 
   int toggleTextAlignIndex = 3;
+
+  int toggleTextArabicFontIndex = 0;
+
+  int toggleTextTranslationFontIndex = 0;
 
   int get getToggleTextAlignIndex => toggleTextAlignIndex;
 
@@ -61,7 +73,23 @@ class ChapterContentSettingsState with ChangeNotifier {
     TextAlign.justify,
   ];
 
-  List get getMyTextAlign => _myTextAlign;
+  final List<String> _arabicFonts = [
+    'Hafs',
+    'Amiri',
+    'Quran',
+  ];
+
+  String get getArabicFont => _arabicFonts[toggleTextArabicFontIndex];
+
+  final List<String> _translationFonts = [
+    'Gilroy',
+    'Calibri',
+    'Times',
+  ];
+
+  String get getTranslationFont => _translationFonts[toggleTextTranslationFontIndex];
+
+  TextAlign get getMyTextAlign => _myTextAlign[toggleTextAlignIndex];
 
   updateToggleDayNight(int index) {
     toggleDayNightIndex = index;
@@ -88,6 +116,24 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   changeTextTranslateSize(double translateTextSize) {
     textTranslateSize = translateTextSize;
+    notifyListeners();
+  }
+
+  updateToggleTextArabicFont(int index) {
+    toggleTextArabicFontIndex = index;
+    for (int i = 0; i < isTextArabicFontSelected.length; i++) {
+      isTextArabicFontSelected[i] = i == toggleTextArabicFontIndex;
+    }
+    contentSettingsBox.put(Constants.keyTextArabicFontIndex, toggleTextArabicFontIndex);
+    notifyListeners();
+  }
+
+  updateToggleTextTranslationFont(int index) {
+    toggleTextTranslationFontIndex = index;
+    for (int i = 0; i < isTextTranslationFontSelected.length; i++) {
+      isTextTranslationFontSelected[i] = i == toggleTextTranslationFontIndex;
+    }
+    contentSettingsBox.put(Constants.keyTextTranslationFontIndex, toggleTextTranslationFontIndex);
     notifyListeners();
   }
 
@@ -126,26 +172,24 @@ class ChapterContentSettingsState with ChangeNotifier {
   }
 
   initContentSettings() {
-    toggleTextAlignIndex =
-        contentSettingsBox.get(Constants.keyTextAlignIndex, defaultValue: 3);
+    toggleTextAlignIndex = contentSettingsBox.get(Constants.keyTextAlignIndex, defaultValue: 3);
     for (int i = 0; i < isTextAlignSelected.length; i++) {
       isTextAlignSelected[i] = i == toggleTextAlignIndex;
     }
-    textArabicSize =
-        contentSettingsBox.get(Constants.keyTextArabicSize, defaultValue: 16.0);
-    textTranslateSize = contentSettingsBox.get(Constants.keyTextTranslateSize,
-        defaultValue: 16.0);
-    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor,
-        defaultValue: Colors.purple[400]!.value));
-    transcriptionTextColor = (contentSettingsBox.get(
-        Constants.keyTextTranscriptionColor,
-        defaultValue: Colors.teal[400]!.value));
-    translateTextColor = (contentSettingsBox.get(
-        Constants.keyTextTranslateColor,
-        defaultValue: Colors.black54.value));
-    isDefaultColors = contentSettingsBox.get(Constants.keyColorsWithDayNight,
-        defaultValue: false);
-    isTranscriptionShow = contentSettingsBox
-        .get(Constants.keyTextTranscriptionIsShow, defaultValue: true);
+    toggleTextArabicFontIndex = contentSettingsBox.get(Constants.keyTextArabicFontIndex, defaultValue: 0);
+    for (int i = 0; i < isTextArabicFontSelected.length; i++) {
+      isTextArabicFontSelected[i] = i == toggleTextArabicFontIndex;
+    }
+    toggleTextTranslationFontIndex = contentSettingsBox.get(Constants.keyTextTranslationFontIndex, defaultValue: 0);
+    for (int i = 0; i < isTextTranslationFontSelected.length; i++) {
+      isTextTranslationFontSelected[i] = i == toggleTextTranslationFontIndex;
+    }
+    textArabicSize = contentSettingsBox.get(Constants.keyTextArabicSize, defaultValue: 16.0);
+    textTranslateSize = contentSettingsBox.get(Constants.keyTextTranslateSize, defaultValue: 16.0);
+    arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor, defaultValue: Colors.purple[400]!.value));
+    transcriptionTextColor = (contentSettingsBox.get(Constants.keyTextTranscriptionColor, defaultValue: Colors.teal[400]!.value));
+    translateTextColor = (contentSettingsBox.get(Constants.keyTextTranslateColor, defaultValue: Colors.black54.value));
+    isDefaultColors = contentSettingsBox.get(Constants.keyColorsWithDayNight, defaultValue: false);
+    isTranscriptionShow = contentSettingsBox.get(Constants.keyTextTranscriptionIsShow, defaultValue: true);
   }
 }

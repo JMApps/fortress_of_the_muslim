@@ -53,7 +53,7 @@ class ChapterContentItem extends StatelessWidget {
                                       .read<ChapterContentSettingsState>()
                                       .getTextArabicSize +
                                   5,
-                              fontFamily: 'Hafs',
+                              fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
                               color: chapterContentSettings.getIsDefaultColors
                                   ? Color(chapterContentSettings.getArabicTextColor)
                                   : myColor.textArabicColor,
@@ -82,13 +82,13 @@ class ChapterContentItem extends StatelessWidget {
                               fontSize: chapterContentSettings
                                   .getTextTranslateSize
                                   .toDouble(),
+                              fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                               color: chapterContentSettings.getIsDefaultColors
                                   ? Color(chapterContentSettings
                                       .getTranscriptionTextColor)
                                   : myColor.textTranscriptionColor,
                             ),
-                            textAlign: chapterContentSettings.getMyTextAlign[
-                                chapterContentSettings.getToggleTextAlignIndex],
+                            textAlign: chapterContentSettings.getMyTextAlign,
                           ),
                         ),
                       )
@@ -105,8 +105,8 @@ class ChapterContentItem extends StatelessWidget {
                     color: chapterContentSettings.getIsDefaultColors
                         ? Color(chapterContentSettings.getTranslateTextColor)
                         : myColor.textTranslateColor,
-                    textAlign: chapterContentSettings.getMyTextAlign[
-                        chapterContentSettings.getToggleTextAlignIndex],
+              fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
+              textAlign: chapterContentSettings.getMyTextAlign,
                   ),
                   'small': Style(
                     fontSize: const FontSize(8),

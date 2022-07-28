@@ -44,11 +44,10 @@ class ContentChapterSettings extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Divider(),
-                const SizedBox(height: 8),
               ],
             ),
+            const Divider(),
+            const SizedBox(height: 4),
             const Text(
               'Расположение текста',
               style: TextStyle(fontSize: 18),
@@ -72,9 +71,8 @@ class ContentChapterSettings extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
             const Divider(),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(CupertinoIcons.textformat_size),
@@ -104,7 +102,7 @@ class ContentChapterSettings extends StatelessWidget {
                 style: const TextStyle(fontSize: 18),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(CupertinoIcons.textformat_size),
@@ -134,9 +132,122 @@ class ContentChapterSettings extends StatelessWidget {
                 style: const TextStyle(fontSize: 18),
               ),
             ),
-            const SizedBox(height: 8),
             const Divider(),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Text(
+                  'Шрифт арабского текста',
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.start,
+                ),
+                const SizedBox(height: 8),
+                ToggleButtons(
+                  borderRadius: BorderRadius.circular(15),
+                  direction: Axis.vertical,
+                  isSelected: context
+                      .watch<ChapterContentSettingsState>()
+                      .getIsTextArabicFontSelected,
+                  onPressed: (index) => context
+                      .read<ChapterContentSettingsState>()
+                      .updateToggleTextArabicFont(index),
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'السلام عليكم',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Hafs',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'السلام عليكم',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Amiri',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'السلام عليكم',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Quran',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+            const Divider(),
+            const SizedBox(height: 4),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Text(
+                  'Шрифт текста перевода',
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.start,
+                ),
+                const SizedBox(height: 8),
+                ToggleButtons(
+                  borderRadius: BorderRadius.circular(15),
+                  direction: Axis.vertical,
+                  isSelected: context
+                      .watch<ChapterContentSettingsState>()
+                      .getIsTextTranslationFontSelected,
+                  onPressed: (index) => context
+                      .read<ChapterContentSettingsState>()
+                      .updateToggleTextTranslationFont(index),
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Ас-Саляму Аляй-кум',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Gilroy',
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Ас-Саляму Аляй-кум',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Calibri',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Ас-Саляму Аляй-кум',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Times',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+            const SizedBox(height: 4),
+            const Divider(),
+            const SizedBox(height: 4),
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(
@@ -296,9 +407,9 @@ class ContentChapterSettings extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             const Divider(),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.remove_red_eye),
@@ -319,7 +430,6 @@ class ContentChapterSettings extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Divider(),
-            const SizedBox(height: 8),
           ],
         ),
       ),

@@ -43,7 +43,7 @@ class SearchSupplicationItem extends StatelessWidget {
                             style: TextStyle(
                               fontSize:
                                   chapterContentSettings.getTextArabicSize + 5,
-                              fontFamily: 'Hafs',
+                              fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
                               color: chapterContentSettings.getIsDefaultColors
                                   ? Color(
                                       chapterContentSettings.getArabicTextColor)
@@ -70,9 +70,9 @@ class SearchSupplicationItem extends StatelessWidget {
                                 ? Color(chapterContentSettings
                                     .getTranscriptionTextColor)
                                 : myColor.textTranscriptionColor,
+                            fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                           ),
-                          textAlign: chapterContentSettings.getMyTextAlign[
-                              chapterContentSettings.getToggleTextAlignIndex],
+                          textAlign: chapterContentSettings.getMyTextAlign,
                         ),
                       )
                     : const SizedBox(),
@@ -88,8 +88,8 @@ class SearchSupplicationItem extends StatelessWidget {
                       color: chapterContentSettings.getIsDefaultColors
                           ? Color(chapterContentSettings.getTranslateTextColor)
                           : myColor.textTranslateColor,
-                      textAlign: chapterContentSettings.getMyTextAlign[
-                          chapterContentSettings.getToggleTextAlignIndex],
+                      fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
+                      textAlign: chapterContentSettings.getMyTextAlign,
                     ),
                     'small': Style(
                       fontSize: const FontSize(8),
