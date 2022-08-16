@@ -28,19 +28,21 @@ class MainApp extends StatelessWidget {
           create: (_) => BookmarkButtonState(),
         ),
       ],
-      child: Builder(builder: (context) {
-        context.read<AppSettingsState>().initMainSettings();
-        context.read<ChapterContentSettingsState>().initContentSettings();
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Крепость мусульманина',
-          themeMode: context.watch<AppSettingsState>().getThemeMode,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          onGenerateRoute: AppRoute().onGeneratorRoute,
-          home: const MainPage(),
-        );
-      }),
+      child: Builder(
+        builder: (context) {
+          context.read<AppSettingsState>().initMainSettings();
+          context.read<ChapterContentSettingsState>().initContentSettings();
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Крепость мусульманина',
+            themeMode: context.watch<AppSettingsState>().getThemeMode,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            onGenerateRoute: AppRoute().onGeneratorRoute,
+            home: const MainPage(),
+          );
+        },
+      ),
     );
   }
 }

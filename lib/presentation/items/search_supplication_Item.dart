@@ -44,10 +44,8 @@ class SearchSupplicationItem extends StatelessWidget {
                               fontSize:
                                   chapterContentSettings.getTextArabicSize + 5,
                               fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
-                              color: chapterContentSettings.getIsDefaultColors
-                                  ? Color(
-                                      chapterContentSettings.getArabicTextColor)
-                                  : myColor.textArabicColor,
+                              color: Color(
+                                  chapterContentSettings.getArabicTextColor),
                             ),
                             textDirection: TextDirection.rtl,
                             textAlign: TextAlign.start,
@@ -66,10 +64,8 @@ class SearchSupplicationItem extends StatelessWidget {
                             fontSize: chapterContentSettings
                                 .getTextTranslateSize
                                 .toDouble(),
-                            color: chapterContentSettings.getIsDefaultColors
-                                ? Color(chapterContentSettings
-                                    .getTranscriptionTextColor)
-                                : myColor.textTranscriptionColor,
+                            color: Color(chapterContentSettings
+            .getTranscriptionTextColor),
                             fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                           ),
                           textAlign: chapterContentSettings.getMyTextAlign,
@@ -85,9 +81,7 @@ class SearchSupplicationItem extends StatelessWidget {
                           .toDouble()),
                       padding: EdgeInsets.zero,
                       margin: EdgeInsets.zero,
-                      color: chapterContentSettings.getIsDefaultColors
-                          ? Color(chapterContentSettings.getTranslateTextColor)
-                          : myColor.textTranslateColor,
+                      color: Color(chapterContentSettings.getTranslateTextColor),
                       fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                       textAlign: chapterContentSettings.getMyTextAlign,
                     ),

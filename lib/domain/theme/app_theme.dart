@@ -156,4 +156,8 @@ extension ColorSchemeS on ColorScheme {
   Color get passiveCountSwitchColor => brightness == Brightness.light
       ? const Color(0xFF78909C)
       : const Color(0xFF546E7A);
+
+  Color get colorButtonShadow => brightness == Brightness.light
+      ? const Color(0xFFB0BEC5)
+      : const Color(0xFF455A64);
 }

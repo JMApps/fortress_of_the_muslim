@@ -44,19 +44,27 @@ class ChapterContentSettingsState with ChangeNotifier {
 
   int arabicTextColor = Colors.purple[400]!.value;
 
+  int arabicTextColorNight = Colors.purple[400]!.value;
+
   int get getArabicTextColor => arabicTextColor;
+
+  int get getArabicTextColorNight => arabicTextColorNight;
 
   int transcriptionTextColor = Colors.teal[400]!.value;
 
+  int transcriptionTextColorNight = Colors.teal[400]!.value;
+
   int get getTranscriptionTextColor => transcriptionTextColor;
+
+  int get getTranscriptionTextColorNight => transcriptionTextColorNight;
 
   int translateTextColor = Colors.black54.value;
 
+  int translateTextColorNight = Colors.white.value;
+
   int get getTranslateTextColor => translateTextColor;
 
-  bool isDefaultColors = false;
-
-  bool get getIsDefaultColors => isDefaultColors;
+  int get getTranslateTextColorNight => translateTextColorNight;
 
   bool isTranscriptionShow = true;
 
@@ -143,9 +151,22 @@ class ChapterContentSettingsState with ChangeNotifier {
     notifyListeners();
   }
 
+
+  changeTextArabicColorNight(Color color) {
+    arabicTextColorNight = color.value;
+    contentSettingsBox.put(Constants.keyTextArabicColorNight, color.value);
+    notifyListeners();
+  }
+
   changeTextTranscriptionColor(Color color) {
     transcriptionTextColor = color.value;
     contentSettingsBox.put(Constants.keyTextTranscriptionColor, color.value);
+    notifyListeners();
+  }
+
+  changeTextTranscriptionColorNight(Color color) {
+    transcriptionTextColorNight = color.value;
+    contentSettingsBox.put(Constants.keyTextTranscriptionColorNight, color.value);
     notifyListeners();
   }
 
@@ -155,9 +176,9 @@ class ChapterContentSettingsState with ChangeNotifier {
     notifyListeners();
   }
 
-  changeDefaultColorsState(bool state) {
-    isDefaultColors = state;
-    contentSettingsBox.put(Constants.keyColorsWithDayNight, state);
+  changeTextTranslateColorNight(Color color) {
+    translateTextColorNight = color.value;
+    contentSettingsBox.put(Constants.keyTextTranslateColorNight, color.value);
     notifyListeners();
   }
 
@@ -187,9 +208,11 @@ class ChapterContentSettingsState with ChangeNotifier {
     textArabicSize = contentSettingsBox.get(Constants.keyTextArabicSize, defaultValue: 16.0);
     textTranslateSize = contentSettingsBox.get(Constants.keyTextTranslateSize, defaultValue: 16.0);
     arabicTextColor = (contentSettingsBox.get(Constants.keyTextArabicColor, defaultValue: Colors.purple[400]!.value));
+    arabicTextColorNight = (contentSettingsBox.get(Constants.keyTextArabicColorNight, defaultValue: Colors.purple[400]!.value));
     transcriptionTextColor = (contentSettingsBox.get(Constants.keyTextTranscriptionColor, defaultValue: Colors.teal[400]!.value));
+    transcriptionTextColorNight = (contentSettingsBox.get(Constants.keyTextTranscriptionColorNight, defaultValue: Colors.teal[400]!.value));
     translateTextColor = (contentSettingsBox.get(Constants.keyTextTranslateColor, defaultValue: Colors.black54.value));
-    isDefaultColors = contentSettingsBox.get(Constants.keyColorsWithDayNight, defaultValue: false);
+    translateTextColorNight = (contentSettingsBox.get(Constants.keyTextTranslateColorNight, defaultValue: Colors.white.value));
     isTranscriptionShow = contentSettingsBox.get(Constants.keyTextTranscriptionIsShow, defaultValue: true);
   }
 }

@@ -46,7 +46,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: chapterContentSettings.getTextArabicSize + 5,
                                 fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
-                                color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getArabicTextColor) : myColor.textArabicColor,
+                                color: Color(chapterContentSettings.getArabicTextColor),
                               ),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.start,
@@ -70,7 +70,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                               '${item.contentTranscription}',
                               style: TextStyle(
                                 fontSize: chapterContentSettings.getTextTranslateSize.toDouble(),
-                                color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranscriptionTextColor) : myColor.textTranscriptionColor,
+                                color: Color(chapterContentSettings.getTranscriptionTextColor),
                                 fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                               ),
                               textAlign: chapterContentSettings.getMyTextAlign,
@@ -86,7 +86,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                       fontSize: FontSize(chapterContentSettings.getTextTranslateSize.toDouble()),
                       padding: EdgeInsets.zero,
                       margin: EdgeInsets.zero,
-                      color: chapterContentSettings.getIsDefaultColors ? Color(chapterContentSettings.getTranslateTextColor) : myColor.textTranslateColor,
+                      color: Color(chapterContentSettings.getTranslateTextColor),
                       fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
                       textAlign: chapterContentSettings.getMyTextAlign,
                     ),

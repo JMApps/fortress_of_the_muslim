@@ -21,6 +21,7 @@ class ChapterContentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQueryData.fromWindow(WidgetsBinding.instance.window).platformBrightness;
     final myColor = Theme.of(context).colorScheme;
     return Consumer<ChapterContentSettingsState>(
         builder: (context, chapterContentSettings, _) {
@@ -54,9 +55,7 @@ class ChapterContentItem extends StatelessWidget {
                                       .getTextArabicSize +
                                   5,
                               fontFamily: context.watch<ChapterContentSettingsState>().getArabicFont,
-                              color: chapterContentSettings.getIsDefaultColors
-                                  ? Color(chapterContentSettings.getArabicTextColor)
-                                  : myColor.textArabicColor,
+                              color: Color(chapterContentSettings.getArabicTextColor),
                             ),
                             textDirection: TextDirection.rtl,
                             textAlign: TextAlign.start,
@@ -83,10 +82,8 @@ class ChapterContentItem extends StatelessWidget {
                                   .getTextTranslateSize
                                   .toDouble(),
                               fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
-                              color: chapterContentSettings.getIsDefaultColors
-                                  ? Color(chapterContentSettings
-                                      .getTranscriptionTextColor)
-                                  : myColor.textTranscriptionColor,
+                              color: Color(chapterContentSettings
+                                  .getTranscriptionTextColor),
                             ),
                             textAlign: chapterContentSettings.getMyTextAlign,
                           ),
@@ -102,9 +99,7 @@ class ChapterContentItem extends StatelessWidget {
                         chapterContentSettings.getTextTranslateSize.toDouble()),
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.zero,
-                    color: chapterContentSettings.getIsDefaultColors
-                        ? Color(chapterContentSettings.getTranslateTextColor)
-                        : myColor.textTranslateColor,
+                    color: Color(chapterContentSettings.getTranslateTextColor),
               fontFamily: context.watch<ChapterContentSettingsState>().getTranslationFont,
               textAlign: chapterContentSettings.getMyTextAlign,
                   ),
