@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
+import 'package:fortress_of_the_muslim/presentation/main/main_column.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -10,6 +11,7 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(AppStrings.appName),
       ),
+      body: const MainColumn(),
     );
   }
 }

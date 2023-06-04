@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
+
+class AppThemes {
+  static final lightTheme = ThemeData(
+    brightness: Brightness.light,
+    primarySwatch: Colors.teal,
+    fontFamily: 'Nexa',
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      elevation: 0,
+      shape: AppStyles.appBarShape,
+    ),
+    textTheme: const TextTheme(
+      titleMedium: TextStyle(
+        fontSize: 16,
+      )
+    ),
+    cardTheme: const CardTheme(
+      elevation: 0.5,
+      color: Colors.teal
+    )
+  );
+
+  static final darkTheme = ThemeData();
+}
+
+extension ColorsSchemes on ColorScheme {
+
+  Color get mainChaptersColor => brightness == Brightness.light
+      ? const Color(0xBF4DB6AC)
+      : const Color(0xFF004D40);
+
+  Color get mainBookmarksColor => brightness == Brightness.light
+      ? const Color(0xBFFFB74D)
+      : const Color(0xFFE65100);
+
+  Color get mainSupplicationsColor => brightness == Brightness.light
+      ? const Color(0xBFE57373)
+      : const Color(0xFFB71C1C);
+
+  Color get mainFavoritesColor => brightness == Brightness.light
+      ? const Color(0xBF64B5F6)
+      : const Color(0xFF0D47A1);
+}
