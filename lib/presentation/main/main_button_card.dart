@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 
-class SupplicationCard extends StatelessWidget {
-  const SupplicationCard({
+class MainButtonCard extends StatelessWidget {
+  const MainButtonCard({
     super.key,
     required this.title,
     required this.icon,

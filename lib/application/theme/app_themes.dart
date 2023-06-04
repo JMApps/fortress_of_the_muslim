@@ -18,8 +18,8 @@ class AppThemes {
     ),
     cardTheme: const CardTheme(
       elevation: 0.5,
-      color: Colors.teal
-    )
+      shape: AppStyles.mainShape,
+    ),
   );
 
   static final darkTheme = ThemeData();
@@ -42,4 +42,16 @@ extension ColorsSchemes on ColorScheme {
   Color get mainFavoritesColor => brightness == Brightness.light
       ? const Color(0xBF64B5F6)
       : const Color(0xFF0D47A1);
+
+  Color get lastChapterBorderSideColor => brightness == Brightness.light
+      ? const Color(0xFF009688)
+      : const Color(0xBFFFB74D);
+
+  Color get counterBorderSideColor => brightness == Brightness.light
+      ? const Color(0xFFF44336)
+      : const Color(0xFFE65100);
+
+  Color get optionsCircleAvatarColor => brightness == Brightness.light
+      ? const Color(0xBF4DB6AC)
+      : const Color(0xFFE65100);
 }

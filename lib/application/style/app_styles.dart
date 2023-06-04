@@ -23,6 +23,16 @@ class AppStyles {
     ),
   ];
 
+  static const mainShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(25),
+    ),
+  );
+
+  static const mainBorder = BorderRadius.all(
+    Radius.circular(25),
+  );
+
   static const mainPadding = EdgeInsets.all(16);
   static const mainPaddingMini = EdgeInsets.all(8);
   static const mainMargin = EdgeInsets.all(16);
