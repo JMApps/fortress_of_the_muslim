@@ -13,4 +13,5 @@ class AppStrings {
   static const String lastChapter = 'Продолжить чтение';
   static const String searchChapters = 'Поиск глав...';
   static const String searchQueryIsEmpty = 'По вашему запросу ничего не найдено';
+  static const String bookmarksChapterIsEmpty = 'Избранных глав нет';
 }

@@ -45,19 +45,19 @@ class AppThemes {
 
 extension ColorsSchemes on ColorScheme {
   Color get mainChaptersColor => brightness == Brightness.light
-      ? const Color(0xBF4DB6AC)
+      ? const Color(0xFF4DB6AC)
       : const Color(0xFF004D40);
 
   Color get mainBookmarksColor => brightness == Brightness.light
-      ? const Color(0xBFFFB74D)
+      ? const Color(0xFFFFB74D)
       : const Color(0xFFE65100);
 
   Color get mainSupplicationsColor => brightness == Brightness.light
-      ? const Color(0xBFE57373)
+      ? const Color(0xFFE57373)
       : const Color(0xFFB71C1C);
 
   Color get mainFavoritesColor => brightness == Brightness.light
-      ? const Color(0xBF64B5F6)
+      ? const Color(0xFF64B5F6)
       : const Color(0xFF0D47A1);
 
   Color get lastChapterBorderSideColor => brightness == Brightness.light

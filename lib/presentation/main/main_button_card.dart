@@ -4,15 +4,15 @@ import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 class MainButtonCard extends StatelessWidget {
   const MainButtonCard({
     super.key,
-    required this.title,
     required this.icon,
+    required this.title,
     required this.cardColor,
     required this.routeName,
     required this.borderRadiusIndex,
   });
 
-  final String title;
   final IconData icon;
+  final String title;
   final Color cardColor;
   final String routeName;
   final int borderRadiusIndex;
@@ -29,7 +29,7 @@ class MainButtonCard extends StatelessWidget {
           Navigator.pushNamed(context, routeName);
         },
         child: Container(
-          height: 125,
+          height: 150,
           padding: AppStyles.mainPadding,
           alignment: Alignment.center,
           decoration: BoxDecoration(

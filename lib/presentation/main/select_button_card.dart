@@ -17,11 +17,12 @@ class SelectButtonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: title == AppStrings.counter
-              ? Theme.of(context).colorScheme.counterBorderSideColor
+              ? theme.colorScheme.counterBorderSideColor
               : Colors.transparent,
         ),
         borderRadius: AppStyles.mainBorder,
@@ -33,7 +34,6 @@ class SelectButtonCard extends StatelessWidget {
           padding: AppStyles.mainPadding,
           alignment: Alignment.center,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
@@ -43,7 +43,7 @@ class SelectButtonCard extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: theme.textTheme.labelMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -7,8 +7,8 @@ import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:provider/provider.dart';
 
-class MainChapterItem extends StatelessWidget {
-  const MainChapterItem({
+class MainChapterBookmarkItem extends StatelessWidget {
+  const MainChapterBookmarkItem({
     super.key,
     required this.item,
     required this.itemIndex,
@@ -34,7 +34,7 @@ class MainChapterItem extends StatelessWidget {
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: appTheme.colorScheme.mainChaptersColor,
+            color: appTheme.colorScheme.mainBookmarksColor,
           ),
         ),
         subtitle: Html(
@@ -67,12 +67,9 @@ class MainChapterItem extends StatelessWidget {
           icon: item.favoriteState == 1
               ? Icon(
                   CupertinoIcons.bookmark_fill,
-                  color: appTheme.colorScheme.mainChaptersColor,
+                  color: appTheme.colorScheme.mainBookmarksColor,
                 )
-              : Icon(
-                  CupertinoIcons.bookmark,
-                  color: appTheme.colorScheme.arrowIconColor,
-                ),
+              : Icon(CupertinoIcons.bookmark, color: appTheme.colorScheme.arrowIconColor,),
           visualDensity: const VisualDensity(horizontal: -4),
         ),
       ),
