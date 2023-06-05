@@ -43,7 +43,7 @@ class SelectButtonCard extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.labelMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

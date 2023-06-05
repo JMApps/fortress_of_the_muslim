@@ -17,7 +17,7 @@ class MainChaptersList extends StatelessWidget {
         return snapshot.hasData
             ? CupertinoScrollbar(
                 child: ListView.builder(
-                  padding: AppStyles.topBottomPadding,
+                  padding: AppStyles.mainPaddingMini,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return MainChapterItem(

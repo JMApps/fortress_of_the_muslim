@@ -6,4 +6,9 @@ class MainChaptersState extends ChangeNotifier {
   final DatabaseQuery _databaseQuery = DatabaseQuery();
 
   DatabaseQuery get getDatabaseQuery => _databaseQuery;
+
+  addRemoveChapterBookmark(int state, int chapterId) {
+    _databaseQuery.addRemoveFavoriteChapter(state, chapterId);
+    notifyListeners();
+  }
 }

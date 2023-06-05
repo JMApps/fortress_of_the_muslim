@@ -10,15 +10,28 @@ class AppThemes {
       centerTitle: true,
       elevation: 0,
       shape: AppStyles.appBarShape,
+      titleTextStyle: TextStyle(
+        color: Color(0xFFFFFFFF),
+        fontFamily: 'Gilroy',
+        fontSize: 20,
+      ),
     ),
     textTheme: const TextTheme(
-      titleMedium: TextStyle(
-        fontSize: 16,
+      labelMedium: TextStyle(
+        fontSize: 17,
+        fontFamily: 'Gilroy',
+        color: Colors.black,
       ),
-      titleLarge: TextStyle(
-        fontSize: 16,
+      titleMedium: TextStyle(
+        fontSize: 17,
+        fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: Colors.teal,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 20,
+        fontFamily: 'Gilroy',
+        color: Color(0xFFE0E0E0),
       ),
     ),
     cardTheme: const CardTheme(
@@ -62,4 +75,8 @@ extension ColorsSchemes on ColorScheme {
   Color get mainDefaultColor => brightness == Brightness.light
       ? const Color(0xBF000000)
       : const Color(0xFFF1F1F1);
+
+  Color get arrowIconColor => brightness == Brightness.light
+      ? const Color(0xBF181818)
+      : const Color(0xFFDCDCDC);
 }

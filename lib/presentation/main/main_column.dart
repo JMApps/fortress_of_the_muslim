@@ -126,9 +126,12 @@ class MainColumn extends StatelessWidget {
               shape: AppStyles.mainShape,
               title: Text(
                 AppStrings.lastChapter,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
-              trailing: const Icon(CupertinoIcons.forward),
+              trailing: Icon(
+                CupertinoIcons.forward,
+                color: themeColors.arrowIconColor,
+              ),
             ),
           ),
           const SizedBox(height: 8),

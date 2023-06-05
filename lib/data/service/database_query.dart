@@ -10,4 +10,9 @@ class DatabaseQuery {
     List<MainChapterModel>? mainChapters = res.isNotEmpty ? res.map((c) => MainChapterModel.fromMap(c)).toList() : null;
     return mainChapters!;
   }
+
+  addRemoveFavoriteChapter(int state, int chapterId) async {
+    var dbClient = await con.db;
+    await dbClient.rawQuery('UPDATE Table_of_chapters SET favorite_state = $state WHERE id == $chapterId');
+  }
 }

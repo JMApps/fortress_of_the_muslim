@@ -1,14 +1,16 @@
 class AppStrings {
-  static const appName = 'Крепость мусульманина';
-  static const chapters = 'Главы';
-  static const chapterBookmarks = 'Избранное';
-  static const supplications = 'Дуа';
-  static const supplicationBookmarks = 'Избранные дуа';
-  static const morning = 'Утром';
-  static const evening = 'Вечером';
-  static const night = 'Перед сном';
-  static const afterPrayer = 'После молитвы';
-  static const istikhara = 'Истихара';
-  static const counter = 'Счётчик';
-  static const lastChapter = 'Продолжить чтение';
+  static const String appName = 'Крепость мусульманина';
+  static const String chapters = 'Главы';
+  static const String chapterBookmarks = 'Избранное';
+  static const String supplications = 'Дуа';
+  static const String supplicationBookmarks = 'Избранные дуа';
+  static const String morning = 'Утром';
+  static const String evening = 'Вечером';
+  static const String night = 'Перед сном';
+  static const String afterPrayer = 'После молитвы';
+  static const String istikhara = 'Истихара';
+  static const String counter = 'Счётчик';
+  static const String lastChapter = 'Продолжить чтение';
+  static const String searchChapters = 'Поиск глав...';
+  static const String searchQueryIsEmpty = 'По вашему запросу ничего не найдено';
 }

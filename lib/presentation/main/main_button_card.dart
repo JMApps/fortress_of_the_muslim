@@ -50,7 +50,7 @@ class MainButtonCard extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ],
           ),
