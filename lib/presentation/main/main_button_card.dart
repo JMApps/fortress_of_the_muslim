@@ -25,7 +25,9 @@ class MainButtonCard extends StatelessWidget {
       ),
       color: cardColor,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, routeName);
+        },
         child: Container(
           height: 125,
           padding: AppStyles.mainPadding,
@@ -39,7 +41,6 @@ class MainButtonCard extends StatelessWidget {
             ),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(

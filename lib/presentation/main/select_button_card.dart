@@ -8,12 +8,12 @@ class SelectButtonCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
-    required this.routeName,
+    required this.chapterIndex,
   });
 
   final String title;
   final IconData icon;
-  final String routeName;
+  final int chapterIndex;
 
   @override
   Widget build(BuildContext context) {

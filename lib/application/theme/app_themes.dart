@@ -5,7 +5,7 @@ class AppThemes {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.teal,
-    fontFamily: 'Nexa',
+    fontFamily: 'Gilroy',
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
@@ -14,10 +14,15 @@ class AppThemes {
     textTheme: const TextTheme(
       titleMedium: TextStyle(
         fontSize: 16,
-      )
+      ),
+      titleLarge: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.teal,
+      ),
     ),
     cardTheme: const CardTheme(
-      elevation: 0.5,
+      elevation: 1,
       shape: AppStyles.mainShape,
     ),
   );
@@ -26,7 +31,6 @@ class AppThemes {
 }
 
 extension ColorsSchemes on ColorScheme {
-
   Color get mainChaptersColor => brightness == Brightness.light
       ? const Color(0xBF4DB6AC)
       : const Color(0xFF004D40);
@@ -54,4 +58,8 @@ extension ColorsSchemes on ColorScheme {
   Color get optionsCircleAvatarColor => brightness == Brightness.light
       ? const Color(0xBF4DB6AC)
       : const Color(0xFFE65100);
+
+  Color get mainDefaultColor => brightness == Brightness.light
+      ? const Color(0xBF000000)
+      : const Color(0xFFF1F1F1);
 }

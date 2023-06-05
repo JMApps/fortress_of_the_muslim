@@ -16,7 +16,6 @@ class MainColumn extends StatelessWidget {
     return SingleChildScrollView(
       padding: AppStyles.mainPadding,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
@@ -25,7 +24,7 @@ class MainColumn extends StatelessWidget {
                   title: AppStrings.chapters,
                   icon: CupertinoIcons.square_list,
                   cardColor: themeColors.mainChaptersColor,
-                  routeName: '',
+                  routeName: '/main_chapters_page',
                   borderRadiusIndex: 0,
                 ),
               ),
@@ -34,7 +33,7 @@ class MainColumn extends StatelessWidget {
                   title: AppStrings.chapterBookmarks,
                   icon: CupertinoIcons.bookmark,
                   cardColor: themeColors.mainBookmarksColor,
-                  routeName: '',
+                  routeName: '/bookmark_chapters_page',
                   borderRadiusIndex: 1,
                 ),
               ),
@@ -47,7 +46,7 @@ class MainColumn extends StatelessWidget {
                   title: AppStrings.supplications,
                   icon: CupertinoIcons.square_grid_2x2,
                   cardColor: themeColors.mainSupplicationsColor,
-                  routeName: '',
+                  routeName: '/all_supplications_page',
                   borderRadiusIndex: 2,
                 ),
               ),
@@ -56,7 +55,7 @@ class MainColumn extends StatelessWidget {
                   title: AppStrings.supplicationBookmarks,
                   icon: CupertinoIcons.book,
                   cardColor: themeColors.mainFavoritesColor,
-                  routeName: '',
+                  routeName: '/bookmark_supplications_page',
                   borderRadiusIndex: 3,
                 ),
               ),
@@ -69,21 +68,21 @@ class MainColumn extends StatelessWidget {
                 child: SelectButtonCard(
                   title: AppStrings.morning,
                   icon: CupertinoIcons.sunrise,
-                  routeName: '',
+                  chapterIndex: 0,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.evening,
                   icon: CupertinoIcons.sunset,
-                  routeName: '',
+                  chapterIndex: 0,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.night,
                   icon: CupertinoIcons.moon,
-                  routeName: '',
+                  chapterIndex: 0,
                 ),
               ),
             ],
@@ -94,21 +93,21 @@ class MainColumn extends StatelessWidget {
                 child: SelectButtonCard(
                   title: AppStrings.afterPrayer,
                   icon: CupertinoIcons.hand_raised,
-                  routeName: '',
+                  chapterIndex: 0,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.istikhara,
                   icon: CupertinoIcons.lightbulb,
-                  routeName: '',
+                  chapterIndex: 0,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.counter,
-                  icon: CupertinoIcons.greaterthan_circle,
-                  routeName: '',
+                  icon: CupertinoIcons.forward,
+                  chapterIndex: 0,
                 ),
               ),
             ],
@@ -142,22 +141,22 @@ class MainColumn extends StatelessWidget {
                   OptionButtonCard(
                     icon: CupertinoIcons.settings,
                     avatarColor: themeColors.mainChaptersColor,
-                    routeName: '',
+                    routeName: '/app_settings',
                   ),
                   OptionButtonCard(
                     icon: CupertinoIcons.book,
                     avatarColor: themeColors.mainBookmarksColor,
-                    routeName: '',
+                    routeName: '/other_content',
                   ),
                   OptionButtonCard(
                     icon: CupertinoIcons.app_badge,
                     avatarColor: themeColors.mainSupplicationsColor,
-                    routeName: '',
+                    routeName: 'for_share',
                   ),
                   OptionButtonCard(
                     icon: CupertinoIcons.share,
                     avatarColor: themeColors.mainFavoritesColor,
-                    routeName: '',
+                    routeName: 'links',
                   ),
                 ],
               ),

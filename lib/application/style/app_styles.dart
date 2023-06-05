@@ -37,4 +37,12 @@ class AppStyles {
   static const mainPaddingMini = EdgeInsets.all(8);
   static const mainMargin = EdgeInsets.all(16);
   static const mainMarginMini = EdgeInsets.all(8);
+
+  static const topBottomPadding = EdgeInsets.fromLTRB(0, 16, 0, 16);
+  static const topBottomPaddingMini = EdgeInsets.fromLTRB(0, 16, 0, 16);
+  static const symmetricVerticalPadding = EdgeInsets.symmetric(vertical: 16);
+  static const symmetricVerticalPaddingMini = EdgeInsets.symmetric(vertical: 8);
+  static const symmetricHorizontalPadding = EdgeInsets.symmetric(horizontal: 16);
+  static const symmetricHorizontalPaddingMini = EdgeInsets.symmetric(horizontal: 8);
+
 }

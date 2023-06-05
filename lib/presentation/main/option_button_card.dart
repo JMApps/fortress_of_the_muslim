@@ -15,14 +15,14 @@ class OptionButtonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 30,
-      backgroundColor: avatarColor,
-      child: InkWell(
-        onTap: () {},
-        borderRadius: AppStyles.mainBorder,
-        splashColor: avatarColor,
-        radius: 35,
+    return InkWell(
+      onTap: () {},
+      borderRadius: AppStyles.mainBorder,
+      splashColor: avatarColor,
+      radius: 25,
+      child: CircleAvatar(
+        radius: 25,
+        backgroundColor: avatarColor,
         child: Icon(
           icon,
         ),
