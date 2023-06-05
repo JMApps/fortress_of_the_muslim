@@ -12,13 +12,19 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
+
+  sqflite: ^2.2.8+4
+  path: ^1.8.3
+  path_provider: ^2.0.15
+  flutter_html: ^3.0.0-beta.2
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
 
 flutter:
 
@@ -27,8 +33,12 @@ flutter:
   assets:
     - assets/fonts/
     - assets/pictures/
-  
+    - assets/databases/
+
   fonts:
     - family: Nexa
       fonts:
         - asset: assets/fonts/nexa_reqular.ttf
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/gilroy_medium.ttf
