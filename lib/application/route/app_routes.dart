@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/bookmarks/main_chapter_bookmarks_page.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/main_chapters_page.dart';
+import 'package:fortress_of_the_muslim/presentation/counter/counter_page.dart';
 
 class AppRoutes {
   static Route onGeneratorRoute(RouteSettings routeSettings) {
@@ -12,6 +13,10 @@ class AppRoutes {
       case '/bookmark_chapters_page':
         return MaterialPageRoute(
           builder: (_) => const MainChapterBookmarksPage(),
+        );
+      case '/counter_page':
+        return MaterialPageRoute(
+          builder: (_) => const CounterPage(),
         );
       default:
         throw Exception('Invalid route ${routeSettings.name}');

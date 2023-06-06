@@ -29,7 +29,11 @@ class SelectButtonCard extends StatelessWidget {
         borderRadius: AppStyles.mainBorder,
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          if (chapterIndex == 222) {
+            Navigator.pushNamed(context, '/counter_page');
+          }
+        },
         borderRadius: AppStyles.mainBorder,
         child: Container(
           padding: AppStyles.mainPadding,

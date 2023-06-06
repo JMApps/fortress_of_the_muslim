@@ -75,14 +75,14 @@ class MainColumn extends StatelessWidget {
                 child: SelectButtonCard(
                   title: AppStrings.evening,
                   icon: CupertinoIcons.sunset,
-                  chapterIndex: 0,
+                  chapterIndex: 1,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.night,
                   icon: CupertinoIcons.moon,
-                  chapterIndex: 0,
+                  chapterIndex: 2,
                 ),
               ),
             ],
@@ -93,21 +93,21 @@ class MainColumn extends StatelessWidget {
                 child: SelectButtonCard(
                   title: AppStrings.afterPrayer,
                   icon: CupertinoIcons.hand_raised,
-                  chapterIndex: 0,
+                  chapterIndex: 3,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.istikhara,
                   icon: CupertinoIcons.lightbulb,
-                  chapterIndex: 0,
+                  chapterIndex: 4,
                 ),
               ),
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.counter,
                   icon: CupertinoIcons.forward,
-                  chapterIndex: 0,
+                  chapterIndex: 222,
                 ),
               ),
             ],
