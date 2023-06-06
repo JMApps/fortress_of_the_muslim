@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
+import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 
 class MainButtonCard extends StatelessWidget {
   const MainButtonCard({
@@ -19,6 +20,7 @@ class MainButtonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: AppStyles.onlyBorderList[borderRadiusIndex],
@@ -45,12 +47,13 @@ class MainButtonCard extends StatelessWidget {
             children: [
               Icon(
                 icon,
+                color: theme.colorScheme.mainDefaultColor,
               ),
               const SizedBox(height: 4),
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: theme.textTheme.labelMedium,
               ),
             ],
           ),

@@ -5,11 +5,13 @@ class AppThemes {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.teal,
+    scaffoldBackgroundColor: const Color(0xFFE8F1F0),
     fontFamily: 'Gilroy',
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
       shape: AppStyles.appBarShape,
+      backgroundColor: Color(0xFF00796B),
       titleTextStyle: TextStyle(
         color: Color(0xFFFFFFFF),
         fontFamily: 'Gilroy',
@@ -20,16 +22,16 @@ class AppThemes {
       labelMedium: TextStyle(
         fontSize: 17,
         fontFamily: 'Gilroy',
-        color: Colors.black,
+        color: Color(0xFF1E1E1E),
       ),
       titleMedium: TextStyle(
         fontSize: 17,
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
-        color: Colors.teal,
+        color: Color(0xFF00796B),
       ),
       bodyMedium: TextStyle(
-        fontSize: 20,
+        fontSize: 17,
         fontFamily: 'Gilroy',
         color: Color(0xFFE0E0E0),
       ),
@@ -38,45 +40,81 @@ class AppThemes {
       elevation: 1,
       shape: AppStyles.mainShape,
     ),
+    cardColor: const Color(0xFFFFFFFF),
   );
 
-  static final darkTheme = ThemeData();
+  static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primarySwatch: Colors.blueGrey,
+    scaffoldBackgroundColor: const Color(0xFF263238),
+    fontFamily: 'Gilroy',
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      elevation: 0,
+      shape: AppStyles.appBarShape,
+      backgroundColor: Color(0xFF192326),
+      titleTextStyle: TextStyle(
+        color: Color(0xFFFFFFFF),
+        fontFamily: 'Gilroy',
+        fontSize: 20,
+      ),
+    ),
+    textTheme: const TextTheme(
+      labelMedium: TextStyle(
+        fontSize: 17,
+        fontFamily: 'Gilroy',
+        color: Color(0xFFD3D3D3),
+      ),
+      titleMedium: TextStyle(
+        fontSize: 17,
+        fontFamily: 'Gilroy',
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF455A64),
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 17,
+        fontFamily: 'Gilroy',
+        color: Color(0xFFE0E0E0),
+      ),
+    ),
+    cardTheme: const CardTheme(
+      elevation: 1,
+      shape: AppStyles.mainShape,
+    ),
+    cardColor: const Color(0xFF192326),
+  );
 }
 
 extension ColorsSchemes on ColorScheme {
   Color get mainChaptersColor => brightness == Brightness.light
-      ? const Color(0xFF4DB6AC)
-      : const Color(0xFF004D40);
+      ? const Color(0xBF00897B)
+      : const Color(0xFF00443E);
 
   Color get mainBookmarksColor => brightness == Brightness.light
-      ? const Color(0xFFFFB74D)
-      : const Color(0xFFE65100);
+      ? const Color(0xBFFB8C00)
+      : const Color(0xFF7A2A00);
 
   Color get mainSupplicationsColor => brightness == Brightness.light
-      ? const Color(0xFFE57373)
-      : const Color(0xFFB71C1C);
+      ? const Color(0xBFE53935)
+      : const Color(0xFF671616);
 
   Color get mainFavoritesColor => brightness == Brightness.light
-      ? const Color(0xFF64B5F6)
-      : const Color(0xFF0D47A1);
-
-  Color get lastChapterBorderSideColor => brightness == Brightness.light
-      ? const Color(0xFF009688)
-      : const Color(0xBFFFB74D);
-
-  Color get counterBorderSideColor => brightness == Brightness.light
-      ? const Color(0xFFF44336)
-      : const Color(0xFFE65100);
-
-  Color get optionsCircleAvatarColor => brightness == Brightness.light
-      ? const Color(0xBF4DB6AC)
-      : const Color(0xFFE65100);
+      ? const Color(0xBF1E88E5)
+      : const Color(0xFF002054);
 
   Color get mainDefaultColor => brightness == Brightness.light
-      ? const Color(0xBF000000)
-      : const Color(0xFFF1F1F1);
+      ? const Color(0xFF1C1C1C)
+      : const Color(0xFFD3D3D3);
 
-  Color get arrowIconColor => brightness == Brightness.light
-      ? const Color(0xBF181818)
-      : const Color(0xFFDCDCDC);
+  Color get cardOddColor => brightness == Brightness.light
+      ? const Color(0xFFE0F2F1)
+      : const Color(0xFF263238);
+
+  Color get cardColor => brightness == Brightness.light
+      ? const Color(0xFFFFFFFF)
+      : const Color(0xFF192326);
+
+  Color get primaryDefaultColor => brightness == Brightness.light
+      ? const Color(0xBF00897B)
+      : const Color(0xFF4DB6AC);
 }

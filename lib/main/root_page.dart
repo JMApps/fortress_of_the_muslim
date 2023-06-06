@@ -20,6 +20,7 @@ class RootPage extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.onGeneratorRoute,
         theme: AppThemes.lightTheme,
+        darkTheme: AppThemes.darkTheme,
         home: const MainPage(),
       ),
     );

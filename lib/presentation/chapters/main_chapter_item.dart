@@ -19,11 +19,11 @@ class MainChapterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
+    final theme = Theme.of(context);
     final chapterItemState = context.read<MainChaptersState>();
     return Card(
       elevation: 0,
-      color: itemIndex.isOdd ? Colors.white : Colors.blueGrey.shade50,
+      color: itemIndex.isOdd ? theme.colorScheme.cardColor : theme.colorScheme.cardOddColor,
       child: ListTile(
         contentPadding: AppStyles.mainPaddingMini,
         dense: true,
@@ -34,7 +34,7 @@ class MainChapterItem extends StatelessWidget {
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: appTheme.colorScheme.mainChaptersColor,
+            color: theme.colorScheme.primaryDefaultColor,
           ),
         ),
         subtitle: Html(
@@ -43,14 +43,14 @@ class MainChapterItem extends StatelessWidget {
             '#': Style(
               fontSize: FontSize(17),
               fontFamily: 'Gilroy',
-              color: appTheme.colorScheme.mainDefaultColor,
+              color: theme.colorScheme.mainDefaultColor,
               padding: HtmlPaddings.zero,
               margin: Margins.zero,
             ),
             'b': Style(
               fontSize: FontSize(17),
               fontWeight: FontWeight.bold,
-              color: appTheme.colorScheme.mainDefaultColor,
+              color: theme.colorScheme.mainDefaultColor,
               padding: HtmlPaddings.zero,
               margin: Margins.zero,
             )
@@ -67,11 +67,11 @@ class MainChapterItem extends StatelessWidget {
           icon: item.favoriteState == 1
               ? Icon(
                   CupertinoIcons.bookmark_fill,
-                  color: appTheme.colorScheme.mainChaptersColor,
+                  color: theme.colorScheme.primaryDefaultColor,
                 )
               : Icon(
                   CupertinoIcons.bookmark,
-                  color: appTheme.colorScheme.arrowIconColor,
+                  color: theme.colorScheme.mainDefaultColor,
                 ),
           visualDensity: const VisualDensity(horizontal: -4),
         ),
