@@ -46,7 +46,7 @@ class MainColumn extends StatelessWidget {
                   title: AppStrings.supplications,
                   icon: CupertinoIcons.square_grid_2x2,
                   cardColor: theme.colorScheme.mainSupplicationsColor,
-                  routeName: '/all_supplications_page',
+                  routeName: '/main_supplications_page',
                   borderRadiusIndex: 2,
                 ),
               ),
