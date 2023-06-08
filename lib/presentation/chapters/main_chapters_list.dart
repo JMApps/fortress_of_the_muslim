@@ -11,8 +11,7 @@ class MainChaptersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future:
-          context.watch<MainChaptersState>().getDatabaseQuery.getAllChapters(),
+      future: context.watch<MainChaptersState>().getDatabaseQuery.getAllChapters(),
       builder: (context, snapshot) {
         return snapshot.hasData
             ? CupertinoScrollbar(

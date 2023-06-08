@@ -117,7 +117,7 @@ class MainColumn extends StatelessWidget {
             shape: RoundedRectangleBorder(
               side: BorderSide(
                 width: 3,
-                color: Theme.of(context).colorScheme.mainChaptersColor,
+                color: Theme.of(context).colorScheme.primaryDefaultColor,
               ),
               borderRadius: AppStyles.mainBorder,
             ),

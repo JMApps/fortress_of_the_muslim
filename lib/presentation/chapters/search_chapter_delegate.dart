@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
+import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/main_chapter_item.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,17 @@ class SearchChapterDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
+      appBarTheme: AppBarTheme(
+        centerTitle: true,
+        elevation: 0,
+        shape: AppStyles.appBarShape,
+        backgroundColor: Theme.of(context).colorScheme.mainChaptersColor,
+        titleTextStyle: const TextStyle(
+          color: Color(0xFFFFFFFF),
+          fontFamily: 'Gilroy',
+          fontSize: 20,
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         border: InputBorder.none,
         hintStyle: Theme.of(context).textTheme.bodyMedium,
@@ -80,8 +92,10 @@ class SearchChapterDelegate extends SearchDelegate {
           _chapters = snapshot.data;
           _recentChapters = query.isEmpty
               ? _chapters
-              : _chapters.where((element) => element.chapterNumber.toLowerCase().contains(query.toLowerCase()) ||
-                      element.chapterTitle.toLowerCase().contains(query.toLowerCase())).toList();
+              : _chapters.where((element) =>
+              element.id.toString().contains(query) ||
+              element.chapterNumber.toLowerCase().contains(query.toLowerCase()) ||
+              element.chapterTitle.toLowerCase().contains(query.toLowerCase())).toList();
           return _recentChapters.isEmpty
               ? Padding(
                   padding: AppStyles.mainPadding,

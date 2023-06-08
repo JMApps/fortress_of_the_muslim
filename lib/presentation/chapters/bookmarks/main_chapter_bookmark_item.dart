@@ -23,7 +23,9 @@ class MainChapterBookmarkItem extends StatelessWidget {
     final chapterItemState = context.read<MainChaptersState>();
     return Card(
       elevation: 0,
-      color: itemIndex.isOdd ? theme.colorScheme.cardColor : theme.colorScheme.cardOddColor,
+      color: itemIndex.isOdd
+          ? theme.colorScheme.cardColor
+          : theme.colorScheme.cardOddColor,
       child: ListTile(
         contentPadding: AppStyles.mainPaddingMini,
         dense: true,
@@ -64,15 +66,14 @@ class MainChapterBookmarkItem extends StatelessWidget {
             );
           },
           splashRadius: 25,
-          icon: item.favoriteState == 1
-              ? Icon(
-                  CupertinoIcons.bookmark_fill,
-                  color: theme.colorScheme.mainBookmarksColor,
-                )
-              : Icon(
-                  CupertinoIcons.bookmark,
-                  color: theme.colorScheme.mainDefaultColor,
-                ),
+          icon: Icon(
+            item.favoriteState == 1
+                ? CupertinoIcons.bookmark_fill
+                : CupertinoIcons.bookmark,
+            color: item.favoriteState == 1
+                ? theme.colorScheme.mainBookmarksColor
+                : theme.colorScheme.mainDefaultColor,
+          ),
           visualDensity: const VisualDensity(horizontal: -4),
         ),
       ),
