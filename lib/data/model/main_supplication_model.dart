@@ -5,6 +5,7 @@ class MainSupplicationModel {
   late final String translationText;
   late final String contentForShare;
   late final String? nameAudio;
+  late final int sampleBy;
   late final int favoriteState;
   late final int? countNumber;
 
@@ -15,6 +16,7 @@ class MainSupplicationModel {
     translationText = map['translation_text'];
     contentForShare = map['content_for_share'];
     nameAudio = map['name_audio'];
+    sampleBy = map['sample_by'];
     favoriteState = map['favorite_state'];
     countNumber = map['count_number'];
   }
