@@ -30,11 +30,6 @@ class AppThemes {
         fontWeight: FontWeight.bold,
         color: Color(0xFF009688),
       ),
-      bodyMedium: TextStyle(
-        fontSize: 17,
-        fontFamily: 'Gilroy',
-        color: Color(0xFFE0E0E0),
-      ),
     ),
     cardTheme: const CardTheme(
       elevation: 1,
@@ -71,17 +66,12 @@ class AppThemes {
         fontWeight: FontWeight.bold,
         color: Color(0xFF455A64),
       ),
-      bodyMedium: TextStyle(
-        fontSize: 17,
-        fontFamily: 'Gilroy',
-        color: Color(0xFFE0E0E0),
-      ),
     ),
     cardTheme: const CardTheme(
       elevation: 1,
       shape: AppStyles.mainShape,
     ),
-    cardColor: const Color(0xFF192326),
+    cardColor: const Color(0xFF263238),
   );
 }
 

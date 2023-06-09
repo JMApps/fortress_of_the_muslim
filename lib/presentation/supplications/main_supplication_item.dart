@@ -76,7 +76,7 @@ class MainSupplicationItem extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {},
-                      splashRadius: 25,
+                      splashRadius: 20,
                       color: theme.colorScheme.mainDefaultColor,
                       visualDensity: const VisualDensity(
                         vertical: -4,
@@ -86,7 +86,7 @@ class MainSupplicationItem extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {},
-                      splashRadius: 25,
+                      splashRadius: 20,
                       color: theme.colorScheme.mainDefaultColor,
                       visualDensity: const VisualDensity(
                         vertical: -4,
@@ -96,7 +96,7 @@ class MainSupplicationItem extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {},
-                      splashRadius: 25,
+                      splashRadius: 20,
                       color: theme.colorScheme.mainDefaultColor,
                       visualDensity: const VisualDensity(
                         vertical: -4,
@@ -111,7 +111,7 @@ class MainSupplicationItem extends StatelessWidget {
                           item.id,
                         );
                       },
-                      splashRadius: 25,
+                      splashRadius: 20,
                       color: theme.colorScheme.mainSupplicationsColor,
                       visualDensity: const VisualDensity(
                         vertical: -4,
@@ -128,7 +128,7 @@ class MainSupplicationItem extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {},
-                      splashRadius: 25,
+                      splashRadius: 20,
                       color: theme.colorScheme.mainDefaultColor,
                       visualDensity: const VisualDensity(
                         vertical: -4,

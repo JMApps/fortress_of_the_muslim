@@ -85,8 +85,7 @@ class SearchChapterDelegate extends SearchDelegate {
 
   Widget _searchFuture(BuildContext context) {
     return FutureBuilder<List>(
-      future:
-          context.watch<MainChaptersState>().getDatabaseQuery.getAllChapters(),
+      future: context.watch<MainChaptersState>().getDatabaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           _chapters = snapshot.data;

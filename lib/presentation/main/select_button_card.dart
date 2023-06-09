@@ -21,7 +21,7 @@ class SelectButtonCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          width: 3,
+          width: 1,
           color: title == AppStrings.counter
               ? theme.colorScheme.primaryDefaultColor
               : Colors.transparent,
@@ -48,7 +48,7 @@ class SelectButtonCard extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: theme.textTheme.labelMedium,
+                style: theme.textTheme.bodyMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -92,7 +92,7 @@ class MainColumn extends StatelessWidget {
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.afterPrayer,
-                  icon: CupertinoIcons.hand_raised,
+                  icon: CupertinoIcons.person_3,
                   chapterIndex: 3,
                 ),
               ),
@@ -116,7 +116,7 @@ class MainColumn extends StatelessWidget {
           Card(
             shape: RoundedRectangleBorder(
               side: BorderSide(
-                width: 3,
+                width: 1,
                 color: Theme.of(context).colorScheme.primaryDefaultColor,
               ),
               borderRadius: AppStyles.mainBorder,
