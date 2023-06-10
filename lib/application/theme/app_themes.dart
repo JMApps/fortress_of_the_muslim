@@ -104,11 +104,11 @@ extension ColorsSchemes on ColorScheme {
       ? const Color(0xFFFFEBEE)
       : const Color(0xFF192326);
 
-  Color get mainFavoritesColor => brightness == Brightness.light
+  Color get mainSupplicationsBookmarkColor => brightness == Brightness.light
       ? const Color(0xBF1E88E5)
       : const Color(0xFF002054);
 
-  Color get mainFavoritesBackgroundColor => brightness == Brightness.light
+  Color get mainSupplicationsBookmarkBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFE1F5FE)
       : const Color(0xFF192326);
 

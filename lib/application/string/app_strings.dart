@@ -15,4 +15,5 @@ class AppStrings {
   static const String searchSupplications = 'Поиск дуа...';
   static const String searchQueryIsEmpty = 'По вашему запросу ничего не найдено';
   static const String bookmarksChapterIsEmpty = 'Избранных глав нет';
+  static const String bookmarksSupplicationIsEmpty = 'Избранных дуа нет';
 }
