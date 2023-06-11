@@ -7,8 +7,8 @@ import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:provider/provider.dart';
 
-class MainChapterBookmarkItem extends StatelessWidget {
-  const MainChapterBookmarkItem({
+class MainChapterBookmarksItem extends StatelessWidget {
+  const MainChapterBookmarksItem({
     super.key,
     required this.item,
     required this.itemIndex,
@@ -29,7 +29,9 @@ class MainChapterBookmarkItem extends StatelessWidget {
       child: ListTile(
         contentPadding: AppStyles.mainPaddingMini,
         dense: true,
-        onTap: () {},
+        onTap: () {
+          chapterItemState.saveLastChapter(item.id);
+        },
         shape: AppStyles.mainShape,
         title: Text(
           item.chapterNumber,

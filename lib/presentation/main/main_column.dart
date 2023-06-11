@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/main/main_button_card.dart';
 import 'package:fortress_of_the_muslim/presentation/main/option_button_card.dart';
 import 'package:fortress_of_the_muslim/presentation/main/select_button_card.dart';
+import 'package:provider/provider.dart';
 
 class MainColumn extends StatelessWidget {
   const MainColumn({super.key});
@@ -92,7 +94,7 @@ class MainColumn extends StatelessWidget {
               Expanded(
                 child: SelectButtonCard(
                   title: AppStrings.afterPrayer,
-                  icon: CupertinoIcons.person_3,
+                  icon: CupertinoIcons.person_2,
                   chapterIndex: 3,
                 ),
               ),
@@ -125,7 +127,7 @@ class MainColumn extends StatelessWidget {
               onTap: () {},
               shape: AppStyles.mainShape,
               title: Text(
-                AppStrings.lastChapter,
+                '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.head}',
                 style: theme.textTheme.labelMedium,
               ),
               trailing: Icon(

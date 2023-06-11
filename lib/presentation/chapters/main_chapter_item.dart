@@ -27,7 +27,9 @@ class MainChapterItem extends StatelessWidget {
       child: ListTile(
         contentPadding: AppStyles.mainPaddingMini,
         dense: true,
-        onTap: () {},
+        onTap: () {
+          chapterItemState.saveLastChapter(item.id);
+        },
         shape: AppStyles.mainShape,
         title: Text(
           item.chapterNumber,

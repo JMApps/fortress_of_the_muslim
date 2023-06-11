@@ -12,7 +12,7 @@ class MainSupplicationBookmarksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
-      future: context.watch<MainChaptersState>().getDatabaseQuery.getBookmarksSupplications(),
+      future: context.watch<MainChaptersState>().getDatabaseQuery.getBookmarkSupplications(),
       builder: (context, snapshot) {
         return snapshot.hasData
             ? CupertinoScrollbar(

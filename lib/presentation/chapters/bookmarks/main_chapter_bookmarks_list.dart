@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
-import 'package:fortress_of_the_muslim/presentation/chapters/bookmarks/main_chapter_bookmark_item.dart';
+import 'package:fortress_of_the_muslim/presentation/chapters/bookmarks/main_chapter_bookmarks_item.dart';
 import 'package:provider/provider.dart';
 
 class MainChapterBookmarksList extends StatelessWidget {
@@ -20,7 +20,7 @@ class MainChapterBookmarksList extends StatelessWidget {
                   padding: AppStyles.mainPaddingMini,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return MainChapterBookmarkItem(
+                    return MainChapterBookmarksItem(
                       item: snapshot.data![index],
                       itemIndex: index,
                     );

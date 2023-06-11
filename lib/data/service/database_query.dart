@@ -35,7 +35,7 @@ class DatabaseQuery {
     return mainSupplications!;
   }
 
-  Future<List<MainSupplicationModel>> getBookmarksSupplications() async {
+  Future<List<MainSupplicationModel>> getBookmarkSupplications() async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_supplications', where: 'favorite_state == 1');
     List<MainSupplicationModel>? mainSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;

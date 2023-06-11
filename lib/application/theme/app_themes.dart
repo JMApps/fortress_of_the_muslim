@@ -98,7 +98,7 @@ extension ColorsSchemes on ColorScheme {
 
   Color get mainSupplicationsColor => brightness == Brightness.light
       ? const Color(0xBFE53935)
-      : const Color(0xFF671616);
+      : const Color(0xFF691717);
 
   Color get mainSupplicationsBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFFFEBEE)
@@ -106,7 +106,7 @@ extension ColorsSchemes on ColorScheme {
 
   Color get mainSupplicationsBookmarkColor => brightness == Brightness.light
       ? const Color(0xBF1E88E5)
-      : const Color(0xFF002054);
+      : const Color(0xFF1B3165);
 
   Color get mainSupplicationsBookmarkBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFE1F5FE)
