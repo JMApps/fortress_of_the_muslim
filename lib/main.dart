@@ -14,6 +14,7 @@ void main() async {
   );
   await Hive.initFlutter();
   await Hive.openBox(AppConstraints.keyMainSettings);
+  await Hive.openBox(AppConstraints.keyCounter);
   DatabaseService databaseService = DatabaseService();
   await databaseService.initializeDatabase();
   runApp(

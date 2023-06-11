@@ -30,6 +30,11 @@ class AppThemes {
         fontWeight: FontWeight.bold,
         color: Color(0xFF009688),
       ),
+      labelLarge: TextStyle(
+        fontSize: 50,
+        fontFamily: 'Gilroy',
+        color: Color(0xFF1E1E1E),
+      ),
     ),
     cardTheme: const CardTheme(
       elevation: 1,
@@ -65,6 +70,11 @@ class AppThemes {
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: Color(0xFF455A64),
+      ),
+      labelLarge: TextStyle(
+        fontSize: 50,
+        fontFamily: 'Gilroy',
+        color: Color(0xFFD3D3D3),
       ),
     ),
     cardTheme: const CardTheme(
