@@ -54,7 +54,7 @@ class MainColumn extends StatelessWidget {
                 child: MainButtonCard(
                   title: AppStrings.supplicationBookmarks,
                   icon: CupertinoIcons.book,
-                  cardColor: theme.colorScheme.mainFavoritesColor,
+                  cardColor: theme.colorScheme.mainSupplicationsBookmarkColor,
                   routeName: '/bookmark_supplications_page',
                   borderRadiusIndex: 3,
                 ),
@@ -158,7 +158,7 @@ class MainColumn extends StatelessWidget {
                   ),
                   OptionButtonCard(
                     icon: CupertinoIcons.share,
-                    avatarColor: theme.colorScheme.mainFavoritesColor,
+                    avatarColor: theme.colorScheme.mainSupplicationsBookmarkColor,
                     routeName: 'links',
                   ),
                 ],

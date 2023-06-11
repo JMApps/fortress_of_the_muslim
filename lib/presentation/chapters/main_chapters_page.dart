@@ -4,19 +4,6 @@ import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/main_chapters_list.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/search_chapter_delegate.dart';
 
-extension on Scaffold {
-  Widget withUnFocusGestureDetector(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (FocusScope.of(context).hasPrimaryFocus) {
-          FocusScope.of(context).unfocus();
-        }
-      },
-      child: this,
-    );
-  }
-}
-
 class MainChaptersPage extends StatelessWidget  {
   const MainChaptersPage({super.key});
 
