@@ -24,6 +24,7 @@ class PercentIndicatorFreeCount extends StatelessWidget {
             },
             splashRadius: 135,
             iconSize: 325,
+            splashColor: themeColors.mainChaptersColor,
             visualDensity: const VisualDensity(
               vertical: -4,
               horizontal: -4,

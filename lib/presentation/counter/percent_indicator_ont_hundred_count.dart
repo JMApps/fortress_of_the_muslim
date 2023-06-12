@@ -14,7 +14,7 @@ class PercentIndicatorOneHundredCount extends StatelessWidget {
       radius: 165,
       lineWidth: 16,
       circularStrokeCap: CircularStrokeCap.round,
-      progressColor: themeColors.mainChaptersColor,
+      progressColor: themeColors.mainSupplicationsColor,
       percent: context.watch<CounterState>().getOneHundredCountNumber / 100,
       center: IconButton(
         onPressed: () {
@@ -22,12 +22,13 @@ class PercentIndicatorOneHundredCount extends StatelessWidget {
         },
         splashRadius: 135,
         iconSize: 325,
+        splashColor: themeColors.mainChaptersColor,
+        color: themeColors.mainSupplicationsColor,
         visualDensity: const VisualDensity(
           vertical: -4,
           horizontal: -4,
         ),
         padding: EdgeInsets.zero,
-        color: themeColors.mainSupplicationsColor,
         icon: const Icon(
           Icons.fiber_manual_record,
         ),
