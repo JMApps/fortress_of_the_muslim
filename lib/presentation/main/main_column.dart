@@ -5,7 +5,6 @@ import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/main/main_button_card.dart';
-import 'package:fortress_of_the_muslim/presentation/main/option_button_card.dart';
 import 'package:fortress_of_the_muslim/presentation/main/select_button_card.dart';
 import 'package:provider/provider.dart';
 
@@ -15,159 +14,130 @@ class MainColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SingleChildScrollView(
-      padding: AppStyles.mainPadding,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: MainButtonCard(
-                  title: AppStrings.chapters,
-                  icon: CupertinoIcons.square_list,
-                  cardColor: theme.colorScheme.mainChaptersColor,
-                  routeName: '/main_chapters_page',
-                  borderRadiusIndex: 0,
-                ),
-              ),
-              Expanded(
-                child: MainButtonCard(
-                  title: AppStrings.chapterBookmarks,
-                  icon: CupertinoIcons.bookmark,
-                  cardColor: theme.colorScheme.mainBookmarksColor,
-                  routeName: '/bookmark_chapters_page',
-                  borderRadiusIndex: 1,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: MainButtonCard(
-                  title: AppStrings.supplications,
-                  icon: CupertinoIcons.square_grid_2x2,
-                  cardColor: theme.colorScheme.mainSupplicationsColor,
-                  routeName: '/main_supplications_page',
-                  borderRadiusIndex: 2,
-                ),
-              ),
-              Expanded(
-                child: MainButtonCard(
-                  title: AppStrings.supplicationBookmarks,
-                  icon: CupertinoIcons.book,
-                  cardColor: theme.colorScheme.mainSupplicationsBookmarkColor,
-                  routeName: '/bookmark_supplications_page',
-                  borderRadiusIndex: 3,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Row(
-            children: [
-              Expanded(
-                child: SelectButtonCard(
-                  title: AppStrings.morning,
-                  icon: CupertinoIcons.sunrise,
-                  chapterIndex: 0,
-                ),
-              ),
-              Expanded(
-                child: SelectButtonCard(
-                  title: AppStrings.evening,
-                  icon: CupertinoIcons.sunset,
-                  chapterIndex: 1,
-                ),
-              ),
-              Expanded(
-                child: SelectButtonCard(
-                  title: AppStrings.night,
-                  icon: CupertinoIcons.moon,
-                  chapterIndex: 2,
-                ),
-              ),
-            ],
-          ),
-          const Row(
-            children: [
-              Expanded(
-                child: SelectButtonCard(
-                  title: AppStrings.afterPrayer,
-                  icon: CupertinoIcons.person_2,
-                  chapterIndex: 3,
-                ),
-              ),
-              Expanded(
-                child: SelectButtonCard(
-                  title: AppStrings.istikhara,
-                  icon: CupertinoIcons.lightbulb,
-                  chapterIndex: 4,
-                ),
-              ),
-              Expanded(
-                child: SelectButtonCard(
-                  title: AppStrings.counter,
-                  icon: CupertinoIcons.forward,
-                  chapterIndex: 222,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Card(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                width: 1,
-                color: Theme.of(context).colorScheme.primaryDefaultColor,
-              ),
-              borderRadius: AppStyles.mainBorder,
-            ),
-            child: ListTile(
-              onTap: () {},
-              shape: AppStyles.mainShape,
-              title: Text(
-                '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.head}',
-                style: theme.textTheme.labelMedium,
-              ),
-              trailing: Icon(
-                CupertinoIcons.forward,
-                color: theme.colorScheme.mainDefaultColor,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Card(
-            child: Padding(
-              padding: AppStyles.mainPaddingMini,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  OptionButtonCard(
-                    icon: CupertinoIcons.settings,
-                    avatarColor: theme.colorScheme.mainChaptersColor,
-                    routeName: '/app_settings',
+    return Center(
+      child: SingleChildScrollView(
+        padding: AppStyles.mainPadding,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: MainButtonCard(
+                    title: AppStrings.chapters,
+                    icon: CupertinoIcons.square_list,
+                    cardColor: theme.colorScheme.mainChaptersColor,
+                    routeName: '/main_chapters_page',
+                    borderRadiusIndex: 0,
                   ),
-                  OptionButtonCard(
+                ),
+                Expanded(
+                  child: MainButtonCard(
+                    title: AppStrings.chapterBookmarks,
+                    icon: CupertinoIcons.bookmark,
+                    cardColor: theme.colorScheme.mainBookmarksColor,
+                    routeName: '/bookmark_chapters_page',
+                    borderRadiusIndex: 1,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: MainButtonCard(
+                    title: AppStrings.supplications,
+                    icon: CupertinoIcons.square_grid_2x2,
+                    cardColor: theme.colorScheme.mainSupplicationsColor,
+                    routeName: '/main_supplications_page',
+                    borderRadiusIndex: 2,
+                  ),
+                ),
+                Expanded(
+                  child: MainButtonCard(
+                    title: AppStrings.supplicationBookmarks,
                     icon: CupertinoIcons.book,
-                    avatarColor: theme.colorScheme.mainBookmarksColor,
-                    routeName: '/other_content',
+                    cardColor: theme.colorScheme.mainSupplicationsBookmarkColor,
+                    routeName: '/bookmark_supplications_page',
+                    borderRadiusIndex: 3,
                   ),
-                  OptionButtonCard(
-                    icon: CupertinoIcons.app_badge,
-                    avatarColor: theme.colorScheme.mainSupplicationsColor,
-                    routeName: 'for_share',
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Row(
+              children: [
+                Expanded(
+                  child: SelectButtonCard(
+                    title: AppStrings.morning,
+                    icon: CupertinoIcons.sunrise,
+                    chapterIndex: 0,
                   ),
-                  OptionButtonCard(
-                    icon: CupertinoIcons.share,
-                    avatarColor: theme.colorScheme.mainSupplicationsBookmarkColor,
-                    routeName: 'links',
+                ),
+                Expanded(
+                  child: SelectButtonCard(
+                    title: AppStrings.evening,
+                    icon: CupertinoIcons.sunset,
+                    chapterIndex: 1,
                   ),
-                ],
+                ),
+                Expanded(
+                  child: SelectButtonCard(
+                    title: AppStrings.night,
+                    icon: CupertinoIcons.moon,
+                    chapterIndex: 2,
+                  ),
+                ),
+              ],
+            ),
+            const Row(
+              children: [
+                Expanded(
+                  child: SelectButtonCard(
+                    title: AppStrings.afterPrayer,
+                    icon: CupertinoIcons.person_2,
+                    chapterIndex: 3,
+                  ),
+                ),
+                Expanded(
+                  child: SelectButtonCard(
+                    title: AppStrings.istikhara,
+                    icon: CupertinoIcons.lightbulb,
+                    chapterIndex: 4,
+                  ),
+                ),
+                Expanded(
+                  child: SelectButtonCard(
+                    title: AppStrings.counter,
+                    icon: CupertinoIcons.forward,
+                    chapterIndex: 222,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Card(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  width: 1,
+                  color: theme.colorScheme.mainChaptersColor,
+                ),
+                borderRadius: AppStyles.mainBorder,
+              ),
+              child: ListTile(
+                onTap: () {},
+                shape: AppStyles.mainShape,
+                title: Text(
+                  '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.head}',
+                  style: theme.textTheme.labelMedium,
+                ),
+                trailing: Icon(
+                  CupertinoIcons.forward,
+                  color: theme.colorScheme.mainDefaultColor,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

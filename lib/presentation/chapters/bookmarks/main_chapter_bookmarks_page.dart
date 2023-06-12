@@ -8,12 +8,12 @@ class MainChapterBookmarksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final themeColors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: theme.colorScheme.mainBookmarksBackgroundColor,
+      backgroundColor: themeColors.mainBookmarksBackgroundColor,
       appBar: AppBar(
         title: const Text(AppStrings.chapterBookmarks),
-        backgroundColor: theme.colorScheme.mainBookmarksColor,
+        backgroundColor: themeColors.mainBookmarksColor,
     ),
     body: const MainChapterBookmarksList(),
     );

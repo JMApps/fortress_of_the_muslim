@@ -35,7 +35,7 @@ class DatabaseService {
     //   await deleteDatabase(toDeleteDB);
     // }
 
-    var exists = await databaseExists(databasePath);
+    bool exists = await databaseExists(databasePath);
 
     if (!exists) {
       try {

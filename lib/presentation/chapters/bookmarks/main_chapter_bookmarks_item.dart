@@ -27,11 +27,10 @@ class MainChapterBookmarksItem extends StatelessWidget {
           ? theme.colorScheme.cardColor
           : theme.colorScheme.cardOddColor,
       child: ListTile(
-        contentPadding: AppStyles.mainPaddingMini,
-        dense: true,
         onTap: () {
           chapterItemState.saveLastChapter(item.id);
         },
+        contentPadding: AppStyles.mainPaddingMini,
         shape: AppStyles.mainShape,
         title: Text(
           item.chapterNumber,

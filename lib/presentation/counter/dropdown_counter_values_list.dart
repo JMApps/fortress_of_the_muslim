@@ -9,6 +9,7 @@ class DropDownCounterValuesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer<CounterState>(
       builder: (context, counterState, _) {
         return Card(
@@ -21,7 +22,7 @@ class DropDownCounterValuesList extends StatelessWidget {
               elevation: 1,
               isExpanded: true,
               alignment: AlignmentDirectional.center,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: theme.textTheme.labelMedium,
               underline: const SizedBox(),
               onChanged: (String? value) {
                 counterState.setDropDownValuesIndex = AppStrings.counterValuesList.indexOf(value!);
@@ -33,7 +34,7 @@ class DropDownCounterValuesList extends StatelessWidget {
                     child: Center(
                       child: Text(
                         value,
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: theme.textTheme.labelMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),

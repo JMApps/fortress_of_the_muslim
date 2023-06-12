@@ -23,38 +23,40 @@ class MainChapterItem extends StatelessWidget {
     final chapterItemState = context.read<MainChaptersState>();
     return Card(
       elevation: 0,
-      color: itemIndex.isOdd ? theme.colorScheme.cardColor : theme.colorScheme.cardOddColor,
+      color: itemIndex.isOdd
+          ? theme.colorScheme.cardColor
+          : theme.colorScheme.cardOddColor,
       child: ListTile(
-        contentPadding: AppStyles.mainPaddingMini,
-        dense: true,
         onTap: () {
           chapterItemState.saveLastChapter(item.id);
         },
+        contentPadding: AppStyles.mainPaddingMini,
         shape: AppStyles.mainShape,
         title: Text(
           item.chapterNumber,
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: theme.colorScheme.primaryDefaultColor,
+            color: theme.colorScheme.mainChaptersColor,
           ),
         ),
         subtitle: Html(
           data: item.chapterTitle,
           style: {
             '#': Style(
+              padding: HtmlPaddings.zero,
+              margin: Margins.zero,
               fontSize: FontSize(17),
               fontFamily: 'Gilroy',
               color: theme.colorScheme.mainDefaultColor,
-              padding: HtmlPaddings.zero,
-              margin: Margins.zero,
             ),
             'b': Style(
-              fontSize: FontSize(17),
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.mainDefaultColor,
               padding: HtmlPaddings.zero,
               margin: Margins.zero,
+              fontSize: FontSize(17),
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Gilroy',
+              color: theme.colorScheme.mainDefaultColor,
             )
           },
         ),
@@ -66,16 +68,16 @@ class MainChapterItem extends StatelessWidget {
             );
           },
           splashRadius: 25,
+          visualDensity: const VisualDensity(horizontal: -4),
           icon: item.favoriteState == 1
               ? Icon(
                   CupertinoIcons.bookmark_fill,
-                  color: theme.colorScheme.primaryDefaultColor,
+                  color: theme.colorScheme.mainChaptersColor,
                 )
               : Icon(
                   CupertinoIcons.bookmark,
                   color: theme.colorScheme.mainDefaultColor,
                 ),
-          visualDensity: const VisualDensity(horizontal: -4),
         ),
       ),
     );

@@ -20,6 +20,7 @@ class PercentIndicatorOneHundredCount extends StatelessWidget {
         onPressed: () {
           context.read<CounterState>().onCounterButtonTap();
         },
+        padding: EdgeInsets.zero,
         splashRadius: 135,
         iconSize: 325,
         splashColor: themeColors.mainChaptersColor,
@@ -28,7 +29,6 @@ class PercentIndicatorOneHundredCount extends StatelessWidget {
           vertical: -4,
           horizontal: -4,
         ),
-        padding: EdgeInsets.zero,
         icon: const Icon(
           Icons.fiber_manual_record,
         ),

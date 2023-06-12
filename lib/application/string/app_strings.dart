@@ -19,7 +19,7 @@ class AppStrings {
   static const String bookmarksSupplicationIsEmpty = 'Избранных дуа нет';
 
   static const List<String> counterValuesList = [
-    '-|-|-',
+    'Без ограничений',
     'После молитвы',
     '100',
   ];

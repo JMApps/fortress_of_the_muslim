@@ -86,9 +86,6 @@ class AppThemes {
 }
 
 extension ColorsSchemes on ColorScheme {
-  Color get primaryDefaultColor => brightness == Brightness.light
-      ? const Color(0xFF009688)
-      : const Color(0xFF4DB6AC);
 
   Color get mainChaptersColor => brightness == Brightness.light
       ? const Color(0xFF009688)

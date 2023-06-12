@@ -19,6 +19,7 @@ class PercentIndicatorPrayerCount extends StatelessWidget {
         onPressed: () {
           context.read<CounterState>().onCounterButtonTap();
         },
+        padding: EdgeInsets.zero,
         splashRadius: 135,
         iconSize: 325,
         splashColor: counterState.getPrayerCountColor,
@@ -27,7 +28,6 @@ class PercentIndicatorPrayerCount extends StatelessWidget {
           vertical: -4,
           horizontal: -4,
         ),
-        padding: EdgeInsets.zero,
         icon: const Icon(
           Icons.fiber_manual_record,
         ),

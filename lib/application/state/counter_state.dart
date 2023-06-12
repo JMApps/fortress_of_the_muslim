@@ -32,8 +32,7 @@ class CounterState extends ChangeNotifier {
   Color get getPrayerCountColor => _prayerCountColor;
 
   CounterState() {
-    _freeCountNumber =
-        _counterBox.get(AppConstraints.keyFreeCountNumber, defaultValue: 0);
+    _freeCountNumber = _counterBox.get(AppConstraints.keyFreeCountNumber, defaultValue: 0);
   }
 
   onCounterButtonTap() {
@@ -46,6 +45,7 @@ class CounterState extends ChangeNotifier {
         break;
       case 2:
         decrementOneHundredNumber();
+        break;
     }
   }
 

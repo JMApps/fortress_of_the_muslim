@@ -23,7 +23,7 @@ class SelectButtonCard extends StatelessWidget {
         side: BorderSide(
           width: 1,
           color: title == AppStrings.counter
-              ? theme.colorScheme.primaryDefaultColor
+              ? theme.colorScheme.mainChaptersColor
               : Colors.transparent,
         ),
         borderRadius: AppStyles.mainBorder,

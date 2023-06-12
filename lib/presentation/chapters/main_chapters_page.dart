@@ -10,32 +10,27 @@ class MainChaptersPage extends StatelessWidget  {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.mainChaptersBackgroundColor,
-        appBar: AppBar(
-          title: const Text(AppStrings.chapters),
-          backgroundColor: theme.colorScheme.mainChaptersColor,
-          actions: [
-            IconButton(
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: SearchChapterDelegate(
-                    hintText: AppStrings.searchChapters,
-                  ),
-                );
-              },
-              splashRadius: 20,
-              icon: const Icon(Icons.search),
-            ),
-          ],
-        ),
-        body: const MainChaptersList(),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.mainChaptersBackgroundColor,
+      appBar: AppBar(
+        title: const Text(AppStrings.chapters),
+        backgroundColor: theme.colorScheme.mainChaptersColor,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchChapterDelegate(
+                  hintText: AppStrings.searchChapters,
+                ),
+              );
+            },
+            splashRadius: 20,
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
+      body: const MainChaptersList(),
     );
   }
 }

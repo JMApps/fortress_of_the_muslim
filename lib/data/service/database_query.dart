@@ -12,15 +12,15 @@ class DatabaseQuery {
   Future<List<MainChapterModel>> getAllChapters() async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_chapters');
-    List<MainChapterModel>? mainChapters = res.isNotEmpty ? res.map((c) => MainChapterModel.fromMap(c)).toList() : null;
-    return mainChapters!;
+    List<MainChapterModel>? allChapters = res.isNotEmpty ? res.map((c) => MainChapterModel.fromMap(c)).toList() : null;
+    return allChapters!;
   }
 
   Future<List<MainChapterModel>> getBookmarkChapters() async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_chapters', where: 'favorite_state == 1');
-    List<MainChapterModel>? mainChapters = res.isNotEmpty ? res.map((c) => MainChapterModel.fromMap(c)).toList() : null;
-    return mainChapters!;
+    List<MainChapterModel>? bookmarkChapters = res.isNotEmpty ? res.map((c) => MainChapterModel.fromMap(c)).toList() : null;
+    return bookmarkChapters!;
   }
 
   addRemoveFavoriteChapter(int state, int chapterId) async {
@@ -31,15 +31,15 @@ class DatabaseQuery {
   Future<List<MainSupplicationModel>> getAllSupplications() async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_supplications');
-    List<MainSupplicationModel>? mainSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
-    return mainSupplications!;
+    List<MainSupplicationModel>? allSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
+    return allSupplications!;
   }
 
   Future<List<MainSupplicationModel>> getBookmarkSupplications() async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_supplications', where: 'favorite_state == 1');
-    List<MainSupplicationModel>? mainSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
-    return mainSupplications!;
+    List<MainSupplicationModel>? bookmarkSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
+    return bookmarkSupplications!;
   }
 
   addRemoveFavoriteSupplication(int state, int supplicationId) async {
