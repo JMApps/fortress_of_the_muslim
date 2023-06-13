@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
+import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
@@ -42,15 +43,17 @@ class MainChapterBookmarksItem extends StatelessWidget {
         shape: AppStyles.mainShape,
         title: Text(
           item.chapterNumber,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: theme.colorScheme.mainBookmarksColor,
+            color: Color(0xFFFB8C00),
           ),
         ),
         subtitle: ForHtmlText(
           textData: item.chapterTitle,
           textSize: 17,
+          footnoteColor: const Color(0xFFFB8C00),
+          textDataAlign: TextAlign.start,
         ),
         leading: IconButton(
           onPressed: () {
@@ -59,14 +62,11 @@ class MainChapterBookmarksItem extends StatelessWidget {
               item.id,
             );
           },
+          tooltip: AppStrings.removeFromBookmark,
           splashRadius: 25,
-          icon: Icon(
-            item.favoriteState == 1
-                ? CupertinoIcons.bookmark_fill
-                : CupertinoIcons.bookmark,
-            color: item.favoriteState == 1
-                ? theme.colorScheme.mainBookmarksColor
-                : theme.colorScheme.mainDefaultColor,
+          icon: const Icon(
+            CupertinoIcons.bookmark_fill,
+            color: Color(0xFFFB8C00),
           ),
           visualDensity: const VisualDensity(horizontal: -4),
         ),

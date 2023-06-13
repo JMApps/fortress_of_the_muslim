@@ -16,6 +16,13 @@ class DatabaseQuery {
     return allChapters!;
   }
 
+  Future<List<MainChapterModel>> getOneChapter(int chapterId) async {
+    var dbClient = await _con.db;
+    var res = await dbClient.query('Table_of_chapters', where: 'id == $chapterId');
+    List<MainChapterModel>? allChapters = res.isNotEmpty ? res.map((c) => MainChapterModel.fromMap(c)).toList() : null;
+    return allChapters!;
+  }
+
   Future<List<MainChapterModel>> getBookmarkChapters() async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_chapters', where: 'favorite_state == 1');

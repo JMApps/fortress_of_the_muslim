@@ -17,7 +17,11 @@ class OptionButtonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        switch (routeName) {
+
+        }
+      },
       borderRadius: AppStyles.mainBorder,
       splashColor: avatarColor,
       radius: 35,

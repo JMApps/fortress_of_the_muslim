@@ -21,21 +21,26 @@ class SearchSupplicationDelegate extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    return Theme.of(context).copyWith(
+    final theme = Theme.of(context);
+    return theme.copyWith(
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
         shape: AppStyles.appBarShape,
-        backgroundColor: Theme.of(context).colorScheme.mainSupplicationsColor,
+        backgroundColor: theme.colorScheme.mainSupplicationsColor,
         titleTextStyle: const TextStyle(
           color: Color(0xFFFFFFFF),
           fontFamily: 'Gilroy',
           fontSize: 20,
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
-        hintStyle: Theme.of(context).textTheme.bodyMedium,
+        hintStyle: TextStyle(
+          fontSize: 17,
+          fontFamily: 'Gilroy',
+          color: Colors.white70,
+        ),
       ),
     );
   }
@@ -85,15 +90,22 @@ class SearchSupplicationDelegate extends SearchDelegate {
 
   Widget _searchFuture(BuildContext context) {
     return FutureBuilder<List>(
-      future: context.watch<MainChaptersState>().getDatabaseQuery.getAllSupplications(),
+      future: context
+          .watch<MainChaptersState>()
+          .getDatabaseQuery
+          .getAllSupplications(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           _supplications = snapshot.data;
           _recentSupplications = query.isEmpty
               ? _supplications
-              : _supplications.where((element) =>
+              : _supplications
+                  .where((element) =>
                       element.id.toString().contains(query.toString()) ||
-                      element.translationText.toLowerCase().contains(query.toLowerCase())).toList();
+                      element.translationText
+                          .toLowerCase()
+                          .contains(query.toLowerCase()))
+                  .toList();
           return _recentSupplications.isEmpty
               ? Padding(
                   padding: AppStyles.mainPadding,

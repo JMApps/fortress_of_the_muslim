@@ -2,6 +2,10 @@ class AppStrings {
   static const String appName = 'Крепость мусульманина';
   static const String chapters = 'Главы';
   static const String chapterBookmarks = 'Избранное';
+  static const String addToBookmark = 'Добавить в избранное';
+  static const String removeFromBookmark = 'Удалить из избранного';
+  static const String added = 'Добавлено';
+  static const String deleted = 'Удалено';
   static const String supplications = 'Все дуа';
   static const String supplicationBookmarks = 'Избранные дуа';
   static const String morning = 'Утром';

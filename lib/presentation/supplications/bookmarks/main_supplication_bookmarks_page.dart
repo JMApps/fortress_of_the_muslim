@@ -8,12 +8,12 @@ class MainSupplicationBookmarksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final themeColors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: theme.colorScheme.mainSupplicationsBookmarkBackgroundColor,
+      backgroundColor: themeColors.mainSupplicationsBookmarkBackgroundColor,
       appBar: AppBar(
         title: const Text(AppStrings.supplicationBookmarks),
-        backgroundColor: theme.colorScheme.mainSupplicationsBookmarkColor,
+        backgroundColor: themeColors.mainSupplicationsBookmarkColor,
       ),
       body: const MainSupplicationBookmarksList(),
     );

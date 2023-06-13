@@ -12,15 +12,15 @@ class MainSupplicationsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
       future: context.watch<MainChaptersState>().getDatabaseQuery.getAllSupplications(),
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         return snapshot.hasData
             ? CupertinoScrollbar(
                 child: ListView.builder(
                   padding: AppStyles.mainPaddingMini,
-                  itemCount: snapshot.data!.length,
+                  itemCount: snapshot.data?.length,
                   itemBuilder: (BuildContext context, int index) {
                     return MainSupplicationItem(
-                      item: snapshot.data![index],
+                      item: snapshot.data?[index],
                       itemIndex: index,
                     );
                   },

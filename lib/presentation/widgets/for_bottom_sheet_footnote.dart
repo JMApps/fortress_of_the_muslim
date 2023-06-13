@@ -25,6 +25,7 @@ class ForBottomSheetFootnote extends StatelessWidget {
             fontSize: FontSize(17),
             fontFamily: 'Gilroy',
             color: theme.colorScheme.mainDefaultColor,
+            textAlign: TextAlign.center
           ),
           'b': Style(
             padding: HtmlPaddings.zero,

@@ -9,10 +9,14 @@ class ForHtmlText extends StatelessWidget {
     super.key,
     required this.textData,
     required this.textSize,
+    required this.footnoteColor,
+    required this.textDataAlign,
   });
 
   final String textData;
   final double textSize;
+  final Color footnoteColor;
+  final TextAlign textDataAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class ForHtmlText extends StatelessWidget {
           fontSize: FontSize(textSize),
           fontFamily: 'Gilroy',
           color: theme.colorScheme.mainDefaultColor,
+          textAlign: textDataAlign,
         ),
         'b': Style(
           padding: HtmlPaddings.zero,
@@ -46,7 +51,7 @@ class ForHtmlText extends StatelessWidget {
           fontSize: FontSize(textSize),
           fontFamily: 'Gilroy',
           fontWeight: FontWeight.bold,
-          color: theme.colorScheme.footnoteColor,
+          color: footnoteColor,
         ),
       },
       onLinkTap: (String? url, _, __) {

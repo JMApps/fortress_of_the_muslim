@@ -11,7 +11,7 @@ class AppThemes {
       centerTitle: true,
       elevation: 0,
       shape: AppStyles.appBarShape,
-      backgroundColor: Color(0xFF009688),
+      backgroundColor: Color(0xFF00897B),
       titleTextStyle: TextStyle(
         color: Color(0xFFFFFFFF),
         fontFamily: 'Gilroy',
@@ -24,14 +24,8 @@ class AppThemes {
         fontFamily: 'Gilroy',
         color: Color(0xFF1E1E1E),
       ),
-      titleMedium: TextStyle(
-        fontSize: 17,
-        fontFamily: 'Gilroy',
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF009688),
-      ),
       labelLarge: TextStyle(
-        fontSize: 50,
+        fontSize: 75,
         fontFamily: 'Gilroy',
         color: Color(0xFF1E1E1E),
       ),
@@ -65,14 +59,8 @@ class AppThemes {
         fontFamily: 'Gilroy',
         color: Color(0xFFD3D3D3),
       ),
-      titleMedium: TextStyle(
-        fontSize: 17,
-        fontFamily: 'Gilroy',
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF455A64),
-      ),
       labelLarge: TextStyle(
-        fontSize: 50,
+        fontSize: 75,
         fontFamily: 'Gilroy',
         color: Color(0xFFD3D3D3),
       ),
@@ -88,40 +76,44 @@ class AppThemes {
 extension ColorsSchemes on ColorScheme {
 
   Color get mainChaptersColor => brightness == Brightness.light
-      ? const Color(0xFF009688)
-      : const Color(0xFF00443E);
+      ? const Color(0xFF00897B)
+      : const Color(0xFF004D40);
 
   Color get mainChaptersBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFE0F2F1)
       : const Color(0xFF192326);
 
   Color get mainBookmarksColor => brightness == Brightness.light
-      ? const Color(0xBFFB8C00)
-      : const Color(0xFF7A2A00);
+      ? const Color(0xFFFB8C00)
+      : const Color(0xFFE65100);
 
   Color get mainBookmarksBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFFFF3E0)
       : const Color(0xFF192326);
 
   Color get mainSupplicationsColor => brightness == Brightness.light
-      ? const Color(0xBFE53935)
-      : const Color(0xFF691717);
+      ? const Color(0xFFE53935)
+      : const Color(0xFFB71C1C);
 
   Color get mainSupplicationsBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFFFEBEE)
       : const Color(0xFF192326);
 
   Color get mainSupplicationsBookmarkColor => brightness == Brightness.light
-      ? const Color(0xBF1E88E5)
-      : const Color(0xFF1B3165);
+      ? const Color(0xFF1E88E5)
+      : const Color(0xFF0D47A1);
 
   Color get mainSupplicationsBookmarkBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFE1F5FE)
       : const Color(0xFF192326);
 
   Color get chapterContentSupplicationsColor => brightness == Brightness.light
-      ? const Color(0xFF607D8B)
+      ? const Color(0xFF546E7A)
       : const Color(0xFF263238);
+
+  Color get chapterContentSupplicationsPrimaryColor => brightness == Brightness.light
+      ? const Color(0xFFE53935)
+      : const Color(0xFF4FC3F7);
 
   Color get chapterContentSupplicationsBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFECEFF1)
@@ -138,8 +130,4 @@ extension ColorsSchemes on ColorScheme {
   Color get cardColor => brightness == Brightness.light
       ? const Color(0xFFFFFFFF)
       : const Color(0xFF192326);
-
-  Color get footnoteColor => brightness == Brightness.light
-      ? const Color(0xBFE53935)
-      : const Color(0xBF35E596);
 }

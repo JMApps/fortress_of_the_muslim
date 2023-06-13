@@ -4,6 +4,7 @@ import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/content/content_chapter_supplication_item.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
 import 'package:provider/provider.dart';
 
 class ChapterContentPage extends StatelessWidget {
@@ -21,7 +22,7 @@ class ChapterContentPage extends StatelessWidget {
       backgroundColor: theme.colorScheme.chapterContentSupplicationsBackgroundColor,
       body: FutureBuilder<List>(
         future: context.watch<MainChaptersState>().getDatabaseQuery.getChapterContentSupplications(chapterId),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           return snapshot.hasData
               ? CustomScrollView(
                   slivers: [
@@ -32,17 +33,33 @@ class ChapterContentPage extends StatelessWidget {
                       backgroundColor: theme.colorScheme.chapterContentSupplicationsColor,
                     ),
                     SliverToBoxAdapter(
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                        elevation: 0,
-                        child: Padding(
-                          padding: AppStyles.mainPadding,
-                          child: Text(
-                            'OK',
-                            style: theme.textTheme.labelMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                      child: FutureBuilder<List>(
+                        future: context.read<MainChaptersState>().getDatabaseQuery.getOneChapter(chapterId),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<dynamic>> snapshot) {
+                          return snapshot.hasData
+                              ? Card(
+                                  margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                  elevation: 0,
+                                  child: Padding(
+                                    padding: AppStyles.mainPadding,
+                                    child: ForHtmlText(
+                                      textData: snapshot.data?[0].chapterTitle,
+                                      textSize: 17,
+                                      footnoteColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
+                                      textDataAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                )
+                              : const Card(
+                                  margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                  elevation: 0,
+                                  child: Padding(
+                                    padding: AppStyles.mainPadding,
+                                    child: CircularProgressIndicator.adaptive(),
+                                  ),
+                                );
+                        },
                       ),
                     ),
                     SliverList(

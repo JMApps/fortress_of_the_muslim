@@ -21,21 +21,26 @@ class SearchChapterDelegate extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    return Theme.of(context).copyWith(
+    final theme = Theme.of(context);
+    return theme.copyWith(
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
         shape: AppStyles.appBarShape,
-        backgroundColor: Theme.of(context).colorScheme.mainChaptersColor,
+        backgroundColor: theme.colorScheme.mainChaptersColor,
         titleTextStyle: const TextStyle(
           color: Color(0xFFFFFFFF),
           fontFamily: 'Gilroy',
           fontSize: 20,
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
-        hintStyle: Theme.of(context).textTheme.bodyMedium,
+        hintStyle: TextStyle(
+          fontSize: 17,
+          fontFamily: 'Gilroy',
+          color: Colors.white70,
+        ),
       ),
     );
   }
@@ -85,16 +90,23 @@ class SearchChapterDelegate extends SearchDelegate {
 
   Widget _searchFuture(BuildContext context) {
     return FutureBuilder<List>(
-      future: context.watch<MainChaptersState>().getDatabaseQuery.getAllChapters(),
+      future:
+          context.watch<MainChaptersState>().getDatabaseQuery.getAllChapters(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           _chapters = snapshot.data;
           _recentChapters = query.isEmpty
               ? _chapters
-              : _chapters.where((element) =>
-              element.id.toString().contains(query) ||
-              element.chapterNumber.toLowerCase().contains(query.toLowerCase()) ||
-              element.chapterTitle.toLowerCase().contains(query.toLowerCase())).toList();
+              : _chapters
+                  .where((element) =>
+                      element.id.toString().contains(query) ||
+                      element.chapterNumber
+                          .toLowerCase()
+                          .contains(query.toLowerCase()) ||
+                      element.chapterTitle
+                          .toLowerCase()
+                          .contains(query.toLowerCase()))
+                  .toList();
           return _recentChapters.isEmpty
               ? Padding(
                   padding: AppStyles.mainPadding,

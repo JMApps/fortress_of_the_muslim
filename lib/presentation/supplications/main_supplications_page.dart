@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
@@ -9,12 +10,12 @@ class MainSupplicationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final themeColors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: theme.colorScheme.mainSupplicationsBackgroundColor,
+      backgroundColor: themeColors.mainSupplicationsBackgroundColor,
       appBar: AppBar(
         title: const Text(AppStrings.supplications),
-        backgroundColor: theme.colorScheme.mainSupplicationsColor,
+        backgroundColor: themeColors.mainSupplicationsColor,
         actions: [
           IconButton(
             onPressed: () {
@@ -25,8 +26,9 @@ class MainSupplicationsPage extends StatelessWidget {
                 ),
               );
             },
+            tooltip: AppStrings.searchSupplications,
             splashRadius: 20,
-            icon: const Icon(Icons.search),
+            icon: const Icon(CupertinoIcons.search),
           ),
         ],
       ),
