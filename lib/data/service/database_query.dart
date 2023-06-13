@@ -46,4 +46,11 @@ class DatabaseQuery {
     var dbClient = await _con.db;
     await dbClient.rawQuery('UPDATE Table_of_supplications SET favorite_state = $state WHERE id == $supplicationId');
   }
+
+  Future<List<MainSupplicationModel>> getChapterContentSupplications(int chapterId) async {
+    var dbClient = await _con.db;
+    var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $chapterId');
+    List<MainSupplicationModel>? chapterContentSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
+    return chapterContentSupplications!;
+  }
 }

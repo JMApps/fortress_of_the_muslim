@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/bookmarks/main_chapter_bookmarks_page.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/main_chapters_page.dart';
+import 'package:fortress_of_the_muslim/presentation/content/chapter_content_page.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/counter_page.dart';
 import 'package:fortress_of_the_muslim/presentation/supplications/bookmarks/main_supplication_bookmarks_page.dart';
 import 'package:fortress_of_the_muslim/presentation/supplications/main_supplications_page.dart';
@@ -27,6 +29,14 @@ class AppRoutes {
       case '/counter_page':
         return MaterialPageRoute(
           builder: (_) => const CounterPage(),
+        );
+      case '/chapter_content_page':
+        final MainChapterArguments mainChapterArguments =
+            routeSettings.arguments as MainChapterArguments;
+        return MaterialPageRoute(
+          builder: (_) => ChapterContentPage(
+            chapterId: mainChapterArguments.chapterId,
+          ),
         );
       default:
         throw Exception('Invalid route ${routeSettings.name}');
