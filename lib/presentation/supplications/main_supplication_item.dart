@@ -4,6 +4,7 @@ import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dar
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
 import 'package:provider/provider.dart';
 
 class MainSupplicationItem extends StatelessWidget {
@@ -51,10 +52,9 @@ class MainSupplicationItem extends StatelessWidget {
             item.transcriptionText != null
                 ? const SizedBox(height: 16)
                 : const SizedBox(),
-            Text(
-              item.translationText,
-              style: theme.textTheme.labelMedium,
-              textAlign: TextAlign.start,
+            ForHtmlText(
+              textData: item.translationText,
+              textSize: 17,
             ),
             const SizedBox(height: 16),
             Card(

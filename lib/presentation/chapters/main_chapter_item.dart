@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
 import 'package:provider/provider.dart';
 
 class MainChapterItem extends StatelessWidget {
@@ -29,6 +30,13 @@ class MainChapterItem extends StatelessWidget {
       child: ListTile(
         onTap: () {
           chapterItemState.saveLastChapter(item.id);
+          Navigator.pushNamed(
+            context,
+            '/chapter_content_page',
+            arguments: MainChapterArguments(
+              chapterId: item.id,
+            ),
+          );
         },
         contentPadding: AppStyles.mainPaddingMini,
         shape: AppStyles.mainShape,
@@ -40,25 +48,9 @@ class MainChapterItem extends StatelessWidget {
             color: theme.colorScheme.mainChaptersColor,
           ),
         ),
-        subtitle: Html(
-          data: item.chapterTitle,
-          style: {
-            '#': Style(
-              padding: HtmlPaddings.zero,
-              margin: Margins.zero,
-              fontSize: FontSize(17),
-              fontFamily: 'Gilroy',
-              color: theme.colorScheme.mainDefaultColor,
-            ),
-            'b': Style(
-              padding: HtmlPaddings.zero,
-              margin: Margins.zero,
-              fontSize: FontSize(17),
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Gilroy',
-              color: theme.colorScheme.mainDefaultColor,
-            )
-          },
+        subtitle: ForHtmlText(
+          textData: item.chapterTitle,
+          textSize: 17,
         ),
         leading: IconButton(
           onPressed: () {
