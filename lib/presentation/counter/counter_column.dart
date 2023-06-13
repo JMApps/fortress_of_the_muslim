@@ -45,11 +45,19 @@ class _CounterColumnState extends State<CounterColumn> {
                   margin: AppStyles.mainMargin,
                   child: Padding(
                     padding: AppStyles.mainPadding,
-                    child: _countTexts[counterState.getDropDownValuesIndex],
+                    child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        child: _countTexts[counterState.getDropDownValuesIndex],
+                        switchInCurve: Curves.easeInCubic,
+                        switchOutCurve: Curves.easeInCubic),
                   ),
                 ),
                 const SizedBox(height: 32),
-                _countPercentIndicators[counterState.getDropDownValuesIndex],
+                AnimatedSwitcher(
+                  duration: (const Duration(milliseconds: 500)),
+                  child: _countPercentIndicators[
+                      counterState.getDropDownValuesIndex],
+                ),
                 const SizedBox(height: 32),
                 const DropDownCounterValuesList(),
                 const SizedBox(height: 16),

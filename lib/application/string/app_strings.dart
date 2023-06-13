@@ -22,6 +22,7 @@ class AppStrings {
   static const String searchQueryIsEmpty = 'По вашему запросу ничего не найдено';
   static const String bookmarksChapterIsEmpty = 'Избранных глав нет';
   static const String bookmarksSupplicationIsEmpty = 'Избранных дуа нет';
+  static const String settings = 'Настройки';
 
   static const List<String> counterValuesList = [
     'Без ограничений',

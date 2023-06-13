@@ -27,12 +27,12 @@ class MainPage extends StatelessWidget {
               OptionButtonCard(
                 icon: CupertinoIcons.settings,
                 avatarColor: theme.colorScheme.mainChaptersColor,
-                routeName: '/app_settings',
+                routeName: '/app_settings_page',
               ),
               OptionButtonCard(
                 icon: CupertinoIcons.book,
                 avatarColor: theme.colorScheme.mainBookmarksColor,
-                routeName: '/other_content',
+                routeName: '/other_content_page',
               ),
               OptionButtonCard(
                 icon: CupertinoIcons.app_badge,

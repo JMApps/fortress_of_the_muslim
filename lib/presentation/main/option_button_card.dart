@@ -19,7 +19,9 @@ class OptionButtonCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         switch (routeName) {
-
+          case '/app_settings_page':
+            Navigator.pushNamed(context, routeName);
+            break;
         }
       },
       borderRadius: AppStyles.mainBorder,

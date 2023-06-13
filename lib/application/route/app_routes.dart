@@ -4,6 +4,7 @@ import 'package:fortress_of_the_muslim/presentation/chapters/bookmarks/main_chap
 import 'package:fortress_of_the_muslim/presentation/chapters/main_chapters_page.dart';
 import 'package:fortress_of_the_muslim/presentation/content/chapter_content_page.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/counter_page.dart';
+import 'package:fortress_of_the_muslim/presentation/settings/app_settings_page.dart';
 import 'package:fortress_of_the_muslim/presentation/supplications/bookmarks/main_supplication_bookmarks_page.dart';
 import 'package:fortress_of_the_muslim/presentation/supplications/main_supplications_page.dart';
 
@@ -37,6 +38,10 @@ class AppRoutes {
           builder: (_) => ChapterContentPage(
             chapterId: mainChapterArguments.chapterId,
           ),
+        );
+      case '/app_settings_page':
+        return MaterialPageRoute(
+          builder: (_) => const AppSettingsPage(),
         );
       default:
         throw Exception('Invalid route ${routeSettings.name}');
