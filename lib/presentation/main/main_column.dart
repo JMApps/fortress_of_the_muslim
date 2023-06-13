@@ -4,6 +4,7 @@ import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dar
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/presentation/main/main_button_card.dart';
 import 'package:fortress_of_the_muslim/presentation/main/select_button_card.dart';
 import 'package:provider/provider.dart';
@@ -70,21 +71,21 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.morning,
                     icon: CupertinoIcons.sunrise,
-                    chapterIndex: 0,
+                    chapterId: 27,
                   ),
                 ),
                 Expanded(
                   child: SelectButtonCard(
                     title: AppStrings.evening,
                     icon: CupertinoIcons.sunset,
-                    chapterIndex: 1,
+                    chapterId: 28,
                   ),
                 ),
                 Expanded(
                   child: SelectButtonCard(
                     title: AppStrings.night,
                     icon: CupertinoIcons.moon,
-                    chapterIndex: 2,
+                    chapterId: 29,
                   ),
                 ),
               ],
@@ -95,21 +96,21 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.afterPrayer,
                     icon: CupertinoIcons.person_2,
-                    chapterIndex: 3,
+                    chapterId: 25,
                   ),
                 ),
                 Expanded(
                   child: SelectButtonCard(
                     title: AppStrings.istikhara,
                     icon: CupertinoIcons.lightbulb,
-                    chapterIndex: 4,
+                    chapterId: 26,
                   ),
                 ),
                 Expanded(
                   child: SelectButtonCard(
                     title: AppStrings.counter,
                     icon: CupertinoIcons.forward,
-                    chapterIndex: 222,
+                    chapterId: 222,
                   ),
                 ),
               ],
@@ -118,16 +119,24 @@ class MainColumn extends StatelessWidget {
             Card(
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  width: 1,
+                  width: 2,
                   color: theme.colorScheme.mainChaptersColor,
                 ),
                 borderRadius: AppStyles.mainBorder,
               ),
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/chapter_content_page',
+                    arguments: MainChapterArguments(
+                      chapterId: context.read<MainChaptersState>().getLastSavedChapterIndex,
+                    ),
+                  );
+                },
                 shape: AppStyles.mainShape,
                 title: Text(
-                  '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.head}',
+                  '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.heads}',
                   style: theme.textTheme.labelMedium,
                 ),
                 trailing: Icon(

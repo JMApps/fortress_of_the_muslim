@@ -18,8 +18,9 @@ class MainPage extends StatelessWidget {
       ),
       body: const MainColumn(),
       bottomNavigationBar: Card(
+        elevation: 1,
         child: Padding(
-          padding: AppStyles.symmetricVerticalPadding,
+          padding: AppStyles.symmetricVerticalPaddingMini,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

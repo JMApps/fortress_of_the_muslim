@@ -119,6 +119,14 @@ extension ColorsSchemes on ColorScheme {
       ? const Color(0xFFE1F5FE)
       : const Color(0xFF192326);
 
+  Color get chapterContentSupplicationsColor => brightness == Brightness.light
+      ? const Color(0xFF607D8B)
+      : const Color(0xFF263238);
+
+  Color get chapterContentSupplicationsBackgroundColor => brightness == Brightness.light
+      ? const Color(0xFFECEFF1)
+      : const Color(0xFF192326);
+
   Color get mainDefaultColor => brightness == Brightness.light
       ? const Color(0xFF1C1C1C)
       : const Color(0xFFD3D3D3);
@@ -130,4 +138,8 @@ extension ColorsSchemes on ColorScheme {
   Color get cardColor => brightness == Brightness.light
       ? const Color(0xFFFFFFFF)
       : const Color(0xFF192326);
+
+  Color get footnoteColor => brightness == Brightness.light
+      ? const Color(0xBFE53935)
+      : const Color(0xBF35E596);
 }

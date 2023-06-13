@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 
 class SelectButtonCard extends StatelessWidget {
   const SelectButtonCard({
     super.key,
     required this.title,
     required this.icon,
-    required this.chapterIndex,
+    required this.chapterId,
   });
 
   final String title;
   final IconData icon;
-  final int chapterIndex;
+  final int chapterId;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class SelectButtonCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          width: 1,
+          width: 2,
           color: title == AppStrings.counter
               ? theme.colorScheme.mainChaptersColor
               : Colors.transparent,
@@ -30,8 +31,16 @@ class SelectButtonCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          if (chapterIndex == 222) {
+          if (chapterId == 222) {
             Navigator.pushNamed(context, '/counter_page');
+          } else {
+            Navigator.pushNamed(
+              context,
+              '/chapter_content_page',
+              arguments: MainChapterArguments(
+                chapterId: chapterId,
+              ),
+            );
           }
         },
         borderRadius: AppStyles.mainBorder,

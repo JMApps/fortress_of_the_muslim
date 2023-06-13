@@ -11,7 +11,8 @@ class AppStrings {
   static const String istikhara = 'Истихара';
   static const String counter = 'Счётчик';
   static const String lastChapter = 'Продолжить чтение';
-  static const String head = 'главы';
+  static const String heads = 'главы';
+  static const String head = 'Глава';
   static const String searchChapters = 'Поиск глав...';
   static const String searchSupplications = 'Поиск дуа...';
   static const String searchQueryIsEmpty = 'По вашему запросу ничего не найдено';
