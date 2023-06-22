@@ -35,8 +35,7 @@ class ChapterContentPage extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: FutureBuilder<List>(
                         future: context.read<MainChaptersState>().getDatabaseQuery.getOneChapter(chapterId),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<dynamic>> snapshot) {
+                        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
                           return snapshot.hasData
                               ? Card(
                                   margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
@@ -64,12 +63,14 @@ class ChapterContentPage extends StatelessWidget {
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int itemIndex) {
-                        return ContentChapterSupplicationItem(
-                          item: snapshot.data![itemIndex],
-                          itemIndex: itemIndex,
-                        );
-                      }, childCount: snapshot.data!.length),
+                        (BuildContext context, int itemIndex) {
+                          return ContentChapterSupplicationItem(
+                            item: snapshot.data![itemIndex],
+                            itemIndex: itemIndex,
+                          );
+                        },
+                        childCount: snapshot.data!.length,
+                      ),
                     ),
                   ],
                 )

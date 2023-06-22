@@ -53,16 +53,14 @@ class ContentChapterSupplicationItem extends StatelessWidget {
             ForHtmlText(
               textData: item.translationText,
               textSize: 17,
-              footnoteColor:
-                  theme.colorScheme.chapterContentSupplicationsPrimaryColor,
+              footnoteColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
               textDataAlign: TextAlign.start,
             ),
             const SizedBox(height: 16),
             SupplicationMediaCard(
               item: item,
               itemIndex: itemIndex,
-              itemColor:
-                  theme.colorScheme.chapterContentSupplicationsPrimaryColor,
+              itemColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
             ),
           ],
         ),
