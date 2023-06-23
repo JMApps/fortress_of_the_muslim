@@ -10,10 +10,12 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
     super.key,
     required this.item,
     required this.itemIndex,
+    required this.itemsLength,
   });
 
   final MainSupplicationModel item;
   final int itemIndex;
+  final int itemsLength;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,7 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
               item: item,
               itemIndex: itemIndex,
               itemColor: const Color(0xFF1E88E5),
+              itemsLength: itemsLength,
             ),
           ],
         ),

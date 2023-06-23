@@ -45,7 +45,7 @@ class ChapterContentPage extends StatelessWidget {
                                     child: ForHtmlText(
                                       textData: snapshot.data?[0].chapterTitle,
                                       textSize: 17,
-                                      footnoteColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
+                                      footnoteColor: theme.colorScheme.mainChaptersColor,
                                       textDataAlign: TextAlign.center,
                                     ),
                                   ),
@@ -67,6 +67,7 @@ class ChapterContentPage extends StatelessWidget {
                           return ContentChapterSupplicationItem(
                             item: snapshot.data![itemIndex],
                             itemIndex: itemIndex,
+                            itemsLength: snapshot.data!.length,
                           );
                         },
                         childCount: snapshot.data!.length,

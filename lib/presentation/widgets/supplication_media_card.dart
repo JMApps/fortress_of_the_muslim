@@ -13,11 +13,13 @@ class SupplicationMediaCard extends StatelessWidget {
     super.key,
     required this.item,
     required this.itemIndex,
+    required this.itemsLength,
     required this.itemColor,
   });
 
   final MainSupplicationModel item;
   final int itemIndex;
+  final int itemsLength;
   final Color itemColor;
 
   @override
@@ -34,13 +36,6 @@ class SupplicationMediaCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              'Дуа ${item.id}',
-              style: TextStyle(
-                fontSize: 17,
-                color: itemColor,
-              ),
-            ),
             item.arabicText != null ? IconButton(
               onPressed: () {},
               splashRadius: 20,
@@ -49,7 +44,7 @@ class SupplicationMediaCard extends StatelessWidget {
                 vertical: -4,
                 horizontal: -4,
               ),
-              icon: const Icon(Icons.play_circle),
+              icon: const Icon(CupertinoIcons.play),
             ) : const SizedBox(),
             item.arabicText != null ? IconButton(
               onPressed: () {},
@@ -59,7 +54,7 @@ class SupplicationMediaCard extends StatelessWidget {
                 vertical: -4,
                 horizontal: -4,
               ),
-              icon: const Icon(Icons.replay),
+              icon: const Icon(Icons.repeat_rounded),
             ) : const SizedBox(),
             item.arabicText != null ? IconButton(
               onPressed: () {},
@@ -112,7 +107,14 @@ class SupplicationMediaCard extends StatelessWidget {
                 vertical: -4,
                 horizontal: -4,
               ),
-              icon: const Icon(Icons.share),
+              icon: const Icon(CupertinoIcons.share),
+            ),
+            Text(
+              '${itemIndex + 1}/$itemsLength',
+              style: TextStyle(
+                fontSize: 17,
+                color: itemColor,
+              ),
             ),
           ],
         ),

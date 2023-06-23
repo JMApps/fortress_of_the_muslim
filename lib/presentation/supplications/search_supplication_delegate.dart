@@ -94,9 +94,9 @@ class SearchSupplicationDelegate extends SearchDelegate {
           .watch<MainChaptersState>()
           .getDatabaseQuery
           .getAllSupplications(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
-          _supplications = snapshot.data;
+          _supplications = snapshot.data as List<MainSupplicationModel>;
           _recentSupplications = query.isEmpty
               ? _supplications
               : _supplications
@@ -125,6 +125,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
                       return MainSupplicationItem(
                         item: _recentSupplications[index],
                         itemIndex: index,
+                        itemsLength: snapshot.data!.length,
                       );
                     },
                   ),

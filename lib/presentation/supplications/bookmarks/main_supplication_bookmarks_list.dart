@@ -23,6 +23,7 @@ class MainSupplicationBookmarksList extends StatelessWidget {
                     return MainSupplicationBookmarkItem(
                       item: snapshot.data?[index],
                       itemIndex: index,
+                      itemsLength: snapshot.data!.length,
                     );
                   },
                 ),

@@ -10,10 +10,12 @@ class ContentChapterSupplicationItem extends StatelessWidget {
     super.key,
     required this.item,
     required this.itemIndex,
+    required this.itemsLength,
   });
 
   final MainSupplicationModel item;
   final int itemIndex;
+  final int itemsLength;
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +55,14 @@ class ContentChapterSupplicationItem extends StatelessWidget {
             ForHtmlText(
               textData: item.translationText,
               textSize: 17,
-              footnoteColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
+              footnoteColor: theme.colorScheme.mainChaptersColor,
               textDataAlign: TextAlign.start,
             ),
             const SizedBox(height: 16),
             SupplicationMediaCard(
               item: item,
               itemIndex: itemIndex,
+              itemsLength: itemsLength,
               itemColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
             ),
           ],

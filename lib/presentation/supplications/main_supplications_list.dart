@@ -22,6 +22,7 @@ class MainSupplicationsList extends StatelessWidget {
                     return MainSupplicationItem(
                       item: snapshot.data?[index],
                       itemIndex: index,
+                      itemsLength: snapshot.data!.length,
                     );
                   },
                 ),

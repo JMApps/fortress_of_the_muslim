@@ -10,10 +10,12 @@ class MainSupplicationItem extends StatelessWidget {
     super.key,
     required this.item,
     required this.itemIndex,
+    required this.itemsLength,
   });
 
   final MainSupplicationModel item;
   final int itemIndex;
+  final int itemsLength;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class MainSupplicationItem extends StatelessWidget {
             SupplicationMediaCard(
               item: item,
               itemIndex: itemIndex,
+              itemsLength: itemsLength,
               itemColor: const Color(0xFFE53935),
             ),
           ],
