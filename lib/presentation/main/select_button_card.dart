@@ -9,11 +9,13 @@ class SelectButtonCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
+    required this.pictureName,
     required this.chapterId,
   });
 
   final String title;
   final IconData icon;
+  final String pictureName;
   final int chapterId;
 
   @override
@@ -47,6 +49,14 @@ class SelectButtonCard extends StatelessWidget {
         child: Container(
           padding: AppStyles.mainPadding,
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: AppStyles.mainBorder,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              opacity: 0.15,
+              image: AssetImage('assets/pictures/$pictureName'),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

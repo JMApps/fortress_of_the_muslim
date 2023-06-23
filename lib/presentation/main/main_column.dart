@@ -71,6 +71,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.morning,
                     icon: CupertinoIcons.sunrise,
+                    pictureName: 'morning.jpg',
                     chapterId: 27,
                   ),
                 ),
@@ -78,6 +79,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.evening,
                     icon: CupertinoIcons.sunset,
+                    pictureName: 'evening.jpg',
                     chapterId: 28,
                   ),
                 ),
@@ -85,6 +87,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.night,
                     icon: CupertinoIcons.moon,
+                    pictureName: 'night.jpg',
                     chapterId: 29,
                   ),
                 ),
@@ -96,6 +99,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.afterPrayer,
                     icon: CupertinoIcons.person_2,
+                    pictureName: 'kaaba.png',
                     chapterId: 25,
                   ),
                 ),
@@ -103,6 +107,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.istikhara,
                     icon: CupertinoIcons.lightbulb,
+                    pictureName: 'question.png',
                     chapterId: 26,
                   ),
                 ),
@@ -110,6 +115,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.counter,
                     icon: CupertinoIcons.forward,
+                    pictureName: 'numbers.png',
                     chapterId: 222,
                   ),
                 ),
