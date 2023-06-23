@@ -76,32 +76,32 @@ class AppThemes {
 extension ColorsSchemes on ColorScheme {
 
   Color get mainChaptersColor => brightness == Brightness.light
-      ? const Color(0xFF00897B)
-      : const Color(0xFF004D40);
+      ? const Color(0xFF26A69A)
+      : const Color(0xFF00695C);
 
   Color get mainChaptersBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFE0F2F1)
       : const Color(0xFF192326);
 
   Color get mainBookmarksColor => brightness == Brightness.light
-      ? const Color(0xFFFB8C00)
-      : const Color(0xFFE65100);
+      ? const Color(0xFFFFA726)
+      : const Color(0xFFEF6C00);
 
   Color get mainBookmarksBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFFFF3E0)
       : const Color(0xFF192326);
 
   Color get mainSupplicationsColor => brightness == Brightness.light
-      ? const Color(0xFFE53935)
-      : const Color(0xFFB71C1C);
+      ? const Color(0xFFEF5350)
+      : const Color(0xFFC62828);
 
   Color get mainSupplicationsBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFFFEBEE)
       : const Color(0xFF192326);
 
   Color get mainSupplicationsBookmarkColor => brightness == Brightness.light
-      ? const Color(0xFF1E88E5)
-      : const Color(0xFF0D47A1);
+      ? const Color(0xFF42A5F5)
+      : const Color(0xFF1565C0);
 
   Color get mainSupplicationsBookmarkBackgroundColor => brightness == Brightness.light
       ? const Color(0xFFE1F5FE)
