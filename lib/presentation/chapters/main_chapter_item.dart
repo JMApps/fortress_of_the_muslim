@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/snack_container.dart';
 import 'package:provider/provider.dart';
 
 class MainChapterItem extends StatelessWidget {
@@ -58,6 +59,18 @@ class MainChapterItem extends StatelessWidget {
             chapterItemState.addRemoveChapterBookmark(
               item.favoriteState == 0 ? 1 : 0,
               item.id,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: themeColors.mainChaptersColor,
+                duration: const Duration(milliseconds: 350),
+                behavior: SnackBarBehavior.fixed,
+                padding: const EdgeInsets.only(top: 16),
+                shape: AppStyles.mainShape,
+                content: SnackContainer(
+                  message: item.favoriteState == 0 ? AppStrings.added : AppStrings.deleted,
+                ),
+              ),
             );
           },
           tooltip: item.favoriteState == 0

@@ -7,6 +7,7 @@ import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/snack_container.dart';
 import 'package:provider/provider.dart';
 
 class MainChapterBookmarksItem extends StatelessWidget {
@@ -21,13 +22,13 @@ class MainChapterBookmarksItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final themeColors = Theme.of(context).colorScheme;
     final chapterItemState = context.read<MainChaptersState>();
     return Card(
       elevation: 0,
       color: itemIndex.isOdd
-          ? theme.colorScheme.cardColor
-          : theme.colorScheme.cardOddColor,
+          ? themeColors.cardColor
+          : themeColors.cardOddColor,
       child: ListTile(
         onTap: () {
           chapterItemState.saveLastChapter(item.id);
@@ -60,6 +61,18 @@ class MainChapterBookmarksItem extends StatelessWidget {
             chapterItemState.addRemoveChapterBookmark(
               item.favoriteState == 1 ? 0 : 1,
               item.id,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: themeColors.mainBookmarksColor,
+                duration: const Duration(milliseconds: 350),
+                behavior: SnackBarBehavior.fixed,
+                padding: const EdgeInsets.only(top: 16),
+                shape: AppStyles.mainShape,
+                content: const SnackContainer(
+                  message: AppStrings.deleted,
+                ),
+              ),
             );
           },
           tooltip: AppStrings.removeFromBookmark,
