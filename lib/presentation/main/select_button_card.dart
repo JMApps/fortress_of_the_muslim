@@ -53,7 +53,7 @@ class SelectButtonCard extends StatelessWidget {
             borderRadius: AppStyles.mainBorder,
             image: DecorationImage(
               fit: BoxFit.cover,
-              opacity: 0.15,
+              opacity: Theme.of(context).brightness == Brightness.dark ? 0.10 : 0.25,
               image: AssetImage('assets/pictures/$pictureName'),
             ),
           ),
