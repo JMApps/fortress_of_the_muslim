@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/application/other/default_scroll_behavior.dart';
 import 'package:fortress_of_the_muslim/application/route/app_routes.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
@@ -18,6 +19,12 @@ class RootPage extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        builder: (context, child) {
+          return ScrollConfiguration(
+            behavior: DefaultScrollBehavior(),
+            child: child!,
+          );
+        },
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
         onGenerateRoute: AppRoutes.onGeneratorRoute,
