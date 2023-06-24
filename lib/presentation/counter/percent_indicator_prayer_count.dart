@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/counter_state.dart';
+import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -11,6 +12,7 @@ class PercentIndicatorPrayerCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterState = context.watch<CounterState>();
+    final themeColors = Theme.of(context).colorScheme;
     return CircularStepProgressIndicator(
       totalSteps: 99,
       currentStep: counterState.getPrayerCountNumber,
@@ -26,7 +28,7 @@ class PercentIndicatorPrayerCount extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(500),
         ),
-        color: counterState.getPrayerCountColor,
+        color: themeColors.mainSupplicationsColor,
         child: InkWell(
           onTap: () {
             context.read<CounterState>().onCounterButtonTap();
