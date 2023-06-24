@@ -64,7 +64,7 @@ class _CounterColumnState extends State<CounterColumn> {
                 AnimatedSwitcher(
                   duration: (const Duration(milliseconds: 500)),
                   child: _countPercentIndicators[
-                  counterState.getDropDownValuesIndex],
+                      counterState.getDropDownValuesIndex],
                 ),
                 const SizedBox(height: 32),
                 Row(
@@ -72,19 +72,30 @@ class _CounterColumnState extends State<CounterColumn> {
                     const Expanded(
                       child: DropDownCounterValuesList(),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        counterState.resetCounterButtonTap();
-                      },
-                      splashRadius: 25,
-                      tooltip: AppStrings.reset,
-                      visualDensity: const VisualDensity(
-                        horizontal: -4,
-                        vertical: -4,
+                    Card(
+                      margin: EdgeInsets.zero,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(25),
+                        ),
                       ),
-                      icon: const Icon(Icons.replay),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        child: IconButton(
+                          onPressed: () {
+                            counterState.resetCounterButtonTap();
+                          },
+                          splashRadius: 25,
+                          tooltip: AppStrings.reset,
+                          visualDensity: const VisualDensity(
+                            horizontal: -4,
+                            vertical: -4,
+                          ),
+                          icon: const Icon(Icons.replay),
+                        ),
+                      ),
                     ),
-                    const SizedBox(width: 16),
                   ],
                 ),
                 const SizedBox(height: 16),
