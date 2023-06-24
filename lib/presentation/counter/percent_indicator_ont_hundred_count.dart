@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/counter_state.dart';
-import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class PercentIndicatorOneHundredCount extends StatelessWidget {
   const PercentIndicatorOneHundredCount({super.key});
@@ -11,24 +12,28 @@ class PercentIndicatorOneHundredCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme themeColors = Theme.of(context).colorScheme;
-    return CircularPercentIndicator(
-      radius: 165,
-      lineWidth: 16,
-      circularStrokeCap: CircularStrokeCap.round,
-      progressColor: themeColors.mainSupplicationsColor.withOpacity(0.75),
-      percent: context.watch<CounterState>().getOneHundredCountNumber / 100,
-      center: IconButton(
-        onPressed: () {
-          context.read<CounterState>().onCounterButtonTap();
-        },
-        padding: EdgeInsets.zero,
-        splashRadius: 135,
-        iconSize: 325,
-        splashColor: themeColors.mainSupplicationsColor.withOpacity(0.25),
+    return CircularStepProgressIndicator(
+      totalSteps: 100,
+      currentStep: context.watch<CounterState>().getOneHundredCountNumber,
+      stepSize: 35,
+      padding: pi / 30,
+      width: 325,
+      height: 325,
+      selectedStepSize: 45,
+      circularDirection: CircularDirection.counterclockwise,
+      selectedColor: themeColors.mainSupplicationsColor,
+      unselectedColor: themeColors.mainSupplicationsColor.withOpacity(0.25),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(500),
+        ),
         color: themeColors.mainSupplicationsColor,
-        tooltip: AppStrings.counter,
-        icon: const Icon(
-          Icons.fiber_manual_record,
+        child: InkWell(
+          onTap: () {
+            context.read<CounterState>().onCounterButtonTap();
+          },
+          splashColor: Colors.transparent,
+          borderRadius: BorderRadius.circular(500),
         ),
       ),
     );

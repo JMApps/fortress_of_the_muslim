@@ -1,8 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/counter_state.dart';
-import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class PercentIndicatorPrayerCount extends StatelessWidget {
   const PercentIndicatorPrayerCount({super.key});
@@ -10,24 +11,28 @@ class PercentIndicatorPrayerCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterState = context.watch<CounterState>();
-    return CircularPercentIndicator(
-      radius: 165,
-      lineWidth: 16,
-      circularStrokeCap: CircularStrokeCap.round,
-      progressColor: counterState.getPrayerCountColor.withOpacity(0.75),
-      percent: counterState.getPrayerCountNumber / 100,
-      center: IconButton(
-        onPressed: () {
-          context.read<CounterState>().onCounterButtonTap();
-        },
-        padding: EdgeInsets.zero,
-        splashRadius: 135,
-        iconSize: 325,
-        splashColor: counterState.getPrayerCountColor.withOpacity(0.25),
+    return CircularStepProgressIndicator(
+      totalSteps: 99,
+      currentStep: counterState.getPrayerCountNumber,
+      stepSize: 35,
+      padding: pi / 30,
+      width: 325,
+      height: 325,
+      selectedStepSize: 45,
+      circularDirection: CircularDirection.counterclockwise,
+      selectedColor: counterState.getPrayerCountColor,
+      unselectedColor: counterState.getPrayerCountColor.withOpacity(0.25),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(500),
+        ),
         color: counterState.getPrayerCountColor,
-        tooltip: AppStrings.counter,
-        icon: const Icon(
-          Icons.fiber_manual_record,
+        child: InkWell(
+          onTap: () {
+            context.read<CounterState>().onCounterButtonTap();
+          },
+          splashColor: Colors.transparent,
+          borderRadius: BorderRadius.circular(500),
         ),
       ),
     );

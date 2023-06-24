@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/counter_state.dart';
+import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/dropdown_counter_values_list.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/percent_indicator_free_count.dart';
@@ -42,24 +43,50 @@ class _CounterColumnState extends State<CounterColumn> {
               children: [
                 const SizedBox(height: 16),
                 Card(
-                  margin: AppStyles.mainMargin,
+                  margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      bottomLeft: Radius.circular(50),
+                    ),
+                  ),
                   child: Padding(
                     padding: AppStyles.mainPadding,
                     child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 500),
-                        child: _countTexts[counterState.getDropDownValuesIndex],
-                        switchInCurve: Curves.easeInCubic,
-                        switchOutCurve: Curves.easeInCubic),
+                      duration: const Duration(milliseconds: 500),
+                      child: _countTexts[counterState.getDropDownValuesIndex],
+                      switchInCurve: Curves.easeInCubic,
+                      switchOutCurve: Curves.easeInCubic,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 32),
                 AnimatedSwitcher(
                   duration: (const Duration(milliseconds: 500)),
                   child: _countPercentIndicators[
-                      counterState.getDropDownValuesIndex],
+                  counterState.getDropDownValuesIndex],
                 ),
                 const SizedBox(height: 32),
-                const DropDownCounterValuesList(),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: DropDownCounterValuesList(),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        counterState.resetCounterButtonTap();
+                      },
+                      splashRadius: 25,
+                      tooltip: AppStrings.reset,
+                      visualDensity: const VisualDensity(
+                        horizontal: -4,
+                        vertical: -4,
+                      ),
+                      icon: const Icon(Icons.replay),
+                    ),
+                    const SizedBox(width: 16),
+                  ],
+                ),
                 const SizedBox(height: 16),
               ],
             );
