@@ -63,9 +63,9 @@ class MainChapterItem extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: themeColors.mainChaptersColor,
-                duration: const Duration(milliseconds: 350),
-                behavior: SnackBarBehavior.fixed,
-                padding: const EdgeInsets.only(top: 16),
+                duration: const Duration(milliseconds: 750),
+                behavior: SnackBarBehavior.floating,
+                margin: AppStyles.symmetricHorizontalPadding,
                 shape: AppStyles.mainShape,
                 content: SnackContainer(
                   message: item.favoriteState == 0 ? AppStrings.added : AppStrings.deleted,

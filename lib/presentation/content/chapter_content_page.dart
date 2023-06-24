@@ -40,6 +40,13 @@ class ChapterContentPage extends StatelessWidget {
                               ? Card(
                                   margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                                   elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: AppStyles.mainBorder,
+                                    side: BorderSide(
+                                      width: 2,
+                                      color: theme.colorScheme.mainChaptersColor,
+                                    )
+                                  ),
                                   child: Padding(
                                     padding: AppStyles.mainPadding,
                                     child: ForHtmlText(

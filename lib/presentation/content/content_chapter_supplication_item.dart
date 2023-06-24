@@ -63,7 +63,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
               item: item,
               itemIndex: itemIndex,
               itemsLength: itemsLength,
-              itemColor: theme.colorScheme.chapterContentSupplicationsPrimaryColor,
+              itemColor: theme.colorScheme.mainChaptersColor,
             ),
           ],
         ),
