@@ -22,6 +22,9 @@ class OptionButtonCard extends StatelessWidget {
           case '/app_settings_page':
             Navigator.pushNamed(context, routeName);
             break;
+          case '/book_content_page':
+            Navigator.pushNamed(context, routeName);
+            break;
         }
       },
       borderRadius: AppStyles.mainBorder,

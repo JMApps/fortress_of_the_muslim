@@ -33,7 +33,7 @@ class MainPage extends StatelessWidget {
               OptionButtonCard(
                 icon: CupertinoIcons.book,
                 avatarColor: theme.colorScheme.mainBookmarksColor,
-                routeName: '/other_content_page',
+                routeName: '/book_content_page',
               ),
               OptionButtonCard(
                 icon: CupertinoIcons.app_badge,

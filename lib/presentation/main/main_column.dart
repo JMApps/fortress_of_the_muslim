@@ -107,7 +107,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.istikhara,
                     icon: CupertinoIcons.lightbulb,
-                    pictureName: 'question.png',
+                    pictureName: 'question.jpg',
                     chapterId: 26,
                   ),
                 ),
@@ -115,7 +115,7 @@ class MainColumn extends StatelessWidget {
                   child: SelectButtonCard(
                     title: AppStrings.counter,
                     icon: CupertinoIcons.forward,
-                    pictureName: 'numbers.png',
+                    pictureName: 'numbers.jpg',
                     chapterId: 222,
                   ),
                 ),

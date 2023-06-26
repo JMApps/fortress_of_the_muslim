@@ -43,13 +43,8 @@ class _CounterColumnState extends State<CounterColumn> {
               children: [
                 const SizedBox(height: 16),
                 Card(
-                  margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      bottomLeft: Radius.circular(50),
-                    ),
-                  ),
+                  margin: AppStyles.mainMargin,
+                  shape: AppStyles.mainShape,
                   child: Padding(
                     padding: AppStyles.mainPadding,
                     child: AnimatedSwitcher(

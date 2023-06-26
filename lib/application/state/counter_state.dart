@@ -113,6 +113,7 @@ class CounterState extends ChangeNotifier {
   }
 
   resetPrayerCounter() {
+    _prayerCountColor = Colors.teal;
     _prayerCountNumber = 99;
     notifyListeners();
   }

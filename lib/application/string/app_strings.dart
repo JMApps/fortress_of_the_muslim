@@ -24,6 +24,7 @@ class AppStrings {
   static const String bookmarksSupplicationIsEmpty = 'Избранных дуа нет';
   static const String settings = 'Настройки';
   static const String reset = 'Сброс';
+  static const String bookContent = 'Содержимое';
 
   static const List<String> counterValuesList = [
     'Без ограничений',
