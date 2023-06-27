@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
-import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class BookContentPage extends StatelessWidget {
-  const BookContentPage({Key? key}) : super(key: key);
+  const BookContentPage({
+    Key? key,
+    required this.index,
+    required this.title,
+  }) : super(key: key);
+
+  final int index;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    final themeColors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.bookContent),
-        backgroundColor: themeColors.mainBookmarksColor,
+        title: Text(title),
+      ),
+      body: SingleChildScrollView(
+        child: Html(
+          data: 'Simple text',
+        ),
       ),
     );
   }

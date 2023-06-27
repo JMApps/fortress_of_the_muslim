@@ -22,7 +22,7 @@ class OptionButtonCard extends StatelessWidget {
           case '/app_settings_page':
             Navigator.pushNamed(context, routeName);
             break;
-          case '/book_content_page':
+          case '/book_content_list_page':
             Navigator.pushNamed(context, routeName);
             break;
         }
