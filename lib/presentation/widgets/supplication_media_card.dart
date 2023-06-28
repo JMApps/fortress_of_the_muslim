@@ -5,6 +5,7 @@ import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/copy_share_card.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/snack_container.dart';
 import 'package:provider/provider.dart';
 
@@ -36,36 +37,42 @@ class SupplicationMediaCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            item.arabicText != null ? IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              color: theme.colorScheme.mainDefaultColor,
-              visualDensity: const VisualDensity(
-                vertical: -4,
-                horizontal: -4,
-              ),
-              icon: const Icon(CupertinoIcons.play),
-            ) : const SizedBox(),
-            item.arabicText != null ? IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              color: theme.colorScheme.mainDefaultColor,
-              visualDensity: const VisualDensity(
-                vertical: -4,
-                horizontal: -4,
-              ),
-              icon: const Icon(Icons.repeat_rounded),
-            ) : const SizedBox(),
-            item.arabicText != null ? IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              color: theme.colorScheme.mainDefaultColor,
-              visualDensity: const VisualDensity(
-                vertical: -4,
-                horizontal: -4,
-              ),
-              icon: const Icon(Icons.speed),
-            ) : const SizedBox(),
+            item.arabicText != null
+                ? IconButton(
+                    onPressed: () {},
+                    splashRadius: 20,
+                    color: theme.colorScheme.mainDefaultColor,
+                    visualDensity: const VisualDensity(
+                      vertical: -4,
+                      horizontal: -4,
+                    ),
+                    icon: const Icon(CupertinoIcons.play),
+                  )
+                : const SizedBox(),
+            item.arabicText != null
+                ? IconButton(
+                    onPressed: () {},
+                    splashRadius: 20,
+                    color: theme.colorScheme.mainDefaultColor,
+                    visualDensity: const VisualDensity(
+                      vertical: -4,
+                      horizontal: -4,
+                    ),
+                    icon: const Icon(Icons.repeat_rounded),
+                  )
+                : const SizedBox(),
+            item.arabicText != null
+                ? IconButton(
+                    onPressed: () {},
+                    splashRadius: 20,
+                    color: theme.colorScheme.mainDefaultColor,
+                    visualDensity: const VisualDensity(
+                      vertical: -4,
+                      horizontal: -4,
+                    ),
+                    icon: const Icon(Icons.speed),
+                  )
+                : const SizedBox(),
             IconButton(
               onPressed: () {
                 supplicationItemState.addRemoveSupplicationBookmark(
@@ -80,7 +87,9 @@ class SupplicationMediaCard extends StatelessWidget {
                     margin: AppStyles.symmetricHorizontalPadding,
                     shape: AppStyles.mainShape,
                     content: SnackContainer(
-                      message: item.favoriteState == 0 ? AppStrings.added : AppStrings.deleted,
+                      message: item.favoriteState == 0
+                          ? AppStrings.added
+                          : AppStrings.deleted,
                     ),
                   ),
                 );
@@ -100,7 +109,16 @@ class SupplicationMediaCard extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (_) => CopyShareCard(
+                    contentForCopyAndShare: item.contentForShare,
+                  ),
+                );
+              },
               splashRadius: 20,
               color: theme.colorScheme.mainDefaultColor,
               visualDensity: const VisualDensity(

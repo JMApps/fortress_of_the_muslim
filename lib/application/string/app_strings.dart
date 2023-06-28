@@ -25,6 +25,8 @@ class AppStrings {
   static const String settings = 'Настройки';
   static const String reset = 'Сброс';
   static const String bookContent = 'Содержимое';
+  static const String copy = 'Копировать';
+  static const String share = 'Поделиться';
 
   static const List<String> counterValuesList = [
     'Без ограничений',
