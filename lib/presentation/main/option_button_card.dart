@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:share_plus/share_plus.dart';
 
 class OptionButtonCard extends StatelessWidget {
   const OptionButtonCard({
@@ -24,6 +25,9 @@ class OptionButtonCard extends StatelessWidget {
             break;
           case '/book_content_list_page':
             Navigator.pushNamed(context, routeName);
+            break;
+          case 'links':
+            Share.share('links');
             break;
         }
       },
