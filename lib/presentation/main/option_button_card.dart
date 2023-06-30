@@ -20,6 +20,12 @@ class OptionButtonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Uri toStores = Uri(
+        scheme: 'https',
+        host: Platform.isAndroid ? 'www.play.google.com' : 'www.apps.apple.com',
+        path: Platform.isAndroid ? '/store/apps/dev?id=8649252597553656018' : '/tr/developer/imanil-binyaminov/id1564920953'
+    );
+    const String appLinks = 'Крепость мусульманина\n\nВерсия iOS:\nhttps://apps.apple.com/ru/app/крепость-верующего/id1564920951\n\nВерсия Android:\nhttps://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
     return InkWell(
       onTap: () {
         switch (routeName) {
@@ -30,15 +36,10 @@ class OptionButtonCard extends StatelessWidget {
             Navigator.pushNamed(context, routeName);
             break;
           case 'for_share':
-            final Uri toStores = Uri(
-              scheme: 'https',
-              host: Platform.isAndroid ? 'www.play.google.com' : 'www.apps.apple.com',
-              path: Platform.isAndroid ? '/store/apps/dev?id=8649252597553656018' : '/tr/developer/imanil-binyaminov/id1564920953'
-            );
             launchUrl(toStores);
             break;
           case 'links':
-            Share.share('Крепость мусульманина\n\nВерсия iOS:\nhttps://apps.apple.com/ru/app/крепость-верующего/id1564920951\n\nВерсия Android:\nhttps://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim');
+            Share.share(appLinks);
             break;
         }
       },
