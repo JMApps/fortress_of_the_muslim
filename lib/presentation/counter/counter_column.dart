@@ -44,7 +44,7 @@ class _CounterColumnState extends State<CounterColumn> {
                 const SizedBox(height: 16),
                 Card(
                   margin: AppStyles.mainMargin,
-                  shape: AppStyles.mainShape,
+                  shape: AppStyles.bigShape,
                   child: Padding(
                     padding: AppStyles.mainPadding,
                     child: AnimatedSwitcher(
@@ -68,15 +68,13 @@ class _CounterColumnState extends State<CounterColumn> {
                       child: DropDownCounterValuesList(),
                     ),
                     Card(
-                      margin: EdgeInsets.zero,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          bottomLeft: Radius.circular(25),
-                        ),
-                      ),
+                      margin: const EdgeInsets.only(right: 16),
+                      shape: AppStyles.mainShape,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 8,
+                        ),
                         child: IconButton(
                           onPressed: () {
                             counterState.resetCounterButtonTap();

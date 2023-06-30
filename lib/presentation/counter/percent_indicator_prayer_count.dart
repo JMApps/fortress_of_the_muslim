@@ -23,7 +23,7 @@ class PercentIndicatorPrayerCount extends StatelessWidget {
       selectedStepSize: 45,
       circularDirection: CircularDirection.counterclockwise,
       selectedColor: counterState.getPrayerCountColor,
-      unselectedColor: counterState.getPrayerCountColor.withOpacity(0.25),
+      unselectedColor: themeColors.mainSupplicationsColor.withOpacity(0.25),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(500),
