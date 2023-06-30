@@ -116,6 +116,7 @@ class SupplicationMediaCard extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   builder: (_) => CopyShareCard(
                     contentForCopyAndShare: item.contentForShare,
+                    backgroundColor: itemColor,
                   ),
                 );
               },

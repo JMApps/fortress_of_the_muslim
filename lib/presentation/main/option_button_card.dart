@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OptionButtonCard extends StatelessWidget {
   const OptionButtonCard({
@@ -26,8 +29,16 @@ class OptionButtonCard extends StatelessWidget {
           case '/book_content_list_page':
             Navigator.pushNamed(context, routeName);
             break;
+          case 'for_share':
+            final Uri toStores = Uri(
+              scheme: 'https',
+              host: Platform.isAndroid ? 'www.play.google.com' : 'www.apps.apple.com',
+              path: Platform.isAndroid ? '/store/apps/dev?id=8649252597553656018' : '/tr/developer/imanil-binyaminov/id1564920953'
+            );
+            launchUrl(toStores);
+            break;
           case 'links':
-            Share.share('links');
+            Share.share('Крепость мусульманина\n\nВерсия iOS:\nhttps://apps.apple.com/ru/app/крепость-верующего/id1564920951\n\nВерсия Android:\nhttps://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim');
             break;
         }
       },
