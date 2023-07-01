@@ -29,9 +29,9 @@ class AppStyles {
     ),
   );
 
-  static const bigShape = RoundedRectangleBorder(
+  static const hardShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.all(
-      Radius.circular(50),
+      Radius.circular(75),
     ),
   );
 

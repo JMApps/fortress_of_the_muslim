@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/counter_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
+import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/dropdown_counter_values_list.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/percent_indicator_free_count.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/percent_indicator_ont_hundred_count.dart';
@@ -33,6 +34,7 @@ class _CounterColumnState extends State<CounterColumn> {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = Theme.of(context).colorScheme;
     return Center(
       child: SingleChildScrollView(
         child: Consumer<CounterState>(
@@ -44,14 +46,20 @@ class _CounterColumnState extends State<CounterColumn> {
                 const SizedBox(height: 16),
                 Card(
                   margin: AppStyles.mainMargin,
-                  shape: AppStyles.bigShape,
+                  shape: AppStyles.hardShape,
                   child: Padding(
                     padding: AppStyles.mainPadding,
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),
-                      child: _countTexts[counterState.getDropDownValuesIndex],
                       switchInCurve: Curves.easeInCubic,
                       switchOutCurve: Curves.easeInCubic,
+                      child: Visibility(
+                        maintainSize: true,
+                        maintainAnimation: true,
+                        maintainState: true,
+                        visible: counterState.getShowCountNumber,
+                        child: _countTexts[counterState.getDropDownValuesIndex],
+                      ),
                     ),
                   ),
                 ),
@@ -64,6 +72,29 @@ class _CounterColumnState extends State<CounterColumn> {
                 const SizedBox(height: 32),
                 Row(
                   children: [
+                    Card(
+                      margin: const EdgeInsets.only(left: 16),
+                      shape: AppStyles.mainShape,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 8,
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            counterState.showHideCountNumber();
+                          },
+                          splashRadius: 25,
+                          tooltip: AppStrings.reset,
+                          visualDensity: const VisualDensity(
+                            horizontal: -4,
+                            vertical: -4,
+                          ),
+                          color: counterState.getShowCountNumber ? themeColors.mainDefaultColor : themeColors.mainSupplicationsColor,
+                          icon: const Icon(Icons.remove_red_eye),
+                        ),
+                      ),
+                    ),
                     const Expanded(
                       child: DropDownCounterValuesList(),
                     ),

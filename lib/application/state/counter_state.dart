@@ -32,6 +32,10 @@ class CounterState extends ChangeNotifier {
 
   Color get getPrayerCountColor => _prayerCountColor;
 
+  bool _showCountNumber = true;
+
+  bool get getShowCountNumber => _showCountNumber;
+
   CounterState() {
     _freeCountNumber =
         _counterBox.get(AppConstraints.keyFreeCountNumber, defaultValue: 0);
@@ -85,6 +89,11 @@ class CounterState extends ChangeNotifier {
     } else {
       Vibration.vibrate(duration: 500);
     }
+  }
+
+  showHideCountNumber() {
+    _showCountNumber = !_showCountNumber;
+    notifyListeners();
   }
 
   resetCounterButtonTap() {
