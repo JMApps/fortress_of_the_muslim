@@ -53,21 +53,20 @@ class _CounterColumnState extends State<CounterColumn> {
                       duration: const Duration(milliseconds: 500),
                       switchInCurve: Curves.easeInCubic,
                       switchOutCurve: Curves.easeInCubic,
-                      child: Visibility(
+                      child: counterState.getDropDownValuesIndex == 0 ? Visibility(
                         maintainSize: true,
                         maintainAnimation: true,
                         maintainState: true,
                         visible: counterState.getShowCountNumber,
                         child: _countTexts[counterState.getDropDownValuesIndex],
-                      ),
+                      ) : _countTexts[counterState.getDropDownValuesIndex],
                     ),
                   ),
                 ),
                 const SizedBox(height: 32),
                 AnimatedSwitcher(
                   duration: (const Duration(milliseconds: 500)),
-                  child: _countPercentIndicators[
-                      counterState.getDropDownValuesIndex],
+                  child: _countPercentIndicators[counterState.getDropDownValuesIndex],
                 ),
                 const SizedBox(height: 32),
                 Row(
