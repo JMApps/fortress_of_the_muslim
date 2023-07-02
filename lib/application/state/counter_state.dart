@@ -37,8 +37,7 @@ class CounterState extends ChangeNotifier {
   bool get getShowCountNumber => _showCountNumber;
 
   CounterState() {
-    _freeCountNumber =
-        _counterBox.get(AppConstraints.keyFreeCountNumber, defaultValue: 0);
+    _freeCountNumber = _counterBox.get(AppConstraints.keyFreeCountNumber, defaultValue: 0);
   }
 
   onCounterButtonTap() {
