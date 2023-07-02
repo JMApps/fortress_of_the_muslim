@@ -24,6 +24,11 @@ class AppThemes {
         fontFamily: 'Gilroy',
         color: Color(0xFF1E1E1E),
       ),
+      bodyMedium: TextStyle(
+        fontSize: 22,
+        fontFamily: 'Gilroy',
+        color: Color(0xFF1E1E1E),
+      ),
       labelLarge: TextStyle(
         fontSize: 75,
         fontFamily: 'Gilroy',
@@ -56,6 +61,11 @@ class AppThemes {
     textTheme: const TextTheme(
       labelMedium: TextStyle(
         fontSize: 17,
+        fontFamily: 'Gilroy',
+        color: Color(0xFFD3D3D3),
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 20,
         fontFamily: 'Gilroy',
         color: Color(0xFFD3D3D3),
       ),

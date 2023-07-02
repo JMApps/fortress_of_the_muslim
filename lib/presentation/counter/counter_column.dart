@@ -69,57 +69,62 @@ class _CounterColumnState extends State<CounterColumn> {
                   child: _countPercentIndicators[counterState.getDropDownValuesIndex],
                 ),
                 const SizedBox(height: 32),
-                Row(
-                  children: [
-                    Card(
-                      margin: const EdgeInsets.only(left: 16),
-                      shape: AppStyles.mainShape,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 8,
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            counterState.showHideCountNumber();
-                          },
-                          splashRadius: 25,
-                          tooltip: AppStrings.reset,
-                          visualDensity: const VisualDensity(
-                            horizontal: -4,
-                            vertical: -4,
+                Card(
+                  margin: AppStyles.mainMargin,
+                  shape: AppStyles.hardShape,
+                  color: themeColors.cardColor.withOpacity(0.75),
+                  child: Row(
+                    children: [
+                      Card(
+                        margin: const EdgeInsets.only(left: 16),
+                        shape: AppStyles.mainShape,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 4,
+                            horizontal: 8,
                           ),
-                          color: counterState.getShowCountNumber ? themeColors.mainDefaultColor : themeColors.mainSupplicationsColor,
-                          icon: const Icon(Icons.remove_red_eye),
+                          child: IconButton(
+                            onPressed: () {
+                              counterState.showHideCountNumber();
+                            },
+                            splashRadius: 25,
+                            tooltip: AppStrings.reset,
+                            visualDensity: const VisualDensity(
+                              horizontal: -4,
+                              vertical: -4,
+                            ),
+                            color: counterState.getShowCountNumber ? themeColors.mainDefaultColor : themeColors.mainSupplicationsColor,
+                            icon: const Icon(Icons.remove_red_eye),
+                          ),
                         ),
                       ),
-                    ),
-                    const Expanded(
-                      child: DropDownCounterValuesList(),
-                    ),
-                    Card(
-                      margin: const EdgeInsets.only(right: 16),
-                      shape: AppStyles.mainShape,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 8,
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            counterState.resetCounterButtonTap();
-                          },
-                          splashRadius: 25,
-                          tooltip: AppStrings.reset,
-                          visualDensity: const VisualDensity(
-                            horizontal: -4,
-                            vertical: -4,
+                      const Expanded(
+                        child: DropDownCounterValuesList(),
+                      ),
+                      Card(
+                        margin: const EdgeInsets.only(right: 16),
+                        shape: AppStyles.mainShape,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 4,
+                            horizontal: 8,
                           ),
-                          icon: const Icon(Icons.replay),
+                          child: IconButton(
+                            onPressed: () {
+                              counterState.resetCounterButtonTap();
+                            },
+                            splashRadius: 25,
+                            tooltip: AppStrings.reset,
+                            visualDensity: const VisualDensity(
+                              horizontal: -4,
+                              vertical: -4,
+                            ),
+                            icon: const Icon(Icons.replay),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 16),
               ],

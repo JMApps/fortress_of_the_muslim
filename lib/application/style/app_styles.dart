@@ -50,5 +50,4 @@ class AppStyles {
   static const symmetricVerticalPaddingMini = EdgeInsets.symmetric(vertical: 8);
   static const symmetricHorizontalPadding = EdgeInsets.symmetric(horizontal: 16);
   static const symmetricHorizontalPaddingMini = EdgeInsets.symmetric(horizontal: 8);
-
 }
