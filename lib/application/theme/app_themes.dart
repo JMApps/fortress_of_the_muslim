@@ -25,7 +25,7 @@ class AppThemes {
         color: Color(0xFF1E1E1E),
       ),
       bodyMedium: TextStyle(
-        fontSize: 22,
+        fontSize: 20,
         fontFamily: 'Gilroy',
         color: Color(0xFF1E1E1E),
       ),

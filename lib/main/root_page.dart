@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/other/default_scroll_behavior.dart';
 import 'package:fortress_of_the_muslim/application/route/app_routes.dart';
+import 'package:fortress_of_the_muslim/application/state/main_app_settings_state.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
@@ -16,6 +17,9 @@ class RootPage extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => MainChaptersState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MainAppSettingsState(),
         ),
       ],
       child: MaterialApp(
