@@ -117,7 +117,7 @@ class AppSettingsPage extends StatelessWidget {
                   activeColor: theme.colorScheme.mainChaptersColor,
                   visualDensity: const VisualDensity(horizontal: -4),
                   value: settings.getIsUserTheme,
-                  onChanged: (bool? value) {
+                  onChanged: settings.getIsAdaptiveTheme ? null : (bool? value) {
                     settings.userTheme();
                   },
                 ),
