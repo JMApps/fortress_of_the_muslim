@@ -3,6 +3,7 @@ import 'package:fortress_of_the_muslim/data/arguments/book_content_arguments.dar
 import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 import 'package:fortress_of_the_muslim/presentation/book/book_content_list_page.dart';
 import 'package:fortress_of_the_muslim/presentation/book/book_content_page.dart';
+import 'package:fortress_of_the_muslim/presentation/book/footnote_page.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/bookmarks/main_chapter_bookmarks_page.dart';
 import 'package:fortress_of_the_muslim/presentation/chapters/main_chapters_page.dart';
 import 'package:fortress_of_the_muslim/presentation/content/chapter_content_page.dart';
@@ -58,6 +59,10 @@ class AppRoutes {
             index: bookContentArguments.index,
             title: bookContentArguments.title,
           ),
+        );
+      case '/footnote_page':
+        return MaterialPageRoute(
+          builder: (_) => const FootnotePage(),
         );
       default:
         throw Exception('Invalid route ${routeSettings.name}');

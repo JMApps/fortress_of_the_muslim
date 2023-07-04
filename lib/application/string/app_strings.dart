@@ -28,6 +28,7 @@ class AppStrings {
   static const String copy = 'Копировать';
   static const String copied = 'Скопировано';
   static const String share = 'Поделиться';
+  static const String footnotes = 'Сноски';
 
   static const List<String> counterValuesList = [
     'Без ограничений',

@@ -27,6 +27,15 @@ class _BookContentListPageState extends State<BookContentListPage> {
       appBar: AppBar(
         title: const Text(AppStrings.bookContent),
         backgroundColor: themeColors.mainBookmarksColor,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/footnote_page');
+            },
+            splashRadius: 20,
+            icon: const Icon(Icons.ac_unit),
+          ),
+        ],
       ),
       body: CupertinoScrollbar(
         child: ListView.separated(

@@ -1,3 +1,5 @@
+import 'package:fortress_of_the_muslim/data/model/book_content_model.dart';
+import 'package:fortress_of_the_muslim/data/model/footnote_model.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
 import 'package:fortress_of_the_muslim/data/service/database_service.dart';
@@ -59,5 +61,26 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_supplications', where: 'sample_by == $chapterId');
     List<MainSupplicationModel>? chapterContentSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
     return chapterContentSupplications!;
+  }
+
+  Future<List<BookContentModel>> getOneBookContent(int bookContentIndex) async {
+    var dbClient = await _con.db;
+    var res = await dbClient.query('Table_of_book_content', where: 'id == $bookContentIndex');
+    List<BookContentModel>? oneBookContent = res.isNotEmpty ? res.map((c) => BookContentModel.fromMap(c)).toList() : null;
+    return oneBookContent!;
+  }
+
+  Future<List<FootnoteModel>> getAllFootnotes() async {
+    var dbClient = await _con.db;
+    var res = await dbClient.query('Table_of_footnotes');
+    List<FootnoteModel>? allFootnotes = res.isNotEmpty ? res.map((c) => FootnoteModel.fromMap(c)).toList() : null;
+    return allFootnotes!;
+  }
+
+  Future<List<FootnoteModel>> getOneFootnotes(int footnoteId) async {
+    var dbClient = await _con.db;
+    var res = await dbClient.query('Table_of_footnotes', where: 'id == $footnoteId');
+    List<FootnoteModel>? allFootnotes = res.isNotEmpty ? res.map((c) => FootnoteModel.fromMap(c)).toList() : null;
+    return allFootnotes!;
   }
 }
