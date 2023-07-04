@@ -27,6 +27,8 @@ dependencies:
   vibration: ^1.8.1
   url_launcher: ^6.1.11
   flu_wake_lock: ^0.0.2
+  just_audio: ^0.9.34
+  flutter_local_notifications: ^15.0.0
 
 dev_dependencies:
   flutter_test:
