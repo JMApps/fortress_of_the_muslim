@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
-import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/arguments/main_chapter_arguments.dart';
 
 class SelectButtonCard extends StatelessWidget {
@@ -22,15 +20,7 @@ class SelectButtonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          width: 2,
-          color: title == AppStrings.counter
-              ? theme.colorScheme.mainChaptersColor
-              : Colors.transparent,
-        ),
-        borderRadius: AppStyles.mainBorder,
-      ),
+      shape: AppStyles.mainShape,
       child: InkWell(
         onTap: () {
           if (chapterId == 222) {

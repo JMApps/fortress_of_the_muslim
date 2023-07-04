@@ -123,31 +123,28 @@ class MainColumn extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Card(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: 2,
-                  color: theme.colorScheme.mainChaptersColor,
-                ),
-                borderRadius: AppStyles.mainBorder,
-              ),
-              child: ListTile(
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/chapter_content_page',
-                    arguments: MainChapterArguments(
-                      chapterId: context.read<MainChaptersState>().getLastSavedChapterIndex,
-                    ),
-                  );
-                },
-                shape: AppStyles.mainShape,
-                title: Text(
-                  '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.heads}',
-                  style: theme.textTheme.labelMedium,
-                ),
-                trailing: Icon(
-                  CupertinoIcons.forward,
-                  color: theme.colorScheme.mainDefaultColor,
+              color: theme.colorScheme.mainSupplicationsColor,
+              child: Card(
+                margin: const EdgeInsets.only(right: 4),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/chapter_content_page',
+                      arguments: MainChapterArguments(
+                        chapterId: context.read<MainChaptersState>().getLastSavedChapterIndex,
+                      ),
+                    );
+                  },
+                  shape: AppStyles.mainShape,
+                  title: Text(
+                    '${AppStrings.lastChapter} ${context.watch<MainChaptersState>().getLastSavedChapterIndex} ${AppStrings.heads}',
+                    style: theme.textTheme.labelMedium,
+                  ),
+                  trailing: Icon(
+                    CupertinoIcons.forward,
+                    color: theme.colorScheme.mainDefaultColor,
+                  ),
                 ),
               ),
             ),
