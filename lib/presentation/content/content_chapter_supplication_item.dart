@@ -55,6 +55,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
             ForHtmlText(
               textData: item.translationText,
               textSize: 17,
+              textColor: theme.colorScheme.mainDefaultColor,
               footnoteColor: theme.colorScheme.mainChaptersColor,
               textDataAlign: TextAlign.start,
             ),

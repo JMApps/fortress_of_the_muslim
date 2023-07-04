@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
-import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/for_bottom_sheet_footnote.dart';
 
 class ForHtmlText extends StatelessWidget {
@@ -9,18 +8,19 @@ class ForHtmlText extends StatelessWidget {
     super.key,
     required this.textData,
     required this.textSize,
+    required this.textColor,
     required this.footnoteColor,
     required this.textDataAlign,
   });
 
   final String textData;
   final double textSize;
+  final Color textColor;
   final Color footnoteColor;
   final TextAlign textDataAlign;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Html(
       data: textData,
       style: {
@@ -29,7 +29,7 @@ class ForHtmlText extends StatelessWidget {
           margin: Margins.zero,
           fontSize: FontSize(textSize),
           fontFamily: 'Gilroy',
-          color: theme.colorScheme.mainDefaultColor,
+          color: textColor,
           textAlign: textDataAlign,
         ),
         'b': Style(
@@ -38,7 +38,7 @@ class ForHtmlText extends StatelessWidget {
           fontSize: FontSize(textSize),
           fontWeight: FontWeight.bold,
           fontFamily: 'Gilroy',
-          color: theme.colorScheme.mainDefaultColor,
+          color: textColor,
         ),
         'small': Style(
           padding: HtmlPaddings.zero,

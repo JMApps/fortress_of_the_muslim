@@ -54,6 +54,7 @@ class MainSupplicationItem extends StatelessWidget {
             ForHtmlText(
               textData: item.translationText,
               textSize: 17,
+              textColor: theme.colorScheme.mainDefaultColor,
               footnoteColor: const Color(0xFFE53935),
               textDataAlign: TextAlign.start,
             ),

@@ -54,6 +54,7 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
             ForHtmlText(
               textData: item.translationText,
               textSize: 17,
+              textColor: theme.colorScheme.mainDefaultColor,
               footnoteColor: const Color(0xFF1E88E5),
               textDataAlign: TextAlign.start,
             ),

@@ -51,6 +51,7 @@ class MainChapterItem extends StatelessWidget {
         subtitle: ForHtmlText(
           textData: item.chapterTitle,
           textSize: 17,
+          textColor: themeColors.mainDefaultColor,
           footnoteColor: const Color(0xFF00897B),
           textDataAlign: TextAlign.start,
         ),
