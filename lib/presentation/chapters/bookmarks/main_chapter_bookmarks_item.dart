@@ -53,6 +53,7 @@ class MainChapterBookmarksItem extends StatelessWidget {
         subtitle: ForHtmlText(
           textData: item.chapterTitle,
           textSize: 17,
+          textColor: themeColors.mainDefaultColor,
           footnoteColor: const Color(0xFFFB8C00),
           textDataAlign: TextAlign.start,
         ),

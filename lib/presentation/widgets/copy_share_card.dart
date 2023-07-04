@@ -25,7 +25,7 @@ class CopyShareCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Divider(),
+            const SizedBox(height: 8),
             ListTile(
               onTap: () {
                 Clipboard.getData(contentForCopyAndShare);
@@ -58,7 +58,7 @@ class CopyShareCard extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -4),
               shape: AppStyles.mainShape,
             ),
-            const Divider(),
+            const SizedBox(height: 8),
           ],
         ),
       ),
