@@ -80,7 +80,7 @@ class DatabaseQuery {
   Future<List<FootnoteModel>> getOneFootnotes(int footnoteId) async {
     var dbClient = await _con.db;
     var res = await dbClient.query('Table_of_footnotes', where: 'id == $footnoteId');
-    List<FootnoteModel>? allFootnotes = res.isNotEmpty ? res.map((c) => FootnoteModel.fromMap(c)).toList() : null;
-    return allFootnotes!;
+    List<FootnoteModel>? oneFootnote = res.isNotEmpty ? res.map((c) => FootnoteModel.fromMap(c)).toList() : null;
+    return oneFootnote!;
   }
 }
