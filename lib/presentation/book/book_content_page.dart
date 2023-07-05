@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
+import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
@@ -42,7 +43,7 @@ class BookContentPage extends StatelessWidget {
               : const Center(
                   child: Padding(
                     padding: AppStyles.mainPadding,
-                    child: Text('Ошибка при загрузки данных'),
+                    child: Text(AppStrings.errorLoadData),
                   ),
                 );
         },

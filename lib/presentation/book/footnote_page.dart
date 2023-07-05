@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
@@ -24,29 +25,28 @@ class FootnotePage extends StatelessWidget {
             );
           }
           return snapshot.hasData
-              ? ListView.separated(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final FootnoteModel item = snapshot.data![index];
-                    return Card(
-                      child: Padding(
-                        padding: AppStyles.mainPaddingMini,
-                        child: Text(
-                          '${item.id}: ${item.footnote}',
-                          style: theme.textTheme.bodyMedium,
-                          textAlign: TextAlign.center,
+              ? CupertinoScrollbar(
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final FootnoteModel item = snapshot.data![index];
+                      return Card(
+                        child: Padding(
+                          padding: AppStyles.mainPaddingMini,
+                          child: Text(
+                            item.footnote,
+                            style: theme.textTheme.bodyMedium,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider(indent: 16, endIndent: 16);
-                  },
+                      );
+                    },
+                  ),
                 )
               : const Center(
                   child: Padding(
                     padding: AppStyles.mainPadding,
-                    child: Text('Ошибка загрузки данных'),
+                    child: Text(AppStrings.errorLoadData),
                   ),
                 );
         },

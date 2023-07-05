@@ -125,14 +125,16 @@ class MainColumn extends StatelessWidget {
             Card(
               color: theme.colorScheme.mainSupplicationsColor,
               child: Card(
-                margin: const EdgeInsets.only(right: 4),
+                margin: const EdgeInsets.only(right: 12),
                 child: ListTile(
                   onTap: () {
                     Navigator.pushNamed(
                       context,
                       '/chapter_content_page',
                       arguments: MainChapterArguments(
-                        chapterId: context.read<MainChaptersState>().getLastSavedChapterIndex,
+                        chapterId: context
+                            .read<MainChaptersState>()
+                            .getLastSavedChapterIndex,
                       ),
                     );
                   },

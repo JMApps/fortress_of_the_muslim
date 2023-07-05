@@ -33,7 +33,7 @@ class _BookContentListPageState extends State<BookContentListPage> {
               Navigator.pushNamed(context, '/footnote_page');
             },
             splashRadius: 20,
-            icon: const Icon(Icons.ac_unit),
+            icon: const Icon(CupertinoIcons.list_dash),
           ),
         ],
       ),
