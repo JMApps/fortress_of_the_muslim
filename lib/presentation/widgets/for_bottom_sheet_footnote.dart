@@ -10,9 +10,11 @@ class ForBottomSheetFootnote extends StatelessWidget {
   const ForBottomSheetFootnote({
     super.key,
     required this.footnoteData,
+    required this.footnoteColor,
   });
 
   final String footnoteData;
+  final Color footnoteColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,36 +22,56 @@ class ForBottomSheetFootnote extends StatelessWidget {
     return SingleChildScrollView(
       padding: AppStyles.mainPadding,
       child: FutureBuilder<List>(
-        future: context.watch<MainChaptersState>().getDatabaseQuery.getOneFootnotes(int.parse(footnoteData)),
+        future: context
+            .watch<MainChaptersState>()
+            .getDatabaseQuery
+            .getOneFootnotes(int.parse(footnoteData)),
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           return snapshot.hasData
-              ? Html(
-                  data: snapshot.data![0].footnote,
-                  style: {
-                    '#': Style(
-                      padding: HtmlPaddings.zero,
-                      margin: Margins.zero,
-                      fontSize: FontSize(18),
-                      fontFamily: 'Gilroy',
-                      color: theme.colorScheme.mainDefaultColor,
-                      textAlign: TextAlign.center,
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: footnoteColor,
+                      child: Text(
+                        footnoteData,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                    'b': Style(
-                      padding: HtmlPaddings.zero,
-                      margin: Margins.zero,
-                      fontSize: FontSize(18),
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Gilroy',
-                      color: theme.colorScheme.mainDefaultColor,
+                    const SizedBox(height: 8),
+                    Html(
+                      data: snapshot.data![0].footnote,
+                      style: {
+                        '#': Style(
+                          padding: HtmlPaddings.zero,
+                          margin: Margins.zero,
+                          fontSize: FontSize(18),
+                          fontFamily: 'Gilroy',
+                          color: theme.colorScheme.mainDefaultColor,
+                          textAlign: TextAlign.center,
+                        ),
+                        'b': Style(
+                          padding: HtmlPaddings.zero,
+                          margin: Margins.zero,
+                          fontSize: FontSize(18),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Gilroy',
+                          color: theme.colorScheme.mainDefaultColor,
+                        ),
+                        'small': Style(
+                          padding: HtmlPaddings.zero,
+                          margin: Margins.zero,
+                          fontSize: FontSize(12),
+                          fontFamily: 'Gilroy',
+                          color: Colors.grey,
+                        ),
+                      },
                     ),
-                    'small': Style(
-                      padding: HtmlPaddings.zero,
-                      margin: Margins.zero,
-                      fontSize: FontSize(12),
-                      fontFamily: 'Gilroy',
-                      color: Colors.grey,
-                    ),
-                  },
+                  ],
                 )
               : Center(
                   child: Text(

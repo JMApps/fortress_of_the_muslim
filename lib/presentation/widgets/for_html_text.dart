@@ -63,6 +63,7 @@ class ForHtmlText extends StatelessWidget {
             margin: AppStyles.mainMargin,
             child: ForBottomSheetFootnote(
               footnoteData: url!,
+              footnoteColor: footnoteColor,
             ),
           ),
         );
