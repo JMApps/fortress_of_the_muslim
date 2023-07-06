@@ -49,7 +49,7 @@ class MainChapterItem extends StatelessWidget {
           ),
         ),
         subtitle: ForHtmlText(
-          textData: item.chapterTitle,
+          textData: '${item.chapterTitle}<br/><br/>${item.chapterTitleEn}',
           textSize: 17,
           textColor: themeColors.mainDefaultColor,
           footnoteColor: const Color(0xFF00897B),
