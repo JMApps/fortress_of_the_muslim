@@ -58,7 +58,7 @@ class SupplicationMediaCard extends StatelessWidget {
                       vertical: -4,
                       horizontal: -4,
                     ),
-                    icon: const Icon(Icons.repeat_rounded),
+                    icon: const Icon(Icons.replay),
                   )
                 : const SizedBox(),
             item.arabicText != null

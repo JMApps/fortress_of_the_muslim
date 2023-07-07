@@ -22,10 +22,7 @@ class ForBottomSheetFootnote extends StatelessWidget {
     return SingleChildScrollView(
       padding: AppStyles.mainPadding,
       child: FutureBuilder<List>(
-        future: context
-            .watch<MainChaptersState>()
-            .getDatabaseQuery
-            .getOneFootnotes(int.parse(footnoteData)),
+        future: context.watch<MainChaptersState>().getDatabaseQuery.getOneFootnotes(int.parse(footnoteData)),
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           return snapshot.hasData
               ? Column(
