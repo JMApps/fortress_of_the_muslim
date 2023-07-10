@@ -4,10 +4,10 @@ class MainSupplicationModel {
   late final String? transcriptionText;
   late final String translationText;
   late final String contentForShare;
-  late final String? nameAudio;
+  late final String nameAudio;
   late final int sampleBy;
   late final int favoriteState;
-  late final int? countNumber;
+  late final int countNumber;
 
   MainSupplicationModel.fromMap(Map<String, dynamic> map) {
     id = map['id'];
