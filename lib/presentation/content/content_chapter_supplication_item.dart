@@ -59,11 +59,11 @@ class ContentChapterSupplicationItem extends StatelessWidget {
               footnoteColor: theme.colorScheme.mainChaptersColor,
               textDataAlign: TextAlign.start,
             ),
-            const SizedBox(height: 8),
-            MaterialButton(
+            const SizedBox(height: 16),
+            item.countNumber > 0 ? FloatingActionButton(
               onPressed: () {},
               shape: AppStyles.mainShape,
-              color: theme.colorScheme.chapterContentSupplicationsColor,
+              backgroundColor: theme.colorScheme.chapterContentSupplicationsColor,
               child: Text(
                 '${item.countNumber}',
                 style: const TextStyle(
@@ -71,7 +71,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-            ),
+            ) : const SizedBox(),
             item.countNumber > 0 ? const SizedBox(height: 16) : const SizedBox(),
             SupplicationMediaCard(
               item: item,
