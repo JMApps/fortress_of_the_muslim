@@ -33,7 +33,10 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
             item.arabicText != null
                 ? Text(
                     item.arabicText!,
-                    style: theme.textTheme.labelMedium,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontFamily: 'Hafs',
+                    ),
                     textAlign: TextAlign.start,
                     textDirection: TextDirection.rtl,
                   )
@@ -44,7 +47,11 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
             item.transcriptionText != null
                 ? Text(
                     item.transcriptionText!,
-                    style: theme.textTheme.labelMedium,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Gilroy',
+                      fontWeight: FontWeight.w100,
+                    ),
                     textAlign: TextAlign.start,
                   )
                 : const SizedBox(),

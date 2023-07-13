@@ -34,7 +34,10 @@ class ContentChapterSupplicationItem extends StatelessWidget {
             item.arabicText != null
                 ? Text(
                     item.arabicText!,
-                    style: theme.textTheme.labelMedium,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontFamily: 'Hafs',
+                    ),
                     textAlign: TextAlign.start,
                     textDirection: TextDirection.rtl,
                   )
@@ -45,7 +48,11 @@ class ContentChapterSupplicationItem extends StatelessWidget {
             item.transcriptionText != null
                 ? Text(
                     item.transcriptionText!,
-                    style: theme.textTheme.labelMedium,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Gilroy',
+                      fontWeight: FontWeight.w100,
+                    ),
                     textAlign: TextAlign.start,
                   )
                 : const SizedBox(),
@@ -54,25 +61,30 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                 : const SizedBox(),
             ForHtmlText(
               textData: item.translationText,
-              textSize: 17,
+              textSize: 18,
               textColor: theme.colorScheme.mainDefaultColor,
               footnoteColor: theme.colorScheme.mainChaptersColor,
               textDataAlign: TextAlign.start,
             ),
             const SizedBox(height: 16),
-            item.countNumber > 0 ? FloatingActionButton(
-              onPressed: () {},
-              shape: AppStyles.mainShape,
-              backgroundColor: theme.colorScheme.chapterContentSupplicationsColor,
-              child: Text(
-                '${item.countNumber}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
-            ) : const SizedBox(),
-            item.countNumber > 0 ? const SizedBox(height: 16) : const SizedBox(),
+            item.countNumber > 0
+                ? FloatingActionButton(
+                    onPressed: () {},
+                    shape: AppStyles.mainShape,
+                    backgroundColor:
+                        theme.colorScheme.chapterContentSupplicationsColor,
+                    child: Text(
+                      '${item.countNumber}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+            item.countNumber > 0
+                ? const SizedBox(height: 16)
+                : const SizedBox(),
             SupplicationMediaCard(
               item: item,
               itemIndex: itemIndex,
