@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNoticeService {
@@ -8,26 +10,23 @@ class LocalNoticeService {
     return _localNoticeService;
   }
 
+  LocalNoticeService._internal();
+
   static const channelId = "custom_morning_evening_supplications_channel_id";
   static const channelName = "custom_morning_evening_supplications_channel";
   static const iosChannelIdentifier = "ios_channel_identifier";
   static const notificationId = 1234;
 
-  LocalNoticeService._internal();
-
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   Future<void> setupNotification() async {
+
     _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
 
-    const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings('@drawable/ic_launcher');
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_launcher');
 
-    const DarwinInitializationSettings iOSInitializationSettings =
-        DarwinInitializationSettings();
+    const DarwinInitializationSettings iOSInitializationSettings = DarwinInitializationSettings();
 
     const InitializationSettings initializationSettings =
         InitializationSettings(
@@ -36,14 +35,13 @@ class LocalNoticeService {
     );
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    showNotification(title: 'title', body: 'body');
+    showNotification(title: 'Крепость мусульманина', body: 'Время азкаров');
   }
 
   Future<void> showNotification({
     required String title,
     required String body,
   }) async {
-    setupNotification();
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       channelId,
