@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_app_settings_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AppSettingsPage extends StatelessWidget {
@@ -20,7 +21,100 @@ class AppSettingsPage extends StatelessWidget {
             return Column(
               children: [
                 const SizedBox(height: 8),
+                ListTile(
+                  visualDensity: const VisualDensity(horizontal: -4),
+                  title: Text(
+                    'Уведомления утром',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  subtitle: Text(
+                    'Напоминать в ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultMorningNotificationTime))}',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  trailing: Switch(
+                    activeColor: theme.colorScheme.mainChaptersColor,
+                    value: settings.getIsMorningNotification,
+                    onChanged: (bool? value) {
+                      settings.morningNotification();
+                    },
+                  ),
+                  leading: IconButton(
+                    splashRadius: 25,
+                    color: theme.colorScheme.mainChaptersColor,
+                    onPressed: () {
+                      showTimePicker(
+                        context: context,
+                        initialEntryMode: TimePickerEntryMode.dialOnly,
+                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultMorningNotificationTime)),
+                        helpText: AppStrings.morningNotification,
+                        cancelText: AppStrings.cancel,
+                        confirmText: AppStrings.confirm,
+                        builder: (BuildContext context, Widget? child) {
+                          return MediaQuery(
+                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                            child: child!,
+                          );
+                        },
+                      ).then((TimeOfDay? time) {
+                        if (time != null) {
+                          settings.changeMorningTimeOfDay(DateTime(2023, 12, 31, time.hour, time.minute).toIso8601String());
+                        }
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.date_range,
+                    ),
+                  ),
+                ),
+                const Divider(),
+                ListTile(
+                  visualDensity: const VisualDensity(horizontal: -4),
+                  title: Text(
+                    'Уведомления вечером',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  subtitle: Text(
+                    'Напоминать в ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultEveningNotificationTime))}',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  trailing: Switch(
+                    activeColor: theme.colorScheme.mainChaptersColor,
+                    value: settings.getIsEveningNotification,
+                    onChanged: (bool? value) {
+                      settings.eveningNotification();
+                    },
+                  ),
+                  leading: IconButton(
+                    splashRadius: 25,
+                    color: theme.colorScheme.mainChaptersColor,
+                    onPressed: () {
+                      showTimePicker(
+                        context: context,
+                        initialEntryMode: TimePickerEntryMode.dialOnly,
+                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultEveningNotificationTime)),
+                        helpText: AppStrings.eveningNotification,
+                        cancelText: AppStrings.cancel,
+                        confirmText: AppStrings.confirm,
+                        builder: (BuildContext context, Widget? child) {
+                          return MediaQuery(
+                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                            child: child!,
+                          );
+                        },
+                      ).then((TimeOfDay? time) {
+                        if (time != null) {
+                          settings.changeEveningTimeOfDay(DateTime(2023, 12, 31, time.hour, time.minute).toIso8601String());
+                        }
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.date_range,
+                    ),
+                  ),
+                ),
+                const Divider(),
                 SwitchListTile(
+                  visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     'Список глав',
                     style: theme.textTheme.bodyMedium,
@@ -30,7 +124,6 @@ class AppSettingsPage extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
-                  visualDensity: const VisualDensity(horizontal: -4),
                   value: settings.getIsRunMainChapters,
                   onChanged: (bool? value) {
                     settings.runManinChapters();
@@ -38,6 +131,7 @@ class AppSettingsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 SwitchListTile(
+                  visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     'Экран',
                     style: theme.textTheme.bodyMedium,
@@ -47,7 +141,6 @@ class AppSettingsPage extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
-                  visualDensity: const VisualDensity(horizontal: -4),
                   value: settings.getIsDisplayOn,
                   onChanged: (bool? value) {
                     settings.displayOnOff();
@@ -55,40 +148,7 @@ class AppSettingsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 SwitchListTile(
-                  title: Text(
-                    'Уведомления утром',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                  subtitle: Text(
-                    'Напоминать про азкары утром',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  activeColor: theme.colorScheme.mainChaptersColor,
                   visualDensity: const VisualDensity(horizontal: -4),
-                  value: settings.getIsMorningNotification,
-                  onChanged: (bool? value) {
-                    settings.morningNotification();
-                  },
-                ),
-                const Divider(),
-                SwitchListTile(
-                  title: Text(
-                    'Уведомления вечером',
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                  subtitle: Text(
-                    'Напоминать про азкары вечером',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  activeColor: theme.colorScheme.mainChaptersColor,
-                  visualDensity: const VisualDensity(horizontal: -4),
-                  value: settings.getIsEveningNotification,
-                  onChanged: (bool? value) {
-                    settings.eveningNotification();
-                  },
-                ),
-                const Divider(),
-                SwitchListTile(
                   title: Text(
                     'Адаптивная тема',
                     style: theme.textTheme.bodyMedium,
@@ -98,7 +158,6 @@ class AppSettingsPage extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
-                  visualDensity: const VisualDensity(horizontal: -4),
                   value: settings.getIsAdaptiveTheme,
                   onChanged: (bool? value) {
                     settings.adaptiveTheme();
@@ -106,6 +165,7 @@ class AppSettingsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 SwitchListTile(
+                  visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     'Пользовательская тема',
                     style: theme.textTheme.bodyMedium,
@@ -115,62 +175,13 @@ class AppSettingsPage extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
-                  visualDensity: const VisualDensity(horizontal: -4),
                   value: settings.getIsUserTheme,
                   onChanged: settings.getIsAdaptiveTheme
-                      ? null
-                      : (bool? value) {
-                          settings.userTheme();
-                        },
+                      ? null : (bool? value) {
+                            settings.userTheme();
+                          },
                 ),
                 const SizedBox(height: 8),
-                IconButton(
-                  onPressed: () {
-                    showTimePicker(
-                      context: context,
-                      initialEntryMode: TimePickerEntryMode.dialOnly,
-                      initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultMorningNotificationTime)),
-                      helpText: AppStrings.morningNotification,
-                      cancelText: AppStrings.cancel,
-                      confirmText: AppStrings.confirm,
-                      builder: (BuildContext context, Widget? child) {
-                        return MediaQuery(
-                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-                          child: child!,
-                        );
-                      },
-                    ).then((TimeOfDay? time) => {
-                      settings.changeMorningTimeOfDay(DateTime(2023, 12, 31, time!.hour, time.minute).toIso8601String())
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.date_range,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                IconButton(
-                  onPressed: () {
-                    showTimePicker(
-                      context: context,
-                      initialEntryMode: TimePickerEntryMode.dialOnly,
-                      initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultEveningNotificationTime)),
-                      helpText: AppStrings.eveningNotification,
-                      cancelText: AppStrings.cancel,
-                      confirmText: AppStrings.confirm,
-                      builder: (BuildContext context, Widget? child) {
-                        return MediaQuery(
-                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-                          child: child!,
-                        );
-                      },
-                    ).then((TimeOfDay? time) => {
-                      settings.changeEveningTimeOfDay(DateTime(2023, 12, 31, time!.hour, time.minute).toIso8601String())
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.date_range,
-                  ),
-                ),
               ],
             );
           },

@@ -82,7 +82,7 @@ class AppThemes {
         color: Color(0xFFA1A1A1),
       ),
       labelLarge: TextStyle(
-        fontSize: 75,
+        fontSize: 18,
         fontFamily: 'Gilroy',
         color: Color(0xFFD3D3D3),
       ),

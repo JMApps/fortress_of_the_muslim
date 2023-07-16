@@ -43,11 +43,11 @@ class MainAppSettingsState extends ChangeNotifier {
     _isRunMainChapters = _appSettingsBox.get(AppConstraints.keyRunChapters, defaultValue: false);
     _isDisplayOn = _appSettingsBox.get(AppConstraints.keyDisplayOn, defaultValue: true);
     _isMorningNotification = _appSettingsBox.get(AppConstraints.keyMorningNotification, defaultValue: true);
+    _defaultMorningNotificationTime = _appSettingsBox.get(AppConstraints.keyMorningNotificationTime, defaultValue: '2023-12-31T04:00:00.0');
     _isEveningNotification = _appSettingsBox.get(AppConstraints.keyEveningNotification, defaultValue: true);
+    _defaultEveningNotificationTime = _appSettingsBox.get(AppConstraints.keyEveningNotificationTime, defaultValue: '2023-12-31T17:00:00.0');
     _isAdaptiveTheme = _appSettingsBox.get(AppConstraints.keyAdaptiveTheme, defaultValue: true);
     _isUserTheme = _appSettingsBox.get(AppConstraints.keyUserTheme, defaultValue: false);
-    _defaultMorningNotificationTime = _appSettingsBox.get(AppConstraints.keyMorningNotificationTime, defaultValue: '2023-12-31T04:00:00.0');
-    _defaultEveningNotificationTime = _appSettingsBox.get(AppConstraints.keyEveningNotificationTime, defaultValue: '2023-12-31T17:00:00.0');
   }
 
   runManinChapters() {

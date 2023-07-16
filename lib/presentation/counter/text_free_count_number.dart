@@ -9,7 +9,9 @@ class TextFreeCounterNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       context.watch<CounterState>().getFreeCountNumber.toString(),
-      style: Theme.of(context).textTheme.labelLarge,
+      style: const TextStyle(
+        fontSize: 75,
+      ),
       textAlign: TextAlign.center,
     );
   }

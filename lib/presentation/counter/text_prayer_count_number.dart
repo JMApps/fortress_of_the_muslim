@@ -9,7 +9,9 @@ class TextPrayerCounterNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       context.watch<CounterState>().getPrayerCountNumber.toString(),
-      style: Theme.of(context).textTheme.labelLarge,
+      style: const TextStyle(
+        fontSize: 75,
+      ),
       textAlign: TextAlign.center,
     );
   }
