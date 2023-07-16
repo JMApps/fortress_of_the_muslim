@@ -36,7 +36,7 @@ class AppThemes {
         color: Color(0xFF414141),
       ),
       labelLarge: TextStyle(
-        fontSize: 75,
+        fontSize: 18,
         fontFamily: 'Gilroy',
         color: Color(0xFF1E1E1E),
       ),
