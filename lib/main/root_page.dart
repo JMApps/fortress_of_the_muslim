@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/application/notification/local_notice_service.dart';
 import 'package:fortress_of_the_muslim/application/other/default_scroll_behavior.dart';
 import 'package:fortress_of_the_muslim/application/route/app_routes.dart';
 import 'package:fortress_of_the_muslim/application/state/main_app_settings_state.dart';
@@ -13,6 +14,26 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MainAppSettingsState settings = context.watch<MainAppSettingsState>();
+    if (settings.getIsMorningNotification) {
+      LocalNoticeService().morningZonedScheduleNotification(
+        DateTime.parse(settings.getDefaultMorningNotificationTime),
+        AppStrings.appName,
+        'Время утренних азкаров',
+        LocalNoticeService.morningNotificationID,
+      );
+    } else {
+      LocalNoticeService().cancelNotificationWithId(LocalNoticeService.morningNotificationID);
+    }
+    if (settings.getIsEveningNotification) {
+      LocalNoticeService().eveningZonedScheduleNotification(
+        DateTime.parse(settings.getDefaultEveningNotificationTime),
+        AppStrings.appName,
+        'Время вечерних азкаров',
+        LocalNoticeService.eveningNotificationID,
+      );
+    } else {
+      LocalNoticeService().cancelNotificationWithId(LocalNoticeService.eveningNotificationID);
+    }
     return MaterialApp(
       builder: (context, child) {
         return ScrollConfiguration(

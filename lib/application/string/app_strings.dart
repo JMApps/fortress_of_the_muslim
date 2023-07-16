@@ -30,6 +30,13 @@ class AppStrings {
   static const String share = 'Поделиться';
   static const String footnotes = 'Сноски';
   static const String errorLoadData = 'Ошибка загрузки данных';
+  static const String morningNotification = 'Уведомления утром';
+  static const String morningNotificationDescription = 'Напоминать про азкары утром';
+  static const String eveningNotification = 'Уведомления вечером';
+  static const String eveningNotificationDescription = 'Напоминать про азкары вечером';
+  static const String cancel = 'Отмена';
+  static const String confirm = 'Применить';
+  static const String ok = 'Ок';
 
   static const List<String> counterValuesList = [
     'Без ограничений',

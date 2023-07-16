@@ -31,6 +31,14 @@ class MainAppSettingsState extends ChangeNotifier {
 
   bool get getIsUserTheme => _isUserTheme;
 
+  String _defaultMorningNotificationTime = '2023-12-31T04:00:00.0';
+
+  String get getDefaultMorningNotificationTime => _defaultMorningNotificationTime;
+
+  String _defaultEveningNotificationTime = '2023-12-31T17:00:00.0';
+
+  String get getDefaultEveningNotificationTime => _defaultEveningNotificationTime;
+
   MainAppSettingsState() {
     _isRunMainChapters = _appSettingsBox.get(AppConstraints.keyRunChapters, defaultValue: false);
     _isDisplayOn = _appSettingsBox.get(AppConstraints.keyDisplayOn, defaultValue: true);
@@ -38,6 +46,8 @@ class MainAppSettingsState extends ChangeNotifier {
     _isEveningNotification = _appSettingsBox.get(AppConstraints.keyEveningNotification, defaultValue: true);
     _isAdaptiveTheme = _appSettingsBox.get(AppConstraints.keyAdaptiveTheme, defaultValue: true);
     _isUserTheme = _appSettingsBox.get(AppConstraints.keyUserTheme, defaultValue: false);
+    _defaultMorningNotificationTime = _appSettingsBox.get(AppConstraints.keyMorningNotificationTime, defaultValue: '2023-12-31T04:00:00.0');
+    _defaultEveningNotificationTime = _appSettingsBox.get(AppConstraints.keyEveningNotificationTime, defaultValue: '2023-12-31T17:00:00.0');
   }
 
   runManinChapters() {
@@ -59,9 +69,21 @@ class MainAppSettingsState extends ChangeNotifier {
     notifyListeners();
   }
 
+  changeMorningTimeOfDay(String newTime) {
+    _defaultMorningNotificationTime = newTime;
+    _appSettingsBox.put(AppConstraints.keyMorningNotificationTime, _defaultMorningNotificationTime);
+    notifyListeners();
+  }
+
   eveningNotification() {
     _isEveningNotification = !_isEveningNotification;
     _appSettingsBox.put(AppConstraints.keyEveningNotification, _isEveningNotification);
+    notifyListeners();
+  }
+
+  changeEveningTimeOfDay(String newTime) {
+    _defaultEveningNotificationTime = newTime;
+    _appSettingsBox.put(AppConstraints.keyEveningNotificationTime, _defaultEveningNotificationTime);
     notifyListeners();
   }
 

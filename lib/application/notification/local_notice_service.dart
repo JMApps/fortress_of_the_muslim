@@ -1,5 +1,8 @@
+import 'dart:io';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class LocalNoticeService {
   static final LocalNoticeService _localNoticeService =
@@ -11,19 +14,42 @@ class LocalNoticeService {
 
   LocalNoticeService._internal();
 
-  static const channelId = "custom_morning_evening_supplications_channel_id";
-  static const channelName = "custom_morning_evening_supplications_channel";
-  static const iosChannelIdentifier = "ios_channel_identifier";
-  static const notificationId = 1234;
+  static const morningNotificationID = 395;
+  static const eveningNotificationID = 376;
 
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  static const AndroidNotificationDetails androidMorningNotificationDetails =
+  AndroidNotificationDetails(
+    'Daily morning notification channel ID',
+    'Notifications',
+    channelDescription: 'Daily morning notifications',
+    importance: Importance.max,
+    priority: Priority.max,
+  );
+
+  static const DarwinNotificationDetails iOSMorningNotificationDetails =
+  DarwinNotificationDetails();
+
+  static const AndroidNotificationDetails androidEveningNotificationDetails =
+  AndroidNotificationDetails(
+    'Daily evening notification channel ID',
+    'Notifications',
+    channelDescription: 'Daily evening notifications',
+    importance: Importance.max,
+    priority: Priority.max,
+  );
+
+  static const DarwinNotificationDetails iOSEveningNotificationDetails =
+  DarwinNotificationDetails();
 
   Future<void> setupNotification() async {
+    if (Platform.isAndroid) {
+      _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
+    }
 
-    _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
-
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_launcher');
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const DarwinInitializationSettings iOSInitializationSettings = DarwinInitializationSettings();
 
@@ -33,39 +59,45 @@ class LocalNoticeService {
       iOS: iOSInitializationSettings,
     );
 
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    showNotification(title: 'Крепость мусульманина', body: 'Время азкаров');
+    _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    tz.initializeTimeZones();
   }
 
-  Future<void> showNotification({
-    required String title,
-    required String body,
-  }) async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      channelId,
-      channelName,
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      enableVibration: true,
-    );
-
-    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
-        DarwinNotificationDetails(
-      threadIdentifier: iosChannelIdentifier,
-    );
-
-    const NotificationDetails platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: iOSPlatformChannelSpecifics,
-    );
-
-    await _flutterLocalNotificationsPlugin.show(
-      notificationId,
+  Future<void> morningZonedScheduleNotification(DateTime date, String title, String body, int id) async {
+    var tzDateNotification = tz.TZDateTime.from(date, tz.local);
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
       title,
       body,
-      platformChannelSpecifics,
+      tzDateNotification,
+      const NotificationDetails(
+        android: androidMorningNotificationDetails,
+        iOS: iOSMorningNotificationDetails,
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
     );
+  }
+
+  Future<void> eveningZonedScheduleNotification(DateTime date, String title, String body, int id) async {
+    var tzDateNotification = tz.TZDateTime.from(date, tz.local);
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tzDateNotification,
+      const NotificationDetails(
+        android: androidEveningNotificationDetails,
+        iOS: iOSEveningNotificationDetails,
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  Future<void> cancelNotificationWithId(int id) async {
+    await _flutterLocalNotificationsPlugin.cancel(id);
   }
 }

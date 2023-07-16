@@ -9,4 +9,6 @@ class AppConstraints {
   static const String keyEveningNotification = 'key_evening_notification';
   static const String keyAdaptiveTheme = 'key_adaptive_theme';
   static const String keyUserTheme = 'key_user_theme';
+  static const String keyMorningNotificationTime = 'key_morning_notification_time';
+  static const String keyEveningNotificationTime = 'key_evening_notification_time';
 }

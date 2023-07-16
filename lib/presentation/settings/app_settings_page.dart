@@ -117,11 +117,60 @@ class AppSettingsPage extends StatelessWidget {
                   activeColor: theme.colorScheme.mainChaptersColor,
                   visualDensity: const VisualDensity(horizontal: -4),
                   value: settings.getIsUserTheme,
-                  onChanged: settings.getIsAdaptiveTheme ? null : (bool? value) {
-                    settings.userTheme();
-                  },
+                  onChanged: settings.getIsAdaptiveTheme
+                      ? null
+                      : (bool? value) {
+                          settings.userTheme();
+                        },
                 ),
                 const SizedBox(height: 8),
+                IconButton(
+                  onPressed: () {
+                    showTimePicker(
+                      context: context,
+                      initialEntryMode: TimePickerEntryMode.dialOnly,
+                      initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultMorningNotificationTime)),
+                      helpText: AppStrings.morningNotification,
+                      cancelText: AppStrings.cancel,
+                      confirmText: AppStrings.confirm,
+                      builder: (BuildContext context, Widget? child) {
+                        return MediaQuery(
+                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                          child: child!,
+                        );
+                      },
+                    ).then((TimeOfDay? time) => {
+                      settings.changeMorningTimeOfDay(DateTime(2023, 12, 31, time!.hour, time.minute).toIso8601String())
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.date_range,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                IconButton(
+                  onPressed: () {
+                    showTimePicker(
+                      context: context,
+                      initialEntryMode: TimePickerEntryMode.dialOnly,
+                      initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultEveningNotificationTime)),
+                      helpText: AppStrings.eveningNotification,
+                      cancelText: AppStrings.cancel,
+                      confirmText: AppStrings.confirm,
+                      builder: (BuildContext context, Widget? child) {
+                        return MediaQuery(
+                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                          child: child!,
+                        );
+                      },
+                    ).then((TimeOfDay? time) => {
+                      settings.changeEveningTimeOfDay(DateTime(2023, 12, 31, time!.hour, time.minute).toIso8601String())
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.date_range,
+                  ),
+                ),
               ],
             );
           },
