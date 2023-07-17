@@ -27,8 +27,8 @@ class MainChapterBookmarksItem extends StatelessWidget {
     return Card(
       elevation: 0,
       color: itemIndex.isOdd
-          ? themeColors.cardColor
-          : themeColors.cardOddColor,
+          ? themeColors.cardOddColor
+          : themeColors.cardColor,
       child: ListTile(
         onTap: () {
           chapterItemState.saveLastChapter(item.id);

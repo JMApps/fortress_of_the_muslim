@@ -23,8 +23,8 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
     return Card(
       elevation: 0,
       color: itemIndex.isOdd
-          ? theme.colorScheme.cardColor
-          : theme.colorScheme.cardOddColor,
+          ? theme.colorScheme.cardOddColor
+          : theme.colorScheme.cardColor,
       child: Padding(
         padding: AppStyles.mainPadding,
         child: Column(

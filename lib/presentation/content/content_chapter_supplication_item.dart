@@ -24,8 +24,8 @@ class ContentChapterSupplicationItem extends StatelessWidget {
       elevation: 0,
       margin: AppStyles.mainMarginMini,
       color: itemIndex.isOdd
-          ? theme.colorScheme.cardColor
-          : theme.colorScheme.cardOddColor,
+          ? theme.colorScheme.cardOddColor
+          : theme.colorScheme.cardColor,
       child: Padding(
         padding: AppStyles.mainPadding,
         child: Column(

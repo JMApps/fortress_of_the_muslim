@@ -30,8 +30,8 @@ class SupplicationMediaCard extends StatelessWidget {
     return Card(
       margin: EdgeInsets.zero,
       color: itemIndex.isOdd
-          ? theme.colorScheme.cardOddColor
-          : theme.colorScheme.cardColor,
+          ? theme.colorScheme.cardColor
+          : theme.colorScheme.cardOddColor,
       child: Padding(
         padding: AppStyles.mainPaddingMini,
         child: Row(

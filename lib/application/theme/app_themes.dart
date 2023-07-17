@@ -11,7 +11,7 @@ class AppThemes {
       centerTitle: true,
       elevation: 0,
       shape: AppStyles.appBarShape,
-      backgroundColor: Color(0xFF00897B),
+      backgroundColor: Color(0xFF26A69A),
       titleTextStyle: TextStyle(
         color: Color(0xFFFFFFFF),
         fontFamily: 'Gilroy',
@@ -51,7 +51,7 @@ class AppThemes {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.blueGrey,
-    scaffoldBackgroundColor: const Color(0xFF192326),
+    scaffoldBackgroundColor: const Color(0xFF192426),
     fontFamily: 'Gilroy',
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -91,7 +91,7 @@ class AppThemes {
       elevation: 1,
       shape: AppStyles.mainShape,
     ),
-    cardColor: const Color(0xFF263238),
+    cardColor: const Color(0xFF1A2326),
   );
 }
 
@@ -147,9 +147,9 @@ extension ColorsSchemes on ColorScheme {
 
   Color get cardOddColor => brightness == Brightness.light
       ? const Color(0xFFF5F5F5)
-      : const Color(0xFF263238);
+      : const Color(0xFF233036);
 
   Color get cardColor => brightness == Brightness.light
       ? const Color(0xFFFFFFFF)
-      : const Color(0xFF192326);
+      : const Color(0xFF1E282D);
 }
