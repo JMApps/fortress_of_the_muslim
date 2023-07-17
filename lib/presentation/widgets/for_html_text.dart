@@ -48,7 +48,7 @@ class ForHtmlText extends StatelessWidget {
           color: Colors.grey,
         ),
         'a': Style(
-          fontSize: FontSize(textSize),
+          fontSize: FontSize(textSize - 5),
           fontFamily: 'Gilroy',
           fontWeight: FontWeight.bold,
           color: footnoteColor,
