@@ -51,13 +51,13 @@ class AppThemes {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.blueGrey,
-    scaffoldBackgroundColor: const Color(0xFF192426),
+    scaffoldBackgroundColor: const Color(0xFF151E1F),
     fontFamily: 'Gilroy',
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
       shape: AppStyles.appBarShape,
-      backgroundColor: Color(0xFF243336),
+      backgroundColor: Color(0xFF202D2F),
       titleTextStyle: TextStyle(
         color: Color(0xFFFFFFFF),
         fontFamily: 'Gilroy',

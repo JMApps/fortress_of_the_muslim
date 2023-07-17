@@ -126,6 +126,7 @@ class MainColumn extends StatelessWidget {
               color: theme.colorScheme.mainSupplicationsColor,
               child: Card(
                 margin: const EdgeInsets.only(right: 12),
+                color: theme.colorScheme.cardColor,
                 child: ListTile(
                   onTap: () {
                     Navigator.pushNamed(

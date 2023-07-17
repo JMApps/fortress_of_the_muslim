@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage> {
       body: const MainColumn(),
       bottomNavigationBar: Card(
         elevation: 1,
+        color: theme.colorScheme.cardColor,
         margin: AppStyles.mainPadding,
         child: Padding(
           padding: AppStyles.symmetricVerticalPaddingMini,
