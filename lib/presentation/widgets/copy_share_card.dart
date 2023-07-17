@@ -1,19 +1,21 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
+import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/snack_container.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CopyShareCard extends StatelessWidget {
   const CopyShareCard({
     super.key,
-    required this.contentForCopyAndShare,
+    required this.item,
     required this.backgroundColor,
   });
 
-  final String contentForCopyAndShare;
+  final MainSupplicationModel item;
   final Color backgroundColor;
 
   @override
@@ -28,13 +30,13 @@ class CopyShareCard extends StatelessWidget {
             const SizedBox(height: 8),
             ListTile(
               onTap: () {
-                Clipboard.getData(contentForCopyAndShare);
+                FlutterClipboard.copy(_contentForCopyAndShare());
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: backgroundColor,
                     duration: const Duration(milliseconds: 750),
                     behavior: SnackBarBehavior.floating,
-                    margin: AppStyles.symmetricHorizontalPadding,
+                    margin: AppStyles.mainMargin,
                     shape: AppStyles.mainShape,
                     content: const SnackContainer(
                       message: AppStrings.copied,
@@ -51,7 +53,10 @@ class CopyShareCard extends StatelessWidget {
             const Divider(),
             ListTile(
               onTap: () {
-                Share.share(contentForCopyAndShare);
+                Share.share(
+                  _contentForCopyAndShare(),
+                  sharePositionOrigin: const Rect.fromLTWH(0, 0, 0, 0 / 2),
+                );
               },
               title: const Text(AppStrings.share),
               trailing: const Icon(CupertinoIcons.share),
@@ -63,5 +68,11 @@ class CopyShareCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _contentForCopyAndShare() {
+    return '${item.arabicText != null ? '${item.arabicText}\n\n' : ''}'
+        '${item.transcriptionText != null ? '${item.transcriptionText}\n\n' : ''}'
+        '${item.contentForShare}';
   }
 }
