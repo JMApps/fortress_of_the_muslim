@@ -5,20 +5,8 @@ import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/arguments/book_content_arguments.dart';
 
-class BookContentListPage extends StatefulWidget {
+class BookContentListPage extends StatelessWidget {
   const BookContentListPage({Key? key}) : super(key: key);
-
-  @override
-  State<BookContentListPage> createState() => _BookContentListPageState();
-}
-
-class _BookContentListPageState extends State<BookContentListPage> {
-  final List<String> _mainList = [
-    'Предисловие издателя',
-    'Предисловие составителя',
-    'Достоинство поминания Аллаха',
-    'Сборник хадисов',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +28,7 @@ class _BookContentListPageState extends State<BookContentListPage> {
       body: CupertinoScrollbar(
         child: ListView.separated(
           padding: AppStyles.symmetricVerticalPaddingMini,
-          itemCount: _mainList.length,
+          itemCount: AppStrings.bookChapters.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               onTap: () {
@@ -49,12 +37,12 @@ class _BookContentListPageState extends State<BookContentListPage> {
                   '/book_content_page',
                   arguments: BookContentArguments(
                     index: index,
-                    title: _mainList[index],
+                    title: AppStrings.bookChapters[index],
                   ),
                 );
               },
               title: Text(
-                _mainList[index],
+                AppStrings.bookChapters[index],
                 style: Theme.of(context).textTheme.labelMedium,
               ),
               visualDensity: const VisualDensity(vertical: -2),

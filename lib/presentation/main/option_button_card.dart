@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:share_plus/share_plus.dart';
@@ -25,7 +26,7 @@ class OptionButtonCard extends StatelessWidget {
         host: Platform.isAndroid ? 'play.google.com' : 'apps.apple.com',
         path: Platform.isAndroid ? '/store/apps/dev?id=8649252597553656018' : 'tr/developer/imanil-binyaminov/id1564920953'
     );
-    const String appLinks = 'Крепость мусульманина\n\nВерсия iOS:\nhttps://apps.apple.com/ru/app/крепость-верующего/id1564920951\n\nВерсия Android:\nhttps://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
+    const String appLinks = '${AppStrings.appName}\n\n${AppStrings.version} iOS:\nhttps://apps.apple.com/ru/app/крепость-верующего/id1564920951\n\n${AppStrings.version} Android:\nhttps://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
     return InkWell(
       onTap: () {
         switch (routeName) {

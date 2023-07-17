@@ -90,10 +90,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
 
   Widget _searchFuture(BuildContext context) {
     return FutureBuilder<List>(
-      future: context
-          .watch<MainChaptersState>()
-          .getDatabaseQuery
-          .getAllSupplications(),
+      future: context.watch<MainChaptersState>().getDatabaseQuery.getAllSupplications(),
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
           _supplications = snapshot.data as List<MainSupplicationModel>;
@@ -102,10 +99,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
               : _supplications
                   .where((element) =>
                       element.id.toString().contains(query.toString()) ||
-                      element.translationText
-                          .toLowerCase()
-                          .contains(query.toLowerCase()))
-                  .toList();
+                      element.translationText.toLowerCase().contains(query.toLowerCase())).toList();
           return _recentSupplications.isEmpty
               ? Padding(
                   padding: AppStyles.mainPadding,

@@ -24,11 +24,11 @@ class AppSettingsPage extends StatelessWidget {
                 ListTile(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
-                    'Уведомления утром',
+                    AppStrings.morningNotification,
                     style: theme.textTheme.bodyMedium,
                   ),
                   subtitle: Text(
-                    'Напоминать в ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultMorningNotificationTime))}',
+                    '${AppStrings.morningNotificationDescription} ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultMorningNotificationTime))}',
                     style: theme.textTheme.bodySmall,
                   ),
                   trailing: Switch(
@@ -45,19 +45,23 @@ class AppSettingsPage extends StatelessWidget {
                       showTimePicker(
                         context: context,
                         initialEntryMode: TimePickerEntryMode.dialOnly,
-                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultMorningNotificationTime)),
+                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(
+                            settings.getDefaultMorningNotificationTime)),
                         helpText: AppStrings.morningNotification,
                         cancelText: AppStrings.cancel,
                         confirmText: AppStrings.confirm,
                         builder: (BuildContext context, Widget? child) {
                           return MediaQuery(
-                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                            data: MediaQuery.of(context)
+                                .copyWith(alwaysUse24HourFormat: true),
                             child: child!,
                           );
                         },
                       ).then((TimeOfDay? time) {
                         if (time != null) {
-                          settings.changeMorningTimeOfDay(DateTime(2023, 12, 31, time.hour, time.minute).toIso8601String());
+                          settings.changeMorningTimeOfDay(
+                              DateTime(2023, 12, 31, time.hour, time.minute)
+                                  .toIso8601String());
                         }
                       });
                     },
@@ -70,11 +74,11 @@ class AppSettingsPage extends StatelessWidget {
                 ListTile(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
-                    'Уведомления вечером',
+                    AppStrings.eveningNotification,
                     style: theme.textTheme.bodyMedium,
                   ),
                   subtitle: Text(
-                    'Напоминать в ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultEveningNotificationTime))}',
+                    '${AppStrings.eveningNotificationDescription} ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultEveningNotificationTime))}',
                     style: theme.textTheme.bodySmall,
                   ),
                   trailing: Switch(
@@ -91,19 +95,23 @@ class AppSettingsPage extends StatelessWidget {
                       showTimePicker(
                         context: context,
                         initialEntryMode: TimePickerEntryMode.dialOnly,
-                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultEveningNotificationTime)),
+                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(
+                            settings.getDefaultEveningNotificationTime)),
                         helpText: AppStrings.eveningNotification,
                         cancelText: AppStrings.cancel,
                         confirmText: AppStrings.confirm,
                         builder: (BuildContext context, Widget? child) {
                           return MediaQuery(
-                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                            data: MediaQuery.of(context)
+                                .copyWith(alwaysUse24HourFormat: true),
                             child: child!,
                           );
                         },
                       ).then((TimeOfDay? time) {
                         if (time != null) {
-                          settings.changeEveningTimeOfDay(DateTime(2023, 12, 31, time.hour, time.minute).toIso8601String());
+                          settings.changeEveningTimeOfDay(
+                              DateTime(2023, 12, 31, time.hour, time.minute)
+                                  .toIso8601String());
                         }
                       });
                     },
@@ -116,11 +124,11 @@ class AppSettingsPage extends StatelessWidget {
                 SwitchListTile(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
-                    'Список глав',
+                    AppStrings.listChapters,
                     style: theme.textTheme.bodyMedium,
                   ),
                   subtitle: Text(
-                    'Открывать приложение со списка глав',
+                    AppStrings.listChaptersDescriptions,
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
@@ -133,11 +141,11 @@ class AppSettingsPage extends StatelessWidget {
                 SwitchListTile(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
-                    'Экран',
+                    AppStrings.screen,
                     style: theme.textTheme.bodyMedium,
                   ),
                   subtitle: Text(
-                    'Оставить экран включёным',
+                    AppStrings.screenDescription,
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
@@ -150,11 +158,11 @@ class AppSettingsPage extends StatelessWidget {
                 SwitchListTile(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
-                    'Адаптивная тема',
+                    AppStrings.adaptiveTheme,
                     style: theme.textTheme.bodyMedium,
                   ),
                   subtitle: Text(
-                    'В соответствии с темой на устройстве',
+                    AppStrings.adaptiveThemeDescription,
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
@@ -167,19 +175,20 @@ class AppSettingsPage extends StatelessWidget {
                 SwitchListTile(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
-                    'Пользовательская тема',
+                    AppStrings.userTheme,
                     style: theme.textTheme.bodyMedium,
                   ),
                   subtitle: Text(
-                    'Выбранная вами тема',
+                    AppStrings.userThemeDescription,
                     style: theme.textTheme.bodySmall,
                   ),
                   activeColor: theme.colorScheme.mainChaptersColor,
                   value: settings.getIsUserTheme,
                   onChanged: settings.getIsAdaptiveTheme
-                      ? null : (bool? value) {
-                            settings.userTheme();
-                          },
+                      ? null
+                      : (bool? value) {
+                          settings.userTheme();
+                        },
                 ),
                 const SizedBox(height: 8),
               ],

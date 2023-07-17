@@ -31,12 +31,30 @@ class AppStrings {
   static const String footnotes = 'Сноски';
   static const String errorLoadData = 'Ошибка загрузки данных';
   static const String morningNotification = 'Уведомления утром';
-  static const String morningNotificationDescription = 'Напоминать про азкары утром';
+  static const String morningNotificationTime = 'Время утренних азкаров';
+  static const String morningNotificationDescription = 'Напоминать в';
   static const String eveningNotification = 'Уведомления вечером';
-  static const String eveningNotificationDescription = 'Напоминать про азкары вечером';
+  static const String eveningNotificationTime = 'Время вечерних азкаров';
+  static const String eveningNotificationDescription = 'Напоминать в';
   static const String cancel = 'Отмена';
   static const String confirm = 'Применить';
   static const String ok = 'Ок';
+  static const String version = 'Версия';
+  static const String listChapters = 'Список глав';
+  static const String listChaptersDescriptions = 'Открывать со списка глав';
+  static const String screen = 'Экран';
+  static const String screenDescription = 'Оставить экран включёным';
+  static const String adaptiveTheme = 'Адаптивная тема';
+  static const String adaptiveThemeDescription = 'В соответствии с темой на устройстве';
+  static const String userTheme = 'Пользовательская тема';
+  static const String userThemeDescription = 'Пользовательская тема';
+
+  static const List<String> bookChapters = [
+    'Предисловие издателя',
+    'Предисловие составителя',
+    'Достоинство поминания Аллаха',
+    'Сборник хадисов',
+  ];
 
   static const List<String> counterValuesList = [
     'Без ограничений',

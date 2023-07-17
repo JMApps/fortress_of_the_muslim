@@ -19,10 +19,7 @@ class FootnotePage extends StatelessWidget {
         title: const Text(AppStrings.footnotes),
       ),
       body: FutureBuilder<List>(
-        future: context
-            .watch<MainChaptersState>()
-            .getDatabaseQuery
-            .getAllFootnotes(),
+        future: context.watch<MainChaptersState>().getDatabaseQuery.getAllFootnotes(),
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
             return Center(

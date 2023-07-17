@@ -132,9 +132,7 @@ class MainColumn extends StatelessWidget {
                       context,
                       '/chapter_content_page',
                       arguments: MainChapterArguments(
-                        chapterId: context
-                            .read<MainChaptersState>()
-                            .getLastSavedChapterIndex,
+                        chapterId: context.read<MainChaptersState>().getLastSavedChapterIndex,
                       ),
                     );
                   },

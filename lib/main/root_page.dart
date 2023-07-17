@@ -18,7 +18,7 @@ class RootPage extends StatelessWidget {
       LocalNoticeService().morningZonedScheduleNotification(
         DateTime.parse(settings.getDefaultMorningNotificationTime),
         AppStrings.appName,
-        'Время утренних азкаров',
+        AppStrings.morningNotificationTime,
         LocalNoticeService.morningNotificationID,
       );
     } else {
@@ -28,7 +28,7 @@ class RootPage extends StatelessWidget {
       LocalNoticeService().eveningZonedScheduleNotification(
         DateTime.parse(settings.getDefaultEveningNotificationTime),
         AppStrings.appName,
-        'Время вечерних азкаров',
+        AppStrings.eveningNotificationTime,
         LocalNoticeService.eveningNotificationID,
       );
     } else {
