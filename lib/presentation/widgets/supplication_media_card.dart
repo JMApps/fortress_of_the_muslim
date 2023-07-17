@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/application/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
@@ -27,117 +28,143 @@ class SupplicationMediaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final supplicationItemState = context.read<MainChaptersState>();
-    return Card(
-      margin: EdgeInsets.zero,
-      color: itemIndex.isOdd
-          ? theme.colorScheme.cardColor
-          : theme.colorScheme.cardOddColor,
-      child: Padding(
-        padding: AppStyles.mainPaddingMini,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            item.arabicText != null
-                ? IconButton(
-                    onPressed: () {},
-                    splashRadius: 20,
-                    color: theme.colorScheme.mainDefaultColor,
-                    visualDensity: const VisualDensity(
-                      vertical: -4,
-                      horizontal: -4,
-                    ),
-                    icon: const Icon(CupertinoIcons.play),
-                  )
-                : const SizedBox(),
-            item.arabicText != null
-                ? IconButton(
-                    onPressed: () {},
-                    splashRadius: 20,
-                    color: theme.colorScheme.mainDefaultColor,
-                    visualDensity: const VisualDensity(
-                      vertical: -4,
-                      horizontal: -4,
-                    ),
-                    icon: const Icon(Icons.replay),
-                  )
-                : const SizedBox(),
-            item.arabicText != null
-                ? IconButton(
-                    onPressed: () {},
-                    splashRadius: 20,
-                    color: theme.colorScheme.mainDefaultColor,
-                    visualDensity: const VisualDensity(
-                      vertical: -4,
-                      horizontal: -4,
-                    ),
-                    icon: const Icon(Icons.speed),
-                  )
-                : const SizedBox(),
-            IconButton(
-              onPressed: () {
-                supplicationItemState.addRemoveSupplicationBookmark(
-                  item.favoriteState == 0 ? 1 : 0,
-                  item.id,
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: itemColor,
-                    duration: const Duration(milliseconds: 750),
-                    behavior: SnackBarBehavior.floating,
-                    margin: AppStyles.symmetricHorizontalPadding,
-                    shape: AppStyles.mainShape,
-                    content: SnackContainer(
-                      message: item.favoriteState == 0
-                          ? AppStrings.added
-                          : AppStrings.deleted,
-                    ),
+    return Consumer<AppPlayerState>(
+      builder: (context, playerState, _) {
+        return Card(
+          margin: EdgeInsets.zero,
+          color: itemIndex.isOdd
+              ? theme.colorScheme.cardColor
+              : theme.colorScheme.cardOddColor,
+          child: Padding(
+            padding: AppStyles.mainPaddingMini,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                item.arabicText != null
+                    ? IconButton(
+                        onPressed: () {
+                          playerState.playTrack(
+                            nameAudio: item.nameAudio,
+                            trackId: item.id,
+                          );
+                        },
+                        splashRadius: 20,
+                        color: theme.colorScheme.mainDefaultColor,
+                        visualDensity: const VisualDensity(
+                          vertical: -4,
+                          horizontal: -4,
+                        ),
+                        icon: playerState.getCurrentTrackItem == item.id &&
+                                playerState.getPlayingState
+                            ? const Icon(CupertinoIcons.stop_circle)
+                            : const Icon(CupertinoIcons.play),
+                      )
+                    : const SizedBox(),
+                item.arabicText != null
+                    ? IconButton(
+                        onPressed: () {
+                          playerState.changeRepeatState(
+                            trackId: item.id,
+                          );
+                        },
+                        splashRadius: 20,
+                        color: playerState.getCurrentTrackItem == item.id &&
+                                playerState.getRepeatState
+                            ? itemColor
+                            : theme.colorScheme.mainDefaultColor,
+                        visualDensity: const VisualDensity(
+                          vertical: -4,
+                          horizontal: -4,
+                        ),
+                        icon: const Icon(Icons.replay),
+                      )
+                    : const SizedBox(),
+                item.arabicText != null
+                    ? IconButton(
+                        onPressed: () {
+                          playerState.changePlaybackSpeedState(
+                            trackId: item.id,
+                          );
+                        },
+                        splashRadius: 20,
+                        color: playerState.getCurrentTrackItem == item.id &&
+                                playerState.getSlowSpeedState
+                            ? itemColor
+                            : theme.colorScheme.mainDefaultColor,
+                        visualDensity: const VisualDensity(
+                          vertical: -4,
+                          horizontal: -4,
+                        ),
+                        icon: const Icon(Icons.speed),
+                      )
+                    : const SizedBox(),
+                IconButton(
+                  onPressed: () {
+                    supplicationItemState.addRemoveSupplicationBookmark(
+                      item.favoriteState == 0 ? 1 : 0,
+                      item.id,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: itemColor,
+                        duration: const Duration(milliseconds: 750),
+                        behavior: SnackBarBehavior.floating,
+                        margin: AppStyles.symmetricHorizontalPadding,
+                        shape: AppStyles.mainShape,
+                        content: SnackContainer(
+                          message: item.favoriteState == 0
+                              ? AppStrings.added
+                              : AppStrings.deleted,
+                        ),
+                      ),
+                    );
+                  },
+                  splashRadius: 20,
+                  visualDensity: const VisualDensity(
+                    vertical: -4,
+                    horizontal: -4,
                   ),
-                );
-              },
-              splashRadius: 20,
-              visualDensity: const VisualDensity(
-                vertical: -4,
-                horizontal: -4,
-              ),
-              icon: Icon(
-                item.favoriteState == 1
-                    ? CupertinoIcons.bookmark_fill
-                    : CupertinoIcons.bookmark,
-                color: item.favoriteState == 1
-                    ? itemColor
-                    : theme.colorScheme.mainDefaultColor,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  builder: (_) => CopyShareCard(
-                    contentForCopyAndShare: item.contentForShare,
-                    backgroundColor: itemColor,
+                  icon: Icon(
+                    item.favoriteState == 1
+                        ? CupertinoIcons.bookmark_fill
+                        : CupertinoIcons.bookmark,
+                    color: item.favoriteState == 1
+                        ? itemColor
+                        : theme.colorScheme.mainDefaultColor,
                   ),
-                );
-              },
-              splashRadius: 20,
-              color: theme.colorScheme.mainDefaultColor,
-              visualDensity: const VisualDensity(
-                vertical: -4,
-                horizontal: -4,
-              ),
-              icon: const Icon(CupertinoIcons.share),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (_) => CopyShareCard(
+                        item: item,
+                        backgroundColor: itemColor,
+                      ),
+                    );
+                  },
+                  splashRadius: 20,
+                  color: theme.colorScheme.mainDefaultColor,
+                  visualDensity: const VisualDensity(
+                    vertical: -4,
+                    horizontal: -4,
+                  ),
+                  icon: const Icon(CupertinoIcons.share),
+                ),
+                Text(
+                  '${itemIndex + 1}/$itemsLength',
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: itemColor,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '${itemIndex + 1}/$itemsLength',
-              style: TextStyle(
-                fontSize: 17,
-                color: itemColor,
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
