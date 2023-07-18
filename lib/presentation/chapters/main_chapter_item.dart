@@ -66,7 +66,7 @@ class MainChapterItem extends StatelessWidget {
                 backgroundColor: themeColors.mainChaptersColor,
                 duration: const Duration(milliseconds: 750),
                 behavior: SnackBarBehavior.floating,
-                margin: AppStyles.symmetricHorizontalPadding,
+                margin: AppStyles.mainMargin,
                 shape: AppStyles.mainShape,
                 content: SnackContainer(
                   message: item.favoriteState == 0

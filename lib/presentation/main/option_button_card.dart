@@ -21,11 +21,6 @@ class OptionButtonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Uri toStores = Uri(
-        scheme: 'https',
-        host: Platform.isAndroid ? 'play.google.com' : 'apps.apple.com',
-        path: Platform.isAndroid ? '/store/apps/dev?id=8649252597553656018' : 'tr/developer/imanil-binyaminov/id1564920953'
-    );
     const String appLinks = '${AppStrings.appName}\n\n${AppStrings.version} iOS:\nhttps://apps.apple.com/ru/app/крепость-верующего/id1564920951\n\n${AppStrings.version} Android:\nhttps://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
     return InkWell(
       onTap: () {
@@ -37,7 +32,7 @@ class OptionButtonCard extends StatelessWidget {
             Navigator.pushNamed(context, routeName);
             break;
           case 'for_share':
-            launchUrl(toStores);
+            _launchUrl();
             break;
           case 'links':
             Share.share(appLinks);
@@ -55,6 +50,14 @@ class OptionButtonCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.mainDefaultColor,
         ),
       ),
+    );
+  }
+
+  Future<void> _launchUrl() async {
+    final Uri urlAppStore = Uri.parse('https://apps.apple.com/tr/developer/imanil-binyaminov/id1564920953');
+    final Uri urlPlayGoogle = Uri.parse('play.google.com/store/apps/dev?id=8649252597553656018');
+    await launchUrl(
+      Platform.isIOS ? urlAppStore : urlPlayGoogle,
     );
   }
 }

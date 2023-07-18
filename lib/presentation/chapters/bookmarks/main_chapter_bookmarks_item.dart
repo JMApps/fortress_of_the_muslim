@@ -68,7 +68,7 @@ class MainChapterBookmarksItem extends StatelessWidget {
                 backgroundColor: themeColors.mainBookmarksColor,
                 duration: const Duration(milliseconds: 750),
                 behavior: SnackBarBehavior.floating,
-                margin: AppStyles.symmetricHorizontalPadding,
+                margin: AppStyles.mainPadding,
                 shape: AppStyles.mainShape,
                 content: const SnackContainer(
                   message: AppStrings.deleted,

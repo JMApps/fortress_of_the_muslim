@@ -109,7 +109,7 @@ class SupplicationMediaCard extends StatelessWidget {
                         backgroundColor: itemColor,
                         duration: const Duration(milliseconds: 750),
                         behavior: SnackBarBehavior.floating,
-                        margin: AppStyles.symmetricHorizontalPadding,
+                        margin: AppStyles.mainMargin,
                         shape: AppStyles.mainShape,
                         content: SnackContainer(
                           message: item.favoriteState == 0
