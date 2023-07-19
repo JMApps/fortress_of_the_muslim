@@ -10,8 +10,8 @@ class PercentIndicatorFreeCount extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme themeColors = Theme.of(context).colorScheme;
     return SizedBox(
-      width: 325,
-      height: 325,
+      width: MediaQuery.of(context).orientation == Orientation.portrait ? 325 : 275,
+      height: MediaQuery.of(context).orientation == Orientation.portrait ? 325 : 275,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(500),

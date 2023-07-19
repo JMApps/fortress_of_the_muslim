@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/counter_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/presentation/counter/counter_column.dart';
+import 'package:fortress_of_the_muslim/presentation/counter/counter_row.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatelessWidget {
@@ -19,7 +20,9 @@ class CounterPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text(AppStrings.counter),
         ),
-        body: const CounterColumn(),
+        body: MediaQuery.of(context).orientation == Orientation.portrait
+            ? const CounterColumn()
+            : const CounterRow(),
       ),
     );
   }
