@@ -29,8 +29,7 @@ class ChapterContentPage extends StatelessWidget {
         backgroundColor: theme.colorScheme.chapterContentSupplicationsBackgroundColor,
         body: FutureBuilder<List>(
           future: context.watch<MainChaptersState>().getDatabaseQuery.getChapterContentSupplications(chapterId),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             return snapshot.hasData
                 ? CustomScrollView(
                     slivers: [
@@ -38,7 +37,8 @@ class ChapterContentPage extends StatelessWidget {
                         centerTitle: true,
                         title: Text('${AppStrings.head} $chapterId'),
                         floating: true,
-                        backgroundColor: theme.colorScheme.chapterContentSupplicationsColor,
+                        backgroundColor:
+                            theme.colorScheme.chapterContentSupplicationsColor,
                       ),
                       SliverToBoxAdapter(
                         child: FutureBuilder<List>(
@@ -46,7 +46,8 @@ class ChapterContentPage extends StatelessWidget {
                           builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
                             return snapshot.hasData
                                 ? Card(
-                                    margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(8, 8, 8, 0),
                                     elevation: 0,
                                     color: theme.colorScheme.chapterContentSupplicationsColor,
                                     child: Padding(
@@ -60,13 +61,19 @@ class ChapterContentPage extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : const Card(
-                                    margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                : Card(
+                                    margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                                     elevation: 0,
+                                    color: theme.colorScheme.chapterContentSupplicationsColor,
                                     child: Padding(
                                       padding: AppStyles.mainPadding,
-                                      child:
-                                          CircularProgressIndicator.adaptive(),
+                                      child: ForHtmlText(
+                                        textData: AppStrings.errorLoadData,
+                                        textSize: 17,
+                                        textColor: Colors.white,
+                                        footnoteColor: theme.colorScheme.mainChaptersColor,
+                                        textDataAlign: TextAlign.center,
+                                      ),
                                     ),
                                   );
                           },
