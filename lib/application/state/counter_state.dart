@@ -56,14 +56,14 @@ class CounterState extends ChangeNotifier {
 
   increment() {
     _freeCountNumber++;
-    HapticFeedback.vibrate();
+    HapticFeedback.lightImpact();
     notifyListeners();
   }
 
   decrementPrayerNumber() {
     if (_prayerCountNumber > 0) {
       _prayerCountNumber--;
-      HapticFeedback.vibrate();
+      HapticFeedback.lightImpact();
       switch (_prayerCountNumber) {
         case 66:
           _prayerCountColor = Colors.blue;
@@ -83,7 +83,7 @@ class CounterState extends ChangeNotifier {
   decrementOneHundredNumber() {
     if (_oneHundredCountNumber > 0) {
       _oneHundredCountNumber--;
-      HapticFeedback.vibrate();
+      HapticFeedback.lightImpact();
       notifyListeners();
     } else {
       Vibration.vibrate(duration: 500);
