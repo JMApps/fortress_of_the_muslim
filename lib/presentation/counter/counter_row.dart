@@ -51,6 +51,7 @@ class _CounterRowState extends State<CounterRow> {
                         Card(
                           margin: AppStyles.mainMargin,
                           shape: AppStyles.hardShape,
+                          color: themeColors.cardOddColor,
                           child: Padding(
                             padding: AppStyles.mainPadding,
                             child: AnimatedSwitcher(
@@ -69,7 +70,7 @@ class _CounterRowState extends State<CounterRow> {
                         Card(
                           margin: AppStyles.mainMargin,
                           shape: AppStyles.hardShape,
-                          color: themeColors.cardColor.withOpacity(0.75),
+                          color: themeColors.cardOddColor,
                           child: Row(
                             children: [
                               Card(
