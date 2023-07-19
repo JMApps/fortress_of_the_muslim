@@ -76,7 +76,7 @@ class SupplicationMediaCard extends StatelessWidget {
                           vertical: -4,
                           horizontal: -4,
                         ),
-                        icon: const Icon(Icons.replay),
+                        icon: const Icon(CupertinoIcons.arrow_2_squarepath)
                       )
                     : const SizedBox(),
                 item.arabicText != null
@@ -86,16 +86,16 @@ class SupplicationMediaCard extends StatelessWidget {
                             trackId: item.id,
                           );
                         },
-                        splashRadius: 20,
                         color: playerState.getCurrentTrackItem == item.id &&
                                 playerState.getSlowSpeedState
                             ? itemColor
                             : theme.colorScheme.mainDefaultColor,
+                        splashRadius: 20,
                         visualDensity: const VisualDensity(
                           vertical: -4,
                           horizontal: -4,
                         ),
-                        icon: const Icon(Icons.speed),
+                        icon: const Icon(CupertinoIcons.timer),
                       )
                     : const SizedBox(),
                 IconButton(

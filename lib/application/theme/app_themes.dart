@@ -5,6 +5,7 @@ class AppThemes {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.teal,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     scaffoldBackgroundColor: const Color(0xFFE8F1F0),
     fontFamily: 'Gilroy',
     appBarTheme: const AppBarTheme(
@@ -51,6 +52,7 @@ class AppThemes {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.blueGrey,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     scaffoldBackgroundColor: const Color(0xFF151E1F),
     fontFamily: 'Gilroy',
     appBarTheme: const AppBarTheme(

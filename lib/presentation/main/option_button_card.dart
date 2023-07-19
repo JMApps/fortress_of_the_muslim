@@ -55,7 +55,7 @@ class OptionButtonCard extends StatelessWidget {
 
   Future<void> _launchUrl() async {
     final Uri urlAppStore = Uri.parse('https://apps.apple.com/tr/developer/imanil-binyaminov/id1564920953');
-    final Uri urlPlayGoogle = Uri.parse('play.google.com/store/apps/dev?id=8649252597553656018');
+    final Uri urlPlayGoogle = Uri.parse('https://play.google.com/store/apps/dev?id=8649252597553656018');
     await launchUrl(
       Platform.isIOS ? urlAppStore : urlPlayGoogle,
     );
