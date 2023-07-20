@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
@@ -26,10 +27,15 @@ class ChapterContentPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        backgroundColor: theme.colorScheme.chapterContentSupplicationsBackgroundColor,
+        backgroundColor:
+            theme.colorScheme.chapterContentSupplicationsBackgroundColor,
         body: FutureBuilder<List>(
-          future: context.watch<MainChaptersState>().getDatabaseQuery.getChapterContentSupplications(chapterId),
-          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          future: context
+              .watch<MainChaptersState>()
+              .getDatabaseQuery
+              .getChapterContentSupplications(chapterId),
+          builder:
+              (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             return snapshot.hasData
                 ? CustomScrollView(
                     slivers: [
@@ -39,39 +45,60 @@ class ChapterContentPage extends StatelessWidget {
                         floating: true,
                         backgroundColor:
                             theme.colorScheme.chapterContentSupplicationsColor,
+                        actions: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/content_settings_page');
+                            },
+                            splashRadius: 20,
+                            icon: const Icon(
+                              CupertinoIcons.settings,
+                            ),
+                          ),
+                        ],
                       ),
                       SliverToBoxAdapter(
                         child: FutureBuilder<List>(
-                          future: context.read<MainChaptersState>().getDatabaseQuery.getOneChapter(chapterId),
-                          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+                          future: context
+                              .read<MainChaptersState>()
+                              .getDatabaseQuery
+                              .getOneChapter(chapterId),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<List<dynamic>> snapshot) {
                             return snapshot.hasData
                                 ? Card(
                                     margin:
                                         const EdgeInsets.fromLTRB(8, 8, 8, 0),
                                     elevation: 0,
-                                    color: theme.colorScheme.chapterContentSupplicationsColor,
+                                    color: theme.colorScheme
+                                        .chapterContentSupplicationsColor,
                                     child: Padding(
                                       padding: AppStyles.mainPadding,
                                       child: ForHtmlText(
-                                        textData: snapshot.data?[0].chapterTitle,
+                                        textData:
+                                            snapshot.data?[0].chapterTitle,
                                         textSize: 17,
                                         textColor: Colors.white,
-                                        footnoteColor: theme.colorScheme.mainChaptersColor,
+                                        footnoteColor:
+                                            theme.colorScheme.mainChaptersColor,
                                         textDataAlign: TextAlign.center,
                                       ),
                                     ),
                                   )
                                 : Card(
-                                    margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(8, 8, 8, 0),
                                     elevation: 0,
-                                    color: theme.colorScheme.chapterContentSupplicationsColor,
+                                    color: theme.colorScheme
+                                        .chapterContentSupplicationsColor,
                                     child: Padding(
                                       padding: AppStyles.mainPadding,
                                       child: ForHtmlText(
                                         textData: AppStrings.errorLoadData,
                                         textSize: 17,
                                         textColor: Colors.white,
-                                        footnoteColor: theme.colorScheme.mainChaptersColor,
+                                        footnoteColor:
+                                            theme.colorScheme.mainChaptersColor,
                                         textDataAlign: TextAlign.center,
                                       ),
                                     ),
