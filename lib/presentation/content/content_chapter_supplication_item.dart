@@ -50,7 +50,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                       )
                     : const SizedBox(),
                 item.arabicText != null
-                    ? const SizedBox(height: 16)
+                    ? const SizedBox(height: 8)
                     : const SizedBox(),
                 item.transcriptionText != null
                     ? settings.getTranslationShowState
