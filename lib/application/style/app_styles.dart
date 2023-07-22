@@ -50,4 +50,19 @@ class AppStyles {
   static const symmetricVerticalPaddingMini = EdgeInsets.symmetric(vertical: 8);
   static const symmetricHorizontalPadding = EdgeInsets.symmetric(horizontal: 16);
   static const symmetricHorizontalPaddingMini = EdgeInsets.symmetric(horizontal: 8);
+
+
+  static const List<TextAlign> arabicTextAlign = [
+    TextAlign.right,
+    TextAlign.center,
+    TextAlign.left,
+    TextAlign.justify,
+  ];
+
+  static const List<TextAlign> textAlign = [
+    TextAlign.left,
+    TextAlign.center,
+    TextAlign.right,
+    TextAlign.justify,
+  ];
 }

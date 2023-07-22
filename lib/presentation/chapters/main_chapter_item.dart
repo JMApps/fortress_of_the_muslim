@@ -52,6 +52,7 @@ class MainChapterItem extends StatelessWidget {
           textData: item.chapterTitle,
           textSize: 17,
           textColor: themeColors.mainDefaultColor,
+          fontFamily: 'Gilroy',
           footnoteColor: const Color(0xFF00897B),
           textDataAlign: TextAlign.start,
         ),

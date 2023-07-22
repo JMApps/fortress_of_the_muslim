@@ -9,6 +9,7 @@ class ForHtmlText extends StatelessWidget {
     required this.textData,
     required this.textSize,
     required this.textColor,
+    required this.fontFamily,
     required this.footnoteColor,
     required this.textDataAlign,
   });
@@ -16,6 +17,7 @@ class ForHtmlText extends StatelessWidget {
   final String textData;
   final double textSize;
   final Color textColor;
+  final String fontFamily;
   final Color footnoteColor;
   final TextAlign textDataAlign;
 
@@ -28,7 +30,7 @@ class ForHtmlText extends StatelessWidget {
           padding: HtmlPaddings.zero,
           margin: Margins.zero,
           fontSize: FontSize(textSize),
-          fontFamily: 'Gilroy',
+          fontFamily: fontFamily,
           color: textColor,
           textAlign: textDataAlign,
         ),

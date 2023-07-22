@@ -7,10 +7,12 @@ class Assets {
   static const String audiosDua3 = 'assets/audios/dua_3.mp3';
   static const String audiosDua4 = 'assets/audios/dua_4.mp3';
   static const String databasesFortressDatabase = 'assets/databases/fortress_database.db';
+  static const String fontsAmiriReqular = 'assets/fonts/amiri_reqular.ttf';
   static const String fontsGilroyLight = 'assets/fonts/gilroy_light.ttf';
   static const String fontsGilroyMedium = 'assets/fonts/gilroy_medium.ttf';
   static const String fontsHafs = 'assets/fonts/hafs.ttf';
   static const String fontsNexaReqular = 'assets/fonts/nexa_reqular.ttf';
+  static const String fontsQuranFont = 'assets/fonts/quran_font.ttf';
   static const String fontsVerdana = 'assets/fonts/verdana.ttf';
   static const String picturesEvening = 'assets/pictures/evening.jpg';
   static const String picturesKaaba = 'assets/pictures/kaaba.png';

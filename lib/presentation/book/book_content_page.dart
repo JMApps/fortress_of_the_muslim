@@ -35,6 +35,7 @@ class BookContentPage extends StatelessWidget {
                       textData: snapshot.data![0].content,
                       textSize: 18,
                       textColor: theme.colorScheme.mainDefaultColor,
+                      fontFamily: 'Gilroy',
                       footnoteColor: theme.colorScheme.mainChaptersColor,
                       textDataAlign: TextAlign.start,
                     ),

@@ -62,6 +62,7 @@ class MainSupplicationItem extends StatelessWidget {
               textData: item.translationText,
               textSize: 17,
               textColor: theme.colorScheme.mainDefaultColor,
+              fontFamily: 'Gilroy',
               footnoteColor: const Color(0xFFE53935),
               textDataAlign: TextAlign.start,
             ),

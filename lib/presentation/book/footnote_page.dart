@@ -39,6 +39,7 @@ class FootnotePage extends StatelessWidget {
                             textData: item.footnote,
                             textSize: 17,
                             textColor: theme.colorScheme.mainDefaultColor,
+                            fontFamily: 'Gilroy',
                             footnoteColor: theme.colorScheme.mainChaptersColor,
                             textDataAlign: TextAlign.center,
                           ),

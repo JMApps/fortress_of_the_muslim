@@ -27,8 +27,7 @@ class ChapterContentPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        backgroundColor:
-            theme.colorScheme.chapterContentSupplicationsBackgroundColor,
+        backgroundColor: theme.colorScheme.chapterContentSupplicationsBackgroundColor,
         body: FutureBuilder<List>(
           future: context.watch<MainChaptersState>().getDatabaseQuery.getChapterContentSupplications(chapterId),
           builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -69,6 +68,7 @@ class ChapterContentPage extends StatelessWidget {
                                         textData: snapshot.data?[0].chapterTitle,
                                         textSize: 17,
                                         textColor: Colors.white,
+                                        fontFamily: 'Gilroy',
                                         footnoteColor: theme.colorScheme.mainChaptersColor,
                                         textDataAlign: TextAlign.center,
                                       ),

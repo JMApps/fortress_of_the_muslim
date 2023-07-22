@@ -62,6 +62,7 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
               textData: item.translationText,
               textSize: 17,
               textColor: theme.colorScheme.mainDefaultColor,
+              fontFamily: 'Gilroy',
               footnoteColor: const Color(0xFF1E88E5),
               textDataAlign: TextAlign.start,
             ),

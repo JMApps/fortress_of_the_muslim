@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fortress_of_the_muslim/application/notification/local_notice_service.dart';
+import 'package:fortress_of_the_muslim/application/state/content_settings_state.dart';
 import 'package:fortress_of_the_muslim/application/state/main_app_settings_state.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_constraints.dart';
@@ -24,6 +25,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(AppConstraints.keyMainSettings);
   await Hive.openBox(AppConstraints.keyCounter);
+  await Hive.openBox(AppConstraints.keyContentSettings);
   DatabaseService databaseService = DatabaseService();
   await databaseService.initializeDatabase();
   LocalNoticeService().setupNotification();
@@ -35,6 +37,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => MainAppSettingsState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ContentSettingsState(),
         ),
       ],
       child: const RootPage(),

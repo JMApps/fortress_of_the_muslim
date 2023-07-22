@@ -61,4 +61,29 @@ class AppStrings {
     'После молитвы',
     '100',
   ];
+
+  static const String arabicTextFont = 'Шрифт арабского текста';
+  static const String translationTextFont = 'Шрифт текста перевода';
+  static const String textAlign = 'Расположение текста';
+  static const String arabicTextSize = 'Размер арабского текста';
+  static const String translationTextSize = 'Размер текста перевода';
+  static const String textColor = 'Цвет текста';
+  static const String arabic = 'Арабский';
+  static const String transcription = 'Транскрипция';
+  static const String translation = 'Перевод';
+  static const String forLightTheme = 'Для светлой темы';
+  static const String forDarkTheme = 'Для темной темы';
+  static const String close = 'Закрыть';
+
+  static const List<String> fontArabicText = [
+    'Quran',
+    'Hafs',
+    'Amiri',
+  ];
+
+  static const List<String> fontTranslateText = [
+    'Gilroy',
+    'Nexa',
+    'Verdana',
+  ];
 }
