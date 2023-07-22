@@ -154,4 +154,8 @@ extension ColorsSchemes on ColorScheme {
   Color get cardColor => brightness == Brightness.light
       ? const Color(0xFFFFFFFF)
       : const Color(0xFF1E282D);
+
+  Color get segmentControlItemColor => brightness == Brightness.light
+      ? const Color(0xFFE0F2F1)
+      : const Color(0xFF1A2326);
 }
