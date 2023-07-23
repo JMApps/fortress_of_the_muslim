@@ -53,18 +53,25 @@ flutter:
       fonts:
         - asset: assets/fonts/gilroy_medium.ttf
         - asset: assets/fonts/gilroy_light.ttf
-    - family: Nexa
+
+    - family: Ubuntu
       fonts:
-        - asset: assets/fonts/nexa_reqular.ttf
+        - asset: assets/fonts/ubuntu_medium.ttf
+        - asset: assets/fonts/ubuntu_light.ttf
+
     - family: Verdana
       fonts:
-        - asset: assets/fonts/verdana.ttf
+        - asset: assets/fonts/verdana_reqular.ttf
+        - asset: assets/fonts/verdana_light.ttf
+
     - family: Quran
       fonts:
         - asset: assets/fonts/quran_font.ttf
+
     - family: Hafs
       fonts:
         - asset: assets/fonts/hafs.ttf
+
     - family: Amiri
       fonts:
         - asset: assets/fonts/amiri_reqular.ttf

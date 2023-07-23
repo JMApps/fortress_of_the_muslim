@@ -65,7 +65,7 @@ class ContentSettingsPage extends StatelessWidget {
                       style: theme.textTheme.labelMedium,
                     ),
                     1: Text(
-                      'Nexa',
+                      'Ubuntu',
                       style: theme.textTheme.labelMedium,
                     ),
                     2: Text(

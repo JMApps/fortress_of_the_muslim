@@ -83,7 +83,7 @@ class AppStrings {
 
   static const List<String> fontTranslateText = [
     'Gilroy',
-    'Nexa',
+    'Ubuntu',
     'Verdana',
   ];
 }
