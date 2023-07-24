@@ -6,6 +6,7 @@ import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
 import 'package:fortress_of_the_muslim/presentation/supplications/main_supplication_item.dart';
+import 'package:fortress_of_the_muslim/presentation/supplications/search_supplication_item.dart';
 import 'package:provider/provider.dart';
 
 class SearchSupplicationDelegate extends SearchDelegate {
@@ -116,7 +117,7 @@ class SearchSupplicationDelegate extends SearchDelegate {
                     padding: AppStyles.mainPaddingMini,
                     itemCount: _recentSupplications.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return MainSupplicationItem(
+                      return SearchSupplicationItem(
                         item: _recentSupplications[index],
                         itemIndex: index,
                         itemsLength: snapshot.data!.length,
