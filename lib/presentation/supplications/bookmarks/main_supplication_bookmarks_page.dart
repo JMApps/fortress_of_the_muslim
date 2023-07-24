@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/app_player_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
@@ -22,6 +23,17 @@ class MainSupplicationBookmarksPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text(AppStrings.supplicationBookmarks),
           backgroundColor: themeColors.mainSupplicationsBookmarkColor,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/content_settings_page');
+              },
+              splashRadius: 20,
+              icon: const Icon(
+                CupertinoIcons.settings,
+              ),
+            ),
+          ],
         ),
         body: const MainSupplicationBookmarksList(),
       ),

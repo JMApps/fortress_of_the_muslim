@@ -38,6 +38,15 @@ class MainSupplicationsPage extends StatelessWidget {
               splashRadius: 20,
               icon: const Icon(CupertinoIcons.search),
             ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/content_settings_page');
+              },
+              splashRadius: 20,
+              icon: const Icon(
+                CupertinoIcons.settings,
+              ),
+            ),
           ],
         ),
         body: const MainSupplicationsList(),

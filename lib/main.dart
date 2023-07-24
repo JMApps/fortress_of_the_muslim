@@ -26,9 +26,8 @@ void main() async {
   await Hive.openBox(AppConstraints.keyMainSettings);
   await Hive.openBox(AppConstraints.keyCounter);
   await Hive.openBox(AppConstraints.keyContentSettings);
-  DatabaseService databaseService = DatabaseService();
-  await databaseService.initializeDatabase();
-  LocalNoticeService().setupNotification();
+  await DatabaseService().initializeDatabase();
+  await LocalNoticeService().setupNotification();
   runApp(
     MultiProvider(
       providers: [
