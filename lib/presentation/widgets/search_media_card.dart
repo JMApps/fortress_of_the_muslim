@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/application/state/app_player_state.dart';
-import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
-import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/copy_share_card.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/snack_container.dart';
-import 'package:provider/provider.dart';
 
 class SearchMediaCard extends StatelessWidget {
   const SearchMediaCard({

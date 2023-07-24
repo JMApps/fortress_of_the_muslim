@@ -6,7 +6,6 @@ import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/for_html_text.dart';
 import 'package:fortress_of_the_muslim/presentation/widgets/search_media_card.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/supplication_media_card.dart';
 import 'package:provider/provider.dart';
 
 class SearchSupplicationItem extends StatelessWidget {

@@ -5,7 +5,6 @@ import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
-import 'package:fortress_of_the_muslim/presentation/supplications/main_supplication_item.dart';
 import 'package:fortress_of_the_muslim/presentation/supplications/search_supplication_item.dart';
 import 'package:provider/provider.dart';
 
