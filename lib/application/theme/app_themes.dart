@@ -158,4 +158,8 @@ extension ColorsSchemes on ColorScheme {
   Color get segmentControlItemColor => brightness == Brightness.light
       ? const Color(0xFFE0F2F1)
       : const Color(0xFF1A2326);
+
+  Color get contentCountColor => brightness == Brightness.light
+      ? const Color(0xFF455A64)
+      : const Color(0xFFEF6C00);
 }

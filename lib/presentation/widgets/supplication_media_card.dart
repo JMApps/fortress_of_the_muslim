@@ -44,7 +44,7 @@ class SupplicationMediaCard extends StatelessWidget {
                     ? IconButton(
                         onPressed: () {
                           playerState.playTrack(
-                            nameAudio: item.nameAudio,
+                            nameAudio: item.nameAudio!,
                             trackId: item.id,
                           );
                         },
@@ -54,8 +54,7 @@ class SupplicationMediaCard extends StatelessWidget {
                           vertical: -4,
                           horizontal: -4,
                         ),
-                        icon: playerState.getCurrentTrackItem == item.id &&
-                                playerState.getPlayingState
+                        icon: playerState.getCurrentTrackItem == item.id && playerState.getPlayingState
                             ? const Icon(CupertinoIcons.stop_circle)
                             : const Icon(CupertinoIcons.play),
                       )
