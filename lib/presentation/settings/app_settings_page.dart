@@ -45,8 +45,7 @@ class AppSettingsPage extends StatelessWidget {
                       showTimePicker(
                         context: context,
                         initialEntryMode: TimePickerEntryMode.dialOnly,
-                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(
-                            settings.getDefaultMorningNotificationTime)),
+                        initialTime: TimeOfDay.fromDateTime(DateTime.parse(settings.getDefaultMorningNotificationTime)),
                         helpText: AppStrings.morningNotification,
                         cancelText: AppStrings.cancel,
                         confirmText: AppStrings.confirm,
