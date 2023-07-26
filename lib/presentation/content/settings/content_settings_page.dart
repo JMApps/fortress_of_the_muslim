@@ -33,7 +33,7 @@ class ContentSettingsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(4),
                   children: <int, Widget>{
                     0: Text(
-                      'Quran',
+                      'Mus\'haf',
                       style: theme.textTheme.labelMedium,
                     ),
                     1: Text(

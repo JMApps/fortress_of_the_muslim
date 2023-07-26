@@ -97,9 +97,7 @@ class MainSupplicationBookmarkItem extends StatelessWidget {
                           buttonColor: theme.colorScheme.mainSupplicationsBookmarkColor,
                         )
                       : const SizedBox(),
-                  item.countNumber > 0
-                      ? const SizedBox(height: 16)
-                      : const SizedBox(),
+                  const SizedBox(height: 16),
                   SupplicationMediaCard(
                     item: item,
                     itemIndex: itemIndex,

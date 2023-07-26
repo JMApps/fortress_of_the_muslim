@@ -19,7 +19,9 @@ class FabSupplicationCount extends StatelessWidget {
           child: Visibility(
             visible: counter.getCounterButtonIsShow,
             child: Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(
+                top: 16,
+              ),
               child: FloatingActionButton.large(
                 onPressed: () {
                   counter.decrement;

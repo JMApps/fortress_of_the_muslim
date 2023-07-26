@@ -96,9 +96,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                           buttonColor: theme.colorScheme.contentCountColor,
                         )
                       : const SizedBox(),
-                  item.countNumber > 0
-                      ? const SizedBox(height: 16)
-                      : const SizedBox(),
+                  const SizedBox(height: 16),
                   SupplicationMediaCard(
                     item: item,
                     itemIndex: itemIndex,
