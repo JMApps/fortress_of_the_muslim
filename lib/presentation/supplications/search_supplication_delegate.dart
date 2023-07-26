@@ -119,7 +119,6 @@ class SearchSupplicationDelegate extends SearchDelegate {
                       return SearchSupplicationItem(
                         item: _recentSupplications[index],
                         itemIndex: index,
-                        itemsLength: snapshot.data!.length,
                       );
                     },
                   ),

@@ -13,12 +13,10 @@ class SearchSupplicationItem extends StatelessWidget {
     super.key,
     required this.item,
     required this.itemIndex,
-    required this.itemsLength,
   });
 
   final MainSupplicationModel item;
   final int itemIndex;
-  final int itemsLength;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +39,8 @@ class SearchSupplicationItem extends StatelessWidget {
                         item.arabicText!,
                         style: TextStyle(
                             fontSize: settings.getArabicTextSize,
-                            fontFamily: AppStrings
-                                .fontArabicText[settings.getArabicFontIndex],
-                            color:
-                                Theme.of(context).brightness == Brightness.light
+                            fontFamily: AppStrings.fontArabicText[settings.getArabicFontIndex],
+                            color: Theme.of(context).brightness == Brightness.light
                                     ? settings.getArabicLightTextColor
                                     : settings.getArabicDarkTextColor),
                         textAlign: AppStyles
@@ -63,8 +59,7 @@ class SearchSupplicationItem extends StatelessWidget {
                               fontSize: settings.getTranslationTextSize,
                               fontFamily: AppStrings.fontTranslateText[
                                   settings.getTranslationFontIndex],
-                              color: Theme.of(context).brightness ==
-                                      Brightness.light
+                              color: Theme.of(context).brightness == Brightness.light
                                   ? settings.getTranscriptionLightTextColor
                                   : settings.getTranscriptionDarkTextColor,
                               fontWeight: FontWeight.w100,
@@ -85,35 +80,14 @@ class SearchSupplicationItem extends StatelessWidget {
                   textColor: Theme.of(context).brightness == Brightness.light
                       ? settings.getTranslationLightTextColor
                       : settings.getTranslationDarkTextColor,
-                  fontFamily: AppStrings
-                      .fontTranslateText[settings.getTranslationFontIndex],
+                  fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],
                   footnoteColor: theme.colorScheme.mainSupplicationsColor,
                   textDataAlign:
                       AppStyles.textAlign[settings.getTextAlignIndex],
                 ),
                 const SizedBox(height: 16),
-                item.countNumber > 0
-                    ? FloatingActionButton(
-                        onPressed: () {},
-                        shape: AppStyles.mainShape,
-                        backgroundColor:
-                            theme.colorScheme.chapterContentSupplicationsColor,
-                        child: Text(
-                          '${item.countNumber}',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
-                item.countNumber > 0
-                    ? const SizedBox(height: 16)
-                    : const SizedBox(),
                 SearchMediaCard(
                   item: item,
-                  itemIndex: itemIndex,
-                  itemsLength: itemsLength,
                   itemColor: theme.colorScheme.mainSupplicationsColor,
                 ),
               ],

@@ -13,14 +13,10 @@ class SearchMediaCard extends StatelessWidget {
   const SearchMediaCard({
     super.key,
     required this.item,
-    required this.itemIndex,
-    required this.itemsLength,
     required this.itemColor,
   });
 
   final MainSupplicationModel item;
-  final int itemIndex;
-  final int itemsLength;
   final Color itemColor;
 
   @override
@@ -28,7 +24,7 @@ class SearchMediaCard extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       margin: EdgeInsets.zero,
-      color: itemIndex.isOdd
+      color: item.id.isOdd
           ? theme.colorScheme.cardColor
           : theme.colorScheme.cardOddColor,
       child: Padding(
@@ -89,6 +85,13 @@ class SearchMediaCard extends StatelessWidget {
                 color: item.favoriteState == 1
                     ? itemColor
                     : theme.colorScheme.mainDefaultColor,
+              ),
+            ),
+            Text(
+              '${item.id}',
+              style: TextStyle(
+                fontSize: 17,
+                color: itemColor,
               ),
             ),
           ],
