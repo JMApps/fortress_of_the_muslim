@@ -49,7 +49,7 @@ class LocalNoticeService {
       _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
     }
 
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_notification');
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_launcher');
 
     const DarwinInitializationSettings iOSInitializationSettings = DarwinInitializationSettings();
 

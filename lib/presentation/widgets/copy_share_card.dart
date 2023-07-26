@@ -1,7 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/style/app_styles.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
@@ -23,7 +22,7 @@ class CopyShareCard extends StatelessWidget {
     return Card(
       margin: AppStyles.mainMargin,
       child: Padding(
-        padding: AppStyles.symmetricHorizontalPadding,
+        padding: AppStyles.mainPaddingMini,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

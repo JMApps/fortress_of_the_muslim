@@ -164,9 +164,9 @@ class ContentSettingsPage extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: MaterialColorPicker(
                                   onColorChange: (Color color) {
-                                    contentSettings.changeTranslationLightColor = color;
+                                    contentSettings.changeArabicLightColor = color;
                                   },
-                                  selectedColor: contentSettings.getTranslationLightTextColor,
+                                  selectedColor: contentSettings.getArabicLightTextColor,
                                 ),
                               ),
                               actions: [
@@ -186,7 +186,7 @@ class ContentSettingsPage extends StatelessWidget {
                         },
                         child: CircleAvatar(
                           radius: 15,
-                          backgroundColor: contentSettings.getTranslationLightTextColor,
+                          backgroundColor: contentSettings.getArabicLightTextColor,
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -205,9 +205,9 @@ class ContentSettingsPage extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: MaterialColorPicker(
                                   onColorChange: (Color color) {
-                                    contentSettings.changeTranslationDarkColor = color;
+                                    contentSettings.changeArabicDarkColor = color;
                                   },
-                                  selectedColor: contentSettings.getTranslationDarkTextColor,
+                                  selectedColor: contentSettings.getArabicDarkTextColor,
                                 ),
                               ),
                               actions: [
@@ -227,7 +227,7 @@ class ContentSettingsPage extends StatelessWidget {
                         },
                         child: CircleAvatar(
                           radius: 15,
-                          backgroundColor: contentSettings.getTranslationDarkTextColor,
+                          backgroundColor: contentSettings.getArabicDarkTextColor,
                         ),
                       ),
                     ],
@@ -360,9 +360,9 @@ class ContentSettingsPage extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: MaterialColorPicker(
                                   onColorChange: (Color color) {
-                                    contentSettings.changeArabicLightColor = color;
+                                    contentSettings.changeTranslationLightColor = color;
                                   },
-                                  selectedColor: contentSettings.getArabicLightTextColor,
+                                  selectedColor: contentSettings.getTranslationLightTextColor,
                                 ),
                               ),
                               actions: [
@@ -382,7 +382,7 @@ class ContentSettingsPage extends StatelessWidget {
                         },
                         child: CircleAvatar(
                           radius: 15,
-                          backgroundColor: contentSettings.getArabicLightTextColor,
+                          backgroundColor: contentSettings.getTranslationLightTextColor,
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -401,9 +401,9 @@ class ContentSettingsPage extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: MaterialColorPicker(
                                   onColorChange: (Color color) {
-                                    contentSettings.changeArabicDarkColor = color;
+                                    contentSettings.changeTranslationDarkColor = color;
                                   },
-                                  selectedColor: contentSettings.getArabicDarkTextColor,
+                                  selectedColor: contentSettings.getTranslationDarkTextColor,
                                 ),
                               ),
                               actions: [
@@ -423,7 +423,7 @@ class ContentSettingsPage extends StatelessWidget {
                         },
                         child: CircleAvatar(
                           radius: 15,
-                          backgroundColor: contentSettings.getArabicDarkTextColor,
+                          backgroundColor: contentSettings.getTranslationDarkTextColor,
                         ),
                       ),
                     ],

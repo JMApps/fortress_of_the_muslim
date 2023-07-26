@@ -12,7 +12,7 @@ class AppThemes {
       centerTitle: true,
       elevation: 0,
       shape: AppStyles.appBarShape,
-      backgroundColor: Color(0xFF26A69A),
+      backgroundColor: Color(0xFF00897B),
       titleTextStyle: TextStyle(
         color: Color(0xFFFFFFFF),
         fontFamily: 'Gilroy',
