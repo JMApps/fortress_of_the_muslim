@@ -54,7 +54,7 @@ class CopyShareCard extends StatelessWidget {
               onTap: () {
                 Share.share(
                   _contentForCopyAndShare(),
-                  sharePositionOrigin: const Rect.fromLTWH(0, 0, 0, 0 / 2),
+                  sharePositionOrigin: const Rect.fromLTWH(1, 1, 1, 2 / 2),
                 );
               },
               title: const Text(AppStrings.share),

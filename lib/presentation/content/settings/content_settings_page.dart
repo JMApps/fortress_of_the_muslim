@@ -358,7 +358,7 @@ class ContentSettingsPage extends StatelessWidget {
                     Icons.palette_outlined,
                     color: theme.brightness == Brightness.light
                         ? contentSettings.getTranslationLightTextColor
-                        : contentSettings.getTranslationLightTextColor,
+                        : contentSettings.getTranslationDarkTextColor,
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

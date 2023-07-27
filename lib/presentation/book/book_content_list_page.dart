@@ -15,14 +15,14 @@ class BookContentListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(AppStrings.bookContent),
         backgroundColor: themeColors.mainBookmarksColor,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/footnote_page');
-            },
-            splashRadius: 20,
-            icon: const Icon(CupertinoIcons.list_dash),
-          ),
+        actions: const [
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, '/footnote_page');
+          //   },
+          //   splashRadius: 20,
+          //   icon: const Icon(CupertinoIcons.list_dash),
+          // ),
         ],
       ),
       body: CupertinoScrollbar(

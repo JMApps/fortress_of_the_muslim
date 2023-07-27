@@ -19,7 +19,10 @@ class FootnotePage extends StatelessWidget {
         title: const Text(AppStrings.footnotes),
       ),
       body: FutureBuilder<List>(
-        future: context.watch<MainChaptersState>().getDatabaseQuery.getAllFootnotes(),
+        future: context
+            .watch<MainChaptersState>()
+            .getDatabaseQuery
+            .getAllFootnotes(),
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -35,13 +38,22 @@ class FootnotePage extends StatelessWidget {
                       return Card(
                         child: Padding(
                           padding: AppStyles.mainPaddingMini,
-                          child: ForHtmlText(
-                            textData: item.footnote,
-                            textSize: 17,
-                            textColor: theme.colorScheme.mainDefaultColor,
-                            fontFamily: 'Gilroy',
-                            footnoteColor: theme.colorScheme.mainChaptersColor,
-                            textDataAlign: TextAlign.center,
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 8),
+                              Text(item.id.toString()),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: ForHtmlText(
+                                  textData: item.footnote,
+                                  textSize: 17,
+                                  textColor: theme.colorScheme.mainDefaultColor,
+                                  fontFamily: 'Gilroy',
+                                  footnoteColor: theme.colorScheme.mainChaptersColor,
+                                  textDataAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );
@@ -49,10 +61,7 @@ class FootnotePage extends StatelessWidget {
                   ),
                 )
               : const Center(
-                  child: Padding(
-                    padding: AppStyles.mainPadding,
-                    child: Text(AppStrings.errorLoadData),
-                  ),
+                  child: CircularProgressIndicator.adaptive(),
                 );
         },
       ),
