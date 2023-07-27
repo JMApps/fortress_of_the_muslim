@@ -13,7 +13,7 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '32'
+    flutterVersionCode = '33'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
@@ -26,7 +26,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "jmapps.fortressofthemuslim"
+    namespace "jmapps.fortress_of_the_muslim"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
