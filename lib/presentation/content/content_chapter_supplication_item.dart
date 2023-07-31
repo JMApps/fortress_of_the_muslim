@@ -41,69 +41,73 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                 : theme.colorScheme.cardColor,
             child: Padding(
               padding: AppStyles.mainPadding,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  item.arabicText != null
-                      ? Text(
-                          item.arabicText!,
-                          style: TextStyle(
-                              fontSize: settings.getArabicTextSize,
-                              fontFamily: AppStrings.fontArabicText[settings.getArabicFontIndex],
-                              color: Theme.of(context).brightness == Brightness.light
-                                  ? settings.getArabicLightTextColor
-                                  : settings.getArabicDarkTextColor),
-                          textAlign: AppStyles.arabicTextAlign[settings.getTextAlignIndex],
-                          textDirection: TextDirection.rtl,
-                        )
-                      : const SizedBox(),
-                  item.arabicText != null
-                      ? const SizedBox(height: 8)
-                      : const SizedBox(),
-                  item.transcriptionText != null
-                      ? settings.getTranslationShowState
-                          ? Text(
-                              item.transcriptionText!,
-                              style: TextStyle(
-                                fontSize: settings.getTranslationTextSize,
-                                fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],
+              child: SelectableRegion(
+                focusNode: FocusNode(),
+                selectionControls: materialTextSelectionControls,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    item.arabicText != null
+                        ? Text(
+                            item.arabicText!,
+                            style: TextStyle(
+                                fontSize: settings.getArabicTextSize,
+                                fontFamily: AppStrings.fontArabicText[settings.getArabicFontIndex],
                                 color: Theme.of(context).brightness == Brightness.light
-                                    ? settings.getTranscriptionLightTextColor
-                                    : settings.getTranscriptionDarkTextColor,
-                                fontWeight: FontWeight.w100,
-                              ),
-                              textAlign: AppStyles.textAlign[settings.getTextAlignIndex],
-                            )
-                          : const SizedBox()
-                      : const SizedBox(),
-                  item.transcriptionText != null
-                      ? settings.getTranslationShowState
-                          ? const SizedBox(height: 16)
-                          : const SizedBox()
-                      : const SizedBox(),
-                  ForHtmlText(
-                    textData: item.translationText,
-                    textSize: settings.getTranslationTextSize,
-                    textColor: Theme.of(context).brightness == Brightness.light
-                        ? settings.getTranslationLightTextColor
-                        : settings.getTranslationDarkTextColor,
-                    fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],
-                    footnoteColor: theme.colorScheme.mainChaptersColor,
-                    textDataAlign: AppStyles.textAlign[settings.getTextAlignIndex],
-                  ),
-                  item.countNumber > 0
-                      ? FabSupplicationCount(
-                          buttonColor: theme.colorScheme.contentCountColor,
-                        )
-                      : const SizedBox(),
-                  const SizedBox(height: 16),
-                  SupplicationMediaCard(
-                    item: item,
-                    itemIndex: itemIndex,
-                    itemsLength: itemsLength,
-                    itemColor: theme.colorScheme.mainChaptersColor,
-                  ),
-                ],
+                                    ? settings.getArabicLightTextColor
+                                    : settings.getArabicDarkTextColor),
+                            textAlign: AppStyles.arabicTextAlign[settings.getTextAlignIndex],
+                            textDirection: TextDirection.rtl,
+                          )
+                        : const SizedBox(),
+                    item.arabicText != null
+                        ? const SizedBox(height: 8)
+                        : const SizedBox(),
+                    item.transcriptionText != null
+                        ? settings.getTranslationShowState
+                            ? Text(
+                                item.transcriptionText!,
+                                style: TextStyle(
+                                  fontSize: settings.getTranslationTextSize,
+                                  fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],
+                                  color: Theme.of(context).brightness == Brightness.light
+                                      ? settings.getTranscriptionLightTextColor
+                                      : settings.getTranscriptionDarkTextColor,
+                                  fontWeight: FontWeight.w100,
+                                ),
+                                textAlign: AppStyles.textAlign[settings.getTextAlignIndex],
+                              )
+                            : const SizedBox()
+                        : const SizedBox(),
+                    item.transcriptionText != null
+                        ? settings.getTranslationShowState
+                            ? const SizedBox(height: 16)
+                            : const SizedBox()
+                        : const SizedBox(),
+                    ForHtmlText(
+                      textData: item.translationText,
+                      textSize: settings.getTranslationTextSize,
+                      textColor: Theme.of(context).brightness == Brightness.light
+                          ? settings.getTranslationLightTextColor
+                          : settings.getTranslationDarkTextColor,
+                      fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],
+                      footnoteColor: theme.colorScheme.mainChaptersColor,
+                      textDataAlign: AppStyles.textAlign[settings.getTextAlignIndex],
+                    ),
+                    item.countNumber > 0
+                        ? FabSupplicationCount(
+                            buttonColor: theme.colorScheme.contentCountColor,
+                          )
+                        : const SizedBox(),
+                    const SizedBox(height: 16),
+                    SupplicationMediaCard(
+                      item: item,
+                      itemIndex: itemIndex,
+                      itemsLength: itemsLength,
+                      itemColor: theme.colorScheme.mainChaptersColor,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

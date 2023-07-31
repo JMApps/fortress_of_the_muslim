@@ -56,6 +56,7 @@ class CopyShareCard extends StatelessWidget {
                   _contentForCopyAndShare(),
                   sharePositionOrigin: const Rect.fromLTWH(1, 1, 1, 2 / 2),
                 );
+                Navigator.pop(context);
               },
               title: const Text(AppStrings.share),
               trailing: const Icon(CupertinoIcons.share),
