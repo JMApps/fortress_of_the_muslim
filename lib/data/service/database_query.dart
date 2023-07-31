@@ -2,12 +2,12 @@ import 'package:fortress_of_the_muslim/data/model/book_content_model.dart';
 import 'package:fortress_of_the_muslim/data/model/footnote_model.dart';
 import 'package:fortress_of_the_muslim/data/model/main_chapter_model.dart';
 import 'package:fortress_of_the_muslim/data/model/main_supplication_model.dart';
-import 'package:fortress_of_the_muslim/data/service/database_chapters_service.dart';
+import 'package:fortress_of_the_muslim/data/service/chapters_database_service.dart';
 import 'package:fortress_of_the_muslim/data/service/database_service.dart';
 
 class DatabaseQuery {
   final DatabaseService _mainDB = DatabaseService();
-  final DatabaseChaptersService _chapterDB = DatabaseChaptersService();
+  final ChaptersDatabaseService _chapterDB = ChaptersDatabaseService();
 
   static final DatabaseQuery _instance = DatabaseQuery.internal();
   factory DatabaseQuery() => _instance;

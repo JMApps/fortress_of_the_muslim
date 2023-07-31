@@ -7,7 +7,7 @@ import 'package:fortress_of_the_muslim/application/state/content_settings_state.
 import 'package:fortress_of_the_muslim/application/state/main_app_settings_state.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
 import 'package:fortress_of_the_muslim/application/string/app_constraints.dart';
-import 'package:fortress_of_the_muslim/data/service/database_chapters_service.dart';
+import 'package:fortress_of_the_muslim/data/service/chapters_database_service.dart';
 import 'package:fortress_of_the_muslim/data/service/database_service.dart';
 import 'package:fortress_of_the_muslim/main/root_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -28,7 +28,7 @@ void main() async {
   await Hive.openBox(AppConstraints.keyCounter);
   await Hive.openBox(AppConstraints.keyContentSettings);
   await DatabaseService().initializeDatabase();
-  await DatabaseChaptersService().initializeDatabase();
+  await ChaptersDatabaseService().initializeDatabase();
   await LocalNoticeService().setupNotification();
   runApp(
     MultiProvider(

@@ -27,9 +27,9 @@ class ChaptersDatabaseService {
         ? await getExternalStorageDirectory()
         : await getApplicationSupportDirectory();
 
-    String databasePath = join(documentDirectory!.path, 'chapters_fortress_database.db');
+    String databasePath = join(documentDirectory!.path, 'fortress_chapters_database.db');
 
-    // String toDeleteDB = '${documentDirectory.path}/fortress_database.db';
+    // String toDeleteDB = '${documentDirectory.path}/fortress_chapters_database.db';
     // var delDB = await databaseExists(toDeleteDB);
     // if (delDB) {
     //   await deleteDatabase(toDeleteDB);
@@ -44,7 +44,7 @@ class ChaptersDatabaseService {
         Exception('Invalid database');
       }
 
-      ByteData data = await rootBundle.load(join('assets/databases', 'chapters_fortress_database.db'));
+      ByteData data = await rootBundle.load(join('assets/databases', 'fortress_chapters_database.db'));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(databasePath).writeAsBytes(bytes, flush: true);
     }

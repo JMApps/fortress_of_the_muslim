@@ -231,12 +231,12 @@ class Assets {
   static const String audiosDua98 = 'assets/audios/dua_98.mp3';
   static const String audiosDua99 = 'assets/audios/dua_99.mp3';
   static const String databasesFortressChaptersDatabase = 'assets/databases/fortress_chapters_database.db';
-  static const String databasesFortressDatabase = 'assets/databases/fortress_database.db';
+  static const String databasesFortressDatabase1 = 'assets/databases/fortress_database_1.db';
   static const String fontsAmiriReqular = 'assets/fonts/amiri_reqular.ttf';
   static const String fontsGilroyLight = 'assets/fonts/gilroy_light.ttf';
   static const String fontsGilroyMedium = 'assets/fonts/gilroy_medium.ttf';
   static const String fontsHafs = 'assets/fonts/hafs.ttf';
-  static const String fontsQuranFont = 'assets/fonts/quran_font.ttf';
+  static const String fontsScheherazade = 'assets/fonts/scheherazade.ttf';
   static const String fontsUbuntuLight = 'assets/fonts/ubuntu_light.ttf';
   static const String fontsUbuntuMedium = 'assets/fonts/ubuntu_medium.ttf';
   static const String fontsVerdanaLight = 'assets/fonts/verdana_light.ttf';
