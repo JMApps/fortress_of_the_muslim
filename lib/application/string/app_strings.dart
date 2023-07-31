@@ -63,7 +63,9 @@ class AppStrings {
   ];
 
   static const String arabicTextFont = 'Шрифт арабского текста';
+  static const String helloArabic = 'السلام عليكم';
   static const String translationTextFont = 'Шрифт текста перевода';
+  static const String helloTranslation = 'Ас-Саляму аляйкум';
   static const String textAlign = 'Расположение текста';
   static const String arabicTextSize = 'Размер арабского текста';
   static const String translationTextSize = 'Размер текста перевода';
@@ -76,7 +78,7 @@ class AppStrings {
   static const String close = 'Закрыть';
 
   static const List<String> fontArabicText = [
-    'Quran',
+    'Scheherazade',
     'Hafs',
     'Amiri',
   ];

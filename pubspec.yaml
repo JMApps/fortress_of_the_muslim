@@ -64,9 +64,9 @@ flutter:
         - asset: assets/fonts/verdana_reqular.ttf
         - asset: assets/fonts/verdana_light.ttf
 
-    - family: Quran
+    - family: Scheherazade
       fonts:
-        - asset: assets/fonts/quran_font.ttf
+        - asset: assets/fonts/scheherazade.ttf
 
     - family: Hafs
       fonts:

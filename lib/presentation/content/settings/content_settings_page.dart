@@ -33,7 +33,7 @@ class ContentSettingsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(4),
                   children: <int, Widget>{
                     0: Text(
-                      'Mus\'haf',
+                      'Scheherazade',
                       style: theme.textTheme.labelMedium,
                     ),
                     1: Text(
@@ -51,6 +51,16 @@ class ContentSettingsPage extends StatelessWidget {
                     contentSettings.changeArabicFontIndex = index!;
                   },
                 ),
+                const Divider(indent: 16, endIndent: 16),
+                Text(
+                  AppStrings.helloArabic,
+                  style: TextStyle(
+                    fontFamily: AppStrings.fontArabicText[contentSettings.getArabicFontIndex],
+                    fontSize: contentSettings.getArabicTextSize,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const Divider(indent: 16, endIndent: 16),
                 const SizedBox(height: 16),
                 Text(
                   AppStrings.translationTextFont,
@@ -79,6 +89,16 @@ class ContentSettingsPage extends StatelessWidget {
                     contentSettings.changeTranslationFontIndex = index!;
                   },
                 ),
+                const Divider(indent: 16, endIndent: 16),
+                Text(
+                  AppStrings.helloTranslation,
+                  style: TextStyle(
+                    fontFamily: AppStrings.fontTranslateText[contentSettings.getTranslationFontIndex],
+                    fontSize: contentSettings.getTranslationTextSize,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const Divider(indent: 16, endIndent: 16),
                 const SizedBox(height: 16),
                 Text(
                   AppStrings.textAlign,

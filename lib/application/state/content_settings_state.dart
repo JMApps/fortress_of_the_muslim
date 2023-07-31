@@ -36,7 +36,7 @@ class ContentSettingsState extends ChangeNotifier {
     notifyListeners();
   }
 
-  double _arabicTextSize = 20;
+  double _arabicTextSize = 25;
 
   double get getArabicTextSize => _arabicTextSize;
 
@@ -130,7 +130,7 @@ class ContentSettingsState extends ChangeNotifier {
     _arabicFontIndex = _contentSettingsBox.get(AppConstraints.keyArabicFontIndex, defaultValue: 0);
     _translationFontIndex = _contentSettingsBox.get(AppConstraints.keyTranslationFontIndex, defaultValue: 0);
     _textAlignIndex = _contentSettingsBox.get(AppConstraints.keyTextAlignIndex, defaultValue: 0);
-    _arabicTextSize = _contentSettingsBox.get(AppConstraints.keyArabicTextSize, defaultValue: 20.0);
+    _arabicTextSize = _contentSettingsBox.get(AppConstraints.keyArabicTextSize, defaultValue: 25.0);
     _translationTextSize = _contentSettingsBox.get(AppConstraints.keyTranslationTextSize, defaultValue: 18.0);
     _arabicLightTextColor = Color(_contentSettingsBox.get(AppConstraints.keyArabicLightColor, defaultValue: Colors.grey.shade900.value));
     _arabicDarkTextColor = Color(_contentSettingsBox.get(AppConstraints.keyArabicDarkColor, defaultValue: Colors.grey.shade50.value));
