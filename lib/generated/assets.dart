@@ -231,7 +231,7 @@ class Assets {
   static const String audiosDua98 = 'assets/audios/dua_98.mp3';
   static const String audiosDua99 = 'assets/audios/dua_99.mp3';
   static const String databasesFortressChaptersDatabase = 'assets/databases/fortress_chapters_database.db';
-  static const String databasesFortressDatabase1 = 'assets/databases/fortress_database_1.db';
+  static const String databasesFortressDatabase2 = 'assets/databases/fortress_database_2.db';
   static const String fontsAmiriReqular = 'assets/fonts/amiri_reqular.ttf';
   static const String fontsGilroyLight = 'assets/fonts/gilroy_light.ttf';
   static const String fontsGilroyMedium = 'assets/fonts/gilroy_medium.ttf';

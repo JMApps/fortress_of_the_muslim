@@ -25,6 +25,7 @@ class LocalNoticeService {
     'Daily morning notification channel ID',
     'Notifications',
     channelDescription: 'Daily morning notifications',
+    icon: '@drawable/ic_notif',
     importance: Importance.max,
     priority: Priority.max,
   );
@@ -37,6 +38,7 @@ class LocalNoticeService {
     'Daily evening notification channel ID',
     'Notifications',
     channelDescription: 'Daily evening notifications',
+    icon: '@drawable/ic_notif',
     importance: Importance.max,
     priority: Priority.max,
   );

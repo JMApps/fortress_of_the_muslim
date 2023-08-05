@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/state/main_chapters_state.dart';
@@ -31,13 +33,17 @@ class BookContentPage extends StatelessWidget {
               ? CupertinoScrollbar(
                   child: SingleChildScrollView(
                     padding: AppStyles.mainPadding,
-                    child: ForHtmlText(
-                      textData: snapshot.data![0].content,
-                      textSize: 18,
-                      textColor: theme.colorScheme.mainDefaultColor,
-                      fontFamily: 'Gilroy',
-                      footnoteColor: theme.colorScheme.mainChaptersColor,
-                      textDataAlign: TextAlign.start,
+                    child: SelectableRegion(
+                      focusNode: FocusNode(),
+                      selectionControls: Platform.isIOS ? cupertinoTextSelectionControls : materialTextSelectionControls,
+                      child: ForHtmlText(
+                        textData: snapshot.data![0].content,
+                        textSize: 18,
+                        textColor: theme.colorScheme.mainDefaultColor,
+                        fontFamily: 'Gilroy',
+                        footnoteColor: theme.colorScheme.mainChaptersColor,
+                        textDataAlign: TextAlign.start,
+                      ),
                     ),
                   ),
                 )
