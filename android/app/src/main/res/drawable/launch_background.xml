@@ -4,6 +4,6 @@
   <item>
     <bitmap
       android:gravity="center"
-      android:src="@drawable/ic_notif" />
+      android:src="@drawable/ic_launch" />
   </item>
 </layer-list>
