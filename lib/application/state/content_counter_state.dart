@@ -2,24 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ContentCounterState extends ChangeNotifier {
-  int _count = 0;
+  late int _count;
+
+  late int _defCount;
 
   int get getCount => _count;
 
-  bool _counterButtonIsShow = true;
-
-  bool get getCounterButtonIsShow => _counterButtonIsShow;
-
-  ContentCounterState(this._count);
+  ContentCounterState(this._count) {
+    _defCount = _count;
+  }
 
   get decrement {
-    if (_count > 1) {
+    if (_count >= 1) {
       _count--;
       HapticFeedback.mediumImpact();
       notifyListeners();
     } else {
-      _counterButtonIsShow = false;
+      HapticFeedback.heavyImpact();
       notifyListeners();
     }
+  }
+
+  get getDefaultCount {
+    _count = _defCount;
+    HapticFeedback.lightImpact();
+    notifyListeners();
   }
 }

@@ -14,30 +14,30 @@ class FabSupplicationCount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ContentCounterState>(
       builder: (context, counter, _) {
-        return AnimatedSize(
-          duration: const Duration(milliseconds: 750),
-          child: Visibility(
-            visible: counter.getCounterButtonIsShow,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 16,
-              ),
-              child: FloatingActionButton.large(
-                onPressed: () {
-                  counter.decrement;
-                },
-                backgroundColor: buttonColor,
-                elevation: 0,
-                child: Center(
-                  child: Text(
-                    '${counter.getCount}',
-                    style: const TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: 16,
+          ),
+          child: InkWell(
+            onTap: () {
+              counter.decrement;
+            },
+            onLongPress: () {
+              counter.getDefaultCount;
+            },
+            borderRadius: BorderRadius.circular(150),
+            child: CircleAvatar(
+              backgroundColor: buttonColor,
+              radius: 40,
+              child: Center(
+                child: Text(
+                  '${counter.getCount}',
+                  style: const TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu'
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
