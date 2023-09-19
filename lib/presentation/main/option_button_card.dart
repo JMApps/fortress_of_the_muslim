@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/string/app_strings.dart';
 import 'package:fortress_of_the_muslim/application/theme/app_themes.dart';
+import 'package:fortress_of_the_muslim/presentation/widgets/social_container.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OptionButtonCard extends StatelessWidget {
   const OptionButtonCard({
@@ -30,8 +28,13 @@ class OptionButtonCard extends StatelessWidget {
           case '/book_content_list_page':
             Navigator.pushNamed(context, routeName);
             break;
-          case 'for_share':
-            _launchUrl();
+          case 'social':
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (_) => const SocialContainer(),
+            );
             break;
           case 'links':
             Share.share(appLinks);
@@ -46,14 +49,6 @@ class OptionButtonCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.mainDefaultColor,
         ),
       ),
-    );
-  }
-
-  Future<void> _launchUrl() async {
-    final Uri urlAppStore = Uri.parse('https://apps.apple.com/developer/imanil-binyaminov/id1564920953');
-    final Uri urlPlayGoogle = Uri.parse('https://play.google.com/store/apps/dev?id=8649252597553656018');
-    await launchUrl(
-      Platform.isIOS ? urlAppStore : urlPlayGoogle,
     );
   }
 }

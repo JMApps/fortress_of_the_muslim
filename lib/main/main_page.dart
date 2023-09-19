@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
               OptionButtonCard(
                 icon: CupertinoIcons.app_badge,
                 avatarColor: theme.colorScheme.mainSupplicationsColor,
-                routeName: 'for_share',
+                routeName: 'social',
               ),
               OptionButtonCard(
                 icon: CupertinoIcons.share,
