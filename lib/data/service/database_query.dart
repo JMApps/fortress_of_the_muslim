@@ -46,16 +46,11 @@ class DatabaseQuery {
     return allSupplications!;
   }
 
-  Future<List<MainSupplicationModel>> getBookmarkSupplications() async {
+  Future<List<MainSupplicationModel>> getBookmarkSupplications({required List<int> favorites}) async {
     var dbClient = await _mainDB.db;
-    var res = await dbClient.query('Table_of_supplications', where: 'favorite_state == 1');
+    var res = await dbClient.query('Table_of_supplications', where: 'id IN (${favorites.map((id) => '?').join(', ')})', whereArgs: favorites);
     List<MainSupplicationModel>? bookmarkSupplications = res.isNotEmpty ? res.map((c) => MainSupplicationModel.fromMap(c)).toList() : null;
     return bookmarkSupplications!;
-  }
-
-  addRemoveFavoriteSupplication(int state, int supplicationId) async {
-    var dbClient = await _mainDB.db;
-    await dbClient.rawQuery('UPDATE Table_of_supplications SET favorite_state = $state WHERE id == $supplicationId');
   }
 
   Future<List<MainSupplicationModel>> getChapterContentSupplications(int chapterId) async {

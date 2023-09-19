@@ -21,6 +21,8 @@ class SearchMediaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final supplicationItemState = Provider.of<MainChaptersState>(context);
+    final bool isBookmark = supplicationItemState.supplicationIsFavorite(item.id);
     final theme = Theme.of(context);
     return Card(
       margin: EdgeInsets.zero,
@@ -54,10 +56,7 @@ class SearchMediaCard extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                context.read<MainChaptersState>().addRemoveSupplicationBookmark(
-                  item.favoriteState == 0 ? 1 : 0,
-                  item.id,
-                );
+                supplicationItemState.toggleFavorite(item.id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: itemColor,
@@ -66,9 +65,9 @@ class SearchMediaCard extends StatelessWidget {
                     margin: AppStyles.mainMargin,
                     shape: AppStyles.mainShape,
                     content: SnackContainer(
-                      message: item.favoriteState == 0
-                          ? AppStrings.added
-                          : AppStrings.deleted,
+                      message: isBookmark
+                          ? AppStrings.deleted
+                          : AppStrings.added,
                     ),
                   ),
                 );
@@ -79,12 +78,11 @@ class SearchMediaCard extends StatelessWidget {
                 horizontal: -4,
               ),
               icon: Icon(
-                item.favoriteState == 1
+                isBookmark
                     ? CupertinoIcons.bookmark_fill
                     : CupertinoIcons.bookmark,
-                color: item.favoriteState == 1
-                    ? itemColor
-                    : theme.colorScheme.mainDefaultColor,
+                color:
+                    isBookmark ? itemColor : theme.colorScheme.mainDefaultColor,
               ),
             ),
             Text(

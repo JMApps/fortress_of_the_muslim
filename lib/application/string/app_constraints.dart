@@ -1,5 +1,6 @@
 class AppConstraints {
   static const String keyMainSettings = 'key_main_settings';
+  static const String keyFavoriteSupplicationIds = 'key_favorite_supplications';
   static const String keyCounter = 'key_counter';
   static const String keyContentSettings = 'key_content_settings';
   static const String keyLastSavedChapter = 'key_last_saved_chapter';

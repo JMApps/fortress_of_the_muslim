@@ -15,8 +15,13 @@ class MainChaptersState extends ChangeNotifier {
 
   int get getLastSavedChapterIndex => _lastSavedChapterIndex;
 
+  List<int> _favoriteSupplications = [];
+
+  List<int> get getFavoriteSupplications => _favoriteSupplications;
+
   MainChaptersState() {
     _lastSavedChapterIndex = _settingBox.get(AppConstraints.keyLastSavedChapter, defaultValue: 1);
+    _favoriteSupplications = _settingBox.get(AppConstraints.keyFavoriteSupplicationIds, defaultValue: <int>[]);
   }
 
   saveLastChapter(int chapterId) {
@@ -30,9 +35,20 @@ class MainChaptersState extends ChangeNotifier {
     notifyListeners();
   }
 
-  addRemoveSupplicationBookmark(int state, int supplicationId) {
-    _databaseQuery.addRemoveFavoriteSupplication(state, supplicationId);
+  toggleFavorite(int supplicationId) {
+    final exist = _favoriteSupplications.contains(supplicationId);
+    if (exist) {
+      _favoriteSupplications.remove(supplicationId);
+    } else {
+      _favoriteSupplications.add(supplicationId);
+    }
+    _settingBox.put(AppConstraints.keyFavoriteSupplicationIds, _favoriteSupplications);
     notifyListeners();
+  }
+
+  bool supplicationIsFavorite(int id) {
+    final exist = _favoriteSupplications.contains(id);
+    return exist;
   }
 
   @override
