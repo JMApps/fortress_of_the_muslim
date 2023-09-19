@@ -24,7 +24,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -50,7 +50,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                           style: TextStyle(
                               fontSize: settings.getArabicTextSize,
                               fontFamily: AppStrings.fontArabicText[settings.getArabicFontIndex],
-                              color: Theme.of(context).brightness == Brightness.light
+                              color: theme.brightness == Brightness.light
                                   ? settings.getArabicLightTextColor
                                   : settings.getArabicDarkTextColor),
                           textAlign: AppStyles.arabicTextAlign[settings.getTextAlignIndex],
@@ -67,7 +67,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: settings.getTranslationTextSize,
                                 fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],
-                                color: Theme.of(context).brightness == Brightness.light
+                                color: theme.brightness == Brightness.light
                                     ? settings.getTranscriptionLightTextColor
                                     : settings.getTranscriptionDarkTextColor,
                                 fontWeight: FontWeight.w100,
@@ -84,7 +84,7 @@ class ContentChapterSupplicationItem extends StatelessWidget {
                   ForHtmlText(
                     textData: item.translationText,
                     textSize: settings.getTranslationTextSize,
-                    textColor: Theme.of(context).brightness == Brightness.light
+                    textColor: theme.brightness == Brightness.light
                         ? settings.getTranslationLightTextColor
                         : settings.getTranslationDarkTextColor,
                     fontFamily: AppStrings.fontTranslateText[settings.getTranslationFontIndex],

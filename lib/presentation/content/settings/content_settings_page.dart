@@ -452,7 +452,7 @@ class ContentSettingsPage extends StatelessWidget {
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   value: contentSettings.getTranslationShowState,
                   onChanged: (bool? state) {
                     contentSettings.transcriptionShowState = state!;

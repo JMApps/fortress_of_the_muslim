@@ -31,7 +31,7 @@ class AppSettingsPage extends StatelessWidget {
                     '${AppStrings.morningNotificationDescription} ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultMorningNotificationTime))}',
                     style: theme.textTheme.bodySmall,
                   ),
-                  trailing: Switch(
+                  trailing: Switch.adaptive(
                     activeColor: theme.colorScheme.mainChaptersColor,
                     value: settings.getIsMorningNotification,
                     onChanged: (bool? value) {
@@ -51,16 +51,13 @@ class AppSettingsPage extends StatelessWidget {
                         confirmText: AppStrings.confirm,
                         builder: (BuildContext context, Widget? child) {
                           return MediaQuery(
-                            data: MediaQuery.of(context)
-                                .copyWith(alwaysUse24HourFormat: true),
+                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
                             child: child!,
                           );
                         },
                       ).then((TimeOfDay? time) {
                         if (time != null) {
-                          settings.changeMorningTimeOfDay(
-                              DateTime(2023, 12, 31, time.hour, time.minute)
-                                  .toIso8601String());
+                          settings.changeMorningTimeOfDay(DateTime(2023, 12, 31, time.hour, time.minute).toIso8601String());
                         }
                       });
                     },
@@ -80,7 +77,7 @@ class AppSettingsPage extends StatelessWidget {
                     '${AppStrings.eveningNotificationDescription} ${DateFormat().add_Hm().format(DateTime.parse(settings.getDefaultEveningNotificationTime))}',
                     style: theme.textTheme.bodySmall,
                   ),
-                  trailing: Switch(
+                  trailing: Switch.adaptive(
                     activeColor: theme.colorScheme.mainChaptersColor,
                     value: settings.getIsEveningNotification,
                     onChanged: (bool? value) {
@@ -120,7 +117,7 @@ class AppSettingsPage extends StatelessWidget {
                   ),
                 ),
                 const Divider(),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     AppStrings.listChapters,
@@ -137,7 +134,7 @@ class AppSettingsPage extends StatelessWidget {
                   },
                 ),
                 const Divider(),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     AppStrings.screen,
@@ -154,7 +151,7 @@ class AppSettingsPage extends StatelessWidget {
                   },
                 ),
                 const Divider(),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     AppStrings.adaptiveTheme,
@@ -171,7 +168,7 @@ class AppSettingsPage extends StatelessWidget {
                   },
                 ),
                 const Divider(),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   visualDensity: const VisualDensity(horizontal: -4),
                   title: Text(
                     AppStrings.userTheme,
