@@ -27,20 +27,20 @@ class SocialContainer extends StatelessWidget {
               ),
               textAlign: TextAlign.start,
             ),
-            // const SocialItem(
-            //   name: 'Google Play',
-            //   description: 'Наши приложения в Google Play',
-            //   iconName: 'google-play',
-            //   link:
-            //       'https://play.google.com/store/apps/dev?id=8649252597553656018',
-            // ),
             const SocialItem(
-              name: 'App Store',
-              description: 'Наши приложения в App Store',
-              iconName: 'app-store',
+              name: 'Google Play',
+              description: 'Наши приложения в Google Play',
+              iconName: 'google-play',
               link:
-                  'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953',
+                  'https://play.google.com/store/apps/dev?id=8649252597553656018',
             ),
+            // const SocialItem(
+            //   name: 'App Store',
+            //   description: 'Наши приложения в App Store',
+            //   iconName: 'app-store',
+            //   link:
+            //       'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953',
+            // ),
             Text(
               'Мы в социальных сетях',
               style: TextStyle(
@@ -69,12 +69,12 @@ class SocialContainer extends StatelessWidget {
               iconName: 'facebook',
               link: 'https://www.facebook.com/jmappps',
             ),
-            // const SocialItem(
-            //   name: 'GMail',
-            //   description: 'jmappsmuslim@gmail.com',
-            //   iconName: 'gmail',
-            //   link: 'https://www.gmail.com',
-            // ),
+            const SocialItem(
+              name: 'GMail',
+              description: 'jmappsmuslim@gmail.com',
+              iconName: 'gmail',
+              link: 'https://www.gmail.com',
+            ),
             Text(
               'Политика конфиденциальности',
               style: TextStyle(

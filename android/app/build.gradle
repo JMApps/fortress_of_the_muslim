@@ -13,12 +13,12 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '35'
+    flutterVersionCode = '36'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '2.0.2'
+    flutterVersionName = '2.0.3'
 }
 
 apply plugin: 'com.android.application'
@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "jmapps.fortress_of_the_muslim"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdk 33
     ndkVersion flutter.ndkVersion
 
 
@@ -46,7 +46,7 @@ android {
 
     defaultConfig {
         applicationId "jmapps.fortressofthemuslim"
-        compileSdkVersion 33
+        compileSdk 33
         minSdkVersion 23
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
