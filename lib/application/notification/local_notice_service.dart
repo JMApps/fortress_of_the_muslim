@@ -48,7 +48,7 @@ class LocalNoticeService {
 
   Future<void> setupNotification() async {
     if (Platform.isAndroid) {
-      _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
+      _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
     }
 
     const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_notif');

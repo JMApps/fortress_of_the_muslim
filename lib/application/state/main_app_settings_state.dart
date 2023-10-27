@@ -1,7 +1,7 @@
-import 'package:flu_wake_lock/flu_wake_lock.dart';
 import 'package:flutter/material.dart';
 import 'package:fortress_of_the_muslim/application/string/app_constraints.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class MainAppSettingsState extends ChangeNotifier {
 
@@ -58,7 +58,7 @@ class MainAppSettingsState extends ChangeNotifier {
 
   displayOnOff() {
     _isDisplayOn = !_isDisplayOn;
-    _isDisplayOn ? FluWakeLock().enable() : FluWakeLock().disable();
+    _isDisplayOn ? WakelockPlus.enable() : WakelockPlus.disable();
     _appSettingsBox.put(AppConstraints.keyDisplayOn, _isDisplayOn);
     notifyListeners();
   }
