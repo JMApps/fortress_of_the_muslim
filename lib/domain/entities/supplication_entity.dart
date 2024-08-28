@@ -1,3 +1,5 @@
+import '../../data/models/supplication_model.dart';
+
 class SupplicationEntity {
   final int supplicationId;
   final String arabicText;
@@ -16,4 +18,16 @@ class SupplicationEntity {
     required this.sampleBy,
     required this.countNumber,
   });
+
+  factory SupplicationEntity.fromModel(SupplicationModel model) {
+    return SupplicationEntity(
+      supplicationId: model.supplicationId,
+      arabicText: model.arabicText,
+      transcriptionText: model.transcriptionText,
+      translationText: model.translationText,
+      nameAudio: model.nameAudio,
+      sampleBy: model.sampleBy,
+      countNumber: model.countNumber,
+    );
+  }
 }
