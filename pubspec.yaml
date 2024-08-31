@@ -63,8 +63,12 @@ flutter:
   assets:
     - assets/fonts/
     - assets/pictures/
+    - assets/databases/
 
   fonts:
     - family: Raleway
       fonts:
         - asset: assets/fonts/raleway_regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/roboto_slab_light.ttf
