@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/routes/name_routes.dart';
 
 import '../../core/styles/app_styles.dart';
 

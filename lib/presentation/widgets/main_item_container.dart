@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../core/styles/app_styles.dart';
-
 class MainItemContainer extends StatelessWidget {
   const MainItemContainer({
     super.key,
@@ -28,6 +26,7 @@ class MainItemContainer extends StatelessWidget {
       child: InkWell(
         onTap: () {
           HapticFeedback.lightImpact();
+          Navigator.pushNamed(context, routeName);
         },
         splashColor: Colors.grey,
         borderRadius: itemBorder,
