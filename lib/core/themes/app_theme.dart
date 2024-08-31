@@ -4,15 +4,13 @@ import '../strings/app_strings.dart';
 import '../styles/app_styles.dart';
 
 class AppTheme {
-  final Color themeColor;
-
-  AppTheme({required this.themeColor});
-
   ThemeData get lightTheme => ThemeData(
         fontFamily: AppStrings.fontRaleway,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
-          seedColor: themeColor,
+          seedColor: Colors.teal,
+          secondary: Colors.orange,
+          tertiary: Colors.red,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -38,7 +36,9 @@ class AppTheme {
         fontFamily: AppStrings.fontRaleway,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
-          seedColor: themeColor,
+          seedColor: Colors.teal,
+          secondary: Colors.orange,
+          tertiary: Colors.red,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -48,7 +48,7 @@ class AppTheme {
           alignLabelWithHint: true,
           floatingLabelAlignment: FloatingLabelAlignment.center,
           border: OutlineInputBorder(
-            borderRadius: AppStyles.border,
+            borderRadius: AppStyles.borderWithoutBottom,
             borderSide: BorderSide(
               width: 0.5,
             ),

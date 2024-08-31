@@ -35,6 +35,7 @@ class AppStyles {
   static const border = BorderRadius.all(Radius.circular(16));
   static const borderMini = BorderRadius.all(Radius.circular(8));
   static const borderWithBottom =  BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32));
+  static const borderWithoutBottom =  BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16));
 
   static const borderTopLeft = BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),);
   static const borderTopRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(16), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),);
