@@ -1,3 +1,5 @@
+import '../../core/strings/db_values.dart';
+
 class SupplicationModel {
   final int supplicationId;
   final String? arabicText;
@@ -17,12 +19,12 @@ class SupplicationModel {
 
   factory SupplicationModel.fromMap(Map<dynamic, String> map) {
     return SupplicationModel(
-      supplicationId: map['supplication_id'] as int,
-      arabicText: map['arabic_text'],
-      transcriptionText: map['transcription_text'],
-      translationText: map['translation_text'] as String,
-      nameAudio: map['name_audio'],
-      countNumber: map['count_number'] as int,
+      supplicationId: map[DBValues.dbSupplicationId] as int,
+      arabicText: map[DBValues.dbArabicText],
+      transcriptionText: map[DBValues.dbTranscriptionText],
+      translationText: map[DBValues.dbTranslationText] as String,
+      nameAudio: map[DBValues.dbNameAudio],
+      countNumber: map[DBValues.dbCounterNumber] as int,
     );
   }
 }

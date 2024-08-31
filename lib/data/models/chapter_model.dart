@@ -1,3 +1,5 @@
+import '../../core/strings/db_values.dart';
+
 class ChapterModel {
   final int chapterId;
   final String chapterNumber;
@@ -11,9 +13,9 @@ class ChapterModel {
 
   factory ChapterModel.fromMap(Map<dynamic, Object?> map) {
     return ChapterModel(
-      chapterId: map['chapter_id'] as int,
-      chapterNumber: map['chapter_number'] as String,
-      chapterTitle: map['chapter_title'] as String,
+      chapterId: map[DBValues.dbChapterId] as int,
+      chapterNumber: map[DBValues.dbChapterNumber] as String,
+      chapterTitle: map[DBValues.dbChapterTitle] as String,
     );
   }
 }

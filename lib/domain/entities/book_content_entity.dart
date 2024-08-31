@@ -14,7 +14,7 @@ class BookContentEntity {
   factory BookContentEntity.fromModel(BookContentModel model) {
     return BookContentEntity(
       bookContentId: model.bookContentId,
-      bookContentTitle: model.bookContentTitle,
+      bookContentTitle: model.bookTitle,
       bookContent: model.bookContent,
     );
   }
