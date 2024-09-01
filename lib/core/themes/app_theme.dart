@@ -9,8 +9,6 @@ class AppTheme {
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
           seedColor: Colors.teal,
-          secondary: Colors.orange,
-          tertiary: Colors.red,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -37,8 +35,6 @@ class AppTheme {
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: Colors.teal,
-          secondary: Colors.orange,
-          tertiary: Colors.red,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,

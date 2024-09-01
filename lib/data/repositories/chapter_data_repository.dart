@@ -20,7 +20,7 @@ class ChapterDataRepository implements ChapterRepository {
   @override
   Future<ChapterEntity> getChapterById({required int chapterId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbChapterTableName);
+    final List<Map<String, Object?>> resources = await database.query(DBValues.dbChapterTableName, where: '${DBValues.dbChapterId} = ?', whereArgs: [chapterId]);
     final ChapterEntity? chapterById = resources.isNotEmpty ? ChapterEntity.fromModel(ChapterModel.fromMap(resources.first)) : null;
     return chapterById!;
   }

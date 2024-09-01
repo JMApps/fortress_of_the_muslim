@@ -20,7 +20,7 @@ class FootnoteDataRepository implements FootnoteRepository {
   @override
   Future<FootnoteEntity> getFootnoteById({required int footnoteId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbFootnoteId} = $footnoteId', whereArgs: [footnoteId]);
+    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbFootnoteId} = ?', whereArgs: [footnoteId]);
     final FootnoteEntity? footnoteById = resources.isNotEmpty ? FootnoteEntity.fromModel(FootnoteModel.fromMap(resources.first)) : null;
     return footnoteById!;
   }
@@ -28,7 +28,7 @@ class FootnoteDataRepository implements FootnoteRepository {
   @override
   Future<FootnoteEntity> getFootnoteBySupplication({required int supplicationId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbSampleBy} = $supplicationId');
+    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbSampleBy} = ?', whereArgs: [supplicationId]);
     final FootnoteEntity? footnoteBySupplicationId = resources.isNotEmpty ? FootnoteEntity.fromModel(FootnoteModel.fromMap(resources.first)) : null;
     return footnoteBySupplicationId!;
   }
