@@ -24,7 +24,7 @@ class MainHtmlData extends StatelessWidget {
         '#': Style(
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
-          fontSize: FontSize(16),
+          fontSize: FontSize(fontSize),
         ),
         'a': Style(
           margin: Margins.zero,

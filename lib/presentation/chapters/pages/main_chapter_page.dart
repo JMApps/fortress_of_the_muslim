@@ -15,7 +15,7 @@ class MainChapterPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            tooltip: AppStrings.searchChapters,
+            tooltip: AppStrings.search,
             icon: const Icon(CupertinoIcons.search),
           ),
         ],

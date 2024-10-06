@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../domain/entities/chapter_entity.dart';
 import '../../domain/usecases/chapter_use_case.dart';
-import '../repositories/chapter_data_repository.dart';
 
 class MainChaptersState extends ChangeNotifier {
-  final ChapterUseCase _chapterUseCase = ChapterUseCase(ChapterDataRepository());
+  final ChapterUseCase _chapterUseCase;
+
+  MainChaptersState(this._chapterUseCase);
 
   Future<List<ChapterEntity>> getAllChapters() async {
     return await _chapterUseCase.fetchAllChapters();
@@ -15,7 +16,7 @@ class MainChaptersState extends ChangeNotifier {
     return await _chapterUseCase.fetchChapterById(chapterId: chapterId);
   }
 
-  Future<List<ChapterEntity>> getFavoriteChapters({required int ids}) async {
+  Future<List<ChapterEntity>> getFavoriteChapters({required List<int> ids}) async {
     return await _chapterUseCase.fetchFavoriteChapters(ids: ids);
   }
 

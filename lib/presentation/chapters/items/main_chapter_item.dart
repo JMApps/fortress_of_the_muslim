@@ -34,13 +34,14 @@ class MainChapterItem extends StatelessWidget {
           chapterModel.chapterNumber,
           style: TextStyle(
             color: appColors.primary,
+            fontSize: 17.0,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
           footnoteColor: appColors.primary,
-          fontSize: 16.0,
+          fontSize: 17.0,
         ),
         leading: IconButton(
           onPressed: () {},

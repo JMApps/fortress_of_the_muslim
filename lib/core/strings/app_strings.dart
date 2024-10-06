@@ -2,13 +2,13 @@ class AppStrings {
   static const String appName = 'Крепость мусульманина';
 
   static const String chapters = 'Главы';
-  static const String searchChapters = 'Поиск по главам';
   static const String favoriteChapters = 'Избранное';
-  static const String searchFavoriteChapters = 'Поиск избранных глав';
+  static const String favoriteChaptersIsEmpty = 'Избранных глав нет';
   static const String allSupplications = 'Все дуа';
-  static const String searchSupplications = 'Поиск дуа';
   static const String favoriteSupplications = 'Избранные дуа';
-  static const String searchFavoriteSupplications = 'Поиск избранных дуа';
+  static const String favoriteSupplicationsIsEmpty = 'Избранных дуа нет';
+
+  static const String search = 'Поиск...';
 
   static const String morning = 'Утром';
   static const String evening = 'Вечером';

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../domain/entities/footnote_entity.dart';
 import '../../domain/usecases/footnote_use_case.dart';
-import '../repositories/footnote_data_repository.dart';
 
 class FootnotesState extends ChangeNotifier {
-  final FootnoteUseCase _footnoteUseCase = FootnoteUseCase(FootnoteDataRepository());
+  final FootnoteUseCase _footnoteUseCase;
+
+  FootnotesState(this._footnoteUseCase);
 
   Future<List<FootnoteEntity>> getAllFootnotes() async {
     return await _footnoteUseCase.fetchAllFootnotes();

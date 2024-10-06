@@ -1,7 +1,12 @@
 import '../../domain/entities/supplication_entity.dart';
 import '../../domain/repositories/supplication_repository.dart';
+import '../services/database_service.dart';
 
 class SupplicationDataRepository implements SupplicationRepository {
+  final DatabaseService _databaseService;
+
+  SupplicationDataRepository(this._databaseService);
+
   @override
   Future<List<SupplicationEntity>> getFavoriteSupplications(
       {required int ids}) {

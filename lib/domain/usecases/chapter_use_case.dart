@@ -15,7 +15,7 @@ class ChapterUseCase {
     return await _chapterRepository.getChapterById(chapterId: chapterId);
   }
 
-  Future<List<ChapterEntity>> fetchFavoriteChapters({required int ids}) async {
+  Future<List<ChapterEntity>> fetchFavoriteChapters({required List<int> ids}) async {
     return await _chapterRepository.getFavoriteChapters(ids: ids);
   }
 

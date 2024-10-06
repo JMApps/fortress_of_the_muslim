@@ -5,7 +5,7 @@ abstract class ChapterRepository {
 
   Future<ChapterEntity> getChapterById({required int chapterId});
 
-  Future<List<ChapterEntity>> getFavoriteChapters({required int ids});
+  Future<List<ChapterEntity>> getFavoriteChapters({required List<int> ids});
 
   Future<int> addChapterFavorite({required int chapterId});
 

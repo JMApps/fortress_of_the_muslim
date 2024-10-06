@@ -7,7 +7,9 @@ import '../models/footnote_model.dart';
 import '../services/database_service.dart';
 
 class FootnoteDataRepository implements FootnoteRepository {
-  final DatabaseService _databaseService = DatabaseService();
+  final DatabaseService _databaseService;
+
+  FootnoteDataRepository(this._databaseService);
 
   @override
   Future<List<FootnoteEntity>> getAllFootnotes() async {

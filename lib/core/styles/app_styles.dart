@@ -21,6 +21,7 @@ class AppStyles {
   static const paddingRightMini = EdgeInsets.only(right: 8);
 
   static const paddingBottom = EdgeInsets.only(bottom: 16);
+  static const paddingBottom75 = EdgeInsets.only(bottom: 75);
   static const paddingBottomMini = EdgeInsets.only(bottom: 8);
 
   static const paddingLeft = EdgeInsets.only(left: 16);
