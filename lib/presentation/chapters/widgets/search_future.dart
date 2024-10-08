@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/states/main_chapters_state.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../states/main_chapters_state.dart';
 import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/main_chapter_item.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/styles/app_styles.dart';
-import '../../data/states/footnotes_state.dart';
 import '../../domain/entities/footnote_entity.dart';
+import '../states/footnotes_state.dart';
 import 'main_error_text_data.dart';
 import 'main_html_data.dart';
 

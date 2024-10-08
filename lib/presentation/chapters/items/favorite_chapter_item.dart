@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../states/main_chapters_state.dart';
 import '../../widgets/main_html_data.dart';
 
 class FavoriteChapterItem extends StatelessWidget {
@@ -44,9 +45,11 @@ class FavoriteChapterItem extends StatelessWidget {
           fontSize: 17.0,
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<MainChaptersState>(context, listen: false).toggleChapterFavorite(chapterId: chapterModel.chapterId);
+          },
           padding: EdgeInsets.zero,
-          icon: const Icon(CupertinoIcons.bookmark),
+          icon: const Icon(Icons.bookmark),
         ),
       ),
     );

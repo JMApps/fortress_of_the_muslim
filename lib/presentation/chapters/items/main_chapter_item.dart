@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fortress_of_the_muslim/presentation/states/main_chapters_state.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
@@ -44,9 +45,11 @@ class MainChapterItem extends StatelessWidget {
           fontSize: 17.0,
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<MainChaptersState>(context, listen: false).toggleChapterFavorite(chapterId: chapterModel.chapterId);
+          },
           padding: EdgeInsets.zero,
-          icon: const Icon(CupertinoIcons.bookmark),
+          icon: Icon(Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId) ? Icons.bookmark : Icons.bookmark_outline_outlined),
         ),
       ),
     );

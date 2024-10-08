@@ -15,11 +15,8 @@ class SearchChaptersDelegate extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
-      appBarTheme: theme.appBarTheme.copyWith(
-        titleSpacing: 0,      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: InputBorder.none,
-      ),
+      appBarTheme: theme.appBarTheme.copyWith(titleSpacing: 0),
+      inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
     );
   }
 
