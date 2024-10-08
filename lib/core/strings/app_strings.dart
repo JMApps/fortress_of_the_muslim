@@ -9,6 +9,7 @@ class AppStrings {
   static const String favoriteSupplicationsIsEmpty = 'Избранных дуа нет';
 
   static const String search = 'Поиск...';
+  static const String searchIsEmpty = 'По вашему запросу ничего не найдено';
 
   static const String morning = 'Утром';
   static const String evening = 'Вечером';
