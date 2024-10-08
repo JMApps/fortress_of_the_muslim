@@ -1,5 +1,6 @@
 class AppConstraints {
-  static const String keyMainAppSettingsBox = 'key_main_app_settings_box';
-  static const String keyChapterIds = 'key_chapter_ids';
-  static const String keySupplicationIds = 'key_supplication_ids';
+  static const String keyMainSettingsBox = 'key_main_settings';
+
+  static const String keyChapterIds = 'key_favorite_chapters';
+  static const String keySupplicationIds = 'key_favorite_supplications';
 }

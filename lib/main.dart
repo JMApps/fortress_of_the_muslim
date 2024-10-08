@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-  await Hive.openBox(AppConstraints.keyMainAppSettingsBox);
+  await Hive.openBox(AppConstraints.keyMainSettingsBox);
 
   final DatabaseService databaseService = DatabaseService();
   await databaseService.initializeDatabase();

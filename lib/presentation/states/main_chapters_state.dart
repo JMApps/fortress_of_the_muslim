@@ -6,7 +6,7 @@ import '../../domain/entities/chapter_entity.dart';
 import '../../domain/usecases/chapter_use_case.dart';
 
 class MainChaptersState extends ChangeNotifier {
-  final _mainAppSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
+  final _mainAppSettingsBox = Hive.box(AppConstraints.keyMainSettingsBox);
 
   final ChapterUseCase _chapterUseCase;
 

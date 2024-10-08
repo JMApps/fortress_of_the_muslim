@@ -17,13 +17,13 @@ class SupplicationModel {
     required this.countNumber,
   });
 
-  factory SupplicationModel.fromMap(Map<dynamic, String> map) {
+  factory SupplicationModel.fromMap(Map<String, Object?> map) {
     return SupplicationModel(
       supplicationId: map[DBValues.dbSupplicationId] as int,
-      arabicText: map[DBValues.dbArabicText],
-      transcriptionText: map[DBValues.dbTranscriptionText],
+      arabicText: map[DBValues.dbArabicText] as String?,
+      transcriptionText: map[DBValues.dbTranscriptionText] as String?,
       translationText: map[DBValues.dbTranslationText] as String,
-      nameAudio: map[DBValues.dbNameAudio],
+      nameAudio: map[DBValues.dbNameAudio] as String?,
       countNumber: map[DBValues.dbCounterNumber] as int,
     );
   }
