@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_strings.dart';
@@ -12,13 +11,6 @@ class FavoriteChapterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.favoriteChapters),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            tooltip: AppStrings.search,
-            icon: const Icon(CupertinoIcons.search),
-          ),
-        ],
       ),
       body: const FavoriteChaptersList(),
     );

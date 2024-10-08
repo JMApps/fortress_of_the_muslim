@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../lists/main_chapters_list.dart';
+import '../widgets/search_chapters_delegate.dart';
 
 class MainChapterPage extends StatelessWidget {
   const MainChapterPage({super.key});
@@ -14,9 +14,11 @@ class MainChapterPage extends StatelessWidget {
         title: const Text(AppStrings.chapters),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: SearchChaptersDelegate());
+            },
             tooltip: AppStrings.search,
-            icon: const Icon(CupertinoIcons.search),
+            icon: const Icon(Icons.search),
           ),
         ],
       ),

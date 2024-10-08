@@ -29,7 +29,7 @@ class FavoriteIsEmpty extends StatelessWidget {
             Text(
               text,
               style: const TextStyle(
-                fontSize: 22,
+                fontSize: 20,
               ),
               textAlign: TextAlign.center,
             )

@@ -20,6 +20,7 @@ class MainPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
+            tooltip: AppStrings.share,
             icon: const Icon(Icons.ios_share),
           ),
         ],
