@@ -34,16 +34,4 @@ class ChapterDataRepository implements ChapterRepository {
     final List<ChapterEntity> favoriteChapters = resources.isNotEmpty ? resources.map((e) => ChapterEntity.fromModel(ChapterModel.fromMap(e))).toList() : [];
     return favoriteChapters;
   }
-
-  @override
-  Future<int> addChapterFavorite({required int chapterId}) async {
-    // TODO: implement addChapterFavorite
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<int> removeChapterFavorite({required int chapterId}) async {
-    // TODO: implement removeChapterFavorite
-    throw UnimplementedError();
-  }
 }
