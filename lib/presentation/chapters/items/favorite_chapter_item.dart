@@ -21,8 +21,8 @@ class FavoriteChapterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withOpacity(0.125);
+    final itemEvenColor = appColors.inversePrimary.withOpacity(0.250);
     final bool chapterIsFavorite = Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId);
     return Padding(
       padding: AppStyles.paddingBottomMini,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_strings.dart';
-import '../../../core/styles/app_styles.dart';
 import 'search_chapter_future.dart';
 
 class SearchChaptersDelegate extends SearchDelegate {
