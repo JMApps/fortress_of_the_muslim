@@ -20,6 +20,7 @@ class MainDescriptionText extends StatelessWidget {
         style: const TextStyle(
           fontSize: 20,
         ),
+        textAlign: TextAlign.center,
       ),
     );
   }

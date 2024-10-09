@@ -10,11 +10,13 @@ class MainHtmlData extends StatelessWidget {
     required this.htmlData,
     required this.footnoteColor,
     required this.fontSize,
+    required this.textAlign,
   });
 
   final String htmlData;
   final Color footnoteColor;
   final double fontSize;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +27,19 @@ class MainHtmlData extends StatelessWidget {
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
           fontSize: FontSize(fontSize),
+          textAlign: textAlign,
+        ),
+        'small': Style(
+          fontSize: FontSize(14.0)
         ),
         'a': Style(
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
-          fontSize: FontSize(fontSize),
-          fontWeight: FontWeight.bold,
+          fontSize: FontSize(fontSize - 3),
+          letterSpacing: 1.5,
           color: footnoteColor,
-          fontFamily: AppStrings.fontRoboto,
+          fontWeight: FontWeight.bold,
+          fontFamily: AppStrings.fontMontserrat,
         ),
       },
       onLinkTap: (String? footnoteNumber, _, __) {

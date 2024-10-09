@@ -17,10 +17,10 @@ class DBValues {
 
   static const String dbSupplicationId = 'supplication_id';
   static const String dbArabicText = 'arabic_text';
+  static const String dbTranscriptionText = 'transcription_text';
   static const String dbTranslationText = 'translation_text';
   static const String dbNameAudio = 'name_audio';
-  static const String dbCounterNumber = 'counter_number';
-  static const String dbTranscriptionText = 'transcription_text';
+  static const String dbCounterNumber = 'count_number';
 
   static const String dbBookContentId = 'book_content_id';
   static const String dbBookTitle = 'book_title';

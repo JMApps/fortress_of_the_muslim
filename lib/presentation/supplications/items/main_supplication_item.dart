@@ -4,7 +4,7 @@ import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../widgets/main_html_data.dart';
-import '../widgets/supplication_media_card.dart';
+import '../../widgets/supplication_media_card.dart';
 
 class MainSupplicationItem extends StatelessWidget {
   const MainSupplicationItem({
@@ -52,6 +52,7 @@ class MainSupplicationItem extends StatelessWidget {
               htmlData: supplicationModel.translationText,
               footnoteColor: Colors.red,
               fontSize: 18.0,
+              textAlign: TextAlign.start,
             ),
             const SizedBox(height: 16),
             SupplicationMediaCard(supplicationModel: supplicationModel),

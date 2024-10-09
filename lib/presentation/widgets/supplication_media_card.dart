@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
-import '../../../core/styles/app_styles.dart';
-import '../../../domain/entities/supplication_entity.dart';
-import '../../states/main_supplications_state.dart';
+import '../../core/strings/app_strings.dart';
+import '../../core/styles/app_styles.dart';
+import '../../domain/entities/supplication_entity.dart';
+import '../states/main_supplications_state.dart';
 
 class SupplicationMediaCard extends StatelessWidget {
   const SupplicationMediaCard({

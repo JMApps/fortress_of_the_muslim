@@ -29,6 +29,7 @@ class MainFootnoteData extends StatelessWidget {
               htmlData: '${snapshot.data!.footnoteId}: ${snapshot.data!.footnote}',
               footnoteColor: footnoteColor,
               fontSize: 18.0,
+              textAlign: TextAlign.start,
             ),
           );
         } else if (snapshot.hasError) {

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/chapter_model_args.dart';
 import '../../../domain/entities/chapter_entity.dart';
 import '../../states/main_chapters_state.dart';
 import '../../widgets/main_html_data.dart';
@@ -23,13 +25,18 @@ class MainChapterItem extends StatelessWidget {
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.125);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.250);
-    final bool chapterIsFavorite = Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId);
+    final bool chapterIsFavorite = Provider.of<MainChaptersState>(context)
+        .chapterIsFavorite(chapterModel.chapterId);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () {
           HapticFeedback.lightImpact();
-          // To content page
+          Navigator.pushNamed(
+            context,
+            NameRoutes.chapterContentPage,
+            arguments: ChapterModelArgs(chapterModel: chapterModel),
+          );
         },
         horizontalTitleGap: 8,
         contentPadding: AppStyles.paddingHorMiniVerMicro,
@@ -48,13 +55,14 @@ class MainChapterItem extends StatelessWidget {
           htmlData: chapterModel.chapterTitle,
           footnoteColor: appColors.primary,
           fontSize: 17.0,
+          textAlign: TextAlign.start,
         ),
         leading: IconButton(
           onPressed: () {
             Provider.of<MainChaptersState>(context, listen: false).toggleChapterFavorite(chapterId: chapterModel.chapterId);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                backgroundColor: appColors.primary,
+                backgroundColor: appColors.secondaryContainer,
                 duration: const Duration(milliseconds: 750),
                 behavior: SnackBarBehavior.floating,
                 margin: AppStyles.paddingMini,
@@ -64,7 +72,7 @@ class MainChapterItem extends StatelessWidget {
                   chapterIsFavorite ? AppStrings.removed : AppStrings.added,
                   style: TextStyle(
                     fontSize: 17.0,
-                    color: appColors.surface,
+                    color: appColors.onSurface,
                   ),
                 ),
               ),

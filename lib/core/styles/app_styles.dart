@@ -13,6 +13,8 @@ class AppStyles {
 
   static const paddingVerHorMini = EdgeInsets.symmetric(vertical: 16, horizontal: 8);
   static const paddingHorVerMini = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+  static const paddingHorVerMicro = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
+  static const paddingHorMiniVerMicro = EdgeInsets.symmetric(horizontal: 8, vertical: 4);
 
   static const paddingTop = EdgeInsets.only(top: 16);
   static const paddingTopMini = EdgeInsets.only(top: 8);

@@ -38,7 +38,7 @@ class SupplicationDataRepository implements SupplicationRepository {
   @override
   Future<List<SupplicationEntity>> getFavoriteSupplications({required List<int> ids}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbChapterTableName, where: '${DBValues.dbSupplicationId} IN (${ids.map((id) => '?').join(', ')})', whereArgs: ids);
+    final List<Map<String, Object?>> resources = await database.query(DBValues.dbSupplicationTableName, where: '${DBValues.dbSupplicationId} IN (${ids.map((id) => '?').join(', ')})', whereArgs: ids);
     final List<SupplicationEntity> favoriteSupplications = resources.isNotEmpty ? resources.map((e) => SupplicationEntity.fromModel(SupplicationModel.fromMap(e))).toList() : [];
     return favoriteSupplications;
   }
