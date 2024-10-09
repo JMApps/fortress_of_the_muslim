@@ -19,7 +19,8 @@ class _MainChaptersListState extends State<MainChaptersList> {
 
   @override
   void initState() {
-    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).getAllChapters();
+    _futureChapters =
+        Provider.of<MainChaptersState>(context, listen: false).getAllChapters();
     super.initState();
   }
 
@@ -30,6 +31,11 @@ class _MainChaptersListState extends State<MainChaptersList> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
+        }
+        if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
         }
         if (snapshot.hasData) {
           return Scrollbar(
@@ -45,11 +51,10 @@ class _MainChaptersListState extends State<MainChaptersList> {
               },
             ),
           );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
         }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
       },
     );
   }

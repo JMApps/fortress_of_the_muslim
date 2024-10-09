@@ -9,8 +9,8 @@ import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/main_chapter_item.dart';
 
-class SearchFuture extends StatefulWidget {
-  const SearchFuture({
+class SearchChaptersFuture extends StatefulWidget {
+  const SearchChaptersFuture({
     super.key,
     required this.query,
   });
@@ -18,10 +18,10 @@ class SearchFuture extends StatefulWidget {
   final String query;
 
   @override
-  State<SearchFuture> createState() => _SearchFutureState();
+  State<SearchChaptersFuture> createState() => _SearchChaptersFutureState();
 }
 
-class _SearchFutureState extends State<SearchFuture> {
+class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
   late Future<List<ChapterEntity>> _futureChapters;
   List<ChapterEntity> _chapters = [];
   List<ChapterEntity> _recentChapters = [];
@@ -45,6 +45,11 @@ class _SearchFutureState extends State<SearchFuture> {
             descriptionText: AppStrings.searchIsEmpty,
           );
         }
+        if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           _chapters = snapshot.data!;
           _recentChapters = widget.query.isEmpty ? _chapters : _chapters.where((element) =>
@@ -61,11 +66,10 @@ class _SearchFutureState extends State<SearchFuture> {
               },
             ),
           );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
         }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
       },
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fortress_of_the_muslim/presentation/states/main_chapters_state.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../states/main_chapters_state.dart';
 import '../../widgets/main_html_data.dart';
 
 class MainChapterItem extends StatelessWidget {
@@ -20,15 +21,19 @@ class MainChapterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.05);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.125);
+    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
+    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final bool chapterIsFavorite = Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () {
           HapticFeedback.lightImpact();
+          // To content page
         },
-        splashColor: appColors.inversePrimary.withOpacity(0.25),
+        horizontalTitleGap: 8,
+        contentPadding: AppStyles.paddingHorMiniVerMicro,
+        splashColor: appColors.inversePrimary.withOpacity(0.5),
         tileColor: chapterIndex.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(
@@ -47,10 +52,33 @@ class MainChapterItem extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             Provider.of<MainChaptersState>(context, listen: false).toggleChapterFavorite(chapterId: chapterModel.chapterId);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: appColors.primary,
+                duration: const Duration(milliseconds: 750),
+                behavior: SnackBarBehavior.floating,
+                margin: AppStyles.paddingMini,
+                shape: AppStyles.shape,
+                elevation: 0,
+                content: Text(
+                  chapterIsFavorite ? AppStrings.removed : AppStrings.added,
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    color: appColors.surface,
+                  ),
+                ),
+              ),
+            );
           },
           padding: EdgeInsets.zero,
-          icon: Icon(Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId) ? Icons.bookmark : Icons.bookmark_outline_outlined),
+          icon: Icon(
+            chapterIsFavorite
+                ? Icons.bookmark
+                : Icons.bookmark_outline_outlined,
+            color: appColors.primary,
+          ),
         ),
+        trailing: const Icon(Icons.arrow_forward_ios_rounded),
       ),
     );
   }

@@ -26,6 +26,11 @@ class FavoriteChaptersList extends StatelessWidget {
             color: Colors.orange,
           );
         }
+        if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return Scrollbar(
             child: ListView.builder(
@@ -40,11 +45,10 @@ class FavoriteChaptersList extends StatelessWidget {
               },
             ),
           );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
         }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
       },
     );
   }

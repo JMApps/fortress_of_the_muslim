@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import 'search_future.dart';
+import 'search_chapter_future.dart';
 
 class SearchChaptersDelegate extends SearchDelegate {
 
@@ -15,7 +15,6 @@ class SearchChaptersDelegate extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
-      appBarTheme: theme.appBarTheme.copyWith(titleSpacing: 0),
       inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
     );
   }
@@ -38,7 +37,7 @@ class SearchChaptersDelegate extends SearchDelegate {
   @override
   Widget? buildLeading(BuildContext context) {
     return Padding(
-      padding: AppStyles.paddingLeft,
+      padding: EdgeInsets.only(left: 12),
       child: IconButton(
         onPressed: () {
           close(context, null);
@@ -50,11 +49,11 @@ class SearchChaptersDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return SearchFuture(query: query.toLowerCase());
+    return SearchChaptersFuture(query: query.toLowerCase());
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SearchFuture(query: query.toLowerCase());
+    return SearchChaptersFuture(query: query.toLowerCase());
   }
 }
