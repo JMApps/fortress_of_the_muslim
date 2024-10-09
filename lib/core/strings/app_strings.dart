@@ -11,6 +11,9 @@ class AppStrings {
   static const String search = 'Поиск...';
   static const String searchIsEmpty = 'По вашему запросу ничего не найдено';
 
+  static const String added = 'Добавлено';
+  static const String removed = 'Удалено';
+
   static const String morning = 'Утром';
   static const String evening = 'Вечером';
   static const String beforeSleep = 'Перед сном';
@@ -24,5 +27,6 @@ class AppStrings {
   static const String share = 'Поделиться';
 
   static const String fontRaleway = 'Raleway';
-  static const String fontRoboto = 'Roboto';
+  static const String fontMontserrat = 'Montserrat';
+  static const String fontHafs = 'Hafs';
 }

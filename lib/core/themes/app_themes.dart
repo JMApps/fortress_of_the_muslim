@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import '../strings/app_strings.dart';
 import '../styles/app_styles.dart';
 
-class AppTheme {
+class AppThemes {
+  final Color _appColor;
+
+  AppThemes(this._appColor);
+
   ThemeData get lightTheme => ThemeData(
-        fontFamily: AppStrings.fontRaleway,
+        fontFamily: AppStrings.fontMontserrat,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
-          seedColor: Colors.teal,
+          seedColor: _appColor,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -31,10 +35,10 @@ class AppTheme {
       );
 
   ThemeData get darkTheme => ThemeData(
-        fontFamily: AppStrings.fontRaleway,
+        fontFamily: AppStrings.fontMontserrat,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
-          seedColor: Colors.teal,
+          seedColor: _appColor,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,

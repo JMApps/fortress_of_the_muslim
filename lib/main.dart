@@ -5,12 +5,15 @@ import 'package:provider/provider.dart';
 import 'core/strings/app_constraints.dart';
 import 'data/repositories/chapter_data_repository.dart';
 import 'data/repositories/footnote_data_repository.dart';
+import 'data/repositories/supplication_data_repository.dart';
 import 'data/services/database_service.dart';
 import 'domain/usecases/chapter_use_case.dart';
 import 'domain/usecases/footnote_use_case.dart';
+import 'domain/usecases/supplication_use_case.dart';
 import 'presentation/pages/root_page.dart';
 import 'presentation/states/footnotes_state.dart';
 import 'presentation/states/main_chapters_state.dart';
+import 'presentation/states/main_supplications_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +31,13 @@ void main() async {
           create: (_) => MainChaptersState(
             ChapterUseCase(
               ChapterDataRepository(databaseService),
+            ),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MainSupplicationsState(
+            SupplicationUseCase(
+              SupplicationDataRepository(databaseService),
             ),
           ),
         ),
