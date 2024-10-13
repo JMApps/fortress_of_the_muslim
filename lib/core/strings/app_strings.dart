@@ -14,6 +14,7 @@ class AppStrings {
   static const String added = 'Добавлено';
   static const String removed = 'Удалено';
 
+
   static const String morning = 'Утром';
   static const String evening = 'Вечером';
   static const String beforeSleep = 'Перед сном';
@@ -24,6 +25,7 @@ class AppStrings {
   static const String settings = 'Настройки';
   static const String bookContent = 'Содержимое';
   static const String aboutUs = 'О нас';
+  static const String copy = 'Скопировать';
   static const String share = 'Поделиться';
 
   static const String fontRaleway = 'Raleway';
