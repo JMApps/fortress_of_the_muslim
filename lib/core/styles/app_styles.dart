@@ -62,16 +62,23 @@ class AppStyles {
     Icon(Icons.format_align_justify_rounded),
   ];
 
+  static const arabicTextAlignIcons = <Icon>[
+    Icon(Icons.format_align_right_rounded),
+    Icon(Icons.format_align_center_rounded),
+    Icon(Icons.format_align_left_rounded),
+    Icon(Icons.format_align_justify_rounded),
+  ];
+
   static const arabicFonts = <String>[
     'Hafs',
-    'Second',
-    'Third',
+    'Noto Naskh',
+    'Scheherezade',
   ];
 
   static const translationFonts = <String>[
-    'Hafs',
-    'Second',
-    'Third',
+    'Raleway',
+    'Montserrat',
+    'Gilroy',
   ];
 
   static const textSizes = <double>[
@@ -91,7 +98,7 @@ class AppStyles {
 
   static const counterAligns = <String>[
     'Слева',
-    'Посередине',
+    'По центру',
     'Справа',
   ];
 

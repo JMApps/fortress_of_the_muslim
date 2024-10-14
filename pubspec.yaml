@@ -72,6 +72,15 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/montserrat_light.ttf
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/gilroy_light.ttf
     - family: Hafs
       fonts:
         - asset: assets/fonts/hafs.ttf
+    - family: Noto Naskh
+      fonts:
+        - asset: assets/fonts/noto_naskh_regular.ttf
+    - family: Scheherazade
+      fonts:
+        - asset: assets/fonts/scheherazade.ttf
