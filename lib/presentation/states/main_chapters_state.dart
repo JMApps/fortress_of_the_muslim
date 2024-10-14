@@ -12,6 +12,7 @@ class MainChaptersState extends ChangeNotifier {
 
   MainChaptersState(this._chapterUseCase) {
     _favoriteChapterIds = _mainAppSettingsBox.get(AppConstraints.keyChapterIds, defaultValue: <int>[]);
+    _lastChapterId = _mainAppSettingsBox.get(AppConstraints.keyLastSavedChapter, defaultValue: 1);
   }
 
   late List<int> _favoriteChapterIds = [];
@@ -30,14 +31,14 @@ class MainChaptersState extends ChangeNotifier {
     return await _chapterUseCase.fetchFavoriteChapters(ids: ids);
   }
 
-  void toggleChapterFavorite({required int chapterId}) {
+  void toggleChapterFavorite({required int chapterId}) async {
     final bool exist = _favoriteChapterIds.contains(chapterId);
     if (exist) {
       _favoriteChapterIds.remove(chapterId);
     } else {
       _favoriteChapterIds.add(chapterId);
     }
-    _mainAppSettingsBox.put(AppConstraints.keyChapterIds, _favoriteChapterIds);
+    await _mainAppSettingsBox.put(AppConstraints.keyChapterIds, _favoriteChapterIds);
     notifyListeners();
   }
 
@@ -49,8 +50,9 @@ class MainChaptersState extends ChangeNotifier {
 
   int get getLastChapterId => _lastChapterId;
 
-  void saveLastChapter(int chapterId) {
+  void saveLastChapter(int chapterId) async {
     _lastChapterId = chapterId;
-    _mainAppSettingsBox.put(AppConstraints.keyLastSavedChapter, chapterId);
+    await _mainAppSettingsBox.put(AppConstraints.keyLastSavedChapter, chapterId);
+    notifyListeners();
   }
 }

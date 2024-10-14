@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/domain/entities/chapter_entity.dart';
-import 'package:fortress_of_the_muslim/presentation/states/main_chapters_state.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../domain/entities/chapter_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
+import '../../states/main_chapters_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../../widgets/main_html_data.dart';
@@ -44,7 +45,12 @@ class ChapterContentPage extends StatelessWidget {
                   floating: true,
                   actions: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          NameRoutes.settingsContentPage,
+                        );
+                      },
                       icon: Icon(Icons.settings_outlined),
                     ),
                   ],
@@ -73,8 +79,7 @@ class ChapterContentPage extends StatelessWidget {
                         child: MainErrorTextData(errorText: snapshot.error.toString()),
                       );
                     }
-                    if (snapshot.hasData &&
-                        snapshot.connectionState == ConnectionState.waiting) {
+                    if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
                       return SliverFillRemaining(
                         child: Center(
                           child: CircularProgressIndicator.adaptive(),

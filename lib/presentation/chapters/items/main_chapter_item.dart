@@ -31,7 +31,7 @@ class MainChapterItem extends StatelessWidget {
       child: ListTile(
         onTap: () {
           HapticFeedback.lightImpact();
-          Provider.of<MainChaptersState>(context).saveLastChapter(chapterModel.chapterId);
+          Provider.of<MainChaptersState>(context, listen: false).saveLastChapter(chapterModel.chapterId);
           Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
