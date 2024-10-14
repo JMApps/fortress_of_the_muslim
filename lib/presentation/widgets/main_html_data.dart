@@ -9,14 +9,18 @@ class MainHtmlData extends StatelessWidget {
     super.key,
     required this.htmlData,
     required this.footnoteColor,
+    required this.font,
     required this.fontSize,
     required this.textAlign,
+    required this.fontColor,
   });
 
   final String htmlData;
   final Color footnoteColor;
+  final String font;
   final double fontSize;
   final TextAlign textAlign;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +30,10 @@ class MainHtmlData extends StatelessWidget {
         '#': Style(
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
+          fontFamily: font,
           fontSize: FontSize(fontSize),
           textAlign: textAlign,
+          color: fontColor
         ),
         'small': Style(
           fontSize: FontSize(12.0)

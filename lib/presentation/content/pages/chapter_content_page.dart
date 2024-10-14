@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
@@ -66,8 +67,10 @@ class ChapterContentPage extends StatelessWidget {
                     child: MainHtmlData(
                       htmlData: chapterModel.chapterTitle,
                       footnoteColor: appColors.primary,
+                      font: AppStrings.fontRaleway,
                       fontSize: 18.0,
                       textAlign: TextAlign.center,
+                      fontColor: appColors.onSurface,
                     ),
                   ),
                 ),

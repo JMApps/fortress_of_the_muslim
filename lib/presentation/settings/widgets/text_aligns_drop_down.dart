@@ -15,6 +15,7 @@ class TextAlignsDropDown extends StatelessWidget {
     Widget buildDropDownRow({
       required String label,
       required int selectedIndex,
+      required List<Icon> alignIcons,
       required ValueChanged<int?> onChanged,
     }) {
       return Row(
@@ -28,13 +29,13 @@ class TextAlignsDropDown extends StatelessWidget {
             elevation: 1,
             value: selectedIndex,
             items: List.generate(
-              AppStyles.textAlignIcons.length,
+              alignIcons.length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
-                    child: AppStyles.textAlignIcons[index],
+                    child: alignIcons[index],
                   ),
                 ),
               ),
@@ -45,6 +46,7 @@ class TextAlignsDropDown extends StatelessWidget {
         ],
       );
     }
+
 
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
@@ -66,16 +68,19 @@ class TextAlignsDropDown extends StatelessWidget {
             buildDropDownRow(
               label: AppStrings.arabic,
               selectedIndex: contentSettings.getArabicFontAlignIndex,
+              alignIcons: AppStyles.arabicTextAlignIcons,
               onChanged: (newIndex) => contentSettings.setArabicFontAlignIndex = newIndex!,
             ),
             buildDropDownRow(
               label: AppStrings.transcription,
               selectedIndex: contentSettings.getTranscriptionFontAlignIndex,
+              alignIcons: AppStyles.textAlignIcons,
               onChanged: (newIndex) => contentSettings.setTranscriptionFontAlignIndex = newIndex!,
             ),
             buildDropDownRow(
               label: AppStrings.translation,
               selectedIndex: contentSettings.getTranslationFontAlignIndex,
+              alignIcons: AppStyles.textAlignIcons,
               onChanged: (newIndex) => contentSettings.setTranslationFontAlignIndex = newIndex!,
             ),
             const Divider(indent: 16, endIndent: 16),

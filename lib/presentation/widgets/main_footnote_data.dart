@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/styles/app_styles.dart';
@@ -28,8 +29,10 @@ class MainFootnoteData extends StatelessWidget {
             child: MainHtmlData(
               htmlData: '${snapshot.data!.footnoteId}: ${snapshot.data!.footnote}',
               footnoteColor: footnoteColor,
+              font: AppStrings.fontRaleway,
               fontSize: 18.0,
               textAlign: TextAlign.start,
+              fontColor: Theme.of(context).colorScheme.onSurface,
             ),
           );
         } else if (snapshot.hasError) {
