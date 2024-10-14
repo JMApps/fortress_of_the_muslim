@@ -44,4 +44,13 @@ class MainChaptersState extends ChangeNotifier {
   bool chapterIsFavorite(int chapterId) {
     return _favoriteChapterIds.contains(chapterId);
   }
+
+  late int _lastChapterId;
+
+  int get getLastChapterId => _lastChapterId;
+
+  void saveLastChapter(int chapterId) {
+    _lastChapterId = chapterId;
+    _mainAppSettingsBox.put(AppConstraints.keyLastSavedChapter, chapterId);
+  }
 }

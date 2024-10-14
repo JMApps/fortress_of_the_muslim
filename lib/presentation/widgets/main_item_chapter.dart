@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
+import '../../data/models/arguments/chapter_id_args.dart';
 
 class MainItemChapter extends StatelessWidget {
   const MainItemChapter({
@@ -30,7 +32,11 @@ class MainItemChapter extends StatelessWidget {
             if (chapterNumber == 1000) {
               // Counter
             } else {
-              // Navigator
+              Navigator.pushNamed(
+                context,
+                NameRoutes.chapterContentPage,
+                arguments: ChapterIdArgs(chapterId: chapterNumber),
+              );
             }
           },
           borderRadius: AppStyles.borderMini,

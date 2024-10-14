@@ -3,4 +3,6 @@ class AppConstraints {
 
   static const String keyChapterIds = 'key_favorite_chapters';
   static const String keySupplicationIds = 'key_favorite_supplications';
+
+  static const String keyLastSavedChapter = 'key_last_saved_chapter';
 }

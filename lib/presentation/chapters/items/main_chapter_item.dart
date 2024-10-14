@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/models/arguments/chapter_model_args.dart';
+import '../../../data/models/arguments/chapter_id_args.dart';
 import '../../../domain/entities/chapter_entity.dart';
 import '../../states/main_chapters_state.dart';
 import '../../widgets/main_html_data.dart';
@@ -25,17 +25,17 @@ class MainChapterItem extends StatelessWidget {
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.125);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.250);
-    final bool chapterIsFavorite = Provider.of<MainChaptersState>(context)
-        .chapterIsFavorite(chapterModel.chapterId);
+    final bool chapterIsFavorite = Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () {
           HapticFeedback.lightImpact();
+          Provider.of<MainChaptersState>(context).saveLastChapter(chapterModel.chapterId);
           Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
-            arguments: ChapterModelArgs(chapterModel: chapterModel),
+            arguments: ChapterIdArgs(chapterId: chapterModel.chapterId),
           );
         },
         horizontalTitleGap: 8,

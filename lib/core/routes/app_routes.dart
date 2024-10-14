@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/data/models/arguments/chapter_id_args.dart';
 
-import '../../data/models/arguments/chapter_model_args.dart';
 import '../../presentation/chapters/pages/favorite_chapter_page.dart';
 import '../../presentation/chapters/pages/main_chapter_page.dart';
 import '../../presentation/content/pages/chapter_content_page.dart';
@@ -28,9 +28,9 @@ class AppRoutes {
           builder: (_) => const FavoriteSupplicationPage(),
         );
       case NameRoutes.chapterContentPage:
-        final ChapterModelArgs chapterModelArgs = routeSettings.arguments as ChapterModelArgs;
+        final ChapterIdArgs chapterIdArgs = routeSettings.arguments as ChapterIdArgs;
         return MaterialPageRoute(
-          builder: (_) => ChapterContentPage(chapterModel: chapterModelArgs.chapterModel),
+          builder: (_) => ChapterContentPage(chapterId: chapterIdArgs.chapterId),
         );
       default:
         throw Exception('Invalid route');

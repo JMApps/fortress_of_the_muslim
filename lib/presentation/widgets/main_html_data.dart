@@ -30,7 +30,7 @@ class MainHtmlData extends StatelessWidget {
           textAlign: textAlign,
         ),
         'small': Style(
-          fontSize: FontSize(14.0)
+          fontSize: FontSize(12.0)
         ),
         'a': Style(
           margin: Margins.zero,

@@ -53,7 +53,10 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           _supplications = snapshot.data!;
           _recentSupplications = widget.query.isEmpty ? _supplications : _supplications.where((element) =>
-          element.supplicationId.toString().contains(widget.query) || element.translationText.toLowerCase().contains(widget.query)).toList();
+          element.supplicationId.toString().contains(widget.query) ||
+              (element.arabicText != null && element.arabicText!.contains(widget.query)) ||
+              (element.transcriptionText != null && element.transcriptionText!.toLowerCase().contains(widget.query)) ||
+              element.translationText.toLowerCase().contains(widget.query)).toList();
           return _recentSupplications.isEmpty ? const MainDescriptionText(descriptionText: AppStrings.searchIsEmpty) : Scrollbar(
             child: ListView.builder(
               padding: AppStyles.paddingMini,
