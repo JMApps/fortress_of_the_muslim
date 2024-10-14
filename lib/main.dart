@@ -11,6 +11,7 @@ import 'domain/usecases/chapter_use_case.dart';
 import 'domain/usecases/footnote_use_case.dart';
 import 'domain/usecases/supplication_use_case.dart';
 import 'presentation/pages/root_page.dart';
+import 'presentation/states/content_settings_state.dart';
 import 'presentation/states/footnotes_state.dart';
 import 'presentation/states/main_chapters_state.dart';
 import 'presentation/states/main_supplications_state.dart';
@@ -47,6 +48,9 @@ void main() async {
               FootnoteDataRepository(databaseService),
             ),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ContentSettingsState(),
         ),
       ],
       child: const RootPage(),

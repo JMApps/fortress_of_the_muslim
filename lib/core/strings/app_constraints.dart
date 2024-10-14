@@ -5,4 +5,25 @@ class AppConstraints {
   static const String keySupplicationIds = 'key_favorite_supplications';
 
   static const String keyLastSavedChapter = 'key_last_saved_chapter';
+
+  static const String keyArabicFontIndex = 'key_arabic_font_index';
+  static const String keyArabicFontSizeIndex = 'key_arabic_size_index';
+  static const String keyArabicFontAlignIndex = 'key_arabic_align_index';
+  static const String keyArabicLightColor = 'key_arabic_light_color_index';
+  static const String keyArabicDarkColor = 'key_arabic_dark_color_index';
+
+  static const String keyTranscriptionFontIndex = 'key_transcription_font_index';
+  static const String keyTranscriptionFontSizeIndex = 'key_transcription_size_index';
+  static const String keyTranscriptionFontAlignIndex = 'key_transcription_align_index';
+  static const String keyTranscriptionLightColor = 'key_transcription_light_color_index';
+  static const String keyTranscriptionDarkColor = 'key_transcription_dark_color_index';
+
+  static const String keyTranslationFontIndex = 'key_translation_font_index';
+  static const String keyTranslationFontSizeIndex = 'key_translation_size_index';
+  static const String keyTranslationFontAlignIndex = 'key_translation_align_index';
+  static const String keyTranslationLightColor = 'key_translation_light_color_index';
+  static const String keyTranslationDarkColor = 'key_translation_dark_color_index';
+
+  static const String keyShowTranscriptionState = 'key_show_transcription_state';
+  static const String keyCounterAlignIndex = 'key_counter_align_index';
 }
