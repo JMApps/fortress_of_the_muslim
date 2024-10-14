@@ -30,20 +30,18 @@ class AppStrings {
   static const String copy = 'Скопировать';
   static const String share = 'Поделиться';
 
-  static const String fontRaleway = 'Raleway';
   static const String fontMontserrat = 'Montserrat';
-  static const String fontHafs = 'Hafs';
 
   static const String font = 'Шрифт';
-  static const List arabicFontNames = [
+  static const List<String> arabicFontNames = [
     'Hafs',
-    'Second',
-    'Third',
+    'Noto Naskh',
+    'Scheherazade',
   ];
 
-  static const List translationFontNames = [
-    'Roboto',
-    'Veranda',
+  static const List<String> translationFontNames = [
+    'Montserrat',
+    'Verdana',
     'Gilroy',
   ];
 

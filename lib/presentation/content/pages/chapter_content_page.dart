@@ -67,7 +67,7 @@ class ChapterContentPage extends StatelessWidget {
                     child: MainHtmlData(
                       htmlData: chapterModel.chapterTitle,
                       footnoteColor: appColors.primary,
-                      font: AppStrings.fontRaleway,
+                      font: AppStrings.fontMontserrat,
                       fontSize: 18.0,
                       textAlign: TextAlign.center,
                       fontColor: appColors.onSurface,

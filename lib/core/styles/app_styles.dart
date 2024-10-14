@@ -47,10 +47,10 @@ class AppStyles {
   static const borderBottomLeft = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(8),);
   static const borderBottomRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(16),);
 
-  static const mainTextStyle = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontRaleway);
-  static const mainTextStyle20 = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontRaleway);
-  static const mainTextStyle20Bold = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontRaleway, fontWeight: FontWeight.bold);
-  static const mainTextStyleBold = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontRaleway, fontWeight: FontWeight.bold);
+  static const mainTextStyle = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontMontserrat);
+  static const mainTextStyle20 = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontMontserrat);
+  static const mainTextStyle20Bold = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontMontserrat, fontWeight: FontWeight.bold);
+  static const mainTextStyleBold = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontMontserrat, fontWeight: FontWeight.bold);
 
   static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));
   static const shapeMini = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)));
@@ -67,18 +67,6 @@ class AppStyles {
     Icon(Icons.format_align_center_rounded),
     Icon(Icons.format_align_left_rounded),
     Icon(Icons.format_align_justify_rounded),
-  ];
-
-  static const arabicFonts = <String>[
-    'Hafs',
-    'Noto Naskh',
-    'Scheherezade',
-  ];
-
-  static const translationFonts = <String>[
-    'Raleway',
-    'Montserrat',
-    'Gilroy',
   ];
 
   static const textSizes = <double>[

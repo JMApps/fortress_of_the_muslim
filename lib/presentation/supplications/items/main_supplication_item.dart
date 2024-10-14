@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/content_settings_state.dart';
@@ -37,7 +38,7 @@ class MainSupplicationItem extends StatelessWidget {
                 arabicShowState ? Text(
                   supplicationModel.arabicText!,
                   style: TextStyle(
-                    fontFamily: AppStyles.arabicFonts[contentSettings.getArabicFontIndex],
+                    fontFamily: AppStrings.arabicFontNames[contentSettings.getArabicFontIndex],
                     fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex],
                     color: isLightTheme ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
                     height: 1.75,
@@ -49,7 +50,7 @@ class MainSupplicationItem extends StatelessWidget {
                 transcriptionShowState ? Text(
                   supplicationModel.transcriptionText!,
                   style: TextStyle(
-                    fontFamily: AppStyles.translationFonts[contentSettings.getTranscriptionFontIndex],
+                    fontFamily: AppStrings.translationFontNames[contentSettings.getTranscriptionFontIndex],
                     fontSize: AppStyles.textSizes[contentSettings.getTranscriptionFontSizeIndex] + 5,
                     color: isLightTheme ? Color(contentSettings.getTranscriptionLightTextColor) : Color(contentSettings.getTranscriptionDarkTextColor),
                     height: 1.75,
@@ -60,7 +61,7 @@ class MainSupplicationItem extends StatelessWidget {
                 MainHtmlData(
                   htmlData: supplicationModel.translationText,
                   footnoteColor: Colors.red,
-                  font: AppStyles.translationFonts[contentSettings.getTranslationFontIndex],
+                  font: AppStrings.translationFontNames[contentSettings.getTranslationFontIndex],
                   fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
                   textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
                   fontColor: isLightTheme ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),

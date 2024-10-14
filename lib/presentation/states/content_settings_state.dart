@@ -34,7 +34,7 @@ class ContentSettingsState extends ChangeNotifier {
 
   void _initializeSettings() {
     _arabicFontIndex = _getSetting(AppConstraints.keyArabicFontIndex, 0);
-    _transcriptionFontIndex = _getSetting(AppConstraints.keyTranscriptionFontIndex, 0);
+    _transcriptionFontIndex = _getSetting(AppConstraints.keyTranscriptionFontIndex, 2);
     _translationFontIndex = _getSetting(AppConstraints.keyTranslationFontIndex, 0);
 
     _arabicFontSizeIndex = _getSetting(AppConstraints.keyArabicFontSizeIndex, 1);

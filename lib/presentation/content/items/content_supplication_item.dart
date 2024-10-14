@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
@@ -38,10 +39,10 @@ class ContentSupplicationItem extends StatelessWidget {
               arabicShowState ? Text(
                 supplicationModel.arabicText!,
                 style: TextStyle(
-                  fontFamily: AppStyles.arabicFonts[contentSettings.getArabicFontIndex],
+                  fontFamily:AppStrings.arabicFontNames[contentSettings.getArabicFontIndex],
                   fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
                   color: isLightTheme ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
-                  height: 1.75,
+                  height: 2,
                 ),
                 textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
                 textDirection: TextDirection.rtl,
@@ -50,10 +51,9 @@ class ContentSupplicationItem extends StatelessWidget {
               transcriptionShowState ? contentSettings.getShowTranscriptionState ? Text(
                 supplicationModel.transcriptionText!,
                 style: TextStyle(
-                  fontFamily: AppStyles.translationFonts[contentSettings.getTranscriptionFontIndex],
+                  fontFamily: AppStrings.translationFontNames[contentSettings.getTranscriptionFontIndex],
                   fontSize: AppStyles.textSizes[contentSettings.getTranscriptionFontSizeIndex],
                   color: isLightTheme ? Color(contentSettings.getTranscriptionLightTextColor) : Color(contentSettings.getTranscriptionDarkTextColor),
-                  height: 1.75,
                 ),
                 textAlign: AppStyles.textAligns[contentSettings.getTranscriptionFontAlignIndex],
               ) : const SizedBox() : const SizedBox(),
@@ -61,7 +61,7 @@ class ContentSupplicationItem extends StatelessWidget {
               MainHtmlData(
                 htmlData: supplicationModel.translationText,
                 footnoteColor: Colors.red,
-                font: AppStyles.translationFonts[contentSettings.getTranslationFontIndex],
+                font: AppStrings.translationFontNames[contentSettings.getTranslationFontIndex],
                 fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
                 textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
                 fontColor: isLightTheme ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
@@ -80,8 +80,9 @@ class ContentSupplicationItem extends StatelessWidget {
                       child: Text(
                         supplicationModel.countNumber.toString(),
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
+                          fontFamily: AppStrings.fontMontserrat,
                         ),
                         textAlign: TextAlign.right,
                       ),

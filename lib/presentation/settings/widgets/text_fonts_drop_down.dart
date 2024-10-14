@@ -11,7 +11,7 @@ class TextFontsDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppStrings.fontRaleway, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppStrings.fontMontserrat, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
         return Column(
@@ -31,7 +31,7 @@ class TextFontsDropDown extends StatelessWidget {
             ),
             _buildFontRow(
               label: AppStrings.arabic,
-              fontNames: AppStyles.arabicFonts,
+              fontNames: AppStrings.arabicFontNames,
               selectedFontIndex: contentSettings.getArabicFontIndex,
               onChanged: (newIndex) => contentSettings.setArabicFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,
@@ -39,7 +39,7 @@ class TextFontsDropDown extends StatelessWidget {
             ),
             _buildFontRow(
               label: AppStrings.transcription,
-              fontNames: AppStyles.translationFonts,
+              fontNames: AppStrings.translationFontNames,
               selectedFontIndex: contentSettings.getTranscriptionFontIndex,
               onChanged: (newIndex) => contentSettings.setTranscriptionFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,
@@ -47,7 +47,7 @@ class TextFontsDropDown extends StatelessWidget {
             ),
             _buildFontRow(
               label: AppStrings.translation,
-              fontNames: AppStyles.translationFonts,
+              fontNames: AppStrings.translationFontNames,
               selectedFontIndex: contentSettings.getTranslationFontIndex,
               onChanged: (newIndex) => contentSettings.setTranslationFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,

@@ -54,7 +54,7 @@ class MainChapterItem extends StatelessWidget {
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
           footnoteColor: Colors.orange,
-          font: AppStrings.fontRaleway,
+          font: AppStrings.fontMontserrat,
           fontSize: 17.0,
           textAlign: TextAlign.start,
           fontColor: appColors.onSurface,
