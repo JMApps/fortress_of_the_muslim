@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/styles/app_styles.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_strings.dart';
@@ -19,6 +20,7 @@ class FirstMainTwo extends StatelessWidget {
             itemIcon: CupertinoIcons.collections,
             itemTitle: AppStrings.chapters,
             routeName: NameRoutes.allChaptersPage,
+            itemBorder: AppStyles.borderTopLeft,
           ),
         ),
         const SizedBox(width: 8),
@@ -29,6 +31,7 @@ class FirstMainTwo extends StatelessWidget {
             itemIcon: CupertinoIcons.bookmark,
             itemTitle: AppStrings.favoriteChapters,
             routeName: NameRoutes.favoriteChaptersPage,
+            itemBorder: AppStyles.borderTopRight,
           ),
         ),
       ],

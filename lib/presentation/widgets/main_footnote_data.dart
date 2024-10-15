@@ -29,7 +29,7 @@ class MainFootnoteData extends StatelessWidget {
             child: MainHtmlData(
               htmlData: '${snapshot.data!.footnoteId}: ${snapshot.data!.footnote}',
               footnoteColor: footnoteColor,
-              font: AppStrings.fontMontserrat,
+              font: AppStrings.fontGilroy,
               fontSize: 18.0,
               textAlign: TextAlign.start,
               fontColor: Theme.of(context).colorScheme.onSurface,

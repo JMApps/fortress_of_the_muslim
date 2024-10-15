@@ -22,50 +22,62 @@ class MainItemChapter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    return ClipRRect(
+    final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    return InkWell(
+      onTap: () {
+        HapticFeedback.lightImpact();
+        if (chapterNumber == 1000) {
+          Navigator.pushNamed(context, NameRoutes.appCounterPage);
+        } else {
+          Navigator.pushNamed(
+            context,
+            NameRoutes.chapterContentPage,
+            arguments: ChapterIdArgs(chapterId: chapterNumber),
+          );
+        }
+      },
       borderRadius: AppStyles.borderMini,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: InkWell(
-        onTap: () {
-          HapticFeedback.lightImpact();
-          if (chapterNumber == 1000) {
-            Navigator.pushNamed(context, NameRoutes.appCounterPage);
-          } else {
-            Navigator.pushNamed(
-              context,
-              NameRoutes.chapterContentPage,
-              arguments: ChapterIdArgs(chapterId: chapterNumber),
-            );
-          }
-        },
-        borderRadius: AppStyles.borderMini,
-        child: Container(
-          padding: AppStyles.padding,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/pictures/$iconName.jpg'),
-              fit: BoxFit.cover,
-              opacity: themeIsDark ? 0.35 : 0.65,
+      splashColor: Colors.grey.withOpacity(themeIsDark ? 0.5 : 0.95),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Opacity(
+              opacity: themeIsDark ? 0.25 : 0.65,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: AppStyles.borderMini,
+                  image: DecorationImage(
+                    image: AssetImage('assets/pictures/$iconName.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
           ),
-          child: Opacity(
-            opacity: themeIsDark ? 0.65 : 0.95,
+          Align(
+            alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(itemIcon),
+                Icon(
+                  itemIcon,
+                color: fixColor,
+                ),
                 Text(
                   itemTitle,
-                  style: const TextStyle(
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: fixColor,
                     fontWeight: FontWeight.bold,
                   ),
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }

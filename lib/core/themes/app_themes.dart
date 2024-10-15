@@ -9,7 +9,7 @@ class AppThemes {
   AppThemes(this._appColor);
 
   ThemeData get lightTheme => ThemeData(
-        fontFamily: AppStrings.fontMontserrat,
+        fontFamily: AppStrings.fontGilroy,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
           seedColor: _appColor,
@@ -35,7 +35,7 @@ class AppThemes {
       );
 
   ThemeData get darkTheme => ThemeData(
-        fontFamily: AppStrings.fontMontserrat,
+        fontFamily: AppStrings.fontGilroy,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: _appColor,

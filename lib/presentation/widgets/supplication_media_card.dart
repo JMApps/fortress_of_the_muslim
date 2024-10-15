@@ -62,7 +62,7 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
               style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
-                fontFamily: AppStrings.fontMontserrat,
+                fontFamily: AppStrings.fontGilroy,
               ),
             ),
           ),

@@ -15,8 +15,10 @@ dependencies:
   # Design
   cupertino_icons: ^1.0.8
   flutter_html: ^3.0.0-beta.2
+  html: 0.15.4
   step_progress_indicator: ^1.0.2
   flutter_material_color_picker: ^1.2.0
+  responsive_builder: ^0.7.1
 
   # Databases
   sqflite: ^2.4.0
@@ -24,7 +26,7 @@ dependencies:
 
   # System
   wakelock_plus: ^1.2.8
-  vibration: ^2.0.0
+  vibration: ^2.0.1
 
   # Path
   path: ^1.9.0
@@ -66,12 +68,12 @@ flutter:
     - assets/databases/
 
   fonts:
-    - family: Raleway
-      fonts:
-        - asset: assets/fonts/raleway_regular.ttf
     - family: Montserrat
       fonts:
         - asset: assets/fonts/montserrat_light.ttf
+    - family: SF Pro
+      fonts:
+        - asset: assets/fonts/sf_pro_regular.ttf
     - family: Gilroy
       fonts:
         - asset: assets/fonts/gilroy_light.ttf

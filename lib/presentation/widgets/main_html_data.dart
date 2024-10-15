@@ -45,7 +45,7 @@ class MainHtmlData extends StatelessWidget {
           letterSpacing: 1.5,
           color: footnoteColor,
           fontWeight: FontWeight.bold,
-          fontFamily: AppStrings.fontMontserrat,
+          fontFamily: AppStrings.fontGilroy,
         ),
       },
       onLinkTap: (String? footnoteNumber, _, __) {

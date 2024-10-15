@@ -32,7 +32,6 @@ class AppStrings {
   static const String copied = 'Скопировано';
   static const String share = 'Поделиться';
 
-  static const String fontMontserrat = 'Montserrat';
   static const String fontGilroy = 'Gilroy';
 
   static const String font = 'Шрифт';
@@ -44,7 +43,7 @@ class AppStrings {
 
   static const List<String> translationFontNames = [
     'Montserrat',
-    'Verdana',
+    'SF Pro',
     'Gilroy',
   ];
 

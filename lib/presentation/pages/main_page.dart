@@ -24,18 +24,18 @@ class MainPage extends StatelessWidget {
           IconButton(
             onPressed: () {},
             tooltip: AppStrings.share,
-            icon: const Icon(Icons.ios_share),
+            icon: Icon(Icons.ios_share),
           ),
         ],
       ),
       body: Container(
         height: screenHeight,
         padding: AppStyles.padding,
-        child: OrientationLayoutBuilder(
-          portrait: (context) => ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: AppStyles.borderBig,
-            child: Column(
+        child: ClipRRect(
+          borderRadius: AppStyles.borderBig,
+          clipBehavior: Clip.hardEdge,
+          child: OrientationLayoutBuilder(
+            portrait: (context) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Flexible(
@@ -69,10 +69,7 @@ class MainPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          landscape: (context) => ClipRRect(
-            borderRadius: AppStyles.borderBig,
-            child: Row(
+            landscape: (context) => Row(
               children: [
                 Flexible(
                   flex: 2,

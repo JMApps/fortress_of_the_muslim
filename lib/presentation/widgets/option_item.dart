@@ -21,49 +21,59 @@ class OptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    return ClipRRect(
+    final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    return InkWell(
+      onTap: () {
+        HapticFeedback.lightImpact();
+        if (routeName.contains(AppStrings.aboutUs)) {
+          // Bottom sheet
+        } else {
+          // Navigator
+        }
+      },
       borderRadius: AppStyles.borderMini,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: InkWell(
-        onTap: () {
-          HapticFeedback.lightImpact();
-          if (routeName.contains(AppStrings.aboutUs)) {
-            // Bottom sheet
-          } else {
-            // Navigator
-          }
-        },
-        borderRadius: AppStyles.borderMini,
-        child: Opacity(
-          opacity: themeIsDark ? 0.65 : 0.85,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: const AssetImage('assets/pictures/texture_bottom_left.jpg'),
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
-                colorFilter: ColorFilter.mode(
-                  itemColor,
-                  BlendMode.multiply,
+      splashColor: Colors.grey.withOpacity(themeIsDark ? 0.25 : 0.95),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Opacity(
+              opacity: themeIsDark ? 0.5 : 0.95,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: AppStyles.borderMini,
+                  image: DecorationImage(
+                    image: AssetImage('assets/pictures/texture_bottom_left.jpg'),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      itemColor.withOpacity(0.85),
+                      BlendMode.multiply,
+                    ),
+                  ),
                 ),
               ),
             ),
+          ),
+          Align(
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(itemIcon),
+                Icon(itemIcon,
+                  color: fixColor,
+                ),
                 Text(
                   itemTitle,
-                  style: const TextStyle(
-                    fontSize: 15,
+                  style: TextStyle(
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
+                    color: fixColor,
                   ),
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }

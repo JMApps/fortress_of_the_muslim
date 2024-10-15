@@ -63,13 +63,16 @@ class ChapterContentPage extends StatelessWidget {
                   }
                   if (snapshot.hasData) {
                     final ChapterEntity chapterModel = snapshot.data!;
-                    return MainHtmlData(
-                      htmlData: chapterModel.chapterTitle,
-                      footnoteColor: appColors.primary,
-                      font: AppStrings.fontMontserrat,
-                      fontSize: 18.0,
-                      textAlign: TextAlign.center,
-                      fontColor: appColors.onSurface,
+                    return Padding(
+                      padding: AppStyles.paddingMicro,
+                      child: MainHtmlData(
+                        htmlData: chapterModel.chapterTitle,
+                        footnoteColor: appColors.primary,
+                        font: AppStrings.fontGilroy,
+                        fontSize: 18.0,
+                        textAlign: TextAlign.center,
+                        fontColor: appColors.onSurface,
+                      ),
                     );
                   }
                   return Center(
