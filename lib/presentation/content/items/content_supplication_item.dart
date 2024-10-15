@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/content_settings_state.dart';
@@ -21,10 +21,7 @@ class ContentSupplicationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
-    final appColors = appTheme.colorScheme;
     final isLightTheme = appTheme.brightness == Brightness.light;
-    final arabicShowState = supplicationModel.arabicText != null;
-    final transcriptionShowState = supplicationModel.transcriptionText != null;
     return Card(
       elevation: 0,
       shape: AppStyles.shape,
@@ -33,70 +30,65 @@ class ContentSupplicationItem extends StatelessWidget {
         padding: AppStyles.padding,
         child: Consumer<ContentSettingsState>(
           builder: (context, contentSettings, _) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              arabicShowState ? Text(
-                supplicationModel.arabicText!,
-                style: TextStyle(
-                  fontFamily:AppStrings.arabicFontNames[contentSettings.getArabicFontIndex],
-                  fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
-                  color: isLightTheme ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
-                  height: 2,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (supplicationModel.arabicText != null)
+                  _buildText(
+                    text: supplicationModel.arabicText!,
+                    fontIndex: contentSettings.getArabicFontIndex,
+                    fontSizeIndex: contentSettings.getArabicFontSizeIndex,
+                    textColor: isLightTheme ? contentSettings.getArabicLightTextColor : contentSettings.getArabicDarkTextColor,
+                    textAlignIndex: contentSettings.getArabicFontAlignIndex,
+                    isArabic: true,
+                  ),
+                const SizedBox(height: 16),
+                if (supplicationModel.transcriptionText != null)
+                  _buildText(
+                    text: supplicationModel.transcriptionText!,
+                    fontIndex: contentSettings.getTranscriptionFontIndex,
+                    fontSizeIndex: contentSettings.getTranscriptionFontSizeIndex,
+                    textColor: isLightTheme ? contentSettings.getTranscriptionLightTextColor : contentSettings.getTranscriptionDarkTextColor,
+                    textAlignIndex: contentSettings.getTranscriptionFontAlignIndex,
+                    isArabic: false,
+                  ),
+                const SizedBox(height: 16),
+                MainHtmlData(
+                  htmlData: supplicationModel.translationText,
+                  footnoteColor: appTheme.colorScheme.primary,
+                  font: AppStrings.translationFontNames[contentSettings.getTranslationFontIndex],
+                  fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
+                  textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
+                  fontColor: isLightTheme ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
                 ),
-                textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
-                textDirection: TextDirection.rtl,
-              ) : const SizedBox(),
-              SizedBox(height: arabicShowState ? 16 : 0),
-              transcriptionShowState ? contentSettings.getShowTranscriptionState ? Text(
-                supplicationModel.transcriptionText!,
-                style: TextStyle(
-                  fontFamily: AppStrings.translationFontNames[contentSettings.getTranscriptionFontIndex],
-                  fontSize: AppStyles.textSizes[contentSettings.getTranscriptionFontSizeIndex],
-                  color: isLightTheme ? Color(contentSettings.getTranscriptionLightTextColor) : Color(contentSettings.getTranscriptionDarkTextColor),
-                ),
-                textAlign: AppStyles.textAligns[contentSettings.getTranscriptionFontAlignIndex],
-              ) : const SizedBox() : const SizedBox(),
-              SizedBox(height: transcriptionShowState ? contentSettings.getShowTranscriptionState ? 16 : 0 : 0),
-              MainHtmlData(
-                htmlData: supplicationModel.translationText,
-                footnoteColor: Colors.red,
-                font: AppStrings.translationFontNames[contentSettings.getTranslationFontIndex],
-                fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
-                textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
-                fontColor: isLightTheme ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
-              ),
-              SizedBox(height: supplicationModel.countNumber > 0 ? 4 : 0),
-              supplicationModel.countNumber > 0 ? InkWell(
-                onTap: () {},
-                borderRadius: AppStyles.border,
-                splashColor: appColors.primary.withOpacity(0.05),
-                child: Row(
-                  mainAxisAlignment: AppStyles.counterAlign[contentSettings.getCounterAlignIndex],
-                  children: [
-                    CircleAvatar(
-                      radius: 35,
-                      backgroundColor: appColors.inversePrimary,
-                      child: Text(
-                        supplicationModel.countNumber.toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: AppStrings.fontMontserrat,
-                        ),
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
-                  ],
-                ),
-              ) : const SizedBox(),
-              SizedBox(height: supplicationModel.countNumber > 0 ? 16 : 16),
-              SupplicationMediaCard(supplicationModel: supplicationModel),
-            ],
-          );
-        },
+                const SizedBox(height: 16),
+                SupplicationMediaCard(supplicationModel: supplicationModel),
+              ],
+            );
+          },
         ),
       ),
+    );
+  }
+
+  Widget _buildText({
+    required String text,
+    required int fontIndex,
+    required int fontSizeIndex,
+    required int textColor,
+    required int textAlignIndex,
+    required bool isArabic,
+  }) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontFamily: isArabic ? AppStrings.arabicFontNames[fontIndex] : AppStrings.translationFontNames[fontIndex],
+        fontSize: AppStyles.textSizes[fontSizeIndex] + (isArabic ? 5 : 0),
+        color: Color(textColor),
+        height: 1.75,
+      ),
+      textAlign: AppStyles.textAligns[textAlignIndex],
+      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
     );
   }
 }

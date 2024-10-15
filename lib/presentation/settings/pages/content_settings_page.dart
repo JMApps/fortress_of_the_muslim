@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../widgets/counter_align_drop_down.dart';
+import '../widgets/default_settings_button.dart';
 import '../widgets/supplication_text_colors.dart';
 import '../widgets/text_aligns_drop_down.dart';
 import '../widgets/text_fonts_drop_down.dart';
@@ -29,6 +30,7 @@ class ContentSettingsPage extends StatelessWidget {
             SupplicationTextColors(),
             TranscriptionListTile(),
             CounterAlignDropDown(),
+            DefaultSettingsButton(),
           ],
         ),
       ),

@@ -4,7 +4,7 @@ import '../../core/strings/app_constraints.dart';
 
 class ContentSettingsState extends ChangeNotifier {
 
-  final _mainAppSettingsBox = Hive.box(AppConstraints.keyMainSettingsBox);
+  final _contentSettings = Hive.box(AppConstraints.keyContentSettingsBox);
 
   late int _arabicFontIndex;
   late int _transcriptionFontIndex;
@@ -45,23 +45,23 @@ class ContentSettingsState extends ChangeNotifier {
     _transcriptionFontAlignIndex = _getSetting(AppConstraints.keyTranscriptionFontAlignIndex, 0);
     _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 0);
 
-    _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.black.value);
-    _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.white.value);
+    _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blueGrey.shade900.value);
+    _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.grey.shade50.value);
     _transcriptionLightTextColor = _getSetting(AppConstraints.keyTranscriptionLightColor, Colors.grey.value);
     _transcriptionDarkTextColor = _getSetting(AppConstraints.keyTranscriptionDarkColor, Colors.grey.value);
-    _translationLightTextColor = _getSetting(AppConstraints.keyTranslationLightColor, Colors.black.value);
-    _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.white.value);
+    _translationLightTextColor = _getSetting(AppConstraints.keyTranslationLightColor, Colors.blueGrey.shade900.value);
+    _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.grey.shade50.value);
 
-    _showTranscriptionState = _mainAppSettingsBox.get(AppConstraints.keyShowTranscriptionState, defaultValue: true);
+    _showTranscriptionState = _contentSettings.get(AppConstraints.keyShowTranscriptionState, defaultValue: true);
     _counterAlignIndex = _getSetting(AppConstraints.keyCounterAlignIndex, 2);
   }
 
   int _getSetting(String key, int defaultValue) {
-    return _mainAppSettingsBox.get(key, defaultValue: defaultValue);
+    return _contentSettings.get(key, defaultValue: defaultValue);
   }
 
   void _setSetting(int value, String key) {
-    _mainAppSettingsBox.put(key, value);
+    _contentSettings.put(key, value);
     notifyListeners();
   }
 
@@ -164,12 +164,39 @@ class ContentSettingsState extends ChangeNotifier {
 
   set setShowTranscriptionState(bool state) {
     _showTranscriptionState = state;
-    _mainAppSettingsBox.put(AppConstraints.keyShowTranscriptionState, state);
+    _contentSettings.put(AppConstraints.keyShowTranscriptionState, state);
     notifyListeners();
   }
 
   set setCounterAlignIndex(int index) {
     _counterAlignIndex = index;
     _setSetting(index, AppConstraints.keyCounterAlignIndex);
+  }
+
+  void setDefault() {
+    setArabicFontIndex = 0;
+    setTranscriptionFontIndex = 2;
+    setTranslationFontIndex = 0;
+
+    setArabicFontSizeIndex = 1;
+    setTranscriptionFontSizeIndex = 1;
+    setTranslationFontSizeIndex = 1;
+
+    setArabicFontAlignIndex = 0;
+    setTranscriptionFontAlignIndex = 0;
+    setTranslationFontAlignIndex = 0;
+
+    setArabicLightTextColor = Colors.black.value;
+    setArabicDarkTextColor = Colors.white.value;
+
+    setTranscriptionLightTextColor = Colors.grey.value;
+    setTranscriptionDarkTextColor = Colors.grey.value;
+
+    setTranslationLightTextColor = Colors.black.value;
+    setTranslationDarkTextColor = Colors.white.value;
+
+    setShowTranscriptionState = true;
+    setCounterAlignIndex = 2;
+    notifyListeners();
   }
 }

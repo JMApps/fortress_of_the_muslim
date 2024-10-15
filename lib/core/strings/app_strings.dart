@@ -66,6 +66,7 @@ class AppStrings {
   static const String transcription = 'Транскрипция';
   static const String showTranscription = 'Показывать транскрипцию';
   static const String translation = 'Перевод';
+  static const String defaultSettings = 'По умолчанию';
 
   static const String forLightTheme = 'Для светлой темы';
   static const String forDarkTheme = 'Для тёмной темы';

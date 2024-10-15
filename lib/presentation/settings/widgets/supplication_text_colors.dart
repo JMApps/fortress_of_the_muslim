@@ -28,7 +28,7 @@ class SupplicationTextColors extends StatelessWidget {
           color: Colors.transparent,
           child: MaterialColorPicker(
             alignment: WrapAlignment.center,
-            iconSelected: Icons.check_circle_outline,
+            iconSelected: Icons.check_circle,
             elevation: 0.5,
             onColorChange: (Color? color) => onColorSelected(color!.value),
             selectedColor: Color(currentColor),

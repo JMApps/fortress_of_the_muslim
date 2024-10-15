@@ -22,8 +22,6 @@ class FavoriteSupplicationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     final isLightTheme = appTheme.brightness == Brightness.light;
-    final arabicShowState = supplicationModel.arabicText != null;
-    final transcriptionShowState = supplicationModel.transcriptionText != null;
     return Card(
       elevation: 0,
       shape: AppStyles.shape,
@@ -35,32 +33,29 @@ class FavoriteSupplicationItem extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                arabicShowState ? Text(
-                  supplicationModel.arabicText!,
-                  style: TextStyle(
-                    fontFamily: AppStrings.arabicFontNames[contentSettings.getArabicFontIndex],
-                    fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
-                    color: isLightTheme ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
-                    height: 1.75,
+                if (supplicationModel.arabicText != null)
+                  _buildText(
+                    text: supplicationModel.arabicText!,
+                    fontIndex: contentSettings.getArabicFontIndex,
+                    fontSizeIndex: contentSettings.getArabicFontSizeIndex,
+                    textColor: isLightTheme ? contentSettings.getArabicLightTextColor : contentSettings.getArabicDarkTextColor,
+                    textAlignIndex: contentSettings.getArabicFontAlignIndex,
+                    isArabic: true,
                   ),
-                  textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
-                  textDirection: TextDirection.rtl,
-                ) : const SizedBox(),
-                SizedBox(height: arabicShowState ? 16 : 0),
-                transcriptionShowState ? Text(
-                  supplicationModel.transcriptionText!,
-                  style: TextStyle(
-                    fontFamily: AppStrings.translationFontNames[contentSettings.getTranscriptionFontIndex],
-                    fontSize: AppStyles.textSizes[contentSettings.getTranscriptionFontSizeIndex],
-                    color: isLightTheme ? Color(contentSettings.getTranscriptionLightTextColor) : Color(contentSettings.getTranscriptionDarkTextColor),
-                    height: 1.75,
+                const SizedBox(height: 16),
+                if (supplicationModel.transcriptionText != null)
+                  _buildText(
+                    text: supplicationModel.transcriptionText!,
+                    fontIndex: contentSettings.getTranscriptionFontIndex,
+                    fontSizeIndex: contentSettings.getTranscriptionFontSizeIndex,
+                    textColor: isLightTheme ? contentSettings.getTranscriptionLightTextColor : contentSettings.getTranscriptionDarkTextColor,
+                    textAlignIndex: contentSettings.getTranscriptionFontAlignIndex,
+                    isArabic: false,
                   ),
-                  textAlign: AppStyles.textAligns[contentSettings.getTranscriptionFontAlignIndex],
-                ) : const SizedBox(),
-                SizedBox(height: transcriptionShowState ? 16 : 0),
+                const SizedBox(height: 16),
                 MainHtmlData(
                   htmlData: supplicationModel.translationText,
-                  footnoteColor: Colors.red,
+                  footnoteColor: Colors.blue,
                   font: AppStrings.translationFontNames[contentSettings.getTranslationFontIndex],
                   fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
                   textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
@@ -73,6 +68,27 @@ class FavoriteSupplicationItem extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildText({
+    required String text,
+    required int fontIndex,
+    required int fontSizeIndex,
+    required int textColor,
+    required int textAlignIndex,
+    required bool isArabic,
+  }) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontFamily: isArabic ? AppStrings.arabicFontNames[fontIndex] : AppStrings.translationFontNames[fontIndex],
+        fontSize: AppStyles.textSizes[fontSizeIndex] + (isArabic ? 5 : 0),
+        color: Color(textColor),
+        height: 1.75,
+      ),
+      textAlign: AppStyles.textAligns[textAlignIndex],
+      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
     );
   }
 }
