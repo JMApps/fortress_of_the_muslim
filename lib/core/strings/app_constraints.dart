@@ -28,4 +28,6 @@ class AppConstraints {
 
   static const String keyShowTranscriptionState = 'key_show_transcription_state';
   static const String keyCounterAlignIndex = 'key_counter_align_index';
+
+  static const String keyFreeCountValue = 'key_free_count_number';
 }

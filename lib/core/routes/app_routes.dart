@@ -4,6 +4,7 @@ import '../../data/models/arguments/chapter_id_args.dart';
 import '../../presentation/chapters/pages/favorite_chapter_page.dart';
 import '../../presentation/chapters/pages/main_chapter_page.dart';
 import '../../presentation/content/pages/chapter_content_page.dart';
+import '../../presentation/counter/pages/app_counter_page.dart';
 import '../../presentation/settings/pages/content_settings_page.dart';
 import '../../presentation/supplications/pages/favorite_supplication_page.dart';
 import '../../presentation/supplications/pages/main_supplication_page.dart';
@@ -20,14 +21,6 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => const FavoriteChapterPage(),
         );
-      case NameRoutes.allSupplicationsPage:
-        return MaterialPageRoute(
-          builder: (_) => const MainSupplicationPage(),
-        );
-      case NameRoutes.favoriteSupplicationsPage:
-        return MaterialPageRoute(
-          builder: (_) => const FavoriteSupplicationPage(),
-        );
       case NameRoutes.chapterContentPage:
         final ChapterIdArgs chapterIdArgs = routeSettings.arguments as ChapterIdArgs;
         return MaterialPageRoute(
@@ -36,6 +29,18 @@ class AppRoutes {
       case NameRoutes.settingsContentPage:
         return MaterialPageRoute(
           builder: (_) => ContentSettingsPage(),
+        );
+      case NameRoutes.allSupplicationsPage:
+        return MaterialPageRoute(
+          builder: (_) => const MainSupplicationPage(),
+        );
+      case NameRoutes.favoriteSupplicationsPage:
+        return MaterialPageRoute(
+          builder: (_) => const FavoriteSupplicationPage(),
+        );
+      case NameRoutes.appCounterPage:
+        return MaterialPageRoute(
+          builder: (_) => const AppCounterPage(),
         );
       default:
         throw Exception('Invalid route');

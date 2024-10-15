@@ -29,7 +29,7 @@ class MainItemChapter extends StatelessWidget {
         onTap: () {
           HapticFeedback.lightImpact();
           if (chapterNumber == 1000) {
-            // Counter
+            Navigator.pushNamed(context, NameRoutes.appCounterPage);
           } else {
             Navigator.pushNamed(
               context,

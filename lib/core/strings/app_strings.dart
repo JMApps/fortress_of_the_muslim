@@ -33,6 +33,7 @@ class AppStrings {
   static const String share = 'Поделиться';
 
   static const String fontMontserrat = 'Montserrat';
+  static const String fontGilroy = 'Gilroy';
 
   static const String font = 'Шрифт';
   static const List<String> arabicFontNames = [
@@ -61,6 +62,12 @@ class AppStrings {
     'Средний',
     'Большой',
     'Очень большой',
+  ];
+
+  static const List counterValues = [
+    'Без ограничений',
+    'После молитвы',
+    '100',
   ];
 
   static const String textColor = 'Цвет текста';
