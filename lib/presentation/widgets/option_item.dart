@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/strings/app_strings.dart';
+import '../../core/styles/app_styles.dart';
 
 class OptionItem extends StatelessWidget {
   const OptionItem({
     super.key,
     required this.itemIcon,
     required this.itemTitle,
-    required this.itemBorder,
     required this.itemColor,
     required this.routeName,
   });
 
   final IconData itemIcon;
   final String itemTitle;
-  final BorderRadius itemBorder;
   final Color itemColor;
   final String routeName;
 
@@ -23,7 +22,7 @@ class OptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
     return ClipRRect(
-      borderRadius: itemBorder,
+      borderRadius: AppStyles.borderMini,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
@@ -34,7 +33,7 @@ class OptionItem extends StatelessWidget {
             // Navigator
           }
         },
-        borderRadius: itemBorder,
+        borderRadius: AppStyles.borderMini,
         child: Opacity(
           opacity: themeIsDark ? 0.65 : 0.85,
           child: Container(

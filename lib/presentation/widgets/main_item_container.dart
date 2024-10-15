@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/styles/app_styles.dart';
+
 class MainItemContainer extends StatelessWidget {
   const MainItemContainer({
     super.key,
-    required this.itemBorder,
     required this.itemColor,
     required this.pictureName,
     required this.itemIcon,
@@ -12,7 +13,6 @@ class MainItemContainer extends StatelessWidget {
     required this.routeName,
   });
 
-  final BorderRadius itemBorder;
   final Color itemColor;
   final String pictureName;
   final IconData itemIcon;
@@ -28,10 +28,10 @@ class MainItemContainer extends StatelessWidget {
         Navigator.pushNamed(context, routeName);
       },
       splashColor: Colors.grey,
-      borderRadius: itemBorder,
+      borderRadius: AppStyles.borderMini,
       child: ClipRRect(
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        borderRadius: itemBorder,
+        borderRadius: AppStyles.borderMini,
         child: Opacity(
           opacity: themeIsDark ? 0.65 : 0.95,
           child: Container(

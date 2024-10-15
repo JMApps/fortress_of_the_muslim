@@ -38,14 +38,15 @@ class AppStyles {
   static const paddingWithoutBottomMini = EdgeInsets.only(left: 8, right: 8, top: 8);
 
   static const border = BorderRadius.all(Radius.circular(16));
+  static const borderBig = BorderRadius.all(Radius.circular(25));
   static const borderMini = BorderRadius.all(Radius.circular(8));
   static const borderWithBottom =  BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32));
   static const borderWithoutBottom =  BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16));
 
-  static const borderTopLeft = BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),);
-  static const borderTopRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(16), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),);
-  static const borderBottomLeft = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(8),);
-  static const borderBottomRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(16),);
+  static const borderTopLeft = BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),);
+  static const borderTopRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(25), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),);
+  static const borderBottomLeft = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(25), bottomRight: Radius.circular(8),);
+  static const borderBottomRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(25),);
 
   static const mainTextStyle18 = TextStyle(fontSize: 18.0, fontFamily: AppStrings.fontMontserrat);
   static const mainTextStyle18Bold = TextStyle(fontSize: 18.0, fontFamily: AppStrings.fontMontserrat, fontWeight: FontWeight.bold);
