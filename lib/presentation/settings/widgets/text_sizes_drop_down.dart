@@ -19,13 +19,14 @@ class TextSizesDropDown extends StatelessWidget {
     }) {
       return Row(
         children: [
-          Text(label, style: AppStyles.mainTextStyle20),
+          Text(label, style: AppStyles.mainTextStyle18),
           const Spacer(),
           DropdownButton<int>(
             iconEnabledColor: appColors.primary,
             padding: AppStyles.paddingHorizontal,
             borderRadius: AppStyles.border,
             elevation: 1,
+            alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
               AppStrings.fontSizeNames.length,
@@ -36,7 +37,7 @@ class TextSizesDropDown extends StatelessWidget {
                     padding: AppStyles.paddingRightMini,
                     child: Text(
                       AppStrings.fontSizeNames[index],
-                      style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle,
+                      style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle18,
                     ),
                   ),
                 ),
@@ -59,7 +60,7 @@ class TextSizesDropDown extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.textSize,
-                style: AppStyles.mainTextStyle20Bold,
+                style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
                 Icons.format_size,

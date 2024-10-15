@@ -22,7 +22,7 @@ class TextFontsDropDown extends StatelessWidget {
               visualDensity: VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.font,
-                style: AppStyles.mainTextStyle20Bold,
+                style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
                 Icons.font_download,
@@ -71,12 +71,13 @@ class TextFontsDropDown extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: AppStyles.mainTextStyle20),
+        Text(label, style: AppStyles.mainTextStyle18),
         DropdownButton<int>(
           iconEnabledColor: appColors.primary,
           padding: AppStyles.paddingHorizontal,
           borderRadius: AppStyles.border,
           elevation: 1,
+          alignment: Alignment.centerRight,
           value: selectedFontIndex,
           items: List.generate(
             fontNames.length,
@@ -88,7 +89,7 @@ class TextFontsDropDown extends StatelessWidget {
                     padding: AppStyles.paddingRightMini,
                     child: Text(
                       fontNames[index],
-                      style: selectedFontIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle,
+                      style: selectedFontIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle18,
                     ),
                   ),
                 ),

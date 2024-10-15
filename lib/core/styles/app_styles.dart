@@ -47,9 +47,8 @@ class AppStyles {
   static const borderBottomLeft = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(16), bottomRight: Radius.circular(8),);
   static const borderBottomRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(16),);
 
-  static const mainTextStyle = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontMontserrat);
-  static const mainTextStyle20 = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontMontserrat);
-  static const mainTextStyle20Bold = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontMontserrat, fontWeight: FontWeight.bold);
+  static const mainTextStyle18 = TextStyle(fontSize: 18.0, fontFamily: AppStrings.fontMontserrat);
+  static const mainTextStyle18Bold = TextStyle(fontSize: 18.0, fontFamily: AppStrings.fontMontserrat, fontWeight: FontWeight.bold);
   static const mainTextStyleBold = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontMontserrat, fontWeight: FontWeight.bold);
 
   static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));

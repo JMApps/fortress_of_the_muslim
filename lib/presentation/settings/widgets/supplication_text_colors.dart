@@ -22,7 +22,7 @@ class SupplicationTextColors extends StatelessWidget {
         actionsPadding: AppStyles.paddingMini,
         title: Text(
           title,
-          style: AppStyles.mainTextStyle20Bold,
+          style: AppStyles.mainTextStyle18Bold,
         ),
         content: Material(
           color: Colors.transparent,
@@ -41,7 +41,7 @@ class SupplicationTextColors extends StatelessWidget {
             },
             child: const Text(
               AppStrings.close,
-              style: AppStyles.mainTextStyle20,
+              style: AppStyles.mainTextStyle18,
             ),
           ),
         ],
@@ -60,7 +60,7 @@ class SupplicationTextColors extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity(vertical: -4),
-      title: Text(title, style: AppStyles.mainTextStyle20),
+      title: Text(title, style: AppStyles.mainTextStyle18),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -114,7 +114,7 @@ class SupplicationTextColors extends StatelessWidget {
               visualDensity: VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.textColor,
-                style: AppStyles.mainTextStyle20Bold,
+                style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
                 Icons.color_lens,

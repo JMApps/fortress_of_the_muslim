@@ -21,7 +21,7 @@ class CounterAlignDropDown extends StatelessWidget {
         children: [
           Text(
             label,
-            style: AppStyles.mainTextStyle20,
+            style: AppStyles.mainTextStyle18,
           ),
           const Spacer(),
           DropdownButton<int>(
@@ -29,6 +29,7 @@ class CounterAlignDropDown extends StatelessWidget {
             padding: AppStyles.paddingHorizontal,
             borderRadius: AppStyles.border,
             elevation: 1,
+            alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
               AppStyles.counterAligns.length,
@@ -38,7 +39,7 @@ class CounterAlignDropDown extends StatelessWidget {
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
                     child: Text(AppStyles.counterAligns[index],
-                      style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle,
+                      style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle18,
                     ),
                   ),
                 ),
@@ -61,7 +62,7 @@ class CounterAlignDropDown extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.counterAlign,
-                style: AppStyles.mainTextStyle20Bold,
+                style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
                 Icons.align_horizontal_left_rounded,

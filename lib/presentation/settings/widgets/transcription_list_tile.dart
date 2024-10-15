@@ -21,7 +21,7 @@ class TranscriptionListTile extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.transcription,
-                style: AppStyles.mainTextStyle20Bold,
+                style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
                 Icons.format_size,
@@ -33,7 +33,7 @@ class TranscriptionListTile extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.showTranscription,
-                style: AppStyles.mainTextStyle20,
+                style: AppStyles.mainTextStyle18,
               ),
               trailing: Switch.adaptive(
                 activeColor: appColors.primary,
