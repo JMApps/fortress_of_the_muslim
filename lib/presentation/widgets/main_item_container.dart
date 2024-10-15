@@ -22,45 +22,43 @@ class MainItemContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    return Expanded(
-      child: InkWell(
-        onTap: () {
-          HapticFeedback.lightImpact();
-          Navigator.pushNamed(context, routeName);
-        },
-        splashColor: Colors.grey,
+    return InkWell(
+      onTap: () {
+        HapticFeedback.lightImpact();
+        Navigator.pushNamed(context, routeName);
+      },
+      splashColor: Colors.grey,
+      borderRadius: itemBorder,
+      child: ClipRRect(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         borderRadius: itemBorder,
-        child: ClipRRect(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          borderRadius: itemBorder,
-          child: Opacity(
-            opacity: themeIsDark ? 0.65 : 0.95,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/pictures/$pictureName.jpg'),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                  colorFilter: ColorFilter.mode(
-                    itemColor,
-                    BlendMode.multiply,
-                  ),
+        child: Opacity(
+          opacity: themeIsDark ? 0.65 : 0.95,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/pictures/$pictureName.jpg'),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+                colorFilter: ColorFilter.mode(
+                  itemColor,
+                  BlendMode.multiply,
                 ),
               ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(itemIcon),
-                  Text(
-                    itemTitle,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
+            ),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(itemIcon),
+                Text(
+                  itemTitle,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -23,6 +23,8 @@ class LastChapterCard extends StatelessWidget {
       ),
       elevation: 0,
       child: ListTile(
+        dense: true,
+        shape: AppStyles.shapeMini,
         onTap: () {
           Navigator.pushNamed(
             context,
@@ -30,7 +32,6 @@ class LastChapterCard extends StatelessWidget {
             arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),
           );
         },
-        shape: AppStyles.shapeMini,
         title: Text(
           AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
           style: TextStyle(

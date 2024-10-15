@@ -22,49 +22,47 @@ class MainItemChapter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    return Expanded(
-      child: ClipRRect(
+    return ClipRRect(
+      borderRadius: AppStyles.borderMini,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          if (chapterNumber == 1000) {
+            // Counter
+          } else {
+            Navigator.pushNamed(
+              context,
+              NameRoutes.chapterContentPage,
+              arguments: ChapterIdArgs(chapterId: chapterNumber),
+            );
+          }
+        },
         borderRadius: AppStyles.borderMini,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: InkWell(
-          onTap: () {
-            HapticFeedback.lightImpact();
-            if (chapterNumber == 1000) {
-              // Counter
-            } else {
-              Navigator.pushNamed(
-                context,
-                NameRoutes.chapterContentPage,
-                arguments: ChapterIdArgs(chapterId: chapterNumber),
-              );
-            }
-          },
-          borderRadius: AppStyles.borderMini,
-          child: Container(
-            padding: AppStyles.padding,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/pictures/$iconName.jpg'),
-                fit: BoxFit.cover,
-                opacity: themeIsDark ? 0.35 : 0.65,
-              ),
+        child: Container(
+          padding: AppStyles.padding,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/pictures/$iconName.jpg'),
+              fit: BoxFit.cover,
+              opacity: themeIsDark ? 0.35 : 0.65,
             ),
-            child: Opacity(
-              opacity: themeIsDark ? 0.65 : 0.95,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(itemIcon),
-                  Text(
-                    itemTitle,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+          ),
+          child: Opacity(
+            opacity: themeIsDark ? 0.65 : 0.95,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(itemIcon),
+                Text(
+                  itemTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
           ),
         ),

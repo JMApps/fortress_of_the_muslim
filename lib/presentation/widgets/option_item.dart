@@ -22,49 +22,46 @@ class OptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    return Expanded(
-      child: ClipRRect(
+    return ClipRRect(
+      borderRadius: itemBorder,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          if (routeName.contains(AppStrings.aboutUs)) {
+            // Bottom sheet
+          } else {
+            // Navigator
+          }
+        },
         borderRadius: itemBorder,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: InkWell(
-          onTap: () {
-            HapticFeedback.lightImpact();
-            if (routeName.contains(AppStrings.aboutUs)) {
-              // Bottom sheet
-            } else {
-              // Navigator
-            }
-          },
-          borderRadius: itemBorder,
-          child: Opacity(
-            opacity: themeIsDark ? 0.65 : 0.85,
-            child: Container(
-              height: 75,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/pictures/texture_bottom_left.jpg'),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                  colorFilter: ColorFilter.mode(
-                    itemColor,
-                    BlendMode.multiply,
-                  ),
+        child: Opacity(
+          opacity: themeIsDark ? 0.65 : 0.85,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('assets/pictures/texture_bottom_left.jpg'),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+                colorFilter: ColorFilter.mode(
+                  itemColor,
+                  BlendMode.multiply,
                 ),
               ),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(itemIcon),
-                  Text(
-                    itemTitle,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
+            ),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(itemIcon),
+                Text(
+                  itemTitle,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

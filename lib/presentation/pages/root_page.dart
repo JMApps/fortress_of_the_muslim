@@ -9,7 +9,7 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appThemes = AppThemes(Colors.blue);
+    final appThemes = AppThemes(Colors.teal);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRoutes.onRouteGenerator,

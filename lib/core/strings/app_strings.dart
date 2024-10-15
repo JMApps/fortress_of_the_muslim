@@ -2,6 +2,7 @@ class AppStrings {
   static const String appName = 'Крепость мусульманина';
 
   static const String chapters = 'Главы';
+  static const String chapter = 'Глава';
   static const String favoriteChapters = 'Избранное';
   static const String favoriteChaptersIsEmpty = 'Избранных глав нет';
   static const String allSupplications = 'Все дуа';
