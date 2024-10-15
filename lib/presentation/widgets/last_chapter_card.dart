@@ -37,6 +37,8 @@ class LastChapterCard extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         leading: Icon(Icons.save),
         trailing: const Icon(Icons.arrow_forward_ios_rounded),

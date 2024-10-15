@@ -33,6 +33,7 @@ class MainPage extends StatelessWidget {
         padding: AppStyles.padding,
         child: OrientationLayoutBuilder(
           portrait: (context) => ClipRRect(
+            clipBehavior: Clip.hardEdge,
             borderRadius: AppStyles.borderBig,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -78,25 +79,25 @@ class MainPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Flexible(
-                        flex: 2,
+                        flex: 3,
                         child: FirstMainTwo(),
-                      ),
-                      const SizedBox(height: 8),
-                      Flexible(
-                        flex: 2,
-                        child: SecondMainTwo(),
                       ),
                       const SizedBox(height: 8),
                       Flexible(
                         flex: 1,
                         child: LastChapterCard(),
                       ),
+                      const SizedBox(height: 8),
+                      Flexible(
+                        flex: 3,
+                        child: SecondMainTwo(),
+                      ),
                     ],
                   ),
                 ),
                 const SizedBox(width: 8),
                 Flexible(
-                  flex: 3,
+                  flex: 2,
                   child: Column(
                     children: [
                       Flexible(
