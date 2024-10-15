@@ -15,6 +15,7 @@ class ShareSupplicationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () {
         showModalBottomSheet(
@@ -35,7 +36,28 @@ class ShareSupplicationButton extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () async {
                     Navigator.pop(context);
-                    await Clipboard.getData(dataSupplication);
+                    await Clipboard.setData(ClipboardData(text: dataSupplication)).then(
+                      (_) {
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: appColors.secondaryContainer,
+                            duration: const Duration(milliseconds: 750),
+                            behavior: SnackBarBehavior.floating,
+                            margin: AppStyles.paddingMini,
+                            shape: AppStyles.shape,
+                            elevation: 0,
+                            content: Text(
+                              AppStrings.copied,
+                              style: TextStyle(
+                                fontSize: 17.0,
+                                color: appColors.onSurface,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: Text(AppStrings.copy),
                 ),

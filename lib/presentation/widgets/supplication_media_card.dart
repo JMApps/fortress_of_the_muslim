@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as html_parser;
 
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
@@ -49,7 +50,7 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
             icon: const Icon(Icons.speed_rounded),
           ),
           FavoriteSupplicationButton(supplicationId: widget.supplicationModel.supplicationId),
-          ShareSupplicationButton(dataSupplication: 'Test supplication text'),
+          ShareSupplicationButton(dataSupplication: _supplicationText(arabic: widget.supplicationModel.arabicText, transcription: widget.supplicationModel.transcriptionText, translation: widget.supplicationModel.translationText)),
           Container(
             padding: AppStyles.paddingHorVerMicro,
             decoration: BoxDecoration(
@@ -68,5 +69,17 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
         ],
       ),
     );
+  }
+  String _supplicationText({required String? arabic, required String? transcription, required String translation}) {
+    String parseHtmlString(String htmlString) {
+      final document = html_parser.parse(htmlString);
+      return document.body!.text;
+    }
+    String translationText = parseHtmlString(translation);
+      return [
+      if (arabic != null && arabic.isNotEmpty) arabic,
+      if (transcription != null && transcription.isNotEmpty) transcription,
+      if (translationText.isNotEmpty) translationText,
+    ].join('\n\n');
   }
 }

@@ -28,6 +28,7 @@ class AppStrings {
   static const String bookContent = 'Содержимое';
   static const String aboutUs = 'О нас';
   static const String copy = 'Скопировать';
+  static const String copied = 'Скопировано';
   static const String share = 'Поделиться';
 
   static const String fontMontserrat = 'Montserrat';
