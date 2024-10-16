@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/main_supplications_state.dart';
+import '../../states/scroll_page_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/main_supplication_item.dart';
 
@@ -39,6 +40,7 @@ class _MainSupplicationsListState extends State<MainSupplicationsList> {
         if (snapshot.hasData) {
           return Scrollbar(
             child: ListView.builder(
+              controller: Provider.of<ScrollPageState>(context).getScrollController,
               padding: AppStyles.paddingMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {

@@ -1,6 +1,7 @@
 class AppStrings {
   static const String appName = 'Крепость мусульманина';
 
+  static const String toStart = 'В начало';
   static const String chapters = 'Главы';
   static const String chapter = 'Глава';
   static const String favoriteChapters = 'Избранное';

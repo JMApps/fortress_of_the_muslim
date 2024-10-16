@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/presentation/states/scroll_page_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
@@ -39,6 +40,7 @@ class _MainChaptersListState extends State<MainChaptersList> {
         if (snapshot.hasData) {
           return Scrollbar(
             child: ListView.builder(
+              controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
               padding: AppStyles.paddingMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {

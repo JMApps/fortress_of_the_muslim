@@ -22,8 +22,6 @@ PODS:
     - Flutter
   - vibration (1.7.5):
     - Flutter
-  - volume_watcher (0.0.1):
-    - Flutter
   - wakelock_plus (0.0.1):
     - Flutter
 
@@ -39,7 +37,6 @@ DEPENDENCIES:
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - vibration (from `.symlinks/plugins/vibration/ios`)
-  - volume_watcher (from `.symlinks/plugins/volume_watcher/ios`)
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
 
 EXTERNAL SOURCES:
@@ -65,8 +62,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   vibration:
     :path: ".symlinks/plugins/vibration/ios"
-  volume_watcher:
-    :path: ".symlinks/plugins/volume_watcher/ios"
   wakelock_plus:
     :path: ".symlinks/plugins/wakelock_plus/ios"
 
@@ -82,7 +77,6 @@ SPEC CHECKSUMS:
   sqflite_darwin: a553b1fd6fe66f53bbb0fe5b4f5bab93f08d7a13
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   vibration: 7d883d141656a1c1a6d8d238616b2042a51a1241
-  volume_watcher: 6271ae8f78dfafa401c8dac4d117c35576568693
   wakelock_plus: 78ec7c5b202cab7761af8e2b2b3d0671be6c4ae1
 
 PODFILE CHECKSUM: 7be2f5f74864d463a8ad433546ed1de7e0f29aef

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/presentation/states/scroll_page_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
@@ -34,6 +35,7 @@ class FavoriteSupplicationsList extends StatelessWidget {
         if (snapshot.hasData) {
           return Scrollbar(
             child: ListView.builder(
+              controller: Provider.of<ScrollPageState>(context).getScrollController,
               padding: AppStyles.paddingMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
