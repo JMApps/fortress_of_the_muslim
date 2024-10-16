@@ -30,7 +30,7 @@ class MainPage extends StatelessWidget {
       ),
       body: Container(
         height: screenHeight,
-        padding: AppStyles.padding,
+        padding: AppStyles.paddingMini,
         child: ClipRRect(
           borderRadius: AppStyles.borderBig,
           clipBehavior: Clip.hardEdge,
@@ -71,30 +71,23 @@ class MainPage extends StatelessWidget {
             ),
             landscape: (context) => Row(
               children: [
-                Flexible(
-                  flex: 2,
+                Expanded(
                   child: Column(
                     children: [
-                      Flexible(
-                        flex: 3,
+                      Expanded(
                         child: FirstMainTwo(),
                       ),
                       const SizedBox(height: 8),
-                      Flexible(
-                        flex: 1,
-                        child: LastChapterCard(),
-                      ),
+                      LastChapterCard(),
                       const SizedBox(height: 8),
-                      Flexible(
-                        flex: 3,
+                      Expanded(
                         child: SecondMainTwo(),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(width: 8),
-                Flexible(
-                  flex: 2,
+                Expanded(
                   child: Column(
                     children: [
                       Flexible(

@@ -12,13 +12,29 @@ import '../../widgets/main_error_text_data.dart';
 import '../../widgets/main_html_data.dart';
 import '../items/content_supplication_item.dart';
 
-class ChapterContentPage extends StatelessWidget {
+class ChapterContentPage extends StatefulWidget {
   const ChapterContentPage({
     super.key,
     required this.chapterId,
   });
 
   final int chapterId;
+
+  @override
+  State<ChapterContentPage> createState() => _ChapterContentPageState();
+}
+
+class _ChapterContentPageState extends State<ChapterContentPage> {
+
+  late Future<ChapterEntity> _futureChapters;
+  late Future<List<SupplicationEntity>> _futureChapterContent;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).getChapterById(chapterId: widget.chapterId);
+    _futureChapterContent = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(chapterId: widget.chapterId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +44,7 @@ class ChapterContentPage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             centerTitle: true,
-            title: Text('${AppStrings.chapter} $chapterId'),
+            title: Text('${AppStrings.chapter} ${widget.chapterId}'),
             floating: true,
             actions: [
               IconButton(
@@ -51,7 +67,7 @@ class ChapterContentPage extends StatelessWidget {
                 borderRadius: AppStyles.border,
               ),
               child: FutureBuilder<ChapterEntity>(
-                future: Provider.of<MainChaptersState>(context).getChapterById(chapterId: chapterId),
+                future: _futureChapters,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return MainErrorTextData(errorText: snapshot.error.toString());
@@ -83,7 +99,7 @@ class ChapterContentPage extends StatelessWidget {
             ),
           ),
           FutureBuilder<List<SupplicationEntity>>(
-            future: Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(chapterId: chapterId),
+            future: _futureChapterContent,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return SliverFillRemaining(

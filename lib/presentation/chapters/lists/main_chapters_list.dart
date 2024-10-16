@@ -19,8 +19,7 @@ class _MainChaptersListState extends State<MainChaptersList> {
 
   @override
   void initState() {
-    _futureChapters =
-        Provider.of<MainChaptersState>(context, listen: false).getAllChapters();
+    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).getAllChapters();
     super.initState();
   }
 

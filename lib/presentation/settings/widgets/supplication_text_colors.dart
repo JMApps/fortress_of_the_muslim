@@ -22,7 +22,7 @@ class SupplicationTextColors extends StatelessWidget {
         actionsPadding: AppStyles.paddingMini,
         title: Text(
           title,
-          style: AppStyles.mainTextStyle18Bold,
+          style: AppStyles.mainTextStyle17Bold,
         ),
         content: Material(
           color: Colors.transparent,
@@ -41,7 +41,7 @@ class SupplicationTextColors extends StatelessWidget {
             },
             child: const Text(
               AppStrings.close,
-              style: AppStyles.mainTextStyle18,
+              style: AppStyles.mainTextStyle17,
             ),
           ),
         ],
@@ -60,11 +60,11 @@ class SupplicationTextColors extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity(vertical: -4),
-      title: Text(title, style: AppStyles.mainTextStyle18),
+      title: Text(title, style: AppStyles.mainTextStyle17),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(
+          FilledButton.tonal(
             onPressed: () {
               _showColorPickerDialog(
                 context: context,
@@ -73,14 +73,14 @@ class SupplicationTextColors extends StatelessWidget {
                 onColorSelected: onLightColorChanged,
               );
             },
-            padding: EdgeInsets.zero,
-            icon: Icon(
-              Icons.circle,
+            child: Icon(
+              Icons.color_lens,
               color: Color(lightColor),
               size: 35,
             ),
           ),
-          IconButton(
+          const SizedBox(width: 8),
+          FilledButton.tonal(
             onPressed: () {
               _showColorPickerDialog(
                 context: context,
@@ -89,9 +89,8 @@ class SupplicationTextColors extends StatelessWidget {
                 onColorSelected: onDarkColorChanged,
               );
             },
-            padding: EdgeInsets.zero,
-            icon: Icon(
-              Icons.circle,
+            child: Icon(
+              Icons.color_lens,
               color: Color(darkColor),
               size: 35,
             ),
@@ -114,7 +113,7 @@ class SupplicationTextColors extends StatelessWidget {
               visualDensity: VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.textColor,
-                style: AppStyles.mainTextStyle18Bold,
+                style: AppStyles.mainTextStyle17Bold,
               ),
               leading: Icon(
                 Icons.color_lens,
@@ -129,6 +128,7 @@ class SupplicationTextColors extends StatelessWidget {
               onLightColorChanged: (color) => contentSettings.setArabicLightTextColor = color,
               onDarkColorChanged: (color) => contentSettings.setArabicDarkTextColor = color,
             ),
+            const SizedBox(height: 4),
             _buildColorPickerTile(
               context: context,
               title: AppStrings.transcription,
@@ -137,6 +137,7 @@ class SupplicationTextColors extends StatelessWidget {
               onLightColorChanged: (color) => contentSettings.setTranscriptionLightTextColor = color,
               onDarkColorChanged: (color) => contentSettings.setTranscriptionDarkTextColor = color,
             ),
+            const SizedBox(height: 4),
             _buildColorPickerTile(
               context: context,
               title: AppStrings.translation,

@@ -26,14 +26,21 @@ class ShareSupplicationButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                OutlinedButton(
+                FilledButton.tonalIcon(
                   onPressed: () async {
                     Navigator.pop(context);
                     await Share.share(dataSupplication);
                   },
-                  child: Text(AppStrings.share),
+                  icon: Icon(
+                    Icons.ios_share_rounded,
+                    color: appColors.primary,
+                  ),
+                  label: Text(
+                    AppStrings.share,
+                    style: AppStyles.mainTextStyle17,
+                  ),
                 ),
-                OutlinedButton(
+                FilledButton.tonalIcon(
                   onPressed: () async {
                     Navigator.pop(context);
                     await Clipboard.setData(ClipboardData(text: dataSupplication)).then(
@@ -49,17 +56,21 @@ class ShareSupplicationButton extends StatelessWidget {
                             elevation: 0,
                             content: Text(
                               AppStrings.copied,
-                              style: TextStyle(
-                                fontSize: 17.0,
-                                color: appColors.onSurface,
-                              ),
+                              style: AppStyles.mainTextStyle17,
                             ),
                           ),
                         );
                       },
                     );
                   },
-                  child: Text(AppStrings.copy),
+                  icon: Icon(
+                    Icons.copy_rounded,
+                    color: appColors.primary,
+                  ),
+                  label: Text(
+                    AppStrings.copy,
+                    style: AppStyles.mainTextStyle17,
+                  ),
                 ),
               ],
             ),

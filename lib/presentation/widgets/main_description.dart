@@ -17,7 +17,7 @@ class MainDescriptionText extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         descriptionText,
-        style: AppStyles.mainTextStyle18,
+        style: AppStyles.mainTextStyle17,
         textAlign: TextAlign.center,
       ),
     );

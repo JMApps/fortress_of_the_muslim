@@ -42,7 +42,7 @@ class CounterOptionsContainer extends StatelessWidget {
                       ),
                       child: Text(
                         AppStrings.counterValues[index],
-                        style: AppStyles.mainTextStyle18Bold,
+                        style: AppStyles.mainTextStyle17Bold,
                       ),
                     ),
                   ),

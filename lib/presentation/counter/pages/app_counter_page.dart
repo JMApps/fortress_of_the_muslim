@@ -46,8 +46,10 @@ class AppCounterPage extends StatelessWidget {
               Flexible(
                 child: Column(
                   children: [
-                    TextValueContainer(
-                      textColor: appColors.primary,
+                    Flexible(
+                      child: TextValueContainer(
+                        textColor: appColors.primary,
+                      ),
                     ),
                     CounterOptionsContainer(),
                   ],

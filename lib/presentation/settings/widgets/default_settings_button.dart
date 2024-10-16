@@ -16,7 +16,7 @@ class DefaultSettingsButton extends StatelessWidget {
       },
       child: Text(
         AppStrings.defaultSettings,
-        style: AppStyles.mainTextStyle18,
+        style: AppStyles.mainTextStyle17,
       ),
     );
   }

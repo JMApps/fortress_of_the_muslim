@@ -20,7 +20,7 @@ class TextAlignsDropDown extends StatelessWidget {
     }) {
       return Row(
         children: [
-          Text(label, style: AppStyles.mainTextStyle18),
+          Text(label, style: AppStyles.mainTextStyle17),
           const Spacer(),
           DropdownButton<int>(
             iconEnabledColor: appColors.primary,
@@ -59,7 +59,7 @@ class TextAlignsDropDown extends StatelessWidget {
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 AppStrings.textsAlign,
-                style: AppStyles.mainTextStyle18Bold,
+                style: AppStyles.mainTextStyle17Bold,
               ),
               leading: Icon(
                 Icons.align_horizontal_left_rounded,

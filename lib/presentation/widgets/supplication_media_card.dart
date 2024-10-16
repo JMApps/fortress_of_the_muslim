@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/supplication_entity.dart';
 import '../supplications/widgets/favorite_supplication_button.dart';
@@ -59,11 +58,7 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
             ),
             child: Text(
               widget.supplicationModel.supplicationId.toString(),
-              style: const TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: AppStrings.fontGilroy,
-              ),
+              style: AppStyles.mainTextStyle17,
             ),
           ),
         ],

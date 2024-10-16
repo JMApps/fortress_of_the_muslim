@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
-import 'package:fortress_of_the_muslim/presentation/states/main_chapters_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/routes/name_routes.dart';
+import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../data/models/arguments/chapter_id_args.dart';
+import '../states/main_chapters_state.dart';
 
 class LastChapterCard extends StatelessWidget {
   const LastChapterCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     return Card(
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: AppStyles.borderMini,
         side: BorderSide(
-          color: Theme.of(context).colorScheme.inversePrimary,
+          color: appColors.inversePrimary,
           width: 2.5,
         ),
       ),
       elevation: 0,
-      child: ListTile(
-        dense: true,
-        shape: AppStyles.shapeMini,
+      child: InkWell(
         onTap: () {
           Navigator.pushNamed(
             context,
@@ -32,16 +31,29 @@ class LastChapterCard extends StatelessWidget {
             arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),
           );
         },
-        title: Text(
-          AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
-          style: TextStyle(
-            fontSize: 16,
+        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        borderRadius: AppStyles.borderMini,
+        child: Padding(
+          padding: AppStyles.paddingMini,
+          child: Row(
+            children: [
+              const SizedBox(width: 8),
+              Icon(Icons.save),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
+                  style: AppStyles.mainTextStyle17,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Icon(Icons.arrow_forward_ios_rounded),
+              const SizedBox(width: 8),
+            ],
           ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
         ),
-        leading: Icon(Icons.save),
-        trailing: const Icon(Icons.arrow_forward_ios_rounded),
       ),
     );
   }
