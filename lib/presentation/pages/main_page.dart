@@ -57,12 +57,12 @@ class MainPage extends StatelessWidget {
                   flex: 2,
                   child: SecondMainThree(),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
                 Flexible(
                   flex: 1,
                   child: LastChapterCard(),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
                 Flexible(
                   flex: 2,
                   child: LastMainThree(),
@@ -73,13 +73,14 @@ class MainPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
                         child: FirstMainTwo(),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
                       LastChapterCard(),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
                       Expanded(
                         child: SecondMainTwo(),
                       ),

@@ -13,47 +13,23 @@ class LastChapterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    return Card(
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: AppStyles.borderMini,
-        side: BorderSide(
-          color: appColors.inversePrimary,
-          width: 2.5,
-        ),
+    return FilledButton.tonalIcon(
+      onPressed: () {
+        Navigator.pushNamed(
+          context,
+          NameRoutes.chapterContentPage,
+          arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),
+        );
+      },
+      icon: Icon(
+        Icons.save,
+        color: appColors.primary,
       ),
-      elevation: 0,
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            NameRoutes.chapterContentPage,
-            arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),
-          );
-        },
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
-        borderRadius: AppStyles.borderMini,
-        child: Padding(
-          padding: AppStyles.paddingMini,
-          child: Row(
-            children: [
-              const SizedBox(width: 8),
-              Icon(Icons.save),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
-                  style: AppStyles.mainTextStyle17,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(Icons.arrow_forward_ios_rounded),
-              const SizedBox(width: 8),
-            ],
-          ),
-        ),
+      label: Text(
+        AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
+        style: AppStyles.mainTextStyle17,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
