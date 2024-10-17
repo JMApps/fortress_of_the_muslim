@@ -11,7 +11,7 @@ class ChapterModel {
     required this.chapterTitle,
   });
 
-  factory ChapterModel.fromMap(Map<dynamic, Object?> map) {
+  factory ChapterModel.fromMap(Map<String, Object?> map) {
     return ChapterModel(
       chapterId: map[DBValues.dbChapterId] as int,
       chapterNumber: map[DBValues.dbChapterNumber] as String,

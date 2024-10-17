@@ -1,5 +1,9 @@
+import 'package:sqflite/sqflite.dart';
+
+import '../../core/strings/db_values.dart';
 import '../../domain/entities/book_content_entity.dart';
 import '../../domain/repositories/book_content_repository.dart';
+import '../models/book_content_model.dart';
 import '../services/database_service.dart';
 
 class BookContentDataRepository implements BookContentRepository {
@@ -8,14 +12,18 @@ class BookContentDataRepository implements BookContentRepository {
   BookContentDataRepository(this._databaseService);
 
   @override
-  Future<List<BookContentEntity>> getAllContentBook() {
-    // TODO: implement getAllContentBook
-    throw UnimplementedError();
+  Future<List<BookContentEntity>> getAllContentBook() async {
+    final Database database = await _databaseService.db;
+    final List<Map<String, Object?>> resources = await database.query(DBValues.dbBookContentTableName);
+    final List<BookContentEntity> allBookContents = resources.isNotEmpty ? resources.map((e) => BookContentEntity.fromModel(BookContentModel.fromMap(e))).toList() : [];
+    return allBookContents;
   }
 
   @override
-  Future<BookContentEntity> getContentBookById({required int bookContentId}) {
-    // TODO: implement getContentBookById
-    throw UnimplementedError();
+  Future<BookContentEntity> getContentBookById({required int bookContentId}) async {
+    final Database database = await _databaseService.db;
+    final List<Map<String, Object?>> resources = await database.query(DBValues.dbBookContentTableName, where: '${DBValues.dbBookContentId} = ?', whereArgs: [bookContentId]);
+    final BookContentEntity? chapterById = resources.isNotEmpty ? BookContentEntity.fromModel(BookContentModel.fromMap(resources.first)) : null;
+    return chapterById!;
   }
 }

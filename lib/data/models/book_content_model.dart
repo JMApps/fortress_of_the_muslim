@@ -11,7 +11,7 @@ class BookContentModel {
     required this.bookContent,
   });
 
-  factory BookContentModel.fromMap(Map<dynamic, String> map) {
+  factory BookContentModel.fromMap(Map<String, Object?> map) {
     return BookContentModel(
       bookContentId: map[DBValues.dbBookContentId] as int,
       bookContentTitle: map[DBValues.dbBookContentTitle] as String,

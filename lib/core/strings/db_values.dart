@@ -22,6 +22,8 @@ class DBValues {
   static const String dbNameAudio = 'name_audio';
   static const String dbCounterNumber = 'count_number';
 
+  static const String dbBookContentTableName = 'Table_of_book_content';
+
   static const String dbBookContentId = 'book_content_id';
   static const String dbBookContentTitle = 'book_content_title';
   static const String dbBookContent = 'book_content';
