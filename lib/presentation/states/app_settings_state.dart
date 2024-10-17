@@ -16,15 +16,15 @@ class AppSettingsState extends ChangeNotifier {
     _eveningNotificationTime = _mainSettingsBox.get(AppConstraints.keyEveningNotificationTime, defaultValue: DateTime(2024, 12, 31, 16, 0).toIso8601String());
 
     if (_morningNotification) {
-      _notificationService.timeNotifications(id: AppConstraints.morningNotificationID, body: AppStrings.morningPrayers, dateTime: getMorningNotificationTime);
+      _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: getMorningNotificationTime);
     } else {
-      _notificationService.cancelNotificationWithId(AppConstraints.morningNotificationID);
+      _notificationService.cancelNotificationWithId(NotificationService.morningNotificationID);
     }
 
     if (_eveningNotification) {
-      _notificationService.timeNotifications(id: AppConstraints.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: getEveningNotificationTime);
+      _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: getEveningNotificationTime);
     } else {
-      _notificationService.cancelNotificationWithId(AppConstraints.eveningNotificationID);
+      _notificationService.cancelNotificationWithId(NotificationService.eveningNotificationID);
     }
 
     _openWithChapters = _mainSettingsBox.get(AppConstraints.keyOpenWithChapters, defaultValue: false);
@@ -80,9 +80,9 @@ class AppSettingsState extends ChangeNotifier {
   set setMorningNotification(bool value) {
     _morningNotification = value;
     if (value) {
-      _notificationService.timeNotifications(id: AppConstraints.morningNotificationID, body: AppStrings.morningPrayers, dateTime: getMorningNotificationTime);
+      _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: getMorningNotificationTime);
     } else {
-      _notificationService.cancelNotificationWithId(AppConstraints.morningNotificationID);
+      _notificationService.cancelNotificationWithId(NotificationService.morningNotificationID);
     }
     _saveSetting(AppConstraints.keyMorningNotificationState, value);
     notifyListeners();
@@ -91,9 +91,9 @@ class AppSettingsState extends ChangeNotifier {
   set setEveningNotification(bool value) {
     _eveningNotification = value;
     if (value) {
-      _notificationService.timeNotifications(id: AppConstraints.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: getEveningNotificationTime);
+      _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: getEveningNotificationTime);
     } else {
-      _notificationService.cancelNotificationWithId(AppConstraints.eveningNotificationID);
+      _notificationService.cancelNotificationWithId(NotificationService.eveningNotificationID);
     }
     _saveSetting(AppConstraints.keyEveningNotificationState, value);
     notifyListeners();
@@ -101,14 +101,14 @@ class AppSettingsState extends ChangeNotifier {
 
   set setMorningNotificationTime(DateTime time) {
     _morningNotificationTime = time.toIso8601String();
-    _notificationService.timeNotifications(id: AppConstraints.morningNotificationID, body: AppStrings.morningPrayers, dateTime: time);
+    _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: time);
     _saveSetting(AppConstraints.keyMorningNotificationTime, time.toIso8601String());
     notifyListeners();
   }
 
   set setEveningNotificationTime(DateTime time) {
     _eveningNotificationTime = time.toIso8601String();
-    _notificationService.timeNotifications(id: AppConstraints.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: time);
+    _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: time);
     _saveSetting(AppConstraints.keyEveningNotificationTime, time.toIso8601String());
     notifyListeners();
   }

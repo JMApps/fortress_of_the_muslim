@@ -12,43 +12,31 @@ import '../../presentation/supplications/pages/main_supplication_page.dart';
 import 'name_routes.dart';
 
 class AppRoutes {
-  static Route onRouteGenerator(RouteSettings routeSettings) {
-    switch (routeSettings.name) {
-      case NameRoutes.allChaptersPage:
-        return MaterialPageRoute(
-          builder: (_) => const MainChapterPage(),
-        );
-      case NameRoutes.favoriteChaptersPage:
-        return MaterialPageRoute(
-          builder: (_) => const FavoriteChapterPage(),
-        );
-      case NameRoutes.chapterContentPage:
-        final ChapterIdArgs chapterIdArgs = routeSettings.arguments as ChapterIdArgs;
-        return MaterialPageRoute(
-          builder: (_) => ChapterContentPage(chapterId: chapterIdArgs.chapterId),
-        );
-      case NameRoutes.settingsContentPage:
-        return MaterialPageRoute(
-          builder: (_) => ContentSettingsPage(),
-        );
-      case NameRoutes.allSupplicationsPage:
-        return MaterialPageRoute(
-          builder: (_) => const MainSupplicationPage(),
-        );
-      case NameRoutes.favoriteSupplicationsPage:
-        return MaterialPageRoute(
-          builder: (_) => const FavoriteSupplicationPage(),
-        );
-      case NameRoutes.appCounterPage:
-        return MaterialPageRoute(
-          builder: (_) => const AppCounterPage(),
-        );
-      case NameRoutes.appSettingsPage:
-        return MaterialPageRoute(
-          builder: (_) => const AppSettingsPage(),
-        );
-      default:
-        throw Exception('Invalid route');
+  static Route<dynamic> onRouteGenerator(RouteSettings routeSettings) {
+    final builder = routes[routeSettings.name];
+
+    if (builder != null) {
+      return MaterialPageRoute(
+        builder: (context) {
+          return builder(context, routeSettings.arguments);
+        },
+      );
     }
+
+    throw Exception('Invalid route');
   }
+
+  static Map<String, Widget Function(BuildContext, dynamic)> routes = {
+    NameRoutes.allChaptersPage: (context, args) => const MainChapterPage(),
+    NameRoutes.favoriteChaptersPage: (context, args) => const FavoriteChapterPage(),
+    NameRoutes.chapterContentPage: (context, args) {
+      final ChapterIdArgs chapterIdArgs = args as ChapterIdArgs;
+      return ChapterContentPage(chapterId: chapterIdArgs.chapterId);
+    },
+    NameRoutes.settingsContentPage: (context, args) => const ContentSettingsPage(),
+    NameRoutes.allSupplicationsPage: (context, args) => const MainSupplicationPage(),
+    NameRoutes.favoriteSupplicationsPage: (context, args) => const FavoriteSupplicationPage(),
+    NameRoutes.appCounterPage: (context, args) => const AppCounterPage(),
+    NameRoutes.appSettingsPage: (context, args) => const AppSettingsPage(),
+  };
 }

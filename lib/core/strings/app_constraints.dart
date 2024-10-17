@@ -1,7 +1,4 @@
 class AppConstraints {
-  static const String databaseName = 'fortress_of_the_muslim';
-  static const int databaseVersion = 1;
-
   static const String keyMainSettingsBox = 'key_main_settings';
   static const String keyCounterBox = 'key_counter';
   static const String keyContentSettingsBox = 'key_content_settings';
@@ -42,7 +39,4 @@ class AppConstraints {
   static const String keyDisplayAlwaysOn = 'key_display_on_off';
   static const String keyAppThemeColor = 'key_app_theme_color';
   static const String keyThemeModeIndex = 'key_theme_mode_index';
-
-  static const int morningNotificationID = 395;
-  static const int eveningNotificationID = 376;
 }
