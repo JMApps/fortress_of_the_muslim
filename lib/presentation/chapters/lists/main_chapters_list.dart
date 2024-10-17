@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/presentation/states/scroll_page_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
 import '../../states/main_chapters_state.dart';
+import '../../states/scroll_page_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/main_chapter_item.dart';
 
@@ -20,8 +20,8 @@ class _MainChaptersListState extends State<MainChaptersList> {
 
   @override
   void initState() {
-    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).getAllChapters();
     super.initState();
+    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).fetchChapters();
   }
 
   @override
@@ -29,13 +29,13 @@ class _MainChaptersListState extends State<MainChaptersList> {
     return FutureBuilder<List<ChapterEntity>>(
       future: _futureChapters,
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
-        }
-        if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
           );
+        }
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
         }
         if (snapshot.hasData) {
           return Scrollbar(

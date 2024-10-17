@@ -11,15 +11,18 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appSettings = Provider.of<AppSettingsState>(context);
-    final appThemes = AppThemes(Color(appSettings.getAppThemeColor));
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRoutes.onRouteGenerator,
-      theme: appThemes.lightTheme,
-      darkTheme: appThemes.darkTheme,
-      themeMode: appSettings.getThemeMode,
-      home: const MainPage(),
+    return Consumer<AppSettingsState>(
+      builder: (context, appSettings, _) {
+        final appThemes = AppThemes(Color(appSettings.getAppThemeColor));
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: AppRoutes.onRouteGenerator,
+          theme: appThemes.lightTheme,
+          darkTheme: appThemes.darkTheme,
+          themeMode: appSettings.getThemeMode,
+          home: const MainPage(),
+        );
+      },
     );
   }
 }

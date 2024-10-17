@@ -10,16 +10,19 @@ class MainChaptersState extends ChangeNotifier {
 
   final ChapterUseCase _chapterUseCase;
 
+  late Future<List<ChapterEntity>> _futureMainChapters;
+
   MainChaptersState(this._chapterUseCase) {
     _favoriteChapterIds = _mainAppSettingsBox.get(AppConstraints.keyChapterIds, defaultValue: <int>[]);
     _lastChapterId = _mainAppSettingsBox.get(AppConstraints.keyLastSavedChapter, defaultValue: 1);
+    _futureMainChapters = _getAllChapters();
   }
 
   late List<int> _favoriteChapterIds = [];
 
   List<int> get getFavoriteChapterIds => _favoriteChapterIds;
 
-  Future<List<ChapterEntity>> getAllChapters() async {
+  Future<List<ChapterEntity>> _getAllChapters() async {
     return await _chapterUseCase.fetchAllChapters();
   }
 
@@ -29,6 +32,10 @@ class MainChaptersState extends ChangeNotifier {
 
   Future<List<ChapterEntity>> getFavoriteChapters({required List<int> ids}) async {
     return await _chapterUseCase.fetchFavoriteChapters(ids: ids);
+  }
+
+  Future<List<ChapterEntity>> fetchChapters() {
+    return _futureMainChapters;
   }
 
   void toggleChapterFavorite({required int chapterId}) async {
