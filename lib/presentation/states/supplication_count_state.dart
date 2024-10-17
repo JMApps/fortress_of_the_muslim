@@ -15,19 +15,25 @@ class SupplicationCountState extends ChangeNotifier {
   int get getSupplicationCount => _supplicationCount;
 
 
-  void onCountClick() {
+  void onCountClick() async {
     if (_supplicationCount > 0) {
       _supplicationCount--;
       HapticFeedback.heavyImpact();
       notifyListeners();
     } else {
-      Vibration.vibrate();
+      bool canVibrate = await Vibration.hasVibrator() ?? false;
+      if (canVibrate) {
+        Vibration.vibrate();
+      }
     }
   }
 
-  void resetCount() {
+  void resetCount() async {
     _supplicationCount = _defCountValue;
+    bool canVibrate = await Vibration.hasVibrator() ?? false;
+    if (canVibrate) {
+      Vibration.vibrate();
+    }
     notifyListeners();
-    Vibration.vibrate();
   }
 }

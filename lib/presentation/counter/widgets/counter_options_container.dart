@@ -68,11 +68,11 @@ class CounterOptionsContainer extends StatelessWidget {
                   ),
                   FilledButton.tonal(
                     onPressed: () {
-                      appCounter.setVibrationState = !appCounter.getVibrationState;
+                      appCounter.setHapticState = !appCounter.getHapticState;
                     },
                     child: Icon(
                       Icons.vibration_rounded,
-                      color: appCounter.getVibrationState ? appColors.secondary : appColors.error,
+                      color: appCounter.getHapticState ? appColors.secondary : appColors.error,
                     ),
                   ),
                   FilledButton.tonal(

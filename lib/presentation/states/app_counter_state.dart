@@ -17,14 +17,14 @@ class AppCounterState extends ChangeNotifier {
   int _hundredCount = 100;
   int _valuesIndex = 0;
   bool _valueShowState = true;
-  bool _vibrationState = true;
+  bool _hapticState = true;
 
   int get getFreeCount => _freeCount;
   int get getPrayerCount => _prayerCount;
   int get getHundredCount => _hundredCount;
   int get getValuesIndex => _valuesIndex;
   bool get getValueShowState => _valueShowState;
-  bool get getVibrationState => _vibrationState;
+  bool get getHapticState => _hapticState;
 
   set setValuesIndex(int index) {
     _valuesIndex = index;
@@ -36,8 +36,8 @@ class AppCounterState extends ChangeNotifier {
     notifyListeners();
   }
 
-  set setVibrationState(bool state) {
-    _vibrationState = state;
+  set setHapticState(bool state) {
+    _hapticState = state;
     notifyListeners();
   }
 
@@ -94,8 +94,9 @@ class AppCounterState extends ChangeNotifier {
   void _updatePrayerCount() {
     if (_prayerCount > 0) {
       _prayerCount--;
+      _triggerHapticFeedback();
     } else {
-      _vibrateIfEnabled();
+      _vibrate();
     }
   }
 
@@ -103,18 +104,19 @@ class AppCounterState extends ChangeNotifier {
     if (_hundredCount > 0) {
       _hundredCount--;
     } else {
-      _vibrateIfEnabled();
+      _vibrate();
     }
   }
 
-  void _vibrateIfEnabled() {
-    if (_vibrationState) {
+  void _vibrate() async {
+    bool canVibrate = await Vibration.hasVibrator() ?? false;
+    if (canVibrate) {
       Vibration.vibrate();
     }
   }
 
   void _triggerHapticFeedback() {
-    if (_vibrationState) {
+    if (_hapticState) {
       HapticFeedback.heavyImpact();
     }
   }
