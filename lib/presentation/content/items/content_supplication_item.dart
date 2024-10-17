@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/supplication_counter_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
@@ -8,6 +7,7 @@ import '../../../domain/entities/supplication_entity.dart';
 import '../../states/content_settings_state.dart';
 import '../../states/supplication_count_state.dart';
 import '../../widgets/main_html_data.dart';
+import '../../widgets/supplication_counter_button.dart';
 import '../../widgets/supplication_media_card.dart';
 
 class ContentSupplicationItem extends StatelessWidget {

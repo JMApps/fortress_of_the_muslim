@@ -22,7 +22,7 @@ class AppSettingListTile extends StatelessWidget {
       visualDensity: VisualDensity.comfortable,
       title: Text(
         title,
-        style: AppStyles.mainTextStyle17,
+        style: AppStyles.mainTextStyle17Bold,
       ),
       subtitle: Text(
         subTitle,

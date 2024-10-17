@@ -18,7 +18,7 @@ class ThemeModeDropDown extends StatelessWidget {
           visualDensity: VisualDensity.comfortable,
           title: Text(
             AppStrings.theme,
-            style: AppStyles.mainTextStyle17,
+            style: AppStyles.mainTextStyle17Bold,
           ),
           subtitle: Text(AppStrings.themeApp),
           leading: Icon(Icons.brightness_4_outlined),

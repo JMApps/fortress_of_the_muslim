@@ -39,6 +39,7 @@ class AppStyles {
 
   static const border = BorderRadius.all(Radius.circular(16));
   static const borderBig = BorderRadius.all(Radius.circular(25));
+  static const borderVeryBig = BorderRadius.all(Radius.circular(50));
   static const borderMini = BorderRadius.all(Radius.circular(8));
   static const borderWithBottom =  BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32));
   static const borderWithoutBottom =  BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16));
