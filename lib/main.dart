@@ -7,10 +7,12 @@ import 'data/repositories/chapter_data_repository.dart';
 import 'data/repositories/footnote_data_repository.dart';
 import 'data/repositories/supplication_data_repository.dart';
 import 'data/services/database_service.dart';
+import 'data/services/notification/notification_service.dart';
 import 'domain/usecases/chapter_use_case.dart';
 import 'domain/usecases/footnote_use_case.dart';
 import 'domain/usecases/supplication_use_case.dart';
 import 'presentation/pages/root_page.dart';
+import 'presentation/states/app_settings_state.dart';
 import 'presentation/states/content_settings_state.dart';
 import 'presentation/states/footnotes_state.dart';
 import 'presentation/states/main_chapters_state.dart';
@@ -24,12 +26,17 @@ void main() async {
   await Hive.openBox(AppConstraints.keyCounterBox);
   await Hive.openBox(AppConstraints.keyContentSettingsBox);
 
+  await NotificationService().setupNotification();
+
   final DatabaseService databaseService = DatabaseService();
   await databaseService.initializeDatabase();
 
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => AppSettingsState(),
+        ),
         ChangeNotifierProvider(
           create: (_) => MainChaptersState(
             ChapterUseCase(

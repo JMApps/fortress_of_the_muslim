@@ -1,5 +1,7 @@
 class AppStrings {
   static const String appName = 'Крепость мусульманина';
+  static const String morningPrayers = 'Время утренних азкаров';
+  static const String eveningPrayers = 'Время вечерних азкаров';
 
   static const String toStart = 'В начало';
   static const String chapters = 'Главы';
@@ -68,6 +70,33 @@ class AppStrings {
     'Без ограничений',
     'После молитвы',
     '100',
+  ];
+
+  static const counterAligns = <String>[
+    'Слева',
+    'По центру',
+    'Справа',
+  ];
+
+  static const String notifications = 'Уведомления';
+  static const String remindMorning = 'Напоминать утром';
+  static const String remindEvening = 'Напоминать вечером';
+
+  static const String listChapters = 'Список глав';
+  static const String openWithListChapters = 'Открывать со списка глав';
+
+  static const String display = 'Дисплей';
+  static const String displayAlwaysOn = 'Дисплей всегда включён';
+
+  static const String themeColor = 'Цвет темы';
+  static const String selectThemeColor = 'Выберите цвет темы';
+
+  static const String theme = 'Тема';
+  static const String themeApp = 'Тема приложения';
+  static const themeModeNames = <String>[
+    'Дневная',
+    'Ночная',
+    'Система',
   ];
 
   static const String textColor = 'Цвет текста';

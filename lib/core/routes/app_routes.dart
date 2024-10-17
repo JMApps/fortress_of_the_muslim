@@ -5,6 +5,7 @@ import '../../presentation/chapters/pages/favorite_chapter_page.dart';
 import '../../presentation/chapters/pages/main_chapter_page.dart';
 import '../../presentation/content/pages/chapter_content_page.dart';
 import '../../presentation/counter/pages/app_counter_page.dart';
+import '../../presentation/settings/pages/app_settings_page.dart';
 import '../../presentation/settings/pages/content_settings_page.dart';
 import '../../presentation/supplications/pages/favorite_supplication_page.dart';
 import '../../presentation/supplications/pages/main_supplication_page.dart';
@@ -41,6 +42,10 @@ class AppRoutes {
       case NameRoutes.appCounterPage:
         return MaterialPageRoute(
           builder: (_) => const AppCounterPage(),
+        );
+      case NameRoutes.appSettingsPage:
+        return MaterialPageRoute(
+          builder: (_) => const AppSettingsPage(),
         );
       default:
         throw Exception('Invalid route');

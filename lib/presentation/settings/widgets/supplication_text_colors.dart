@@ -64,7 +64,7 @@ class SupplicationTextColors extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          FilledButton.tonal(
+          IconButton.filledTonal(
             onPressed: () {
               _showColorPickerDialog(
                 context: context,
@@ -73,14 +73,13 @@ class SupplicationTextColors extends StatelessWidget {
                 onColorSelected: onLightColorChanged,
               );
             },
-            child: Icon(
-              Icons.color_lens,
+            icon: Icon(
+              Icons.color_lens_rounded,
               color: Color(lightColor),
-              size: 35,
             ),
           ),
           const SizedBox(width: 8),
-          FilledButton.tonal(
+          IconButton.filledTonal(
             onPressed: () {
               _showColorPickerDialog(
                 context: context,
@@ -89,10 +88,9 @@ class SupplicationTextColors extends StatelessWidget {
                 onColorSelected: onDarkColorChanged,
               );
             },
-            child: Icon(
-              Icons.color_lens,
+            icon: Icon(
+              Icons.color_lens_rounded,
               color: Color(darkColor),
-              size: 35,
             ),
           ),
         ],

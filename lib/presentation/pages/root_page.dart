@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/presentation/states/app_settings_state.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/routes/app_routes.dart';
 import '../../core/themes/app_themes.dart';
@@ -9,12 +11,14 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appThemes = AppThemes(Colors.teal);
+    final appSettings = Provider.of<AppSettingsState>(context);
+    final appThemes = AppThemes(Color(appSettings.getAppThemeColor));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRoutes.onRouteGenerator,
       theme: appThemes.lightTheme,
       darkTheme: appThemes.darkTheme,
+      themeMode: appSettings.getThemeMode,
       home: const MainPage(),
     );
   }

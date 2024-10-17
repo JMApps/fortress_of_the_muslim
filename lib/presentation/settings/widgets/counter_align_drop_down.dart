@@ -32,13 +32,13 @@ class CounterAlignDropDown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
-              AppStyles.counterAligns.length,
+              AppStrings.counterAligns.length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
-                    child: Text(AppStyles.counterAligns[index],
+                    child: Text(AppStrings.counterAligns[index],
                       style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle17,
                     ),
                   ),

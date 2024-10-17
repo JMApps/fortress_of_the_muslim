@@ -28,7 +28,7 @@ class OptionItem extends StatelessWidget {
         if (routeName.contains(AppStrings.aboutUs)) {
           // Bottom sheet
         } else {
-          // Navigator
+          Navigator.pushNamed(context, routeName);
         }
       },
       borderRadius: AppStyles.borderMini,

@@ -1,4 +1,7 @@
 class AppConstraints {
+  static const String databaseName = 'fortress_of_the_muslim';
+  static const int databaseVersion = 1;
+
   static const String keyMainSettingsBox = 'key_main_settings';
   static const String keyCounterBox = 'key_counter';
   static const String keyContentSettingsBox = 'key_content_settings';
@@ -30,4 +33,16 @@ class AppConstraints {
   static const String keyCounterAlignIndex = 'key_counter_align_index';
 
   static const String keyFreeCountValue = 'key_free_count_number';
+
+  static const String keyMorningNotificationState = 'key_morning_notification';
+  static const String keyEveningNotificationState = 'key_evening_notification';
+  static const String keyMorningNotificationTime = 'key_morning_notification_time';
+  static const String keyEveningNotificationTime = 'key_evening_notification_time';
+  static const String keyOpenWithChapters = 'key_run_chapters';
+  static const String keyDisplayAlwaysOn = 'key_display_on_off';
+  static const String keyAppThemeColor = 'key_app_theme_color';
+  static const String keyThemeModeIndex = 'key_theme_mode_index';
+
+  static const int morningNotificationID = 395;
+  static const int eveningNotificationID = 376;
 }

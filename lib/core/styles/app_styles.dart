@@ -83,12 +83,6 @@ class AppStyles {
     TextAlign.justify,
   ];
 
-  static const counterAligns = <String>[
-    'Слева',
-    'По центру',
-    'Справа',
-  ];
-
   static const counterAlign = <MainAxisAlignment>[
     MainAxisAlignment.start,
     MainAxisAlignment.center,

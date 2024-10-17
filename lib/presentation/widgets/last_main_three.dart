@@ -16,8 +16,8 @@ class LastMainThree extends StatelessWidget {
           child: OptionItem(
             itemIcon: CupertinoIcons.settings,
             itemTitle: AppStrings.settings,
-            itemColor: Colors.orange,
-            routeName: NameRoutes.settingsPage,
+            itemColor: Colors.teal,
+            routeName: NameRoutes.appSettingsPage,
           ),
         ),
         const SizedBox(width: 8),
@@ -25,7 +25,7 @@ class LastMainThree extends StatelessWidget {
           child: OptionItem(
             itemIcon: CupertinoIcons.book,
             itemTitle: AppStrings.bookContent,
-            itemColor: Colors.red,
+            itemColor: Colors.orange,
             routeName: NameRoutes.bookContentTitlesPage,
           ),
         ),
@@ -34,7 +34,7 @@ class LastMainThree extends StatelessWidget {
           child: OptionItem(
             itemIcon: CupertinoIcons.app_badge,
             itemTitle: AppStrings.aboutUs,
-            itemColor: Colors.blue,
+            itemColor: Colors.red,
             routeName: AppStrings.aboutUs,
           ),
         ),

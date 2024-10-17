@@ -10,7 +10,7 @@ class DefaultSettingsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
+    return FilledButton.tonal(
       onPressed: () {
         Provider.of<ContentSettingsState>(context, listen: false).setDefault();
       },

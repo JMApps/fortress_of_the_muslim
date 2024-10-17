@@ -36,7 +36,7 @@ class TranscriptionListTile extends StatelessWidget {
                 style: AppStyles.mainTextStyle17,
               ),
               trailing: Switch.adaptive(
-                activeColor: appColors.primary,
+                activeColor: appColors.inversePrimary,
                 value: contentSettings.getShowTranscriptionState,
                 onChanged: (bool onChanged) {
                   contentSettings.setShowTranscriptionState = onChanged;
