@@ -18,12 +18,6 @@ class _MainChapterPageState extends State<MainChapterPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [

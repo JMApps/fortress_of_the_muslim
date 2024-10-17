@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../core/strings/app_constraints.dart';
 import '../../core/strings/app_strings.dart';
@@ -29,6 +30,7 @@ class AppSettingsState extends ChangeNotifier {
 
     _openWithChapters = _mainSettingsBox.get(AppConstraints.keyOpenWithChapters, defaultValue: false);
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
+    _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
     _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.teal.value);
     _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
   }
@@ -121,6 +123,7 @@ class AppSettingsState extends ChangeNotifier {
 
   set setDisplayAlwaysOn(bool value) {
     _displayAlwaysOn = value;
+    value ? WakelockPlus.enable() : WakelockPlus.disable();
     _saveSetting(AppConstraints.keyDisplayAlwaysOn, value);
     notifyListeners();
   }

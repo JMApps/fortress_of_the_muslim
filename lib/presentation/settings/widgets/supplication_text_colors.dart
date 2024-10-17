@@ -78,7 +78,6 @@ class SupplicationTextColors extends StatelessWidget {
               color: Color(lightColor),
             ),
           ),
-          const SizedBox(width: 8),
           IconButton.filledTonal(
             onPressed: () {
               _showColorPickerDialog(

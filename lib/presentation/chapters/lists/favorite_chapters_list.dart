@@ -33,8 +33,9 @@ class FavoriteChaptersList extends StatelessWidget {
           );
         }
         return Scrollbar(
+          controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
           child: ListView.builder(
-            controller: Provider.of<ScrollPageState>(context).getScrollController,
+            controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
             padding: AppStyles.paddingMini,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {

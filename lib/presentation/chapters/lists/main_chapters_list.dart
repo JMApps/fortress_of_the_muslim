@@ -16,11 +16,13 @@ class MainChaptersList extends StatefulWidget {
 }
 
 class _MainChaptersListState extends State<MainChaptersList> {
+  late ScrollController _scrollController;
   late Future<List<ChapterEntity>> _futureChapters;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
     _futureChapters = Provider.of<MainChaptersState>(context, listen: false).fetchChapters();
   }
 
@@ -38,8 +40,9 @@ class _MainChaptersListState extends State<MainChaptersList> {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
         return Scrollbar(
+          controller: _scrollController,
           child: ListView.builder(
-            controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
+            controller: _scrollController,
             padding: AppStyles.paddingMini,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
