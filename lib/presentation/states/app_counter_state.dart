@@ -70,11 +70,11 @@ class AppCounterState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void resetCounter() {
+  void resetCounter() async {
     switch (_valuesIndex) {
       case 0:
         _freeCount = 0;
-        _counterSettings.put(AppConstraints.keyFreeCountValue, _freeCount);
+        await _counterSettings.put(AppConstraints.keyFreeCountValue, _freeCount);
         break;
       case 1:
         _prayerCount = 99;
@@ -86,9 +86,9 @@ class AppCounterState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _updateFreeCount() {
+  void _updateFreeCount() async {
     _freeCount++;
-    _counterSettings.put(AppConstraints.keyFreeCountValue, _freeCount);
+    await _counterSettings.put(AppConstraints.keyFreeCountValue, _freeCount);
   }
 
   void _updatePrayerCount() {

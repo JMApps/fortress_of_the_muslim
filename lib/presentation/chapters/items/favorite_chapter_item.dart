@@ -66,8 +66,6 @@ class FavoriteChapterItem extends StatelessWidget {
               SnackBar(
                 backgroundColor: appColors.secondaryContainer,
                 duration: const Duration(milliseconds: 750),
-                behavior: SnackBarBehavior.floating,
-                margin: AppStyles.paddingMini,
                 shape: AppStyles.shape,
                 elevation: 0,
                 content: Text(

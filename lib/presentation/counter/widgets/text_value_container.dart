@@ -25,13 +25,12 @@ class TextValueContainer extends StatelessWidget {
         child: Center(
           child: Consumer<AppCounterState>(
             builder: (context, appCounter, _) {
-              return Visibility(
-                visible: appCounter.getValueShowState,
-                maintainSize: true,
-                maintainState: true,
-                maintainAnimation: true,
+              return AnimatedOpacity(
+                opacity: appCounter.getValueShowState ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 500),
                 child: Text(
                   appCounter.getCountValue(),
+                  key: ValueKey<String>(appCounter.getCountValue()),
                   style: TextStyle(
                     fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
                     fontWeight: FontWeight.bold,

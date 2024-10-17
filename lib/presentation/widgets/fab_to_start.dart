@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
-import '../../states/scroll_page_state.dart';
+import '../../core/strings/app_strings.dart';
+import '../states/scroll_page_state.dart';
 
 class FabTopStart extends StatelessWidget {
   const FabTopStart({

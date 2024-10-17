@@ -66,8 +66,6 @@ class MainChapterItem extends StatelessWidget {
               SnackBar(
                 backgroundColor: appColors.secondaryContainer,
                 duration: const Duration(milliseconds: 750),
-                behavior: SnackBarBehavior.floating,
-                margin: AppStyles.paddingMini,
                 shape: AppStyles.shape,
                 elevation: 0,
                 content: Text(
@@ -82,9 +80,7 @@ class MainChapterItem extends StatelessWidget {
           },
           padding: EdgeInsets.zero,
           icon: Icon(
-            chapterIsFavorite
-                ? Icons.bookmark
-                : Icons.bookmark_outline_outlined,
+            chapterIsFavorite ? Icons.bookmark : Icons.bookmark_outline_outlined,
             color: appColors.primary,
           ),
         ),
