@@ -22,6 +22,8 @@ class ContentSupplicationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     final isLightTheme = appTheme.brightness == Brightness.light;
+    final arabicIsNotEmpty = supplicationModel.arabicText != null;
+    final transcriptionIsNotEmpty = supplicationModel.transcriptionText != null;
     return Card(
       elevation: 0,
       shape: AppStyles.shape,
@@ -33,7 +35,7 @@ class ContentSupplicationItem extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (supplicationModel.arabicText != null)
+                if (arabicIsNotEmpty)
                   _buildText(
                     text: supplicationModel.arabicText!,
                     fontIndex: contentSettings.getArabicFontIndex,
@@ -42,8 +44,8 @@ class ContentSupplicationItem extends StatelessWidget {
                     textAlignIndex: contentSettings.getArabicFontAlignIndex,
                     isArabic: true,
                   ),
-                const SizedBox(height: 16),
-                if (supplicationModel.transcriptionText != null)
+                SizedBox(height: arabicIsNotEmpty ? 16 : 0),
+                if (transcriptionIsNotEmpty)
                   _buildText(
                     text: supplicationModel.transcriptionText!,
                     fontIndex: contentSettings.getTranscriptionFontIndex,
@@ -52,7 +54,7 @@ class ContentSupplicationItem extends StatelessWidget {
                     textAlignIndex: contentSettings.getTranscriptionFontAlignIndex,
                     isArabic: false,
                   ),
-                const SizedBox(height: 16),
+                SizedBox(height: transcriptionIsNotEmpty ? 16 : 0),
                 MainHtmlData(
                   htmlData: supplicationModel.translationText,
                   footnoteColor: appTheme.colorScheme.primary,

@@ -26,13 +26,13 @@ class ChapterContentPage extends StatefulWidget {
 
 class _ChapterContentPageState extends State<ChapterContentPage> {
 
-  late Future<ChapterEntity> _futureChapters;
+  late Future<ChapterEntity> _futureChapter;
   late Future<List<SupplicationEntity>> _futureChapterContent;
 
   @override
   void initState() {
     super.initState();
-    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).getChapterById(chapterId: widget.chapterId);
+    _futureChapter = Provider.of<MainChaptersState>(context, listen: false).getChapterById(chapterId: widget.chapterId);
     _futureChapterContent = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(chapterId: widget.chapterId);
   }
 
@@ -67,32 +67,27 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                 borderRadius: AppStyles.border,
               ),
               child: FutureBuilder<ChapterEntity>(
-                future: _futureChapters,
+                future: _futureChapter,
                 builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return MainErrorTextData(errorText: snapshot.error.toString());
-                  }
-                  if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator.adaptive(),
                     );
                   }
-                  if (snapshot.hasData) {
-                    final ChapterEntity chapterModel = snapshot.data!;
-                    return Padding(
-                      padding: AppStyles.paddingMicro,
-                      child: MainHtmlData(
-                        htmlData: chapterModel.chapterTitle,
-                        footnoteColor: appColors.primary,
-                        font: AppStrings.fontGilroy,
-                        fontSize: 18.0,
-                        textAlign: TextAlign.center,
-                        fontColor: appColors.onSurface,
-                      ),
-                    );
+                  if (snapshot.hasError) {
+                    return MainErrorTextData(errorText: snapshot.error.toString());
                   }
-                  return Center(
-                    child: CircularProgressIndicator.adaptive(),
+                  final ChapterEntity chapterModel = snapshot.data!;
+                  return Padding(
+                    padding: AppStyles.paddingMicro,
+                    child: MainHtmlData(
+                      htmlData: chapterModel.chapterTitle,
+                      footnoteColor: appColors.primary,
+                      font: AppStrings.fontGilroy,
+                      fontSize: 18.0,
+                      textAlign: TextAlign.center,
+                      fontColor: appColors.onSurface,
+                    ),
                   );
                 },
               ),
@@ -101,37 +96,30 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
           FutureBuilder<List<SupplicationEntity>>(
             future: _futureChapterContent,
             builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return SliverFillRemaining(
-                  child: MainErrorTextData(errorText: snapshot.error.toString()),
-                );
-              }
-              if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return SliverFillRemaining(
                   child: Center(
                     child: CircularProgressIndicator.adaptive(),
                   ),
                 );
               }
-              if (snapshot.hasData) {
-                return SliverList.builder(
-                  itemBuilder: (context, index) {
-                    final SupplicationEntity supplicationModel = snapshot.data![index];
-                    return Padding(
-                      padding: AppStyles.paddingHorizontalMini,
-                      child: ContentSupplicationItem(
-                        supplicationModel: supplicationModel,
-                        supplicationIndex: index,
-                      ),
-                    );
-                  },
-                  itemCount: snapshot.data!.length,
+              if (snapshot.hasError) {
+                return SliverFillRemaining(
+                  child: MainErrorTextData(errorText: snapshot.error.toString()),
                 );
               }
-              return SliverFillRemaining(
-                child: Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
+              return SliverList.builder(
+                itemBuilder: (context, index) {
+                  final SupplicationEntity supplicationModel = snapshot.data![index];
+                  return Padding(
+                    padding: AppStyles.paddingHorizontalMini,
+                    child: ContentSupplicationItem(
+                      supplicationModel: supplicationModel,
+                      supplicationIndex: index,
+                    ),
+                  );
+                },
+                itemCount: snapshot.data!.length,
               );
             },
           ),

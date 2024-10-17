@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../states/scroll_page_state.dart';
 import '../lists/main_chapters_list.dart';
-import '../widgets/fab_to_start.dart';
+import '../../widgets/fab_to_start.dart';
 import '../widgets/search_chapters_delegate.dart';
 
 class MainChapterPage extends StatefulWidget {

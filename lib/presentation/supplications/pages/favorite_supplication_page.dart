@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
-import '../../chapters/widgets/fab_to_start.dart';
+import '../../widgets/fab_to_start.dart';
 import '../../states/scroll_page_state.dart';
 import '../lists/favorite_supplications_list.dart';
 
