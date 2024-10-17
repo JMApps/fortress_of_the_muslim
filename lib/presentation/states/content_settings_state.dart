@@ -60,8 +60,8 @@ class ContentSettingsState extends ChangeNotifier {
     return _contentSettings.get(key, defaultValue: defaultValue);
   }
 
-  void _setSetting(int value, String key) {
-    _contentSettings.put(key, value);
+  void _setSetting(int value, String key) async {
+    await _contentSettings.put(key, value);
     notifyListeners();
   }
 

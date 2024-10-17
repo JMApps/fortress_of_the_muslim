@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/footnote_entity.dart';
 import '../states/footnotes_state.dart';
