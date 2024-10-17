@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../widgets/fab_to_start.dart';
 import '../../states/scroll_page_state.dart';
@@ -18,12 +19,6 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -35,6 +30,15 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
         appBar: AppBar(
           title: const Text(AppStrings.allSupplications),
           actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  NameRoutes.settingsContentPage,
+                );
+              },
+              icon: Icon(Icons.settings_outlined),
+            ),
             IconButton(
               onPressed: () {
                 showSearch(
