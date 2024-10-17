@@ -28,7 +28,7 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
 
   @override
   void initState() {
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getAllSupplications();
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications();
     super.initState();
   }
 
@@ -37,6 +37,11 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
     return FutureBuilder<List<SupplicationEntity>>(
       future: _futureSupplications,
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
@@ -45,33 +50,23 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
             descriptionText: AppStrings.searchIsEmpty,
           );
         }
-        if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          _supplications = snapshot.data!;
-          _recentSupplications = widget.query.isEmpty ? _supplications : _supplications.where((element) =>
-          element.supplicationId.toString().contains(widget.query) ||
-              (element.arabicText != null && element.arabicText!.contains(widget.query)) ||
-              (element.transcriptionText != null && element.transcriptionText!.toLowerCase().contains(widget.query)) ||
-              element.translationText.toLowerCase().contains(widget.query)).toList();
-          return _recentSupplications.isEmpty ? const MainDescriptionText(descriptionText: AppStrings.searchIsEmpty) : Scrollbar(
-            child: ListView.builder(
-              padding: AppStyles.paddingMini,
-              itemCount: _recentSupplications.length,
-              itemBuilder: (BuildContext context, int index) {
-                return MainSupplicationItem(
-                  supplicationModel: _recentSupplications[index],
-                  supplicationIndex: index,
-                );
-              },
-            ),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
+        _supplications = snapshot.data!;
+        _recentSupplications = widget.query.isEmpty ? _supplications : _supplications.where((element) =>
+        element.supplicationId.toString().contains(widget.query) ||
+            (element.arabicText != null && element.arabicText!.contains(widget.query)) ||
+            (element.transcriptionText != null && element.transcriptionText!.toLowerCase().contains(widget.query)) ||
+            element.translationText.toLowerCase().contains(widget.query)).toList();
+        return _recentSupplications.isEmpty ? const MainDescriptionText(descriptionText: AppStrings.searchIsEmpty) : Scrollbar(
+          child: ListView.builder(
+            padding: AppStyles.paddingMini,
+            itemCount: _recentSupplications.length,
+            itemBuilder: (BuildContext context, int index) {
+              return MainSupplicationItem(
+                supplicationModel: _recentSupplications[index],
+                supplicationIndex: index,
+              );
+            },
+          ),
         );
       },
     );

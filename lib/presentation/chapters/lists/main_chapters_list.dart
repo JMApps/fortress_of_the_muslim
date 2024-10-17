@@ -37,24 +37,19 @@ class _MainChaptersListState extends State<MainChaptersList> {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
-        if (snapshot.hasData) {
-          return Scrollbar(
-            child: ListView.builder(
-              controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
-              padding: AppStyles.paddingMini,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final ChapterEntity chapterModel = snapshot.data![index];
-                return MainChapterItem(
-                  chapterModel: chapterModel,
-                  chapterIndex: index,
-                );
-              },
-            ),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
+        return Scrollbar(
+          child: ListView.builder(
+            controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
+            padding: AppStyles.paddingMini,
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final ChapterEntity chapterModel = snapshot.data![index];
+              return MainChapterItem(
+                chapterModel: chapterModel,
+                chapterIndex: index,
+              );
+            },
+          ),
         );
       },
     );

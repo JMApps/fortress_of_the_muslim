@@ -20,7 +20,7 @@ class _MainSupplicationsListState extends State<MainSupplicationsList> {
 
   @override
   void initState() {
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getAllSupplications();
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications();
     super.initState();
   }
 
@@ -29,32 +29,27 @@ class _MainSupplicationsListState extends State<MainSupplicationsList> {
     return FutureBuilder<List<SupplicationEntity>>(
       future: _futureSupplications,
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
-        }
-        if (snapshot.hasData && snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
           );
         }
-        if (snapshot.hasData) {
-          return Scrollbar(
-            child: ListView.builder(
-              controller: Provider.of<ScrollPageState>(context).getScrollController,
-              padding: AppStyles.paddingMini,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final supplicationModel = snapshot.data![index];
-                return MainSupplicationItem(
-                  supplicationModel: supplicationModel,
-                  supplicationIndex: index,
-                );
-              },
-            ),
-          );
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
         }
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
+        return Scrollbar(
+          child: ListView.builder(
+            controller: Provider.of<ScrollPageState>(context).getScrollController,
+            padding: AppStyles.paddingMini,
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final supplicationModel = snapshot.data![index];
+              return MainSupplicationItem(
+                supplicationModel: supplicationModel,
+                supplicationIndex: index,
+              );
+            },
+          ),
         );
       },
     );

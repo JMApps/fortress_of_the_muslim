@@ -10,15 +10,23 @@ class MainSupplicationsState extends ChangeNotifier {
 
   final SupplicationUseCase _supplicationUseCase;
 
+  late Future<List<SupplicationEntity>> _futureMainSupplications;
+
+
   MainSupplicationsState(this._supplicationUseCase) {
     _favoriteSupplicationIds = _mainAppSettingsBox.get(AppConstraints.keySupplicationIds, defaultValue: <int>[]);
+    _futureMainSupplications = _getAllSupplications();
   }
 
   late List<int> _favoriteSupplicationIds = [];
 
   List<int> get getFavoriteSupplicationIds => _favoriteSupplicationIds;
 
-  Future<List<SupplicationEntity>> getAllSupplications() async {
+  Future<List<SupplicationEntity>> fetchAllSupplications() {
+    return _futureMainSupplications;
+  }
+
+  Future<List<SupplicationEntity>> _getAllSupplications() async {
     return await _supplicationUseCase.fetchAllSupplications();
   }
 

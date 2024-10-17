@@ -22,6 +22,10 @@ class MainChaptersState extends ChangeNotifier {
 
   List<int> get getFavoriteChapterIds => _favoriteChapterIds;
 
+  Future<List<ChapterEntity>> fetchChapters() {
+    return _futureMainChapters;
+  }
+
   Future<List<ChapterEntity>> _getAllChapters() async {
     return await _chapterUseCase.fetchAllChapters();
   }
@@ -32,10 +36,6 @@ class MainChaptersState extends ChangeNotifier {
 
   Future<List<ChapterEntity>> getFavoriteChapters({required List<int> ids}) async {
     return await _chapterUseCase.fetchFavoriteChapters(ids: ids);
-  }
-
-  Future<List<ChapterEntity>> fetchChapters() {
-    return _futureMainChapters;
   }
 
   void toggleChapterFavorite({required int chapterId}) async {
