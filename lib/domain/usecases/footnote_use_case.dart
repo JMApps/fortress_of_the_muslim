@@ -7,14 +7,26 @@ class FootnoteUseCase {
   FootnoteUseCase(this._footnoteRepository);
 
   Future<List<FootnoteEntity>> fetchAllFootnotes() async {
-    return await _footnoteRepository.getAllFootnotes();
+    try {
+      return await _footnoteRepository.getAllFootnotes();
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<FootnoteEntity> fetchFootnoteById({required int footnoteId}) async {
-    return await _footnoteRepository.getFootnoteById(footnoteId: footnoteId);
+    try {
+      return await _footnoteRepository.getFootnoteById(footnoteId: footnoteId);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<FootnoteEntity> fetchFootnoteBySupplication({required int supplicationId}) async {
-    return await _footnoteRepository.getFootnoteBySupplication(supplicationId: supplicationId);
+    try {
+      return await _footnoteRepository.getFootnoteBySupplication(supplicationId: supplicationId);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 }

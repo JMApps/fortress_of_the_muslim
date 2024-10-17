@@ -23,7 +23,7 @@ class DBValues {
   static const String dbCounterNumber = 'count_number';
 
   static const String dbBookContentId = 'book_content_id';
-  static const String dbBookTitle = 'book_title';
+  static const String dbBookContentTitle = 'book_content_title';
   static const String dbBookContent = 'book_content';
 
   static const String dbSampleBy = 'sample_by';

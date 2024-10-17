@@ -8,10 +8,18 @@ class BookContentUseCase {
   BookContentUseCase(this._bookContentRepository);
 
   Future<List<BookContentEntity>> fetchAllContentBook() async {
-    return await _bookContentRepository.getAllContentBook();
+    try {
+      return await _bookContentRepository.getAllContentBook();
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<BookContentEntity> fetchContentBookById({required int bookContentId}) async {
-    return await _bookContentRepository.getContentBookById(bookContentId: bookContentId);
+    try {
+      return await _bookContentRepository.getContentBookById(bookContentId: bookContentId);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 }

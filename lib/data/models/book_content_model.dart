@@ -2,19 +2,19 @@ import '../../core/strings/db_values.dart';
 
 class BookContentModel {
   final int bookContentId;
-  final String bookTitle;
+  final String bookContentTitle;
   final String bookContent;
 
   BookContentModel({
     required this.bookContentId,
-    required this.bookTitle,
+    required this.bookContentTitle,
     required this.bookContent,
   });
 
   factory BookContentModel.fromMap(Map<dynamic, String> map) {
     return BookContentModel(
       bookContentId: map[DBValues.dbBookContentId] as int,
-      bookTitle: map[DBValues.dbBookTitle] as String,
+      bookContentTitle: map[DBValues.dbBookContentTitle] as String,
       bookContent: map[DBValues.dbBookContent] as String,
     );
   }

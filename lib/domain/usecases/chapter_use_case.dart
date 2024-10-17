@@ -8,14 +8,26 @@ class ChapterUseCase {
   ChapterUseCase(this._chapterRepository);
 
   Future<List<ChapterEntity>> fetchAllChapters() async {
-    return await _chapterRepository.getAllChapters();
+    try {
+      return await _chapterRepository.getAllChapters();
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<ChapterEntity> fetchChapterById({required int chapterId}) async {
-    return await _chapterRepository.getChapterById(chapterId: chapterId);
+    try {
+      return await _chapterRepository.getChapterById(chapterId: chapterId);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<List<ChapterEntity>> fetchFavoriteChapters({required List<int> ids}) async {
-    return await _chapterRepository.getFavoriteChapters(ids: ids);
+    try {
+      return await _chapterRepository.getFavoriteChapters(ids: ids);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 }

@@ -7,18 +7,34 @@ class SupplicationUseCase {
   SupplicationUseCase(this._supplicationRepository);
 
   Future<List<SupplicationEntity>> fetchAllSupplications() async {
-    return await _supplicationRepository.getAllSupplications();
+    try {
+      return await _supplicationRepository.getAllSupplications();
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<List<SupplicationEntity>> fetchSupplicationsByChapterId({required int chapterId}) async {
-    return await _supplicationRepository.getSupplicationsByChapterId(chapterId: chapterId);
+    try {
+      return await _supplicationRepository.getSupplicationsByChapterId(chapterId: chapterId);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<SupplicationEntity> fetchSupplicationById({required int supplicationId}) async {
-    return await _supplicationRepository.getSupplicationById(supplicationId: supplicationId);
+    try {
+      return await _supplicationRepository.getSupplicationById(supplicationId: supplicationId);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 
   Future<List<SupplicationEntity>> fetchFavoriteSupplications({required List<int> ids}) async {
-    return await _supplicationRepository.getFavoriteSupplications(ids: ids);
+    try {
+      return await _supplicationRepository.getFavoriteSupplications(ids: ids);
+    } catch (e) {
+      throw Exception('$e');
+    }
   }
 }
