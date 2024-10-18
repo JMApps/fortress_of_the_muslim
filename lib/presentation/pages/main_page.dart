@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
+import '../states/app_settings_state.dart';
 import '../widgets/first_main_three.dart';
 import '../widgets/first_main_two.dart';
 import '../widgets/last_chapter_card.dart';
@@ -10,13 +13,35 @@ import '../widgets/last_main_three.dart';
 import '../widgets/second_main_three.dart';
 import '../widgets/second_main_two.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  late final bool _isOpenWithChapter;
+
+  @override
+  void initState() {
+    super.initState();
+    _isOpenWithChapter = Provider.of<AppSettingsState>(context, listen: false).getOpenWithChapters;
+    if (_isOpenWithChapter) {
+      _openChaptersPage();
+    }
+  }
+
+  void _openChaptersPage() async {
+    await Future.delayed(Duration.zero);
+    if (mounted) {
+      await Navigator.pushNamed(context, NameRoutes.allChaptersPage);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appName),
