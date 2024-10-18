@@ -7,6 +7,6 @@ class NameRoutes {
   static const String favoriteSupplicationsPage = '/favorite_supplications_page';
   static const String appCounterPage = '/app_counter_page';
   static const String appSettingsPage = '/app_settings_page';
-  static const String bookContentTitlesPage = '/book_content_titles_page';
   static const String bookContentPage = '/book_content_page';
+  static const String bookContentDetailPage = '/book_content_detail_page';
 }

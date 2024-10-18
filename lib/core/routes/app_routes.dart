@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/arguments/book_content_args.dart';
 import '../../data/models/arguments/chapter_id_args.dart';
+import '../../presentation/book/pages/book_content_detail_page.dart';
+import '../../presentation/book/pages/book_content_page.dart';
 import '../../presentation/chapters/pages/favorite_chapter_page.dart';
 import '../../presentation/chapters/pages/main_chapter_page.dart';
 import '../../presentation/content/pages/chapter_content_page.dart';
@@ -30,7 +33,7 @@ class AppRoutes {
     NameRoutes.allChaptersPage: (context, args) => const MainChapterPage(),
     NameRoutes.favoriteChaptersPage: (context, args) => const FavoriteChapterPage(),
     NameRoutes.chapterContentPage: (context, args) {
-      final ChapterIdArgs chapterIdArgs = args as ChapterIdArgs;
+      final ChapterIdArgs chapterIdArgs = args;
       return ChapterContentPage(chapterId: chapterIdArgs.chapterId);
     },
     NameRoutes.settingsContentPage: (context, args) => const ContentSettingsPage(),
@@ -38,5 +41,10 @@ class AppRoutes {
     NameRoutes.favoriteSupplicationsPage: (context, args) => const FavoriteSupplicationPage(),
     NameRoutes.appCounterPage: (context, args) => const AppCounterPage(),
     NameRoutes.appSettingsPage: (context, args) => const AppSettingsPage(),
+    NameRoutes.bookContentPage: (context, args) => const BookContentPage(),
+    NameRoutes.bookContentDetailPage: (context, args) {
+      final BookContentArgs bookContentArgs = args;
+      return BookContentDetailPage(bookModel: bookContentArgs.bookModel);
+    },
   };
 }

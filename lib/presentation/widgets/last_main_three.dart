@@ -26,7 +26,7 @@ class LastMainThree extends StatelessWidget {
             itemIcon: CupertinoIcons.book,
             itemTitle: AppStrings.bookContent,
             itemColor: Colors.orange,
-            routeName: NameRoutes.bookContentTitlesPage,
+            routeName: NameRoutes.bookContentPage,
           ),
         ),
         const SizedBox(width: 8),
