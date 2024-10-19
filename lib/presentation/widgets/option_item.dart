@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
+import 'about_us_column.dart';
 
 class OptionItem extends StatelessWidget {
   const OptionItem({
@@ -20,13 +21,20 @@ class OptionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    final appTheme = Theme.of(context);
+    final themeIsDark = appTheme.brightness == Brightness.dark;
+    final fixColor = appTheme.colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
     return InkWell(
       onTap: () {
         HapticFeedback.lightImpact();
         if (routeName.contains(AppStrings.aboutUs)) {
-          // Bottom sheet
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => SingleChildScrollView(
+              padding: AppStyles.paddingWithoutTopMini,
+              child: AboutUsColumn(),
+            ),
+          );
         } else {
           Navigator.pushNamed(context, routeName);
         }
@@ -59,7 +67,8 @@ class OptionItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(itemIcon,
+                Icon(
+                  itemIcon,
                   color: fixColor,
                 ),
                 Text(

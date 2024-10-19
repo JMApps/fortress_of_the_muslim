@@ -51,6 +51,8 @@ class AppStyles {
 
   static const mainTextStyle17 = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontGilroy);
   static const mainTextStyle17Bold = TextStyle(fontSize: 17.0, fontFamily: AppStrings.fontGilroy, fontWeight: FontWeight.bold);
+  static const mainTextStyle20 = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontGilroy);
+  static const mainTextStyle20Bold = TextStyle(fontSize: 20.0, fontFamily: AppStrings.fontGilroy, fontWeight: FontWeight.bold);
 
   static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));
   static const shapeMini = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)));
