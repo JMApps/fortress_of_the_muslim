@@ -69,15 +69,15 @@ flutter:
     - assets/pictures/
 
   fonts:
-    - family: Montserrat
-      fonts:
-        - asset: assets/fonts/montserrat_light.ttf
-    - family: SF Pro
-      fonts:
-        - asset: assets/fonts/sf_pro_regular.ttf
     - family: Gilroy
       fonts:
         - asset: assets/fonts/gilroy_regular.ttf
+    - family: SF Pro
+      fonts:
+        - asset: assets/fonts/sf_pro_regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat_regular.ttf
     - family: Hafs
       fonts:
         - asset: assets/fonts/hafs.ttf
