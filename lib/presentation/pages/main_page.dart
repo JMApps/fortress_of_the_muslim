@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_strings.dart';
@@ -47,7 +48,9 @@ class _MainPageState extends State<MainPage> {
         title: const Text(AppStrings.appName),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await Share.share('${AppStrings.appName}${AppStrings.appSlogan}\n\n${AppStrings.versionIOS}\n${AppStrings.linkIOS}\n\n${AppStrings.versionAndroid}\n${AppStrings.linkAndroid}');
+            },
             tooltip: AppStrings.share,
             icon: Icon(Icons.ios_share),
           ),

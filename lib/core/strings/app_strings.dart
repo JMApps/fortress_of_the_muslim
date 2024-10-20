@@ -1,5 +1,6 @@
 class AppStrings {
   static const String appName = 'Крепость мусульманина';
+  static const String appSlogan = ' – твоя несокрушимая крепость!';
   static const String morningPrayers = 'Время утренних азкаров';
   static const String eveningPrayers = 'Время вечерних азкаров';
 
@@ -134,6 +135,10 @@ class AppStrings {
   static const String devMuslim = '@dev_muslim';
   static const String linkGooglePlay = 'https://play.google.com/store/apps/dev?id=8649252597553656018';
   static const String linkAppStore = 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
+  static const String versionAndroid = 'Версия Android:';
+  static const String versionIOS = 'Версия iOS:';
+  static const String linkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
+  static const String linkIOS = 'https://apps.apple.com/ru/app/крепость-верующего/id1564920951';
   static const String linkTelegram = 'https://t.me/jmapps';
   static const String linkInstagram = 'https://instagram.com/dev_muslim';
   static const String linkUmmaLife = 'https://ummalife.com/jmapps';
