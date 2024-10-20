@@ -26,7 +26,7 @@ class FingerPrintContainer extends StatelessWidget {
         icon: Icon(
           Icons.fingerprint_rounded,
           color: iconColor.withOpacity(0.5),
-          size: mediaQuery.orientation == Orientation.portrait ? mediaQuery.size.width * 0.85 : mediaQuery.size.height * 0.75,
+          size: mediaQuery.orientation == Orientation.portrait ? mediaQuery.size.width * 0.8 : mediaQuery.size.height * 0.6,
         ),
       ),
     );

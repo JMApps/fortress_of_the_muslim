@@ -94,6 +94,14 @@ class AppCounterState extends ChangeNotifier {
   void _updatePrayerCount() {
     if (_prayerCount > 0) {
       _prayerCount--;
+      switch (_prayerCount) {
+        case 66:
+          _vibrate();
+          break;
+        case 33:
+          _vibrate();
+          break;
+      }
       _triggerHapticFeedback();
     } else {
       _vibrate();

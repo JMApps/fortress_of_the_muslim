@@ -15,33 +15,30 @@ class TextValueContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: AppStyles.padding,
-      alignment: Alignment.center,
-      child: Card(
-        elevation: 0,
-        margin: EdgeInsets.zero,
-        shape: AppStyles.shape,
-        child: Center(
-          child: Consumer<AppCounterState>(
-            builder: (context, appCounter, _) {
-              return AnimatedOpacity(
-                opacity: appCounter.getValueShowState ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 500),
-                child: Text(
-                  appCounter.getCountValue(),
-                  key: ValueKey<String>(appCounter.getCountValue()),
-                  style: TextStyle(
-                    fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: AppStrings.fontGilroy,
-                    color: textColor,
-                  ),
+    return Card(
+      elevation: 0,
+      margin: AppStyles.paddingMini,
+      shape: AppStyles.shape,
+      child: Consumer<AppCounterState>(
+        builder: (context, appCounter, _) {
+          return AnimatedOpacity(
+            opacity: appCounter.getValueShowState ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 500),
+            child: Center(
+              child: Text(
+                appCounter.getCountValue(),
+                key: ValueKey<String>(appCounter.getCountValue()),
+                style: TextStyle(
+                  fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: AppStrings.fontGilroy,
+                  color: textColor,
                 ),
-              );
-            },
-          ),
-        ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

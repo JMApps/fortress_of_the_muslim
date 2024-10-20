@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/strings/app_strings.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../states/app_counter_state.dart';
 import '../widgets/counter_options_container.dart';
 import '../widgets/finger_print_container.dart';
@@ -25,42 +26,49 @@ class AppCounterPage extends StatelessWidget {
           title: Text(AppStrings.counter),
         ),
         body: OrientationLayoutBuilder(
-          portrait: (context) => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 32),
-              TextValueContainer(
-                textColor: appColors.primary,
-              ),
-              Flexible(
-                child: FingerPrintContainer(
-                  iconColor: appColors.primary,
+          portrait: (context) => Padding(
+            padding: AppStyles.paddingMini,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextValueContainer(
+                  textColor: appColors.primary,
                 ),
-              ),
-              CounterOptionsContainer(),
-              const SizedBox(height: 32),
-            ],
+                Flexible(
+                  child: FingerPrintContainer(
+                    iconColor: appColors.primary,
+                  ),
+                ),
+                CounterOptionsContainer(),
+              ],
+            ),
           ),
-          landscape: (context) => Row(
-            children: [
-              Flexible(
-                child: Column(
-                  children: [
-                    Flexible(
-                      child: TextValueContainer(
-                        textColor: appColors.primary,
+          landscape: (context) => Padding(
+            padding: AppStyles.paddingMini,
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      Flexible(
+                        child: TextValueContainer(
+                          textColor: appColors.primary,
+                        ),
                       ),
-                    ),
-                    CounterOptionsContainer(),
-                  ],
+                      CounterOptionsContainer(),
+                    ],
+                  ),
                 ),
-              ),
-              Flexible(
-                child: FingerPrintContainer(
-                  iconColor: appColors.primary,
+                Flexible(
+                  flex: 2,
+                  child: FingerPrintContainer(
+                    iconColor: appColors.primary,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
