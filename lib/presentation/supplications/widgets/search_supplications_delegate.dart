@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
+import '../../states/app_player_state.dart';
 import 'search_supplications_future.dart';
 
 class SearchSupplicationsDelegate extends SearchDelegate {
@@ -39,6 +41,7 @@ class SearchSupplicationsDelegate extends SearchDelegate {
       padding: EdgeInsets.only(left: 12),
       child: IconButton(
         onPressed: () {
+          Provider.of<AppPlayerState>(context, listen: false).stopTrack();
           close(context, null);
         },
         icon: const Icon(Icons.arrow_back_ios),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_strings.dart';
+import '../../states/app_player_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../../states/scroll_page_state.dart';
 import '../lists/favorite_supplications_list.dart';
@@ -28,6 +29,13 @@ class _FavoriteSupplicationPageState extends State<FavoriteSupplicationPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(AppStrings.favoriteSupplications),
+          leading: IconButton(
+            onPressed: () {
+              Provider.of<AppPlayerState>(context, listen: false).stopTrack();
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.arrow_back_ios_new_rounded),
+          ),
           actions: [
             IconButton(
               onPressed: () {

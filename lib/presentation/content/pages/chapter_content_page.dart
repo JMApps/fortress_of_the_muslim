@@ -6,6 +6,7 @@ import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
+import '../../states/app_player_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -45,6 +46,13 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
             centerTitle: true,
             title: Text('${AppStrings.chapter} ${widget.chapterId}'),
             floating: true,
+            leading: IconButton(
+              onPressed: () {
+                Provider.of<AppPlayerState>(context, listen: false).stopTrack();
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.arrow_back_ios_new_rounded),
+            ),
             actions: [
               IconButton(
                 onPressed: () {
