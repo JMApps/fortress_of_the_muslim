@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ class FavoriteSupplicationButton extends StatelessWidget {
         );
       },
       icon: Icon(
-        supplicationIsFavorite ? Icons.bookmark : Icons.bookmark_outline_outlined,
+        supplicationIsFavorite ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
         color: appColors.primary,
       ),
     );

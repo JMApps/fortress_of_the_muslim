@@ -25,7 +25,6 @@ class ChapterContentPage extends StatefulWidget {
 }
 
 class _ChapterContentPageState extends State<ChapterContentPage> {
-
   late Future<ChapterEntity> _futureChapter;
   late Future<List<SupplicationEntity>> _futureChapterContent;
 

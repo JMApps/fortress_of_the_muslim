@@ -12,6 +12,7 @@ import 'domain/usecases/chapter_use_case.dart';
 import 'domain/usecases/footnote_use_case.dart';
 import 'domain/usecases/supplication_use_case.dart';
 import 'presentation/pages/root_page.dart';
+import 'presentation/states/app_player_state.dart';
 import 'presentation/states/app_settings_state.dart';
 import 'presentation/states/content_settings_state.dart';
 import 'presentation/states/footnotes_state.dart';
@@ -60,6 +61,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => ContentSettingsState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AppPlayerState(),
         ),
       ],
       child: const RootPage(),

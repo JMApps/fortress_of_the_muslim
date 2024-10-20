@@ -12,7 +12,7 @@ class AppStrings {
   static const String favoriteSupplications = 'Избранные дуа';
   static const String favoriteSupplicationsIsEmpty = 'Избранных дуа нет';
 
-  static const String search = 'Поиск...';
+  static const String search = 'Начните поиск';
   static const String searchIsEmpty = 'По вашему запросу ничего не найдено';
 
   static const String added = 'Добавлено';
@@ -45,9 +45,9 @@ class AppStrings {
   ];
 
   static const List<String> translationFontNames = [
-    'Montserrat',
-    'SF Pro',
     'Gilroy',
+    'SF Pro',
+    'Montserrat',
   ];
 
   static const String align = 'Расположение';
@@ -76,6 +76,18 @@ class AppStrings {
     'Слева',
     'По центру',
     'Справа',
+  ];
+
+  static const String playSpeed = 'Скорость воспроизведения';
+  static const String repeatOn = 'Повтор включен';
+  static const String repeatOff = 'Повтор выключен';
+  static const playSpeedNames = <String>[
+    '1x',
+    '0.9x',
+    '0.8x',
+    '0.7x',
+    '0.6x',
+    '0.5x',
   ];
 
   static const String notifications = 'Уведомления';

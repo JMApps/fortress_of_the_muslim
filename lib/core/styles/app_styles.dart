@@ -79,6 +79,15 @@ class AppStyles {
     35.0,
   ];
 
+  static const playSpeeds = <double>[
+    1.0,
+    0.9,
+    0.8,
+    0.7,
+    0.6,
+    0.5,
+  ];
+
   static const textAligns = <TextAlign>[
     TextAlign.start,
     TextAlign.center,

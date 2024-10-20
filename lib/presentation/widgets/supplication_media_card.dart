@@ -1,12 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:provider/provider.dart';
 
+import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/supplication_entity.dart';
+import '../states/app_player_state.dart';
 import '../supplications/widgets/favorite_supplication_button.dart';
 import '../supplications/widgets/share_supplication_button.dart';
+import 'play_speed_segment.dart';
 
-class SupplicationMediaCard extends StatefulWidget {
+class SupplicationMediaCard extends StatelessWidget {
   const SupplicationMediaCard({
     super.key,
     required this.supplicationModel,
@@ -15,13 +20,9 @@ class SupplicationMediaCard extends StatefulWidget {
   final SupplicationEntity supplicationModel;
 
   @override
-  State<SupplicationMediaCard> createState() => _SupplicationMediaCardState();
-}
-
-class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
-  @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
+    final isNameAudio = supplicationModel.nameAudio != null;
     return Card(
       elevation: 0,
       margin: EdgeInsets.zero,
@@ -30,26 +31,76 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          IconButton(
-            onPressed: () {
-              // Play audio
+          Consumer<AppPlayerState>(
+            builder: (context, playerState, _) {
+              return Visibility(
+                visible: isNameAudio,
+                maintainSize: true,
+                maintainState: true,
+                maintainAnimation: true,
+                child: IconButton(
+                  onPressed: () {
+                    playerState.playTrack(audioName: supplicationModel.nameAudio!, trackId: supplicationModel.supplicationId);
+                  },
+                  icon: Icon(playerState.isPlaying && playerState.currentTrackId == supplicationModel.supplicationId ? CupertinoIcons.stop : CupertinoIcons.play),
+                ),
+              );
             },
-            icon: const Icon(Icons.play_circle_outline_rounded),
           ),
-          IconButton(
-            onPressed: () {
-              // Save repeat state
+          Consumer<AppPlayerState>(
+            builder: (context, playerState, _) {
+              return Visibility(
+                visible: isNameAudio,
+                maintainSize: true,
+                maintainState: true,
+                maintainAnimation: true,
+                child: IconButton(
+                  onPressed: playerState.isPlaying ? () {
+                    playerState.toggleRepeatMode(supplicationModel.supplicationId);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: appColors.secondaryContainer,
+                        duration: const Duration(milliseconds: 750),
+                        shape: AppStyles.shape,
+                        elevation: 0,
+                        content: Text(
+                          playerState.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            color: appColors.onSurface,
+                          ),
+                        ),
+                      ),
+                    );
+                  } : null,
+                  icon: Icon(
+                      CupertinoIcons.arrow_2_squarepath,
+                    color: playerState.isRepeating && playerState.currentTrackId == supplicationModel.supplicationId ? appColors.error : appColors.onSurface,
+                  ),
+                ),
+              );
             },
-            icon: const Icon(Icons.repeat),
           ),
-          IconButton(
-            onPressed: () {
-              // Save speed index
-            },
-            icon: const Icon(Icons.speed_rounded),
+          Visibility(
+            visible: isNameAudio,
+            maintainSize: true,
+            maintainState: true,
+            maintainAnimation: true,
+            child: IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: PlaySpeedSegment(),
+                  ),
+                );
+              },
+              icon: const Icon(CupertinoIcons.speedometer),
+            ),
           ),
-          FavoriteSupplicationButton(supplicationId: widget.supplicationModel.supplicationId),
-          ShareSupplicationButton(dataSupplication: _supplicationText(arabic: widget.supplicationModel.arabicText, transcription: widget.supplicationModel.transcriptionText, translation: widget.supplicationModel.translationText)),
+          FavoriteSupplicationButton(supplicationId: supplicationModel.supplicationId),
+          ShareSupplicationButton(dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText)),
           Container(
             padding: AppStyles.paddingHorVerMicro,
             decoration: BoxDecoration(
@@ -57,7 +108,7 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
               borderRadius: AppStyles.borderMini,
             ),
             child: Text(
-              widget.supplicationModel.supplicationId.toString(),
+              supplicationModel.supplicationId.toString(),
               style: AppStyles.mainTextStyle17,
             ),
           ),
@@ -65,13 +116,14 @@ class _SupplicationMediaCardState extends State<SupplicationMediaCard> {
       ),
     );
   }
-  String _supplicationText({required String? arabic, required String? transcription, required String translation}) {
-    String parseHtmlString(String htmlString) {
+
+  String _supplicationText({required String? arabic, required String? transcription, required String translation}) {String parseHtmlString(String htmlString) {
       final document = html_parser.parse(htmlString);
       return document.body!.text;
     }
+
     String translationText = parseHtmlString(translation);
-      return [
+    return [
       if (arabic != null && arabic.isNotEmpty) arabic,
       if (transcription != null && transcription.isNotEmpty) transcription,
       if (translationText.isNotEmpty) translationText,

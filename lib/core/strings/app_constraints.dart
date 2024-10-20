@@ -39,4 +39,6 @@ class AppConstraints {
   static const String keyDisplayAlwaysOn = 'key_display_on_off';
   static const String keyAppThemeColor = 'key_app_theme_color';
   static const String keyThemeModeIndex = 'key_theme_mode_index';
+
+  static const String keyPlaySpeedIndex = 'key_play_speed_index';
 }
