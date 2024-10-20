@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/styles/app_styles.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_strings.dart';
@@ -18,6 +19,7 @@ class LastMainThree extends StatelessWidget {
             itemTitle: AppStrings.settings,
             itemColor: Colors.teal,
             routeName: NameRoutes.appSettingsPage,
+            itemBorder: AppStyles.borderBottomRight,
           ),
         ),
         const SizedBox(width: 8),
@@ -27,6 +29,7 @@ class LastMainThree extends StatelessWidget {
             itemTitle: AppStrings.bookContent,
             itemColor: Colors.orange,
             routeName: NameRoutes.bookContentPage,
+            itemBorder: AppStyles.borderMini,
           ),
         ),
         const SizedBox(width: 8),
@@ -36,6 +39,7 @@ class LastMainThree extends StatelessWidget {
             itemTitle: AppStrings.aboutUs,
             itemColor: Colors.red,
             routeName: AppStrings.aboutUs,
+            itemBorder: AppStyles.borderBottomLeft,
           ),
         ),
       ],

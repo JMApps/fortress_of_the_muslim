@@ -18,7 +18,7 @@ class AppThemeColorListTile extends StatelessWidget {
           title: AppStrings.themeColor,
           subTitle: AppStrings.selectThemeColor,
           leading: Icon(Icons.color_lens_outlined),
-          trailing: IconButton.filledTonal(
+          trailing: IconButton(
             onPressed: () {
               showDialog(
                 context: context,

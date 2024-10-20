@@ -34,16 +34,16 @@ class ContentSettingsState extends ChangeNotifier {
 
   void _initializeSettings() {
     _arabicFontIndex = _getSetting(AppConstraints.keyArabicFontIndex, 0);
-    _transcriptionFontIndex = _getSetting(AppConstraints.keyTranscriptionFontIndex, 2);
+    _transcriptionFontIndex = _getSetting(AppConstraints.keyTranscriptionFontIndex, 1);
     _translationFontIndex = _getSetting(AppConstraints.keyTranslationFontIndex, 0);
 
     _arabicFontSizeIndex = _getSetting(AppConstraints.keyArabicFontSizeIndex, 1);
     _transcriptionFontSizeIndex = _getSetting(AppConstraints.keyTranscriptionFontSizeIndex, 1);
     _translationFontSizeIndex = _getSetting(AppConstraints.keyTranslationFontSizeIndex, 1);
 
-    _arabicFontAlignIndex = _getSetting(AppConstraints.keyArabicFontAlignIndex, 0);
-    _transcriptionFontAlignIndex = _getSetting(AppConstraints.keyTranscriptionFontAlignIndex, 0);
-    _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 0);
+    _arabicFontAlignIndex = _getSetting(AppConstraints.keyArabicFontAlignIndex, 1);
+    _transcriptionFontAlignIndex = _getSetting(AppConstraints.keyTranscriptionFontAlignIndex, 1);
+    _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 1);
 
     _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blueGrey.shade900.value);
     _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.grey.shade50.value);

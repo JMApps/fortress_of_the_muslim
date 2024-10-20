@@ -13,7 +13,7 @@ class LastChapterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    return FilledButton.tonalIcon(
+    return OutlinedButton(
       onPressed: () {
         Navigator.pushNamed(
           context,
@@ -21,15 +21,21 @@ class LastChapterCard extends StatelessWidget {
           arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),
         );
       },
-      icon: Icon(
-        Icons.save,
-        color: appColors.primary,
-      ),
-      label: Text(
-        AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
-        style: AppStyles.mainTextStyle17,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
+            style: AppStyles.mainTextStyle17,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(width: 8),
+          Icon(
+            Icons.last_page_rounded,
+            color: appColors.primary,
+          ),
+        ],
       ),
     );
   }

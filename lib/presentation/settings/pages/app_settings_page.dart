@@ -9,14 +9,9 @@ import '../widgets/app_setting_switch.dart';
 import '../widgets/app_theme_color_list_tile.dart';
 import '../widgets/theme_mode_drop_down.dart';
 
-class AppSettingsPage extends StatefulWidget {
+class AppSettingsPage extends StatelessWidget {
   const AppSettingsPage({super.key});
 
-  @override
-  State<AppSettingsPage> createState() => _AppSettingsPageState();
-}
-
-class _AppSettingsPageState extends State<AppSettingsPage> {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
@@ -46,7 +41,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     icon: Icon(
                       Icons.access_time_rounded,
                       color: settingsState.getMorningNotification ? appColors.primary : appColors.onSurface,
-                      size: 30,
+                      size: 40,
                     ),
                   ),
                   trailing: AppSettingSwitch(
@@ -71,7 +66,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     icon: Icon(
                       Icons.access_time_rounded,
                       color: settingsState.getEveningNotification ? appColors.primary : appColors.onSurface,
-                      size: 30,
+                      size: 40,
                     ),
                   ),
                   trailing: AppSettingSwitch(

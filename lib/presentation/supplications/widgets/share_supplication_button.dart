@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
@@ -32,7 +33,7 @@ class ShareSupplicationButton extends StatelessWidget {
                     await Share.share(dataSupplication);
                   },
                   icon: Icon(
-                    Icons.ios_share_rounded,
+                    CupertinoIcons.share,
                     color: appColors.primary,
                   ),
                   label: Text(
@@ -64,7 +65,7 @@ class ShareSupplicationButton extends StatelessWidget {
                     );
                   },
                   icon: Icon(
-                    Icons.copy_rounded,
+                    CupertinoIcons.doc_on_doc,
                     color: appColors.primary,
                   ),
                   label: Text(
@@ -77,7 +78,7 @@ class ShareSupplicationButton extends StatelessWidget {
           ),
         );
       },
-      icon: const Icon(Icons.ios_share_outlined),
+      icon: const Icon(CupertinoIcons.share),
     );
   }
 }

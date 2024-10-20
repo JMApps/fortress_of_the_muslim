@@ -12,12 +12,14 @@ class OptionItem extends StatelessWidget {
     required this.itemTitle,
     required this.itemColor,
     required this.routeName,
+    required this.itemBorder,
   });
 
   final IconData itemIcon;
   final String itemTitle;
   final Color itemColor;
   final String routeName;
+  final BorderRadius itemBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class OptionItem extends StatelessWidget {
           Navigator.pushNamed(context, routeName);
         }
       },
-      borderRadius: AppStyles.borderMini,
+      borderRadius: itemBorder,
       splashColor: Colors.grey.withOpacity(themeIsDark ? 0.25 : 0.95),
       child: Stack(
         children: [

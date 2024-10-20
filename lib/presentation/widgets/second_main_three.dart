@@ -32,7 +32,7 @@ class SecondMainThree extends StatelessWidget {
           child: MainItemChapter(
             iconName: 'numbers',
             chapterNumber: 1000,
-            itemIcon: CupertinoIcons.arrow_right,
+            itemIcon: CupertinoIcons.forward,
             itemTitle: AppStrings.counter,
           ),
         ),

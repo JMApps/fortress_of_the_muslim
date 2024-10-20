@@ -11,23 +11,10 @@ class AppSettingsState extends ChangeNotifier {
   final NotificationService _notificationService = NotificationService();
 
   AppSettingsState() {
-    _morningNotification = _mainSettingsBox.get(AppConstraints.keyMorningNotificationState, defaultValue: true);
-    _eveningNotification = _mainSettingsBox.get(AppConstraints.keyEveningNotificationState, defaultValue: true);
+    _morningNotification = _mainSettingsBox.get(AppConstraints.keyMorningNotificationState, defaultValue: false);
+    _eveningNotification = _mainSettingsBox.get(AppConstraints.keyEveningNotificationState, defaultValue: false);
     _morningNotificationTime = _mainSettingsBox.get(AppConstraints.keyMorningNotificationTime, defaultValue: DateTime(2024, 12, 31, 4, 0).toIso8601String());
     _eveningNotificationTime = _mainSettingsBox.get(AppConstraints.keyEveningNotificationTime, defaultValue: DateTime(2024, 12, 31, 16, 0).toIso8601String());
-
-    if (_morningNotification) {
-      _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: getMorningNotificationTime);
-    } else {
-      _notificationService.cancelNotificationWithId(NotificationService.morningNotificationID);
-    }
-
-    if (_eveningNotification) {
-      _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: getEveningNotificationTime);
-    } else {
-      _notificationService.cancelNotificationWithId(NotificationService.eveningNotificationID);
-    }
-
     _openWithChapters = _mainSettingsBox.get(AppConstraints.keyOpenWithChapters, defaultValue: false);
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
@@ -90,6 +77,13 @@ class AppSettingsState extends ChangeNotifier {
     notifyListeners();
   }
 
+  set setMorningNotificationTime(DateTime time) {
+    _morningNotificationTime = time.toIso8601String();
+    _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: time);
+    _saveSetting(AppConstraints.keyMorningNotificationTime, time.toIso8601String());
+    notifyListeners();
+  }
+
   set setEveningNotification(bool value) {
     _eveningNotification = value;
     if (value) {
@@ -98,13 +92,6 @@ class AppSettingsState extends ChangeNotifier {
       _notificationService.cancelNotificationWithId(NotificationService.eveningNotificationID);
     }
     _saveSetting(AppConstraints.keyEveningNotificationState, value);
-    notifyListeners();
-  }
-
-  set setMorningNotificationTime(DateTime time) {
-    _morningNotificationTime = time.toIso8601String();
-    _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: time);
-    _saveSetting(AppConstraints.keyMorningNotificationTime, time.toIso8601String());
     notifyListeners();
   }
 
