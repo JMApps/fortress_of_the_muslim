@@ -32,7 +32,7 @@ class AppSettingsPage extends StatelessWidget {
                     onPressed: settingsState.getMorningNotification ? () async {
                       final notificationTime = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: 4, minute: 0),
+                        initialTime: TimeOfDay(hour: settingsState.getMorningNotificationTime.hour, minute: settingsState.getMorningNotificationTime.minute),
                       );
                       if (notificationTime != null) {
                         settingsState.setMorningNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
@@ -57,7 +57,7 @@ class AppSettingsPage extends StatelessWidget {
                     onPressed: settingsState.getEveningNotification ? () async {
                       final notificationTime = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: 4, minute: 0),
+                        initialTime: TimeOfDay(hour: settingsState.getEveningNotificationTime.hour, minute: settingsState.getEveningNotificationTime.minute),
                       );
                       if (notificationTime != null) {
                         settingsState.setEveningNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
