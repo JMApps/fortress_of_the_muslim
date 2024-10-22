@@ -55,7 +55,7 @@ class SupplicationMediaCard extends StatelessWidget {
                 maintainState: true,
                 maintainAnimation: true,
                 child: IconButton(
-                  onPressed: playerState.isPlaying ? () {
+                  onPressed: playerState.isPlaying && playerState.currentTrackId == supplicationModel.supplicationId ? () {
                     playerState.toggleRepeatMode(supplicationModel.supplicationId);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -100,7 +100,7 @@ class SupplicationMediaCard extends StatelessWidget {
             ),
           ),
           FavoriteSupplicationButton(supplicationId: supplicationModel.supplicationId),
-          ShareSupplicationButton(dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText)),
+          ShareSupplicationButton(supplicationId: supplicationModel.supplicationId, dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText)),
           Container(
             padding: AppStyles.paddingHorVerMicro,
             decoration: BoxDecoration(

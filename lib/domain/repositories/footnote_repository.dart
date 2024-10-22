@@ -5,5 +5,5 @@ abstract class FootnoteRepository {
 
   Future<FootnoteEntity> getFootnoteById({required int footnoteId});
 
-  Future<FootnoteEntity> getFootnoteBySupplication({required int supplicationId});
+  Future<String> getFootnoteBySupplication({required int supplicationId});
 }

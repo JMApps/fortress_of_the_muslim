@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/presentation/states/app_settings_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/routes/app_routes.dart';
 import '../../core/themes/app_themes.dart';
+import '../states/app_settings_state.dart';
 import 'main_page.dart';
 
 class RootPage extends StatelessWidget {

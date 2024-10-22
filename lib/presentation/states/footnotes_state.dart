@@ -16,7 +16,7 @@ class FootnotesState extends ChangeNotifier {
     return await _footnoteUseCase.fetchFootnoteById(footnoteId: footnoteId);
   }
 
-  Future<FootnoteEntity> getFootnoteBySupplication({required int supplicationId}) async {
+  Future<String> getFootnoteBySupplication({required int supplicationId}) async {
     return await _footnoteUseCase.fetchFootnoteBySupplication(supplicationId: supplicationId);
   }
 }

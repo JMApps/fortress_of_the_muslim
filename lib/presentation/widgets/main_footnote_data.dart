@@ -27,11 +27,11 @@ class MainFootnoteData extends StatelessWidget {
           return SingleChildScrollView(
             padding: AppStyles.paddingWithoutTop,
             child: MainHtmlData(
-              htmlData: '${snapshot.data!.footnoteId}: ${snapshot.data!.footnote}',
+              htmlData: '<b>[${snapshot.data!.footnoteId}]</b> – ${snapshot.data!.footnote}',
               footnoteColor: footnoteColor,
               font: AppStrings.fontGilroy,
               fontSize: 18.0,
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
               fontColor: Theme.of(context).colorScheme.onSurface,
             ),
           );

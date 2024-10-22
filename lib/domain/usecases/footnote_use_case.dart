@@ -22,7 +22,7 @@ class FootnoteUseCase {
     }
   }
 
-  Future<FootnoteEntity> fetchFootnoteBySupplication({required int supplicationId}) async {
+  Future<String> fetchFootnoteBySupplication({required int supplicationId}) async {
     try {
       return await _footnoteRepository.getFootnoteBySupplication(supplicationId: supplicationId);
     } catch (e) {

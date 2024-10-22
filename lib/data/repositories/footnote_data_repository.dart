@@ -28,10 +28,11 @@ class FootnoteDataRepository implements FootnoteRepository {
   }
 
   @override
-  Future<FootnoteEntity> getFootnoteBySupplication({required int supplicationId}) async {
+  Future<String> getFootnoteBySupplication({required int supplicationId}) async {
     final Database database = await _databaseService.db;
     final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbSampleBy} = ?', whereArgs: [supplicationId]);
-    final FootnoteEntity? footnoteBySupplicationId = resources.isNotEmpty ? FootnoteEntity.fromModel(FootnoteModel.fromMap(resources.first)) : null;
-    return footnoteBySupplicationId!;
+    final List<FootnoteEntity> footnotesBySupplication = resources.isNotEmpty ? resources.map((e) => FootnoteEntity.fromModel(FootnoteModel.fromMap(e))).toList() : [];
+    final String serializedFootnotes = footnotesBySupplication.asMap().entries.map((entry) => '[${entry.value.footnoteId}] - ${entry.value.footnote}').join('\n\n');
+    return serializedFootnotes;
   }
 }
