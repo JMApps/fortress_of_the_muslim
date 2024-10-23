@@ -54,7 +54,10 @@ class _MainPageState extends State<MainPage> {
               Share.share('${AppStrings.appName}${AppStrings.appSlogan}\n\n${AppStrings.versionIOS}\n${AppStrings.linkIOS}\n\n${AppStrings.versionAndroid}\n${AppStrings.linkAndroid}');
             },
             tooltip: AppStrings.share,
-            icon: Icon(Icons.ios_share),
+            icon: Icon(
+              Icons.ios_share,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
         ],
       ),

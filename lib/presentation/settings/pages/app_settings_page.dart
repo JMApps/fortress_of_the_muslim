@@ -28,8 +28,8 @@ class AppSettingsPage extends StatelessWidget {
                 AppSettingListTile(
                   title: AppStrings.remindMorning,
                   subTitle: DateFormat('HH:mm').format(settingsState.getMorningNotificationTime),
-                  leading: IconButton.filledTonal(
-                    onPressed: settingsState.getMorningNotification ? () async {
+                  leading: IconButton(
+                    onPressed: () async {
                       final notificationTime = await showTimePicker(
                         context: context,
                         initialTime: TimeOfDay(hour: settingsState.getMorningNotificationTime.hour, minute: settingsState.getMorningNotificationTime.minute),
@@ -37,23 +37,29 @@ class AppSettingsPage extends StatelessWidget {
                       if (notificationTime != null) {
                         settingsState.setMorningNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
                       }
-                    } : null,
+                    },
                     icon: Icon(
-                      Icons.notifications_on_outlined,
-                      color: settingsState.getMorningNotification ? appColors.primary : appColors.onSurface,
+                      Icons.access_time_rounded,
+                      size: 30,
                     ),
                   ),
-                  trailing: AppSettingSwitch(
-                    value: settingsState.getMorningNotification,
-                    onChanged: (onChanged) => settingsState.setMorningNotification = onChanged,
+                  trailing: IconButton.filledTonal(
+                    onPressed: () {
+                      settingsState.setMorningNotification = !settingsState.getMorningNotification;
+                    },
+                    icon: Icon(
+                      settingsState.getMorningNotification ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getMorningNotification ? appColors.primary : appColors.onSurface,
+                      size: 30,
+                    ),
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
                 AppSettingListTile(
                   title: AppStrings.remindEvening,
                   subTitle: DateFormat('HH:mm').format(settingsState.getEveningNotificationTime),
-                  leading: IconButton.filledTonal(
-                    onPressed: settingsState.getEveningNotification ? () async {
+                  leading: IconButton(
+                    onPressed: () async {
                       final notificationTime = await showTimePicker(
                         context: context,
                         initialTime: TimeOfDay(hour: settingsState.getEveningNotificationTime.hour, minute: settingsState.getEveningNotificationTime.minute),
@@ -61,15 +67,21 @@ class AppSettingsPage extends StatelessWidget {
                       if (notificationTime != null) {
                         settingsState.setEveningNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
                       }
-                    } : null,
+                    },
                     icon: Icon(
-                      Icons.notifications_on_outlined,
-                      color: settingsState.getEveningNotification ? appColors.primary : appColors.onSurface,
+                      Icons.access_time_rounded,
+                      size: 30,
                     ),
                   ),
-                  trailing: AppSettingSwitch(
-                    value: settingsState.getEveningNotification,
-                    onChanged: (onChanged) => settingsState.setEveningNotification = onChanged,
+                  trailing: IconButton.filledTonal(
+                    onPressed: () {
+                      settingsState.setEveningNotification = !settingsState.getEveningNotification;
+                    },
+                    icon: Icon(
+                      settingsState.getEveningNotification ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getEveningNotification ? appColors.primary : appColors.onSurface,
+                      size: 30,
+                    ),
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
