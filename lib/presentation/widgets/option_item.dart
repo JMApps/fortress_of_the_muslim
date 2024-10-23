@@ -76,7 +76,7 @@ class OptionItem extends StatelessWidget {
                 Text(
                   itemTitle,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                     color: fixColor,
                   ),

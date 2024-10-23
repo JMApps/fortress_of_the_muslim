@@ -35,28 +35,29 @@ class AppThemes {
       );
 
   ThemeData get darkTheme => ThemeData(
-        fontFamily: AppStrings.fontGilroy,
-        colorScheme: ColorScheme.fromSeed(
-          brightness: Brightness.dark,
-          seedColor: _appColor,
+    fontFamily: AppStrings.fontGilroy,
+    colorScheme: ColorScheme.fromSeed(
+      brightness: Brightness.dark,
+      seedColor: _appColor,
+    ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+      contentPadding: AppStyles.paddingHorizontal,
+      alignLabelWithHint: true,
+      floatingLabelAlignment: FloatingLabelAlignment.center,
+      border: OutlineInputBorder(
+        borderRadius: AppStyles.border,
+        borderSide: BorderSide(
+          width: 0.5,
         ),
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          contentPadding: AppStyles.paddingHorizontal,
-          alignLabelWithHint: true,
-          floatingLabelAlignment: FloatingLabelAlignment.center,
-          border: OutlineInputBorder(
-            borderRadius: AppStyles.borderWithoutBottom,
-            borderSide: BorderSide(
-              width: 0.5,
-            ),
-          ),
-        ),
-        bottomSheetTheme: const BottomSheetThemeData(
-          showDragHandle: true,
-          dragHandleSize: Size(48, 3),
-        ),
-      );
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      showDragHandle: true,
+      dragHandleSize: Size(48, 3),
+    ),
+  );
+
 }

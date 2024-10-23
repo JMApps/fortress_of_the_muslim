@@ -28,7 +28,7 @@ class AppSettingsPage extends StatelessWidget {
                 AppSettingListTile(
                   title: AppStrings.remindMorning,
                   subTitle: DateFormat('HH:mm').format(settingsState.getMorningNotificationTime),
-                  leading: IconButton(
+                  leading: IconButton.filledTonal(
                     onPressed: settingsState.getMorningNotification ? () async {
                       final notificationTime = await showTimePicker(
                         context: context,
@@ -39,9 +39,8 @@ class AppSettingsPage extends StatelessWidget {
                       }
                     } : null,
                     icon: Icon(
-                      Icons.access_time_rounded,
+                      Icons.notifications_on_outlined,
                       color: settingsState.getMorningNotification ? appColors.primary : appColors.onSurface,
-                      size: 40,
                     ),
                   ),
                   trailing: AppSettingSwitch(
@@ -53,7 +52,7 @@ class AppSettingsPage extends StatelessWidget {
                 AppSettingListTile(
                   title: AppStrings.remindEvening,
                   subTitle: DateFormat('HH:mm').format(settingsState.getEveningNotificationTime),
-                  leading: IconButton(
+                  leading: IconButton.filledTonal(
                     onPressed: settingsState.getEveningNotification ? () async {
                       final notificationTime = await showTimePicker(
                         context: context,
@@ -64,9 +63,8 @@ class AppSettingsPage extends StatelessWidget {
                       }
                     } : null,
                     icon: Icon(
-                      Icons.access_time_rounded,
+                      Icons.notifications_on_outlined,
                       color: settingsState.getEveningNotification ? appColors.primary : appColors.onSurface,
-                      size: 40,
                     ),
                   ),
                   trailing: AppSettingSwitch(

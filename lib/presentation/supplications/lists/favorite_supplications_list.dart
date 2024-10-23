@@ -15,6 +15,7 @@ class FavoriteSupplicationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
     return FutureBuilder<List<SupplicationEntity>>(
       future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(ids: Provider.of<MainSupplicationsState>(context).getFavoriteSupplicationIds),
       builder: (context, snapshot) {
@@ -33,9 +34,9 @@ class FavoriteSupplicationsList extends StatelessWidget {
           );
         }
         return Scrollbar(
-          controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
+          controller: scrollController,
           child: ListView.builder(
-            controller: Provider.of<ScrollPageState>(context, listen: false).getScrollController,
+            controller: scrollController,
             padding: AppStyles.paddingMini,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {

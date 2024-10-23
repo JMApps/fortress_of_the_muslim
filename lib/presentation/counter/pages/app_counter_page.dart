@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/presentation/counter/widgets/counter_values_dropdown.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -14,7 +15,6 @@ class AppCounterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -32,15 +32,14 @@ class AppCounterPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextValueContainer(
-                  textColor: appColors.primary,
+                TextValueContainer(),
+                Expanded(
+                  child: FingerPrintContainer(),
                 ),
-                Flexible(
-                  child: FingerPrintContainer(
-                    iconColor: appColors.primary,
-                  ),
-                ),
+                CounterValuesDropdown(),
+                const SizedBox(height: 16),
                 CounterOptionsContainer(),
+                const SizedBox(height: 16),
               ],
             ),
           ),
@@ -48,24 +47,25 @@ class AppCounterPage extends StatelessWidget {
             padding: AppStyles.paddingMini,
             child: Row(
               children: [
-                Flexible(
+                Expanded(
                   flex: 2,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Flexible(
-                        child: TextValueContainer(
-                          textColor: appColors.primary,
-                        ),
+                      Expanded(
+                        child: TextValueContainer(),
                       ),
+                      const SizedBox(height: 8),
+                      CounterValuesDropdown(),
+                      const SizedBox(height: 8),
                       CounterOptionsContainer(),
+                      const SizedBox(height: 8),
                     ],
                   ),
                 ),
-                Flexible(
+                Expanded(
                   flex: 2,
-                  child: FingerPrintContainer(
-                    iconColor: appColors.primary,
-                  ),
+                  child: FingerPrintContainer(),
                 ),
               ],
             ),

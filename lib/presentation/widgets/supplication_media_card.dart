@@ -60,7 +60,7 @@ class SupplicationMediaCard extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: appColors.secondaryContainer,
-                        duration: const Duration(milliseconds: 750),
+                        duration: const Duration(milliseconds: 500),
                         shape: AppStyles.shape,
                         elevation: 0,
                         content: Text(

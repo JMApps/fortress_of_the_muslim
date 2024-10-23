@@ -24,7 +24,7 @@ class ScrollPageState extends ChangeNotifier {
       final currentPixels = _scrollController.position.pixels;
       final maxScroll = _scrollController.position.maxScrollExtent;
 
-      if (maxScroll > 0 && (currentPixels - _previousScrollPosition).abs() > 10) {  // adding a threshold for smoother performance
+      if (maxScroll > 0 && (currentPixels - _previousScrollPosition).abs() > 10) {
         if (currentPixels < _previousScrollPosition) {
           _buttonOpacityNotifier.value = 1.0;
         } else {
@@ -33,11 +33,5 @@ class ScrollPageState extends ChangeNotifier {
         _previousScrollPosition = currentPixels;
       }
     }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }

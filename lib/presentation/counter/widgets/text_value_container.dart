@@ -6,40 +6,39 @@ import '../../../core/styles/app_styles.dart';
 import '../../states/app_counter_state.dart';
 
 class TextValueContainer extends StatelessWidget {
-  const TextValueContainer({
-    super.key,
-    required this.textColor,
-  });
-
-  final Color textColor;
+  const TextValueContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      margin: AppStyles.paddingMini,
-      shape: AppStyles.shape,
-      child: Consumer<AppCounterState>(
-        builder: (context, appCounter, _) {
-          return AnimatedOpacity(
-            opacity: appCounter.getValueShowState ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 500),
-            child: Center(
-              child: Text(
-                appCounter.getCountValue(),
-                key: ValueKey<String>(appCounter.getCountValue()),
-                style: TextStyle(
-                  fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: AppStrings.fontGilroy,
-                  color: textColor,
+    final appColors = Theme.of(context).colorScheme;
+    return Consumer<AppCounterState>(
+      builder: (context, appCounter, _) {
+        return AnimatedOpacity(
+          opacity: appCounter.getValueShowState ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 500),
+          child: Card(
+            elevation: 0,
+            margin: AppStyles.paddingMini,
+            shape: AppStyles.shape,
+            child: Padding(
+              padding: AppStyles.paddingWithoutBottom,
+              child: Center(
+                child: Text(
+                  appCounter.getCountValue(),
+                  key: ValueKey<String>(appCounter.getCountValue()),
+                  style: TextStyle(
+                    fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppStrings.fontGilroy,
+                    color: appColors.primary
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

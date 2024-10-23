@@ -14,8 +14,8 @@ class LastChapterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
     return OutlinedButton(
-      onPressed: () {
-        Navigator.pushNamed(
+      onPressed: () async {
+        await Navigator.pushNamed(
           context,
           NameRoutes.chapterContentPage,
           arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),

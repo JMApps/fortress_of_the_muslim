@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../states/scroll_page_state.dart';
-import '../lists/main_chapters_list.dart';
 import '../../widgets/fab_to_start.dart';
+import '../lists/main_chapters_list.dart';
 import '../widgets/search_chapters_delegate.dart';
 
 class MainChapterPage extends StatefulWidget {
@@ -18,6 +18,12 @@ class _MainChapterPageState extends State<MainChapterPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -29,10 +35,12 @@ class _MainChapterPageState extends State<MainChapterPage> {
         appBar: AppBar(
           title: const Text(AppStrings.chapters),
           actions: [
-            IconButton(
+            IconButton.filledTonal(
               onPressed: () {
                 showSearch(
-                    context: context, delegate: SearchChaptersDelegate());
+                  context: context,
+                  delegate: SearchChaptersDelegate(),
+                );
               },
               tooltip: AppStrings.search,
               icon: const Icon(Icons.search),

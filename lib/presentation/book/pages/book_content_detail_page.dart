@@ -8,7 +8,7 @@ import '../../states/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../../widgets/main_html_data.dart';
 
-class BookContentDetailPage extends StatelessWidget {
+class BookContentDetailPage extends StatefulWidget {
   const BookContentDetailPage({
     super.key,
     required this.bookModel,
@@ -17,16 +17,29 @@ class BookContentDetailPage extends StatelessWidget {
   final BookContentEntity bookModel;
 
   @override
+  State<BookContentDetailPage> createState() => _BookContentDetailPageState();
+}
+
+class _BookContentDetailPageState extends State<BookContentDetailPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ScrollPageState(ScrollController()),
+          create: (_) => ScrollPageState(_scrollController),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(bookModel.bookContentTitle),
+          title: Text(widget.bookModel.bookContentTitle),
         ),
         body: Consumer<ScrollPageState>(
           builder: (context, scrollPageState, _) {
@@ -36,10 +49,10 @@ class BookContentDetailPage extends StatelessWidget {
                 controller: scrollPageState.getScrollController,
                 padding: AppStyles.paddingWithoutTopMini,
                 child: MainHtmlData(
-                  htmlData: bookModel.bookContent,
+                  htmlData: widget.bookModel.bookContent,
                   footnoteColor: Colors.orange,
                   font: AppStrings.fontGilroy,
-                  fontSize: 20.0,
+                  fontSize: 18.0,
                   textAlign: TextAlign.start,
                   fontColor: Theme.of(context).colorScheme.onSurface,
                 ),

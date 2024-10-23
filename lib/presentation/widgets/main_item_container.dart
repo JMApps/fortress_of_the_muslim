@@ -11,7 +11,6 @@ class MainItemContainer extends StatelessWidget {
     required this.itemIcon,
     required this.itemTitle,
     required this.routeName,
-    required this.itemBorder,
   });
 
   final Color itemColor;
@@ -19,7 +18,6 @@ class MainItemContainer extends StatelessWidget {
   final IconData itemIcon;
   final String itemTitle;
   final String routeName;
-  final BorderRadius itemBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class MainItemContainer extends StatelessWidget {
         HapticFeedback.lightImpact();
         Navigator.pushNamed(context, routeName);
       },
-      borderRadius: itemBorder,
+      borderRadius: AppStyles.borderMini,
       splashColor: itemColor.withOpacity(themeIsDark ? 0.5 : 0.95),
       child: Stack(
         children: [

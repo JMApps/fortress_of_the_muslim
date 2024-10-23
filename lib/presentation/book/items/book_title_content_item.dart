@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/data/models/arguments/book_content_args.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/book_content_args.dart';
 import '../../../domain/entities/book_content_entity.dart';
 
 class BookTitleContentItem extends StatelessWidget {
@@ -23,8 +23,8 @@ class BookTitleContentItem extends StatelessWidget {
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
-        onTap: () {
-          Navigator.pushNamed(
+        onTap: () async {
+          await Navigator.pushNamed(
             context,
             NameRoutes.bookContentDetailPage,
             arguments: BookContentArgs(bookModel: bookModel),
@@ -34,7 +34,10 @@ class BookTitleContentItem extends StatelessWidget {
         tileColor: index.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(bookModel.bookContentTitle),
-        trailing: Icon(Icons.arrow_forward_ios_rounded),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: appColors.secondary,
+        ),
       ),
     );
   }

@@ -4,6 +4,8 @@ class AppStrings {
   static const String morningPrayers = 'Время утренних азкаров';
   static const String eveningPrayers = 'Время вечерних азкаров';
 
+  static const String back = 'Назад';
+
   static const String toStart = 'В начало';
   static const String chapters = 'Главы';
   static const String chapter = 'Глава';
@@ -91,7 +93,6 @@ class AppStrings {
     '0.5x',
   ];
 
-  static const String notifications = 'Уведомления';
   static const String remindMorning = 'Напоминать утром';
   static const String remindEvening = 'Напоминать вечером';
 

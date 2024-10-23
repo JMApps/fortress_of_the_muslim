@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_strings.dart';
-import '../../core/styles/app_styles.dart';
 import 'main_item_container.dart';
 
 class SecondMainTwo extends StatelessWidget {
@@ -20,7 +19,6 @@ class SecondMainTwo extends StatelessWidget {
             itemIcon: CupertinoIcons.square_grid_2x2,
             itemTitle: AppStrings.allSupplications,
             routeName: NameRoutes.allSupplicationsPage,
-            itemBorder: AppStyles.borderMini,
           ),
         ),
         const SizedBox(width: 8),
@@ -31,7 +29,6 @@ class SecondMainTwo extends StatelessWidget {
             itemIcon: CupertinoIcons.book,
             itemTitle: AppStrings.favoriteSupplications,
             routeName: NameRoutes.favoriteSupplicationsPage,
-            itemBorder: AppStyles.borderMini,
           ),
         ),
       ],

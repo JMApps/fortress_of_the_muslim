@@ -12,10 +12,12 @@ class AppCounterState extends ChangeNotifier {
     _freeCount = _counterSettings.get(AppConstraints.keyFreeCountValue, defaultValue: 0);
   }
 
+  int _valuesIndex = 0;
+
   late int _freeCount;
   int _prayerCount = 99;
   int _hundredCount = 100;
-  int _valuesIndex = 0;
+
   bool _valueShowState = true;
   bool _hapticState = true;
 

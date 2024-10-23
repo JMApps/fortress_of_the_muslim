@@ -27,10 +27,12 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    _isOpenWithChapter = Provider.of<AppSettingsState>(context, listen: false).getOpenWithChapters;
-    if (_isOpenWithChapter) {
-      _openChaptersPage();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _isOpenWithChapter = context.read<AppSettingsState>().getOpenWithChapters;
+      if (_isOpenWithChapter) {
+        _openChaptersPage();
+      }
+    });
   }
 
   void _openChaptersPage() async {
@@ -48,92 +50,93 @@ class _MainPageState extends State<MainPage> {
         title: const Text(AppStrings.appName),
         actions: [
           IconButton(
-            onPressed: () async {
-              await Share.share('${AppStrings.appName}${AppStrings.appSlogan}\n\n${AppStrings.versionIOS}\n${AppStrings.linkIOS}\n\n${AppStrings.versionAndroid}\n${AppStrings.linkAndroid}');
+            onPressed: () {
+              Share.share('${AppStrings.appName}${AppStrings.appSlogan}\n\n${AppStrings.versionIOS}\n${AppStrings.linkIOS}\n\n${AppStrings.versionAndroid}\n${AppStrings.linkAndroid}');
             },
             tooltip: AppStrings.share,
             icon: Icon(Icons.ios_share),
           ),
         ],
       ),
-      body: Container(
-        height: screenHeight,
-        padding: AppStyles.paddingMini,
-        child: ClipRRect(
-          borderRadius: AppStyles.borderBig,
-          clipBehavior: Clip.hardEdge,
-          child: OrientationLayoutBuilder(
-            portrait: (context) => Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: FirstMainTwo(),
-                ),
-                const SizedBox(height: 8),
-                Flexible(
-                  flex: 4,
-                  child: SecondMainTwo(),
-                ),
-                const SizedBox(height: 8),
-                Flexible(
-                  flex: 2,
-                  child: FirstMainThree(),
-                ),
-                const SizedBox(height: 8),
-                Flexible(
-                  flex: 2,
-                  child: SecondMainThree(),
-                ),
-                const SizedBox(height: 4),
-                Flexible(
-                  flex: 1,
-                  child: LastChapterCard(),
-                ),
-                const SizedBox(height: 4),
-                Flexible(
-                  flex: 2,
-                  child: LastMainThree(),
-                ),
-              ],
-            ),
-            landscape: (context) => Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: FirstMainTwo(),
-                      ),
-                      const SizedBox(height: 4),
-                      LastChapterCard(),
-                      const SizedBox(height: 4),
-                      Expanded(
-                        child: SecondMainTwo(),
-                      ),
-                    ],
+      body: MediaQuery.removePadding(
+        removeBottom: true,
+        context: context,
+        child: Container(
+          height: screenHeight,
+          padding: AppStyles.paddingMini,
+          child: Material(
+            borderRadius: AppStyles.borderBig,
+            clipBehavior: Clip.antiAlias,
+            child: OrientationLayoutBuilder(
+              portrait: (context) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: FirstMainTwo(),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Flexible(
-                        child: FirstMainThree(),
-                      ),
-                      const SizedBox(height: 8),
-                      Flexible(
-                        child: SecondMainThree(),
-                      ),
-                      const SizedBox(height: 8),
-                      Flexible(
-                        child: LastMainThree(),
-                      ),
-                    ],
+                  const SizedBox(height: 8),
+                  Expanded(
+                    flex: 4,
+                    child: SecondMainTwo(),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  Expanded(
+                    flex: 2,
+                    child: FirstMainThree(),
+                  ),
+                  const SizedBox(height: 8),
+                  Expanded(
+                    flex: 2,
+                    child: SecondMainThree(),
+                  ),
+                  const SizedBox(height: 4),
+                  LastChapterCard(),
+                  const SizedBox(height: 4),
+                  Expanded(
+                    flex: 2,
+                    child: LastMainThree(),
+                  ),
+                ],
+              ),
+              landscape: (context) => Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: FirstMainTwo(),
+                        ),
+                        const SizedBox(height: 4),
+                        LastChapterCard(),
+                        const SizedBox(height: 4),
+                        Expanded(
+                          child: SecondMainTwo(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: FirstMainThree(),
+                        ),
+                        const SizedBox(height: 8),
+                        Expanded(
+                          child: SecondMainThree(),
+                        ),
+                        const SizedBox(height: 8),
+                        Expanded(
+                          child: LastMainThree(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

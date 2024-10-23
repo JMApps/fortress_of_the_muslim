@@ -19,6 +19,12 @@ class _FavoriteSupplicationPageState extends State<FavoriteSupplicationPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -34,16 +40,19 @@ class _FavoriteSupplicationPageState extends State<FavoriteSupplicationPage> {
               Provider.of<AppPlayerState>(context, listen: false).stopTrack();
               Navigator.of(context).pop();
             },
+            tooltip: AppStrings.back,
             icon: Icon(Icons.arrow_back_ios_new_rounded),
           ),
           actions: [
-            IconButton(
+            IconButton.filledTonal(
               onPressed: () {
+                Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 Navigator.pushNamed(
                   context,
                   NameRoutes.settingsContentPage,
                 );
               },
+              tooltip: AppStrings.settings,
               icon: Icon(Icons.settings_outlined),
             ),
           ],

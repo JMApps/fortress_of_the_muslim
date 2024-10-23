@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_strings.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/timezone.dart';
+
+import '../../../core/strings/app_strings.dart';
 
 class NotificationService {
   static final NotificationService _localNoticeService = NotificationService._internal();

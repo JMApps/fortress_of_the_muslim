@@ -67,7 +67,7 @@ class MainItemChapter extends StatelessWidget {
                 Text(
                   itemTitle,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 16.0,
                     color: fixColor,
                     fontWeight: FontWeight.bold,
                   ),

@@ -27,13 +27,13 @@ class ChapterContentPage extends StatefulWidget {
 
 class _ChapterContentPageState extends State<ChapterContentPage> {
   late Future<ChapterEntity> _futureChapter;
-  late Future<List<SupplicationEntity>> _futureChapterContent;
+  late Future<List<SupplicationEntity>> _futureSupplications;
 
   @override
   void initState() {
     super.initState();
     _futureChapter = Provider.of<MainChaptersState>(context, listen: false).getChapterById(chapterId: widget.chapterId);
-    _futureChapterContent = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(chapterId: widget.chapterId);
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(chapterId: widget.chapterId);
   }
 
   @override
@@ -51,16 +51,18 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 Navigator.of(context).pop();
               },
+              tooltip: AppStrings.back,
               icon: Icon(Icons.arrow_back_ios_new_rounded),
             ),
             actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(
+              IconButton.filledTonal(
+                onPressed: () async {
+                  await Navigator.pushNamed(
                     context,
                     NameRoutes.settingsContentPage,
                   );
                 },
+                tooltip: AppStrings.settings,
                 icon: Icon(Icons.settings_outlined),
               ),
             ],
@@ -91,7 +93,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                       htmlData: chapterModel.chapterTitle,
                       footnoteColor: appColors.primary,
                       font: AppStrings.fontGilroy,
-                      fontSize: 18.0,
+                      fontSize: 17.0,
                       textAlign: TextAlign.center,
                       fontColor: appColors.onSurface,
                     ),
@@ -101,7 +103,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
             ),
           ),
           FutureBuilder<List<SupplicationEntity>>(
-            future: _futureChapterContent,
+            future: _futureSupplications,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return SliverFillRemaining(

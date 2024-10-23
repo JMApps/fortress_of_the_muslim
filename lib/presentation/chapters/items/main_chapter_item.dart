@@ -29,10 +29,10 @@ class MainChapterItem extends StatelessWidget {
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
-        onTap: () {
+        onTap: () async {
           HapticFeedback.lightImpact();
           Provider.of<MainChaptersState>(context, listen: false).saveLastChapter(chapterModel.chapterId);
-          Navigator.pushNamed(
+          await Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
             arguments: ChapterIdArgs(chapterId: chapterModel.chapterId),
@@ -59,13 +59,13 @@ class MainChapterItem extends StatelessWidget {
           textAlign: TextAlign.start,
           fontColor: appColors.onSurface,
         ),
-        leading: IconButton(
+        leading: IconButton.filledTonal(
           onPressed: () {
             Provider.of<MainChaptersState>(context, listen: false).toggleChapterFavorite(chapterId: chapterModel.chapterId);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: appColors.secondaryContainer,
-                duration: const Duration(milliseconds: 750),
+                duration: const Duration(milliseconds: 500),
                 shape: AppStyles.shape,
                 elevation: 0,
                 content: Text(
@@ -80,11 +80,13 @@ class MainChapterItem extends StatelessWidget {
           },
           padding: EdgeInsets.zero,
           icon: Icon(
-            chapterIsFavorite ? Icons.bookmark : Icons.bookmark_outline_outlined,
-            color: appColors.primary,
+            chapterIsFavorite ? Icons.bookmark : Icons.bookmark_outline_outlined, color: appColors.secondary,
           ),
         ),
-        trailing: const Icon(Icons.arrow_forward_ios_rounded),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: appColors.secondary,
+        ),
       ),
     );
   }

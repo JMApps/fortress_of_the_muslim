@@ -57,8 +57,10 @@ class AppPlayerState extends ChangeNotifier {
 
   void stopTrack() {
     if (!hasListeners) return;
-    _audioPlayer.stop();
-    _resetPlayerState();
+    if (isPlaying) {
+      _audioPlayer.stop();
+      _resetPlayerState();
+    }
   }
 
   void _resetPlayerState() {

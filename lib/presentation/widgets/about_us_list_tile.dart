@@ -32,7 +32,11 @@ class AboutUsListTile extends StatelessWidget {
         subTitle,
         style: AppStyles.mainTextStyle17,
       ),
-      leading: Image.asset('assets/icons/$iconName.png'),
+      leading: Image.asset(
+        'assets/icons/$iconName.png',
+        width: 50,
+        height: 50,
+      ),
       trailing: Icon(Icons.arrow_forward_ios_rounded),
     );
   }

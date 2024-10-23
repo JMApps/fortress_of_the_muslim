@@ -27,7 +27,7 @@ class FabTopStart extends StatelessWidget {
                 onPressed: scrollPageState.getToTop,
                 backgroundColor: fabColor,
                 tooltip: AppStrings.toStart,
-                child: const Icon(Icons.keyboard_arrow_up_rounded),
+                child: const Icon(Icons.arrow_upward_rounded),
               ),
             );
           },

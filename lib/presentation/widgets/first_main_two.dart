@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/styles/app_styles.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_strings.dart';
@@ -13,25 +12,23 @@ class FirstMainTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Flexible(
+        Expanded(
           child: MainItemContainer(
             itemColor: Colors.teal,
             pictureName: 'texture_top_left',
             itemIcon: CupertinoIcons.collections,
             itemTitle: AppStrings.chapters,
             routeName: NameRoutes.allChaptersPage,
-            itemBorder: AppStyles.borderTopLeft,
           ),
         ),
         const SizedBox(width: 8),
-        Flexible(
+        Expanded(
           child: MainItemContainer(
             itemColor: Colors.orange,
             pictureName: 'texture_top_right',
             itemIcon: CupertinoIcons.bookmark,
             itemTitle: AppStrings.favoriteChapters,
             routeName: NameRoutes.favoriteChaptersPage,
-            itemBorder: AppStyles.borderTopRight,
           ),
         ),
       ],
