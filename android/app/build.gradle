@@ -22,7 +22,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "com.example.fortressofthemuslim"
+    namespace = "com.example.fortress_of_the_muslim"
     compileSdk 35
     ndkVersion "27.0.12077973"
 
@@ -46,7 +46,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
-        applicationId "jmapps.fortress_of_the_muslim"
+        applicationId "jmapps.fortressofthemuslim"
         minSdk 23
         targetSdk 35
         versionCode flutterVersionCode.toInteger()

@@ -15,6 +15,7 @@
 *.iml
 *.ipr
 *.iws
+.aab
 .idea/
 
 # Visual Studio Code related
