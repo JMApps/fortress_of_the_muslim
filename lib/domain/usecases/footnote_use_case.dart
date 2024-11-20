@@ -6,25 +6,25 @@ class FootnoteUseCase {
 
   FootnoteUseCase(this._footnoteRepository);
 
-  Future<List<FootnoteEntity>> fetchAllFootnotes() async {
+  Future<List<FootnoteEntity>> fetchAllFootnotes({required String languageCode}) async {
     try {
-      return await _footnoteRepository.getAllFootnotes();
+      return await _footnoteRepository.getAllFootnotes(languageCode: languageCode);
     } catch (e) {
       throw Exception('$e');
     }
   }
 
-  Future<FootnoteEntity> fetchFootnoteById({required int footnoteId}) async {
+  Future<FootnoteEntity> fetchFootnoteById({required String languageCode, required int footnoteId}) async {
     try {
-      return await _footnoteRepository.getFootnoteById(footnoteId: footnoteId);
+      return await _footnoteRepository.getFootnoteById(languageCode: languageCode, footnoteId: footnoteId);
     } catch (e) {
       throw Exception('$e');
     }
   }
 
-  Future<String> fetchFootnoteBySupplication({required int supplicationId}) async {
+  Future<String> fetchFootnoteBySupplication({required String languageCode, required int supplicationId}) async {
     try {
-      return await _footnoteRepository.getFootnoteBySupplication(supplicationId: supplicationId);
+      return await _footnoteRepository.getFootnoteBySupplication(languageCode: languageCode, supplicationId: supplicationId);
     } catch (e) {
       throw Exception('$e');
     }

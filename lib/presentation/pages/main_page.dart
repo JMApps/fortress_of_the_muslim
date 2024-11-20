@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../states/app_settings_state.dart';
 import '../widgets/first_main_three.dart';
@@ -44,16 +44,17 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.appName),
+        title: Text(appLocale.appName),
         actions: [
           IconButton(
             onPressed: () {
-              Share.share('${AppStrings.appName}${AppStrings.appSlogan}\n\n${AppStrings.versionIOS}\n${AppStrings.linkIOS}\n\n${AppStrings.versionAndroid}\n${AppStrings.linkAndroid}');
+              Share.share('${appLocale.appName}${appLocale.appSlogan}\n\n${appLocale.versionIOS}\n${appLocale.linkIOS}\n\n${appLocale.versionAndroid}\n${appLocale.linkAndroid}');
             },
-            tooltip: AppStrings.share,
+            tooltip: appLocale.share,
             icon: Icon(
               Icons.ios_share,
               color: Theme.of(context).colorScheme.primary,
@@ -66,80 +67,80 @@ class _MainPageState extends State<MainPage> {
         context: context,
         child: Container(
           height: screenHeight,
-          padding: AppStyles.paddingMini,
-          child: Material(
-            borderRadius: AppStyles.borderBig,
-            clipBehavior: Clip.antiAlias,
-            child: OrientationLayoutBuilder(
-              portrait: (context) => Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: FirstMainTwo(),
+          clipBehavior: Clip.antiAlias,
+          margin: AppStyles.paddingWithoutTopBottom,
+          decoration: BoxDecoration(
+            borderRadius: AppStyles.borderBig
+          ),
+          child: OrientationLayoutBuilder(
+            portrait: (context) => Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: FirstMainTwo(),
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  flex: 4,
+                  child: SecondMainTwo(),
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  flex: 2,
+                  child: FirstMainThree(),
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  flex: 2,
+                  child: SecondMainThree(),
+                ),
+                const SizedBox(height: 4),
+                LastChapterCard(),
+                const SizedBox(height: 4),
+                Expanded(
+                  flex: 2,
+                  child: LastMainThree(),
+                ),
+              ],
+            ),
+            landscape: (context) => Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: FirstMainTwo(),
+                      ),
+                      const SizedBox(height: 4),
+                      LastChapterCard(),
+                      const SizedBox(height: 4),
+                      Expanded(
+                        child: SecondMainTwo(),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Expanded(
-                    flex: 4,
-                    child: SecondMainTwo(),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: FirstMainThree(),
+                      ),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: SecondMainThree(),
+                      ),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: LastMainThree(),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Expanded(
-                    flex: 2,
-                    child: FirstMainThree(),
-                  ),
-                  const SizedBox(height: 8),
-                  Expanded(
-                    flex: 2,
-                    child: SecondMainThree(),
-                  ),
-                  const SizedBox(height: 4),
-                  LastChapterCard(),
-                  const SizedBox(height: 4),
-                  Expanded(
-                    flex: 2,
-                    child: LastMainThree(),
-                  ),
-                ],
-              ),
-              landscape: (context) => Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: FirstMainTwo(),
-                        ),
-                        const SizedBox(height: 4),
-                        LastChapterCard(),
-                        const SizedBox(height: 4),
-                        Expanded(
-                          child: SecondMainTwo(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: FirstMainThree(),
-                        ),
-                        const SizedBox(height: 8),
-                        Expanded(
-                          child: SecondMainThree(),
-                        ),
-                        const SizedBox(height: 8),
-                        Expanded(
-                          child: LastMainThree(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

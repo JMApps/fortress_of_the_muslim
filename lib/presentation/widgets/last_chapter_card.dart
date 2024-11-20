@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../data/models/arguments/chapter_id_args.dart';
 import '../states/main_chapters_state.dart';
@@ -12,6 +12,7 @@ class LastChapterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return OutlinedButton(
       onPressed: () async {
@@ -25,7 +26,7 @@ class LastChapterCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            AppStrings.readLastChapter.replaceAll('{}', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
+            appLocale.readLastChapter.replaceAll('||', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
             style: AppStyles.mainTextStyle17,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

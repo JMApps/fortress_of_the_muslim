@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
+import 'package:fortress_of_the_muslim/presentation/states/app_settings_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
@@ -20,7 +22,7 @@ class _BookContentListState extends State<BookContentList> {
   @override
   void initState() {
     super.initState();
-    _futureBookContent = Provider.of<BookContentState>(context, listen: false).getAllContentBook();
+    _futureBookContent = Provider.of<BookContentState>(context, listen: false).getAllContentBook(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
   }
 
   @override

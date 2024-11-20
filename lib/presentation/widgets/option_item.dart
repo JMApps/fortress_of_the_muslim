@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import 'about_us_column.dart';
 
@@ -23,13 +23,14 @@ class OptionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appTheme = Theme.of(context);
     final themeIsDark = appTheme.brightness == Brightness.dark;
     final fixColor = appTheme.colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
     return InkWell(
       onTap: () {
         HapticFeedback.lightImpact();
-        if (routeName.contains(AppStrings.aboutUs)) {
+        if (routeName.contains(appLocale.aboutUs)) {
           showModalBottomSheet(
             context: context,
             builder: (_) => SingleChildScrollView(

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/main_supplications_state.dart';
 
@@ -16,6 +16,7 @@ class FavoriteSupplicationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final bool supplicationIsFavorite = Provider.of<MainSupplicationsState>(context).supplicationIsFavorite(supplicationId);
     return IconButton(
@@ -28,7 +29,7 @@ class FavoriteSupplicationButton extends StatelessWidget {
             shape: AppStyles.shape,
             elevation: 0,
             content: Text(
-              supplicationIsFavorite ? AppStrings.removed : AppStrings.added,
+              supplicationIsFavorite ? appLocale.removed : appLocale.added,
               style: TextStyle(
                 fontSize: 17.0,
                 color: appColors.onSurface,

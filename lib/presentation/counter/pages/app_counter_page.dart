@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/presentation/counter/widgets/counter_values_dropdown.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/app_counter_state.dart';
 import '../widgets/counter_options_container.dart';
+import '../widgets/counter_values_dropdown.dart';
 import '../widgets/finger_print_container.dart';
 import '../widgets/text_value_container.dart';
 
@@ -15,6 +15,7 @@ class AppCounterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -23,7 +24,7 @@ class AppCounterPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.counter),
+          title: Text(appLocale.counter),
         ),
         body: OrientationLayoutBuilder(
           portrait: (context) => Padding(

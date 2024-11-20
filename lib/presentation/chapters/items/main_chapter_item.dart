@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/chapter_id_args.dart';
 import '../../../domain/entities/chapter_entity.dart';
@@ -22,6 +23,7 @@ class MainChapterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
@@ -54,7 +56,7 @@ class MainChapterItem extends StatelessWidget {
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
           footnoteColor: Colors.teal,
-          font: AppStrings.fontGilroy,
+          font: AppConstraints.fontGilroy,
           fontSize: 17.0,
           textAlign: TextAlign.start,
           fontColor: appColors.onSurface,
@@ -69,7 +71,7 @@ class MainChapterItem extends StatelessWidget {
                 shape: AppStyles.shape,
                 elevation: 0,
                 content: Text(
-                  chapterIsFavorite ? AppStrings.removed : AppStrings.added,
+                  chapterIsFavorite ? appLocale.removed : appLocale.added,
                   style: TextStyle(
                     fontSize: 17.0,
                     color: appColors.onSurface,

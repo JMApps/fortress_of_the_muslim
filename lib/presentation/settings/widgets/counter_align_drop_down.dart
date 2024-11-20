@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/content_settings_state.dart';
 
@@ -10,8 +11,9 @@ class CounterAlignDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppStrings.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     Widget buildDropDownRow({
       required String label,
       required int selectedIndex,
@@ -32,13 +34,13 @@ class CounterAlignDropDown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
-              AppStrings.counterAligns.length,
+              appLocale.counterAligns.split(', ').length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
-                    child: Text(AppStrings.counterAligns[index],
+                    child: Text(appLocale.counterAligns.split(', ')[index],
                       style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle17,
                     ),
                   ),
@@ -61,7 +63,7 @@ class CounterAlignDropDown extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.counterAlign,
+                appLocale.counterAlign,
                 style: AppStyles.mainTextStyle17Bold,
               ),
               leading: Icon(
@@ -70,7 +72,7 @@ class CounterAlignDropDown extends StatelessWidget {
               ),
             ),
             buildDropDownRow(
-              label: AppStrings.align,
+              label: appLocale.align,
               selectedIndex: contentSettings.getCounterAlignIndex,
               onChanged: (newIndex) => contentSettings.setCounterAlignIndex = newIndex!,
             ),

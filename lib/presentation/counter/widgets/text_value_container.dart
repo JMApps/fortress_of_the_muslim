@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/app_counter_state.dart';
 
@@ -29,7 +29,7 @@ class TextValueContainer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
                     fontWeight: FontWeight.bold,
-                    fontFamily: AppStrings.fontGilroy,
+                    fontFamily: AppConstraints.fontGilroy,
                     color: appColors.primary
                   ),
                   textAlign: TextAlign.center,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../states/app_settings_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -28,12 +30,13 @@ class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
 
   @override
   void initState() {
-    _futureMainChapters = Provider.of<MainChaptersState>(context, listen: false).fetchChapters();
+    _futureMainChapters = Provider.of<MainChaptersState>(context, listen: false).fetchAllChapters(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder<List<ChapterEntity>>(
       future: _futureMainChapters,
       builder: (context, snapshot) {
@@ -46,14 +49,14 @@ class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
         if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return const MainDescriptionText(
-            descriptionText: AppStrings.searchIsEmpty,
+          return MainDescriptionText(
+            descriptionText: appLocale.searchIsEmpty,
           );
         }
         _chapters = snapshot.data!;
         _recentChapters = widget.query.isEmpty ? _chapters : _chapters.where((element) =>
         element.chapterId.toString().contains(widget.query) || element.chapterNumber.toLowerCase().contains(widget.query) || element.chapterTitle.toLowerCase().contains(widget.query)).toList();
-        return _recentChapters.isEmpty ? const MainDescriptionText(descriptionText: AppStrings.searchIsEmpty) : Scrollbar(
+        return _recentChapters.isEmpty ? MainDescriptionText(descriptionText: appLocale.searchIsEmpty) : Scrollbar(
           child: ListView.builder(
             padding: AppStyles.paddingMini,
             itemCount: _recentChapters.length,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../data/repositories/book_content_data_repository.dart';
 import '../../../data/services/database_service.dart';
 import '../../../domain/usecases/book_content_use_case.dart';
@@ -13,6 +13,7 @@ class BookContentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -27,7 +28,7 @@ class BookContentPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.bookContent),
+          title: Text(appLocale.bookContent),
         ),
         body: BookContentList(),
       ),

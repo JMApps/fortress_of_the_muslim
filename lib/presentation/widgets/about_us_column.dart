@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import 'about_us_list_tile.dart';
 
@@ -11,49 +11,50 @@ class AboutUsColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Padding(
       padding: AppStyles.paddingWithoutTopMini,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            AppStrings.ourApps,
+            appLocale.ourApps,
             style: AppStyles.mainTextStyle17,
             textAlign: TextAlign.start,
           ),
           const SizedBox(height: 8),
           AboutUsListTile(
-            title: Platform.isAndroid ? AppStrings.googlePlay : AppStrings.appStore,
-            subTitle: AppStrings.moreOurApps,
+            title: Platform.isAndroid ? appLocale.googlePlay : appLocale.appStore,
+            subTitle: appLocale.moreOurApps,
             iconName: Platform.isAndroid ? 'google-play' : 'appstore',
-            link: Platform.isAndroid ? AppStrings.linkGooglePlay : AppStrings.linkAppStore,
+            link: Platform.isAndroid ? appLocale.linkGooglePlay : appLocale.linkAppStore,
           ),
           const SizedBox(height: 8),
           Text(
-            AppStrings.ourSocials,
+            appLocale.ourSocials,
             style: AppStyles.mainTextStyle17,
             textAlign: TextAlign.start,
           ),
           const SizedBox(height: 8),
           AboutUsListTile(
-            title: AppStrings.telegram,
-            subTitle: AppStrings.jmapps,
+            title: appLocale.telegram,
+            subTitle: appLocale.jmapps,
             iconName: 'telegram',
-            link: AppStrings.linkTelegram,
+            link: appLocale.linkTelegram,
           ),
           const SizedBox(height: 8),
           AboutUsListTile(
-            title: AppStrings.instagram,
-            subTitle: AppStrings.devMuslim,
+            title: appLocale.instagram,
+            subTitle: appLocale.devMuslim,
             iconName: 'instagram',
-            link: AppStrings.linkInstagram,
+            link: appLocale.linkInstagram,
           ),
           const SizedBox(height: 8),
           AboutUsListTile(
-            title: AppStrings.ummaLife,
-            subTitle: AppStrings.jmapps,
+            title: appLocale.ummaLife,
+            subTitle: appLocale.jmapps,
             iconName: 'ummalife',
-            link: AppStrings.linkUmmaLife,
+            link: appLocale.linkUmmaLife,
           ),
           const SizedBox(height: 8),
         ],

@@ -1,3 +1,4 @@
+
 import 'package:sqflite/sqflite.dart';
 
 import '../../core/strings/db_values.dart';
@@ -12,25 +13,25 @@ class FootnoteDataRepository implements FootnoteRepository {
   FootnoteDataRepository(this._databaseService);
 
   @override
-  Future<List<FootnoteEntity>> getAllFootnotes() async {
+  Future<List<FootnoteEntity>> getAllFootnotes({required String languageCode}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName);
+    final List<Map<String, Object?>> resources = await database.query(DBValues.getFootnoteTableName(languageCode));
     final List<FootnoteEntity> allFootnotes = resources.isNotEmpty ? resources.map((e) => FootnoteEntity.fromModel(FootnoteModel.fromMap(e))).toList() : [];
     return allFootnotes;
   }
 
   @override
-  Future<FootnoteEntity> getFootnoteById({required int footnoteId}) async {
+  Future<FootnoteEntity> getFootnoteById({required String languageCode, required int footnoteId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbFootnoteId} = ?', whereArgs: [footnoteId]);
+    final List<Map<String, Object?>> resources = await database.query(DBValues.getFootnoteTableName(languageCode), where: '${DBValues.dbFootnoteId} = ?', whereArgs: [footnoteId]);
     final FootnoteEntity? footnoteById = resources.isNotEmpty ? FootnoteEntity.fromModel(FootnoteModel.fromMap(resources.first)) : null;
     return footnoteById!;
   }
 
   @override
-  Future<String> getFootnoteBySupplication({required int supplicationId}) async {
+  Future<String> getFootnoteBySupplication({required String languageCode, required int supplicationId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.dbFootnoteTableName, where: '${DBValues.dbSampleBy} = ?', whereArgs: [supplicationId]);
+    final List<Map<String, Object?>> resources = await database.query(DBValues.getFootnoteTableName(languageCode), where: '${DBValues.dbSampleBy} = ?', whereArgs: [supplicationId]);
     final List<FootnoteEntity> footnotesBySupplication = resources.isNotEmpty ? resources.map((e) => FootnoteEntity.fromModel(FootnoteModel.fromMap(e))).toList() : [];
     final String serializedFootnotes = footnotesBySupplication.asMap().entries.map((entry) => '[${entry.value.footnoteId}] - ${entry.value.footnote}').join('\n\n');
     return serializedFootnotes;

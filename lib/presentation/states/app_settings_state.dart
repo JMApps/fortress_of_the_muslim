@@ -1,16 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../core/strings/app_constraints.dart';
-import '../../core/strings/app_strings.dart';
-import '../../data/services/notification/notification_service.dart';
 
 class AppSettingsState extends ChangeNotifier {
   final _mainSettingsBox = Hive.box(AppConstraints.keyMainSettingsBox);
-  final NotificationService _notificationService = NotificationService();
 
   AppSettingsState() {
+    _appLocaleIndex = _mainSettingsBox.get(AppConstraints.keyAppLocaleIndex, defaultValue: _getDefLocaleIndex());
     _morningNotification = _mainSettingsBox.get(AppConstraints.keyMorningNotificationState, defaultValue: false);
     _eveningNotification = _mainSettingsBox.get(AppConstraints.keyEveningNotificationState, defaultValue: false);
     _morningNotificationTime = _mainSettingsBox.get(AppConstraints.keyMorningNotificationTime, defaultValue: DateTime(2024, 12, 31, 4, 0).toIso8601String());
@@ -32,6 +32,17 @@ class AppSettingsState extends ChangeNotifier {
   late bool _displayAlwaysOn;
   late int _appThemeColor;
   late int _themeModeIndex;
+  late int _appLocaleIndex;
+
+  int _getDefLocaleIndex() {
+    final deviceLocale = PlatformDispatcher.instance.locale;
+    switch (deviceLocale.languageCode) {
+      case 'ky':
+        return 1;
+      default:
+        return 0;
+    }
+  }
 
   bool get getMorningNotification => _morningNotification;
 
@@ -46,6 +57,8 @@ class AppSettingsState extends ChangeNotifier {
   bool get getDisplayAlwaysOn => _displayAlwaysOn;
 
   int get getAppThemeColor => _appThemeColor;
+
+  int get getAppLocaleIndex => _appLocaleIndex;
 
   ThemeMode get getThemeMode {
     late ThemeMode currentTheme;
@@ -68,36 +81,24 @@ class AppSettingsState extends ChangeNotifier {
 
   set setMorningNotification(bool value) {
     _morningNotification = value;
-    if (value) {
-      _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: getMorningNotificationTime);
-    } else {
-      _notificationService.cancelNotificationWithId(NotificationService.morningNotificationID);
-    }
     _saveSetting(AppConstraints.keyMorningNotificationState, value);
     notifyListeners();
   }
 
   set setMorningNotificationTime(DateTime time) {
     _morningNotificationTime = time.toIso8601String();
-    _notificationService.timeNotifications(id: NotificationService.morningNotificationID, body: AppStrings.morningPrayers, dateTime: time);
     _saveSetting(AppConstraints.keyMorningNotificationTime, time.toIso8601String());
     notifyListeners();
   }
 
   set setEveningNotification(bool value) {
     _eveningNotification = value;
-    if (value) {
-      _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: getEveningNotificationTime);
-    } else {
-      _notificationService.cancelNotificationWithId(NotificationService.eveningNotificationID);
-    }
     _saveSetting(AppConstraints.keyEveningNotificationState, value);
     notifyListeners();
   }
 
   set setEveningNotificationTime(DateTime time) {
     _eveningNotificationTime = time.toIso8601String();
-    _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, body: AppStrings.eveningPrayers, dateTime: time);
     _saveSetting(AppConstraints.keyEveningNotificationTime, time.toIso8601String());
     notifyListeners();
   }
@@ -124,6 +125,12 @@ class AppSettingsState extends ChangeNotifier {
   set setThemeModeIndex(int themeIndex) {
     _themeModeIndex = themeIndex;
     _saveSetting(AppConstraints.keyThemeModeIndex, themeIndex);
+    notifyListeners();
+  }
+
+  set setAppLocaleIndex(int index) {
+    _appLocaleIndex = index;
+    _saveSetting(AppConstraints.keyAppLocaleIndex, index);
     notifyListeners();
   }
 

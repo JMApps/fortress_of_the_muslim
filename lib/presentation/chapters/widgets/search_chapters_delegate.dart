@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/strings/app_strings.dart';
 import 'search_chapter_future.dart';
 
 class SearchChaptersDelegate extends SearchDelegate {
 
-  SearchChaptersDelegate() : super(
-    searchFieldLabel: AppStrings.search,
+  final String search;
+
+  SearchChaptersDelegate({required this.search}) : super(
+    searchFieldLabel: search,
     keyboardType: TextInputType.text,
   );
 

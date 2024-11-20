@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../lists/main_chapters_list.dart';
@@ -25,6 +25,7 @@ class _MainChapterPageState extends State<MainChapterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
@@ -33,16 +34,16 @@ class _MainChapterPageState extends State<MainChapterPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.chapters),
+          title: Text(appLocale.chapters),
           actions: [
             IconButton.filledTonal(
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: SearchChaptersDelegate(),
+                  delegate: SearchChaptersDelegate(search: appLocale.search),
                 );
               },
-              tooltip: AppStrings.search,
+              tooltip: appLocale.search,
               icon: const Icon(Icons.search),
             ),
           ],

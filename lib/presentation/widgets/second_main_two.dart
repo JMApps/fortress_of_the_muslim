@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
-import '../../core/strings/app_strings.dart';
 import 'main_item_container.dart';
 
 class SecondMainTwo extends StatelessWidget {
@@ -10,6 +10,7 @@ class SecondMainTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Row(
       children: [
         Flexible(
@@ -17,7 +18,7 @@ class SecondMainTwo extends StatelessWidget {
             itemColor: Colors.red,
             pictureName: 'texture_bottom_left',
             itemIcon: CupertinoIcons.square_grid_2x2,
-            itemTitle: AppStrings.allSupplications,
+            itemTitle: appLocale.allSupplications,
             routeName: NameRoutes.allSupplicationsPage,
           ),
         ),
@@ -27,7 +28,7 @@ class SecondMainTwo extends StatelessWidget {
             itemColor: Colors.blue,
             pictureName: 'texture_bottom_right',
             itemIcon: CupertinoIcons.book,
-            itemTitle: AppStrings.favoriteSupplications,
+            itemTitle: appLocale.favoriteSupplications,
             routeName: NameRoutes.favoriteSupplicationsPage,
           ),
         ),

@@ -10,36 +10,28 @@ class MainSupplicationsState extends ChangeNotifier {
 
   final SupplicationUseCase _supplicationUseCase;
 
-  late Future<List<SupplicationEntity>> _futureMainSupplications;
-
-
   MainSupplicationsState(this._supplicationUseCase) {
     _favoriteSupplicationIds = _mainAppSettingsBox.get(AppConstraints.keySupplicationIds, defaultValue: <int>[]);
-    _futureMainSupplications = _getAllSupplications();
   }
 
   late List<int> _favoriteSupplicationIds = [];
 
   List<int> get getFavoriteSupplicationIds => _favoriteSupplicationIds;
 
-  Future<List<SupplicationEntity>> fetchAllSupplications() {
-    return _futureMainSupplications;
+  Future<List<SupplicationEntity>> fetchAllSupplications({required String languageCode}) async {
+    return await _supplicationUseCase.fetchAllSupplications(languageCode: languageCode);
   }
 
-  Future<List<SupplicationEntity>> _getAllSupplications() async {
-    return await _supplicationUseCase.fetchAllSupplications();
+  Future<List<SupplicationEntity>> getSupplicationsByChapterId({required String languageCode, required int chapterId}) async {
+    return await _supplicationUseCase.fetchSupplicationsByChapterId(languageCode: languageCode, chapterId: chapterId);
   }
 
-  Future<List<SupplicationEntity>> getSupplicationsByChapterId({required int chapterId}) async {
-    return await _supplicationUseCase.fetchSupplicationsByChapterId(chapterId: chapterId);
+  Future<SupplicationEntity> getSupplicationById({required String languageCode, required int supplicationId}) async {
+    return await _supplicationUseCase.fetchSupplicationById(languageCode: languageCode, supplicationId: supplicationId);
   }
 
-  Future<SupplicationEntity> getSupplicationById({required int supplicationId}) async {
-    return await _supplicationUseCase.fetchSupplicationById(supplicationId: supplicationId);
-  }
-
-  Future<List<SupplicationEntity>> getFavoriteSupplications({required List<int> ids}) async {
-    return await _supplicationUseCase.fetchFavoriteSupplications(ids: ids);
+  Future<List<SupplicationEntity>> getFavoriteSupplications({required String languageCode, required List<int> ids}) async {
+    return await _supplicationUseCase.fetchFavoriteSupplications(languageCode: languageCode, ids: ids);
   }
 
   void toggleSupplicationFavorite({required int supplicationId}) {

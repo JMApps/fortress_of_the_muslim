@@ -7,25 +7,25 @@ class ChapterUseCase {
 
   ChapterUseCase(this._chapterRepository);
 
-  Future<List<ChapterEntity>> fetchAllChapters() async {
+  Future<List<ChapterEntity>> fetchAllChapters({required String languageCode}) async {
     try {
-      return await _chapterRepository.getAllChapters();
+      return await _chapterRepository.getAllChapters(languageCode: languageCode);
     } catch (e) {
       throw Exception('$e');
     }
   }
 
-  Future<ChapterEntity> fetchChapterById({required int chapterId}) async {
+  Future<ChapterEntity> fetchChapterById({required String languageCode, required int chapterId}) async {
     try {
-      return await _chapterRepository.getChapterById(chapterId: chapterId);
+      return await _chapterRepository.getChapterById(languageCode: languageCode, chapterId: chapterId);
     } catch (e) {
       throw Exception('$e');
     }
   }
 
-  Future<List<ChapterEntity>> fetchFavoriteChapters({required List<int> ids}) async {
+  Future<List<ChapterEntity>> fetchFavoriteChapters({required String languageCode, required List<int> ids}) async {
     try {
-      return await _chapterRepository.getFavoriteChapters(ids: ids);
+      return await _chapterRepository.getFavoriteChapters(languageCode: languageCode, ids: ids);
     } catch (e) {
       throw Exception('$e');
     }

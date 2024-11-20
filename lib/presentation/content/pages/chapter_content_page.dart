@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/app_player_state.dart';
+import '../../states/app_settings_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -32,26 +34,27 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
   @override
   void initState() {
     super.initState();
-    _futureChapter = Provider.of<MainChaptersState>(context, listen: false).getChapterById(chapterId: widget.chapterId);
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(chapterId: widget.chapterId);
+    _futureChapter = Provider.of<MainChaptersState>(context, listen: false).getChapterById(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, chapterId: widget.chapterId);
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, chapterId: widget.chapterId);
   }
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             centerTitle: true,
-            title: Text('${AppStrings.chapter} ${widget.chapterId}'),
+            title: Text('${appLocale.chapter} ${widget.chapterId}'),
             floating: true,
             leading: IconButton(
               onPressed: () {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 Navigator.of(context).pop();
               },
-              tooltip: AppStrings.back,
+              tooltip: appLocale.back,
               icon: Icon(Icons.arrow_back_ios_new_rounded),
             ),
             actions: [
@@ -62,7 +65,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                     NameRoutes.settingsContentPage,
                   );
                 },
-                tooltip: AppStrings.settings,
+                tooltip: appLocale.settings,
                 icon: Icon(Icons.settings_outlined),
               ),
             ],
@@ -92,7 +95,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                     child: MainHtmlData(
                       htmlData: chapterModel.chapterTitle,
                       footnoteColor: appColors.primary,
-                      font: AppStrings.fontGilroy,
+                      font: AppConstraints.fontGilroy,
                       fontSize: 17.0,
                       textAlign: TextAlign.center,
                       fontColor: appColors.onSurface,
@@ -124,7 +127,8 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                     padding: AppStyles.paddingHorizontalMini,
                     child: ContentSupplicationItem(
                       supplicationModel: supplicationModel,
-                      supplicationIndex: index,
+                      supplicationIndex: index + 1,
+                      supplicationLength: snapshot.data!.length,
                     ),
                   );
                 },

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
+import '../../states/app_settings_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -28,12 +30,13 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
 
   @override
   void initState() {
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications();
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder<List<SupplicationEntity>>(
       future: _futureSupplications,
       builder: (context, snapshot) {
@@ -46,8 +49,8 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
         if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return const MainDescriptionText(
-            descriptionText: AppStrings.searchIsEmpty,
+          return MainDescriptionText(
+            descriptionText: appLocale.searchIsEmpty,
           );
         }
         _supplications = snapshot.data!;
@@ -56,14 +59,15 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
             (element.arabicText != null && element.arabicText!.contains(widget.query)) ||
             (element.transcriptionText != null && element.transcriptionText!.toLowerCase().contains(widget.query)) ||
             element.translationText.toLowerCase().contains(widget.query)).toList();
-        return _recentSupplications.isEmpty ? const MainDescriptionText(descriptionText: AppStrings.searchIsEmpty) : Scrollbar(
+        return _recentSupplications.isEmpty ? MainDescriptionText(descriptionText: appLocale.searchIsEmpty) : Scrollbar(
           child: ListView.builder(
             padding: AppStyles.paddingMini,
             itemCount: _recentSupplications.length,
             itemBuilder: (BuildContext context, int index) {
               return MainSupplicationItem(
                 supplicationModel: _recentSupplications[index],
-                supplicationIndex: index,
+                supplicationIndex: index + 1,
+                supplicationLength: snapshot.data!.length,
               );
             },
           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/app_settings_state.dart';
 import 'app_setting_list_tile.dart';
@@ -12,11 +12,12 @@ class AppThemeColorListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<AppSettingsState>(
       builder: (context, settingsState, _) {
         return AppSettingListTile(
-          title: AppStrings.themeColor,
-          subTitle: AppStrings.selectThemeColor,
+          title: appLocale.themeColor,
+          subTitle: appLocale.selectThemeColor,
           leading: Icon(Icons.color_lens_outlined),
           trailing: IconButton(
             onPressed: () {
@@ -26,7 +27,7 @@ class AppThemeColorListTile extends StatelessWidget {
                   alignment: Alignment.center,
                   actionsPadding: AppStyles.paddingMini,
                   title: Text(
-                    AppStrings.themeColor,
+                    appLocale.themeColor,
                     style: AppStyles.mainTextStyle17Bold,
                   ),
                   content: Material(
@@ -45,8 +46,8 @@ class AppThemeColorListTile extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
-                        AppStrings.close,
+                      child: Text(
+                        appLocale.close,
                         style: AppStyles.mainTextStyle17,
                       ),
                     ),

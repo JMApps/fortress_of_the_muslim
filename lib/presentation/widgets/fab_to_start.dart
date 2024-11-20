@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../states/scroll_page_state.dart';
 
 class FabTopStart extends StatelessWidget {
@@ -14,6 +14,7 @@ class FabTopStart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<ScrollPageState>(
       builder: (context, scrollPageState, _) {
         return ValueListenableBuilder<double>(
@@ -26,7 +27,7 @@ class FabTopStart extends StatelessWidget {
                 elevation: 0,
                 onPressed: scrollPageState.getToTop,
                 backgroundColor: fabColor,
-                tooltip: AppStrings.toStart,
+                tooltip: appLocale.toStart,
                 child: const Icon(Icons.arrow_upward_rounded),
               ),
             );

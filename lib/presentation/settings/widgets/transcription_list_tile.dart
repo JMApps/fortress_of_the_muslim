@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/content_settings_state.dart';
 
@@ -10,6 +10,7 @@ class TranscriptionListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
@@ -20,7 +21,7 @@ class TranscriptionListTile extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.transcription,
+                appLocale.transcription,
                 style: AppStyles.mainTextStyle17Bold,
               ),
               leading: Icon(
@@ -32,7 +33,7 @@ class TranscriptionListTile extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.showTranscription,
+                appLocale.showTranscription,
                 style: AppStyles.mainTextStyle17,
               ),
               trailing: Switch.adaptive(

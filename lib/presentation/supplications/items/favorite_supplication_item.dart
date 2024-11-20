@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/content_settings_state.dart';
@@ -15,13 +15,16 @@ class FavoriteSupplicationItem extends StatelessWidget {
     super.key,
     required this.supplicationModel,
     required this.supplicationIndex,
+    required this.supplicationLength,
   });
 
   final SupplicationEntity supplicationModel;
   final int supplicationIndex;
+  final int supplicationLength;
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appTheme = Theme.of(context);
     final isLightTheme = appTheme.brightness == Brightness.light;
     final arabicIsNotEmpty = supplicationModel.arabicText != null;
@@ -47,7 +50,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                     Text(
                       supplicationModel.arabicText!,
                       style: TextStyle(
-                        fontFamily: AppStrings.arabicFontNames[contentSettings.getArabicFontIndex],
+                        fontFamily: appLocale.arabicFontNames.split(', ')[contentSettings.getArabicFontIndex],
                         fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
                         color: isLightTheme ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
                         height: 1.75,
@@ -60,7 +63,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                       ? Text(
                     supplicationModel.transcriptionText!,
                     style: TextStyle(
-                      fontFamily: AppStrings.translationFontNames[contentSettings.getTranscriptionFontIndex],
+                      fontFamily: appLocale.translationFontNames.split(', ')[contentSettings.getTranscriptionFontIndex],
                       fontSize: AppStyles.textSizes[contentSettings.getTranscriptionFontSizeIndex],
                       color: isLightTheme ? Color(contentSettings.getTranscriptionLightTextColor) : Color(contentSettings.getTranscriptionDarkTextColor),
                     ),
@@ -69,8 +72,8 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   SizedBox(height: transcriptionIsNotEmpty ? contentSettings.getShowTranscriptionState ? 16 : 0 : 0),
                   MainHtmlData(
                     htmlData: supplicationModel.translationText,
-                    footnoteColor: appTheme.colorScheme.primary,
-                    font: AppStrings.translationFontNames[contentSettings.getTranslationFontIndex],
+                    footnoteColor: Colors.blue,
+                    font: appLocale.translationFontNames.split(', ')[contentSettings.getTranslationFontIndex],
                     fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
                     textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
                     fontColor: isLightTheme ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
@@ -78,7 +81,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                   SizedBox(height: supplicationModel.countNumber > 0 ? 16 : 0),
                   supplicationModel.countNumber > 0 ? SupplicationCounterButton(count: supplicationModel.countNumber) : const SizedBox(),
                   const SizedBox(height: 16),
-                  SupplicationMediaCard(supplicationModel: supplicationModel),
+                  SupplicationMediaCard(supplicationModel: supplicationModel, supplicationIndex: supplicationIndex, supplicationLength: supplicationLength),
                 ],
               );
             },

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/strings/app_strings.dart';
+import '../../core/strings/app_constraints.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/footnote_entity.dart';
+import '../states/app_settings_state.dart';
 import '../states/footnotes_state.dart';
 import 'main_error_text_data.dart';
 import 'main_html_data.dart';
@@ -21,7 +22,7 @@ class MainFootnoteData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<FootnoteEntity>(
-      future: Provider.of<FootnotesState>(context, listen: false).getFootnoteById(footnoteId: footnoteNumber),
+      future: Provider.of<FootnotesState>(context, listen: false).getFootnoteById(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, footnoteId: footnoteNumber),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -36,7 +37,7 @@ class MainFootnoteData extends StatelessWidget {
           child: MainHtmlData(
             htmlData: '<b>[${snapshot.data!.footnoteId}]</b> – ${snapshot.data!.footnote}',
             footnoteColor: footnoteColor,
-            font: AppStrings.fontGilroy,
+            font: AppConstraints.fontGilroy,
             fontSize: 18.0,
             textAlign: TextAlign.center,
             fontColor: Theme.of(context).colorScheme.onSurface,

@@ -8,11 +8,11 @@ class BookContentState extends ChangeNotifier {
 
   BookContentState(this._bookContentUseCase);
 
-  Future<List<BookContentEntity>> getAllContentBook() async {
-    return await _bookContentUseCase.fetchAllContentBook();
+  Future<List<BookContentEntity>> getAllContentBook({required String languageCode}) async {
+    return await _bookContentUseCase.fetchAllContentBook(languageCode: languageCode);
   }
 
-  Future<BookContentEntity> getContentBookById({required int bookContentId}) async {
-    return await _bookContentUseCase.fetchContentBookById(bookContentId: bookContentId);
+  Future<BookContentEntity> getContentBookById({required String languageCode, required int bookContentId}) async {
+    return await _bookContentUseCase.fetchContentBookById(languageCode: languageCode, bookContentId: bookContentId);
   }
 }

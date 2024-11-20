@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../core/strings/app_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'main_item_chapter.dart';
 
 class SecondMainThree extends StatelessWidget {
@@ -8,6 +7,7 @@ class SecondMainThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Row(
       children: [
         Flexible(
@@ -15,7 +15,7 @@ class SecondMainThree extends StatelessWidget {
             iconName: 'kaaba',
             chapterNumber: 25,
             itemIcon: CupertinoIcons.person_2,
-            itemTitle: AppStrings.afterPrayer,
+            itemTitle: appLocale.afterPrayer,
           ),
         ),
         const SizedBox(width: 8),
@@ -24,7 +24,7 @@ class SecondMainThree extends StatelessWidget {
             iconName: 'question',
             chapterNumber: 26,
             itemIcon: CupertinoIcons.lightbulb,
-            itemTitle: AppStrings.istikhara,
+            itemTitle: appLocale.istikhara,
           ),
         ),
         const SizedBox(width: 8),
@@ -33,7 +33,7 @@ class SecondMainThree extends StatelessWidget {
             iconName: 'numbers',
             chapterNumber: 1000,
             itemIcon: CupertinoIcons.forward,
-            itemTitle: AppStrings.counter,
+            itemTitle: appLocale.counter,
           ),
         ),
       ],

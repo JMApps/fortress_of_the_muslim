@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/content_settings_state.dart';
 
@@ -10,8 +11,9 @@ class TextFontsDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppStrings.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
         return Column(
@@ -21,7 +23,7 @@ class TextFontsDropDown extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.font,
+                appLocale.font,
                 style: AppStyles.mainTextStyle17Bold,
               ),
               leading: Icon(
@@ -30,24 +32,24 @@ class TextFontsDropDown extends StatelessWidget {
               ),
             ),
             _buildFontRow(
-              label: AppStrings.arabic,
-              fontNames: AppStrings.arabicFontNames,
+              label: appLocale.arabic,
+              fontNames: appLocale.arabicFontNames.split(', '),
               selectedFontIndex: contentSettings.getArabicFontIndex,
               onChanged: (newIndex) => contentSettings.setArabicFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,
               appColors: appColors,
             ),
             _buildFontRow(
-              label: AppStrings.transcription,
-              fontNames: AppStrings.translationFontNames,
+              label: appLocale.transcription,
+              fontNames: appLocale.translationFontNames.split(', '),
               selectedFontIndex: contentSettings.getTranscriptionFontIndex,
               onChanged: (newIndex) => contentSettings.setTranscriptionFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,
               appColors: appColors,
             ),
             _buildFontRow(
-              label: AppStrings.translation,
-              fontNames: AppStrings.translationFontNames,
+              label: appLocale.translation,
+              fontNames: appLocale.translationFontNames.split(', '),
               selectedFontIndex: contentSettings.getTranslationFontIndex,
               onChanged: (newIndex) => contentSettings.setTranslationFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,

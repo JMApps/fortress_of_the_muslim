@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../states/app_player_state.dart';
 import 'search_supplications_future.dart';
 
 class SearchSupplicationsDelegate extends SearchDelegate {
+  final String search;
 
-  SearchSupplicationsDelegate() : super(
-    searchFieldLabel: AppStrings.search,
+  SearchSupplicationsDelegate({required this.search}) : super(
+    searchFieldLabel: search,
     keyboardType: TextInputType.text,
   );
 

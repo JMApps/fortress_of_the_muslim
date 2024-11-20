@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/book_content_entity.dart';
 import '../../states/scroll_page_state.dart';
@@ -51,7 +51,7 @@ class _BookContentDetailPageState extends State<BookContentDetailPage> {
                 child: MainHtmlData(
                   htmlData: widget.bookModel.bookContent,
                   footnoteColor: Colors.orange,
-                  font: AppStrings.fontGilroy,
+                  font: AppConstraints.fontGilroy,
                   fontSize: 18.0,
                   textAlign: TextAlign.start,
                   fontColor: Theme.of(context).colorScheme.onSurface,

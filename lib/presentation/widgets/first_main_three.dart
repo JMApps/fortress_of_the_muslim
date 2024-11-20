@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import 'main_item_chapter.dart';
 
 class FirstMainThree extends StatelessWidget {
@@ -8,6 +8,7 @@ class FirstMainThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Row(
       children: [
         Flexible(
@@ -15,7 +16,7 @@ class FirstMainThree extends StatelessWidget {
             iconName: 'morning',
             chapterNumber: 27,
             itemIcon: CupertinoIcons.sunrise,
-            itemTitle: AppStrings.morning,
+            itemTitle: appLocale.morning,
           ),
         ),
         const SizedBox(width: 8),
@@ -24,7 +25,7 @@ class FirstMainThree extends StatelessWidget {
             iconName: 'evening',
             chapterNumber: 28,
             itemIcon: CupertinoIcons.sunset,
-            itemTitle: AppStrings.evening,
+            itemTitle: appLocale.evening,
           ),
         ),
         const SizedBox(width: 8),
@@ -33,7 +34,7 @@ class FirstMainThree extends StatelessWidget {
             iconName: 'night',
             chapterNumber: 29,
             itemIcon: CupertinoIcons.moon,
-            itemTitle: AppStrings.beforeSleep,
+            itemTitle: appLocale.beforeSleep,
           ),
         ),
       ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../states/scroll_page_state.dart';
 import '../lists/favorite_chapters_list.dart';
 import '../../widgets/fab_to_start.dart';
@@ -24,6 +24,7 @@ class _FavoriteChapterPageState extends State<FavoriteChapterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
@@ -32,7 +33,7 @@ class _FavoriteChapterPageState extends State<FavoriteChapterPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.favoriteChapters),
+          title: Text(appLocale.favoriteChapters),
         ),
         body: const FavoriteChaptersList(),
         floatingActionButton: FabTopStart(

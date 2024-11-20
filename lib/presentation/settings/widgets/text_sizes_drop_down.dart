@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/content_settings_state.dart';
 
@@ -10,8 +11,9 @@ class TextSizesDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppStrings.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     Widget buildDropDownRow({
       required String label,
       required int selectedIndex,
@@ -29,14 +31,14 @@ class TextSizesDropDown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
-              AppStrings.fontSizeNames.length,
+              appLocale.fontSizeNames.split(', ').length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
                     child: Text(
-                      AppStrings.fontSizeNames[index],
+                      appLocale.fontSizeNames.split(', ')[index],
                       style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle17,
                     ),
                   ),
@@ -52,6 +54,7 @@ class TextSizesDropDown extends StatelessWidget {
 
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
+        final appLocale = AppLocalizations.of(context)!;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -59,7 +62,7 @@ class TextSizesDropDown extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.textSize,
+                appLocale.textSize,
                 style: AppStyles.mainTextStyle17Bold,
               ),
               leading: Icon(
@@ -68,17 +71,17 @@ class TextSizesDropDown extends StatelessWidget {
               ),
             ),
             buildDropDownRow(
-              label: AppStrings.arabic,
+              label: appLocale.arabic,
               selectedIndex: contentSettings.getArabicFontSizeIndex,
               onChanged: (newIndex) => contentSettings.setArabicFontSizeIndex = newIndex!,
             ),
             buildDropDownRow(
-              label: AppStrings.transcription,
+              label: appLocale.transcription,
               selectedIndex: contentSettings.getTranscriptionFontSizeIndex,
               onChanged: (newIndex) => contentSettings.setTranscriptionFontSizeIndex = newIndex!,
             ),
             buildDropDownRow(
-              label: AppStrings.translation,
+              label: appLocale.translation,
               selectedIndex: contentSettings.getTranslationFontSizeIndex,
               onChanged: (newIndex) => contentSettings.setTranslationFontSizeIndex = newIndex!,
             ),

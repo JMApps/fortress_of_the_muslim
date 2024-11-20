@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../states/app_player_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
@@ -27,6 +27,7 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
@@ -35,13 +36,13 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.allSupplications),
+          title: Text(appLocale.allSupplications),
           leading: IconButton(
             onPressed: () {
               Provider.of<AppPlayerState>(context, listen: false).stopTrack();
               Navigator.of(context).pop();
             },
-            tooltip: AppStrings.back,
+            tooltip: appLocale.back,
             icon: Icon(Icons.arrow_back_ios_new_rounded),
           ),
           actions: [
@@ -53,7 +54,7 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
                   NameRoutes.settingsContentPage,
                 );
               },
-              tooltip: AppStrings.settings,
+              tooltip: appLocale.settings,
               icon: Icon(Icons.settings_outlined),
             ),
             IconButton.filledTonal(
@@ -61,10 +62,10 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 showSearch(
                   context: context,
-                  delegate: SearchSupplicationsDelegate(),
+                  delegate: SearchSupplicationsDelegate(search: appLocale.search),
                 );
               },
-              tooltip: AppStrings.search,
+              tooltip: appLocale.search,
               icon: const Icon(Icons.search),
             ),
           ],

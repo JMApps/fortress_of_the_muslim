@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/app_counter_state.dart';
 
@@ -10,6 +10,7 @@ class CounterValuesDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer<AppCounterState>(
       builder: (BuildContext context, appCounter, _) {
@@ -27,7 +28,7 @@ class CounterValuesDropdown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: appCounter.getValuesIndex,
             items: List.generate(
-              AppStrings.counterValues.length,
+              appLocale.counterValues.split(', ').length,
                   (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Container(
@@ -37,7 +38,7 @@ class CounterValuesDropdown extends StatelessWidget {
                     borderRadius: AppStyles.border,
                   ),
                   child: Text(
-                    AppStrings.counterValues[index],
+                    appLocale.counterValues.split(', ')[index],
                     style: AppStyles.mainTextStyle17Bold,
                   ),
                 ),

@@ -7,8 +7,6 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/timezone.dart';
 
-import '../../../core/strings/app_strings.dart';
-
 class NotificationService {
   static final NotificationService _localNoticeService = NotificationService._internal();
 
@@ -56,12 +54,12 @@ class NotificationService {
     );
   }
 
-  Future<void> timeNotifications({required int id, required String body, required DateTime dateTime}) async {
+  Future<void> timeNotifications({required int id, required String title, required String body, required DateTime dateTime}) async {
     TZDateTime tzDateNotification = tz.TZDateTime.from(dateTime, tz.local);
     try {
       await _flutterLocalNotificationsPlugin.zonedSchedule(
         id,
-        AppStrings.appName,
+        title,
         body,
         tzDateNotification,
         NotificationDetails(

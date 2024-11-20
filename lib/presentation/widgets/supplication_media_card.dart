@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/supplication_entity.dart';
 import '../states/app_player_state.dart';
@@ -15,12 +15,17 @@ class SupplicationMediaCard extends StatelessWidget {
   const SupplicationMediaCard({
     super.key,
     required this.supplicationModel,
+    required this.supplicationIndex,
+    required this.supplicationLength,
   });
 
   final SupplicationEntity supplicationModel;
+  final int supplicationIndex;
+  final int supplicationLength;
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final isNameAudio = supplicationModel.nameAudio != null;
     return Card(
@@ -64,7 +69,7 @@ class SupplicationMediaCard extends StatelessWidget {
                         shape: AppStyles.shape,
                         elevation: 0,
                         content: Text(
-                          playerState.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
+                          playerState.isRepeating ? appLocale.repeatOn : appLocale.repeatOff,
                           style: TextStyle(
                             fontSize: 17.0,
                             color: appColors.onSurface,
@@ -108,7 +113,7 @@ class SupplicationMediaCard extends StatelessWidget {
               borderRadius: AppStyles.borderMini,
             ),
             child: Text(
-              supplicationModel.supplicationId.toString(),
+              '$supplicationIndex/$supplicationLength',
               style: AppStyles.mainTextStyle17,
             ),
           ),

@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../states/app_settings_state.dart';
 import '../../states/footnotes_state.dart';
 
 class ShareSupplicationButton extends StatefulWidget {
@@ -26,6 +28,7 @@ class ShareSupplicationButton extends StatefulWidget {
 class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () {
@@ -49,7 +52,7 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
                     color: appColors.primary,
                   ),
                   label: Text(
-                    AppStrings.share,
+                    appLocale.share,
                     style: AppStyles.mainTextStyle17,
                   ),
                 ),
@@ -67,7 +70,7 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
                             shape: AppStyles.shape,
                             elevation: 0,
                             content: Text(
-                              AppStrings.copied,
+                              appLocale.copied,
                               style: TextStyle(
                                 fontSize: 17.0,
                                 color: appColors.onSurface,
@@ -83,7 +86,7 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
                     color: appColors.primary,
                   ),
                   label: Text(
-                    AppStrings.copy,
+                    appLocale.copy,
                     style: AppStyles.mainTextStyle17,
                   ),
                 ),
@@ -98,7 +101,7 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
   }
 
   Future<String> _footnoteSupplication() async {
-    final String footnoteSupplication = await Provider.of<FootnotesState>(context, listen: false).getFootnoteBySupplication(supplicationId: widget.supplicationId);
+    final String footnoteSupplication = await Provider.of<FootnotesState>(context, listen: false).getFootnoteBySupplication(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, supplicationId: widget.supplicationId);
     final footnoteData = html_parser.parse(footnoteSupplication);
     return footnoteData.body!.text;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../states/app_player_state.dart';
 
@@ -10,13 +10,14 @@ class PlaySpeedSegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Padding(
       padding: AppStyles.paddingWithoutTop,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            AppStrings.playSpeed,
+            appLocale.playSpeed,
             style: AppStyles.mainTextStyle17Bold,
           ),
           const SizedBox(height: 8),
@@ -25,11 +26,11 @@ class PlaySpeedSegment extends StatelessWidget {
               return SegmentedButton<int>(
                 showSelectedIcon: false,
                 segments: List.generate(
-                  AppStrings.playSpeedNames.length,
+                  appLocale.playSpeedNames.split(', ').length,
                       (index) => ButtonSegment(
                     value: index,
                     label: Text(
-                      AppStrings.playSpeedNames[index].toString(),
+                      appLocale.playSpeedNames.split(', ')[index].toString(),
                       style: AppStyles.mainTextStyle17,
                     ),
                   ),

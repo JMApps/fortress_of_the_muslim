@@ -7,17 +7,17 @@ class BookContentUseCase {
 
   BookContentUseCase(this._bookContentRepository);
 
-  Future<List<BookContentEntity>> fetchAllContentBook() async {
+  Future<List<BookContentEntity>> fetchAllContentBook({required String languageCode}) async {
     try {
-      return await _bookContentRepository.getAllContentBook();
+      return await _bookContentRepository.getAllContentBook(languageCode: languageCode);
     } catch (e) {
       throw Exception('$e');
     }
   }
 
-  Future<BookContentEntity> fetchContentBookById({required int bookContentId}) async {
+  Future<BookContentEntity> fetchContentBookById({required String languageCode, required int bookContentId}) async {
     try {
-      return await _bookContentRepository.getContentBookById(bookContentId: bookContentId);
+      return await _bookContentRepository.getContentBookById(languageCode: languageCode, bookContentId: bookContentId);
     } catch (e) {
       throw Exception('$e');
     }

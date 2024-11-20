@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../strings/app_strings.dart';
+import '../strings/app_constraints.dart';
 import '../styles/app_styles.dart';
 
 class AppThemes {
@@ -9,7 +9,7 @@ class AppThemes {
   AppThemes(this._appColor);
 
   ThemeData get lightTheme => ThemeData(
-        fontFamily: AppStrings.fontGilroy,
+        fontFamily: AppConstraints.fontGilroy,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.light,
           seedColor: _appColor,
@@ -35,7 +35,7 @@ class AppThemes {
       );
 
   ThemeData get darkTheme => ThemeData(
-    fontFamily: AppStrings.fontGilroy,
+    fontFamily: AppConstraints.fontGilroy,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
       seedColor: _appColor,

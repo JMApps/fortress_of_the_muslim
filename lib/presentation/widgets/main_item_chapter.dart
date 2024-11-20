@@ -64,15 +64,18 @@ class MainItemChapter extends StatelessWidget {
                   itemIcon,
                 color: fixColor,
                 ),
-                Text(
-                  itemTitle,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: fixColor,
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: AppStyles.paddingHorizontalMini,
+                  child: Text(
+                    itemTitle,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: fixColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

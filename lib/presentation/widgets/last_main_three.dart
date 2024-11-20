@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/styles/app_styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
-import '../../core/strings/app_strings.dart';
+import '../../core/styles/app_styles.dart';
 import 'option_item.dart';
 
 class LastMainThree extends StatelessWidget {
@@ -11,12 +11,13 @@ class LastMainThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Row(
       children: [
         Flexible(
           child: OptionItem(
             itemIcon: CupertinoIcons.settings,
-            itemTitle: AppStrings.settings,
+            itemTitle: appLocale.settings,
             itemColor: Colors.teal,
             routeName: NameRoutes.appSettingsPage,
             itemBorder: AppStyles.borderBottomLeft,
@@ -26,7 +27,7 @@ class LastMainThree extends StatelessWidget {
         Flexible(
           child: OptionItem(
             itemIcon: CupertinoIcons.book,
-            itemTitle: AppStrings.bookContent,
+            itemTitle: appLocale.bookContent,
             itemColor: Colors.orange,
             routeName: NameRoutes.bookContentPage,
             itemBorder: AppStyles.borderMini,
@@ -36,9 +37,9 @@ class LastMainThree extends StatelessWidget {
         Flexible(
           child: OptionItem(
             itemIcon: CupertinoIcons.app_badge,
-            itemTitle: AppStrings.aboutUs,
+            itemTitle: appLocale.aboutUs,
             itemColor: Colors.red,
-            routeName: AppStrings.aboutUs,
+            routeName: appLocale.aboutUs,
             itemBorder: AppStyles.borderBottomRight,
           ),
         ),

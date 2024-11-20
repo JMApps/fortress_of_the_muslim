@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/app_settings_state.dart';
 
@@ -10,17 +11,18 @@ class ThemeModeDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppStrings.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<AppSettingsState>(
       builder: (BuildContext context, appSettings, _) {
         return ListTile(
           visualDensity: VisualDensity.comfortable,
           title: Text(
-            AppStrings.theme,
+            appLocale.theme,
             style: AppStyles.mainTextStyle17Bold,
           ),
-          subtitle: Text(AppStrings.themeApp),
+          subtitle: Text(appLocale.themeApp),
           leading: Icon(Icons.brightness_4_outlined),
           trailing: DropdownButton<int>(
             iconEnabledColor: appColors.primary,
@@ -30,14 +32,14 @@ class ThemeModeDropDown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: appSettings.getThemeModeIndex,
             items: List.generate(
-              AppStrings.themeModeNames.length,
+              appLocale.themeModeNames.split(', ').length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
                     child: Text(
-                      AppStrings.themeModeNames[index],
+                      appLocale.themeModeNames.split(', ')[index],
                       style: appSettings.getThemeModeIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle17,
                     ),
                   ),

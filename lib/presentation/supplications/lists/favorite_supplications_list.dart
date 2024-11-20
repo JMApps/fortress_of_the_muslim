@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
+import '../../states/app_settings_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/favorite_is_empty.dart';
@@ -15,9 +17,10 @@ class FavoriteSupplicationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
     return FutureBuilder<List<SupplicationEntity>>(
-      future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(ids: Provider.of<MainSupplicationsState>(context).getFavoriteSupplicationIds),
+      future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, ids: Provider.of<MainSupplicationsState>(context).getFavoriteSupplicationIds),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -28,8 +31,8 @@ class FavoriteSupplicationsList extends StatelessWidget {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
         if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return const FavoriteIsEmpty(
-            text: AppStrings.favoriteSupplicationsIsEmpty,
+          return FavoriteIsEmpty(
+            text: appLocale.favoriteSupplicationsIsEmpty,
             color: Colors.blue,
           );
         }
@@ -43,7 +46,8 @@ class FavoriteSupplicationsList extends StatelessWidget {
               final supplicationModel = snapshot.data![index];
               return FavoriteSupplicationItem(
                 supplicationModel: supplicationModel,
-                supplicationIndex: index,
+                supplicationIndex: index + 1,
+                supplicationLength: snapshot.data!.length,
               );
             },
           ),
