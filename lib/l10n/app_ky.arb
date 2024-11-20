@@ -1,0 +1,117 @@
+{
+  "@@locale": "ky",
+  "appName": "Мусулманын бекиниши",
+  "appSlogan": " – сенин кыялыңдагы бекиниш!",
+  "morningPrayers": "Эртеңки зикрлердин убактысы",
+  "eveningPrayers": "Кечки зикрлердин убактысы",
+
+  "back": "Артка",
+
+  "toStart": "Башка кайтуу",
+  "chapters": "Бөлүмдөр",
+  "chapter": "Бөлүм",
+  "favoriteChapters": "Жактырылган бөлүмдөр",
+  "favoriteChaptersIsEmpty": "Жактырылган бөлүмдөр жок",
+  "allSupplications": "Бардык дубалар",
+  "favoriteSupplications": "Жактырылган дубалар",
+  "favoriteSupplicationsIsEmpty": "Жактырылган дубалар жок",
+
+  "search": "Издөөнү баштаңыз",
+  "searchIsEmpty": "Сиздин сурооңузга эч нерсе табылган жок",
+
+  "added": "Кошулду",
+  "removed": "Алынып салынды",
+
+  "morning": "Эртең менен",
+  "evening": "Кечинде",
+  "beforeSleep": "Уктап жатканда",
+  "afterPrayer": "Молитвадан кийин",
+  "istikhara": "Истикара",
+  "counter": "Санагыч",
+  "counterAlign": "Санагычтын жайгашуусу",
+
+  "readLastChapter": "Жакында || бөлүмүн окууну улантуу",
+
+  "settings": "Параметрлер",
+  "bookContent": "Мазмуну",
+  "aboutUs": "Биз жөнүндө",
+  "copy": "Көчүрүү",
+  "copied": "Көчүрүлдү",
+  "share": "Бөлүшүү",
+
+  "fontGilroy": "Gilroy",
+
+  "font": "Шрифт",
+  "arabicFontNames": "Hafs, Noto Naskh, Scheherazade",
+
+  "translationFontNames": "Gilroy, SF Pro, Montserrat",
+
+  "align": "Жайгашуу",
+  "textsAlign": "Тексттин жайгашуусу",
+  "alignStart": "Сол жактан",
+  "alignCenter": "Ортодо",
+  "alignEnd": "Оң жактан",
+  "alignJustify": "Эки жактан",
+
+  "textSize": "Тексттин өлчөмү",
+  "fontSizeNames": "Кичинекей, Нормалдуу, Орто, Чоң, Абдан чоң, Максималдуу",
+
+  "counterValues": "Чектөөсүз, Молитвадан кийин, 100",
+
+  "counterAligns": "Сол жакта, Ортодо, Оң жакта",
+
+  "playSpeed": "Ойнату ылдамдыгы",
+  "repeatOn": "Кайралоо күйгүзүлгөн",
+  "repeatOff": "Кайралоо өчүрүлгөн",
+  "playSpeedNames": "1x, 0.9x, 0.8x, 0.7x, 0.6x, 0.5x",
+
+  "remindMorning": "Эртең менен эскертүү",
+  "remindEvening": "Кечинде эскертүү",
+
+  "listChapters": "Бөлүмдөрдүн тизмеси",
+  "openWithListChapters": "Бөлүмдөрдүн тизмеси менен ачу",
+
+  "display": "Дисплей",
+  "displayAlwaysOn": "Дисплей дайыма күйүп турат",
+
+  "themeColor": "Тема түсү",
+  "selectThemeColor": "Тема түсүн тандаңыз",
+
+  "theme": "Тема",
+  "themeApp": "Тема колдонмосу",
+  "themeModeNames": "Күндүзгү, Түнкү, Жүйөлүү",
+
+  "language": "Тил",
+  "appLanguage": "Колдонмонун тили",
+
+  "textColor": "Текст түсү",
+  "arabic": "Араб тили",
+  "transcription": "Транскрипция",
+  "showTranscription": "Транскрипцияны көрсөтүү",
+  "translation": "Түшүндүрмө",
+  "defaultSettings": "Тандалган параметрлер",
+
+  "forLightTheme": "Күндүзгү тема үчүн",
+  "forDarkTheme": "Түнкү тема үчүн",
+  "close": "Жабуу",
+
+  "ourApps": "Биздин колдонмолор",
+  "moreOurApps": "Биздин дагы колдонмолор",
+  "appStore": "App Store",
+  "googlePlay": "Google Play",
+  "ourSocials": "Биздин социалдык тармактар",
+  "telegram": "Telegram",
+  "ummaLife": "UmmaLife",
+  "instagram": "Instagram",
+  "jmapps": "@jmapps",
+  "devMuslim": "@dev_muslim",
+  "linkGooglePlay": "https://play.google.com/store/apps/dev?id=8649252597553656018",
+  "linkAppStore": "https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953",
+  "versionAndroid": "Android версиясы:",
+  "versionIOS": "iOS версиясы:",
+  "linkAndroid": "https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim",
+  "linkIOS": "https://apps.apple.com/ru/app/крепость-верующего/id1564920951",
+  "linkTelegram": "https://t.me/jmapps",
+  "linkInstagram": "https://instagram.com/dev_muslim",
+  "linkUmmaLife": "https://ummalife.com/jmapps"
+}
