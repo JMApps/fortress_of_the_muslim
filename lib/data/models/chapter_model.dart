@@ -5,7 +5,7 @@ class ChapterModel {
   final String chapterNumber;
   final String chapterTitle;
 
-  ChapterModel({
+  const ChapterModel({
     required this.chapterId,
     required this.chapterNumber,
     required this.chapterTitle,

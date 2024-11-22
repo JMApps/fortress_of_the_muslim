@@ -16,7 +16,7 @@ class LastMainThree extends StatelessWidget {
       children: [
         Flexible(
           child: OptionItem(
-            itemIcon: CupertinoIcons.settings,
+            itemIcon: Icons.settings_outlined,
             itemTitle: appLocale.settings,
             itemColor: Colors.teal,
             routeName: NameRoutes.appSettingsPage,

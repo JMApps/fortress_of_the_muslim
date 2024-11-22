@@ -33,28 +33,28 @@ class _MainChaptersListState extends State<MainChaptersList> {
     return FutureBuilder<List<ChapterEntity>>(
       future: _futureChapters,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
-        return Scrollbar(
-          controller: _scrollController,
-          child: ListView.builder(
+        if (snapshot.hasData) {
+          return Scrollbar(
             controller: _scrollController,
-            padding: AppStyles.paddingMini,
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final ChapterEntity chapterModel = snapshot.data![index];
-              return MainChapterItem(
-                chapterModel: chapterModel,
-                chapterIndex: index,
-              );
-            },
-          ),
+            child: ListView.builder(
+              controller: _scrollController,
+              padding: AppStyles.paddingMini,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final ChapterEntity chapterModel = snapshot.data![index];
+                return MainChapterItem(
+                  chapterModel: chapterModel,
+                  chapterIndex: index,
+                );
+              },
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );

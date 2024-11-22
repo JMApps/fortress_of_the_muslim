@@ -38,7 +38,7 @@ class SearchSupplicationsDelegate extends SearchDelegate {
   @override
   Widget? buildLeading(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 12),
+      padding: const EdgeInsets.only(left: 12),
       child: IconButton(
         onPressed: () {
           Provider.of<AppPlayerState>(context, listen: false).stopTrack();

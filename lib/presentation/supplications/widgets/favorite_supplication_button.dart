@@ -18,30 +18,34 @@ class FavoriteSupplicationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final bool supplicationIsFavorite = Provider.of<MainSupplicationsState>(context).supplicationIsFavorite(supplicationId);
-    return IconButton(
-      onPressed: () {
-        Provider.of<MainSupplicationsState>(context, listen: false).toggleSupplicationFavorite(supplicationId: supplicationId);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: appColors.secondaryContainer,
-            duration: const Duration(milliseconds: 500),
-            shape: AppStyles.shape,
-            elevation: 0,
-            content: Text(
-              supplicationIsFavorite ? appLocale.removed : appLocale.added,
-              style: TextStyle(
-                fontSize: 17.0,
-                color: appColors.onSurface,
+    return Consumer<MainSupplicationsState>(
+      builder: (context, mainSupplicationsState, _) {
+        final bool supplicationIsFavorite = mainSupplicationsState.supplicationIsFavorite(supplicationId);
+        return IconButton(
+          onPressed: () {
+            mainSupplicationsState.toggleSupplicationFavorite(supplicationId: supplicationId);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: appColors.secondaryContainer,
+                duration: const Duration(milliseconds: 500),
+                shape: AppStyles.shape,
+                elevation: 0,
+                content: Text(
+                  supplicationIsFavorite ? appLocale.removed : appLocale.added,
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    color: appColors.onSurface,
+                  ),
+                ),
               ),
-            ),
+            );
+          },
+          icon: Icon(
+            supplicationIsFavorite ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
+            color: appColors.primary,
           ),
         );
       },
-      icon: Icon(
-        supplicationIsFavorite ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
-        color: appColors.primary,
-      ),
     );
   }
 }

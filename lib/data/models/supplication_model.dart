@@ -8,7 +8,7 @@ class SupplicationModel {
   final String? nameAudio;
   final int countNumber;
 
-  SupplicationModel({
+  const SupplicationModel({
     required this.supplicationId,
     required this.arabicText,
     required this.transcriptionText,

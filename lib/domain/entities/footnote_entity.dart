@@ -4,7 +4,7 @@ class FootnoteEntity {
   final int footnoteId;
   final String footnote;
 
-  FootnoteEntity({
+  const FootnoteEntity({
     required this.footnoteId,
     required this.footnote,
   });

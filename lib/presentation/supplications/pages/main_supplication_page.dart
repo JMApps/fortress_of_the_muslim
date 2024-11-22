@@ -9,21 +9,8 @@ import '../../widgets/fab_to_start.dart';
 import '../lists/main_supplications_list.dart';
 import '../widgets/search_supplications_delegate.dart';
 
-class MainSupplicationPage extends StatefulWidget {
+class MainSupplicationPage extends StatelessWidget {
   const MainSupplicationPage({super.key});
-
-  @override
-  State<MainSupplicationPage> createState() => _MainSupplicationPageState();
-}
-
-class _MainSupplicationPageState extends State<MainSupplicationPage> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +18,7 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
-          create: (_) => ScrollPageState(_scrollController),
+          create: (_) => ScrollPageState(),
         ),
       ],
       child: Scaffold(
@@ -43,24 +30,25 @@ class _MainSupplicationPageState extends State<MainSupplicationPage> {
               Navigator.of(context).pop();
             },
             tooltip: appLocale.back,
-            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
           ),
           actions: [
             IconButton.filledTonal(
-              onPressed: () {
+              onPressed: () async {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
-                Navigator.pushNamed(
+                await Navigator.pushNamed(
                   context,
                   NameRoutes.settingsContentPage,
                 );
               },
               tooltip: appLocale.settings,
-              icon: Icon(Icons.settings_outlined),
+
+              icon: const Icon(Icons.settings),
             ),
             IconButton.filledTonal(
-              onPressed: () {
+              onPressed: () async {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
-                showSearch(
+                await showSearch(
                   context: context,
                   delegate: SearchSupplicationsDelegate(search: appLocale.search),
                 );

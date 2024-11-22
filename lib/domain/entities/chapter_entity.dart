@@ -5,7 +5,7 @@ class ChapterEntity {
   final String chapterNumber;
   final String chapterTitle;
 
-  ChapterEntity({
+  const ChapterEntity({
     required this.chapterId,
     required this.chapterNumber,
     required this.chapterTitle,

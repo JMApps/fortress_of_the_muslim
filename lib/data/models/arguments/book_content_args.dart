@@ -3,7 +3,7 @@ import '../../../domain/entities/book_content_entity.dart';
 class BookContentArgs {
   final BookContentEntity bookModel;
 
-  BookContentArgs({
+  const BookContentArgs({
     required this.bookModel,
   });
 }

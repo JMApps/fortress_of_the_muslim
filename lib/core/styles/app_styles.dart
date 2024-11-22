@@ -10,9 +10,6 @@ class AppStyles {
   static const paddingHorizontal = EdgeInsets.symmetric(horizontal: 16);
   static const paddingHorizontalMini = EdgeInsets.symmetric(horizontal: 8);
 
-  static const paddingVertical = EdgeInsets.symmetric(horizontal: 16);
-  static const paddingVerticalMini = EdgeInsets.symmetric(horizontal: 8);
-
   static const paddingHorVerMicro = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
   static const paddingHorMiniVerMicro = EdgeInsets.symmetric(horizontal: 8, vertical: 4);
 
@@ -23,9 +20,6 @@ class AppStyles {
   static const paddingBottom = EdgeInsets.only(bottom: 16);
   static const paddingBottom75 = EdgeInsets.only(bottom: 75);
   static const paddingBottomMini = EdgeInsets.only(bottom: 8);
-
-  static const paddingLeft = EdgeInsets.only(left: 16);
-  static const paddingLeftMini = EdgeInsets.only(left: 8);
 
   static const paddingWithoutTop = EdgeInsets.only(left: 16, right: 16, bottom: 16);
   static const paddingWithoutTopMini = EdgeInsets.only(left: 8, right: 8, bottom: 8);
@@ -39,9 +33,8 @@ class AppStyles {
   static const borderBottomLeft = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(25), bottomRight: Radius.circular(8),);
   static const borderBottomRight = BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(25),);
 
-  static const mainTextStyle17 = TextStyle(fontSize: 17.0, fontFamily: AppConstraints.fontGilroy);
-  static const mainTextStyle17Bold = TextStyle(fontSize: 17.0, fontFamily: AppConstraints.fontGilroy, fontWeight: FontWeight.bold);
-  static const mainTextStyle20 = TextStyle(fontSize: 20.0, fontFamily: AppConstraints.fontGilroy);
+  static const mainTextStyle17 = TextStyle(fontSize: 17.0, fontFamily: AppConstraints.fontRaleway);
+  static const mainTextStyle17Bold = TextStyle(fontSize: 17.0, fontFamily: AppConstraints.fontRaleway, fontWeight: FontWeight.bold);
 
   static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));
 

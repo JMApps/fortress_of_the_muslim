@@ -8,7 +8,7 @@ class SupplicationEntity {
   final String? nameAudio;
   final int countNumber;
 
-  SupplicationEntity({
+  const SupplicationEntity({
     required this.supplicationId,
     required this.arabicText,
     required this.transcriptionText,

@@ -8,21 +8,8 @@ import '../../widgets/fab_to_start.dart';
 import '../../states/scroll_page_state.dart';
 import '../lists/favorite_supplications_list.dart';
 
-class FavoriteSupplicationPage extends StatefulWidget {
+class FavoriteSupplicationPage extends StatelessWidget {
   const FavoriteSupplicationPage({super.key});
-
-  @override
-  State<FavoriteSupplicationPage> createState() => _FavoriteSupplicationPageState();
-}
-
-class _FavoriteSupplicationPageState extends State<FavoriteSupplicationPage> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +17,7 @@ class _FavoriteSupplicationPageState extends State<FavoriteSupplicationPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
-          create: (_) => ScrollPageState(_scrollController),
+          create: (_) => ScrollPageState(),
         ),
       ],
       child: Scaffold(
@@ -42,19 +29,19 @@ class _FavoriteSupplicationPageState extends State<FavoriteSupplicationPage> {
               Navigator.of(context).pop();
             },
             tooltip: appLocale.back,
-            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
           ),
           actions: [
             IconButton.filledTonal(
-              onPressed: () {
+              onPressed: () async {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
-                Navigator.pushNamed(
+                await Navigator.pushNamed(
                   context,
                   NameRoutes.settingsContentPage,
                 );
               },
               tooltip: appLocale.settings,
-              icon: Icon(Icons.settings_outlined),
+              icon: const Icon(Icons.settings),
             ),
           ],
         ),

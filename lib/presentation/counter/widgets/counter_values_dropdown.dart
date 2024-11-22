@@ -23,7 +23,7 @@ class CounterValuesDropdown extends StatelessWidget {
             borderRadius: AppStyles.border,
             dropdownColor: appColors.onSecondary,
             elevation: 1,
-            icon: SizedBox(),
+            icon: const SizedBox(),
             isExpanded: true,
             alignment: Alignment.centerRight,
             value: appCounter.getValuesIndex,

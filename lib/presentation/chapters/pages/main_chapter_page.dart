@@ -7,21 +7,8 @@ import '../../widgets/fab_to_start.dart';
 import '../lists/main_chapters_list.dart';
 import '../widgets/search_chapters_delegate.dart';
 
-class MainChapterPage extends StatefulWidget {
+class MainChapterPage extends StatelessWidget {
   const MainChapterPage({super.key});
-
-  @override
-  State<MainChapterPage> createState() => _MainChapterPageState();
-}
-
-class _MainChapterPageState extends State<MainChapterPage> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +16,7 @@ class _MainChapterPageState extends State<MainChapterPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
-          create: (_) => ScrollPageState(_scrollController),
+          create: (_) => ScrollPageState(),
         ),
       ],
       child: Scaffold(
@@ -37,8 +24,8 @@ class _MainChapterPageState extends State<MainChapterPage> {
           title: Text(appLocale.chapters),
           actions: [
             IconButton.filledTonal(
-              onPressed: () {
-                showSearch(
+              onPressed: () async {
+                await showSearch(
                   context: context,
                   delegate: SearchChaptersDelegate(search: appLocale.search),
                 );

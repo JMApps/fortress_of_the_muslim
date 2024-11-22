@@ -61,7 +61,7 @@ class SupplicationTextColors extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      visualDensity: VisualDensity(vertical: -4),
+      visualDensity: const VisualDensity(vertical: -4),
       title: Text(title, style: AppStyles.mainTextStyle17),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -110,7 +110,7 @@ class SupplicationTextColors extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.zero,
-              visualDensity: VisualDensity(vertical: -4),
+              visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 appLocale.textColor,
                 style: AppStyles.mainTextStyle17Bold,

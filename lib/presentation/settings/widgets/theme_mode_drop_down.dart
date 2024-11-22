@@ -13,7 +13,7 @@ class ThemeModeDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRaleway, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<AppSettingsState>(
       builder: (BuildContext context, appSettings, _) {
         return ListTile(
@@ -23,7 +23,7 @@ class ThemeModeDropDown extends StatelessWidget {
             style: AppStyles.mainTextStyle17Bold,
           ),
           subtitle: Text(appLocale.themeApp),
-          leading: Icon(Icons.brightness_4_outlined),
+          leading: const Icon(Icons.brightness_4_outlined),
           trailing: DropdownButton<int>(
             iconEnabledColor: appColors.primary,
             borderRadius: AppStyles.border,

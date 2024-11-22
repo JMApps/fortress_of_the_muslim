@@ -50,7 +50,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         }
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.access_time_rounded,
                       size: 30,
                     ),
@@ -88,7 +88,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         }
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.access_time_rounded,
                       size: 30,
                     ),
@@ -113,7 +113,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                 AppSettingListTile(
                   title: appLocale.listChapters,
                   subTitle: appLocale.openWithListChapters,
-                  leading: Icon(Icons.list_alt_rounded),
+                  leading: const Icon(Icons.list_alt_rounded),
                   trailing: AppSettingSwitch(
                     value: settingsState.getOpenWithChapters,
                     onChanged: (onChanged) => settingsState.setOpenWithChapters = onChanged,
@@ -123,18 +123,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                 AppSettingListTile(
                   title: appLocale.display,
                   subTitle: appLocale.displayAlwaysOn,
-                  leading: Icon(Icons.light_mode_outlined),
+                  leading: const Icon(Icons.light_mode_outlined),
                   trailing: AppSettingSwitch(
                     value: settingsState.getDisplayAlwaysOn,
                     onChanged: (onChanged) => settingsState.setDisplayAlwaysOn = onChanged,
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
-                AppThemeColorListTile(),
+                const AppThemeColorListTile(),
                 const Divider(indent: 16, endIndent: 16),
-                ThemeModeDropDown(),
+                const ThemeModeDropDown(),
                 const Divider(indent: 16, endIndent: 16),
-                AppLocaleDropDown(),
+                const AppLocaleDropDown(),
                 const Divider(indent: 16, endIndent: 16),
               ],
             );

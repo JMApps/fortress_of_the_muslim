@@ -18,7 +18,7 @@ class AppThemeColorListTile extends StatelessWidget {
         return AppSettingListTile(
           title: appLocale.themeColor,
           subTitle: appLocale.selectThemeColor,
-          leading: Icon(Icons.color_lens_outlined),
+          leading: const Icon(Icons.color_lens_outlined),
           trailing: IconButton(
             onPressed: () {
               showDialog(

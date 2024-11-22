@@ -95,7 +95,7 @@ class SupplicationMediaCard extends StatelessWidget {
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
-                  builder: (context) => SingleChildScrollView(
+                  builder: (context) => const SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: PlaySpeedSegment(),
                   ),

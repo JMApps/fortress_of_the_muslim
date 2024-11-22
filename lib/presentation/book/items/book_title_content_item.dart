@@ -30,7 +30,7 @@ class BookTitleContentItem extends StatelessWidget {
             arguments: BookContentArgs(bookModel: bookModel),
           );
         },
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        splashColor: appColors.inversePrimary.withOpacity(0.25),
         tileColor: index.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(bookModel.bookContentTitle),

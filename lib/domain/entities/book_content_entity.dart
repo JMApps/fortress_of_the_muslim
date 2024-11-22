@@ -5,7 +5,7 @@ class BookContentEntity {
   final String bookContentTitle;
   final String bookContent;
 
-  BookContentEntity({
+  const BookContentEntity({
     required this.bookContentId,
     required this.bookContentTitle,
     required this.bookContent,

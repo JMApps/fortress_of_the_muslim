@@ -12,21 +12,28 @@ import '../../widgets/favorite_is_empty.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/favorite_chapter_item.dart';
 
-class FavoriteChaptersList extends StatelessWidget {
+class FavoriteChaptersList extends StatefulWidget {
   const FavoriteChaptersList({super.key});
+
+  @override
+  State<FavoriteChaptersList> createState() => _FavoriteChaptersListState();
+}
+
+class _FavoriteChaptersListState extends State<FavoriteChaptersList> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
+  }
 
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
     return FutureBuilder<List<ChapterEntity>>(
       future: Provider.of<MainChaptersState>(context, listen: false).getFavoriteChapters(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, ids: Provider.of<MainChaptersState>(context).getFavoriteChapterIds),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
@@ -36,20 +43,25 @@ class FavoriteChaptersList extends StatelessWidget {
             color: Colors.orange,
           );
         }
-        return Scrollbar(
-          controller: scrollController,
-          child: ListView.builder(
-            controller: scrollController,
-            padding: AppStyles.paddingMini,
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final ChapterEntity chapterModel = snapshot.data![index];
-              return FavoriteChapterItem(
-                chapterModel: chapterModel,
-                chapterIndex: index,
-              );
-            },
-          ),
+        if (snapshot.hasData) {
+          return Scrollbar(
+            controller: _scrollController,
+            child: ListView.builder(
+              controller: _scrollController,
+              padding: AppStyles.paddingMini,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final ChapterEntity chapterModel = snapshot.data![index];
+                return FavoriteChapterItem(
+                  chapterModel: chapterModel,
+                  chapterIndex: index,
+                );
+              },
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );

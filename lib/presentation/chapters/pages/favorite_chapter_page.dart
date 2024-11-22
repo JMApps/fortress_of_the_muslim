@@ -6,21 +6,8 @@ import '../../states/scroll_page_state.dart';
 import '../lists/favorite_chapters_list.dart';
 import '../../widgets/fab_to_start.dart';
 
-class FavoriteChapterPage extends StatefulWidget {
+class FavoriteChapterPage extends StatelessWidget {
   const FavoriteChapterPage({super.key});
-
-  @override
-  State<FavoriteChapterPage> createState() => _FavoriteChapterPageState();
-}
-
-class _FavoriteChapterPageState extends State<FavoriteChapterPage> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +15,7 @@ class _FavoriteChapterPageState extends State<FavoriteChapterPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
-          create: (_) => ScrollPageState(_scrollController),
+          create: (_) => ScrollPageState(),
         ),
       ],
       child: Scaffold(

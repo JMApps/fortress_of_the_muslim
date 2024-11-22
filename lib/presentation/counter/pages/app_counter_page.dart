@@ -27,7 +27,7 @@ class AppCounterPage extends StatelessWidget {
           title: Text(appLocale.counter),
         ),
         body: OrientationLayoutBuilder(
-          portrait: (context) => Padding(
+          portrait: (context) => const Padding(
             padding: AppStyles.paddingMini,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,13 +38,13 @@ class AppCounterPage extends StatelessWidget {
                   child: FingerPrintContainer(),
                 ),
                 CounterValuesDropdown(),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 CounterOptionsContainer(),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
               ],
             ),
           ),
-          landscape: (context) => Padding(
+          landscape: (context) => const Padding(
             padding: AppStyles.paddingMini,
             child: Row(
               children: [
@@ -56,11 +56,11 @@ class AppCounterPage extends StatelessWidget {
                       Expanded(
                         child: TextValueContainer(),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       CounterValuesDropdown(),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       CounterOptionsContainer(),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),

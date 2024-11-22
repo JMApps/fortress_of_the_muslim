@@ -24,24 +24,24 @@ class MainFootnoteData extends StatelessWidget {
     return FutureBuilder<FootnoteEntity>(
       future: Provider.of<FootnotesState>(context, listen: false).getFootnoteById(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, footnoteId: footnoteNumber),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+        if (snapshot.hasData) {
+          if (snapshot.hasError) {
+            return MainErrorTextData(errorText: snapshot.error.toString());
+          }
+          return SingleChildScrollView(
+            padding: AppStyles.paddingWithoutTop,
+            child: MainHtmlData(
+              htmlData: '<b>[${snapshot.data!.footnoteId}]</b> – ${snapshot.data!.footnote}',
+              footnoteColor: footnoteColor,
+              font: AppConstraints.fontRaleway,
+              fontSize: 18.0,
+              textAlign: TextAlign.center,
+              fontColor: Theme.of(context).colorScheme.onSurface,
+            ),
           );
         }
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
-        }
-        return SingleChildScrollView(
-          padding: AppStyles.paddingWithoutTop,
-          child: MainHtmlData(
-            htmlData: '<b>[${snapshot.data!.footnoteId}]</b> – ${snapshot.data!.footnote}',
-            footnoteColor: footnoteColor,
-            font: AppConstraints.fontGilroy,
-            fontSize: 18.0,
-            textAlign: TextAlign.center,
-            fontColor: Theme.of(context).colorScheme.onSurface,
-          ),
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );

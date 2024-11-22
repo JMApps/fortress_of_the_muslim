@@ -5,7 +5,7 @@ class BookContentModel {
   final String bookContentTitle;
   final String bookContent;
 
-  BookContentModel({
+  const BookContentModel({
     required this.bookContentId,
     required this.bookContentTitle,
     required this.bookContent,

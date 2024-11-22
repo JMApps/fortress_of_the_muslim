@@ -29,7 +29,7 @@ class TextValueContainer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
                     fontWeight: FontWeight.bold,
-                    fontFamily: AppConstraints.fontGilroy,
+                    fontFamily: AppConstraints.fontRaleway,
                     color: appColors.primary
                   ),
                   textAlign: TextAlign.center,

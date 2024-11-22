@@ -13,7 +13,7 @@ class TextFontsDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRaleway, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
         return Column(
@@ -21,7 +21,7 @@ class TextFontsDropDown extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.zero,
-              visualDensity: VisualDensity(vertical: -4),
+              visualDensity: const VisualDensity(vertical: -4),
               title: Text(
                 appLocale.font,
                 style: AppStyles.mainTextStyle17Bold,

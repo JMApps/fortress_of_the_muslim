@@ -28,8 +28,8 @@ class ChapterContentPage extends StatefulWidget {
 }
 
 class _ChapterContentPageState extends State<ChapterContentPage> {
-  late Future<ChapterEntity> _futureChapter;
-  late Future<List<SupplicationEntity>> _futureSupplications;
+  late final Future<ChapterEntity> _futureChapter;
+  late final Future<List<SupplicationEntity>> _futureSupplications;
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                 Navigator.of(context).pop();
               },
               tooltip: appLocale.back,
-              icon: Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded),
             ),
             actions: [
               IconButton.filledTonal(
@@ -66,13 +66,13 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                   );
                 },
                 tooltip: appLocale.settings,
-                icon: Icon(Icons.settings_outlined),
+                icon: const Icon(Icons.settings),
               ),
             ],
           ),
           SliverToBoxAdapter(
             child: Container(
-              margin: AppStyles.padding,
+              margin: AppStyles.paddingMini,
               padding: AppStyles.paddingMini,
               decoration: BoxDecoration(
                 color: appColors.secondaryContainer,
@@ -81,25 +81,25 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
               child: FutureBuilder<ChapterEntity>(
                 future: _futureChapter,
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  }
                   if (snapshot.hasError) {
                     return MainErrorTextData(errorText: snapshot.error.toString());
                   }
-                  final ChapterEntity chapterModel = snapshot.data!;
-                  return Padding(
-                    padding: AppStyles.paddingMicro,
-                    child: MainHtmlData(
-                      htmlData: chapterModel.chapterTitle,
-                      footnoteColor: appColors.primary,
-                      font: AppConstraints.fontGilroy,
-                      fontSize: 17.0,
-                      textAlign: TextAlign.center,
-                      fontColor: appColors.onSurface,
-                    ),
+                  if (snapshot.hasData) {
+                    final ChapterEntity chapterModel = snapshot.data!;
+                    return Padding(
+                      padding: AppStyles.paddingMicro,
+                      child: MainHtmlData(
+                        htmlData: chapterModel.chapterTitle,
+                        footnoteColor: appColors.primary,
+                        font: AppConstraints.fontRaleway,
+                        fontSize: 17.0,
+                        textAlign: TextAlign.center,
+                        fontColor: appColors.onSurface,
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
                   );
                 },
               ),
@@ -108,31 +108,31 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
           FutureBuilder<List<SupplicationEntity>>(
             future: _futureSupplications,
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return SliverFillRemaining(
-                  child: Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                );
-              }
-              if (snapshot.hasError) {
-                return SliverFillRemaining(
-                  child: MainErrorTextData(errorText: snapshot.error.toString()),
-                );
-              }
-              return SliverList.builder(
-                itemBuilder: (context, index) {
-                  final SupplicationEntity supplicationModel = snapshot.data![index];
-                  return Padding(
-                    padding: AppStyles.paddingHorizontalMini,
-                    child: ContentSupplicationItem(
-                      supplicationModel: supplicationModel,
-                      supplicationIndex: index + 1,
-                      supplicationLength: snapshot.data!.length,
-                    ),
+              if (snapshot.hasData) {
+                if (snapshot.hasError) {
+                  return SliverFillRemaining(
+                    child: MainErrorTextData(errorText: snapshot.error.toString()),
                   );
-                },
-                itemCount: snapshot.data!.length,
+                }
+                return SliverList.builder(
+                  itemBuilder: (context, index) {
+                    final SupplicationEntity supplicationModel = snapshot.data![index];
+                    return Padding(
+                      padding: AppStyles.paddingHorizontalMini,
+                      child: ContentSupplicationItem(
+                        supplicationModel: supplicationModel,
+                        supplicationIndex: index + 1,
+                        supplicationLength: snapshot.data!.length,
+                      ),
+                    );
+                  },
+                  itemCount: snapshot.data!.length,
+                );
+              }
+              return const SliverFillRemaining(
+                child: Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
               );
             },
           ),

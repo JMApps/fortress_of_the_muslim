@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../core/strings/app_constraints.dart';
 
 class ContentSettingsState extends ChangeNotifier {
-
   final _contentSettings = Hive.box(AppConstraints.keyContentSettingsBox);
 
   late int _arabicFontIndex;

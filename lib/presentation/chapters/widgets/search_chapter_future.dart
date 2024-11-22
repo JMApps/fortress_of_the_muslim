@@ -24,7 +24,7 @@ class SearchChaptersFuture extends StatefulWidget {
 }
 
 class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
-  late Future<List<ChapterEntity>> _futureMainChapters;
+  late final Future<List<ChapterEntity>> _futureMainChapters;
   List<ChapterEntity> _chapters = [];
   List<ChapterEntity> _recentChapters = [];
 
@@ -40,11 +40,6 @@ class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
     return FutureBuilder<List<ChapterEntity>>(
       future: _futureMainChapters,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
@@ -53,20 +48,25 @@ class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
             descriptionText: appLocale.searchIsEmpty,
           );
         }
-        _chapters = snapshot.data!;
-        _recentChapters = widget.query.isEmpty ? _chapters : _chapters.where((element) =>
-        element.chapterId.toString().contains(widget.query) || element.chapterNumber.toLowerCase().contains(widget.query) || element.chapterTitle.toLowerCase().contains(widget.query)).toList();
-        return _recentChapters.isEmpty ? MainDescriptionText(descriptionText: appLocale.searchIsEmpty) : Scrollbar(
-          child: ListView.builder(
-            padding: AppStyles.paddingMini,
-            itemCount: _recentChapters.length,
-            itemBuilder: (BuildContext context, int index) {
-              return MainChapterItem(
-                chapterModel: _recentChapters[index],
-                chapterIndex: index,
-              );
-            },
-          ),
+        if (snapshot.hasData) {
+          _chapters = snapshot.data!;
+          _recentChapters = widget.query.isEmpty ? _chapters : _chapters.where((element) =>
+          element.chapterId.toString().contains(widget.query) || element.chapterNumber.toLowerCase().contains(widget.query) || element.chapterTitle.toLowerCase().contains(widget.query)).toList();
+          return _recentChapters.isEmpty ? MainDescriptionText(descriptionText: appLocale.searchIsEmpty) : Scrollbar(
+            child: ListView.builder(
+              padding: AppStyles.paddingMini,
+              itemCount: _recentChapters.length,
+              itemBuilder: (BuildContext context, int index) {
+                return MainChapterItem(
+                  chapterModel: _recentChapters[index],
+                  chapterIndex: index,
+                );
+              },
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );

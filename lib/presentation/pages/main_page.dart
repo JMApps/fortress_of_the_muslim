@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _isOpenWithChapter = context.read<AppSettingsState>().getOpenWithChapters;
+      _isOpenWithChapter = Provider.of<AppSettingsState>(context, listen: false).getOpenWithChapters;
       if (_isOpenWithChapter) {
         _openChaptersPage();
       }
@@ -50,14 +50,13 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text(appLocale.appName),
         actions: [
-          IconButton(
+          IconButton.filledTonal(
             onPressed: () {
               Share.share('${appLocale.appName}${appLocale.appSlogan}\n\n${appLocale.versionIOS}\n${appLocale.linkIOS}\n\n${appLocale.versionAndroid}\n${appLocale.linkAndroid}');
             },
             tooltip: appLocale.share,
-            icon: Icon(
+            icon: const Icon(
               Icons.ios_share,
-              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],
@@ -69,42 +68,42 @@ class _MainPageState extends State<MainPage> {
           height: screenHeight,
           clipBehavior: Clip.antiAlias,
           margin: AppStyles.paddingWithoutTopBottom,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: AppStyles.borderBig
           ),
           child: OrientationLayoutBuilder(
-            portrait: (context) => Column(
+            portrait: (context) => const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   flex: 4,
                   child: FirstMainTwo(),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Expanded(
                   flex: 4,
                   child: SecondMainTwo(),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Expanded(
                   flex: 2,
                   child: FirstMainThree(),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Expanded(
                   flex: 2,
                   child: SecondMainThree(),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 LastChapterCard(),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Expanded(
                   flex: 2,
                   child: LastMainThree(),
                 ),
               ],
             ),
-            landscape: (context) => Row(
+            landscape: (context) => const Row(
               children: [
                 Expanded(
                   child: Column(
@@ -113,27 +112,27 @@ class _MainPageState extends State<MainPage> {
                       Expanded(
                         child: FirstMainTwo(),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       LastChapterCard(),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Expanded(
                         child: SecondMainTwo(),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     children: [
                       Expanded(
                         child: FirstMainThree(),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Expanded(
                         child: SecondMainThree(),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Expanded(
                         child: LastMainThree(),
                       ),

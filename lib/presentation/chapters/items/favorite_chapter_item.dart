@@ -27,7 +27,6 @@ class FavoriteChapterItem extends StatelessWidget {
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
-    final bool chapterIsFavorite = Provider.of<MainChaptersState>(context).chapterIsFavorite(chapterModel.chapterId);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
@@ -56,35 +55,39 @@ class FavoriteChapterItem extends StatelessWidget {
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
           footnoteColor: Colors.orange,
-          font: AppConstraints.fontGilroy,
+          font: AppConstraints.fontRaleway,
           fontSize: 17.0,
           textAlign: TextAlign.start,
           fontColor: appColors.onSurface,
         ),
-        leading: IconButton.filledTonal(
-          onPressed: () {
-            Provider.of<MainChaptersState>(context, listen: false).toggleChapterFavorite(chapterId: chapterModel.chapterId);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: appColors.secondaryContainer,
-                duration: const Duration(milliseconds: 500),
-                shape: AppStyles.shape,
-                elevation: 0,
-                content: Text(
-                  chapterIsFavorite ? appLocale.removed : appLocale.added,
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    color: appColors.onSurface,
+        leading: Consumer<MainChaptersState>(
+          builder: (context, mainChaptersState, _) {
+            return IconButton.filledTonal(
+              onPressed: () {
+                mainChaptersState.toggleChapterFavorite(chapterId: chapterModel.chapterId);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: appColors.secondaryContainer,
+                    duration: const Duration(milliseconds: 500),
+                    shape: AppStyles.shape,
+                    elevation: 0,
+                    content: Text(
+                      mainChaptersState.chapterIsFavorite(chapterModel.chapterId) ? appLocale.removed : appLocale.added,
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        color: appColors.onSurface,
+                      ),
+                    ),
                   ),
-                ),
+                );
+              },
+              padding: EdgeInsets.zero,
+              icon: Icon(
+                Icons.bookmark,
+                color: appColors.secondary,
               ),
             );
           },
-          padding: EdgeInsets.zero,
-          icon: Icon(
-            Icons.bookmark,
-            color: appColors.secondary,
-          ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,

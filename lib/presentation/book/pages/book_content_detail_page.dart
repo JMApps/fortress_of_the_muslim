@@ -8,7 +8,7 @@ import '../../states/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../../widgets/main_html_data.dart';
 
-class BookContentDetailPage extends StatefulWidget {
+class BookContentDetailPage extends StatelessWidget {
   const BookContentDetailPage({
     super.key,
     required this.bookModel,
@@ -17,29 +17,16 @@ class BookContentDetailPage extends StatefulWidget {
   final BookContentEntity bookModel;
 
   @override
-  State<BookContentDetailPage> createState() => _BookContentDetailPageState();
-}
-
-class _BookContentDetailPageState extends State<BookContentDetailPage> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ScrollPageState(_scrollController),
+          create: (_) => ScrollPageState(),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.bookModel.bookContentTitle),
+          title: Text(bookModel.bookContentTitle),
         ),
         body: Consumer<ScrollPageState>(
           builder: (context, scrollPageState, _) {
@@ -47,11 +34,11 @@ class _BookContentDetailPageState extends State<BookContentDetailPage> {
               controller: scrollPageState.getScrollController,
               child: SingleChildScrollView(
                 controller: scrollPageState.getScrollController,
-                padding: AppStyles.paddingWithoutTopMini,
+                padding: AppStyles.padding,
                 child: MainHtmlData(
-                  htmlData: widget.bookModel.bookContent,
+                  htmlData: bookModel.bookContent,
                   footnoteColor: Colors.orange,
-                  font: AppConstraints.fontGilroy,
+                  font: AppConstraints.fontRaleway,
                   fontSize: 18.0,
                   textAlign: TextAlign.start,
                   fontColor: Theme.of(context).colorScheme.onSurface,
@@ -60,7 +47,9 @@ class _BookContentDetailPageState extends State<BookContentDetailPage> {
             );
           },
         ),
-        floatingActionButton: FabTopStart(fabColor: Colors.orange.withOpacity(0.35)),
+        floatingActionButton: FabTopStart(
+          fabColor: Colors.orange.withOpacity(0.35),
+        ),
       ),
     );
   }

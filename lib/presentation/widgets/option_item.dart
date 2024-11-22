@@ -33,7 +33,7 @@ class OptionItem extends StatelessWidget {
         if (routeName.contains(appLocale.aboutUs)) {
           showModalBottomSheet(
             context: context,
-            builder: (_) => SingleChildScrollView(
+            builder: (_) => const SingleChildScrollView(
               padding: AppStyles.paddingWithoutTopMini,
               child: AboutUsColumn(),
             ),
@@ -54,7 +54,7 @@ class OptionItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: AppStyles.borderMini,
                   image: DecorationImage(
-                    image: AssetImage('assets/pictures/texture_bottom_left.jpg'),
+                    image: const AssetImage('assets/pictures/texture_bottom_left.jpg'),
                     fit: BoxFit.cover,
                     colorFilter: ColorFilter.mode(
                       itemColor.withOpacity(0.85),

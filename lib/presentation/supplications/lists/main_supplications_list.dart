@@ -18,8 +18,8 @@ class MainSupplicationsList extends StatefulWidget {
 }
 
 class _MainSupplicationsListState extends State<MainSupplicationsList> {
-  late ScrollController _scrollController;
-  late Future<List<SupplicationEntity>> _futureSupplications;
+  late final ScrollController _scrollController;
+  late final Future<List<SupplicationEntity>> _futureSupplications;
 
   @override
   void initState() {
@@ -33,29 +33,29 @@ class _MainSupplicationsListState extends State<MainSupplicationsList> {
     return FutureBuilder<List<SupplicationEntity>>(
       future: _futureSupplications,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
-        return Scrollbar(
-          controller: _scrollController,
-          child: ListView.builder(
+        if (snapshot.hasData) {
+          return Scrollbar(
             controller: _scrollController,
-            padding: AppStyles.paddingMini,
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final supplicationModel = snapshot.data![index];
-              return MainSupplicationItem(
-                supplicationModel: supplicationModel,
-                supplicationIndex: index + 1,
-                supplicationLength: snapshot.data!.length,
-              );
-            },
-          ),
+            child: ListView.builder(
+              controller: _scrollController,
+              padding: AppStyles.paddingMini,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final supplicationModel = snapshot.data![index];
+                return MainSupplicationItem(
+                  supplicationModel: supplicationModel,
+                  supplicationIndex: index + 1,
+                  supplicationLength: snapshot.data!.length,
+                );
+              },
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );

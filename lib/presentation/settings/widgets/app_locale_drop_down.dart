@@ -13,7 +13,7 @@ class AppLocaleDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRaleway, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<AppSettingsState>(
       builder: (BuildContext context, appSettings, _) {
         return ListTile(
@@ -23,7 +23,7 @@ class AppLocaleDropDown extends StatelessWidget {
             style: AppStyles.mainTextStyle17Bold,
           ),
           subtitle: Text(appLocale.appLanguage),
-          leading: Icon(Icons.language_rounded),
+          leading: const Icon(Icons.language_rounded),
           trailing: DropdownButton<int>(
             iconEnabledColor: appColors.primary,
             borderRadius: AppStyles.border,

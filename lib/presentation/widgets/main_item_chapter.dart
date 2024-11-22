@@ -24,12 +24,12 @@ class MainItemChapter extends StatelessWidget {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
     final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
     return InkWell(
-      onTap: () {
+      onTap: () async {
         HapticFeedback.lightImpact();
         if (chapterNumber == 1000) {
           Navigator.pushNamed(context, NameRoutes.appCounterPage);
         } else {
-          Navigator.pushNamed(
+          await Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
             arguments: ChapterIdArgs(chapterId: chapterNumber),
