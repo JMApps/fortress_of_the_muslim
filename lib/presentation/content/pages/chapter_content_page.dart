@@ -3,12 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/app_player_state.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -19,9 +17,13 @@ class ChapterContentPage extends StatefulWidget {
   const ChapterContentPage({
     super.key,
     required this.chapterId,
+    required this.chaptersTableName,
+    required this.supplicationsTableName,
   });
 
   final int chapterId;
+  final String chaptersTableName;
+  final String supplicationsTableName;
 
   @override
   State<ChapterContentPage> createState() => _ChapterContentPageState();
@@ -34,8 +36,8 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
   @override
   void initState() {
     super.initState();
-    _futureChapter = Provider.of<MainChaptersState>(context, listen: false).getChapterById(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, chapterId: widget.chapterId);
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, chapterId: widget.chapterId);
+    _futureChapter = Provider.of<MainChaptersState>(context, listen: false).getChapterById(tableName: widget.chaptersTableName, chapterId: widget.chapterId);
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).getSupplicationsByChapterId(tableName: widget.supplicationsTableName, chapterId: widget.chapterId);
   }
 
   @override
@@ -91,7 +93,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                       child: MainHtmlData(
                         htmlData: chapterModel.chapterTitle,
                         footnoteColor: appColors.primary,
-                        font: AppConstraints.fontRaleway,
+                        font: appLocale.mainFont,
                         fontSize: 17.0,
                         textAlign: TextAlign.center,
                         fontColor: appColors.onSurface,

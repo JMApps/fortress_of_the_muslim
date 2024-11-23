@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -15,9 +13,11 @@ class SearchSupplicationsFuture extends StatefulWidget {
   const SearchSupplicationsFuture({
     super.key,
     required this.query,
+    required this.tableName,
   });
 
   final String query;
+  final String tableName;
 
   @override
   State<SearchSupplicationsFuture> createState() => _SearchSupplicationsFutureState();
@@ -30,7 +30,7 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
 
   @override
   void initState() {
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(tableName: widget.tableName);
     super.initState();
   }
 

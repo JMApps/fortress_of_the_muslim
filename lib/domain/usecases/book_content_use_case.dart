@@ -9,7 +9,7 @@ class BookContentUseCase {
 
   Future<List<BookContentEntity>> fetchAllContentBook({required String languageCode}) async {
     try {
-      return await _bookContentRepository.getAllContentBook(languageCode: languageCode);
+      return await _bookContentRepository.getAllContentBook(tableName: languageCode);
     } catch (e) {
       throw Exception('$e');
     }
@@ -17,7 +17,7 @@ class BookContentUseCase {
 
   Future<BookContentEntity> fetchContentBookById({required String languageCode, required int bookContentId}) async {
     try {
-      return await _bookContentRepository.getContentBookById(languageCode: languageCode, bookContentId: bookContentId);
+      return await _bookContentRepository.getContentBookById(tableName: languageCode, bookContentId: bookContentId);
     } catch (e) {
       throw Exception('$e');
     }

@@ -9,4 +9,5 @@ class NameRoutes {
   static const String appSettingsPage = '/app_settings_page';
   static const String bookContentPage = '/book_content_page';
   static const String bookContentDetailPage = '/book_content_detail_page';
+  static const String editSupplicationItem = '/edit_supplication_item';
 }

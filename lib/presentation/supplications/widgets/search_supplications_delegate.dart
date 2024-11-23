@@ -5,12 +5,16 @@ import '../../states/app_player_state.dart';
 import 'search_supplications_future.dart';
 
 class SearchSupplicationsDelegate extends SearchDelegate {
-  final String search;
-
-  SearchSupplicationsDelegate({required this.search}) : super(
+  SearchSupplicationsDelegate({
+    required this.search,
+    required this.tableName,
+  }) : super(
     searchFieldLabel: search,
     keyboardType: TextInputType.text,
   );
+
+  final String search;
+  final String tableName;
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -23,15 +27,17 @@ class SearchSupplicationsDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      query.isNotEmpty ? IconButton(
-        onPressed: () {
-          query = '';
-          },
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_close,
-          progress: transitionAnimation,
-        ),
-      ) : const SizedBox(),
+      query.isNotEmpty
+          ? IconButton(
+              onPressed: () {
+                query = '';
+              },
+              icon: AnimatedIcon(
+                icon: AnimatedIcons.menu_close,
+                progress: transitionAnimation,
+              ),
+            )
+          : const SizedBox(),
     ];
   }
 
@@ -51,11 +57,11 @@ class SearchSupplicationsDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return SearchSupplicationsFuture(query: query.toLowerCase());
+    return SearchSupplicationsFuture(query: query.toLowerCase(), tableName: tableName);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SearchSupplicationsFuture(query: query.toLowerCase());
+    return SearchSupplicationsFuture(query: query.toLowerCase(), tableName: tableName);
   }
 }

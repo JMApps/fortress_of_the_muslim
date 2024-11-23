@@ -8,15 +8,15 @@ class FootnotesState extends ChangeNotifier {
 
   FootnotesState(this._footnoteUseCase);
 
-  Future<List<FootnoteEntity>> getAllFootnotes({required String languageCode}) async {
-    return await _footnoteUseCase.fetchAllFootnotes(languageCode: languageCode);
+  Future<List<FootnoteEntity>> getAllFootnotes({required String tableName}) async {
+    return await _footnoteUseCase.fetchAllFootnotes(languageCode: tableName);
   }
 
-  Future<FootnoteEntity> getFootnoteById({required String languageCode, required int footnoteId}) async {
-    return await _footnoteUseCase.fetchFootnoteById(languageCode: languageCode, footnoteId: footnoteId);
+  Future<FootnoteEntity> getFootnoteById({required String tableName, required int footnoteId}) async {
+    return await _footnoteUseCase.fetchFootnoteById(languageCode: tableName, footnoteId: footnoteId);
   }
 
-  Future<String> getFootnoteBySupplication({required String languageCode, required int supplicationId}) async {
-    return await _footnoteUseCase.fetchFootnoteBySupplication(languageCode: languageCode, supplicationId: supplicationId);
+  Future<String> getFootnoteBySupplication({required String tableName, required int supplicationId}) async {
+    return await _footnoteUseCase.fetchFootnoteBySupplication(tableName: tableName, supplicationId: supplicationId);
   }
 }

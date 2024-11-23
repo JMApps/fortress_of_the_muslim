@@ -30,7 +30,7 @@ class BookContentPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(appLocale.bookContent),
         ),
-        body: const BookContentList(),
+        body: BookContentList(tableName: appLocale.bookContentTableName),
       ),
     );
   }

@@ -45,8 +45,6 @@ class AppConstraints {
 
   static const String keyPlaySpeedIndex = 'key_play_speed_index';
 
-  static const String fontRaleway = 'Montserrat';
-
   static const List<String> appLanguages = [
     'Русский',
     'Кыргызча',

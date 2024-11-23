@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
@@ -32,11 +31,16 @@ class FavoriteChapterItem extends StatelessWidget {
       child: ListTile(
         onTap: () async {
           HapticFeedback.lightImpact();
-          Provider.of<MainChaptersState>(context, listen: false).saveLastChapter(chapterModel.chapterId);
+          Provider.of<MainChaptersState>(context, listen: false)
+              .saveLastChapter(chapterModel.chapterId);
           await Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
-            arguments: ChapterIdArgs(chapterId: chapterModel.chapterId),
+            arguments: ChapterIdArgs(
+              chapterId: chapterModel.chapterId,
+              chaptersTableName: appLocale.chapterTableName,
+              supplicationsTableName: appLocale.supplicationsTableName,
+            ),
           );
         },
         horizontalTitleGap: 8,
@@ -55,7 +59,7 @@ class FavoriteChapterItem extends StatelessWidget {
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
           footnoteColor: Colors.orange,
-          font: AppConstraints.fontRaleway,
+          font: appLocale.mainFont,
           fontSize: 17.0,
           textAlign: TextAlign.start,
           fontColor: appColors.onSurface,

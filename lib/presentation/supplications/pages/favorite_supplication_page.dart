@@ -45,7 +45,7 @@ class FavoriteSupplicationPage extends StatelessWidget {
             ),
           ],
         ),
-        body: const FavoriteSupplicationsList(),
+        body: FavoriteSupplicationsList(tableName: appLocale.supplicationsTableName),
         floatingActionButton: FabTopStart(
           fabColor: Colors.blue.withOpacity(0.35),
         ),

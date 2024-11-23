@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -15,9 +13,11 @@ class SearchChaptersFuture extends StatefulWidget {
   const SearchChaptersFuture({
     super.key,
     required this.query,
+    required this.tableName,
   });
 
   final String query;
+  final String tableName;
 
   @override
   State<SearchChaptersFuture> createState() => _SearchChaptersFutureState();
@@ -30,7 +30,7 @@ class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
 
   @override
   void initState() {
-    _futureMainChapters = Provider.of<MainChaptersState>(context, listen: false).fetchAllChapters(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
+    _futureMainChapters = Provider.of<MainChaptersState>(context, listen: false).fetchAllChapters(tableName: widget.tableName);
     super.initState();
   }
 

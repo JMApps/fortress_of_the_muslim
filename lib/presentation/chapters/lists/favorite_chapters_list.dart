@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/favorite_is_empty.dart';
@@ -13,7 +11,12 @@ import '../../widgets/main_error_text_data.dart';
 import '../items/favorite_chapter_item.dart';
 
 class FavoriteChaptersList extends StatefulWidget {
-  const FavoriteChaptersList({super.key});
+  const FavoriteChaptersList({
+    super.key,
+    required this.tableName,
+  });
+
+  final String tableName;
 
   @override
   State<FavoriteChaptersList> createState() => _FavoriteChaptersListState();
@@ -32,7 +35,7 @@ class _FavoriteChaptersListState extends State<FavoriteChaptersList> {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder<List<ChapterEntity>>(
-      future: Provider.of<MainChaptersState>(context, listen: false).getFavoriteChapters(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, ids: Provider.of<MainChaptersState>(context).getFavoriteChapterIds),
+      future: Provider.of<MainChaptersState>(context, listen: false).getFavoriteChapters(tableName: widget.tableName, ids: Provider.of<MainChaptersState>(context).getFavoriteChapterIds),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());

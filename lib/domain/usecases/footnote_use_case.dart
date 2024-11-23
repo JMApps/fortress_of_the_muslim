@@ -8,7 +8,7 @@ class FootnoteUseCase {
 
   Future<List<FootnoteEntity>> fetchAllFootnotes({required String languageCode}) async {
     try {
-      return await _footnoteRepository.getAllFootnotes(languageCode: languageCode);
+      return await _footnoteRepository.getAllFootnotes(tableName: languageCode);
     } catch (e) {
       throw Exception('$e');
     }
@@ -16,15 +16,15 @@ class FootnoteUseCase {
 
   Future<FootnoteEntity> fetchFootnoteById({required String languageCode, required int footnoteId}) async {
     try {
-      return await _footnoteRepository.getFootnoteById(languageCode: languageCode, footnoteId: footnoteId);
+      return await _footnoteRepository.getFootnoteById(tableName: languageCode, footnoteId: footnoteId);
     } catch (e) {
       throw Exception('$e');
     }
   }
 
-  Future<String> fetchFootnoteBySupplication({required String languageCode, required int supplicationId}) async {
+  Future<String> fetchFootnoteBySupplication({required String tableName, required int supplicationId}) async {
     try {
-      return await _footnoteRepository.getFootnoteBySupplication(languageCode: languageCode, supplicationId: supplicationId);
+      return await _footnoteRepository.getFootnoteBySupplication(tableName: tableName, supplicationId: supplicationId);
     } catch (e) {
       throw Exception('$e');
     }

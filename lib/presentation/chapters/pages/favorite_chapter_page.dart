@@ -22,7 +22,7 @@ class FavoriteChapterPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(appLocale.favoriteChapters),
         ),
-        body: const FavoriteChaptersList(),
+        body: FavoriteChaptersList(tableName: appLocale.chapterTableName),
         floatingActionButton: FabTopStart(
           fabColor: Colors.orange.withOpacity(0.35),
         ),

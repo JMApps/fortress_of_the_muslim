@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/book_content_entity.dart';
 import '../../states/scroll_page_state.dart';
@@ -18,6 +18,7 @@ class BookContentDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -38,7 +39,7 @@ class BookContentDetailPage extends StatelessWidget {
                 child: MainHtmlData(
                   htmlData: bookModel.bookContent,
                   footnoteColor: Colors.orange,
-                  font: AppConstraints.fontRaleway,
+                  font: appLocale.mainFont,
                   fontSize: 18.0,
                   textAlign: TextAlign.start,
                   fontColor: Theme.of(context).colorScheme.onSurface,

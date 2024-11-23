@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
@@ -19,14 +19,19 @@ class LastChapterCard extends StatelessWidget {
         await Navigator.pushNamed(
           context,
           NameRoutes.chapterContentPage,
-          arguments: ChapterIdArgs(chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId),
+          arguments: ChapterIdArgs(
+            chapterId: Provider.of<MainChaptersState>(context, listen: false).getLastChapterId,
+            chaptersTableName: appLocale.chapterTableName,
+            supplicationsTableName: appLocale.supplicationsTableName,
+          ),
         );
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            appLocale.readLastChapter.replaceAll('||', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
+            appLocale.readLastChapter.replaceAll('||',
+                '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
             style: AppStyles.mainTextStyle17,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

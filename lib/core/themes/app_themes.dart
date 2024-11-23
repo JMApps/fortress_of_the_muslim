@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../strings/app_constraints.dart';
 import '../styles/app_styles.dart';
 
 class AppThemes {
   final Color _appColor;
+  final Locale _locale;
 
-  AppThemes(this._appColor);
+  AppThemes(this._appColor, this._locale);
 
   ThemeData get lightTheme => _buildTheme(Brightness.light);
 
   ThemeData get darkTheme => _buildTheme(Brightness.dark);
 
   ThemeData _buildTheme(Brightness brightness) {
+    final fontFamily = _locale.languageCode == 'ky' ? 'Raleway' : 'Gilroy';
+
     return ThemeData(
-      fontFamily: AppConstraints.fontRaleway,
+      fontFamily: fontFamily,
       colorScheme: ColorScheme.fromSeed(
         brightness: brightness,
         seedColor: _appColor,

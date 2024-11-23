@@ -1,5 +1,12 @@
 {
   "@@locale": "ru",
+
+  "chapterTableName": "Table_of_chapters_ru",
+  "supplicationsTableName": "Table_of_supplications_ru",
+  "footnotesTableName": "Table_of_footnotes_ru",
+  "bookContentTableName": "Table_of_book_content_ru",
+  "mainFont": "Gilroy",
+
   "appName": "Крепость мусульманина",
   "appSlogan": " – твоя несокрушимая крепость!",
   "morningPrayers": "Время утренних азкаров",
@@ -33,7 +40,7 @@
   "share": "Поделиться",
   "font": "Шрифт",
   "arabicFontNames": "Hafs, Noto Naskh, Scheherazade",
-  "translationFontNames": "Raleway, SF Pro, Montserrat",
+  "translationFontNames": "Gilroy, SF Pro, Montserrat",
   "align": "Расположение",
   "textsAlign": "Расположение текста",
   "alignStart": "По левому краю",

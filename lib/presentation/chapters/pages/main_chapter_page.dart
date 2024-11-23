@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../states/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
@@ -27,7 +27,10 @@ class MainChapterPage extends StatelessWidget {
               onPressed: () async {
                 await showSearch(
                   context: context,
-                  delegate: SearchChaptersDelegate(search: appLocale.search),
+                  delegate: SearchChaptersDelegate(
+                    search: appLocale.search,
+                    tableName: appLocale.chapterTableName,
+                  ),
                 );
               },
               tooltip: appLocale.search,
@@ -35,7 +38,7 @@ class MainChapterPage extends StatelessWidget {
             ),
           ],
         ),
-        body: const MainChaptersList(),
+        body: MainChaptersList(tableName: appLocale.chapterTableName),
         floatingActionButton: FabTopStart(
           fabColor: Colors.teal.withOpacity(0.35),
         ),

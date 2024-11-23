@@ -1,5 +1,12 @@
 {
   "@@locale": "ky",
+
+  "chapterTableName": "Table_of_chapters_ky",
+  "supplicationsTableName": "Table_of_supplications_ky",
+  "footnotesTableName": "Table_of_footnotes_ky",
+  "bookContentTableName": "Table_of_book_content_ky",
+  "mainFont": "Raleway",
+
   "appName": "Мусулмандын коргону",
   "appSlogan": " – cенин кыйрагыс коргонуң!",
   "morningPrayers": "Эртең мененки зикирлердин убактысы",

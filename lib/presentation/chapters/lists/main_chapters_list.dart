@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_chapters_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/main_chapter_item.dart';
 
 class MainChaptersList extends StatefulWidget {
-  const MainChaptersList({super.key});
+  const MainChaptersList({
+    super.key,
+    required this.tableName,
+  });
+
+  final String tableName;
 
   @override
   State<MainChaptersList> createState() => _MainChaptersListState();
 }
 
 class _MainChaptersListState extends State<MainChaptersList> {
-  late ScrollController _scrollController;
-  late Future<List<ChapterEntity>> _futureChapters;
+  late final ScrollController _scrollController;
+  late final Future<List<ChapterEntity>> _futureChapters;
 
   @override
   void initState() {
     super.initState();
     _scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
-    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).fetchAllChapters(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
+    _futureChapters = Provider.of<MainChaptersState>(context, listen: false).fetchAllChapters(tableName: widget.tableName);
   }
 
   @override

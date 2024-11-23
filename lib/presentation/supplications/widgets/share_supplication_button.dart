@@ -6,9 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/footnotes_state.dart';
 
 class ShareSupplicationButton extends StatefulWidget {
@@ -44,7 +42,7 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
                 FilledButton.tonalIcon(
                   onPressed: () async {
                     Navigator.pop(context);
-                    final String footnoteSupplication = await _footnoteSupplication();
+                    final String footnoteSupplication = await _footnoteSupplication(tableName: appLocale.footnotesTableName);
                     await Share.share(footnoteSupplication.isNotEmpty ? '${widget.dataSupplication}\n\n$footnoteSupplication' : widget.dataSupplication);
                   },
                   icon: Icon(
@@ -59,7 +57,7 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
                 FilledButton.tonalIcon(
                   onPressed: () async {
                     Navigator.pop(context);
-                    final String footnoteSupplication = await _footnoteSupplication();
+                    final String footnoteSupplication = await _footnoteSupplication(tableName: appLocale.footnotesTableName);
                     await Clipboard.setData(ClipboardData(text: footnoteSupplication.isNotEmpty ? '${widget.dataSupplication}\n\n$footnoteSupplication' : widget.dataSupplication)).then(
                       (_) {
                         if (!context.mounted) return;
@@ -100,8 +98,8 @@ class _ShareSupplicationButtonState extends State<ShareSupplicationButton> {
     );
   }
 
-  Future<String> _footnoteSupplication() async {
-    final String footnoteSupplication = await Provider.of<FootnotesState>(context, listen: false).getFootnoteBySupplication(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, supplicationId: widget.supplicationId);
+  Future<String> _footnoteSupplication({required String tableName}) async {
+    final String footnoteSupplication = await Provider.of<FootnotesState>(context, listen: false).getFootnoteBySupplication(tableName: tableName, supplicationId: widget.supplicationId);
     final footnoteData = html_parser.parse(footnoteSupplication);
     return footnoteData.body!.text;
   }

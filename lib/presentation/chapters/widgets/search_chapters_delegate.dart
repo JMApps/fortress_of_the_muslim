@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'search_chapter_future.dart';
 
 class SearchChaptersDelegate extends SearchDelegate {
-
-  final String search;
-
-  SearchChaptersDelegate({required this.search}) : super(
+  SearchChaptersDelegate({
+    required this.search,
+    required this.tableName,
+  }) : super(
     searchFieldLabel: search,
     keyboardType: TextInputType.text,
   );
+
+  final String search;
+  final String tableName;
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -22,15 +25,17 @@ class SearchChaptersDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      query.isNotEmpty ? IconButton(
-        onPressed: () {
-          query = '';
-          },
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_close,
-          progress: transitionAnimation,
-        ),
-      ) : const SizedBox(),
+      query.isNotEmpty
+          ? IconButton(
+              onPressed: () {
+                query = '';
+              },
+              icon: AnimatedIcon(
+                icon: AnimatedIcons.menu_close,
+                progress: transitionAnimation,
+              ),
+            )
+          : const SizedBox(),
     ];
   }
 
@@ -49,11 +54,11 @@ class SearchChaptersDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return SearchChaptersFuture(query: query.toLowerCase());
+    return SearchChaptersFuture(query: query.toLowerCase(), tableName: tableName);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SearchChaptersFuture(query: query.toLowerCase());
+    return SearchChaptersFuture(query: query.toLowerCase(), tableName: tableName);
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/favorite_is_empty.dart';
@@ -13,10 +11,16 @@ import '../../widgets/main_error_text_data.dart';
 import '../items/favorite_supplication_item.dart';
 
 class FavoriteSupplicationsList extends StatefulWidget {
-  const FavoriteSupplicationsList({super.key});
+  const FavoriteSupplicationsList({
+    super.key,
+    required this.tableName,
+  });
+
+  final String tableName;
 
   @override
-  State<FavoriteSupplicationsList> createState() => _FavoriteSupplicationsListState();
+  State<FavoriteSupplicationsList> createState() =>
+      _FavoriteSupplicationsListState();
 }
 
 class _FavoriteSupplicationsListState extends State<FavoriteSupplicationsList> {
@@ -32,7 +36,7 @@ class _FavoriteSupplicationsListState extends State<FavoriteSupplicationsList> {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder<List<SupplicationEntity>>(
-      future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode, ids: Provider.of<MainSupplicationsState>(context).getFavoriteSupplicationIds),
+      future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(tableName: widget.tableName, ids: Provider.of<MainSupplicationsState>(context).getFavoriteSupplicationIds),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());

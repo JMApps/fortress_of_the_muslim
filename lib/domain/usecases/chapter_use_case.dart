@@ -9,7 +9,7 @@ class ChapterUseCase {
 
   Future<List<ChapterEntity>> fetchAllChapters({required String languageCode}) async {
     try {
-      return await _chapterRepository.getAllChapters(languageCode: languageCode);
+      return await _chapterRepository.getAllChapters(tableName: languageCode);
     } catch (e) {
       throw Exception('$e');
     }
@@ -17,7 +17,7 @@ class ChapterUseCase {
 
   Future<ChapterEntity> fetchChapterById({required String languageCode, required int chapterId}) async {
     try {
-      return await _chapterRepository.getChapterById(languageCode: languageCode, chapterId: chapterId);
+      return await _chapterRepository.getChapterById(tableName: languageCode, chapterId: chapterId);
     } catch (e) {
       throw Exception('$e');
     }
@@ -25,7 +25,7 @@ class ChapterUseCase {
 
   Future<List<ChapterEntity>> fetchFavoriteChapters({required String languageCode, required List<int> ids}) async {
     try {
-      return await _chapterRepository.getFavoriteChapters(languageCode: languageCode, ids: ids);
+      return await _chapterRepository.getFavoriteChapters(tableName: languageCode, ids: ids);
     } catch (e) {
       throw Exception('$e');
     }

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/arguments/book_content_args.dart';
 import '../../data/models/arguments/chapter_id_args.dart';
+import '../../data/models/arguments/supplication_args.dart';
 import '../../presentation/book/pages/book_content_detail_page.dart';
 import '../../presentation/book/pages/book_content_page.dart';
 import '../../presentation/chapters/pages/favorite_chapter_page.dart';
 import '../../presentation/chapters/pages/main_chapter_page.dart';
 import '../../presentation/content/pages/chapter_content_page.dart';
 import '../../presentation/counter/pages/app_counter_page.dart';
+import '../../presentation/edit_supplication_item.dart';
 import '../../presentation/settings/pages/app_settings_page.dart';
 import '../../presentation/settings/pages/content_settings_page.dart';
 import '../../presentation/supplications/pages/favorite_supplication_page.dart';
@@ -31,10 +33,14 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext, dynamic)> routes = {
     NameRoutes.allChaptersPage: (context, args) => const MainChapterPage(),
-    NameRoutes.favoriteChaptersPage: (context, args) => const FavoriteChapterPage(),
+    NameRoutes.favoriteChaptersPage: (context, args) =>     const FavoriteChapterPage(),
     NameRoutes.chapterContentPage: (context, args) {
       final ChapterIdArgs chapterIdArgs = args;
-      return ChapterContentPage(chapterId: chapterIdArgs.chapterId);
+      return ChapterContentPage(
+        chapterId: chapterIdArgs.chapterId,
+        chaptersTableName: chapterIdArgs.chaptersTableName,
+        supplicationsTableName: chapterIdArgs.supplicationsTableName,
+      );
     },
     NameRoutes.settingsContentPage: (context, args) => const ContentSettingsPage(),
     NameRoutes.allSupplicationsPage: (context, args) => const MainSupplicationPage(),
@@ -45,6 +51,10 @@ class AppRoutes {
     NameRoutes.bookContentDetailPage: (context, args) {
       final BookContentArgs bookContentArgs = args;
       return BookContentDetailPage(bookModel: bookContentArgs.bookModel);
+    },
+    NameRoutes.editSupplicationItem: (context, args) {
+      final SupplicationArgs supplicationArgs = args;
+      return EditSupplicationItem(supplicationModel: supplicationArgs.supplicationModel);
     },
   };
 }

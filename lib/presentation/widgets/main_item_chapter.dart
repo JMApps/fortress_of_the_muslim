@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
@@ -21,6 +22,7 @@ class MainItemChapter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
     final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
     return InkWell(
@@ -32,7 +34,11 @@ class MainItemChapter extends StatelessWidget {
           await Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
-            arguments: ChapterIdArgs(chapterId: chapterNumber),
+            arguments: ChapterIdArgs(
+              chapterId: chapterNumber,
+              chaptersTableName: appLocale.chapterTableName,
+              supplicationsTableName: appLocale.supplicationsTableName,
+            ),
           );
         }
       },
@@ -62,7 +68,7 @@ class MainItemChapter extends StatelessWidget {
               children: [
                 Icon(
                   itemIcon,
-                color: fixColor,
+                  color: fixColor,
                 ),
                 Padding(
                   padding: AppStyles.paddingHorizontalMini,
