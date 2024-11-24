@@ -15,7 +15,7 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppSettingsState>(
       builder: (context, appSettings, _) {
-        final appThemes = AppThemes(Color(appSettings.getAppThemeColor));
+        final appThemes = AppThemes(Color(appSettings.getAppThemeColor), AppConstraints.appLocales[appSettings.getAppLocaleIndex]);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           onGenerateRoute: AppRoutes.onRouteGenerator,
