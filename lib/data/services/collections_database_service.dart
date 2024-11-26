@@ -53,8 +53,7 @@ class CollectionsDatabaseService {
       CREATE TABLE ${DBValues.dbCollectionTable} (
         ${DBValues.dbCollectionId} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${DBValues.dbCollectionTitle} TEXT,
-        ${DBValues.dbCollectionDescription} TEXT,
-        ${DBValues.dbCollectionColor} INTEGER
+        ${DBValues.dbCollectionDescription} TEXT
       );
     ''');
   }

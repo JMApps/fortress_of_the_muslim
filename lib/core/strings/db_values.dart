@@ -1,6 +1,8 @@
 class DBValues {
   static const String dbName = 'fortress_of_the_muslim.db';
+  static const String collectionDbName = 'fortress_collections.db';
   static const int dbVersion = 3;
+  static const int collectionDvVersion = 1;
 
   static const String dbChapterId = 'chapter_id';
   static const String dbChapterNumber = 'chapter_number';
@@ -21,4 +23,10 @@ class DBValues {
   static const String dbBookContent = 'book_content';
 
   static const String dbSampleBy = 'sample_by';
+
+  static const String dbCollectionTable = 'Table_of_fortress_collections';
+
+  static const String dbCollectionId = 'collection_id';
+  static const String dbCollectionTitle = 'collection_title';
+  static const String dbCollectionDescription = 'collection_description';
 }
