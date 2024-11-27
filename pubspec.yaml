@@ -71,6 +71,9 @@ flutter:
     - assets/pictures/
 
   fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/gilroy_regular.ttf
     - family: Raleway
       fonts:
         - asset: assets/fonts/raleway_regular.ttf

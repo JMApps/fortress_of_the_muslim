@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../states/app_player_state.dart';
@@ -42,7 +42,6 @@ class MainSupplicationPage extends StatelessWidget {
                 );
               },
               tooltip: appLocale.settings,
-
               icon: const Icon(Icons.settings),
             ),
             IconButton.filledTonal(
@@ -50,7 +49,10 @@ class MainSupplicationPage extends StatelessWidget {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 await showSearch(
                   context: context,
-                  delegate: SearchSupplicationsDelegate(search: appLocale.search),
+                  delegate: SearchSupplicationsDelegate(
+                    search: appLocale.search,
+                    tableName: appLocale.supplicationsTableName,
+                  ),
                 );
               },
               tooltip: appLocale.search,
@@ -58,7 +60,7 @@ class MainSupplicationPage extends StatelessWidget {
             ),
           ],
         ),
-        body: const MainSupplicationsList(),
+        body: MainSupplicationsList(tableName: appLocale.supplicationsTableName),
         floatingActionButton: FabTopStart(
           fabColor: Colors.red.withOpacity(0.35),
         ),

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/supplication_entity.dart';
-import '../../states/app_settings_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/main_supplication_item.dart';
 
 class MainSupplicationsList extends StatefulWidget {
-  const MainSupplicationsList({super.key});
+  const MainSupplicationsList({
+    super.key,
+    required this.tableName,
+  });
+
+  final String tableName;
 
   @override
   State<MainSupplicationsList> createState() => _MainSupplicationsListState();
@@ -24,7 +27,7 @@ class _MainSupplicationsListState extends State<MainSupplicationsList> {
   @override
   void initState() {
     _scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
-    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(languageCode: AppConstraints.appLocales[Provider.of<AppSettingsState>(context, listen: false).getAppLocaleIndex].languageCode);
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(tableName: widget.tableName);
     super.initState();
   }
 

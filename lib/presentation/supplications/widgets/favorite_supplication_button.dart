@@ -20,7 +20,7 @@ class FavoriteSupplicationButton extends StatelessWidget {
     final appColors = Theme.of(context).colorScheme;
     return Consumer<MainSupplicationsState>(
       builder: (context, mainSupplicationsState, _) {
-        final bool supplicationIsFavorite = mainSupplicationsState.supplicationIsFavorite(supplicationId);
+        final bool supplicationIsFavorite = mainSupplicationsState.supplicationIsFavorite(supplicationId: supplicationId);
         return IconButton(
           onPressed: () {
             mainSupplicationsState.toggleSupplicationFavorite(supplicationId: supplicationId);

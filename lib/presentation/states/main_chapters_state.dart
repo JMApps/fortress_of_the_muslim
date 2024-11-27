@@ -19,16 +19,16 @@ class MainChaptersState extends ChangeNotifier {
 
   List<int> get getFavoriteChapterIds => _favoriteChapterIds;
 
-  Future<List<ChapterEntity>> fetchAllChapters({required String languageCode}) {
-    return _chapterUseCase.fetchAllChapters(languageCode: languageCode);
+  Future<List<ChapterEntity>> fetchAllChapters({required String tableName}) {
+    return _chapterUseCase.fetchAllChapters(languageCode: tableName);
   }
 
-  Future<ChapterEntity> getChapterById({required String languageCode, required int chapterId}) async {
-    return await _chapterUseCase.fetchChapterById(languageCode: languageCode, chapterId: chapterId);
+  Future<ChapterEntity> getChapterById({required String tableName, required int chapterId}) async {
+    return await _chapterUseCase.fetchChapterById(languageCode: tableName, chapterId: chapterId);
   }
 
-  Future<List<ChapterEntity>> getFavoriteChapters({required String languageCode, required List<int> ids}) async {
-    return await _chapterUseCase.fetchFavoriteChapters(languageCode: languageCode, ids: ids);
+  Future<List<ChapterEntity>> getFavoriteChapters({required String tableName, required List<int> ids}) async {
+    return await _chapterUseCase.fetchFavoriteChapters(languageCode: tableName, ids: ids);
   }
 
   void toggleChapterFavorite({required int chapterId}) async {

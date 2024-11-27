@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
 import '../states/app_settings_state.dart';
 import '../widgets/first_main_three.dart';
-import '../widgets/first_main_two.dart';
 import '../widgets/last_chapter_card.dart';
 import '../widgets/last_main_three.dart';
+import '../widgets/main_four.dart';
 import '../widgets/second_main_three.dart';
-import '../widgets/second_main_two.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -68,21 +67,14 @@ class _MainPageState extends State<MainPage> {
           height: screenHeight,
           clipBehavior: Clip.antiAlias,
           margin: AppStyles.paddingWithoutTopBottom,
-          decoration: const BoxDecoration(
-            borderRadius: AppStyles.borderBig
-          ),
+          decoration: const BoxDecoration(borderRadius: AppStyles.borderBig),
           child: OrientationLayoutBuilder(
             portrait: (context) => const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  flex: 4,
-                  child: FirstMainTwo(),
-                ),
-                SizedBox(height: 8),
-                Expanded(
-                  flex: 4,
-                  child: SecondMainTwo(),
+                  flex: 8,
+                  child: MainFour(),
                 ),
                 SizedBox(height: 8),
                 Expanded(
@@ -110,14 +102,10 @@ class _MainPageState extends State<MainPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                        child: FirstMainTwo(),
+                        child: MainFour(),
                       ),
                       SizedBox(height: 4),
                       LastChapterCard(),
-                      SizedBox(height: 4),
-                      Expanded(
-                        child: SecondMainTwo(),
-                      ),
                     ],
                   ),
                 ),

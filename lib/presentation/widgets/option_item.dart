@@ -81,6 +81,8 @@ class OptionItem extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: fixColor,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
