@@ -25,7 +25,6 @@ class FabCreateCollection extends StatelessWidget {
       elevation: 0,
       heroTag: key.hashCode,
       tooltip: appLocale.createCollection,
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       child: const Icon(Icons.add),
     );
   }

@@ -29,4 +29,5 @@ class DBValues {
   static const String dbCollectionId = 'collection_id';
   static const String dbCollectionTitle = 'collection_title';
   static const String dbCollectionDescription = 'collection_description';
+  static const String dbCollectionSupplicationIds = 'collection_supplication_ids';
 }

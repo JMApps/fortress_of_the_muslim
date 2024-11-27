@@ -42,6 +42,6 @@ class CollectionDataRepository implements CollectionRepository {
   @override
   Future<int> deleteCollection({required int collectionId}) async {
     final Database database = await _collectionsDatabaseService.db;
-    return await database.delete(DBValues.dbCollectionId, where: '${DBValues.dbCollectionId} = ?', whereArgs: [collectionId]);
+    return await database.delete(DBValues.dbCollectionTable, where: '${DBValues.dbCollectionId} = ?', whereArgs: [collectionId]);
   }
 }

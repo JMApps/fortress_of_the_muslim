@@ -36,6 +36,9 @@ class _CreateCollectionColumnState extends State<CreateCollectionColumn> {
           TextField(
             controller: _collectionTitleController,
             autofocus: true,
+            textCapitalization: TextCapitalization.sentences,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               labelText: appLocale.enterTitle,
               helperText: appLocale.title,
@@ -44,27 +47,35 @@ class _CreateCollectionColumnState extends State<CreateCollectionColumn> {
           const SizedBox(height: 16),
           TextField(
             controller: _collectionDescriptionController,
+            textCapitalization: TextCapitalization.sentences,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
             decoration: InputDecoration(
               labelText: appLocale.enterDescription,
               helperText: appLocale.description,
             ),
           ),
           const SizedBox(height: 16),
-          OutlinedButton(
-            onPressed: () {
-              if (_collectionTitleController.text.isNotEmpty) {
-                Navigator.pop(context);
-                final Map<String, Object?> mapCollection = {
-                  DBValues.dbCollectionTitle: _collectionTitleController.text.trim(),
-                  DBValues.dbCollectionDescription: _collectionDescriptionController.text.trim(),
-                };
-                Provider.of<CollectionsState>(context, listen: false).createCollection(mapCollection: mapCollection);
-              }
+          Consumer<CollectionsState>(
+            builder: (context, collectionsState, _) {
+              return OutlinedButton(
+                onPressed: () {
+                  if (_collectionTitleController.text.isNotEmpty) {
+                    Navigator.pop(context);
+                    final Map<String, Object?> mapCollection = {
+                      DBValues.dbCollectionTitle: _collectionTitleController.text.trim(),
+                      DBValues.dbCollectionDescription: _collectionDescriptionController.text.trim(),
+                      DBValues.dbCollectionSupplicationIds: null,
+                    };
+                    collectionsState.createCollection(mapCollection: mapCollection);
+                  }
+                },
+                child: Text(
+                  appLocale.add,
+                  style: AppStyles.mainTextStyle17,
+                ),
+              );
             },
-            child: Text(
-              appLocale.add,
-              style: AppStyles.mainTextStyle17,
-            ),
           ),
         ],
       ),

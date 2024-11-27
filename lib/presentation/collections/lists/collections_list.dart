@@ -16,35 +16,39 @@ class CollectionsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    return FutureBuilder<List<CollectionEntity>>(
-      future: Provider.of<CollectionsState>(context).fetchAllCollections(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
-        }
-        if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return CollectionIsEmpty(
-            text: appLocale.collectionIsEmpty,
-            color: appColors.secondary,
-          );
-        }
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          return Scrollbar(
-            child: ListView.builder(
-              padding: AppStyles.paddingWithoutBottomMini,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final CollectionEntity collectionModel = snapshot.data![index];
-                return CollectionItem(
-                  model: collectionModel,
-                  index: index,
-                );
-              },
-            ),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
+    return Consumer<CollectionsState>(
+      builder: (context, collectionsState, _) {
+        return FutureBuilder<List<CollectionEntity>>(
+          future: collectionsState.fetchAllCollections(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return MainErrorTextData(errorText: snapshot.error.toString());
+            }
+            if (snapshot.hasData && snapshot.data!.isEmpty) {
+              return CollectionIsEmpty(
+                text: appLocale.collectionIsEmpty,
+                color: appColors.secondary,
+              );
+            }
+            if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              return Scrollbar(
+                child: ListView.builder(
+                  padding: AppStyles.paddingWithoutBottomMini,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final CollectionEntity collectionModel = snapshot.data![index];
+                    return CollectionItem(
+                      model: collectionModel,
+                      index: index,
+                    );
+                  },
+                ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          },
         );
       },
     );
