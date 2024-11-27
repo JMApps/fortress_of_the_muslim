@@ -20,6 +20,7 @@ class AppSettingsState extends ChangeNotifier {
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
     _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.teal.value);
     _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
+    _showCollections = _mainSettingsBox.get(AppConstraints.keyShowCollections, defaultValue: true);
   }
 
   late bool _morningNotification;
@@ -33,6 +34,7 @@ class AppSettingsState extends ChangeNotifier {
   late int _appThemeColor;
   late int _themeModeIndex;
   late int _appLocaleIndex;
+  late bool _showCollections;
 
   int _getDefLocaleIndex() {
     final deviceLocale = PlatformDispatcher.instance.locale;
@@ -59,6 +61,8 @@ class AppSettingsState extends ChangeNotifier {
   int get getAppThemeColor => _appThemeColor;
 
   int get getAppLocaleIndex => _appLocaleIndex;
+
+  bool get getShowCollections => _showCollections;
 
   ThemeMode get getThemeMode {
     late ThemeMode currentTheme;
@@ -131,6 +135,12 @@ class AppSettingsState extends ChangeNotifier {
   set setAppLocaleIndex(int index) {
     _appLocaleIndex = index;
     _saveSetting(AppConstraints.keyAppLocaleIndex, index);
+    notifyListeners();
+  }
+
+  set setShowCollections(bool state) {
+    _showCollections = state;
+    _saveSetting(AppConstraints.keyShowCollections, state);
     notifyListeners();
   }
 

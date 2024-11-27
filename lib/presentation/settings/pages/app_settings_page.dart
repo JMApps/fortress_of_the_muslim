@@ -136,6 +136,16 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                 const Divider(indent: 16, endIndent: 16),
                 const AppLocaleDropDown(),
                 const Divider(indent: 16, endIndent: 16),
+                AppSettingListTile(
+                  title: appLocale.collections,
+                  subTitle: appLocale.showCollections,
+                  leading: const Icon(Icons.collections_outlined),
+                  trailing: AppSettingSwitch(
+                    value: settingsState.getShowCollections,
+                    onChanged: (onChanged) => settingsState.setShowCollections = onChanged,
+                  ),
+                ),
+                const Divider(indent: 16, endIndent: 16),
               ],
             );
           },

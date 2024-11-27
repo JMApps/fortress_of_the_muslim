@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
+import '../../../domain/entities/collection_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/collections_state.dart';
 import '../../states/main_collections_state.dart';
@@ -29,8 +30,9 @@ class CollectionSupplicationsList extends StatelessWidget {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
         if (snapshot.hasData) {
+          final CollectionEntity collectionModel = snapshot.data!;
           return FutureBuilder<List<SupplicationEntity>>(
-            future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(tableName: tableName, ids: <int>[]),
+            future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(tableName: tableName, ids: collectionModel.collectionSupplicationIds ?? []),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return MainErrorTextData(errorText: snapshot.error.toString());

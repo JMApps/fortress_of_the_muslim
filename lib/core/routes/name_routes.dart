@@ -1,6 +1,9 @@
 class NameRoutes {
   static const String allChaptersPage = '/all_chapters_page';
   static const String favoriteChaptersPage = '/favorite_chapters_page';
+  static const String collectionsPage = '/collections_page';
+  static const String collectionDetailPage = '/collection_detail_page';
+  static const String addSupplicationsCollectionPage = '/add_supplications_collection_page';
   static const String chapterContentPage = '/chapter_content_page';
   static const String settingsContentPage = '/settings_content_page';
   static const String allSupplicationsPage = '/all_supplications_page';
