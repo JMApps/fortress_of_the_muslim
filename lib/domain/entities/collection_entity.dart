@@ -4,7 +4,7 @@ class CollectionEntity {
   final int collectionId;
   final String collectionTitle;
   final String? collectionDescription;
-  final String? collectionSupplicationIds;
+  final List<int>? collectionSupplicationIds;
 
   const CollectionEntity({
     required this.collectionId,

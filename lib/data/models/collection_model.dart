@@ -4,7 +4,7 @@ class CollectionModel {
   final int collectionId;
   final String collectionTitle;
   final String? collectionDescription;
-  final String? collectionSupplicationIds;
+  final List<int>? collectionSupplicationIds;
 
   const CollectionModel({
     required this.collectionId,
@@ -18,7 +18,7 @@ class CollectionModel {
       collectionId: map[DBValues.dbCollectionId] as int,
       collectionTitle: map[DBValues.dbCollectionTitle] as String,
       collectionDescription: map[DBValues.dbCollectionDescription] as String?,
-      collectionSupplicationIds: map[DBValues.dbCollectionSupplicationIds] as String?,
+      collectionSupplicationIds: map[DBValues.dbCollectionSupplicationIds] as List<int>?,
     );
   }
 }

@@ -24,6 +24,7 @@ class AppStyles {
   static const paddingWithoutTopMini = EdgeInsets.only(left: 8, right: 8, bottom: 8);
 
   static const paddingWithoutBottom = EdgeInsets.only(left: 16, right: 16, top: 16);
+  static const paddingWithoutBottomMini = EdgeInsets.only(left: 8, right: 8, top: 8);
   static const paddingWithoutTopBottom = EdgeInsets.only(left: 8, right: 8, bottom: 16);
 
   static const border = BorderRadius.all(Radius.circular(16));
@@ -36,6 +37,7 @@ class AppStyles {
   static const mainTextStyle17Bold = TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold);
 
   static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));
+  static const shapeWithoutBottom = RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)));
 
   static const textAlignIcons = <Icon>[
     Icon(Icons.format_align_left_rounded),

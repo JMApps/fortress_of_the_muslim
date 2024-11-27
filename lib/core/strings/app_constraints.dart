@@ -42,6 +42,7 @@ class AppConstraints {
   static const String keyAppThemeColor = 'key_app_theme_color';
   static const String keyThemeModeIndex = 'key_theme_mode_index';
   static const String keyAppLocaleIndex = 'key_app_locale_index';
+  static const String keyShowCollections = 'key_show_collections';
 
   static const String keyPlaySpeedIndex = 'key_play_speed_index';
 

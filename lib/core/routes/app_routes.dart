@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/presentation/collections/pages/add_supplications_collection.dart';
+import 'package:fortress_of_the_muslim/presentation/collections/pages/collections_page.dart';
 
 import '../../data/models/arguments/book_content_args.dart';
 import '../../data/models/arguments/chapter_id_args.dart';
+import '../../data/models/arguments/collection_args.dart';
 import '../../data/models/arguments/supplication_args.dart';
 import '../../presentation/book/pages/book_content_detail_page.dart';
 import '../../presentation/book/pages/book_content_page.dart';
 import '../../presentation/chapters/pages/favorite_chapter_page.dart';
 import '../../presentation/chapters/pages/main_chapter_page.dart';
+import '../../presentation/collections/pages/collection_detail_page.dart';
 import '../../presentation/content/pages/chapter_content_page.dart';
 import '../../presentation/counter/pages/app_counter_page.dart';
 import '../../presentation/edit_supplication_item.dart';
@@ -34,6 +38,14 @@ class AppRoutes {
   static Map<String, Widget Function(BuildContext, dynamic)> routes = {
     NameRoutes.allChaptersPage: (context, args) => const MainChapterPage(),
     NameRoutes.favoriteChaptersPage: (context, args) =>     const FavoriteChapterPage(),
+    NameRoutes.collectionsPage: (context, args) => const CollectionsPage(),
+    NameRoutes.collectionDetailPage: (context, args) {
+      final CollectionArgs collectionArgs = args;
+      return CollectionDetailPage(
+        collectionTitle: collectionArgs.collectionTitle,
+      );
+    },
+    NameRoutes.addSupplicationsCollectionPage: (context, args) => const AddSupplicationsCollection(),
     NameRoutes.chapterContentPage: (context, args) {
       final ChapterIdArgs chapterIdArgs = args;
       return ChapterContentPage(

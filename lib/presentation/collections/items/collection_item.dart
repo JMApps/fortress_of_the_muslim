@@ -8,6 +8,7 @@ import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/collection_args.dart';
 import '../../../domain/entities/collection_entity.dart';
 import '../../states/collections_state.dart';
+import '../../states/main_collections_state.dart';
 import '../widgets/update_collection_column.dart';
 
 class CollectionItem extends StatelessWidget {
@@ -31,10 +32,11 @@ class CollectionItem extends StatelessWidget {
       child: ListTile(
         onTap: () async {
           HapticFeedback.lightImpact();
+          Provider.of<MainCollectionsState>(context, listen: false).setCurrentCollectionId = model.collectionId;
           await Navigator.pushNamed(
             context,
             NameRoutes.collectionDetailPage,
-            arguments: CollectionArgs(collectionModel: model),
+            arguments: CollectionArgs(collectionTitle: model.collectionTitle),
           );
         },
         onLongPress: () {

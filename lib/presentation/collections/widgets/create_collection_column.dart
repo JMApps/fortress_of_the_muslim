@@ -56,26 +56,22 @@ class _CreateCollectionColumnState extends State<CreateCollectionColumn> {
             ),
           ),
           const SizedBox(height: 16),
-          Consumer<CollectionsState>(
-            builder: (context, collectionsState, _) {
-              return OutlinedButton(
-                onPressed: () {
-                  if (_collectionTitleController.text.isNotEmpty) {
-                    Navigator.pop(context);
-                    final Map<String, Object?> mapCollection = {
-                      DBValues.dbCollectionTitle: _collectionTitleController.text.trim(),
-                      DBValues.dbCollectionDescription: _collectionDescriptionController.text.trim(),
-                      DBValues.dbCollectionSupplicationIds: null,
-                    };
-                    collectionsState.createCollection(mapCollection: mapCollection);
-                  }
-                },
-                child: Text(
-                  appLocale.add,
-                  style: AppStyles.mainTextStyle17,
-                ),
-              );
+          OutlinedButton(
+            onPressed: () {
+              if (_collectionTitleController.text.isNotEmpty) {
+                Navigator.pop(context);
+                final Map<String, Object?> mapCollection = {
+                  DBValues.dbCollectionTitle: _collectionTitleController.text.trim(),
+                  DBValues.dbCollectionDescription: _collectionDescriptionController.text.trim(),
+                  DBValues.dbCollectionSupplicationIds: null,
+                };
+                Provider.of<CollectionsState>(context, listen: false).createCollection(mapCollection: mapCollection);
+              }
             },
+            child: Text(
+              appLocale.add,
+              style: AppStyles.mainTextStyle17,
+            ),
           ),
         ],
       ),

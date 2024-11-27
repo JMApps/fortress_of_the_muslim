@@ -27,7 +27,7 @@ class CollectionsList extends StatelessWidget {
             if (snapshot.hasData && snapshot.data!.isEmpty) {
               return CollectionIsEmpty(
                 text: appLocale.collectionIsEmpty,
-                color: appColors.secondary,
+                color: appColors.primary,
               );
             }
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {
