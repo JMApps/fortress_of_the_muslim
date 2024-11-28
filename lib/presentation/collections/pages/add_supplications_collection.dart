@@ -1,48 +1,64 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fortress_of_the_muslim/presentation/states/collection_supplications_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings/db_values.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../domain/entities/collection_entity.dart';
+import '../../states/collection_supplications_state.dart';
 import '../../states/collections_state.dart';
-import '../../states/main_collections_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/supplication_item.dart';
 
 class AddSupplicationsCollection extends StatelessWidget {
-  const AddSupplicationsCollection({super.key});
+  const AddSupplicationsCollection({
+    super.key,
+    required this.collectionModel,
+  });
+
+  final CollectionEntity collectionModel;
 
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => CollectionSupplicationsState([1, 2, 3]))
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => CollectionSupplicationsState(
+        collectionModel.collectionSupplicationIds ?? <int>[],
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: Text(appLocale.selectSupplications),
           actions: [
             Consumer<CollectionSupplicationsState>(
               builder: (context, collectionSupplicationsState, child) {
-                return collectionSupplicationsState.collectionSupplicationIds.isNotEmpty ? IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    final Map<String, Object> mapCollection = {
-                      DBValues.dbCollectionSupplicationIds: collectionSupplicationsState.collectionSupplicationIds,
-                    };
-                    Provider.of<CollectionsState>(context, listen: false).updateCollection(mapCollection: mapCollection, collectionId: Provider.of<MainCollectionsState>(context, listen: false).getCurrentCollectionId);
-                  },
-                  icon: const Icon(Icons.check_circle),
-                ) : const SizedBox();
+                if (!listEquals(collectionSupplicationsState.collectionSupplicationIds, collectionModel.collectionSupplicationIds)) {
+                  return IconButton(
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      final Map<String, Object> mapCollection = {
+                        DBValues.dbCollectionSupplicationIds: jsonEncode(collectionSupplicationsState.collectionSupplicationIds),
+                      };
+                      await Provider.of<CollectionsState>(context, listen: false).updateCollection(
+                        mapCollection: mapCollection,
+                        collectionId: collectionModel.collectionId,
+                      );
+                    },
+                    icon: const Icon(Icons.check_circle),
+                  );
+                }
+                return const SizedBox();
               },
             ),
           ],
         ),
         body: FutureBuilder(
-          future: Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(tableName: appLocale.supplicationsTableName),
+          future: Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(
+            tableName: appLocale.supplicationsTableName,
+          ),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return MainErrorTextData(errorText: snapshot.error.toString());

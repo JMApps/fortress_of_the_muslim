@@ -42,10 +42,15 @@ class AppRoutes {
     NameRoutes.collectionDetailPage: (context, args) {
       final CollectionArgs collectionArgs = args;
       return CollectionDetailPage(
-        collectionTitle: collectionArgs.collectionTitle,
+        collectionModel: collectionArgs.collectionModel,
       );
     },
-    NameRoutes.addSupplicationsCollectionPage: (context, args) => const AddSupplicationsCollection(),
+    NameRoutes.addSupplicationsCollectionPage: (context, args) {
+      final CollectionArgs collectionArgs = args;
+      return AddSupplicationsCollection(
+        collectionModel: collectionArgs.collectionModel,
+      );
+    },
     NameRoutes.chapterContentPage: (context, args) {
       final ChapterIdArgs chapterIdArgs = args;
       return ChapterContentPage(

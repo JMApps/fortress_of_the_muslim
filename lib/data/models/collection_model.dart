@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../core/strings/db_values.dart';
 
 class CollectionModel {
@@ -14,11 +16,14 @@ class CollectionModel {
   });
 
   factory CollectionModel.fromMap(Map<String, Object?> map) {
+    final supplicationIdsJson = map[DBValues.dbCollectionSupplicationIds] as String?;
+    final supplicationIds = supplicationIdsJson != null ? List<int>.from(jsonDecode(supplicationIdsJson)) : null;
+
     return CollectionModel(
       collectionId: map[DBValues.dbCollectionId] as int,
       collectionTitle: map[DBValues.dbCollectionTitle] as String,
       collectionDescription: map[DBValues.dbCollectionDescription] as String?,
-      collectionSupplicationIds: map[DBValues.dbCollectionSupplicationIds] as List<int>?,
+      collectionSupplicationIds: supplicationIds,
     );
   }
 }

@@ -21,7 +21,6 @@ import 'presentation/states/collections_state.dart';
 import 'presentation/states/content_settings_state.dart';
 import 'presentation/states/footnotes_state.dart';
 import 'presentation/states/main_chapters_state.dart';
-import 'presentation/states/main_collections_state.dart';
 import 'presentation/states/main_supplications_state.dart';
 
 void main() async {
@@ -59,9 +58,6 @@ void main() async {
               CollectionDataRepository(collectionsDatabaseService),
             ),
           ),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => MainCollectionsState(),
         ),
         ChangeNotifierProvider(
           create: (_) => MainSupplicationsState(

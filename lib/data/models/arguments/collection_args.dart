@@ -1,7 +1,9 @@
+import '../../../domain/entities/collection_entity.dart';
+
 class CollectionArgs {
-  final String collectionTitle;
+  final CollectionEntity collectionModel;
 
   CollectionArgs({
-    required this.collectionTitle,
+    required this.collectionModel,
   });
 }

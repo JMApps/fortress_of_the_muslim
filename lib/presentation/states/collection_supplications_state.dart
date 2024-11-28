@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CollectionSupplicationsState extends ChangeNotifier {
+  CollectionSupplicationsState(List<int> collectionSupplicationIds) : _collectionSupplicationIds = List<int>.from(collectionSupplicationIds);
+
   late final List<int> _collectionSupplicationIds;
 
-  CollectionSupplicationsState(this._collectionSupplicationIds);
-
-  List<int> get collectionSupplicationIds => List.unmodifiable(_collectionSupplicationIds);
+  List<int> get collectionSupplicationIds => _collectionSupplicationIds;
 
   void removeFromCollection({required int supplicationId}) {
     _collectionSupplicationIds.remove(supplicationId);
@@ -16,8 +16,20 @@ class CollectionSupplicationsState extends ChangeNotifier {
     return _collectionSupplicationIds.contains(supplicationId);
   }
 
-  void addAllToCollection(List<int> supplicationIds) {
+  void addAllToCollection({required List<int> supplicationIds}) {
     _collectionSupplicationIds.addAll(supplicationIds);
+    notifyListeners();
+  }
+
+  void addToCollection(int supplicationId) {
+    if (!_collectionSupplicationIds.contains(supplicationId)) {
+      _collectionSupplicationIds.add(supplicationId);
+      notifyListeners();
+    }
+  }
+
+  void removeFromCollectionById(int supplicationId) {
+    _collectionSupplicationIds.remove(supplicationId);
     notifyListeners();
   }
 }

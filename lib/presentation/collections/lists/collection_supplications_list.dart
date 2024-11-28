@@ -6,7 +6,6 @@ import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/collection_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
 import '../../states/collections_state.dart';
-import '../../states/main_collections_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../supplications/items/main_supplication_item.dart';
 import '../../widgets/main_error_text_data.dart';
@@ -16,23 +15,28 @@ class CollectionSupplicationsList extends StatelessWidget {
   const CollectionSupplicationsList({
     super.key,
     required this.tableName,
+    required this.collectionId,
   });
 
   final String tableName;
+  final int collectionId;
 
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return FutureBuilder(
-      future: Provider.of<CollectionsState>(context).fetchCollectionById(collectionId: Provider.of<MainCollectionsState>(context, listen: false).getCurrentCollectionId),
+    return FutureBuilder<CollectionEntity>(
+      future: Provider.of<CollectionsState>(context, listen: false).fetchCollectionById(collectionId: collectionId),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
         if (snapshot.hasData) {
-          final CollectionEntity collectionModel = snapshot.data!;
+          final List<int>? collectionSupplicationIds = snapshot.data!.collectionSupplicationIds;
           return FutureBuilder<List<SupplicationEntity>>(
-            future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(tableName: tableName, ids: collectionModel.collectionSupplicationIds ?? []),
+            future: Provider.of<MainSupplicationsState>(context).getFavoriteSupplications(
+              tableName: tableName,
+              ids: collectionSupplicationIds ?? <int>[],
+            ),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return MainErrorTextData(errorText: snapshot.error.toString());
