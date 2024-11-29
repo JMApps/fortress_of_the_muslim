@@ -8,26 +8,42 @@ import 'package:provider/provider.dart';
 import '../../../core/strings/db_values.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/collection_entity.dart';
+import '../../../domain/entities/supplication_entity.dart';
 import '../../states/collection_supplications_state.dart';
 import '../../states/collections_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/supplication_item.dart';
 
-class AddSupplicationsCollection extends StatelessWidget {
+class AddSupplicationsCollection extends StatefulWidget {
   const AddSupplicationsCollection({
     super.key,
     required this.collectionModel,
+    required this.supplicationTableName,
   });
 
   final CollectionEntity collectionModel;
+  final String supplicationTableName;
+
+  @override
+  State<AddSupplicationsCollection> createState() => _AddSupplicationsCollectionState();
+}
+
+class _AddSupplicationsCollectionState extends State<AddSupplicationsCollection> {
+  late final Future<List<SupplicationEntity>> _futureSupplications;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureSupplications = Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(tableName: widget.supplicationTableName);
+  }
 
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return ChangeNotifierProvider(
       create: (_) => CollectionSupplicationsState(
-        collectionModel.collectionSupplicationIds ?? <int>[],
+        widget.collectionModel.collectionSupplicationIds ?? <int>[],
       ),
       child: Scaffold(
         appBar: AppBar(
@@ -35,7 +51,7 @@ class AddSupplicationsCollection extends StatelessWidget {
           actions: [
             Consumer<CollectionSupplicationsState>(
               builder: (context, collectionSupplicationsState, child) {
-                if (!listEquals(collectionSupplicationsState.collectionSupplicationIds, collectionModel.collectionSupplicationIds)) {
+                if (!listEquals(collectionSupplicationsState.collectionSupplicationIds, widget.collectionModel.collectionSupplicationIds)) {
                   return IconButton(
                     onPressed: () async {
                       Navigator.of(context).pop();
@@ -44,7 +60,7 @@ class AddSupplicationsCollection extends StatelessWidget {
                       };
                       await Provider.of<CollectionsState>(context, listen: false).updateCollection(
                         mapCollection: mapCollection,
-                        collectionId: collectionModel.collectionId,
+                        collectionId: widget.collectionModel.collectionId,
                       );
                     },
                     icon: const Icon(Icons.check_circle),
@@ -56,9 +72,7 @@ class AddSupplicationsCollection extends StatelessWidget {
           ],
         ),
         body: FutureBuilder(
-          future: Provider.of<MainSupplicationsState>(context, listen: false).fetchAllSupplications(
-            tableName: appLocale.supplicationsTableName,
-          ),
+          future: _futureSupplications,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return MainErrorTextData(errorText: snapshot.error.toString());

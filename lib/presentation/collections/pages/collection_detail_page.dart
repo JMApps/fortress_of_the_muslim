@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fortress_of_the_muslim/presentation/states/collections_state.dart';
-import 'package:fortress_of_the_muslim/presentation/widgets/main_error_text_data.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../data/models/arguments/collection_args.dart';
 import '../../../domain/entities/collection_entity.dart';
+import '../../states/app_player_state.dart';
+import '../../states/collections_state.dart';
+import '../../widgets/main_error_text_data.dart';
 import '../lists/collection_supplications_list.dart';
 
 class CollectionDetailPage extends StatelessWidget {
@@ -23,6 +24,14 @@ class CollectionDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(collectionModel.collectionTitle),
+        leading: IconButton(
+          onPressed: () {
+            Provider.of<AppPlayerState>(context, listen: false).stopTrack();
+            Navigator.of(context).pop();
+          },
+          tooltip: appLocale.back,
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        ),
         actions: [
           FutureBuilder<CollectionEntity>(
             future: Provider.of<CollectionsState>(context).fetchCollectionById(collectionId: collectionModel.collectionId),
@@ -35,10 +44,14 @@ class CollectionDetailPage extends StatelessWidget {
                 return IconButton.filledTonal(
                   tooltip: appLocale.add,
                   onPressed: () async {
+                    Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                     await Navigator.pushNamed(
                       context,
                       NameRoutes.addSupplicationsCollectionPage,
-                      arguments: CollectionArgs(collectionModel: futureCollectionModel),
+                      arguments: CollectionArgs(
+                        collectionModel: futureCollectionModel,
+                        supplicationTableName: appLocale.supplicationsTableName,
+                      ),
                     );
                   },
                   icon: const Icon(Icons.add),
@@ -46,6 +59,13 @@ class CollectionDetailPage extends StatelessWidget {
               }
               return const CircularProgressIndicator.adaptive();
             }
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.exit_to_app_rounded),
           ),
         ],
       ),

@@ -34,7 +34,10 @@ class CollectionItem extends StatelessWidget {
           await Navigator.pushNamed(
             context,
             NameRoutes.collectionDetailPage,
-            arguments: CollectionArgs(collectionModel: model),
+            arguments: CollectionArgs(
+              collectionModel: model,
+              supplicationTableName: appLocale.supplicationsTableName,
+            ),
           );
         },
         onLongPress: () {

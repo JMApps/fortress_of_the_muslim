@@ -3,13 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'create_collection_column.dart';
 
-class FabCreateCollection extends StatelessWidget {
-  const FabCreateCollection({super.key});
+class CreateCollectionButton extends StatelessWidget {
+  const CreateCollectionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return FloatingActionButton(
+    return IconButton.filledTonal(
       onPressed: () {
         showModalBottomSheet(
           context: context,
@@ -22,10 +22,8 @@ class FabCreateCollection extends StatelessWidget {
           ),
         );
       },
-      elevation: 0,
-      heroTag: key.hashCode,
       tooltip: appLocale.createCollection,
-      child: const Icon(Icons.add),
+      icon: const Icon(Icons.add),
     );
   }
 }

@@ -49,6 +49,7 @@ class AppRoutes {
       final CollectionArgs collectionArgs = args;
       return AddSupplicationsCollection(
         collectionModel: collectionArgs.collectionModel,
+        supplicationTableName: collectionArgs.supplicationTableName,
       );
     },
     NameRoutes.chapterContentPage: (context, args) {

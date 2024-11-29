@@ -26,14 +26,14 @@ class CollectionSupplicationsList extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder<CollectionEntity>(
       future: Provider.of<CollectionsState>(context, listen: false).fetchCollectionById(collectionId: collectionId),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
+      builder: (context, collectionSnapshot) {
+        if (collectionSnapshot.hasError) {
+          return MainErrorTextData(errorText: collectionSnapshot.error.toString());
         }
-        if (snapshot.hasData) {
-          final List<int>? collectionSupplicationIds = snapshot.data!.collectionSupplicationIds;
+        if (collectionSnapshot.hasData) {
+          final List<int>? collectionSupplicationIds = collectionSnapshot.data!.collectionSupplicationIds;
           return FutureBuilder<List<SupplicationEntity>>(
-            future: Provider.of<MainSupplicationsState>(context).getFavoriteSupplications(
+            future: Provider.of<MainSupplicationsState>(context, listen: false).getFavoriteSupplications(
               tableName: tableName,
               ids: collectionSupplicationIds ?? <int>[],
             ),
@@ -50,7 +50,7 @@ class CollectionSupplicationsList extends StatelessWidget {
               if (snapshot.hasData) {
                 return Scrollbar(
                   child: ListView.builder(
-                    padding: AppStyles.paddingMini,
+                    padding: AppStyles.paddingWithoutBottomMini,
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       final supplicationModel = snapshot.data![index];

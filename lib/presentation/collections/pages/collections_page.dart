@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../lists/collections_list.dart';
-import '../widgets/fab_create_collection.dart';
+import '../widgets/create_collection_button.dart';
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
@@ -19,9 +19,11 @@ class _CollectionsPageState extends State<CollectionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(appLocale.collections),
+        actions: const [
+          CreateCollectionButton(),
+        ],
       ),
       body: const CollectionsList(),
-      floatingActionButton: const FabCreateCollection(),
     );
   }
 }

@@ -58,12 +58,11 @@ class _CreateCollectionColumnState extends State<CreateCollectionColumn> {
           const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () {
-              if (_collectionTitleController.text.isNotEmpty) {
+              if (_collectionTitleController.text.trim().isNotEmpty) {
                 Navigator.pop(context);
                 final Map<String, Object?> mapCollection = {
                   DBValues.dbCollectionTitle: _collectionTitleController.text.trim(),
                   DBValues.dbCollectionDescription: _collectionDescriptionController.text.trim(),
-                  DBValues.dbCollectionSupplicationIds: null,
                 };
                 Provider.of<CollectionsState>(context, listen: false).createCollection(mapCollection: mapCollection);
               }
