@@ -181,9 +181,9 @@ class ContentSettingsState extends ChangeNotifier {
     setTranscriptionFontSizeIndex = 1;
     setTranslationFontSizeIndex = 1;
 
-    setArabicFontAlignIndex = 0;
-    setTranscriptionFontAlignIndex = 0;
-    setTranslationFontAlignIndex = 0;
+    setArabicFontAlignIndex = 1;
+    setTranscriptionFontAlignIndex = 1;
+    setTranslationFontAlignIndex = 1;
 
     setArabicLightTextColor = Colors.black.value;
     setArabicDarkTextColor = Colors.white.value;

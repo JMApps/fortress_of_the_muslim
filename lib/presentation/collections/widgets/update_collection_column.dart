@@ -69,17 +69,16 @@ class _UpdateCollectionColumnState extends State<UpdateCollectionColumn> {
           ),
           const SizedBox(height: 16),
           OutlinedButton(
-            onPressed: () {
-              if (_collectionTitleController.text.isNotEmpty) {
+            onPressed: () async {
+              if (_collectionTitleController.text.trim().isNotEmpty) {
                 if (widget.collectionModel.collectionTitle != _collectionTitleController.text.trim() ||
                     widget.collectionModel.collectionDescription != _collectionDescriptionController.text.trim()) {
                   Navigator.pop(context);
                   final Map<String, Object?> mapCollection = {
                     DBValues.dbCollectionTitle: _collectionTitleController.text.trim(),
                     DBValues.dbCollectionDescription: _collectionDescriptionController.text.trim(),
-                    DBValues.dbCollectionSupplicationIds: widget.collectionModel.collectionSupplicationIds,
                   };
-                  Provider.of<CollectionsState>(context, listen: false).updateCollection(
+                  await Provider.of<CollectionsState>(context, listen: false).updateCollection(
                       mapCollection: mapCollection,
                       collectionId: widget.collectionModel.collectionId,
                   );

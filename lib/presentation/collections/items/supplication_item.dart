@@ -29,27 +29,31 @@ class SupplicationItem extends StatelessWidget {
         builder: (context, collectionSupplicationsState, _) {
           return ListTile(
             tileColor: supplicationIndex.isOdd ? itemOddColor : itemEvenColor,
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+            horizontalTitleGap: 0,
+            contentPadding: AppStyles.paddingMini,
             shape: AppStyles.shape,
             leading: Checkbox(
               value: collectionSupplicationsState.supplicationIsCollection(supplicationId: supplicationModel.supplicationId),
               onChanged: (bool? onChanged) {
                 if (onChanged == true) {
-                  collectionSupplicationsState.addAllToCollection([supplicationModel.supplicationId]);
-                } else {
+                  collectionSupplicationsState.addAllToCollection(supplicationIds: <int>[supplicationModel.supplicationId]);
+                } else if (onChanged == false) {
                   collectionSupplicationsState.removeFromCollection(supplicationId: supplicationModel.supplicationId);
                 }
               },
             ),
-            title: supplicationModel.arabicText != null ? Text(
+            title: supplicationModel.arabicText?.isNotEmpty ?? false ? Text(
               supplicationModel.arabicText!.trim(),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18.0,
                 fontFamily: 'Hafs',
+                color: appColors.primary,
               ),
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,
             ) : null,
-            subtitle: Html(
+            subtitle: supplicationModel.translationText.isNotEmpty ? Html(
               data: supplicationModel.translationText.trim(),
               style: {
                 '#': Style(
@@ -57,7 +61,7 @@ class SupplicationItem extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               },
-            ),
+            ) : null,
           );
         },
       ),

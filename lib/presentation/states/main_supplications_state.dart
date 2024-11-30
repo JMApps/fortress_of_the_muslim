@@ -14,24 +14,24 @@ class MainSupplicationsState extends ChangeNotifier {
     _favoriteSupplicationIds = _mainAppSettingsBox.get(AppConstraints.keySupplicationIds, defaultValue: <int>[]);
   }
 
-  late List<int> _favoriteSupplicationIds = [];
+  late List<int> _favoriteSupplicationIds;
 
   List<int> get getFavoriteSupplicationIds => _favoriteSupplicationIds;
 
-  Future<List<SupplicationEntity>> fetchAllSupplications({required String languageCode}) async {
-    return await _supplicationUseCase.fetchAllSupplications(languageCode: languageCode);
+  Future<List<SupplicationEntity>> fetchAllSupplications({required String tableName}) async {
+    return await _supplicationUseCase.fetchAllSupplications(tableName: tableName);
   }
 
-  Future<List<SupplicationEntity>> getSupplicationsByChapterId({required String languageCode, required int chapterId}) async {
-    return await _supplicationUseCase.fetchSupplicationsByChapterId(languageCode: languageCode, chapterId: chapterId);
+  Future<List<SupplicationEntity>> getSupplicationsByChapterId({required String tableName, required int chapterId}) async {
+    return await _supplicationUseCase.fetchSupplicationsByChapterId(tableName: tableName, chapterId: chapterId);
   }
 
-  Future<SupplicationEntity> getSupplicationById({required String languageCode, required int supplicationId}) async {
-    return await _supplicationUseCase.fetchSupplicationById(languageCode: languageCode, supplicationId: supplicationId);
+  Future<SupplicationEntity> getSupplicationById({required String tableName, required int supplicationId}) async {
+    return await _supplicationUseCase.fetchSupplicationById(tableName: tableName, supplicationId: supplicationId);
   }
 
-  Future<List<SupplicationEntity>> getFavoriteSupplications({required String languageCode, required List<int> ids}) async {
-    return await _supplicationUseCase.fetchFavoriteSupplications(languageCode: languageCode, ids: ids);
+  Future<List<SupplicationEntity>> getFavoriteSupplications({required String tableName, required List<int> ids}) async {
+    return await _supplicationUseCase.fetchFavoriteSupplications(tableName: tableName, ids: ids);
   }
 
   void toggleSupplicationFavorite({required int supplicationId}) {
@@ -45,7 +45,7 @@ class MainSupplicationsState extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool supplicationIsFavorite(int supplicationId) {
+  bool supplicationIsFavorite({required int supplicationId}) {
     return _favoriteSupplicationIds.contains(supplicationId);
   }
 }

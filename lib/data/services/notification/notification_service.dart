@@ -24,9 +24,9 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   final AndroidNotificationDetails _androidTimeNotificationDetails = const AndroidNotificationDetails(
-    'Daily notification channel ID',
-    'Daily notifications',
-    channelDescription: 'Daily notifications',
+    'Fortress daily notifications',
+    'Fortress notifications',
+    channelDescription: 'Fortress of the muslim daily notifications',
     icon: _logoName,
     importance: Importance.max,
     priority: Priority.max,

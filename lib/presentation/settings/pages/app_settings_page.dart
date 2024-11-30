@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fortress_of_the_muslim/core/routes/name_routes.dart';
+import 'package:fortress_of_the_muslim/core/styles/app_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../data/services/notification/notification_service.dart';
 import '../../states/app_settings_state.dart';
 import '../widgets/app_locale_drop_down.dart';
@@ -41,12 +44,26 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     onPressed: () async {
                       final notificationTime = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: settingsState.getMorningNotificationTime.hour, minute: settingsState.getMorningNotificationTime.minute),
+                        initialTime: TimeOfDay(
+                            hour: settingsState.getMorningNotificationTime.hour,
+                            minute: settingsState.getMorningNotificationTime.minute,
+                        ),
                       );
                       if (notificationTime != null) {
-                        settingsState.setMorningNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
+                        settingsState.setMorningNotificationTime = DateTime(
+                            2024,
+                            12,
+                            31,
+                            notificationTime.hour,
+                            notificationTime.minute,
+                        );
                         if (settingsState.getMorningNotification) {
-                          _notificationService.timeNotifications(id: NotificationService.morningNotificationID, title: appLocale.appName, body: appLocale.morningPrayers, dateTime: settingsState.getMorningNotificationTime);
+                          _notificationService.timeNotifications(
+                              id: NotificationService.morningNotificationID,
+                              title: appLocale.appName,
+                              body: appLocale.morningPrayers,
+                              dateTime: settingsState.getMorningNotificationTime,
+                          );
                         }
                       }
                     },
@@ -59,14 +76,20 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     onPressed: () {
                       settingsState.setMorningNotification = !settingsState.getMorningNotification;
                       if (settingsState.getMorningNotification) {
-                        _notificationService.timeNotifications(id: NotificationService.morningNotificationID, title: appLocale.appName, body: appLocale.morningPrayers, dateTime: settingsState.getMorningNotificationTime);
+                        _notificationService.timeNotifications(
+                            id: NotificationService.morningNotificationID,
+                            title: appLocale.appName,
+                            body: appLocale.morningPrayers,
+                            dateTime: settingsState.getMorningNotificationTime);
                       } else {
                         _notificationService.cancelNotificationWithId(NotificationService.morningNotificationID);
                       }
                     },
                     icon: Icon(
-                      settingsState.getMorningNotification ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
-                      color: settingsState.getMorningNotification ? appColors.primary : appColors.onSurface,
+                      settingsState.getMorningNotification
+                          ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getMorningNotification
+                          ? appColors.primary : appColors.onSurface,
                       size: 30,
                     ),
                   ),
@@ -79,12 +102,23 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     onPressed: () async {
                       final notificationTime = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: settingsState.getEveningNotificationTime.hour, minute: settingsState.getEveningNotificationTime.minute),
+                        initialTime: TimeOfDay(
+                            hour: settingsState.getEveningNotificationTime.hour,
+                            minute: settingsState.getEveningNotificationTime.minute),
                       );
                       if (notificationTime != null) {
-                        settingsState.setEveningNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
+                        settingsState.setEveningNotificationTime = DateTime(
+                            2024,
+                            12,
+                            31,
+                            notificationTime.hour,
+                            notificationTime.minute);
                         if (settingsState.getEveningNotification) {
-                          _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, title: appLocale.appName, body: appLocale.eveningPrayers, dateTime: settingsState.getEveningNotificationTime);
+                          _notificationService.timeNotifications(
+                              id: NotificationService.eveningNotificationID,
+                              title: appLocale.appName,
+                              body: appLocale.eveningPrayers,
+                              dateTime: settingsState.getEveningNotificationTime);
                         }
                       }
                     },
@@ -97,14 +131,21 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                     onPressed: () {
                       settingsState.setEveningNotification = !settingsState.getEveningNotification;
                       if (settingsState.getEveningNotification) {
-                        _notificationService.timeNotifications(id: NotificationService.eveningNotificationID, title: appLocale.appName, body: appLocale.eveningPrayers, dateTime: settingsState.getEveningNotificationTime);
+                        _notificationService.timeNotifications(
+                            id: NotificationService.eveningNotificationID,
+                            title: appLocale.appName,
+                            body: appLocale.eveningPrayers,
+                            dateTime: settingsState.getEveningNotificationTime,
+                        );
                       } else {
                         _notificationService.cancelNotificationWithId(NotificationService.eveningNotificationID);
                       }
                     },
                     icon: Icon(
-                      settingsState.getEveningNotification ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
-                      color: settingsState.getEveningNotification ? appColors.primary : appColors.onSurface,
+                      settingsState.getEveningNotification
+                          ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getEveningNotification
+                          ? appColors.primary : appColors.onSurface,
                       size: 30,
                     ),
                   ),
@@ -146,6 +187,18 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
+                Padding(
+                  padding: AppStyles.paddingHorizontal,
+                  child: FilledButton.tonalIcon(
+                    onPressed: () async {
+                      await Navigator.pushReplacementNamed(
+                        context, NameRoutes.settingsContentPage,
+                      );
+                    },
+                    label: Text(appLocale.settingTexts),
+                    icon: const Icon(Icons.settings),
+                  ),
+                ),
               ],
             );
           },

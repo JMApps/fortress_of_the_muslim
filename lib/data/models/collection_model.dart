@@ -16,8 +16,8 @@ class CollectionModel {
   });
 
   factory CollectionModel.fromMap(Map<String, Object?> map) {
-    final supplicationIdsJson = map[DBValues.dbCollectionSupplicationIds] as String?;
-    final supplicationIds = supplicationIdsJson != null ? List<int>.from(jsonDecode(supplicationIdsJson)) : null;
+    final String? supplicationIdsJson = map[DBValues.dbCollectionSupplicationIds] as String?;
+    final List<int>? supplicationIds = supplicationIdsJson != null ? List<int>.from(jsonDecode(supplicationIdsJson)) : null;
 
     return CollectionModel(
       collectionId: map[DBValues.dbCollectionId] as int,

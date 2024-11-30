@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/routes/name_routes.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/styles/app_styles.dart';
+import '../../data/models/arguments/supplication_args.dart';
 import '../../domain/entities/supplication_entity.dart';
 import '../states/app_player_state.dart';
 import '../supplications/widgets/favorite_supplication_button.dart';
@@ -116,6 +118,16 @@ class SupplicationMediaCard extends StatelessWidget {
               '$supplicationIndex/$supplicationLength',
               style: AppStyles.mainTextStyle17,
             ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                NameRoutes.editSupplicationItem,
+                arguments: SupplicationArgs(supplicationModel: supplicationModel),
+              );
+            },
+            icon: const Icon(Icons.edit),
           ),
         ],
       ),

@@ -62,6 +62,7 @@ class CollectionDetailPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
+              Provider.of<AppPlayerState>(context, listen: false).stopTrack();
               Navigator.of(context).pop();
               Navigator.of(context).pop();
             },

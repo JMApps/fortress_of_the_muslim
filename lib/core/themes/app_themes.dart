@@ -13,7 +13,7 @@ class AppThemes {
   ThemeData get darkTheme => _buildTheme(Brightness.dark);
 
   ThemeData _buildTheme(Brightness brightness) {
-    final fontFamily = _locale.languageCode == 'ky' ? 'Raleway' : 'Gilroy';
+    final fontFamily = _locale.languageCode == 'ru' ? 'Gilroy' : 'Raleway';
 
     return ThemeData(
       fontFamily: fontFamily,

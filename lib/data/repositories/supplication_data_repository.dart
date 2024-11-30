@@ -12,33 +12,33 @@ class SupplicationDataRepository implements SupplicationRepository {
   SupplicationDataRepository(this._databaseService);
 
   @override
-  Future<List<SupplicationEntity>> getAllSupplications({required String languageCode}) async {
+  Future<List<SupplicationEntity>> getAllSupplications({required String tableName}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.getSupplicationTableName(languageCode));
+    final List<Map<String, Object?>> resources = await database.query(tableName);
     final List<SupplicationEntity> allSupplications = resources.isNotEmpty ? resources.map((e) => SupplicationEntity.fromModel(SupplicationModel.fromMap(e))).toList() : [];
     return allSupplications;
   }
 
   @override
-  Future<List<SupplicationEntity>> getSupplicationsByChapterId({required String languageCode, required int chapterId}) async {
+  Future<List<SupplicationEntity>> getSupplicationsByChapterId({required String tableName, required int chapterId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.getSupplicationTableName(languageCode), where: '${DBValues.dbSampleBy} = ?', whereArgs: [chapterId]);
+    final List<Map<String, Object?>> resources = await database.query(tableName, where: '${DBValues.dbSampleBy} = ?', whereArgs: [chapterId]);
     final List<SupplicationEntity> byChapterSupplications = resources.isNotEmpty ? resources.map((e) => SupplicationEntity.fromModel(SupplicationModel.fromMap(e))).toList() : [];
     return byChapterSupplications;
   }
 
   @override
-  Future<SupplicationEntity> getSupplicationById({required String languageCode, required int supplicationId}) async {
+  Future<SupplicationEntity> getSupplicationById({required String tableName, required int supplicationId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.getSupplicationTableName(languageCode), where: '${DBValues.dbSupplicationId} = ?', whereArgs: [supplicationId]);
+    final List<Map<String, Object?>> resources = await database.query(tableName, where: '${DBValues.dbSupplicationId} = ?', whereArgs: [supplicationId]);
     final SupplicationEntity? supplicationById = resources.isNotEmpty ? SupplicationEntity.fromModel(SupplicationModel.fromMap(resources.first)) : null;
     return supplicationById!;
   }
 
   @override
-  Future<List<SupplicationEntity>> getFavoriteSupplications({required String languageCode, required List<int> ids}) async {
+  Future<List<SupplicationEntity>> getFavoriteSupplications({required String tableName, required List<int> ids}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DBValues.getSupplicationTableName(languageCode), where: '${DBValues.dbSupplicationId} IN (${ids.map((id) => '?').join(', ')})', whereArgs: ids);
+    final List<Map<String, Object?>> resources = await database.query(tableName, where: '${DBValues.dbSupplicationId} IN (${ids.map((id) => '?').join(', ')})', whereArgs: ids);
     final List<SupplicationEntity> favoriteSupplications = resources.isNotEmpty ? resources.map((e) => SupplicationEntity.fromModel(SupplicationModel.fromMap(e))).toList() : [];
     return favoriteSupplications;
   }
