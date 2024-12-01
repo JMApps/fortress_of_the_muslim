@@ -18,6 +18,7 @@ class MainFour extends StatelessWidget {
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
     final appColors = Theme.of(context).colorScheme;
     final fixColor = appColors.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -89,8 +90,8 @@ class MainFour extends StatelessWidget {
             splashColor: appColors.onSurface,
             borderRadius: AppStyles.borderBig,
             child: Container(
-              height: 150,
-              width: 150,
+              height: screenWidth * 0.35,
+              width: screenWidth * 0.35,
               padding: AppStyles.padding,
               decoration: BoxDecoration(
                 color: appColors.surface,

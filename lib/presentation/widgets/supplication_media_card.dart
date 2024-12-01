@@ -119,16 +119,6 @@ class SupplicationMediaCard extends StatelessWidget {
               style: AppStyles.mainTextStyle17,
             ),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                NameRoutes.editSupplicationItem,
-                arguments: SupplicationArgs(supplicationModel: supplicationModel),
-              );
-            },
-            icon: const Icon(Icons.edit),
-          ),
         ],
       ),
     );
