@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -30,7 +31,7 @@ class TextValueContainer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: int.parse(appCounter.getCountValue()) > 100000 ? 50 : 100,
                     fontWeight: FontWeight.bold,
-                    fontFamily: appLocale.mainFont,
+                    fontFamily: AppConstraints.fontGilroy,
                     color: appColors.primary
                   ),
                   textAlign: TextAlign.center,

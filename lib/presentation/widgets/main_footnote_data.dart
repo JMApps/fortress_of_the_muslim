@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,7 +34,7 @@ class MainFootnoteData extends StatelessWidget {
             child: MainHtmlData(
               htmlData: '<b>[${snapshot.data!.footnoteId}]</b> – ${snapshot.data!.footnote}',
               footnoteColor: footnoteColor,
-              font: appLocale.mainFont,
+              font: AppConstraints.fontGilroy,
               fontSize: 18.0,
               textAlign: TextAlign.center,
               fontColor: Theme.of(context).colorScheme.onSurface,

@@ -30,8 +30,7 @@ class LastChapterCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            appLocale.readLastChapter.replaceAll('||',
-                '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
+            appLocale.readLastChapter.replaceAll('||', '${Provider.of<MainChaptersState>(context).getLastChapterId}'),
             style: AppStyles.mainTextStyle17,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

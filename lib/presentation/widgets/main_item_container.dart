@@ -29,7 +29,7 @@ class MainItemContainer extends StatelessWidget {
         Navigator.pushNamed(context, routeName);
       },
       borderRadius: AppStyles.borderMini,
-      splashColor: itemColor.withOpacity(themeIsDark ? 0.5 : 0.95),
+      splashColor: itemColor.withAlpha(themeIsDark ? 155 : 225),
       child: Stack(
         children: [
           Align(
@@ -43,7 +43,7 @@ class MainItemContainer extends StatelessWidget {
                     image: AssetImage('assets/pictures/$pictureName.jpg'),
                     fit: BoxFit.cover,
                     colorFilter: ColorFilter.mode(
-                      itemColor.withOpacity(0.85),
+                      itemColor.withAlpha(205),
                       BlendMode.multiply,
                     ),
                   ),

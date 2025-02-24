@@ -43,7 +43,7 @@ class MainItemChapter extends StatelessWidget {
         }
       },
       borderRadius: AppStyles.borderMini,
-      splashColor: Colors.grey.withOpacity(themeIsDark ? 0.5 : 0.95),
+      splashColor: Colors.grey.withAlpha(themeIsDark ? 155 : 225),
       child: Stack(
         children: [
           Align(

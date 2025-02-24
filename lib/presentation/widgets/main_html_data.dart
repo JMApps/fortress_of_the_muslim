@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 
 import 'main_footnote_data.dart';
 
@@ -46,7 +47,7 @@ class MainHtmlData extends StatelessWidget {
           letterSpacing: 1.5,
           color: footnoteColor,
           fontWeight: FontWeight.bold,
-          fontFamily: appLocale.mainFont,
+          fontFamily: AppConstraints.fontGilroy,
         ),
       },
       onLinkTap: (String? footnoteNumber, _, __) {

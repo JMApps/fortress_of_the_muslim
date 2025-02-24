@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -39,7 +40,7 @@ class BookContentDetailPage extends StatelessWidget {
                 child: MainHtmlData(
                   htmlData: bookModel.bookContent,
                   footnoteColor: Colors.orange,
-                  font: appLocale.mainFont,
+                  font: AppConstraints.fontGilroy,
                   fontSize: 18.0,
                   textAlign: TextAlign.start,
                   fontColor: Theme.of(context).colorScheme.onSurface,

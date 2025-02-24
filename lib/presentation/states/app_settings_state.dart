@@ -41,7 +41,7 @@ class AppSettingsState extends ChangeNotifier {
     switch (deviceLocale.languageCode) {
       case 'ky':
         return 1;
-      case 'kz':
+      case 'kk':
         return 2;
       default:
         return 0;

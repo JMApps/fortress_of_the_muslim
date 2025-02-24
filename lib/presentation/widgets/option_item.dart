@@ -26,7 +26,7 @@ class OptionItem extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     final appTheme = Theme.of(context);
     final themeIsDark = appTheme.brightness == Brightness.dark;
-    final fixColor = appTheme.colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    final fixColor = appTheme.colorScheme.onSecondaryContainer.withAlpha(themeIsDark ? 215 : 235);
     return InkWell(
       onTap: () {
         HapticFeedback.lightImpact();
@@ -43,7 +43,7 @@ class OptionItem extends StatelessWidget {
         }
       },
       borderRadius: itemBorder,
-      splashColor: Colors.grey.withOpacity(themeIsDark ? 0.25 : 0.95),
+      splashColor: Colors.grey.withAlpha(themeIsDark ? 75 : 235),
       child: Stack(
         children: [
           Align(
@@ -57,7 +57,7 @@ class OptionItem extends StatelessWidget {
                     image: const AssetImage('assets/pictures/texture_bottom_left.jpg'),
                     fit: BoxFit.cover,
                     colorFilter: ColorFilter.mode(
-                      itemColor.withOpacity(0.85),
+                      itemColor.withAlpha(225),
                       BlendMode.multiply,
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
@@ -58,7 +59,7 @@ class FavoriteChapterItem extends StatelessWidget {
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
           footnoteColor: Colors.orange,
-          font: appLocale.mainFont,
+          font: AppConstraints.fontGilroy,
           fontSize: 17.0,
           textAlign: TextAlign.start,
           fontColor: appColors.onSurface,

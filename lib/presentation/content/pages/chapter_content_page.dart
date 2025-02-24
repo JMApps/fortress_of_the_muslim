@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -93,7 +94,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
                       child: MainHtmlData(
                         htmlData: chapterModel.chapterTitle,
                         footnoteColor: appColors.primary,
-                        font: appLocale.mainFont,
+                        font: AppConstraints.fontGilroy,
                         fontSize: 17.0,
                         textAlign: TextAlign.center,
                         fontColor: appColors.onSurface,

@@ -33,91 +33,93 @@ class SupplicationMediaCard extends StatelessWidget {
       margin: EdgeInsets.zero,
       shape: AppStyles.shape,
       color: appColors.onSecondary,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Consumer<AppPlayerState>(
-            builder: (context, playerState, _) {
-              return Visibility(
-                visible: isNameAudio,
-                maintainSize: true,
-                maintainState: true,
-                maintainAnimation: true,
-                child: IconButton(
-                  onPressed: () {
-                    playerState.playTrack(audioName: supplicationModel.nameAudio!, trackId: supplicationModel.supplicationId);
-                  },
-                  icon: Icon(playerState.isPlaying && playerState.currentTrackId == supplicationModel.supplicationId ? CupertinoIcons.stop : CupertinoIcons.play),
-                ),
-              );
-            },
-          ),
-          Consumer<AppPlayerState>(
-            builder: (context, playerState, _) {
-              return Visibility(
-                visible: isNameAudio,
-                maintainSize: true,
-                maintainState: true,
-                maintainAnimation: true,
-                child: IconButton(
-                  onPressed: playerState.isPlaying && playerState.currentTrackId == supplicationModel.supplicationId ? () {
-                    playerState.toggleRepeatMode(supplicationModel.supplicationId);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: appColors.secondaryContainer,
-                        duration: const Duration(milliseconds: 500),
-                        shape: AppStyles.shape,
-                        elevation: 0,
-                        content: Text(
-                          playerState.isRepeating ? appLocale.repeatOn : appLocale.repeatOff,
-                          style: TextStyle(
-                            fontSize: 17.0,
-                            color: appColors.onSurface,
-                          ),
-                        ),
-                      ),
-                    );
-                  } : null,
-                  icon: Icon(
-                      CupertinoIcons.arrow_2_squarepath,
-                    color: playerState.isRepeating && playerState.currentTrackId == supplicationModel.supplicationId ? appColors.error : appColors.onSurface,
-                  ),
-                ),
-              );
-            },
-          ),
-          Visibility(
-            visible: isNameAudio,
-            maintainSize: true,
-            maintainState: true,
-            maintainAnimation: true,
-            child: IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) => const SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: PlaySpeedSegment(),
+      child: Padding(
+        padding: AppStyles.paddingHorizontalMini,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Consumer<AppPlayerState>(
+              builder: (context, playerState, _) {
+                return Visibility(
+                  visible: isNameAudio,
+                  maintainSize: true,
+                  maintainState: true,
+                  maintainAnimation: true,
+                  child: IconButton(
+                    onPressed: () {
+                      playerState.playTrack(audioName: supplicationModel.nameAudio!, trackId: supplicationModel.supplicationId);
+                    },
+                    icon: Icon(playerState.isPlaying && playerState.currentTrackId == supplicationModel.supplicationId ? CupertinoIcons.stop : CupertinoIcons.play),
                   ),
                 );
               },
-              icon: const Icon(CupertinoIcons.speedometer),
             ),
-          ),
-          FavoriteSupplicationButton(supplicationId: supplicationModel.supplicationId),
-          ShareSupplicationButton(supplicationId: supplicationModel.supplicationId, dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText)),
-          Container(
-            padding: AppStyles.paddingHorVerMicro,
-            decoration: BoxDecoration(
-              color: appColors.secondaryContainer,
-              borderRadius: AppStyles.borderMini,
+            Consumer<AppPlayerState>(
+              builder: (context, playerState, _) {
+                return Visibility(
+                  visible: isNameAudio,
+                  maintainSize: true,
+                  maintainState: true,
+                  maintainAnimation: true,
+                  child: IconButton(
+                    onPressed: playerState.isPlaying && playerState.currentTrackId == supplicationModel.supplicationId ? () {
+                      playerState.toggleRepeatMode(supplicationModel.supplicationId);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: appColors.secondaryContainer,
+                          duration: const Duration(milliseconds: 500),
+                          shape: AppStyles.shape,
+                          elevation: 0,
+                          content: Text(
+                            playerState.isRepeating ? appLocale.repeatOn : appLocale.repeatOff,
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              color: appColors.onSurface,
+                            ),
+                          ),
+                        ),
+                      );
+                    } : null,
+                    icon: Icon(
+                        CupertinoIcons.arrow_2_squarepath,
+                      color: playerState.isRepeating && playerState.currentTrackId == supplicationModel.supplicationId ? appColors.error : appColors.onSurface,
+                    ),
+                  ),
+                );
+              },
             ),
-            child: Text(
-              '$supplicationIndex/$supplicationLength',
-              style: AppStyles.mainTextStyle17,
+            Visibility(
+              visible: isNameAudio,
+              maintainSize: true,
+              maintainState: true,
+              maintainAnimation: true,
+              child: IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: PlaySpeedSegment(),
+                    ),
+                  );
+                },
+                icon: const Icon(CupertinoIcons.speedometer),
+              ),
             ),
-          ),
-        ],
+            FavoriteSupplicationButton(supplicationId: supplicationModel.supplicationId),
+            ShareSupplicationButton(supplicationId: supplicationModel.supplicationId, dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText)),
+            Container(
+              padding: AppStyles.paddingHorVerMicro,
+              decoration: BoxDecoration(
+                color: appColors.secondaryContainer,
+                borderRadius: AppStyles.borderMini,
+              ),
+              child: Text(
+                '$supplicationIndex/$supplicationLength',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
