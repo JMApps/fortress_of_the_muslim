@@ -23,8 +23,8 @@ class FavoriteChapterPage extends StatelessWidget {
           title: Text(appLocale.favoriteChapters),
         ),
         body: FavoriteChaptersList(tableName: appLocale.chapterTableName),
-        floatingActionButton: FabTopStart(
-          fabColor: Colors.orange.withOpacity(0.35),
+        floatingActionButton: const FabTopStart(
+          fabColor: Colors.orange,
         ),
       ),
     );

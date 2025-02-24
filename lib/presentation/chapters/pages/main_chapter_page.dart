@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ class MainChapterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
+    final appColors = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ScrollPageState>(
@@ -23,7 +25,7 @@ class MainChapterPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(appLocale.chapters),
           actions: [
-            IconButton.filledTonal(
+            IconButton(
               onPressed: () async {
                 await showSearch(
                   context: context,
@@ -34,13 +36,13 @@ class MainChapterPage extends StatelessWidget {
                 );
               },
               tooltip: appLocale.search,
-              icon: const Icon(Icons.search),
+              icon: const Icon(CupertinoIcons.search),
             ),
           ],
         ),
         body: MainChaptersList(tableName: appLocale.chapterTableName),
         floatingActionButton: FabTopStart(
-          fabColor: Colors.teal.withOpacity(0.35),
+          fabColor: appColors.inversePrimary,
         ),
       ),
     );

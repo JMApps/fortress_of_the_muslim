@@ -24,15 +24,14 @@ class FavoriteChapterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withAlpha(15);
+    final itemEvenColor = appColors.inversePrimary.withAlpha(35);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () async {
           HapticFeedback.lightImpact();
-          Provider.of<MainChaptersState>(context, listen: false)
-              .saveLastChapter(chapterModel.chapterId);
+          Provider.of<MainChaptersState>(context, listen: false).saveLastChapter(chapterModel.chapterId);
           await Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
@@ -45,7 +44,7 @@ class FavoriteChapterItem extends StatelessWidget {
         },
         horizontalTitleGap: 8,
         contentPadding: AppStyles.paddingHorMiniVerMicro,
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        splashColor: appColors.inversePrimary.withAlpha(155),
         tileColor: chapterIndex.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(
@@ -88,7 +87,7 @@ class FavoriteChapterItem extends StatelessWidget {
               padding: EdgeInsets.zero,
               icon: Icon(
                 Icons.bookmark,
-                color: appColors.secondary,
+                color: appColors.tertiary,
               ),
             );
           },

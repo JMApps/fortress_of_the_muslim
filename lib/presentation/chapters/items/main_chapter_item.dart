@@ -24,15 +24,14 @@ class MainChapterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withAlpha(15);
+    final itemEvenColor = appColors.inversePrimary.withAlpha(35);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () async {
           HapticFeedback.lightImpact();
-          Provider.of<MainChaptersState>(context, listen: false)
-              .saveLastChapter(chapterModel.chapterId);
+          Provider.of<MainChaptersState>(context, listen: false).saveLastChapter(chapterModel.chapterId);
           await Navigator.pushNamed(
             context,
             NameRoutes.chapterContentPage,
@@ -45,7 +44,7 @@ class MainChapterItem extends StatelessWidget {
         },
         horizontalTitleGap: 8,
         contentPadding: AppStyles.paddingHorMiniVerMicro,
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        splashColor: appColors.inversePrimary.withAlpha(155),
         tileColor: chapterIndex.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(
@@ -58,7 +57,7 @@ class MainChapterItem extends StatelessWidget {
         ),
         subtitle: MainHtmlData(
           htmlData: chapterModel.chapterTitle,
-          footnoteColor: Colors.teal,
+          footnoteColor: appColors.primary,
           font: appLocale.mainFont,
           fontSize: 17.0,
           textAlign: TextAlign.start,
@@ -66,12 +65,10 @@ class MainChapterItem extends StatelessWidget {
         ),
         leading: Consumer<MainChaptersState>(
           builder: (context, mainChaptersState, _) {
-            bool isFavorite =
-                mainChaptersState.chapterIsFavorite(chapterModel.chapterId);
+            bool isFavorite = mainChaptersState.chapterIsFavorite(chapterModel.chapterId);
             return IconButton.filledTonal(
               onPressed: () {
-                mainChaptersState.toggleChapterFavorite(
-                    chapterId: chapterModel.chapterId);
+                mainChaptersState.toggleChapterFavorite(chapterId: chapterModel.chapterId);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: appColors.secondaryContainer,
@@ -91,7 +88,7 @@ class MainChapterItem extends StatelessWidget {
               padding: EdgeInsets.zero,
               icon: Icon(
                 isFavorite ? Icons.bookmark : Icons.bookmark_outline_outlined,
-                color: appColors.secondary,
+                color: appColors.tertiary,
               ),
             );
           },

@@ -4,7 +4,7 @@ class CollectionArgs {
   final CollectionEntity collectionModel;
   final String supplicationTableName;
 
-  CollectionArgs({
+  const CollectionArgs({
     required this.collectionModel,
     required this.supplicationTableName,
   });

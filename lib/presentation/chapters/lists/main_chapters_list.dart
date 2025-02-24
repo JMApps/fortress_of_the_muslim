@@ -44,7 +44,7 @@ class _MainChaptersListState extends State<MainChaptersList> {
             controller: _scrollController,
             child: ListView.builder(
               controller: _scrollController,
-              padding: AppStyles.paddingMini,
+              padding: AppStyles.paddingWithoutTopMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final ChapterEntity chapterModel = snapshot.data![index];

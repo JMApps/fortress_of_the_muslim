@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 
 import '../styles/app_styles.dart';
 
 class AppThemes {
   final Color _appColor;
-  final Locale _locale;
 
-  AppThemes(this._appColor, this._locale);
+  AppThemes(this._appColor);
 
   ThemeData get lightTheme => _buildTheme(Brightness.light);
 
   ThemeData get darkTheme => _buildTheme(Brightness.dark);
 
   ThemeData _buildTheme(Brightness brightness) {
-    final fontFamily = _locale.languageCode == 'ru' ? 'Gilroy' : 'Raleway';
+    final colorScheme = ColorScheme.fromSeed(
+      brightness: brightness,
+      seedColor: _appColor,
+    );
 
     return ThemeData(
-      fontFamily: fontFamily,
+      fontFamily: AppConstraints.fontGilroy,
+      fontFamilyFallback: const [AppConstraints.fontSFPro],
       colorScheme: ColorScheme.fromSeed(
         brightness: brightness,
         seedColor: _appColor,
@@ -38,6 +42,17 @@ class AppThemes {
       bottomSheetTheme: const BottomSheetThemeData(
         showDragHandle: true,
         dragHandleSize: Size(48, 3),
+      ),
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: AppStyles.borderMini,
+          border: Border.all(
+            width: 1.0,
+            color: colorScheme.primary,
+          ),
+        ),
+        textStyle: AppStyles.mainTextStyle17,
       ),
     );
   }

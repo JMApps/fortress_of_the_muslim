@@ -54,7 +54,7 @@ class _SearchChaptersFutureState extends State<SearchChaptersFuture> {
           element.chapterId.toString().contains(widget.query) || element.chapterNumber.toLowerCase().contains(widget.query) || element.chapterTitle.toLowerCase().contains(widget.query)).toList();
           return _recentChapters.isEmpty ? MainDescriptionText(descriptionText: appLocale.searchIsEmpty) : Scrollbar(
             child: ListView.builder(
-              padding: AppStyles.paddingMini,
+              padding: AppStyles.paddingWithoutTopMini,
               itemCount: _recentChapters.length,
               itemBuilder: (BuildContext context, int index) {
                 return MainChapterItem(

@@ -46,13 +46,18 @@ class AppConstraints {
 
   static const String keyPlaySpeedIndex = 'key_play_speed_index';
 
+  static const String fontGilroy = 'Gilroy';
+  static const String fontSFPro = 'SF Pro';
+
   static const List<String> appLanguages = [
     'Русский',
     'Кыргызча',
+    'Қазақша',
   ];
 
   static const List<Locale> appLocales = [
     Locale('ru', 'RU'),
     Locale('ky', 'KG'),
+    Locale('kk', 'KZ'),
   ];
 }

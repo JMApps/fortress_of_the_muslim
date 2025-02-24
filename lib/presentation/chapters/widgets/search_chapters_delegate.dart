@@ -25,17 +25,15 @@ class SearchChaptersDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      query.isNotEmpty
-          ? IconButton(
-              onPressed: () {
-                query = '';
-              },
-              icon: AnimatedIcon(
-                icon: AnimatedIcons.menu_close,
-                progress: transitionAnimation,
-              ),
-            )
-          : const SizedBox(),
+      query.isNotEmpty ? IconButton(
+        onPressed: () {
+          query = '';
+          },
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_close,
+          progress: transitionAnimation,
+        ),
+      ) : const SizedBox(),
     ];
   }
 
