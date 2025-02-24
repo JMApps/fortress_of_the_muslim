@@ -5,7 +5,6 @@
   "supplicationsTableName": "Table_of_supplications_ru",
   "footnotesTableName": "Table_of_footnotes_ru",
   "bookContentTableName": "Table_of_book_content_ru",
-  "mainFont": "Gilroy",
 
   "appName": "Крепость мусульманина",
   "appSlogan": " – твоя несокрушимая крепость!",
@@ -96,6 +95,7 @@
   "forLightTheme": "Для дневной темы",
   "forDarkTheme": "Для ночной темы",
   "close": "Закрыть",
+
   "ourApps": "Наши приложения",
   "moreOurApps": "Больше наших приложений",
   "appStore": "App Store",
