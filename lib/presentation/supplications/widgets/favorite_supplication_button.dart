@@ -42,7 +42,7 @@ class FavoriteSupplicationButton extends StatelessWidget {
           },
           icon: Icon(
             supplicationIsFavorite ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
-            color: appColors.primary,
+            color: appColors.tertiary,
           ),
         );
       },

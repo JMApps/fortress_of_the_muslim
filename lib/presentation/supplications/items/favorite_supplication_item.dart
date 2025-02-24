@@ -59,8 +59,7 @@ class FavoriteSupplicationItem extends StatelessWidget {
                       textDirection: TextDirection.rtl,
                     ),
                   SizedBox(height: arabicIsNotEmpty ? 16 : 0),
-                  transcriptionIsNotEmpty ? contentSettings.getShowTranscriptionState
-                      ? Text(
+                  transcriptionIsNotEmpty ? contentSettings.getShowTranscriptionState ? Text(
                     supplicationModel.transcriptionText!,
                     style: TextStyle(
                       fontFamily: appLocale.translationFontNames.split(', ')[contentSettings.getTranscriptionFontIndex],

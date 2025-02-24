@@ -44,7 +44,7 @@ class _MainSupplicationsListState extends State<MainSupplicationsList> {
             controller: _scrollController,
             child: ListView.builder(
               controller: _scrollController,
-              padding: AppStyles.paddingMini,
+              padding: AppStyles.paddingWithoutTopMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final supplicationModel = snapshot.data![index];

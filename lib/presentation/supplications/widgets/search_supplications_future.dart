@@ -57,7 +57,7 @@ class _SearchSupplicationsFutureState extends State<SearchSupplicationsFuture> {
               element.translationText.toLowerCase().contains(widget.query)).toList();
           return _recentSupplications.isEmpty ? MainDescriptionText(descriptionText: appLocale.searchIsEmpty) : Scrollbar(
             child: ListView.builder(
-              padding: AppStyles.paddingMini,
+              padding: AppStyles.paddingWithoutTopMini,
               itemCount: _recentSupplications.length,
               itemBuilder: (BuildContext context, int index) {
                 return MainSupplicationItem(

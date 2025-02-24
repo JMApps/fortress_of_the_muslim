@@ -42,7 +42,7 @@ class MainChapterPage extends StatelessWidget {
         ),
         body: MainChaptersList(tableName: appLocale.chapterTableName),
         floatingActionButton: FabTopStart(
-          fabColor: appColors.inversePrimary,
+          fabColor: appColors.inversePrimary.withAlpha(155),
         ),
       ),
     );

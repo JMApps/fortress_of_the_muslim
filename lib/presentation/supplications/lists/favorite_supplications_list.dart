@@ -19,8 +19,7 @@ class FavoriteSupplicationsList extends StatefulWidget {
   final String tableName;
 
   @override
-  State<FavoriteSupplicationsList> createState() =>
-      _FavoriteSupplicationsListState();
+  State<FavoriteSupplicationsList> createState() => _FavoriteSupplicationsListState();
 }
 
 class _FavoriteSupplicationsListState extends State<FavoriteSupplicationsList> {
@@ -52,7 +51,7 @@ class _FavoriteSupplicationsListState extends State<FavoriteSupplicationsList> {
             controller: _scrollController,
             child: ListView.builder(
               controller: _scrollController,
-              padding: AppStyles.paddingMini,
+              padding: AppStyles.paddingWithoutTopMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final supplicationModel = snapshot.data![index];
