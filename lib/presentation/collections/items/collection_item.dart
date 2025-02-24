@@ -24,8 +24,8 @@ class CollectionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withAlpha(15);
+    final itemEvenColor = appColors.inversePrimary.withAlpha(35);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
@@ -115,7 +115,7 @@ class CollectionItem extends StatelessWidget {
             ),
           );
         },
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        splashColor: appColors.inversePrimary.withAlpha(155),
         tileColor: index.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(

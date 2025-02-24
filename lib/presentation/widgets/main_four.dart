@@ -17,7 +17,7 @@ class MainFour extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
     final appColors = Theme.of(context).colorScheme;
-    final fixColor = appColors.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    final fixColor = appColors.onSecondaryContainer.withAlpha(themeIsDark ? 215 : 235);
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       alignment: Alignment.center,

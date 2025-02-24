@@ -18,8 +18,8 @@ class BookTitleContentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withAlpha(15);
+    final itemEvenColor = appColors.inversePrimary.withAlpha(35);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
@@ -30,7 +30,7 @@ class BookTitleContentItem extends StatelessWidget {
             arguments: BookContentArgs(bookModel: bookModel),
           );
         },
-        splashColor: appColors.inversePrimary.withOpacity(0.25),
+        splashColor: appColors.inversePrimary.withAlpha(75),
         tileColor: index.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         title: Text(bookModel.bookContentTitle),

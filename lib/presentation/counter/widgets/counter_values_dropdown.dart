@@ -34,7 +34,7 @@ class CounterValuesDropdown extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: appColors.onSecondary.withOpacity(0.25),
+                    color: appColors.onSecondary.withAlpha(75),
                     borderRadius: AppStyles.border,
                   ),
                   child: Text(

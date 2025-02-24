@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../states/app_counter_state.dart';
 
@@ -11,7 +10,6 @@ class TextValueContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer<AppCounterState>(
       builder: (context, appCounter, _) {

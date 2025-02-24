@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 
+import '../../core/strings/app_constraints.dart';
 import 'main_footnote_data.dart';
 
 class MainHtmlData extends StatelessWidget {
@@ -25,7 +24,6 @@ class MainHtmlData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appLocale = AppLocalizations.of(context)!;
     return Html(
       data: htmlData,
       style: {

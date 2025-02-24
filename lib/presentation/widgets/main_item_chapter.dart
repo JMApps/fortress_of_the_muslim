@@ -24,7 +24,7 @@ class MainItemChapter extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final themeIsDark = Theme.of(context).brightness == Brightness.dark;
-    final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(themeIsDark ? 0.85 : 0.95);
+    final fixColor = Theme.of(context).colorScheme.onSecondaryContainer.withAlpha(themeIsDark ? 215 : 235);
     return InkWell(
       onTap: () async {
         HapticFeedback.lightImpact();

@@ -23,7 +23,7 @@ class CollectionIsEmpty extends StatelessWidget {
           children: [
             Icon(
               CupertinoIcons.collections_solid,
-              color: color.withOpacity(0.25),
+              color: color.withAlpha(75),
               size: 200,
             ),
             Text(
