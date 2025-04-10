@@ -61,7 +61,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
             ),
             actions: [
-              IconButton.filledTonal(
+              IconButton(
                 onPressed: () async {
                   await Navigator.pushNamed(
                     context,
@@ -78,8 +78,16 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
               margin: AppStyles.paddingMini,
               padding: AppStyles.paddingMini,
               decoration: BoxDecoration(
-                color: appColors.secondaryContainer,
                 borderRadius: AppStyles.border,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    appColors.primary.withAlpha(125),
+                    appColors.primary.withAlpha(95),
+                    appColors.primary.withAlpha(75),
+                  ],
+                ),
               ),
               child: FutureBuilder<ChapterEntity>(
                 future: _futureChapter,

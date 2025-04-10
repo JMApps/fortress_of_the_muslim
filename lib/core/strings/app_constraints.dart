@@ -53,11 +53,13 @@ class AppConstraints {
     'Русский',
     'Кыргызча',
     'Қазақша',
+    'English',
   ];
 
   static const List<Locale> appLocales = [
     Locale('ru', 'RU'),
     Locale('ky', 'KG'),
     Locale('kk', 'KZ'),
+    Locale('en', 'US'),
   ];
 }

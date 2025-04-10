@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/supplication_entity.dart';
@@ -111,8 +111,16 @@ class SupplicationMediaCard extends StatelessWidget {
             Container(
               padding: AppStyles.paddingHorVerMicro,
               decoration: BoxDecoration(
-                color: appColors.secondaryContainer,
                 borderRadius: AppStyles.borderMini,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    appColors.primary.withAlpha(125),
+                    appColors.primary.withAlpha(95),
+                    appColors.primary.withAlpha(75),
+                  ],
+                ),
               ),
               child: Text(
                 '$supplicationIndex/$supplicationLength',

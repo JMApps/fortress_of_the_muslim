@@ -52,7 +52,7 @@ class ContentSettingsState extends ChangeNotifier {
     _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.grey.shade50.value);
 
     _showTranscriptionState = _contentSettings.get(AppConstraints.keyShowTranscriptionState, defaultValue: true);
-    _counterAlignIndex = _getSetting(AppConstraints.keyCounterAlignIndex, 2);
+    _counterAlignIndex = _getSetting(AppConstraints.keyCounterAlignIndex, 1);
   }
 
   int _getSetting(String key, int defaultValue) {

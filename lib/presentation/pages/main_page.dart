@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text(appLocale.appName),
         actions: [
-          IconButton.filledTonal(
+          IconButton(
             onPressed: () {
               Share.share('${appLocale.appName}${appLocale.appSlogan}\n\n${appLocale.versionIOS}\n${appLocale.linkIOS}\n\n${appLocale.versionAndroid}\n${appLocale.linkAndroid}');
             },

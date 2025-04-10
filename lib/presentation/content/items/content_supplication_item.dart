@@ -58,6 +58,8 @@ class ContentSupplicationItem extends StatelessWidget {
                       textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
                       textDirection: TextDirection.rtl,
                     ),
+                  SizedBox(height: supplicationModel.countNumber > 0 ? 16 : 0),
+                  supplicationModel.countNumber > 0 ? SupplicationCounterButton(count: supplicationModel.countNumber) : const SizedBox(),
                   SizedBox(height: arabicIsNotEmpty ? 16 : 0),
                   transcriptionIsNotEmpty ? contentSettings.getShowTranscriptionState
                       ? Text(
@@ -78,8 +80,6 @@ class ContentSupplicationItem extends StatelessWidget {
                     textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
                     fontColor: isLightTheme ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
                   ),
-                  SizedBox(height: supplicationModel.countNumber > 0 ? 16 : 0),
-                  supplicationModel.countNumber > 0 ? SupplicationCounterButton(count: supplicationModel.countNumber) : const SizedBox(),
                   const SizedBox(height: 16),
                   SupplicationMediaCard(supplicationModel: supplicationModel, supplicationIndex: supplicationIndex, supplicationLength: supplicationLength),
                 ],

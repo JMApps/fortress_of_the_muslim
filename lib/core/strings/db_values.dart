@@ -1,7 +1,7 @@
 class DBValues {
   static const String dbName = 'fortress_of_the_muslim.db';
   static const String collectionDbName = 'fortress_collections.db';
-  static const int dbVersion = 4;
+  static const int dbVersion = 5;
   static const int collectionDvVersion = 1;
 
   static const String dbChapterId = 'chapter_id';

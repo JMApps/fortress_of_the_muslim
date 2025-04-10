@@ -43,6 +43,8 @@ class AppSettingsState extends ChangeNotifier {
         return 1;
       case 'kk':
         return 2;
+      case 'en':
+        return 3;
       default:
         return 0;
     }

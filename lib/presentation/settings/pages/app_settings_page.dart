@@ -67,8 +67,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         }
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.access_time_rounded,
+                      color: appColors.tertiary,
                       size: 30,
                     ),
                   ),
@@ -86,10 +87,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       }
                     },
                     icon: Icon(
-                      settingsState.getMorningNotification
-                          ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
-                      color: settingsState.getMorningNotification
-                          ? appColors.primary : appColors.onSurface,
+                      settingsState.getMorningNotification ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getMorningNotification ? appColors.primary : appColors.onSurface,
                       size: 30,
                     ),
                   ),
@@ -122,8 +121,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                         }
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.access_time_rounded,
+                      color: appColors.tertiary,
                       size: 30,
                     ),
                   ),
@@ -142,10 +142,8 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
                       }
                     },
                     icon: Icon(
-                      settingsState.getEveningNotification
-                          ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
-                      color: settingsState.getEveningNotification
-                          ? appColors.primary : appColors.onSurface,
+                      settingsState.getEveningNotification ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getEveningNotification ? appColors.primary : appColors.onSurface,
                       size: 30,
                     ),
                   ),

@@ -34,7 +34,7 @@ class MainSupplicationPage extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios_new_rounded),
           ),
           actions: [
-            IconButton.filledTonal(
+            IconButton(
               onPressed: () async {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 await Navigator.pushNamed(
@@ -45,7 +45,7 @@ class MainSupplicationPage extends StatelessWidget {
               tooltip: appLocale.settings,
               icon: const Icon(Icons.settings),
             ),
-            IconButton.filledTonal(
+            IconButton(
               onPressed: () async {
                 Provider.of<AppPlayerState>(context, listen: false).stopTrack();
                 await showSearch(
