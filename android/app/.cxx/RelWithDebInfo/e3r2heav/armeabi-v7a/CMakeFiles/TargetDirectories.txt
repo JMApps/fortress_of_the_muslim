@@ -1,0 +1,2 @@
+/Users/jmapps/StudioProjects/fortress_of_the_muslim/android/app/.cxx/RelWithDebInfo/e3r2heav/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/jmapps/StudioProjects/fortress_of_the_muslim/android/app/.cxx/RelWithDebInfo/e3r2heav/armeabi-v7a/CMakeFiles/rebuild_cache.dir

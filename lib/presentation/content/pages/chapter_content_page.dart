@@ -79,15 +79,7 @@ class _ChapterContentPageState extends State<ChapterContentPage> {
               padding: AppStyles.paddingMini,
               decoration: BoxDecoration(
                 borderRadius: AppStyles.border,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    appColors.primary.withAlpha(125),
-                    appColors.primary.withAlpha(95),
-                    appColors.primary.withAlpha(75),
-                  ],
-                ),
+                color: appColors.secondaryContainer,
               ),
               child: FutureBuilder<ChapterEntity>(
                 future: _futureChapter,

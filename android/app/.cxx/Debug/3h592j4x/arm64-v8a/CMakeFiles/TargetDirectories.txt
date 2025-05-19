@@ -1,0 +1,2 @@
+/Users/jmapps/StudioProjects/fortress_of_the_muslim/android/app/.cxx/Debug/3h592j4x/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/jmapps/StudioProjects/fortress_of_the_muslim/android/app/.cxx/Debug/3h592j4x/arm64-v8a/CMakeFiles/rebuild_cache.dir

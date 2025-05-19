@@ -112,15 +112,7 @@ class SupplicationMediaCard extends StatelessWidget {
               padding: AppStyles.paddingHorVerMicro,
               decoration: BoxDecoration(
                 borderRadius: AppStyles.borderMini,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    appColors.primary.withAlpha(125),
-                    appColors.primary.withAlpha(95),
-                    appColors.primary.withAlpha(75),
-                  ],
-                ),
+                color: appColors.secondaryContainer,
               ),
               child: Text(
                 '$supplicationIndex/$supplicationLength',
