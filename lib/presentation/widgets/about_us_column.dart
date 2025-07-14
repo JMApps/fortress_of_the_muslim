@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/styles/app_styles.dart';
+import '../../l10n/app_localizations.dart';
 import 'about_us_list_tile.dart';
 
 class AboutUsColumn extends StatelessWidget {

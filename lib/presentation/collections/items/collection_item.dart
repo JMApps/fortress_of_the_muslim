@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/collection_args.dart';
 import '../../../domain/entities/collection_entity.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/collections_state.dart';
 import '../widgets/update_collection_column.dart';
 

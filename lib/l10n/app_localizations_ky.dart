@@ -171,6 +171,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get share => 'Бөлүшүү';
 
   @override
+  String get shareWithAudio => 'Поделиться с аудио';
+
+  @override
   String get font => 'Шрифт';
 
   @override
@@ -201,7 +204,8 @@ class AppLocalizationsKy extends AppLocalizations {
   String get textSize => 'Тексттин көлөмү';
 
   @override
-  String get fontSizeNames => 'Кичинекей, Нормалдуу, Орточо, Чоң, Өтө чоң, Максималдуу';
+  String get fontSizeNames =>
+      'Кичинекей, Нормалдуу, Орточо, Чоң, Өтө чоң, Максималдуу';
 
   @override
   String get counterValues => 'Чеги жок, Намаздан кийин, 100';
@@ -318,10 +322,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get devMuslim => '@dev_muslim';
 
   @override
-  String get linkGooglePlay => 'https://play.google.com/store/apps/dev?id=8649252597553656018';
+  String get linkGooglePlay =>
+      'https://play.google.com/store/apps/dev?id=8649252597553656018';
 
   @override
-  String get linkAppStore => 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
+  String get linkAppStore =>
+      'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
 
   @override
   String get versionAndroid => 'Версия Android:';
@@ -330,10 +336,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get versionIOS => 'Версия iOS:';
 
   @override
-  String get linkAndroid => 'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
+  String get linkAndroid =>
+      'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
 
   @override
-  String get linkIOS => 'https://apps.apple.com/ru/app/крепость-верующего/id1564920951';
+  String get linkIOS =>
+      'https://apps.apple.com/ru/app/крепость-верующего/id1564920951';
 
   @override
   String get linkTelegram => 'https://t.me/jmapps';

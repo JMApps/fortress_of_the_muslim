@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../core/strings/app_constraints.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/footnote_entity.dart';
+import '../../l10n/app_localizations.dart';
 import '../states/footnotes_state.dart';
 import 'main_error_text_data.dart';
 import 'main_html_data.dart';

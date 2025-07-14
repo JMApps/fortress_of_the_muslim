@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/repositories/book_content_data_repository.dart';
 import '../../../data/services/database_service.dart';
 import '../../../domain/usecases/book_content_use_case.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/book_content_state.dart';
 import '../lists/book_content_list.dart';
 

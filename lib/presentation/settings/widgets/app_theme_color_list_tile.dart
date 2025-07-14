@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/app_settings_state.dart';
 import 'app_setting_list_tile.dart';
 
@@ -37,7 +37,7 @@ class AppThemeColorListTile extends StatelessWidget {
                       iconSelected: Icons.check_circle,
                       elevation: 0.5,
                       allowShades: false,
-                      onMainColorChange: (Color? color) => settingsState.setAppThemeColor = color!.value,
+                      onMainColorChange: (Color? color) => settingsState.setAppThemeColor = color!.toARGB32(),
                       selectedColor: Color(settingsState.getAppThemeColor),
                     ),
                   ),

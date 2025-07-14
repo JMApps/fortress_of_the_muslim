@@ -18,7 +18,7 @@ class AppSettingsState extends ChangeNotifier {
     _openWithChapters = _mainSettingsBox.get(AppConstraints.keyOpenWithChapters, defaultValue: false);
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
-    _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.teal.value);
+    _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.teal.toARGB32());
     _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
     _showCollections = _mainSettingsBox.get(AppConstraints.keyShowCollections, defaultValue: true);
   }

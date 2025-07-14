@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
+import '../../l10n/app_localizations.dart';
 import 'option_item.dart';
 
 class LastMainThree extends StatelessWidget {

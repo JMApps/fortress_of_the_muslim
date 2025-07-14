@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/collection_entity.dart';
 import '../../../domain/entities/supplication_entity.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/collections_state.dart';
 import '../../states/main_supplications_state.dart';
 import '../../supplications/items/main_supplication_item.dart';

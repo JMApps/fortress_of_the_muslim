@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/collection_entity.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/collections_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/collection_item.dart';

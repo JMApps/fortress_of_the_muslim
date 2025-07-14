@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/content_settings_state.dart';
 
 class SupplicationTextColors extends StatelessWidget {
@@ -31,7 +31,7 @@ class SupplicationTextColors extends StatelessWidget {
             alignment: WrapAlignment.center,
             iconSelected: Icons.check_circle,
             elevation: 0.5,
-            onColorChange: (Color? color) => onColorSelected(color!.value),
+            onColorChange: (Color? color) => onColorSelected(color!.toARGB32()),
             selectedColor: Color(currentColor),
           ),
         ),

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
+import '../../l10n/app_localizations.dart';
 import '../states/app_settings_state.dart';
 import 'main_item_container.dart';
 

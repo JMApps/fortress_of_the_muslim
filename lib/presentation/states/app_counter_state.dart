@@ -119,7 +119,7 @@ class AppCounterState extends ChangeNotifier {
   }
 
   void _vibrate() async {
-    bool canVibrate = await Vibration.hasVibrator() ?? false;
+    bool canVibrate = await Vibration.hasVibrator();
     if (canVibrate) {
       Vibration.vibrate();
     }

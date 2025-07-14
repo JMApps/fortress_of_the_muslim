@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/main_chapters_state.dart';
 import '../../states/scroll_page_state.dart';
 import '../../widgets/favorite_is_empty.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/app_counter_state.dart';
 import '../widgets/counter_options_container.dart';
 import '../widgets/counter_values_dropdown.dart';

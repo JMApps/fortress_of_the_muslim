@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
+import '../../l10n/app_localizations.dart';
 import '../states/app_settings_state.dart';
 import '../widgets/first_main_three.dart';
 import '../widgets/last_chapter_card.dart';
@@ -51,7 +51,9 @@ class _MainPageState extends State<MainPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Share.share('${appLocale.appName}${appLocale.appSlogan}\n\n${appLocale.versionIOS}\n${appLocale.linkIOS}\n\n${appLocale.versionAndroid}\n${appLocale.linkAndroid}');
+              SharePlus.instance.share(
+                ShareParams(text: '${appLocale.appName}${appLocale.appSlogan}\n\n${appLocale.versionIOS}\n${appLocale.linkIOS}\n\n${appLocale.versionAndroid}\n${appLocale.linkAndroid}'),
+              );
             },
             tooltip: appLocale.share,
             icon: const Icon(

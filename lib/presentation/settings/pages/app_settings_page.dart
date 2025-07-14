@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fortress_of_the_muslim/core/routes/name_routes.dart';
-import 'package:fortress_of_the_muslim/core/styles/app_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/routes/name_routes.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../../data/services/notification/notification_service.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/app_settings_state.dart';
 import '../widgets/app_locale_drop_down.dart';
 import '../widgets/app_setting_list_tile.dart';

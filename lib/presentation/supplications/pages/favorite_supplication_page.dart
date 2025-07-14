@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/app_player_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../../states/scroll_page_state.dart';

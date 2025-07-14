@@ -21,7 +21,7 @@ class SupplicationCountState extends ChangeNotifier {
       HapticFeedback.heavyImpact();
       notifyListeners();
     } else {
-      bool canVibrate = await Vibration.hasVibrator() ?? false;
+      bool canVibrate = await Vibration.hasVibrator();
       if (canVibrate) {
         Vibration.vibrate();
       }
@@ -30,7 +30,7 @@ class SupplicationCountState extends ChangeNotifier {
 
   void resetCount() async {
     _supplicationCount = _defCountValue;
-    bool canVibrate = await Vibration.hasVibrator() ?? false;
+    bool canVibrate = await Vibration.hasVibrator();
     if (canVibrate) {
       Vibration.vibrate();
     }

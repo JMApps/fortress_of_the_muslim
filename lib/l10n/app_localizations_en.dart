@@ -171,6 +171,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get share => 'Share';
 
   @override
+  String get shareWithAudio => 'Share with audio';
+
+  @override
   String get font => 'Font';
 
   @override
@@ -201,7 +204,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get textSize => 'Text size';
 
   @override
-  String get fontSizeNames => 'Small, Normal, Medium, Large, Very large, Maximum';
+  String get fontSizeNames =>
+      'Small, Normal, Medium, Large, Very large, Maximum';
 
   @override
   String get counterValues => 'Unlimited, After prayer, 100';
@@ -318,10 +322,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get devMuslim => '@dev_muslim';
 
   @override
-  String get linkGooglePlay => 'https://play.google.com/store/apps/dev?id=8649252597553656018';
+  String get linkGooglePlay =>
+      'https://play.google.com/store/apps/dev?id=8649252597553656018';
 
   @override
-  String get linkAppStore => 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
+  String get linkAppStore =>
+      'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
 
   @override
   String get versionAndroid => 'Android version:';
@@ -330,10 +336,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get versionIOS => 'iOS version:';
 
   @override
-  String get linkAndroid => 'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
+  String get linkAndroid =>
+      'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
 
   @override
-  String get linkIOS => 'https://apps.apple.com/ru/app/крепость-верующего/id1564920951';
+  String get linkIOS =>
+      'https://apps.apple.com/ru/app/крепость-верующего/id1564920951';
 
   @override
   String get linkTelegram => 'https://t.me/jmapps';

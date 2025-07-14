@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fortress_of_the_muslim/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/chapter_id_args.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/main_chapters_state.dart';
 import '../../widgets/main_html_data.dart';
 

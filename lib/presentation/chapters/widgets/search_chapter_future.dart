@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/chapter_entity.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../states/main_chapters_state.dart';
 import '../../widgets/main_description.dart';
 import '../../widgets/main_error_text_data.dart';

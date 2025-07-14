@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/styles/app_styles.dart';
 import '../../data/models/arguments/chapter_id_args.dart';
+import '../../l10n/app_localizations.dart';
 
 class MainItemChapter extends StatelessWidget {
   const MainItemChapter({

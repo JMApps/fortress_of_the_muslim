@@ -44,12 +44,12 @@ class ContentSettingsState extends ChangeNotifier {
     _transcriptionFontAlignIndex = _getSetting(AppConstraints.keyTranscriptionFontAlignIndex, 1);
     _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 1);
 
-    _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blueGrey.shade900.value);
-    _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.grey.shade50.value);
-    _transcriptionLightTextColor = _getSetting(AppConstraints.keyTranscriptionLightColor, Colors.grey.value);
-    _transcriptionDarkTextColor = _getSetting(AppConstraints.keyTranscriptionDarkColor, Colors.grey.value);
-    _translationLightTextColor = _getSetting(AppConstraints.keyTranslationLightColor, Colors.blueGrey.shade900.value);
-    _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.grey.shade50.value);
+    _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blueGrey.shade900.toARGB32());
+    _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.grey.shade50.toARGB32());
+    _transcriptionLightTextColor = _getSetting(AppConstraints.keyTranscriptionLightColor, Colors.grey.toARGB32());
+    _transcriptionDarkTextColor = _getSetting(AppConstraints.keyTranscriptionDarkColor, Colors.grey.toARGB32());
+    _translationLightTextColor = _getSetting(AppConstraints.keyTranslationLightColor, Colors.blueGrey.shade900.toARGB32());
+    _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.grey.shade50.toARGB32());
 
     _showTranscriptionState = _contentSettings.get(AppConstraints.keyShowTranscriptionState, defaultValue: true);
     _counterAlignIndex = _getSetting(AppConstraints.keyCounterAlignIndex, 1);
@@ -185,14 +185,14 @@ class ContentSettingsState extends ChangeNotifier {
     setTranscriptionFontAlignIndex = 1;
     setTranslationFontAlignIndex = 1;
 
-    setArabicLightTextColor = Colors.black.value;
-    setArabicDarkTextColor = Colors.white.value;
+    setArabicLightTextColor = Colors.black.toARGB32();
+    setArabicDarkTextColor = Colors.white.toARGB32();
 
-    setTranscriptionLightTextColor = Colors.grey.value;
-    setTranscriptionDarkTextColor = Colors.grey.value;
+    setTranscriptionLightTextColor = Colors.grey.toARGB32();
+    setTranscriptionDarkTextColor = Colors.grey.toARGB32();
 
-    setTranslationLightTextColor = Colors.black.value;
-    setTranslationDarkTextColor = Colors.white.value;
+    setTranslationLightTextColor = Colors.black.toARGB32();
+    setTranslationDarkTextColor = Colors.white.toARGB32();
 
     setShowTranscriptionState = true;
     setCounterAlignIndex = 2;
