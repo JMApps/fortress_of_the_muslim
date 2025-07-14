@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
 
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/supplication_entity.dart';
+import '../../l10n/app_localizations.dart';
 import '../states/app_player_state.dart';
 import '../supplications/widgets/favorite_supplication_button.dart';
 import '../supplications/widgets/share_supplication_button.dart';
@@ -79,9 +79,10 @@ class SupplicationMediaCard extends StatelessWidget {
                           ),
                         ),
                       );
-                    } : null,
+                    }
+                    : null,
                     icon: Icon(
-                        CupertinoIcons.arrow_2_squarepath,
+                      CupertinoIcons.arrow_2_squarepath,
                       color: playerState.isRepeating && playerState.currentTrackId == supplicationModel.supplicationId ? appColors.error : appColors.onSurface,
                     ),
                   ),
@@ -107,7 +108,11 @@ class SupplicationMediaCard extends StatelessWidget {
               ),
             ),
             FavoriteSupplicationButton(supplicationId: supplicationModel.supplicationId),
-            ShareSupplicationButton(supplicationId: supplicationModel.supplicationId, dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText)),
+            ShareSupplicationButton(
+              supplicationId: supplicationModel.supplicationId,
+              dataSupplication: _supplicationText(arabic: supplicationModel.arabicText, transcription: supplicationModel.transcriptionText, translation: supplicationModel.translationText),
+              isAudio: supplicationModel.nameAudio != null,
+            ),
             Container(
               padding: AppStyles.paddingHorVerMicro,
               decoration: BoxDecoration(
@@ -124,7 +129,9 @@ class SupplicationMediaCard extends StatelessWidget {
     );
   }
 
-  String _supplicationText({required String? arabic, required String? transcription, required String translation}) {String parseHtmlString(String htmlString) {
+  String _supplicationText(
+      {required String? arabic, required String? transcription, required String translation}) {
+    String parseHtmlString(String htmlString) {
       final document = html_parser.parse(htmlString);
       return document.body!.text;
     }
