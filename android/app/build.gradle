@@ -13,18 +13,18 @@ if (localPropertiesFile.exists()) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '47'
+    flutterVersionCode = '48'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '2.3.1'
+    flutterVersionName = '2.3.2'
 }
 
 android {
     namespace = "com.example.fortress_of_the_muslim"
-    compileSdk 35
-    ndkVersion "27.0.12077973"
+    compileSdk 36
+    ndkVersion "29.0.13599879"
 
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -47,7 +47,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         applicationId "jmapps.fortressofthemuslim"
-        targetSdk 35
+        targetSdk 36
         minSdk 23
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
