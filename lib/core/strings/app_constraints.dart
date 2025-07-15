@@ -57,9 +57,9 @@ class AppConstraints {
   ];
 
   static const List<Locale> appLocales = [
-    Locale('ru', 'RU'),
-    Locale('ky', 'KG'),
-    Locale('kk', 'KZ'),
-    Locale('en', 'US'),
+    Locale('ru'),
+    Locale('ky'),
+    Locale('kk'),
+    Locale('en'),
   ];
 }
